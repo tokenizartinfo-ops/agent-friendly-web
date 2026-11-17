@@ -1,0 +1,200 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-PROPOSED-CENSUS/1",
+  "status": "DESIGN_ONLY_ROOT_COUNT_RELEASE_PENDING",
+  "family": "FINITE_GET_DIAG3",
+  "sourceRound": 2,
+  "ownRound": 3,
+  "maxRounds": 5,
+  "proposedNativeGroups": 8,
+  "proposedReceiverEvaluations": 68,
+  "retainedRegressionEvaluations": 44,
+  "newFocusedEvaluations": 24,
+  "groups": [
+    {
+      "id": "FG3_OWN_D2_COMPAT",
+      "evaluations": 44,
+      "expected": "all original44 expected outcomes",
+      "cases": [
+        "Run original immutable44 through unmodified frozen d2ModelRead; verify each ID/input hash/state/reason and controlled rejection. One aggregate native group, 44 independently reported evaluations; not evidence that a new E3 wrapper passed."
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_KNOWN",
+      "evaluations": 4,
+      "cases": [
+        {
+          "id": "FG3_K01",
+          "expected": "ADMIT",
+          "model": "ExactScope15 failedGET/currentfirst14PASS/nativeprefix: HTTP503 plus joined0/1."
+        },
+        {
+          "id": "FG3_K02",
+          "expected": "ADMIT",
+          "model": "HTTP429 plus joined0/0; no rate-limit/no-write inference."
+        },
+        {
+          "id": "FG3_K03",
+          "expected": "ADMIT",
+          "model": "HTTP599 plus joined2+/0; no monotonicity or causal subtraction."
+        },
+        {
+          "id": "FG3_K04",
+          "expected": "ADMIT",
+          "model": "All target joins closed then later journaltorn; preserve knownHTTP/snapshots and observed firstthrow."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_INDEPENDENCE",
+      "evaluations": 3,
+      "cases": [
+        {
+          "id": "FG3_I01",
+          "expected": "ADMIT",
+          "model": "HTTPKNOWN; afterMonitorMARKER_UNAVAILABLE, afterScopeJOINED1."
+        },
+        {
+          "id": "FG3_I02",
+          "expected": "ADMIT",
+          "model": "HTTPUNKNOWN/UNSUPPORTED_SCALARS with both snapshotsJOINED; private scalar absence not recomputed."
+        },
+        {
+          "id": "FG3_I03",
+          "expected": "ADMIT",
+          "model": "Prefix ends after completedMonitor14: first snapshotJOINED, Scope snapshot andHTTP unresolved; no availability chaining."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_POINTERS",
+      "evaluations": 4,
+      "cases": [
+        {
+          "id": "FG3_P01",
+          "expected": "REJECT",
+          "model": "KnownHTTP throwSequence points to return/otheroperation instead of actual earliestScope15throw."
+        },
+        {
+          "id": "FG3_P02",
+          "expected": "REJECT",
+          "model": "Swap valid count.return pointers of14and15; pointers must match their own IDs."
+        },
+        {
+          "id": "FG3_P03",
+          "expected": "REJECT",
+          "model": "Use laterFINITE16 same assertion site asScope15 target; no fallback or laterthrow substitution."
+        },
+        {
+          "id": "FG3_P04",
+          "expected": "REJECT",
+          "model": "Forge positive sample with count.throw/open count despite permissible numeric countSequence."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS",
+      "evaluations": 5,
+      "cases": [
+        {
+          "id": "FG3_B01",
+          "expected": "REJECT",
+          "model": "native.integritytorn withKNOWNhttp orJOINEDsample despite complete pairs."
+        },
+        {
+          "id": "FG3_B02",
+          "expected": "ADMIT",
+          "model": "Matching torn native +HTTPUNKNOWN/TRUNCATED_NATIVE and samplesUNKNOWN/NATIVE_UNJOINED, null payload/pointers."
+        },
+        {
+          "id": "FG3_B03",
+          "expected": "REJECT",
+          "model": "One prior nativeFAIL hidden behind first14PASS prerequisite, forgedKNOWNhttp/JOINED."
+        },
+        {
+          "id": "FG3_B04",
+          "expected": "REJECT",
+          "model": "NativePASS contradicts reliable samecase action/countthrow; UNKNOWNfiniteGet cannot heal inheritedN2."
+        },
+        {
+          "id": "FG3_B05",
+          "expected": "REJECT",
+          "model": "AFTER interleaves before relevant count.return but snapshot claimsJOINED."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+      "evaluations": 3,
+      "cases": [
+        {
+          "id": "FG3_S01",
+          "expected": "REJECT",
+          "model": "One sample declares globalMARKER_STREAM_INVALID while the other claimsJOINED or lower-priority marker availability."
+        },
+        {
+          "id": "FG3_S02",
+          "expected": "REJECT",
+          "model": "HTTPKNOWN with SOURCE_UNJOINED orNATIVE_UNJOINED sample; sharedprefix evidence contradicts."
+        },
+        {
+          "id": "FG3_S03",
+          "expected": "ADMIT",
+          "model": "HTTPKNOWN with countJOURNAL_UNRESOLVED only because visibleAFTER interleave; independentHTTP evidence remains valid."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_WIRE",
+      "evaluations": 3,
+      "cases": [
+        {
+          "id": "FG3_W01",
+          "expected": "REJECT",
+          "model": "Missing requiredfiniteGet/extra field/noncanonical order; no silentoptional extension."
+        },
+        {
+          "id": "FG3_W02",
+          "expected": "REJECT",
+          "model": "UNKNOWN sample carries nonnull sequence or numeric0/coerced2 instead of closed stringenum/null contract."
+        },
+        {
+          "id": "FG3_W03",
+          "expected": "REJECT",
+          "model": "KNOWNHTTPactual200, numericstring ornonnullscalars in UNKNOWN/NA; no invented200."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_CALLER_BINDING",
+      "evaluations": 2,
+      "cases": [
+        {
+          "id": "FG3_C01",
+          "expected": "REJECT",
+          "model": "Coherently rebound outcome/log/ZIP/API uses foreignrun/head/tree while independentcallerexpected staysfixed."
+        },
+        {
+          "id": "FG3_C02",
+          "expected": "REJECT",
+          "model": "E2/oldS08or deferredE3/bodyset substituted with otherwise validfiniteGet; RootnewSource25/E3/context is mandatory."
+        }
+      ]
+    }
+  ],
+  "expectedNew": {
+    "admit": 9,
+    "reject": 15
+  },
+  "privateProducerControlsNotOwnCoverage": [
+    "Canonical validmap+connection/noticesanchors+uses with0/1/2distinctfinitebases.",
+    "Two validfinitebases followed by malformedthird row stillUNKNOWN; saturation never shortcircuits validation.",
+    "Foreign/mismatchedlineage,missingmap/anchor,orphanuse,key/bodydigestmismatch,noncanonicalcodec input =>UNKNOWN,neverzero.",
+    "Caps512rows/16ticketnamespace/8192value/1024key enforced onlyobserver; unknownnamespace valuesopaque.",
+    "Usedfinitebases remaincounted; no wallclock/active-ticket claim.",
+    "World-local armed/ready/consumeonce, wrongworld/publiccountduringarmed/rearmpoison, originalerror/returnidentity andsingleexistingread; Source realfactorytests only."
+  ],
+  "fixtureFirst": "After Root acceptance seal exact ordered group/evaluationIDs, complete coherent literalAPI/tree/log/custody/outcome/ZIP models and expectations before guard. Existing44 unchanged; D3inputs are NEW synthetic fixtures with explicit E3/modelbindings, never relabeled actual history.",
+  "controlsExecuted": 0,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

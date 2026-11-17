@@ -1,0 +1,70 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-INDEPENDENT-OWN-DESIGN-INDEX/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "status": "DESIGN_ONLY_READY_FOR_ROOT_DECISION",
+  "sourceRound": 2,
+  "ownRound": 3,
+  "maxRounds": 5,
+  "sourceContract": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+  "sourceCrossChecks": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3-design/proposed-census.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "68841353d0e1563bcca8116cc3450fa7157bdfba",
+        "bytes": 7304,
+        "sha256": "415985b035e409e9214ed0a4929e015ed4cb9f5e841f2c77ec85ed93e7330b1c",
+        "gitSha": "68841353d0e1563bcca8116cc3450fa7157bdfba"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3-design/contract-reuse-binding-plan.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "42569afe21ac5153d0d02da438ce8fb23130d591",
+        "bytes": 14739,
+        "sha256": "884dc999600c51a65dce9d570ead12375cd16cb96dd3758621699c64e3b78f84",
+        "gitSha": "42569afe21ac5153d0d02da438ce8fb23130d591"
+      },
+      "fullReadback": true
+    }
+  ],
+  "allArtifactBytes": 22043,
+  "proposedCounts": {
+    "nativeGroups": 8,
+    "receiverEvaluations": 68,
+    "regression44": 44,
+    "new24": 24,
+    "expectedAdmit": 30,
+    "expectedReject": 38
+  },
+  "compatibility": "Compatible field/precedence/context DATA, no unresolved blocking contradiction. Blueprint/E3/pins/occurrence NOTadmitted; Rootacceptance andseparatefixture/code/nativerelease required.",
+  "sizeBudget": {
+    "finiteGetSchemaMaxUTF8": 343,
+    "modelsOnly": true,
+    "guardImplemented": false
+  },
+  "samePrivateIdentityNotProven": true,
+  "noCausalDeltaOrEffectsAbsence": true,
+  "privateRowsAndRawTAPAbsent": true,
+  "codeImplemented": false,
+  "controlsExecuted": 0,
+  "nativeRuns": 0,
+  "refsOrRunsChanged": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

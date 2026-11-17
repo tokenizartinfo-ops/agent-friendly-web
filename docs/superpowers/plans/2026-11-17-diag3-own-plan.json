@@ -1,0 +1,233 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-INDEPENDENT-OWN-DESIGN/1",
+  "status": "DESIGN_ONLY_COMPATIBLE_PENDING_ROOT_RECONCILIATION",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "sourceRound": 2,
+  "ownRound": 3,
+  "maxRounds": 5,
+  "authority": "Parent design-only task; no fixture/code/native/ref/run/business release. Source609738+1ebdd are proposed DATA, not executable authority.",
+  "basis": {
+    "actualReview": "16599e9905523b42fbb63a944182d838224de440",
+    "actualOutcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
+    "sourceAnalysis": "85cd124dc261eef3db8a7706ddc6cb46839ccc8f",
+    "facts": "DIAG2 native17=14PASS3FAIL; first validated throwScope15/action/ERR_ASSERTION/S08:18:118 atseq58,30.012s afteractionenter. Before noScope drop/holder/approvalPOST path. Counts14/15returned but values and numericHTTP were not exported. C16 is another request; nofallback.",
+    "limits": "NumericHTTP and finite ticket categories for historicalDIAG2 remainUNKNOWN. No503/zero inference, hostfix causal claim, Source qualification or effects-absence claim."
+  },
+  "contractReview": {
+    "sourceFinal": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+    "crossChecks": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+    "field": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32",
+    "blueprint": "32789882150f65092607780a796a7cb28efe8e7a",
+    "selectionInventory": "6b2c733af81c5ca9e7bf02c7d92a4de968bcb9ff",
+    "peerSourceReview": "93c5f4a4855e27ace6d8bd413a2aba741e1aad46",
+    "decision": "Compatible design, with explicitpublicprecedences below and no private equality/authentication claim. No unresolved blocking wire contradiction afterSourcecrossChecks. Root must accept before implementation."
+  },
+  "wire": {
+    "append": "observation.finiteGet required LAST after unchangedfirstFailure. Keep firstFailure C1 schema/6keys/semantics,35Source controls and oldOWNcore.",
+    "finiteGetKeys": [
+      "schema",
+      "http",
+      "afterMonitor",
+      "afterScopeMissing"
+    ],
+    "httpKeys": [
+      "state",
+      "reason",
+      "throwSequence",
+      "actual",
+      "expected"
+    ],
+    "checkpointKeys": [
+      "value",
+      "reason",
+      "countSequence"
+    ],
+    "category": [
+      "0",
+      "1",
+      "2+",
+      "UNKNOWN"
+    ],
+    "nullable": "UNKNOWN/NOT_APPLICABLE HTTP =>throwSequence/actual/expectednull; UNKNOWN checkpoint=>countSequencenull. No empty value or implicitzero.",
+    "caps": "finiteGet512UTF8 B, existingfirstFailure512 separately; unchanged outcome24576body+LF<=24577, custody1024/fault2048, ZIP1MiB/log4MiB, case120s/child180s/total330s/job7min,20cases/2launches. No trimmingfacts to fit.",
+    "finiteGetSchemaMaxBytes": 343,
+    "childMarker": "Source-only '# C2FT3 '+canonical{id,value}+LF <=96B; atmost2labelledattempts. No rawtypedmarkers/privateTAP/rowkeys/IDs/handles/timestamps exported."
+  },
+  "joins": {
+    "inherited": "First enforce independently preboundSource25/E3/API/tree/job/actualnumericcommandstep/timewindow, canonical2frames/custody2/TARGET13beforeafter/oneartifact+LF/strictZIPfullDeflate andN2. Infrastructure/unstableownership failures stayFAULT; finiteGetUNKNOWN cannot normalize them.",
+    "http": "KNOWN exclusively currentScope15/nativeordinal15, native.integrityprefix, first14currentnativePASS+action/countreturns, earliestvalidatedprefixthrowScopeaction/AssertionError/ERR_ASSERTION at measuredE3 S08:18:118, owncountreturned, uniqueC1-format nativeblock expected200/actualfiniteint100..599!=200 and canonicalalignedC2SOURCE15. Preservevalidcandidate under laterJournaltail; noC16 substitution. Retargeting neitherC1NOTICES norhistoricalmetadata.",
+    "httpPriority": [
+      "InheritedFAULT/N2.",
+      "Observedearliestthrowdiff=>NA EARLIEST_THROW_DIFFERENT; priornativefail=>NA EARLIER_NATIVE_FAILURE; targetPASS+returns=>NA TARGET_PASSED.",
+      "No-throwNAonlycleancomplete20+AFTER; insufficienttargetprefix=>UNKNOWN JOURNAL_UNRESOLVED.",
+      "Countunreturned/throw=>UNKNOWN COUNTER_UNAVAILABLE; explicitnativetorn/ambiguous=>UNKNOWN TRUNCATED_NATIVE/AMBIGUOUS_EVIDENCE; boundedprivategrammar/source/scalar failures remain correspondingUNKNOWN.",
+      "Only alljoins=>KNOWN; allnonKNOWNscalar/pointerfieldsnull."
+    ],
+    "checkpoint14": "JOINED onlycurrentfirst14PASS andallaction/countreturnthrough14, clean nativeprefix, ownC14MONITOR SourceRow phase monitor/statuspass/codeOK/counters3 valid, onevalidC2FT3 label bracketedbetweenSourceRows13/14. countSequence equals actualC14count.return, not just aninteger.",
+    "checkpoint15": "JOINED onlyfirst14asabove plusownC15actionreturn/nativepass ORactionthrow/nativefail, count.enter/count.return, alignedSourceRow15phase scope/status/code, markerbetween14/15. FrameworkFAILwithreturnedactiondoesnotjoin asPASS. CountpointerequalsownactualC15count.return.",
+    "checkpointPriority": [
+      "JOURNAL_UNRESOLVED ifrequiredsettlements missing/countthrow/AFTERorothercaseinterleavebeforethatcount.return; laterJournaltaildoesnoterasecompletedjoins.",
+      "NATIVE_UNJOINED unless nativeprefixandcurrentrequiredPASS/targetmapping hold.",
+      "SOURCE_UNJOINED forbadcanonicalorderedprefix; then globalMARKER_STREAM_INVALID; then missingMARKER_UNAVAILABLE; then explicitUNKNOWNmarker=>SNAPSHOT_INVALID; otherwiseJOINEDcategory."
+    ],
+    "crossA": "MARKER_STREAM_INVALID declares globaltypedstreamtaint. Other sample may only sharethatreason or have a higher-priorityjournal/native/sourceblocker. CannotcoexistwithJOINED,MARKER_UNAVAILABLEorSNAPSHOT_INVALID. Missingonevalidmarker alonedoesnottainthigherother.",
+    "crossB": "HTTPKNOWN entails sameSourceprefix15/first14nativePASS/currentsettlements: incompatiblewithSOURCE_UNJOINED orNATIVE_UNJOINED in either sample. JOURNAL_UNRESOLVEDonlyifvisibleAFTERinterleavebeforetherelevantcount.return (blocksassignment butdoesnoterasevalidHTTPscalar). Withoutthatexception allowonlyJOINEDorMARKER_*/SNAPSHOT_INVALID. Do not forcebothsnapshotsknown, equateHTTP/countstates orenforcemonotonicity.",
+    "prefixPointers": "Derivepointers fromactualeventsequence; never hardcode56/60/58 becauseindependentAFTERedgescanoffsetsequences. ExistingchronologicalFSM mustvalidateallvisibleevents first."
+  },
+  "privatePredicateBoundary": {
+    "sourceResponsibility": "Source actualE3factory quantizes SAMEdetached arrayfromexistingcountsnapshot once, returnsoriginal3businesskeys unchanged, labelsworld-localmonitor/noScope entry/finish/consumeone publiccounts, neverprivatecount(f). Originalexception/return/singleread/labelpoisoning provenbyactualSourcefactoryNativeunits; OWNneverimportsS08/codec/helper.",
+    "predicate": "Dense1..512pairs/uniqueboundedkeys,<=16ticketnamespace rows,onecanonicalProjectRefmap; strictunchangedcodec roundtrip forProjectRef/Ticket/TicketUse andkey/bodyhash; allcandidatebindings/timeintervals/connection+noticesanchors+uses validated BEFOREsaturation. Finitebasesdistinctcounted0/1/2+; usesdonotsubtract. Malformed/capped/missing/foreign/orphan=>UNKNOWN, neverzero. Othernamespacevaluesopaque.",
+    "selector": "Eachmap mustmatchalreadyresidentf.choice.projectRef/f.source.sourceRevision anditsowncanonicaltickets/anchors. No newRPC,clock,token,approval,cache orsnapshotread. No cross-snapshotpreconnectionequality is exported/proven; samplesremain independentcontextobservations.",
+    "meaning": "CountsarestructurallyqualifyingbaseTicketRECORDS inthesnapshot, notactive/unused/authorizedtickets. Expiryisnotcomparedtowallclock; usedfinitebasesremaincounted. 0 doesnotproveabsenceoflaterwrites;1→0notrevoke;2+iscensored. Compareonlyreportedcategories, nevercausaldelta oridentitycontinuity.",
+    "ownLimit": "ActualrawTAP/C2SOURCE/C2FT3/storagearrays absent. OWNcannotrecomputemarkerbrackets/privatecanonicalpredicate/authenticatesamepreconnectionorcoherent503→429/count1→2+ rewrite. Trustexactreviewedtestedproducer+pinnedAPI/Git/ZIP; SHAdoesnotrecoverprivatebytes. Rejectexplicitpubliccontradictions, notimaginaryprivatefakes."
+  },
+  "reuseAndDelta": {
+    "reuse": [
+      {
+        "role": "shape",
+        "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067"
+      },
+      {
+        "role": "replay",
+        "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7"
+      },
+      {
+        "role": "ZIP/API/time/tree",
+        "blob": "5b8b36129eb9ab3af25ead0bbba840a32bdf67c2"
+      },
+      {
+        "role": "C1joinsinclnativeprefix",
+        "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e"
+      }
+    ],
+    "retention": "Old42native/44evaluations/indexb5d274852deae3ce7bd1d7c08563d1e6862b8b00 andallhistory immutable. Proposedonecompatgroup executesoriginal44withunmodifiedD2reader andliteralexpected/IDs; notretargetingactualoutcomes. NewD3familyneedsNEWcoherentsyntheticfixtures andexplicitnewbindings. No419/wholeTask1rerun.",
+    "newOwn": "MinimalnewfiniteGetsemanticjoin +versionedfamilyentrypoint/fixedDATA/requiredschemafield/markers. Preserveexactcorefunctions wherepossible; Sourceactual/modelclosedentrypointpattern, nooutcome-basedselection/fallback. ExistingC1site41:12andnewGETsite18:118mustmaprealE3bytes/alias.",
+    "bindings": "E3diagnostic13changesONLYS08observer;other12includingS10cb95fixed. BindnewE3index+S08Git/bytes/SHA+bothactualTARGETarrays; oldE2defaultforbidden. Newselection/schema/protocol/collector/runner/WF/final25andcalleroccurrencefutureRoot. 25template17frozen+8unbound isNOTadmissible.",
+    "blueprintHold": "Blueprintnot:{} rejectsALL untilRootmeasuresE3/newselection/bodypinsandremovesguardwithanewimmutableversion. Everydeferredconstant mustresolve; no null/defaultwildcards. ProposedSourceWF/nominationsdoNOTauthorizeruntime; actualhead/tree/run/job neverguessed.",
+    "proof": "Forproposedlargerregressioncensus keepfullinput/code manifests externallysealed+RootFULLmeasuredandruntimehashmatched; proofcompact<=24576withmanifesthash andorderedper-evaluationIDs/state/reason/projectionhash/counts,avoidduplicatelongpins. No newtoy:reuseadmittedNode22C1console/strictEqualgrammar."
+  },
+  "census": {
+    "status": "PROPOSED_NOT_EXECUTED_COUNT_RELEASE_PENDING",
+    "nativeGroups": 8,
+    "receiverEvaluations": 68,
+    "retained44": 44,
+    "new24": 24,
+    "expectedAdmit": 30,
+    "expectedReject": 38,
+    "sourcePrivateTestsNotOwnCoverage": true,
+    "fixtureFirst": "Rootacceptscensus,thenimmutablecompleteAPI/tree/log/custody/outcome/rawZIPmodels+independentexpected/IDs BEFOREguardcode. Noexpectedcomputedbydecoder. Nestedcompat44 reportedindividually;Rootrecomputesallhashes/IDs/order.No codeyet."
+  },
+  "closureCriteria": [
+    "RootacceptsSource609+1ebdd/Ownplan+exactcensus; no code/native release impliedhere.",
+    "RootpinsrealE3S08/index/sites andfullclosed25/newfamilyconstants; keep12/M/QA/SDK/D07/recorder/reader/tail/caps/calls unchanged.",
+    "Afterseparatefixture/code release:literalfixturesfirst,OWNonlyRAMnegativecontrols/green,source actualfactory+publisherunits native byRoot,OWNnative+freshreview+closure.",
+    "Anynewbusinesscapture isseparateRootdecisionafterusefulnessofboundedprojection; fullnormalTask1held. No ownerinterventionrequested."
+  ],
+  "fullReadInputHashes": [
+    {
+      "key": "analysis",
+      "blob": "85cd124dc261eef3db8a7706ddc6cb46839ccc8f",
+      "bytes": 18566,
+      "sha256": "17de30fbeca0aa1b5fba3a848c1415bee133b674b2203d9cf2f62d56b310dee6",
+      "gitSha": "85cd124dc261eef3db8a7706ddc6cb46839ccc8f",
+      "fullRead": true
+    },
+    {
+      "key": "review",
+      "blob": "16599e9905523b42fbb63a944182d838224de440",
+      "bytes": 20118,
+      "sha256": "4f08003f227343278a2190fe38f54a9d8ad09b560dc709bb139ae4cb3e66142e",
+      "gitSha": "16599e9905523b42fbb63a944182d838224de440",
+      "fullRead": true
+    },
+    {
+      "key": "outcome",
+      "blob": "f7306430e390cf69787347daa1b8b396b543dbc5",
+      "bytes": 12816,
+      "sha256": "4cf086fe9c63406f3c7ecaaceab5cb60395b2bca5a88fa6f572ccef1a5f01c25",
+      "gitSha": "f7306430e390cf69787347daa1b8b396b543dbc5",
+      "fullRead": true
+    },
+    {
+      "key": "earlyFieldSchema",
+      "blob": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32",
+      "bytes": 5761,
+      "sha256": "10303c6098b54ab7c00cdf61f0b168783a0ff2283db75c79edc01202acb6f684",
+      "gitSha": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32",
+      "fullRead": true
+    },
+    {
+      "key": "finalContract",
+      "blob": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+      "bytes": 18806,
+      "sha256": "347491b2041e467b2443dac683d7bce0e66949b55c035eae07826f67b061ab2b",
+      "gitSha": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+      "fullRead": true
+    },
+    {
+      "key": "outerBlueprint",
+      "blob": "32789882150f65092607780a796a7cb28efe8e7a",
+      "bytes": 33248,
+      "sha256": "9d5fa4bd7ab5ce3e7cec883094449986f47a93e32541ba74e7c30ec8741d8af6",
+      "gitSha": "32789882150f65092607780a796a7cb28efe8e7a",
+      "fullRead": true
+    },
+    {
+      "key": "selectionInventory",
+      "blob": "6b2c733af81c5ca9e7bf02c7d92a4de968bcb9ff",
+      "bytes": 24325,
+      "sha256": "6f959945effd84751baa9135cda1e70b66dcffa194ad53d3f4ab0db996ea65ce",
+      "gitSha": "6b2c733af81c5ca9e7bf02c7d92a4de968bcb9ff",
+      "fullRead": true
+    },
+    {
+      "key": "sourceExamples",
+      "blob": "eae704ae66396197406a9a7166669d5ff551878b",
+      "bytes": 11017,
+      "sha256": "8f19c42d5523660d463549c46e04e8b69f1555a83d3e40f9cc4503327c84c78c",
+      "gitSha": "eae704ae66396197406a9a7166669d5ff551878b",
+      "fullRead": true
+    },
+    {
+      "key": "sourceIndex",
+      "blob": "866bd15a36e0dc3e09d55bf6431ce94ae55f9d9b",
+      "bytes": 7165,
+      "sha256": "53ef653c1c9c9f769f23dda13dfdf6b52155e019e72596e1badaf54380653807",
+      "gitSha": "866bd15a36e0dc3e09d55bf6431ce94ae55f9d9b",
+      "fullRead": true
+    },
+    {
+      "key": "sourceSupplement",
+      "blob": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+      "bytes": 10701,
+      "sha256": "1d6ebe9a25ca4495b3f393b167a182952d8333d3838a8fc6db177528e82cb7d4",
+      "gitSha": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+      "fullRead": true
+    }
+  ],
+  "performed": {
+    "immutableReadsAndDataArtifacts": true,
+    "inertJSONHashBudgetOnly": true,
+    "codeImplemented": false,
+    "controlsExecuted": 0,
+    "nativeRuns": 0,
+    "SourceEvalImportASTSyntaxCompile": false,
+    "SourceProgramMaterialized": false,
+    "logsArtifactsRepoll": false,
+    "refsOrRunsChanged": false,
+    "providerBrowserMailSecrets": false,
+    "actualSourceContextInvented": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

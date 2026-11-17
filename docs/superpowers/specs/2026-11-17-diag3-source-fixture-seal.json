@@ -1,0 +1,729 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-SOURCE-FIXTURE-FIRST-SEAL/1",
+  "status": "PREIMPLEMENTATION_IMMUTABLE_SYNTHETIC_DATA",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "lineage": {
+    "candidateFamily": "FINITE_GET_DIAG3",
+    "sourceRound": 2,
+    "ownRound": 3,
+    "maxRounds": 5,
+    "design": "866bd15a36e0dc3e09d55bf6431ce94ae55f9d9b",
+    "seamAndCrossChecks": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+    "componentSchema": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32",
+    "source13Base": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "oldS08": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+    "oldAdapter": "9f457450ba1e7a746117fc1498922972613df789",
+    "c1LiteralInputs": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "node": "v22.23.4"
+  },
+  "components": {
+    "quantizer": {
+      "bytes": 52948,
+      "sha256": "e5f6d8774d0fd5124791a6a7d6d223bc31ef828faae87fc09dda3d10f61492bf",
+      "blob": "b7dd795365170a1bcafa4f809cf5f6230c6f698d"
+    },
+    "lifecycle": {
+      "bytes": 6076,
+      "sha256": "e062f6abcf459ba3fd582c3ae7783b3f3c9b5a0f60b8577b82b5ed5ea1218413",
+      "blob": "5ed9a8e4d5842ada493f6d484051c347168b9db1"
+    },
+    "literalStreamAtoms": {
+      "bytes": 22526,
+      "sha256": "3598bd2e983a35a162e36ac6ee56227418e37528c57d4e138d9baf9cbf71a471",
+      "blob": "8301628a2141c6e125cef9e549158e3a1712f5a1"
+    },
+    "rawCollector": {
+      "bytes": 25482,
+      "sha256": "7c5bf36c6c17a8b688ee2d2135a09fbb4e40a9075d8d7c626c806a9b5e05b1a0",
+      "blob": "1b5b319f98f678e79979c3bfadc77544917a5957"
+    },
+    "originalC1": {
+      "bytes": 18126,
+      "sha256": "380c5510e2b6468f7b1e3b2e465f6ee56c9be2fdce7c0cb2b428284e581fda9c",
+      "blob": "62e3beb1b817523fe33b2e4ed17b6b20ffa448a8"
+    },
+    "publication": {
+      "bytes": 66809,
+      "sha256": "0516d6709408e35ab4123fffcf1d75ea40bad9c004f90d7f69ede0c60ce91401",
+      "blob": "1ef8ffb9001be3dcbb16962a11ab982e7204e910"
+    }
+  },
+  "counts": {
+    "topLevelNativeIds": 9,
+    "oldC1Inner": 35,
+    "otherInner": 110,
+    "totalInner": 145,
+    "perOrderedGroup": [
+      6,
+      24,
+      9,
+      4,
+      19,
+      6,
+      12,
+      35,
+      30
+    ]
+  },
+  "groups": [
+    {
+      "ordinal": 1,
+      "id": "FG3_CODEC_COUNTS",
+      "subchecks": [
+        {
+          "id": "Q_ZERO",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "Q_ONE",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "Q_TWO",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "Q_THREE",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "Q_USED_FINITE",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "Q_ORDER_IRRELEVANT",
+          "corpus": "quantizer"
+        }
+      ]
+    },
+    {
+      "ordinal": 2,
+      "id": "FG3_CODEC_REJECTS",
+      "subchecks": [
+        {
+          "id": "X_EMPTY",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_MISSING_MAP",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_MISSING_CONNECTION",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_MISSING_NOTICES_USE",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_DUPLICATE_STORAGE_KEY",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_ORPHAN_USE",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_MALFORMED_PAIR",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_NONCANONICAL",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_EXTRA_FIELD",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_WRONG_PURPOSE",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_HASH_MISMATCH",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_FOREIGN_PROJECT",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_PRECONNECTION",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_FOREIGN_CONNECTION",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_BAD_USE_TIME",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_INVALID_AFTER_TWO",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_OVERLONG_ROW",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_WRONG_KEY_SUFFIX",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_EXTRA_MAP",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_WORLD_PROJECT",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_WORLD_REVISION",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_MISSING_WORLD_ANCHOR",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_OVER_512",
+          "corpus": "quantizer"
+        },
+        {
+          "id": "X_OVER_16_RESERVED",
+          "corpus": "quantizer"
+        }
+      ]
+    },
+    {
+      "ordinal": 3,
+      "id": "FG3_ONE_SNAPSHOT",
+      "subchecks": [
+        {
+          "id": "L_RETURN",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_ACTION_THROW",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_UNLABELLED",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_INTERNAL",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_CONCURRENT_PUBLIC",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_REARM_OVERLAP",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_OTHER_WORLD",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_ORIGINAL_REJECT",
+          "corpus": "lifecycle"
+        },
+        {
+          "id": "L_EMIT_REJECT",
+          "corpus": "lifecycle"
+        }
+      ]
+    },
+    {
+      "ordinal": 4,
+      "id": "FG3_HTTP_JOIN",
+      "subchecks": [
+        {
+          "id": "H_KNOWN_429",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_KNOWN_503",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_JOURNAL_TORN_LATER",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_NONADJACENT_STREAMS",
+          "corpus": "rawCollector"
+        }
+      ]
+    },
+    {
+      "ordinal": 5,
+      "id": "FG3_HTTP_EXCLUSIONS",
+      "subchecks": [
+        {
+          "id": "H_PRIOR_SITE_AND_LATER_GET",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_EARLIER_NATIVE_FAILURE",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_TARGET_PASS",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_COUNT_OPEN",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_COUNT_THREW",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_NATIVE_TORN",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_NATIVE_AMBIGUOUS",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DMISSING",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DNESTED",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DQUOTED",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_D601",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_D200",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DEXPECTED201",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DDUP",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DWRONGOP",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_DOPEN",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_SOURCE_ABSENT",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_SOURCE_PHASE_WRONG",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "H_N2_CONFLICT",
+          "corpus": "rawCollector"
+        }
+      ]
+    },
+    {
+      "ordinal": 6,
+      "id": "FG3_MARKER_JOIN",
+      "subchecks": [
+        {
+          "id": "M_SATURATION",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_ONLY_MONITOR",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_MISSING_MONITOR",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_EXPLICIT_SCOPE_UNKNOWN",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_BOTH_SNAPSHOT_UNKNOWN",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_AFTER_INTERLEAVE",
+          "corpus": "rawCollector"
+        }
+      ]
+    },
+    {
+      "ordinal": 7,
+      "id": "FG3_MARKER_REJECTS",
+      "subchecks": [
+        {
+          "id": "M_DUPLICATE14",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_REVERSE",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_MISBRACKET",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_FOREIGN",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_THIRD",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_OVERLONG",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_EXTRA_KEY",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_NUMBER_COERCION",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_NESTED_FAKE_ONLY",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_DUPLICATE_SOURCE14",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_TORN_BARE_TYPED",
+          "corpus": "rawCollector"
+        },
+        {
+          "id": "M_GLOBAL_HIGHER_PRIORITY",
+          "corpus": "rawCollector"
+        }
+      ]
+    },
+    {
+      "ordinal": 8,
+      "id": "FG3_C1_COMPAT",
+      "subchecks": [
+        {
+          "id": "S01_KNOWN_503_COUNTS_222",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S02_KNOWN_429_PARTIAL",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S03_KNOWN_599_BOUNDS_ONLY",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S04_MISSING_SOURCE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S05_DUPLICATE_SOURCE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S06_SOURCE_STATUS_CONFLICT",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S07_SOURCE_WRONG_PHASE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S08_SOURCE_WRONG_CODE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S09_SOURCE_EXTRA_KEY",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S10_SOURCE_NONCANONICAL",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S11_MISSING_SCALAR",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S12_DUPLICATE_SCALAR",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S13_SCALAR_MESSAGE_FAKE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S14_SCALAR_NESTED_FAKE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S15_SCALAR_STRING",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S16_SCALAR_FLOAT",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S17_SCALAR_600",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S18_SCALAR_200_CONFLICT",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S19_WRONG_EXPECTED",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S20_COUNTER_RANGE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S21_WRONG_OPERATOR",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S22_WRONG_NATIVE_ORDINAL",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S23_NESTED_TARGET_PAIR",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S24_TORN_CANDIDATE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S25_CRLF_UNSUPPORTED",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S26_SOURCE_WRONG_ORDER",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S27_EARLIEST_WRONG_SITE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S28_COUNTER_THROW",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S29_COUNTER_OPEN",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S30_VALID_CANDIDATE_LATER_TORN",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S31_EARLIER_NATIVE_FAILURE",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S32_TARGET_PASS",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S33_NO_QUALIFYING_THROW",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S34_TARGET_RESULT_MISSING",
+          "corpus": "originalC1"
+        },
+        {
+          "id": "S35_TARGET_THROW_NOT_IN_VALIDATED_PREFIX",
+          "corpus": "originalC1"
+        }
+      ]
+    },
+    {
+      "ordinal": 9,
+      "id": "FG3_PUBLICATION_CLOSURE",
+      "subchecks": [
+        {
+          "id": "P_JOINED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_COUNTS_ONLY",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_AFTER_EXCEPTION",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_GLOBAL_WITH_HIGHER_BLOCK",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_SOURCE_STUFFING",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_STATUS200",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_STATUS_RANGE",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_POINTER_SWAP",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_POINTER_TO_ENTER",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BAD_FIELD_ORDER",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_UNKNOWN_NUMBER",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_GLOBAL_PLUS_JOINED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_GLOBAL_PLUS_MISSING",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_GLOBAL_PLUS_SNAPSHOT",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_KNOWN_AFTERMONITOR_JOURNAL_UNRESOLVED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_KNOWN_AFTERSCOPEMISSING_JOURNAL_UNRESOLVED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_KNOWN_AFTERMONITOR_NATIVE_UNJOINED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_KNOWN_AFTERSCOPEMISSING_NATIVE_UNJOINED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_KNOWN_AFTERMONITOR_SOURCE_UNJOINED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_KNOWN_AFTERSCOPEMISSING_SOURCE_UNJOINED",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_STALE_E2",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_OLD13_TARGET",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_WRONG_C1",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BYTES_C1_EXACT",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BYTES_C1_OVER",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BYTES_FG_EXACT",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BYTES_FG_OVER",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BYTES_OUT_EXACT",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_BYTES_OUT_OVER",
+          "corpus": "publication"
+        },
+        {
+          "id": "P_FAULT_ALONE",
+          "corpus": "publication"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "tooling": "Every named group must pass, and every ordered subcheck must produce its specific sealed verdict. No skipping, collapsing two rows, literal expected-as-actual, or upgrading inner checks to extra node:test names. The 35 C1 inner results include independently obtained complete-projection equality/digest/state/reason for each, 4 KNOWN/27 UNKNOWN/4 NOT_APPLICABLE.",
+    "preimage": "E2 fixture does not emit typed samples and prior successPacket cannot publish mandatory D3 field. Static preimage incompatibility only. No actual native RED or GREEN in this seal.",
+    "binding": "E3 S08, index (including target #8), final selection and schema constants and future 25 body edges are unresolved. Positive publication fixture synthetic head/tree/run42 are only structural tooling controls. Its E3 artifact hashes later come exclusively from a prebound Root-measured data file, never the payload nor the old E2 or a wildcard. Exact pass/reject semantics and values above are fixed before any implementation.",
+    "staticWiring": "Lifecycle L_INTERNAL uses the actual unlabelled count(f) function shared by S08 business paths. If needed allow a named diagnostic-only ES-module alias for that same function in the E3 fixture/tooling import graph, no parallel implementation. L_REARM_OVERLAP finishReturn closes the most-recent attempted token and earlier pending label remains poisoned. Labels only in real monitor/noScope and only public counts consumes. No business harness/SDK/provider in tooling.",
+    "byteBounds": "Actual encodeBody used by publisher must return complete UTF8 JSON at limit and reject one more byte. P_BYTES checks 512/24576 in isolation, separate from holistic schema/admission, exact outcome+one LF. Whole payloads never become admissible through a size-only check.",
+    "scope": "All fixtures are intentionally synthetic. Target HTTP scalars429/503 and snapshot buckets are not observations of any business occurrence. No raw child/private source rows exported. Budget/custody/case order/S07/D07/recorder/other12/normal E2 untouched."
+  },
+  "supersededWorkingStreamIndex": "7721d2f87a143e217b83d6fc18a31a3547e4c4fb was a preseal draft; H_SOURCE_ABSENT in final1b5b… omits both C15 source and marker to isolate the missing source row (no orphan typed marker). All other streams and oracles unchanged.",
+  "beforeCode": true,
+  "sourceCodeWritten": false,
+  "sourceCodeExecuted": false,
+  "native": false,
+  "activeRef": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
