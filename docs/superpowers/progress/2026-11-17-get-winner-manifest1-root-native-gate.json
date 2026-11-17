@@ -1,0 +1,104 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.MANIFEST1.NATIVE_GATE/1",
+  "timestampUTC": "2026-11-17 17:15:00 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "one-use credential-free GitHub Actions isolated synthetic lab",
+  "resourceType": "fresh exact branch",
+  "resourceId": "lab/afw-c2-get-winner-20261117-fixtures-manifest1",
+  "allowedAction": "One changed controlled StageA attempt1 with fixed remote syntax5/startup46 and at most one original positive-M GET. Confirm selected Miniflare5 manifest residency before dispatch; preserve exact qualified RED41 or separate failure diagnostic1, close only this workflow. No Source feature/business/live release.",
+  "authority": {
+    "ownerRequest": "que falta para hacer la prueba con mi PC apagada y continua con todo",
+    "brief": "163133b354c4f69e7cacd3bcef4580f162df9a17",
+    "ruling": "eade609cb88c8fbb447c7a6923aaefa84db56208",
+    "actualReview": "f5696ee0d8782886a05619ef4885c0edc0e8e967",
+    "staticReview": "9f287e9f1d5538954ad3bd62e357bf33866033de"
+  },
+  "prepared": {
+    "branch": "lab/afw-c2-get-winner-20261117-fixtures-manifest1",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "preparing": false,
+    "activationAttempted": false,
+    "refCreated": false,
+    "unattached": true,
+    "mounts": 33,
+    "tree": "1ae6c6ce938f8e5fccc34435b9f15d3a34990234",
+    "head": "f8fbf79837b1238a36077ad7951bc908478a9aa8",
+    "fullTreeVerified": true,
+    "original3203Preserved": true,
+    "leaves": 3236
+  },
+  "proposal": "167c0ace99b313fd18d45ddc1a973cb505eb01cb",
+  "RootFullMeasurement": "4241578c4b15032f4d57c2b1baa46846d6ad8627",
+  "canonical33BodyEdges": {
+    "bytes": 8101,
+    "sha256": "73d5e35bcf6638753117549e203baa0eb2257ac3feb784f31c972279d5dee63e"
+  },
+  "checks": {
+    "SPEC": true,
+    "QUALITY": true,
+    "full33ReadbackHashes": true,
+    "childOnlyPhysical54Changed": true,
+    "assertionSites48_59_67Exact": true,
+    "Source13And315AndStartup46Exact": true,
+    "other27PriorLeavesExact": true,
+    "literal14OperationsReversible": true,
+    "metadata21OperationsReversible": true,
+    "completeOriginal3203Preserved": true,
+    "all33PathsAbsentAtBase": true,
+    "freshNominationAbsent": true,
+    "priorRuns": 0,
+    "protected19Exact": true,
+    "inheritedTriggerAudit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "oldWorkflowsAbsent": true,
+    "capsSame": true,
+    "localSourceExecuted": false
+  },
+  "expected": {
+    "syntaxChecks": 5,
+    "startupControls": 46,
+    "nativeGETsAtMost": 1,
+    "RED": {
+      "exit": 41,
+      "status": 413,
+      "actorArrival": 1,
+      "bodyOriginal": true,
+      "disposed": true,
+      "markerMissing": null,
+      "expectedMarker": "g1.413.S.413",
+      "artifact": "afw-c2-get-winner-red",
+      "file": "get-winner-red.json"
+    },
+    "fault": {
+      "exit": 1,
+      "expectedRED": false,
+      "artifact": "afw-c2-get-winner-startup-diagnostic",
+      "file": "get-winner-startup-diagnostic.json"
+    },
+    "artifactsMutuallyExclusive": true,
+    "missingOrWrongProofNeverPasses": true
+  },
+  "fixedDependencySource": "https://github.com/cloudflare/workers-sdk/blob/b7b4ff84477982e7c770bb93928287893fcf2e03/packages/miniflare/src/config/v4-convert.ts#L194-L244",
+  "historicAttributionStillUnknown": true,
+  "rounds": {
+    "StageA": 3,
+    "StageAMax": 5,
+    "Source": 5,
+    "Own": 5,
+    "noReset": true
+  },
+  "rollback": "After terminal snapshot remove only manifest1 workflow and add Root primary/close evidence by exact CAS; preserve original3203+32 other additions, full tree/protected19/zero closure runs.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
