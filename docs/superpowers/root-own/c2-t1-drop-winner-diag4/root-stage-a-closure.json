@@ -1,0 +1,33 @@
+{
+  "schema": "AFW.OWN5.STAGE_A.CLOSURE_INTENT/1",
+  "timestampUTC": "2026-11-17 14:34:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+  "attemptedHead": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+  "attemptedTree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
+  "run": 44104034023,
+  "job": 134111413596,
+  "outcome": "EXPECTED_NAMED_RED_OBSERVED",
+  "primary": "b3e8fe456e92f93b0c52506b29b3743093d5e332",
+  "proof": "d05e6bbff13eb9f792cd8432abcb8c45b628bcf7",
+  "validation": "300e459a8b4b8b19df654ed71127113862723834",
+  "removeOnly": ".github/workflows/afw-c2-own-drop-winner-fixtures.yml",
+  "retainOriginalLeaves": 3203,
+  "retainMountedFiles": 12,
+  "expectedLeaves": 3217,
+  "neverRerunOrReopen": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
