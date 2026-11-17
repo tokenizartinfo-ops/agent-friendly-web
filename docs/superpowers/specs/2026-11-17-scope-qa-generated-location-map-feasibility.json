@@ -1,0 +1,39 @@
+{
+  "kind": "AFW_SCOPE_POST_MAP_FEASIBILITY",
+  "date": "2026-11-17",
+  "parent": "135ca8aade653df553812b4be1687d342681ec7e",
+  "decision": "HOLD. Prefer direct generated-site inspection. A private external sidecar is feasible in principle, with equality and site discrimination unproved. Neither option recovers the historical case15 frames. No business occurrence is warranted by this check.",
+  "basis": {
+    "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "s10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "s09": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+    "s00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "lock": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+    "esbuild": "0.28.2",
+    "linuxX64Binary": "0.28.2",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "nativeWire": "38285fa0149a38924c431b4d5a705bec1384216d"
+  },
+  "options": [
+    {
+      "method": "1. Exact generated JS location, without a second build",
+      "facts": "S10:129 bundles stdin with write:false, metafile:true, neutral/ESM/es2022, no explicit sourcefile/sourceURL/map/output path. S10:134–145 measures, saves qa-index.mjs in job scratch, and mounts the selected JS. Metafile gives input/output names, imports and bytes, not statement locations. A runtime script label indicates a module only. S09:382/385 collects up to six at-frames from the original caught error before S00:808 normalizes status. It neither guarantees a caller frame nor binds the observation to a case. Historical DIAG3 archived no such frame pair.",
+      "gate": "For an explicitly gated private compiler-only check, use the exact measured bundle and exact plugin-prepared S00 bytes. Pick one potentially actionable stage, e.g. S00:743, the finite prerequisite check just before scope sealing. Require the generated caller span for that one guard to be unique, distinguish it from sibling S00:747, which checks the append result, and from the shared fail() frame. A match certifies at most that guard, never which operand failed. No nearest-line/candidate guess. This is less work than a second compilation if raw generated text is unambiguous."
+    },
+    {
+      "method": "2. Private companion map only if direct location is ambiguous",
+      "facts": "esbuild external emits a separate map without a reference comment in JS; this does not promise bitwise equality. In 0.28.2 pkg/api/api_impl.go:1298–1306 missing outfile/outdir selects stdout mode and rejects external maps even when write:false. A companion build must specify e.g. an in-memory outfile in the same working directory, sourcemap:external and sourcesContent:false. Leave original S10 output selection and mount alone. The companion must identify the exact single .js and the matching .js.map by path, never outputFiles[0].",
+      "gate": "Use the same captured prepared bytes once for both compilations, identical resolution, dependency tree, mode, cwd, flags, platform, original stdin/defines and pinned binary; ordinary S10:129 output is the reference. Require byte-by-byte equality of complete emitted JS, plus identical byte count and SHA256. Source-map coordinates resolve to the plugin-transformed S00, not automatically to Git S00; verify the exact transformed throw and caller span against the unique original anchor. Prove stack base/unit/module/column correspondence and that a nearby other call and generic/async/truncated frames cannot select the guard. Only a private job-memory map, no map mounting/publishing, no stack/path/sourceContent outside; report equality/uniqueness plus safe stage only. Any mismatch or unavailable inputs stops this path."
+    }
+  ],
+  "reproducibility": "Two clean original harness launches are not an identical input pair. S10:54,67–74 embeds a freshly computed approval ceiling into source. L49,125–127 derives virtual files from native namespace/history facts; L50–52,129 embeds M program, compressed residency and bootstrap material in defines. S09:379ff and S10:99–128 transform inputs; mutations must match the positive run. S10:38 generates an RSA key for outbound auth and L53 builds a dated command; neither is a direct define listed at L129. Do not persist private keys or freeze a live clock to force reproducibility. Existing budgetCompileOnly shortcut substitutes modeled namespace IDs at L49 and is constrained at L30, with a different composition from S08:9; it cannot certify historical QA identity. A tools-only comparison on one fully bound prepared input set is prospective. If no exact prepared input can be obtained under the approved scope, stop before a build.",
+  "winner": "For any later causal claim, require a single closed drop-POST binding, QA catch for that invocation on the actual returned response, and the outer bridge choosing that very downstream denial. S09:152–157 marks only QA return when a trace exists. Bridge L36–38 raises a fresh error from that response; L44 catches a winner that may instead come from the lease/deadline race (wire L26–39,51–52). The minimal distinguishing fact is whether the exact error object made at the non-ok-response path passed to first/cancel is the one caught by the outer bridge for that same invocation, plus confirmation the outer public path returned that result. An isolated M witness comparing private object identity across those two existing sites would be a separate proposal if ever authorized. Status equality, firstEvent time, location alone or a merely returned QA response do not establish it. With M frozen and no equivalent already-proved join, report QA site only and keep public causality UNKNOWN.",
+  "references": [
+    "https://github.com/evanw/esbuild/blob/v0.28.2/pkg/api/api_impl.go#L1298-L1306",
+    "https://esbuild.github.io/api/#sourcemap",
+    "https://esbuild.github.io/api/#sources-content",
+    "https://esbuild.github.io/api/#metafile"
+  ],
+  "authority": "Static feasibility DATA only. Source 4/5 and OWN 4/5. No code, fixtures, builds, refs, native or business execution."
+}
