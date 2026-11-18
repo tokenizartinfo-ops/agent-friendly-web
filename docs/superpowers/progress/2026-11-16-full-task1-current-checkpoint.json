@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "f06f9f72b5d12c2f01b2765a61e524a9135ddbc8",
-  "phase": "NOTICE_COMPONENT_CONTROLLER_CLOUD_VERIFIED_INTEGRATED_TRIAL_PENDING",
+  "previousCheckpoint": "166f5dc6841b47fd6d79cc5b8b15f2f83821cd67",
+  "phase": "LINKED_SYNTHETIC_NOTICE_VERIFIED_ORIGINAL_503_OPEN",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Use the verified serial controller for ordinary AFW checks. The blocked B2 fault-injection package remains unqualified. The integrated preparation GET 503 remains unresolved. Continue with passive defensive diagnosis or an ordinary authorized validation path when one can provide a same-occurrence receipt; reserve the one live Entry for the real PC-off trial.",
+  "next": "The same synthetic notice scenario is now verified in hosted CI. Initial native prep returns 200 and 202; original later mounted stage GET503 remains unresolved. Need new passive observation of the ordinary next-stage path to isolate the pending operation, then real cloud recipient review, withdrawal and restoration in a single valid occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -559,7 +559,7 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "03f90b2557ed7e95198a4943ade4f90d847738e2",
+  "readinessDocument": "eb300a73fd1eeae40ba5ec6b8ffdbcf3ef2365f1",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1822,8 +1822,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 138,
-  "updatedAtUTC": "2026-11-18 15:59:44 UTC",
+  "schemaVersion": 139,
+  "updatedAtUTC": "2026-11-18 16:11:46 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1966,5 +1966,58 @@
     "firstRun": 44341454726,
     "activeB2PacketReleased": false,
     "integratedOccurrenceVerified": false
+  },
+  "linkedSyntheticNotice": {
+    "atUTC": "2026-11-18 16:11:46 UTC",
+    "run": 44344076711,
+    "job": 134941612753,
+    "head": "3ebe223f0fab14e51fcafcc61362c734d74904f1",
+    "close": "12d9562bde417d8f0797e9bf3248ce1c3edeaadb",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44344076711",
+    "testPath": "test/mcp-own-notice-journey-linked.test.mjs",
+    "verifiedLogLines": [
+      "2026-11-18T16:10:49.8486788Z ok 1 - initial owned synthetic selection needs no OAuth grant and uses release primary",
+      "2026-11-18T16:10:49.8624141Z # tests 1",
+      "2026-11-18T16:10:49.8624757Z # pass 1",
+      "2026-11-18T16:10:49.8625020Z # fail 0",
+      "2026-11-18T16:10:49.8625534Z # cancelled 0",
+      "2026-11-18T16:10:49.8625890Z # skipped 0",
+      "2026-11-18T16:10:49.8626341Z # todo 0",
+      "2026-11-18T16:10:49.8626663Z # duration_ms 1133.810983",
+      "2026-11-18T16:10:50.2387119Z ok 1 - one synthetic dossier event is received, reviewed and withdrawn under the original subscription",
+      "2026-11-18T16:10:50.2477981Z # tests 1",
+      "2026-11-18T16:10:50.2478866Z # pass 1",
+      "2026-11-18T16:10:50.2479179Z # fail 0",
+      "2026-11-18T16:10:50.2479496Z # cancelled 0",
+      "2026-11-18T16:10:50.2479814Z # skipped 0",
+      "2026-11-18T16:10:50.2480109Z # todo 0",
+      "2026-11-18T16:10:50.2480468Z # duration_ms 347.096244"
+    ],
+    "closure": {
+      "branch": "lab/afw-linked-notice-journey-20261118",
+      "head": "12d9562bde417d8f0797e9bf3248ce1c3edeaadb",
+      "activeRuns": 0
+    },
+    "outcome": {
+      "ordinaryPreparationHTTP200": true,
+      "ordinaryApprovalHTTP202": true,
+      "oneSyntheticPersistedEvent": true,
+      "actualSyntheticDispatchAndHttpReceipt": true,
+      "signedOwnerReviewOfLinkedSubscription": true,
+      "withdrawalOfSameSubscription": true,
+      "original503Resolved": false,
+      "liveCloudActorReview": false,
+      "PCoff": false
+    },
+    "evidence": "3daffe72957e705985e6577172af18d177f12c75",
+    "first": {
+      "run": 44343644028,
+      "job": 134940066615,
+      "head": "7384fd8f729fe8243b5b358c66d6610bb8e93c70",
+      "closed": "3120ffe80974dabd3a09ca274ed4359bfa88924b",
+      "ordinaryPreparation": "passed",
+      "linked": "failed at assertion of raw DB event ID equality with projected webhook ID",
+      "sourceFix": false
+    }
   }
 }

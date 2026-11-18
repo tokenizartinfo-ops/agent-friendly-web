@@ -1,0 +1,77 @@
+{
+  "schema": "afw.repository.linked-synthetic-notice.evidence.v1",
+  "project": "AFW",
+  "verifiedUTC": "2026-11-18 16:11:46 UTC",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "first": {
+    "run": 44343644028,
+    "job": 134940066615,
+    "head": "7384fd8f729fe8243b5b358c66d6610bb8e93c70",
+    "closed": "3120ffe80974dabd3a09ca274ed4359bfa88924b",
+    "ordinaryPreparation": "passed",
+    "linked": "failed at assertion of raw DB event ID equality with projected webhook ID",
+    "sourceFix": false
+  },
+  "verified": {
+    "atUTC": "2026-11-18 16:11:46 UTC",
+    "run": 44344076711,
+    "job": 134941612753,
+    "head": "3ebe223f0fab14e51fcafcc61362c734d74904f1",
+    "close": "12d9562bde417d8f0797e9bf3248ce1c3edeaadb",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44344076711",
+    "testPath": "test/mcp-own-notice-journey-linked.test.mjs",
+    "verifiedLogLines": [
+      "2026-11-18T16:10:49.8486788Z ok 1 - initial owned synthetic selection needs no OAuth grant and uses release primary",
+      "2026-11-18T16:10:49.8624141Z # tests 1",
+      "2026-11-18T16:10:49.8624757Z # pass 1",
+      "2026-11-18T16:10:49.8625020Z # fail 0",
+      "2026-11-18T16:10:49.8625534Z # cancelled 0",
+      "2026-11-18T16:10:49.8625890Z # skipped 0",
+      "2026-11-18T16:10:49.8626341Z # todo 0",
+      "2026-11-18T16:10:49.8626663Z # duration_ms 1133.810983",
+      "2026-11-18T16:10:50.2387119Z ok 1 - one synthetic dossier event is received, reviewed and withdrawn under the original subscription",
+      "2026-11-18T16:10:50.2477981Z # tests 1",
+      "2026-11-18T16:10:50.2478866Z # pass 1",
+      "2026-11-18T16:10:50.2479179Z # fail 0",
+      "2026-11-18T16:10:50.2479496Z # cancelled 0",
+      "2026-11-18T16:10:50.2479814Z # skipped 0",
+      "2026-11-18T16:10:50.2480109Z # todo 0",
+      "2026-11-18T16:10:50.2480468Z # duration_ms 347.096244"
+    ],
+    "closure": {
+      "branch": "lab/afw-linked-notice-journey-20261118",
+      "head": "12d9562bde417d8f0797e9bf3248ce1c3edeaadb",
+      "activeRuns": 0
+    },
+    "outcome": {
+      "ordinaryPreparationHTTP200": true,
+      "ordinaryApprovalHTTP202": true,
+      "oneSyntheticPersistedEvent": true,
+      "actualSyntheticDispatchAndHttpReceipt": true,
+      "signedOwnerReviewOfLinkedSubscription": true,
+      "withdrawalOfSameSubscription": true,
+      "original503Resolved": false,
+      "liveCloudActorReview": false,
+      "PCoff": false
+    }
+  },
+  "sourceFiles": [
+    {
+      "path": "test/mcp-own-notice-journey-linked.test.mjs",
+      "sha": "94babfb9da162252c32dfd066929d1db1568bd69",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": ".github/workflows/afw-linked-notice-journey.yml",
+      "sha": "daf26a7f4c973b51df63ee72f5bcfccb004a2e30",
+      "mode": "100644",
+      "type": "blob"
+    }
+  ],
+  "scope": "Isolated GitHub Actions. Ordinary authorization path checked by existing workerd preparation test; one SQLite dossier change, actual AFW delivery code with fixture dispatch and simulated HTTP 200, original subscription read through real signed own-review handler, original subscription withdrawn and read back. No external receiver or hosted assistant processed the event.",
+  "identifiers": "Saved event has a DB ID. Webhook ID and payload ID matched the projection recomputed from that one committed row. The receipt, signed owner review and withdrawal retained the original subscription.",
+  "preparation503": "Ordinary first-stage prep passes; historical integrated case was a later first GET in its different mounted stage lineage. Its specific pending await and cause remain unknown. No timeout, authorization, published runtime or original private evidence changed.",
+  "operationalReadiness": false,
+  "PCoff": false
+}
