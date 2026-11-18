@@ -1,0 +1,106 @@
+{
+  "project": "AFW",
+  "recordedAtUTC": "2026-11-18 18:15:35 UTC",
+  "changes": {
+    "setupReader": "GET-only original setup Workflow/step output, published seed and exact QA and canary deployments under the original parent deadline",
+    "guard": "Native alarm and nominal read resolve exactly the retained control before factory hydration and recheck after hydration",
+    "testClock": "Dated synthetic occurrence matching fixture credential. No production clock, permission or custody changed."
+  },
+  "verification": {
+    "run": 44367371881,
+    "job": 135024645211,
+    "head": "4deb3e59d2f0fe88d5f93080fa10f2ff6fa048a7",
+    "closed": "e8e81d824c0c00eaf11bfc31694bf891bef66157",
+    "lines": [
+      "2026-11-18T18:14:14.0156016Z ok 6 - QA adopts the exact completed setup only after checking both deployed Workers",
+      "2026-11-18T18:14:14.0160912Z ok 7 - QA rejects incomplete, unrelated or drifted setup evidence",
+      "2026-11-18T18:14:14.0801373Z ok 8 - actual CLI waits for attended observer until 50s after successful primary seed; GET only",
+      "2026-11-18T18:14:23.2876714Z ok 60 - native QA alarm resolves capabilities only for the retained control",
+      "2026-11-18T18:14:23.2879112Z # pass 60",
+      "2026-11-18T18:14:23.2879373Z # fail 0"
+    ],
+    "manifest": {
+      "sourceRevision": "4deb3e59d2f0fe88d5f93080fa10f2ff6fa048a7",
+      "sourceTree": "4b43403c72be339887cdf1f71576b41b271aa4ed",
+      "completePackage": false,
+      "operationalReadiness": false,
+      "modules": {
+        "canaryLive": {
+          "name": "index.mjs",
+          "sha256": "87a903ecf593a5d3a4c38b930ff89551f16b77be9f5d52fc702ad9885e2dd067",
+          "bytes": 1989585,
+          "exports": [
+            "AfwNodeControl",
+            "AfwOwnEventNode",
+            "default"
+          ]
+        },
+        "qaLive": {
+          "name": "index.mjs",
+          "sha256": "b5583e34d9a34f3648e3f0726ab2c4f3e51249775ec07643372ab036d61367d3",
+          "bytes": 2695958,
+          "exports": [
+            "IndependentClosure",
+            "PrivateQaBootstrap",
+            "PrivateQaCatalog",
+            "PrivateQaNamedConfirmation",
+            "PrivateQaPreregistration",
+            "default",
+            "observePrivateQa"
+          ]
+        }
+      }
+    },
+    "branches": [
+      {
+        "branch": "lab/afw-qa-evidence-guard-integration-20261118",
+        "head": "4deb3e59d2f0fe88d5f93080fa10f2ff6fa048a7",
+        "closed": "e8e81d824c0c00eaf11bfc31694bf891bef66157",
+        "run": 44367371881,
+        "result": "success"
+      },
+      {
+        "branch": "lab/afw-qa-setup-primary-20261118",
+        "head": "e0d661b26e9f7448b09286293c9febd15921d225",
+        "closed": "482925968736afc0cb140c6901acd675c9b9fbb2",
+        "run": 44366340808,
+        "result": "failure"
+      },
+      {
+        "branch": "lab/afw-qa-guard-baseline-20261118",
+        "head": "816020c752519104b96b72afd9e11d3e0b0d37b5",
+        "closed": "0855f73d6bf605190e8926a520092b605047fece",
+        "run": 44367034181,
+        "result": "success"
+      }
+    ],
+    "activeRuns": 0,
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "actualPublication": false
+  },
+  "baseline": {
+    "evidence": [
+      "2026-11-18T18:12:20.5204716Z not ok 7 - native QA alarm resolves capabilities only for the retained control",
+      "2026-11-18T18:12:20.5242584Z # pass 6",
+      "2026-11-18T18:12:20.5243152Z # fail 1",
+      "2026-11-18T18:12:20.5273012Z AFW_GUARD_RED_EXIT 1",
+      "2026-11-18T18:12:20.8949272Z # pass 0",
+      "2026-11-18T18:12:20.8963234Z # fail 20",
+      "2026-11-18T18:12:20.8982027Z AFW_PREEXISTING_ADOPTION_BASELINE_EXIT 1"
+    ],
+    "baselineFailures": 13
+  },
+  "remaining": {
+    "nativeSetupEntryAndPolicySource": "unavailable",
+    "launchMaterialAndOperations": "unavailable",
+    "materialAndGuardRuntimeFactoriesMounted": false,
+    "custodyCommitmentExpiresAt": "2026-11-08T02:59:59Z",
+    "completePackage": false,
+    "candidatePublished": false,
+    "actualTrialAttempted": false,
+    "actualCloudReceipt": false,
+    "actualCloudReview": false,
+    "actualSubscriptionWithdrawn": false
+  },
+  "ownerActionNeededNow": false
+}

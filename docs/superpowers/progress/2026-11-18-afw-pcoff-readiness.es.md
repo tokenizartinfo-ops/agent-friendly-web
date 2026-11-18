@@ -12,4 +12,10 @@ El ensamblador leyó el respaldo real de R2 y el artefacto exacto de GitHub Acti
 
 Las versiones cerradas de QA, canary y operador seguían desplegadas. Cloudflare devolvió cero instancias activas y cero ejecuciones AFW sin terminar. La lista de todos los estados también devolvió un registro detenido. El respaldo exacto de QA respondió HTTP 404 en las cinco rutas del ensayo aislado.
 
-El borrador conserva cinco módulos y el manifiesto de verificación. El código del Worker todavía tiene pendientes los registros del proveedor de datos primarios y del guardián que verifica la retirada y restauración. El Worker ya dirige la alarma al guardián, cuya fábrica aún requiere integración. Por eso el paquete sigue sin calificar para abrir el ensayo real. [Auditoría del código de QA](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44364395121)
+## Datos de QA y control de cierre
+
+La candidata ya puede verificar el recibo de preparación con los registros primarios de Cloudflare. Comprueba la ejecución y su paso exactos, compara ambos recibos con la semilla aprobada y exige que los despliegues de QA y canary sigan apuntando a las versiones registradas. La alarma de cierre comprueba el control guardado antes y después de obtener sus capacidades. En las pruebas, un control alterado frenó todas las operaciones de cierre y el control correcto completó la secuencia simulada.
+
+Pasaron 60 pruebas y la candidata compiló para preparación. Una parte de la suite también fallaba en la versión anterior porque la hora sintética se tomaba del día de ejecución con una constancia de custodia fechada. Se fijó únicamente la fecha de la prueba. [Pruebas de la candidata](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44367371881)
+
+Faltan los proveedores nativos que producen los datos de preparación y ejecutan la retirada y restauración bajo el control recién verificado. La constancia de custodia de la versión actual también está vencida. El ensamblado anterior corresponde a la revisión anterior. El paquete nuevo permanece en preparación y el ensayo real de recepción, revisión del mismo aviso y retirada sigue pendiente. Todavía no hace falta intervención de Gabriel.
