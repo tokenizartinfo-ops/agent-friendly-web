@@ -1,0 +1,71 @@
+{
+  "schema": "AFW.C2.FIRST_GET.DEADLINE_INVESTIGATION/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "closed synthetic occurrence; static read-only follow-up",
+  "brief": "da0a80215e3a63cc8e61afa4e09295c999670ded",
+  "acceptedActual": "7dc02ce610fc0f9158cb911c16b81e996e54dec1",
+  "payload": "0b962ca840e0cf76248ecc277cf06472dbba704a",
+  "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "sourcePins": {
+    "S00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "S01": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+    "S02": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+    "S03": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+    "S08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+    "S09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "S10": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "stageWork": "068d35c2555c7dc711c487f6021ec572bd3af067"
+  },
+  "diagnosis": "The M operation's shared deadline/abort rejection won the original race for this one GET. The action elapsed 30,008 ms, consistent with exhaustion of the original 30-second budget. Its cause, the last completed M await and QA state cannot be recovered from the existing evidence. No definite routing, permission, retention cycle or business defect established.",
+  "evidence": [
+    {
+      "kind": "accepted observation",
+      "where": "public witness 57–60; S08:18:143",
+      "fact": "112983 ms to 142991 ms is the host action interval, including dispatch, original status/body read and the assertion. It is not a timer timestamp. Count returned at 143026 ms. HTTP 503 and DEADLINE_OR_ABORT are independently joined. Stub status and last QA phase are UNKNOWN. A later child timeout at open case18 did not terminate the case15 action."
+    },
+    {
+      "kind": "source",
+      "where": "S08:17–19,110–113; S10:149–171,188–200; S09:355–358; S03:17–28,40–41",
+      "fact": "The original bodyless GET is issued from the main fixture, dispatched to the first positive worker, and awaited once at the finite worker entry. The named actor binding selects the separate QA worker in the mounted configuration. Case15 failed in its initial choose; subsequent case15 scenario actions were not reached. Static wiring cannot demonstrate runtime receipt at the actor."
+    },
+    {
+      "kind": "source",
+      "where": "S01:53–83; native-wire:26–39; S09:652,715–725,739–765,797–801",
+      "fact": "The root lease begins on request entry. Its abort controller receives both the inbound request's abort and a root timer at 30 seconds. A separate timer for the operation uses the floored remaining budget. Its callback is also the lease signal listener. Both uses generate the same error class and observer category; there is no first-source bit. The observed error was the one escaping this race. The original parent.finish runs after the awaited bridge result and cannot initiate that same winning rejection. Inspecting an aborted lease after finish would misattribute the cause."
+    },
+    {
+      "kind": "source",
+      "where": "native-bridge:18–44; native-wire:35–52,88–99; S09:710–725,739–745",
+      "fact": "The retained operation starts in a promise turn, checks the root, reads the incoming message, builds the fixed forwarded request and awaits the original stub fetch. On this bodyless host GET, the no-body reader path returns empty bytes. If a response arrives, the failure path signals first before awaiting actual cancellation, or the success path awaits bounded body reads before synchronous validation. Waiting on cancellation after a first rejection does not by itself explain a deadline beating that rejection. For the deadline category the observer does not require its forward-site fact. Delivery, response-header arrival, response-body completion and physical settlement remain distinct unknowns."
+    },
+    {
+      "kind": "source",
+      "where": "S09:153–158; S02:9–27; S00:610–653,659–664; S01:79–106,201–233",
+      "fact": "If the forwarded operation reaches QA, the forwarding wrapper returns the original operation; the receiver makes a local lease clipped to the transported deadline, checks local context, and awaits the handler. The GET can wait on the phase/timeline, preparation, ticket storage and readbacks before a response is formed. Child-bound work can expire before its parent. The GET's form-response return precedes POST stage admission. None of these QA steps was observed by the case15 result; a GET is not a guarantee of no internal preparation writes."
+    },
+    {
+      "kind": "source",
+      "where": "stage-work:8–23,65–75; native-wire:35–39",
+      "fact": "The request scope retains originals and attaches settlement bookkeeping. A scope collision fails immediately. Removal requires abort and an empty retained set. waitUntil receives a rejection-handled derivative of actual completion; the public race does not await that derivative or poll for the retained set to drain. The race's finally clears its own timer/listener and does not certify cancellation, settlement or cleanup of the loser. Static code shows no direct circular wait between this race and its own retention registry."
+    }
+  ],
+  "hypotheses": [
+    "The operation timer could have fired, or the lease could have aborted due to its timer or an incoming abort. Timing alone cannot rank those near-coincident triggers reliably.",
+    "A pending stub response or a response-body read is compatible with the outcome. The scope count does not locate the pending operation. An overlapped QA guard denial would normally fail promptly if executed. No evidence shows that guard was reached or that a particular holder, permit or queue blocked."
+  ],
+  "nextDesignOnly": {
+    "question": "Can a diagnostic distinguish the operation timer from the lease abort event at their original shared rejection without changing the race?",
+    "minimum": "First specify a standalone, synthetic async control with an inert pending promise and a local abort signal, independent of OAuth, application actors and storage. At the existing winning callback boundary, model only the invocation source. The two expected labels are operation timer and lease signal; ambiguous/unjoined evidence stays UNKNOWN. A later losing callback must not overwrite the label. Independent original HTTP/UNKNOWN semantics stay intact. This needs no application traffic, additional polling, new timeout, or reread of a finished signal.",
+    "limit": "A signal label would still conflate root timer with inbound abort. Neither label establishes a forward, QA entry, or work settlement. This is a design proposal, not a run or authorization to export an extra field. Any change to the measured source, receiver contract or bounded marker requires its own review; the historical occurrence stays unclassifiable."
+  },
+  "execution": "NOT_RUN",
+  "newSourceOrLiveEvidence": false,
+  "businessRepairProved": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}

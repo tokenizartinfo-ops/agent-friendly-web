@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "e2471b2b8957e51d949ce8e6c3ac33c0b810b58f",
-  "phase": "M_ORIGINAL_DEADLINE_ABORT_INVESTIGATION_RUNNING",
+  "phase": "M_PENDING_AWAIT_DIAGNOSTIC_DESIGN",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete bounded static original M lease/abort/outstanding-work/cancellation/settlement investigation against accepted current occurrence; decide the smallest evidence-based next seam or repair without timer extension, extra IO or unchanged rerun.",
+  "next": "Review combined minimal M pending-await/winning-trigger design, then release only evidence-based bounded implementation through independent static and native gates. No unchanged full20 replay or original timer extension.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -250,7 +250,7 @@
       "replyComment": 6957793271,
       "action": "RECORDED_ONLY_NO_ACTIVATION_OR_CONSUMPTION"
     },
-    "lastRead": "2026-11-17 22:52:00 UTC",
+    "lastRead": "2026-11-18 00:56:00 UTC",
     "newRequests": 0
   },
   "rulings": [
@@ -1181,18 +1181,20 @@
       "repairReleased": false
     },
     "mDeadlineInvestigation": {
-      "status": "READ_ONLY_CODE_DEPENDENCY_INVESTIGATION_RUNNING",
+      "status": "READ_ONLY_FINDINGS_ACCEPTED_DESIGN_CLARIFICATION_RUNNING",
       "brief": "da0a80215e3a63cc8e61afa4e09295c999670ded",
       "actor": "/root/get_winner_full20_carrier_review",
       "currentBoundary": "DEADLINE_OR_ABORT",
       "targetDurationMs": 30008,
       "QAphase": "UNKNOWN",
       "timerVsAbort": "UNKNOWN",
-      "sourceRepairOrNewRunReleased": false
+      "sourceRepairOrNewRunReleased": false,
+      "report": "841ccd8a3c288cd797bdbed08c91c2e7fbcb8757",
+      "rootRuling": "Original operation/lease signal share one rejection. No concrete cycle proven. A signal-only control is insufficient to locate the pending await; request bounded M progress plus source discrimination and inert original-wiring roundtrip assessment before code release."
     }
   },
-  "schemaVersion": 107,
-  "updatedAtUTC": "2026-11-18 00:50:15 UTC",
+  "schemaVersion": 108,
+  "updatedAtUTC": "2026-11-18 00:56:30 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
