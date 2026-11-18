@@ -1,0 +1,144 @@
+{
+  "schema": "afw.notice-journey.repository-evidence.v1",
+  "project": "AFW",
+  "basis": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "checkedAtUTC": "2026-11-18 15:59:44 UTC",
+  "first": {
+    "run": 44341454726,
+    "job": 134932245919,
+    "head": "ae77c1bf89be3448f2b428314ee7caff92db4834",
+    "closed": "a256fd0196e17dcc3ffa554f15be3181b58cf978",
+    "conclusion": "failure",
+    "reason": "Pinned CLI documents --experimental-test-isolation for Node 22.23.4; first controller used --test-isolation."
+  },
+  "success": {
+    "run": 44341758747,
+    "job": 134933343697,
+    "head": "18453cab0c6792608c5338cd89792d9d71efcc94",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44341758747",
+    "result": {
+      "schema": "afw.notice-journey.component-check.v1",
+      "revision": "18453cab0c6792608c5338cd89792d9d71efcc94",
+      "observedAt": "2026-11-18T15:58:46.350Z",
+      "status": "passed",
+      "scope": "synthetic_component_checks",
+      "results": [
+        {
+          "stage": "subscription",
+          "status": "passed",
+          "workerClosed": true,
+          "elapsedMs": 193,
+          "exitCode": 0,
+          "stderrBytes": 0
+        },
+        {
+          "stage": "delivery",
+          "status": "passed",
+          "workerClosed": true,
+          "elapsedMs": 62,
+          "exitCode": 0,
+          "stderrBytes": 0
+        },
+        {
+          "stage": "review",
+          "status": "passed",
+          "workerClosed": true,
+          "elapsedMs": 40,
+          "exitCode": 0,
+          "stderrBytes": 0
+        },
+        {
+          "stage": "withdrawal",
+          "status": "passed",
+          "workerClosed": true,
+          "elapsedMs": 62,
+          "exitCode": 0,
+          "stderrBytes": 0
+        },
+        {
+          "stage": "retirement",
+          "status": "passed",
+          "workerClosed": true,
+          "elapsedMs": 44,
+          "exitCode": 0,
+          "stderrBytes": 0
+        }
+      ],
+      "operationalReadiness": false,
+      "pcOffVerified": false
+    },
+    "artifacts": [
+      {
+        "id": 14443463356,
+        "name": "afw-notice-journey-components",
+        "size": 488,
+        "expired": false,
+        "createdAt": "2026-11-18T15:58:48Z",
+        "digest": "sha256:5bb717ead844bc5ac8b157b6c8f1c60a5b4695d22fb2683ad4c9bedd1a5d2c54"
+      }
+    ],
+    "source": "run API, job terminal, exact structured result from decoded job log and artifact metadata"
+  },
+  "closure": {
+    "atUTC": "2026-11-18 15:59:44 UTC",
+    "branch": "lab/afw-notice-journey-components-20261118",
+    "active": "18453cab0c6792608c5338cd89792d9d71efcc94",
+    "closed": "4572086a8e5a93ebd1e07c6b99480846a36e74be",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "activeRuns": 0,
+    "observedRuns": [
+      {
+        "id": 44341758747,
+        "conclusion": "success",
+        "sha": "18453cab0c6792608c5338cd89792d9d71efcc94"
+      },
+      {
+        "id": 44341454726,
+        "conclusion": "failure",
+        "sha": "ae77c1bf89be3448f2b428314ee7caff92db4834"
+      }
+    ]
+  },
+  "selection": [
+    {
+      "stage": "subscription",
+      "path": "test/mcp-own-subscription-receipt.test.mjs",
+      "name": "first verified subscription preserves exact safe immutable receipt and rejects refresh"
+    },
+    {
+      "stage": "delivery",
+      "path": "test/mcp-subscription-lifecycle.test.mjs",
+      "name": "one durable delivery records HTTP receipt separately from cloud review and never repeats"
+    },
+    {
+      "stage": "review",
+      "path": "test/operations-notice-cycle.test.mjs",
+      "name": "terminal server review remains a dated reviewed result rather than idle or delivery success"
+    },
+    {
+      "stage": "withdrawal",
+      "path": "test/mcp-subscription-lifecycle.test.mjs",
+      "name": "private observation distinguishes expiry from actual unsubscribe without sending or changing history"
+    },
+    {
+      "stage": "retirement",
+      "path": "test/mcp-retirement-receipt-integration.test.mjs",
+      "name": "actual challenged helper chain accepts +21ms and yields caller-local physical evidence"
+    }
+  ],
+  "integration": {
+    "controller": {
+      "path": "scripts/qa/afw-notice-journey.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "748e1f1f4863688140962f70259df11f86096df3"
+    },
+    "reporterBlob": "c5036e84a85e3d099f5b14c1dc3eb9f7faf03651",
+    "executionWorkflow": ".github/workflows/afw-notice-journey-components.yml",
+    "runMode": "Fixed allowlist of five ordinary existing test cases, one direct Node process per file occurrence. Requires precisely one genuine passing test result, successful summary, exit zero and closed streams before advancing. Read-only GitHub Actions job with no cloud credentials or project data.",
+    "repositoryRuntimeChanged": false
+  },
+  "limits": "Separate synthetic fixtures do not bind a same-occurrence delivery/ACK/useful cloud review/withdrawal/restoration chain. They do not establish the cause of the previously observed real internal GET 503. B2 remains unqualified and was not run.",
+  "operationalReadiness": false,
+  "pcOffVerified": false
+}

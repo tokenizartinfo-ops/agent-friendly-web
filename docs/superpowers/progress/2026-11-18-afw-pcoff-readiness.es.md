@@ -1,15 +1,11 @@
-# AFW · preparación de la prueba con el ordenador apagado
+# AFW · Preparación de la prueba con el ordenador apagado
 
-Estado guardado: 2026-11-18 15:49:15 UTC.
+Estado comprobado el 18 de noviembre de 2026 a las 15:59 UTC.
 
-La prueba final sigue pendiente. El bloqueo actual está en el diagnóstico interno: el recolector y el controlador todavía no acreditan de forma conjunta el resultado de cada trabajador, el origen exacto de las marcas y el retiro de sus procesos ante un fallo.
+El controlador quedó conectado a cinco comprobaciones existentes de AFW en una rama de laboratorio. GitHub Actions verificó la suscripción, el recibo de entrega, el reconocimiento de una revisión, la retirada y la evidencia de cierre por separado. Los cinco procesos terminaron en orden y entregaron un resultado válido. La rama quedó cerrada y las dos ejecuciones están terminadas.
 
-El bloque MODEL B1 pasó 134 comprobaciones en GitHub Actions y quedó cerrado. La propuesta B2 completa, las revisiones, las mediciones y los componentes parciales están preservados en esta rama. Los componentes parciales tienen cero consumidores conectados. La última ronda no entregó una corrección integrada; se alcanzó el límite de correcciones y la propuesta activa quedó rechazada para ejecución. B2 no se lanzó.
+La primera ejecución se detuvo antes de validar el primer caso. El controlador usaba un nombre de opción incompatible con la versión fijada de Node. Tras corregirlo, la segunda ejecución verificó los cinco casos. [Ejecución corregida](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44341758747)
 
-Antes de retomar el diagnóstico hay que definir e integrar el controlador mínimo compatible con la API pública de Node, conservando los cinco trabajadores, sus casos, tiempos y límites. Debe verificar la terminación antes de admitir el siguiente, conservar las categorías auténticas de salida, comprobar los resultados individuales y validar la respuesta original completa. Los helpers archivados no satisfacen esto por sí solos.
+El controlador verifica componentes con datos sintéticos. Queda pendiente acreditar que el mismo aviso se recibe, se procesa con un resultado útil y se retira en un solo ensayo en la nube. El último recorrido integrado observado devolvió HTTP 503 en la consulta de preparación. La causa sigue abierta y la comprobación por componentes no modifica ese resultado. El diagnóstico anterior sigue sin habilitarse para ejecución.
 
-Después faltan una observación válida del fallo real, la corrección de su causa, la validación del recorrido completo y la preparación de candidata, reversión y permisos vigentes. La prueba final deberá acreditar en una misma ocurrencia la ejecución cloud, el aviso útil, su recepción, la retirada y el cierre con el equipo apagado. El piloto de Max requiere su consentimiento propio y va después.
-
-La última observación real de Source sigue siendo GET 503 en el caso 15; su causa no está aislada. Este bloqueo de integración no demuestra una incidencia actual de Cloudflare ni un problema de credenciales. No hay un plazo fiable para el ensayo final mientras esto siga abierto.
-
-No hay una ejecución nueva activa ni trabajo de fondo iniciado por este cierre. No hace falta reconectar Chrome, copiar claves o pedir códigos para este punto. Se preservaron los contadores originales Source/OWN/StageB 5/5 sin reiniciarlos. SourceQualified, Task1Pass, operationalReadiness y PCoff siguen false.
+Antes de coordinar el ensayo con el equipo apagado, falta validar ese tramo integrado, comprobar la candidata y su reversión, y preparar la única ventana del expediente sintético. La prueba final sigue pendiente y este avance no requiere intervención de Gabriel.

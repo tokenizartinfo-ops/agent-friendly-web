@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "7ae9a7367e15f3f32e09ef1e3e09a58ffd4a4a3d",
-  "phase": "B2_STATIC_PACKET_REJECTED_AT_CORRECTION_CAP",
+  "previousCheckpoint": "f06f9f72b5d12c2f01b2765a61e524a9135ddbc8",
+  "phase": "NOTICE_COMPONENT_CONTROLLER_CLOUD_VERIFIED_INTEGRATED_TRIAL_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Before any new diagnostic execution, replan the minimal integrated process/evidence controller against cap adjudication7a98ca785ff92b8474d1637462ce3b156afa7e66. Five original Important findings remain load-bearing. No sixth correction round, Source/OWN/StageB reset, unqualified B2 run, P4/Source replay or owner login request. This checkpoint starts no background work.",
+  "next": "Use the verified serial controller for ordinary AFW checks. The blocked B2 fault-injection package remains unqualified. The integrated preparation GET 503 remains unresolved. Continue with passive defensive diagnosis or an ordinary authorized validation path when one can provide a same-occurrence receipt; reserve the one live Entry for the real PC-off trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -559,7 +559,7 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "76522a75a6fb5fd7c25c9b0f0d11e969dbfbe69e",
+  "readinessDocument": "03f90b2557ed7e95198a4943ade4f90d847738e2",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1822,8 +1822,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 137,
-  "updatedAtUTC": "2026-11-18 15:49:15 UTC",
+  "schemaVersion": 138,
+  "updatedAtUTC": "2026-11-18 15:59:44 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1940,5 +1940,31 @@
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
   "noRuntimeMutationThisBlock": true,
-  "ownerActionNeededNow": false
+  "ownerActionNeededNow": false,
+  "nominalNoticeController": {
+    "atUTC": "2026-11-18 15:59:44 UTC",
+    "branch": "lab/afw-notice-journey-components-20261118",
+    "active": "18453cab0c6792608c5338cd89792d9d71efcc94",
+    "closed": "4572086a8e5a93ebd1e07c6b99480846a36e74be",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "activeRuns": 0,
+    "observedRuns": [
+      {
+        "id": 44341758747,
+        "conclusion": "success",
+        "sha": "18453cab0c6792608c5338cd89792d9d71efcc94"
+      },
+      {
+        "id": 44341454726,
+        "conclusion": "failure",
+        "sha": "ae77c1bf89be3448f2b428314ee7caff92db4834"
+      }
+    ],
+    "evidence": "2fd4681357d3ced035d8b66ac74474e5df33e27a",
+    "result": "5/5 existing nominal synthetic component checks passed in GitHub Actions",
+    "run": 44341758747,
+    "firstRun": 44341454726,
+    "activeB2PacketReleased": false,
+    "integratedOccurrenceVerified": false
+  }
 }
