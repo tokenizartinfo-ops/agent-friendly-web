@@ -1,0 +1,63 @@
+{
+  "schema": "afw.b2.fi2-programmatic-admission-ruling.v1",
+  "atUTC": "2026-11-18 15:36:48 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "fixRound": 4,
+  "maxRounds": 5,
+  "basis": {
+    "fi2": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+    "schedule": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+    "review": "f1d36b71ecd97d73a2106be9b766ded87025ec94",
+    "narrowedScope": "814aedb69d5f948dbd87e58e4f2374230f844b68"
+  },
+  "conflict": "Stock one aggregated node --test five-file scheduling has no independently gated next-worker admission via a passive diagnostics subscriber. A thrown channel subscriber exception is deferred; treating it as prevention is invalid.",
+  "ruling": "Authorize a static proposed replacement of only the existing neutral CLI launch entry with one fixed programmatic Node22.23.4 node:test supervisor entry. It may call the public run API for each one exact original file, sequentially, with a separate genuine TestsStream. Independently reconcile exact terminal process identity and per-worker outcomes before invoking the next one-file run. This replaces aggregation semantics and must be disclosed; it does not add a controller process, workers, scenarios, runtime operations or execution approval.",
+  "unchanged": {
+    "neutralCLIProcesses": 1,
+    "neutralWorkers": 5,
+    "concurrentTestWorkers": 1,
+    "maxNodeProcessesInGroup": 2,
+    "orderedIds": [
+      "DNEG_THROW",
+      "DNEG_MISSING_MARK",
+      "DNEG_DUPLICATE_MARK",
+      "DNEG_FOREIGN_CARRIER",
+      "DNEG_HELD_CUTOFF"
+    ],
+    "groupCapMs": 8000,
+    "workerCapMs": 1600,
+    "heldCountByMs": 1250,
+    "heldConfirmMaxMs": 100,
+    "terminalReserveMs": 250,
+    "originalD07TimeoutMs": 120000,
+    "D07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "sourceCounters": "5/5 unchanged",
+    "processCaps": "13 planned guarded Node /24 maximum, per-target8",
+    "groupAndJobCaps": "All prior phase/producer/job caps unchanged"
+  },
+  "requirements": [
+    "Use pinned public run API, isolate each file in its own genuine worker; do not directly import D07 into the CLI",
+    "Preserve exact original selected test outcomes/errors, neutral close behavior, real recorder faults, and intentional held cutoff separately; final summary is application composition, not a purported stock five-file TAP run",
+    "Install supported passive lifecycle/TestsStream collection before admission; retain original event type and exact worker identity",
+    "No callback can be used as a fictional preventive gate: the explicit application admission check must precede each run call",
+    "Original ambient custody and exact CLI/worker launch inventory/role proofs remain required; same UID is not filesystem isolation",
+    "Stop without admitting the next worker if prior terminal/readback or full slot/group/final reserve is unavailable",
+    "Keep complete source-text delta and dependency graph; no Node internals, Promise, console, D07, recorder monkeypatch"
+  ],
+  "primarySupport": [
+    "https://github.com/nodejs/node/blob/v22.23.4/test/parallel/test-runner-run.mjs",
+    "https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/runner.js",
+    "https://github.com/nodejs/node/blob/v22.23.4/doc/api/test.md#runoptions"
+  ],
+  "costIfWrong": "Review or finite qualification will reject the new neutral CLI; all business/runtime actions stay held and this text proposal can be discarded. Do not credit hypothetical timing or transport behavior.",
+  "scopeExclusions": [
+    "N06/overlap/OAuth/scenario modules remain unchanged in this generic Fix4 subset",
+    "No program execution, CLI invocation, native probes, refs, GHA or remote runtime mutation by author"
+  ],
+  "executionReleased": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "supersedesTimestampOnly": "9213e14e619410d3017f2efd981fbf3d94e66ae5"
+}

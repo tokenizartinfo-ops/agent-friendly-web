@@ -3,7 +3,7 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "f8d855f3e0fe637c3c36901713ef0f8000e4416d",
+  "previousCheckpoint": "4d35ca5de5ecd51342f08b0644c768708e300dc2",
   "phase": "PENDING_GET_B2_FIX4_GENERIC_COLLECTOR_HARDENING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
@@ -275,6 +275,11 @@
       "atUTC": "2026-11-18 15:31:00 UTC",
       "ref": "814aedb69d5f948dbd87e58e4f2374230f844b68",
       "summary": "Fix4 resumes as generic supervisor/collector hardening only. Partial implementation does not qualify B2; all six findings remain open until reviewed. No integration of the refused reproduction changes."
+    },
+    {
+      "atUTC": "2026-11-18 15:37:09 UTC",
+      "ref": "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1",
+      "summary": "Ruling: replace only stock aggregate scheduling inside the same one neutral CLI with supported sequential single-file run() admission. Five genuine worker outcomes, no added process/case/time; original D07/recorder unchanged. Costs if wrong: reject static or finite TOOL qualification, no business/runtime release."
     }
   ],
   "source5": {
@@ -1757,7 +1762,9 @@
         ],
         "withdrawn": "Earlier host PID concern addressed obsolete body; active6f459 already uses correct proc-visible PID; no new flags.",
         "coveringTests": "Future fixed CAL56/P3/native finite GHA packet only after independent acceptance",
-        "testStatus": "NOT_RUN"
+        "testStatus": "NOT_RUN",
+        "admissionRuling": "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1",
+        "aggregationPremise": "One existing neutral CLI process may use public Node22 run() for five sequential single-file TestsStreams with explicit terminal admission, instead of stock aggregated scheduling. All original cases/clocks/workers/guards unchanged; static proposal only."
       },
       "reviewer": "/root/pending_get_red_review",
       "finalProposal": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
@@ -1771,8 +1778,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 134,
-  "updatedAtUTC": "2026-11-18 15:31:00 UTC",
+  "schemaVersion": 135,
+  "updatedAtUTC": "2026-11-18 15:37:09 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1872,5 +1879,18 @@
     "scope": "Dated own Git refs/run history only; no fresh Cloudflare runtime status inferred"
   },
   "PCoff": false,
-  "operationalReadiness": false
+  "operationalReadiness": false,
+  "archiveVerification": {
+    "head": "eee54974686e71e0f43e4a1514271cb9df9699f4",
+    "parent": "a69bf2211658ed142d7de1caee530c45d8e26340",
+    "expected": 78,
+    "actual": 78,
+    "mismatched": [],
+    "absent": [],
+    "allDocs": true,
+    "added": 76,
+    "modified": 2,
+    "removed": 0,
+    "oneCommit": true
+  }
 }
