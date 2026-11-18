@@ -21,13 +21,16 @@ export async function cfFiniteFixture({at,configure=()=>{}}={}){
  base.restorationState.observer='complete';base.old.state.canary={...base.old.state.canary,versions:[{version_id:p.deployments.canaryClosed.versionId,percentage:100}],id:p.deployments.canaryClosed.deploymentId};
  const state={mode:'normal',observerStatus:'complete',qaVersion:p.deployments.qaLive.versionId,qaDeployment:p.deployments.qaLive.deploymentId,annotation:null,posts:0};
  const seedFixture=await seedPrimaryFixture({T0:v.T0,sourceRevision:v.sourceRevision,commandId:p.commandId,qaLive:p.deployments.qaLive});
- seedFixture.seed.qaPublication.observedAt=v.T0;seedFixture.refresh();
+ seedFixture.seed.qaPublication.observedAt=v.T0;seedFixture.seedStep.completed_at=new Date(v.T0+50).toISOString();seedFixture.refresh();
  const ref=seedFixture.ref;gh.rows.set(ref,seedFixture.map.get('/git/ref/tags/afw-finite-observer-create/'+v.intentId));gh.tags.set(seedFixture.tagSha,seedFixture.map.get('/git/tags/'+seedFixture.tagSha));
  const response=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{date:new Date(base.f.now()).toUTCString(),'content-type':'application/json'}});
  const answer=(result,result_info)=>({success:true,errors:[],messages:[],result,...result_info?{result_info}:{}});
  const fetchImpl=async(url,init)=>{
   requests.push({url,method:init.method});if(url.startsWith('https://api.github.com/')){
    const path=url.slice(SEED_GH.length);
+   // The seed reader performs anonymous GETs with its own clock and redirect
+   // policy. Authenticated finalizer/publisher traffic still uses the GH fixture.
+   if(init.method==='GET'&&!init.headers?.Authorization&&seedFixture.map.has(path))return response(seedFixture.map.get(path));
    if(path.startsWith('/git/commits/')||path.startsWith('/contents/')||path.startsWith('/actions/artifacts/')||path==='/actions/runs/101')return response(seedFixture.map.get(path));
    return gh.fetchImpl(url,init);
   }
