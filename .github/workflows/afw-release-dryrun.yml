@@ -1,69 +1,9 @@
-name: AFW release profile readback
-on:
-  push:
-    branches: [lab/afw-release-profile-readback-20261118]
-permissions:
-  contents: read
+name: AFW release profile readback closed
+on: workflow_dispatch
+permissions: {}
 jobs:
-  build:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-release-profile-readback-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-RELEASE-PROFILE-READBACK-20261118' }}
+  closed:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - name: Install locked dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Build and verify the source candidate in staging
-        shell: bash
-        run: |
-          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
-          node <<'AFW_VERIFY'
-          const fs = require('node:fs');
-          const p = JSON.parse(fs.readFileSync('output/finite-native-staging/staging.json', 'utf8'));
-          if (p.purpose !== 'afw.finite-native-compiler-staging.v1' || p.sourceRevision !== process.env.GITHUB_SHA ||
-              p.completePackage !== false || p.operationalReadiness !== false ||
-              Object.keys(p.modules).sort().join(',') !== 'canaryLive,qaLive') process.exit(1);
-          const evidence = {sourceRevision:p.sourceRevision,sourceTree:p.sourceTree,completePackage:false,operationalReadiness:false,
-            modules:Object.fromEntries(Object.entries(p.modules).map(([role,value])=>[role,value.module]))};
-          console.log('AFW_FINAL_APPROVAL_STAGING ' + JSON.stringify(evidence));
-          AFW_VERIFY
-      - name: Validate both worker configurations and capture exact error details
-        shell: bash
-        env:
-          WRANGLER_SEND_METRICS: 'false'
-        run: |
-          export NO_COLOR=1
-          result=0
-          for role in canary qa; do
-            if [[ $role = canary ]]; then
-              module=output/finite-native-staging/canaryLive/index.mjs
-              config=wrangler.mcp-own.finite.jsonc
-            else
-              module=output/finite-native-staging/qaLive/index.mjs
-              config=wrangler.independent-closure-qa.finite.jsonc
-            fi
-            log="$RUNNER_TEMP/afw-wrangler-$role.log"
-            if ./node_modules/.bin/wrangler deploy "$module" --config "$config" --dry-run --no-bundle --outdir "output/afw-verify-$role" > "$log" 2>&1; then
-              cmp --silent "$module" "output/afw-verify-$role/index.mjs" || exit 1
-              echo "AFW_EXACT_STAGE_DRY_RUN_PASS $role"
-            else
-              node --input-type=module - "$role" "$log" <<'AFW_DIAG'
-          import {readFileSync} from 'node:fs';
-          const lines=readFileSync(process.argv[3],'utf8').replace(/\x1b\[[\d;]*m/g,'').split('\n');
-          const start=lines.findIndex(line=>/\[ERROR\]|Error:|TypeError:/i.test(line));
-          for(const raw of lines.slice(Math.max(0,start),Math.max(0,start)+12)){
-            if(!raw.trim() || /https?:\/\/|bearer|secret|token|Authorization/i.test(raw)) continue;
-            const line=raw.replace(/\b[a-f0-9-]{20,}\b/ig,'[id]').replace(/[^\t\x20-\x7e]/g,'');
-            console.log('AFW_WRANGLER_DETAIL '+process.argv[2]+' '+line.trim().slice(0,220));
-          }
-          AFW_DIAG
-              result=1
-            fi
-          done
-          exit "$result"
+      - run: exit 1
