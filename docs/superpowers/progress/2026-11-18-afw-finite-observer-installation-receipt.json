@@ -1,0 +1,42 @@
+{
+  "schema": "afw.finite-observer-installation-receipt.v1",
+  "observedAtUTC": "2026-11-18T22:28:27Z",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-observer-installation-20261118",
+  "head": "ad5f90dbdfae4511280f5d24c769b8cc4c626d32",
+  "tree": "de22ebe457d035e7284fc6cca25b57e64cd9ad01",
+  "closed": "ab9526a7ae33161b92298fed11cb8bbf8d5b6f1a",
+  "closedTree": "79c2d1fc173849ea63d36ca3fb4651f8e6a771b9",
+  "verifiedRun": 44411584280,
+  "red": {
+    "head": "6a4fdcc0fb43fc0019a59b13572d231e84ec4af9",
+    "run": 44410693567,
+    "reason": "Finite observer did not require or persist the original installed-policy receipt"
+  },
+  "verification": {
+    "tests": 112,
+    "pass": 112,
+    "fail": 0,
+    "skipped": 0,
+    "stagingCompletePackage": false,
+    "fixtureRecovery": [
+      "Adoption fixtures emit the exact v2 receipt; negative cases send no receipt or a different hash.",
+      "Native observer tests isolate custody dates with synthetic fixture-only metadata. Production credential remains expired."
+    ]
+  },
+  "material": [
+    "Fixed private QA actor route projects an installed-policy receipt from original storage, actor, selection and plan.",
+    "Observer step v2 carries only the setup receipt hash with the existing preview. HTTP adoption independently reads exact provider instance completion and verifies the same hash.",
+    "The initial notice selectors, native scope, policy text and candidate pin are bound to the same validated plan in observer and nominal confirmation.",
+    "Original deadlines, single-claim logic and literal private route remain; old preview is available only for compatibility outside new adoption."
+  ],
+  "limits": [
+    "Finite observer control factory and launch material/finalizer sources are still absent in the release composition.",
+    "Verification is isolated simulated-provider CI and a non-publishable staging build.",
+    "No runtime deployment, model receipt, real subscription, native withdrawal or PC-off evidence."
+  ],
+  "operationalReadiness": false,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "ownerActionNeededNow": false
+}

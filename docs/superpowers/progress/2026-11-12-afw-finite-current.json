@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "68506c4f835da91fb441470c2e1539f8404e7c59",
-  "phase": "The fixed confirmation actor revalidates the exact native installation and original private expediente before returning material for the same notice.",
+  "previousCheckpoint": "fce92ad9488e170279d6d7819b8248a962221dd3",
+  "phase": "Observer admission now requires the original setup receipt and matched private notice selectors; isolated source validation complete.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Join observer setup receipt to original native preview, then finish canonical launcher/observer material, finalizer and complete publishable package. Qualify current scoped custody before one real cloud trial of the same notice, review and withdrawal.",
+  "next": "Build the fixed observer/launcher canonical control material from completion, seed, verified provider role pins, and the original QA durable source. Install fixed finalizer and prepare the complete package plus valid scoped custody. Then perform one cloud trial correlating the notice, assistant review, and native withdrawal.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 159,
-  "updatedAtUTC": "2026-11-18T22:19:21Z",
+  "schemaVersion": 160,
+  "updatedAtUTC": "2026-11-18T22:28:27Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2277,6 +2277,16 @@
     "closed": "11df894a19c12c8518c8141e9d72499d12b158e5",
     "verifiedRun": 44410032508,
     "tests": 137,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "observerInstallationReceipt": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-finite-observer-installation-receipt.json",
+    "evidence": "6569f285506ce4e752fe44d3c8393c6b405e606f",
+    "head": "ad5f90dbdfae4511280f5d24c769b8cc4c626d32",
+    "closed": "ab9526a7ae33161b92298fed11cb8bbf8d5b6f1a",
+    "verifiedRun": 44411584280,
+    "tests": 112,
     "completePackage": false,
     "realCloudOccurrence": false
   }
