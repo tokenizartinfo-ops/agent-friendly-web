@@ -29,6 +29,8 @@ function fixture(change){
   params:{operation:'finite_private_policy_setup',intentId,sourceRevision},output,step_count:1,
   steps:[{name:'finite-private-policy-setup',type:'step',start:iso(start+100),end:iso(end-10),
    attempts:[{success:true}],success:true,output}]};
+ if(change==='provider-suffix')result.steps[0].name+='-1';
+ if(change==='wrong-suffix')result.steps[0].name+='-2';
  if(change==='running')result.status='running';
  if(change==='duplicate-step')result.steps.push(result.steps[0]);
  if(change==='step-output')result.steps[0].output=JSON.stringify({status:'admin_pending'});
@@ -64,9 +66,14 @@ test('QA adopts the exact completed setup only after checking both deployed Work
 });
 
 test('QA rejects incomplete, unrelated or drifted setup evidence',async()=>{
- for(const change of ['running','duplicate-step','step-output','unrelated','early','drift','other-module','abort']){
+ for(const change of ['wrong-suffix','running','duplicate-step','step-output','unrelated','early','drift','other-module','abort']){
   const f=fixture(change);
   await assert.rejects(readPrivateQaFiniteSetupCompletion(f.input),undefined,change);
   if(change==='abort')assert.equal(f.calls.length,1);
  }
+});
+
+test('QA accepts the first step name emitted by Cloudflare Workflows',async()=>{
+ const f=fixture('provider-suffix');
+ assert.deepEqual((await readPrivateQaFiniteSetupCompletion(f.input)).receipt,f.receipt);
 });
