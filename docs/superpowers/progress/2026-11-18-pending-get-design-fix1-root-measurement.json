@@ -1,0 +1,66 @@
+{
+  "schema": "AFW.PENDING.GET.DESIGN_FIX1.ROOT_MEASUREMENT/1",
+  "files": [
+    {
+      "expected": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+      "bytes": 15157,
+      "sha256": "0474b262b7ce44dd20356a790854d4e684a82e0ccf0fda92af3636ecf949fb1b",
+      "blob": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+      "gitMatches": true
+    },
+    {
+      "expected": "411ba4fc5e6ff4cd2db2b2c05e2e5dde3610c6e4",
+      "bytes": 7560,
+      "sha256": "10733b868ef4be654e8eb32d414841bef8c4e4265f07b36e49a9fc2e603a5934",
+      "blob": "411ba4fc5e6ff4cd2db2b2c05e2e5dde3610c6e4",
+      "gitMatches": true
+    },
+    {
+      "expected": "acdacd7860e96f7ea1416f5bfe7bd4c0adb7a2d8",
+      "bytes": 21044,
+      "sha256": "6732175e7370ee3e580daddc7d6a071aeb311334477436f049ed275777142119",
+      "blob": "acdacd7860e96f7ea1416f5bfe7bd4c0adb7a2d8",
+      "gitMatches": true
+    },
+    {
+      "expected": "112665cfbded57375864d7f89d6eb9f57937c274",
+      "bytes": 13957,
+      "sha256": "f3f3d79fef3261b48e1a09790272b1d9c5e943490ae602049e9fca195e645298",
+      "blob": "112665cfbded57375864d7f89d6eb9f57937c274",
+      "gitMatches": true
+    },
+    {
+      "expected": "375746b121d03d5c6ec8391e6155b951d897c4cf",
+      "bytes": 17313,
+      "sha256": "9880cf7d017fe26d03bfdefd70572fa9feca70bf6401d0b8d94b90ccdf866920",
+      "blob": "375746b121d03d5c6ec8391e6155b951d897c4cf",
+      "gitMatches": true
+    },
+    {
+      "expected": "bde64dc7991edbbe577b07fbbf828b6d64270de6",
+      "bytes": 9529,
+      "sha256": "28be785600ff6d24e0a0049b174acc175d66c258543f556eee82a56babc747a0",
+      "blob": "bde64dc7991edbbe577b07fbbf828b6d64270de6",
+      "gitMatches": true
+    }
+  ],
+  "reversibleChecks": [
+    {
+      "file": "design.md",
+      "forwardMatched": true,
+      "inverseMatched": true,
+      "beforeLines": 37,
+      "afterLines": 24
+    },
+    {
+      "file": "plan.md",
+      "forwardMatched": true,
+      "inverseMatched": true,
+      "beforeLines": 18,
+      "afterLines": 17
+    }
+  ],
+  "originalReviewPrefixExact": true,
+  "SourceExecuted": false,
+  "tests": "NOT_RUN_DESIGN_ONLY"
+}

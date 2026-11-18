@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "e2471b2b8957e51d949ce8e6c3ac33c0b810b58f",
-  "phase": "BOUNDED_PENDING_AWAIT_DESIGN_FIX1",
+  "phase": "BOUNDED_PENDING_AWAIT_DESIGN_FIX1_REREVIEW",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -1195,7 +1195,7 @@
       "noExistingQACutObservation": true
     },
     "pendingAwaitDesign": {
-      "status": "DESIGN_FIX1_RUNNING",
+      "status": "DESIGN_FIX1_INDEPENDENT_REREVIEW_RUNNING",
       "brief": "f5461fc7334c01360008c3f8bea5eabbd197e5b9",
       "actor": "/root/m_pending_observation_design",
       "premiseChangeUnderEvaluation": "A bounded post-result synthetic fixture observation, explicitly later than M cutoff, may be designed if existing channel is insufficient. No current/public/business contract or implementation change released.",
@@ -1220,11 +1220,27 @@
       "deferredMinors": [
         "M1 preimages vs future generated postimages"
       ],
-      "fixBrief": "f2e92a4fd60bb2ea7c05a3719c0149d6b1ec4c56"
+      "fixBrief": "f2e92a4fd60bb2ea7c05a3719c0149d6b1ec4c56",
+      "fix1": {
+        "design": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+        "plan": "411ba4fc5e6ff4cd2db2b2c05e2e5dde3610c6e4",
+        "diff": "61127e65f8c510d3bac1a124b268b289df46636e",
+        "report": "bde64dc7991edbbe577b07fbbf828b6d64270de6",
+        "rootMeasurement": "8645bf8358cf1f9fd88845f47d662e82b3a62d2f",
+        "rereviewBrief": "7528fd8a4aaeb6b41c028e0d2a4fc697d69c7b15",
+        "authorClaims": [
+          "I1",
+          "I2",
+          "I3",
+          "I4",
+          "M1"
+        ],
+        "testStatus": "NOT_RUN_DESIGN_ONLY"
+      }
     }
   },
-  "schemaVersion": 111,
-  "updatedAtUTC": "2026-11-18 01:18:30 UTC",
+  "schemaVersion": 112,
+  "updatedAtUTC": "2026-11-18 01:30:22 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",

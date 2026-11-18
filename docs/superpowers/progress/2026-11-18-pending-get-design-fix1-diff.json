@@ -1,0 +1,46 @@
+{
+  "schema": "AFW.PENDING_GET.DESIGN_FIX_TEXT_DIFF/1",
+  "round": 1,
+  "format": "Unified diff, whole-file replacement. For each file concatenate its ordered parts with no added separator, then apply its hunk to the corresponding before blob. Reverse by exchanging minus and plus sides. Every blob ends in LF.",
+  "files": [
+    {
+      "file": "design.md",
+      "before": "5a6da67f176c65fe9ea133a08923470d69606a97",
+      "beforeBytes": 19733,
+      "after": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+      "afterBytes": 15157,
+      "parts": [
+        {
+          "blob": "acdacd7860e96f7ea1416f5bfe7bd4c0adb7a2d8",
+          "bytes": 21044
+        },
+        {
+          "blob": "112665cfbded57375864d7f89d6eb9f57937c274",
+          "bytes": 13957
+        }
+      ],
+      "lines": [
+        37,
+        24
+      ]
+    },
+    {
+      "file": "plan.md",
+      "before": "2b7081d270c017e7e24190fdab3c1923d86a91cd",
+      "beforeBytes": 9672,
+      "after": "411ba4fc5e6ff4cd2db2b2c05e2e5dde3610c6e4",
+      "afterBytes": 7560,
+      "parts": [
+        {
+          "blob": "375746b121d03d5c6ec8391e6155b951d897c4cf",
+          "bytes": 17313
+        }
+      ],
+      "lines": [
+        18,
+        17
+      ]
+    }
+  ],
+  "validation": "Full readback and byte-exact source/destination reconstruction in both directions; files are design and plan text only."
+}
