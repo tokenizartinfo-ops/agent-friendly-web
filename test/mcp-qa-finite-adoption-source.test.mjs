@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {createHash} from 'node:crypto';
+import {buildFinitePolicyOrigin} from '../lib/mcp-qa-finite-policy-origin.mjs';
 import {readPrivateQaFiniteSetupCompletion} from '../lib/mcp-qa-finite-adoption-source.mjs';
 
 const T0=Date.parse('2026-11-18T16:00:00Z');
@@ -25,15 +26,21 @@ function fixture(change){
  if(change==='other-module')receipt.moduleHash='4'.repeat(64);
  receipt.receiptHash=hash(receipt.purpose+'\n'+canonical(receipt));
  const output=JSON.stringify({status:'installed',receipt}),start=T0+2000,end=T0+2400;
+ const origin=buildFinitePolicyOrigin({setupInstanceId,sourceRevision,qaVersionId:qa.versionId,eventTimestamp:T0+1900,
+  queuedAt:start-200,startedAt:start,T0},{intentId,sourceRevision},start+25);
+ const originStep={name:'finite-private-policy-origin-1',type:'step',start:iso(start+10),end:iso(start+50),attempts:[{success:true}],success:true,output:JSON.stringify(origin)};
  const result={status:'complete',success:true,versionId:id(7),queued:iso(start-200),start:iso(start),end:iso(end),
-  params:{operation:'finite_private_policy_setup',intentId,sourceRevision},output,step_count:1,
-  steps:[{name:'finite-private-policy-setup',type:'step',start:iso(start+100),end:iso(end-10),
+  params:{operation:'finite_private_policy_setup',intentId,sourceRevision},output,step_count:2,
+  steps:[originStep,{name:'finite-private-policy-setup',type:'step',start:iso(start+100),end:iso(end-10),
    attempts:[{success:true}],success:true,output}]};
- if(change==='provider-suffix')result.steps[0].name+='-1';
- if(change==='wrong-suffix')result.steps[0].name+='-2';
+ if(change==='provider-suffix')result.steps[1].name+='-1';
+ if(change==='wrong-suffix')result.steps[1].name+='-2';
+ if(change==='missing-origin'){result.steps.shift();result.step_count--;}
+ if(change==='wrong-origin'){result.steps[0].output=JSON.stringify({...origin,sourceRevision:'9'.repeat(40)});}
+ if(change==='late-origin')result.steps[0].end=iso(start+200);
  if(change==='running')result.status='running';
- if(change==='duplicate-step')result.steps.push(result.steps[0]);
- if(change==='step-output')result.steps[0].output=JSON.stringify({status:'admin_pending'});
+ if(change==='duplicate-step')result.steps.push(result.steps[1]);
+ if(change==='step-output')result.steps[1].output=JSON.stringify({status:'admin_pending'});
  if(change==='unrelated')result.params.intentId='9'.repeat(64);
  if(change==='early')result.queued=iso(T0+999);
  const expected={qa,seedHash,canaryModuleHash:canary.sha256,canaryPublicStaticHash:publicStaticHash,seedCompletedAt:T0+1000,T0};
@@ -66,7 +73,7 @@ test('QA adopts the exact completed setup only after checking both deployed Work
 });
 
 test('QA rejects incomplete, unrelated or drifted setup evidence',async()=>{
- for(const change of ['wrong-suffix','running','duplicate-step','step-output','unrelated','early','drift','other-module','abort']){
+ for(const change of ['missing-origin','wrong-origin','late-origin','wrong-suffix','running','duplicate-step','step-output','unrelated','early','drift','other-module','abort']){
   const f=fixture(change);
   await assert.rejects(readPrivateQaFiniteSetupCompletion(f.input),undefined,change);
   if(change==='abort')assert.equal(f.calls.length,1);

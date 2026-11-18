@@ -5,12 +5,13 @@ import {seedPrimaryFixture,SEED_GH} from './fixtures/finite-seed-primary.mjs';
 import {hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
 import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../lib/mcp-qa-finite-profile.mjs';
 import {qaClosedConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';
+import {buildFinitePolicyOrigin} from '../lib/mcp-qa-finite-policy-origin.mjs';
 import {finitePrivateQaSetupInstanceId} from '../lib/mcp-qa-finite-adoption.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../lib/mcp-fixed-terminal-workflows.mjs';
 
 const sourceRevision='b'.repeat(40);
 globalThis.__AFW_QA_SOURCE_REVISION__=sourceRevision;
-const {readPrivateQaFinitePolicyEntry}=await import('../lib/mcp-qa-finite-policy-setup-source.mjs');
+const {readPrivateQaFinitePolicyEntry,readPrivateQaFinitePolicyOrigin}=await import('../lib/mcp-qa-finite-policy-setup-source.mjs');
 delete globalThis.__AFW_QA_SOURCE_REVISION__;
 const account='85d0d5dadac3341a564f22ce885e9eec';
 const root='https://api.cloudflare.com/client/v4/accounts/'+account;
@@ -42,6 +43,15 @@ async function scenario(t,mode){
   ['/workers/workers/'+definition.script+'/versions/'+qaVersionId+'?include=modules',{...configuration,id:qaVersionId,urls:[],modules:[{name:module.name,content_type:'application/javascript+module',content_base64:bytes.toString('base64')}]}],
  ]);
  const row=map.get(path+'/instances/'+setupInstanceId);
+ const native={setupInstanceId,sourceRevision,qaVersionId,eventTimestamp:T0+2400,queuedAt:T0+2200,startedAt:T0+2500,T0};
+ if(['actor-origin','actor-wrong-origin','actor-late-origin','actor-replay'].includes(mode)){
+  const origin=buildFinitePolicyOrigin(native,{intentId,sourceRevision},T0+2600);
+  row.steps.push({name:'finite-private-policy-origin-1',type:'step',success:true,attempts:[{success:true}],
+   start:iso(T0+2510),end:iso(T0+2700),output:JSON.stringify(mode==='actor-wrong-origin'?{...origin,qaVersionId:workflowVersion}:origin)});
+  if(mode==='actor-late-origin')row.steps[0].end=iso(T0+3001);
+  row.steps.push({name:'finite-private-policy-setup-1',type:'step',success:mode==='actor-replay'?true:null});
+  row.step_count=row.steps.length;
+ }
  if(mode==='queued-before-seed')row.queued=iso(T0+1900);
  if(mode==='failed-step')row.steps=[{name:'finite-private-policy-setup-1',success:false}],row.step_count=1;
  if(mode==='foreign-definition')map.get(path).script_name='foreign-script';
@@ -68,8 +78,11 @@ async function scenario(t,mode){
  const env={AFW_MCP_CLOSURE_READ_TOKEN:credential,AFW_QA_VERSION:{id:qaVersionId},AFW_QA_BOOTSTRAP:{get(){}},AFW_INDEPENDENT_CLOSURE:{}};
  const controller=new AbortController(),lease={signal:controller.signal,assertCurrent(){assert.equal(controller.signal.aborted,false);}};
  if(mode==='missing-credential')delete env.AFW_MCP_CLOSURE_READ_TOKEN;
+ const id={toString:()=> 'a'.repeat(64)};
+ env.AFW_INDEPENDENT_CLOSURE.idFromName=()=>id;
+ const readActor=()=>readPrivateQaFinitePolicyOrigin({ctx:{storage:{},id},env,intentId,sourceRevision},lease);
  const read=()=>readPrivateQaFinitePolicyEntry({env,event,step:{do(){assert.fail('source reader cannot invoke a step');}}},lease);
- return {T0,setupInstanceId,read,provider,seed};
+ return {T0,setupInstanceId,native,read,readActor,provider,seed};
 }
 test('fixed setup source verifies original native occurrence, seed and active QA bytes before step',async t=>{
  const f=await scenario(t);
@@ -81,4 +94,14 @@ for(const mode of ['queued-before-seed','event-before-seed','failed-step','forei
  const f=await scenario(t,mode);
  await assert.rejects(f.read());
  if(mode==='missing-credential')assert.equal(f.provider.length,0);
+});
+
+test('the actor obtains the original native timestamp from the completed Cloudflare step',async t=>{
+ const f=await scenario(t,'actor-origin');
+ assert.deepEqual(await f.readActor(),f.native);
+ assert.equal(f.provider.length,5);
+});
+for(const mode of ['actor-missing','actor-wrong-origin','actor-late-origin','actor-replay'])test('the actor rejects '+mode,async t=>{
+ const f=await scenario(t,mode);
+ await assert.rejects(f.readActor());
 });
