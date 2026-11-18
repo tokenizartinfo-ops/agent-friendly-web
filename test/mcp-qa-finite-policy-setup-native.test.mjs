@@ -123,3 +123,15 @@ test('real primary blocks activation when the original notice permission is with
  assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,1);
  assert.equal(rows.some(([k])=>k.endsWith(':confirmation')),false);
 });
+
+test('original Cloudflare proof is completed before the setup callback',async t=>{
+ const f=await policyFixture(t),r=await f.run();
+ assert.equal(r.status,'installed');
+ assert.deepEqual(r.callbacks,['finite-private-policy-origin','finite-private-policy-setup']);
+});
+test('tampered original Cloudflare proof cannot reach the setup callback',async t=>{
+ const f=await policyFixture(t,'tampered-origin'),r=await f.run();
+ assert.equal(r.status,'admin_pending');
+ assert.deepEqual(r.callbacks,['finite-private-policy-origin']);
+ assert.equal(f.posts(),0);
+});
