@@ -1,0 +1,78 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX1.REREVIEW_PACKAGE/1",
+  "atUTC": "2026-11-18 13:29:13 UTC",
+  "round": 1,
+  "maxRounds": 5,
+  "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "fixBrief": "94b5aa6194889e66a6ced472ada5d7d58d762e69",
+  "priorReview": "44db4b8fa86ebbd0e37649e9f4639d4e47a06e22",
+  "fixBaseManifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
+  "currentManifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+  "currentGraph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
+  "originalReport": "709bafefde2dc4b182163aefd7ba559a61694dd6",
+  "fixAppendix": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962",
+  "literalReversibleDelta": "70cbe163710a8b05325b442a5c38b5fcf1e1d133",
+  "RootMeasurement": "c79c4f2edd2fb0cde93c37c7f7d331afdb34cd99",
+  "fullScopedDiff": [
+    {
+      "roles": [
+        "host",
+        "hostTest",
+        "workflow"
+      ],
+      "blob": "d64515c143f711dea14ef410bb79bcd0e7c303ac",
+      "chars": 15355
+    },
+    {
+      "roles": [
+        "manifest"
+      ],
+      "blob": "c119a04945f7f4d8e63dc48b4f253023e706e185",
+      "chars": 8897
+    }
+  ],
+  "openFindings": [
+    {
+      "severity": "IMPORTANT",
+      "tracks": [
+        "SPEC",
+        "QUALITY"
+      ],
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs",
+      "line": 77,
+      "endLine": 94,
+      "title": "The synchronous read exception can replace a terminal host row",
+      "evidence": "startRead sets waiting and invokes an adapter. That adapter can synchronously report completeRead('timeout') or a reply, which stages the first terminal row. If the adapter then throws, the catch unconditionally calls stage('V'), bypassing the waiting guard in completeRead. A staged timeout can become V and a row already admitted by reentrant adapter code can be staged again after admit closed the mailbox.",
+      "impact": "A subsequent adapter outcome changes the one-shot result and can break the at-most-one admitted row invariant. The sealed H50 path exercises a late completeRead call and H56 exercises an initial throw. Neither covers a completion followed by the exception path in the same local callback.",
+      "fix": "Route the caught invocation failure through the same waiting-only completion transition, or add the equivalent state check before staging V. Add a local regression subcheck for first completion followed by throw, including the closed-state guard if called reentrantly. Keep the sealed H50 and H56 rows and their meanings unchanged."
+    },
+    {
+      "severity": "IMPORTANT",
+      "tracks": [
+        "SPEC",
+        "QUALITY"
+      ],
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "line": 77,
+      "endLine": 113,
+      "title": "Host rejection vectors do not enforce zero premature header reads",
+      "evidence": "The first readMain callback asserts the Response identity inside the host's exception handler and then increments headerCopies. Its final assertion only checks headerCopies <= 1. A regression that copies the header before a failed identity, count, journal or cutoff gate can still yield the sealed null row and zero queries. It would pass these checks. A wrong Response identity can also be swallowed before the counter is incremented.",
+      "impact": "The model can report the negative gate vectors as completed while violating their promised fail-closed copy ordering. H15 through H28 and H54, H55 and H57 include relevant controls. Validly qualified missing or malformed M still requires one copy to classify it.",
+      "fix": "Track the exact response identity and invocation count before any callback assertions can be swallowed. Assert exact zero or one copy for each model variant based on its independent admission facts. Keep the sealed expected row and query values. Count every startRead callback entry before validating its captured arguments outside the called function."
+    },
+    {
+      "severity": "MINOR",
+      "tracks": [
+        "QUALITY"
+      ],
+      "path": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+      "line": 29,
+      "title": "The setup-node input does not exist on the pinned action",
+      "evidence": "The pinned action.yml recognizes cache and cache-dependency-path. It has no package-manager-cache input. The existing omission of cache already keeps the pinned action's caching opt-in.",
+      "impact": "The extra option can cause an unexpected-input warning and gives the workflow a misleading cache setting.",
+      "fix": "Remove the unsupported package-manager-cache line. Preserve the pinned action and omit cache.",
+      "source": "https://github.com/actions/setup-node/blob/49933ea5288caeca8642d1e84afbd3f7d6820020/action.yml"
+    }
+  ],
+  "instructions": "Scoped re-review only: verdict ADDRESSED/NOT_ADDRESSED each original Important/Minor, overall SPEC+QUALITY; new breakage only inside fix diff.16other mounted bodies exact. All134DATA labels/oracles, clocks, nomination, M/QA/factory/codec/runner/child unchanged. Covering files/command/NOT_RUN explicit in appendix; no actual test output claimed. No Source/core/harness execution/import/eval/AST/syntax/tests/builds on any executor, no refs/runs/live actions/subagents. DATA/text/hash and detached review persistence/full readback only. Return <=15lines+reviewpin."
+}

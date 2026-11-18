@@ -1,0 +1,49 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX2_BRIEF/1",
+  "atUTC": "2026-11-18 13:33:06 UTC",
+  "round": 2,
+  "maxRounds": 5,
+  "taskBrief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "review": "ba7d8d14512822fa48a5315984fc6550d2e03ebb",
+  "fixBase": {
+    "manifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+    "graph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
+    "appendix": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962",
+    "package": "464750c843a09ac62b1e15a07a742d7c47a4ddff"
+  },
+  "findingVerbatim": [
+    {
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "line": 124,
+      "relatedLines": [
+        62,
+        95,
+        125
+      ],
+      "title": "H22 no-hook invokes its first eligible take at the duplicate check",
+      "evidence": "The no-hook alternative sets take=false at line 62 and continues to capture the eligible handle. Line 95 skips take and leaves the mailbox captured. The attempted startRead and completeRead leave it captured because neither is eligible without the skipped take. The journal proof and context remain valid. Line 124 then calls take with DEFAULT M as though it had already taken the mailbox. The real host copies the retained response, parses valid keyed M, sets ready and returns true. The assertion expects false, so the suite would stop at H22 before checking its required zero copies. This is a latent fault in the previous duplicate assertion carried into the rewritten path.",
+      "impact": "The no-hook sealed scenario no longer stays hook-free through the test end and cannot prove zero read/copy. The child cannot reach all 134 completed labels.",
+      "fix": "Run the duplicate-take assertion only when the first take was attempted. For H22/no-hook, keep the hook uncalled and check exact zero copies, zero queries and null admission. Retain the H22 missing-terminal alternative, where a rejected first take consumes the mailbox and the duplicate check is meaningful."
+    }
+  ],
+  "scope": "Only the H22/no-hook contradiction in host-model.mjs and required manifest/graph/report/delta metadata. Keep current host-core protection, cache removal and all other19 mounted source/input bodies unchanged. No new tests/cases/oracles, no broader model refactor. Duplicate take is meaningful only when first take was attempted; no-hook must leave take uncalled and assert zero copies/queries and null admission.",
+  "coveringTest": {
+    "file": "host-model.mjs",
+    "cases": [
+      "H22/no-hook",
+      "H22/missing-terminal"
+    ],
+    "command": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+    "authorStatus": "NOT_RUN_BY_DESIGN",
+    "actualOutput": null
+  },
+  "delivery": "Full updated20-body graph and manifest, exact tiny literal forward/inverse against fix1 reviewed preimage, append-only separate fix2 report preserving original/fix1, exact hashes/full readback. No Source/core/harness execution/import/eval/AST/syntax/test/build on any executor, refs/trees/commits/runs/localfiles/live actions/subagents. Root later reviews and gates.",
+  "oldCounters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  },
+  "executionReleased": false
+}

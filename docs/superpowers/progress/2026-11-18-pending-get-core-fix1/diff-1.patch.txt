@@ -1,0 +1,354 @@
+# Scoped B1 fix1 diff; previous reviewed proposal -> current immutable proposal
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs
+index 19ed665180b1ce6d3e22e9f4af32068eb30011da..249033b347dbb9696f6fd872557b28385617cd90 100644
+--- a/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs
+@@ -73,21 +73,21 @@
+-    else state = 'ready';
+-    return true;
+-  }
+-
+-  function startRead(invoke) {
+-    if (state !== 'ready' || typeof invoke !== 'function') return undefined;
+-    state = 'waiting';
+-    try {
+-      return invoke(epoch, main.key);
+-    } catch {
+-      stage('V');
+-      return undefined;
+-    }
+-  }
+-
+-  function completeRead(kind, value) {
+-    if (state !== 'waiting') return null;
+-    if (kind === 'timeout') return stage('T');
+-    if (kind !== 'reply') return stage('V');
+-    const qa = parseQa(value, epoch, main.key);
+-    return stage(qa.code, qa.tuple);
++    else state = 'ready';
++    return true;
++  }
++
++  function startRead(invoke) {
++    if (state !== 'ready' || typeof invoke !== 'function') return undefined;
++    state = 'waiting';
++    try {
++      return invoke(epoch, main.key);
++    } catch {
++      completeRead('failure');
++      return undefined;
++    }
++  }
++
++  function completeRead(kind, value) {
++    if (state !== 'waiting') return null;
++    if (kind === 'timeout') return stage('T');
++    if (kind !== 'reply') return stage('V');
++    const qa = parseQa(value, epoch, main.key);
++    return stage(qa.code, qa.tuple);
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs
+index 0e7f515b187291fea860eefd67e22a8c7357b507..d326e347ab2de6c97b941a756f4b728ebfb4d3d0 100644
+--- a/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs
+@@ -10,114 +10,138 @@
+-    H16: ['duplicate', 'foreign-label'],
+-    H18: ['token', 'main', 'directProof', 'test'],
+-    H19: ['generation', 'actor'],
+-    H22: ['no-hook', 'missing-terminal'],
+-    H23: ['null-count', 'missing-count', 'substitute'],
+-    H24: ['missing-terminal', 'duplicate-terminal'],
+-    H25: ['duplicate-action', 'intervening'],
+-    H26: ['recorder', 'truncated', 'bytes', 'rows'],
+-    H27: ['regular', 'pathStable', 'ownerMatch', 'modeMatch', 'singleLink', 'trailingLf'],
+-    H28: ['beforeCutoff', 'reserveAvailable'],
+-    H51: ['torn', 'missing'],
+-    H52: ['public-frame', 'recorder'],
+-    H53: ['close-hung', 'close-throw', 'child-cutoff'],
+-  };
+-
+-  for (const variant of variants[id] ?? ['default']) {
+-    const {host, handle, context, proof, post} = hostInput(epoch, id !== 'H55');
+-    let capture = true;
+-    let take = true;
+-    let attempted = 0;
+-    let headerCopies = 0;
+-
+-    switch (id) {
+-      case 'H15': handle.g1 = 'g1.503.V.0'; break;
+-      case 'H16':
+-        if (variant === 'foreign-label') context.label = 'other-case';
+-        break;
+-      case 'H17': context.response = {...handle.response}; break;
+-      case 'H18':
+-      case 'H19': context[variant] = {}; break;
+-      case 'H20': proof.marks[3].kind = 'countThrow'; break;
+-      case 'H21':
+-        proof.marks[1].kind = 'actionReturn';
+-        proof.marks[3].kind = 'countThrow';
+-        break;
+-      case 'H22':
+-        if (variant === 'no-hook') take = false;
+-        else proof.marks.pop();
+-        break;
+-      case 'H23':
+-        if (variant === 'substitute') proof.countQualified = false;
+-        else proof.countSnapshot = variant === 'null-count' ? null : undefined;
+-        break;
+-      case 'H24':
+-        if (variant === 'missing-terminal') proof.marks.pop();
+-        else proof.marks.push({...proof.marks[3]});
+-        break;
+-      case 'H25':
+-        if (variant === 'duplicate-action') proof.marks.splice(2, 0, {...proof.marks[1]});
+-        else proof.marks.splice(2, 0, {kind: 'countEnter', label: 'other-case'});
+-        break;
+-      case 'H26':
+-        if (variant === 'recorder') proof.recorderIntact = false;
+-        else if (variant === 'truncated') proof.marks[3].kind = 'countRet';
+-        else if (variant === 'bytes') proof.bytes = 32769;
+-        else proof.rows = 129;
+-        break;
+-      case 'H27': proof.custody[variant] = false; break;
+-      case 'H28': context[variant] = false; break;
+-      case 'H54': capture = false; break;
+-      case 'H57':
+-        handle.status = 200;
+-        handle.g1 = null;
+-        break;
+-      default: break;
+-    }
+-
+-    if (capture) assert.equal(host.capture(handle), id !== 'H55');
+-    if (id === 'H16' && variant === 'duplicate') assert.equal(host.capture(handle), false);
+-    if (take) host.take(context, proof, response => {
+-      assert.equal(response, handle.response);
+-      headerCopies += 1;
+-      return m;
+-    });
+-
+-    const response = host.startRead((readEpoch, key) => {
+-      assert.equal(readEpoch, epoch);
+-      assert.equal(key, uuid);
+-      attempted += 1;
+-      if (id === 'H56') throw new Error('MODEL synchronous read failure');
+-      return q;
+-    });
+-
+-    if (id === 'H49' || id === 'H50') {
+-      // Explicit local wait outcome. No timer, unresolved Promise, or transport is started.
+-      host.completeRead('timeout');
+-      if (id === 'H50') assert.equal(host.completeRead('reply', defaults.QA), null);
+-    } else if (id !== 'H56') host.completeRead('reply', response);
+-
+-    let file = host.staged();
+-    if (id === 'H51') {
+-      assert.notEqual(file, null);
+-      file = variant === 'torn' ? file.slice(0, -1) : null;
+-    }
+-    if (id === 'H52') post[variant === 'public-frame' ? 'publicFrameConfirmed' : 'recorderIntact'] = false;
+-    if (id === 'H53') post[variant === 'child-cutoff' ? 'childTerminatedNormally' : 'closeReturned'] = false;
+-
+-    host.startRead(() => { attempted += 1; });
+-    let duplicateCopies = 0;
+-    assert.equal(host.take(context, proof, () => { duplicateCopies += 1; return m; }), false);
+-    assert.equal(duplicateCopies, 0);
+-    assert.ok(headerCopies <= 1);
+-    assert.equal(finishHost(host, post, file), expectedRow, id + ' admitted row (' + variant + ')');
+-    assert.equal(attempted, expectedQueries, id + ' query count (' + variant + ')');
+-  }
+-}
+-
+-export function checkRow(row) {
+-  const [id, body, qualification, queries] = row;
+-  const accepted = qualification.startsWith('ACCEPT ');
+-  const observed = parseRow(body);
+-  const expected = accepted ? body.replace(/\n$/u, '') : null;
+-  assert.equal(observed, expected, id + ' row file grammar');
+-  if (accepted) assert.equal(Buffer.byteLength(body), Number(qualification.split(' ')[1]));
++    H16: ['duplicate', 'foreign-label'],
++    H18: ['token', 'main', 'directProof', 'test'],
++    H19: ['generation', 'actor'],
++    H22: ['no-hook', 'missing-terminal'],
++    H23: ['null-count', 'missing-count', 'substitute'],
++    H24: ['missing-terminal', 'duplicate-terminal'],
++    H25: ['duplicate-action', 'intervening'],
++    H26: ['recorder', 'truncated', 'bytes', 'rows'],
++    H27: ['regular', 'pathStable', 'ownerMatch', 'modeMatch', 'singleLink', 'trailingLf'],
++    H28: ['beforeCutoff', 'reserveAvailable'],
++    H50: ['default', 'timeout-then-throw', 'admit-timeout-then-throw'],
++    H51: ['torn', 'missing'],
++    H52: ['public-frame', 'recorder'],
++    H53: ['close-hung', 'close-throw', 'child-cutoff'],
++    H56: ['initial-throw', 'failure-then-throw', 'admit-failure-then-throw'],
++  };
++
++  // These cases fail public, capture, count, journal, cutoff, or route admission before any M copy.
++  const caseNumber = Number(id.slice(1));
++  const blockedBeforeCopy = (caseNumber >= 15 && caseNumber <= 28) || ['H54', 'H55', 'H57'].includes(id);
++  const expectedCopies = blockedBeforeCopy ? 0 : 1;
++
++  for (const variant of variants[id] ?? ['default']) {
++    const {host, handle, context, proof, post} = hostInput(epoch, id !== 'H55');
++    let capture = true;
++    let take = true;
++    const copiedResponses = [];
++    const readArguments = [];
++    let completedInside;
++    let admittedInside;
++    const completeInside = variant === 'timeout-then-throw' || variant === 'admit-timeout-then-throw' ? 'timeout' :
++      variant === 'failure-then-throw' || variant === 'admit-failure-then-throw' ? 'failure' : null;
++    const admitInside = variant === 'admit-timeout-then-throw' || variant === 'admit-failure-then-throw';
++    const readMain = response => {
++      copiedResponses.push(response);
++      return m;
++    };
++
++    switch (id) {
++      case 'H15': handle.g1 = 'g1.503.V.0'; break;
++      case 'H16':
++        if (variant === 'foreign-label') context.label = 'other-case';
++        break;
++      case 'H17': context.response = {...handle.response}; break;
++      case 'H18':
++      case 'H19': context[variant] = {}; break;
++      case 'H20': proof.marks[3].kind = 'countThrow'; break;
++      case 'H21':
++        proof.marks[1].kind = 'actionReturn';
++        proof.marks[3].kind = 'countThrow';
++        break;
++      case 'H22':
++        if (variant === 'no-hook') take = false;
++        else proof.marks.pop();
++        break;
++      case 'H23':
++        if (variant === 'substitute') proof.countQualified = false;
++        else proof.countSnapshot = variant === 'null-count' ? null : undefined;
++        break;
++      case 'H24':
++        if (variant === 'missing-terminal') proof.marks.pop();
++        else proof.marks.push({...proof.marks[3]});
++        break;
++      case 'H25':
++        if (variant === 'duplicate-action') proof.marks.splice(2, 0, {...proof.marks[1]});
++        else proof.marks.splice(2, 0, {kind: 'countEnter', label: 'other-case'});
++        break;
++      case 'H26':
++        if (variant === 'recorder') proof.recorderIntact = false;
++        else if (variant === 'truncated') proof.marks[3].kind = 'countRet';
++        else if (variant === 'bytes') proof.bytes = 32769;
++        else proof.rows = 129;
++        break;
++      case 'H27': proof.custody[variant] = false; break;
++      case 'H28': context[variant] = false; break;
++      case 'H54': capture = false; break;
++      case 'H57':
++        handle.status = 200;
++        handle.g1 = null;
++        break;
++      default: break;
++    }
++
++    if (capture) assert.equal(host.capture(handle), id !== 'H55');
++    if (id === 'H16' && variant === 'duplicate') assert.equal(host.capture(handle), false);
++    if (take) host.take(context, proof, readMain);
++
++    const response = host.startRead((readEpoch, key) => {
++      readArguments.push([readEpoch, key]);
++      if (completeInside) {
++        completedInside = host.completeRead(completeInside);
++        if (admitInside) admittedInside = host.admit(completedInside, post);
++        throw new Error('MODEL synchronous read exception after completion');
++      }
++      if (id === 'H56') throw new Error('MODEL synchronous read failure');
++      return q;
++    });
++
++    if (completeInside) assert.equal(completedInside, expectedRow, id + ' first terminal row');
++    if (id === 'H49' || id === 'H50') {
++      // Explicit local wait outcome. No timer, unresolved Promise, or transport is started.
++      if (!completeInside) host.completeRead('timeout');
++      if (id === 'H50') assert.equal(host.completeRead('reply', defaults.QA), null);
++    } else if (id !== 'H56') host.completeRead('reply', response);
++
++    let file = host.staged();
++    if (id === 'H51') {
++      assert.notEqual(file, null);
++      file = variant === 'torn' ? file.slice(0, -1) : null;
++    }
++    if (id === 'H52') post[variant === 'public-frame' ? 'publicFrameConfirmed' : 'recorderIntact'] = false;
++    if (id === 'H53') post[variant === 'child-cutoff' ? 'childTerminatedNormally' : 'closeReturned'] = false;
++
++    host.startRead((readEpoch, key) => { readArguments.push([readEpoch, key]); });
++    assert.equal(host.take(context, proof, readMain), false);
++    assert.equal(copiedResponses.length, expectedCopies, id + ' read count (' + variant + ')');
++    if (expectedCopies === 1) assert.equal(copiedResponses[0], handle.response, id + ' response identity');
++    assert.equal(readArguments.length, expectedQueries, id + ' query count (' + variant + ')');
++    if (expectedQueries === 1) {
++      assert.deepEqual(readArguments[0], [epoch, uuid], id + ' query arguments');
++    }
++    if (admitInside) {
++      assert.equal(admittedInside, expectedRow, id + ' admitted row (' + variant + ')');
++      assert.equal(file, null, id + ' closed state cannot stage a new row');
++      assert.equal(finishHost(host, post, completedInside), null, id + ' no second admission');
++    } else {
++      assert.equal(finishHost(host, post, file), expectedRow, id + ' admitted row (' + variant + ')');
++    }
++  }
++}
++
++export function checkRow(row) {
++  const [id, body, qualification, queries] = row;
++  const accepted = qualification.startsWith('ACCEPT ');
++  const observed = parseRow(body);
++  const expected = accepted ? body.replace(/\n$/u, '') : null;
++  assert.equal(observed, expected, id + ' row file grammar');
++  if (accepted) assert.equal(Buffer.byteLength(body), Number(qualification.split(' ')[1]));
+
+diff --git a/.github/workflows/afw-c2-pending-get-model-green1.yml b/.github/workflows/afw-c2-pending-get-model-green1.yml
+index f0e1578535fb5715769cb702405176b9b13c9094..b24db9f508408cbd662b3693397e2c976e65c413 100644
+--- a/.github/workflows/afw-c2-pending-get-model-green1.yml
++++ b/.github/workflows/afw-c2-pending-get-model-green1.yml
+@@ -19,21 +19,20 @@
+-    runs-on: ubuntu-24.04
+-    timeout-minutes: 3
+-    steps:
+-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+-        with:
+-          persist-credentials: false
+-          fetch-depth: 2
+-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+-        with:
+-          node-version: '22.23.4'
+-          package-manager-cache: false
+-      - name: Run only the sealed MODEL
+-        run: node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs
+-      - name: Preserve the bounded evidence frame
+-        if: always()
+-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+-        with:
+-          name: afw-c2-pending-get-model-green1
+-          path: output/c2-pending-get-model-green1.json
+-          if-no-files-found: error
+-          retention-days: 7
++    runs-on: ubuntu-24.04
++    timeout-minutes: 3
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++        with:
++          persist-credentials: false
++          fetch-depth: 2
++      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
++        with:
++          node-version: '22.23.4'
++      - name: Run only the sealed MODEL
++        run: node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs
++      - name: Preserve the bounded evidence frame
++        if: always()
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
++        with:
++          name: afw-c2-pending-get-model-green1
++          path: output/c2-pending-get-model-green1.json
++          if-no-files-found: error
++          retention-days: 7

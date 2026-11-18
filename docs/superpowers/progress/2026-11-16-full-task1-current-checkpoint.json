@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 13:22:48 UTC",
+  "timestampUTC": "2026-11-18 13:34:34 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "2ffb563d8dff6b8839b5d7313f89efa427246836",
-  "phase": "PENDING_GET_CORE_MODEL_FIX1",
+  "previousCheckpoint": "ce329a45b99b08aace800ad2ad8ac0db8e682ae6",
+  "phase": "PENDING_GET_CORE_MODEL_FIX2",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Original B1 implementer fixes host terminal-state guard and exact side-effect regression assertions plus small workflow input. Scoped fix1 re-review before any MODEL GREEN activation. No business/native run active.",
+  "next": "Targeted fix2 of H22/no-hook test; one source and metadata only. Scoped re-review then Root MODEL GREEN gate if approved; no Source/native/business run active.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1411,7 +1411,7 @@
       "rootAcceptance": "c4a19b5b0755c5058abb1f3f20340892f5680531"
     },
     "pendingAwaitCoreModel": {
-      "status": "FIX1_RUNNING_EXECUTION_HELD",
+      "status": "FIX2_RUNNING_EXECUTION_HELD",
       "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
       "actor": "/root/pending_get_core_model_complete",
       "nomination": {
@@ -1474,30 +1474,36 @@
       "review": "44db4b8fa86ebbd0e37649e9f4639d4e47a06e22",
       "SPEC": "FAIL_STATIC",
       "QUALITY": "FAIL_STATIC",
-      "fixRound": 1,
+      "fixRound": 2,
       "maxFixRounds": 5,
       "fixBrief": "94b5aa6194889e66a6ced472ada5d7d58d762e69",
       "openFindings": [
         {
-          "id": "B1-HOST-TERMINAL",
+          "id": "B1-HOST-COPY-TEST-H22",
           "severity": "IMPORTANT",
-          "summary": "Synchronous invocation throw can overwrite/reopen a completed host row"
-        },
-        {
-          "id": "B1-HOST-COPY-TEST",
-          "severity": "IMPORTANT",
-          "summary": "Negative model assertions must enforce exact0 copies and capture actual callback args outside catch"
-        },
-        {
-          "id": "B1-WORKFLOW-INPUT",
-          "severity": "MINOR",
-          "summary": "Remove unsupported package-manager-cache"
+          "summary": "No-hook model incorrectly executes its first take at duplicate guard; must skip it and preserve0reads"
         }
-      ]
+      ],
+      "fixRoundsCompleted": 1,
+      "fix1": {
+        "manifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+        "graph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
+        "appendix": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962",
+        "rootMeasurement": "c79c4f2edd2fb0cde93c37c7f7d331afdb34cd99",
+        "review": "ba7d8d14512822fa48a5315984fc6550d2e03ebb",
+        "addressed": [
+          "HOST_TERMINAL_GUARD",
+          "WORKFLOW_INPUT"
+        ],
+        "remaining": [
+          "HOST_COPY_TEST_H22_NO_HOOK"
+        ]
+      },
+      "fix2Brief": "de6039294c08795601acd8d90bfb27614bd732b3"
     }
   },
-  "schemaVersion": 126,
-  "updatedAtUTC": "2026-11-18 13:22:48 UTC",
+  "schemaVersion": 127,
+  "updatedAtUTC": "2026-11-18 13:34:34 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

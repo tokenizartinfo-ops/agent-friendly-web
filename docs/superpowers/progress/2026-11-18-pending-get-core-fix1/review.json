@@ -1,0 +1,91 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX1.STATIC_REREVIEW/1",
+  "round": 1,
+  "limit": 5,
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Detached immutable Git DATA",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "Fix1 static review of 464750c843a09ac62b1e15a07a742d7c47a4ddff",
+    "ALLOWED_ACTION": "Create and fully read back this detached review blob only. No runtime or ref changes."
+  },
+  "pins": {
+    "package": "464750c843a09ac62b1e15a07a742d7c47a4ddff",
+    "priorReview": "44db4b8fa86ebbd0e37649e9f4639d4e47a06e22",
+    "fixBrief": "94b5aa6194889e66a6ced472ada5d7d58d762e69",
+    "manifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+    "graph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
+    "appendix": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962",
+    "delta": "70cbe163710a8b05325b442a5c38b5fcf1e1d133",
+    "rootMeasurement": "c79c4f2edd2fb0cde93c37c7f7d331afdb34cd99"
+  },
+  "verdicts": {
+    "SPEC": {
+      "verdict": "FAIL",
+      "reason": "The scoped host driver stops in the sealed H22 no-hook alternative. Its cleanup-like assertion invokes the very hook omitted by the scenario and attempts a private copy after a valid capture."
+    },
+    "QUALITY": {
+      "verdict": "FAIL",
+      "reason": "Fix1 protects first completion and improves side-effect accounting. The pre-existing H22 contradiction remains in the changed duplicate-take assertion, so the 134-label suite cannot be admitted."
+    }
+  },
+  "previousFindings": [
+    {
+      "prior": "The synchronous read exception can replace a terminal host row",
+      "verdict": "ADDRESSED",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs",
+      "line": 83,
+      "reason": "The catch delegates to completeRead('failure'), which stages V only while waiting. A prior staged timeout/failure is retained and an admitted closed mailbox remains closed. The H50 and H56 internal alternatives cover completion and reentrant admission before the local throw, and H56's initial-throw path remains."
+    },
+    {
+      "prior": "Host rejection vectors do not enforce zero premature header reads",
+      "verdict": "NOT_ADDRESSED",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "line": 124,
+      "reason": "The exact copy and query counters and argument assertions address the observation mechanism. The H22 no-hook variant still invokes take on a valid captured mailbox in the revised duplicate-take check, contradicting its zero-read scenario and deterministically failing before the exact-count assertion."
+    },
+    {
+      "prior": "The setup-node input does not exist on the pinned action",
+      "verdict": "ADDRESSED",
+      "path": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+      "line": 26,
+      "reason": "The only workflow edit deletes package-manager-cache. The same setup-node version remains pinned, cache is omitted, and the trigger, command, artifact and limits are identical."
+    }
+  ],
+  "openFindings": [
+    {
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "line": 124,
+      "relatedLines": [
+        62,
+        95,
+        125
+      ],
+      "title": "H22 no-hook invokes its first eligible take at the duplicate check",
+      "evidence": "The no-hook alternative sets take=false at line 62 and continues to capture the eligible handle. Line 95 skips take and leaves the mailbox captured. The attempted startRead and completeRead leave it captured because neither is eligible without the skipped take. The journal proof and context remain valid. Line 124 then calls take with DEFAULT M as though it had already taken the mailbox. The real host copies the retained response, parses valid keyed M, sets ready and returns true. The assertion expects false, so the suite would stop at H22 before checking its required zero copies. This is a latent fault in the previous duplicate assertion carried into the rewritten path.",
+      "impact": "The no-hook sealed scenario no longer stays hook-free through the test end and cannot prove zero read/copy. The child cannot reach all 134 completed labels.",
+      "fix": "Run the duplicate-take assertion only when the first take was attempted. For H22/no-hook, keep the hook uncalled and check exact zero copies, zero queries and null admission. Retain the H22 missing-terminal alternative, where a rejected first take consumes the mailbox and the duplicate check is meaningful."
+    }
+  ],
+  "checked": [
+    "Read both scoped unified diff parts and the exact before/after blobs. Applied all four literal replacements as text and independently verified each inverse, exact size and patch-derived postimage. The 20-slot mount matches the current manifest, with sixteen untouched file pins and only host, hostTest, workflow and manifest changed. Nomination, limits, factory, M, QA, codec, runner, child and sealed fixture pins are unchanged.",
+    "The adapter callbacks record every readMain identity and query argument before exceptions. Both first and duplicate attempts use the same capture arrays. The subsequent counts and argument checks are outside the host's error handling. Evaluated the revised H50/H56 paths by text only. Root digest/census data remains corroboration of the graph.",
+    "The appendix preserves the original author report and names host-model.mjs H50/H56 internal alternatives and the sealed H vector copy/query checks. It names the exact test command and leaves execution, output and results unset. No pre-fix executable module was added."
+  ],
+  "coveringCommand": {
+    "command": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+    "status": "NOT_RUN_BY_DESIGN",
+    "actualOutput": null
+  },
+  "boundary": "Static text and JSON DATA review only. No Source, core, harness, test, import, evaluation, AST or syntax check, build, ref, tree, commit, run or live operation. Actual MODEL GREEN, Source qualification and PC-off operation remain unobserved.",
+  "release": "Hold the one-use Root GHA gate. Review the targeted H22 no-hook correction and its updated exact body pins before admission.",
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  }
+}

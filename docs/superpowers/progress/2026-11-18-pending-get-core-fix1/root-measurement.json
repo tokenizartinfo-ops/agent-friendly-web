@@ -1,0 +1,79 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX1.ROOT_MEASUREMENT/1",
+  "atUTC": "2026-11-18 13:29:13 UTC",
+  "fixBrief": "94b5aa6194889e66a6ced472ada5d7d58d762e69",
+  "previous": "6a9410c128786d7f659c29c9fb8d7b8b2b89452f",
+  "manifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+  "graph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
+  "delta": "70cbe163710a8b05325b442a5c38b5fcf1e1d133",
+  "appendix": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962",
+  "checks": {
+    "changed": 4,
+    "unchangedExact": 16,
+    "nominationUnchanged": true,
+    "factoryAndAllSealedDataUnchanged": true,
+    "all4LiteralForwardAndInverse": true,
+    "manifestEdgesMatched": 19,
+    "originalBodyCount": 20,
+    "newBodyCount": 20,
+    "newBytes": 133418,
+    "originalReportPreserved": true,
+    "sourceExecution": false,
+    "newGraphInverseToBase": true
+  },
+  "measured": [
+    {
+      "role": "workflow",
+      "bytes": 1328,
+      "sha256": "da561ef4a3e1254f6413807e7001b83c8e3ee7554ae5f84a5ab5cca4392ffc77",
+      "blob": "b24db9f508408cbd662b3693397e2c976e65c413"
+    },
+    {
+      "role": "host",
+      "bytes": 4227,
+      "sha256": "5aaa332786812d8f838ce4d42c68837b3a4215a1ea4fd7f725108ffe6b5c088b",
+      "blob": "249033b347dbb9696f6fd872557b28385617cd90"
+    },
+    {
+      "role": "hostTest",
+      "bytes": 6780,
+      "sha256": "a390cc997123c27a6310d39dfa9eeb3334693afde63fa43afcb55f3984d3daee",
+      "blob": "d326e347ab2de6c97b941a756f4b728ebfb4d3d0"
+    },
+    {
+      "role": "manifest",
+      "bytes": 6914,
+      "sha256": "165418c8d6cedc87f1fd9befc22962bd07d61894715edd6b5c27c77553f9c0c9",
+      "blob": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025"
+    },
+    {
+      "role": "graph",
+      "bytes": 16219,
+      "sha256": "83ef1871b665b4dbe16fb1709c8bb3e4463b4f55865f4023e1dcfc41540f6813",
+      "blob": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944"
+    },
+    {
+      "role": "delta",
+      "bytes": 19845,
+      "sha256": "f5fd058c553c25f0ced6bc8734c0215d9f1a17296ec1bc2574718a2f11b38b27",
+      "blob": "70cbe163710a8b05325b442a5c38b5fcf1e1d133"
+    },
+    {
+      "role": "appendix",
+      "bytes": 9677,
+      "sha256": "6dfc4cac83fbd1464195432dcca8ebad6c1d0226a722e99f8438bfe80f140825",
+      "blob": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962"
+    }
+  ],
+  "coveringReportChecked": {
+    "files": [
+      "host-model.mjs",
+      "host-core.mjs"
+    ],
+    "command": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+    "status": "NOT_RUN_BY_DESIGN",
+    "actualOutput": null
+  },
+  "sourceExecution": false,
+  "executionReleased": false
+}
