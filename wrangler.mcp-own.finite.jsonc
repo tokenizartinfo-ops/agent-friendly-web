@@ -62,6 +62,12 @@
   "version_metadata": {
     "binding": "AFW_FINITE_TRIAL_VERSION"
   },
+  "containers": [
+    {
+      "name": "agent-friendly-web-delegated-canary-afwowneventnode",
+      "scheduling_policy": "durable_object"
+    }
+  ],
   "exports": {
     "default": {
       "type": "worker"
