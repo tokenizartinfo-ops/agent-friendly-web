@@ -158,3 +158,24 @@ test('third business delivery keeps original fallback even with an unresolved ef
  assert.equal(x.f.alarm,x.handoff.initialC0);
  assert.deepEqual(x.calls,['withdraw','close','seal']);
 });
+
+test('historical completion refuses a deployment or readback that differs from the restoration journal',async()=>{
+ const x=await setup(),guard=api.createPrivateQaFiniteTrialGuard(x.options());
+ assert.equal((await guard.arm()).status,'armed');
+ x.f.setNow(x.f.plan.C0+3);
+ assert.equal((await guard.alarm()).status,'complete');
+ x.f.setNow(x.f.plan.R1+60000);
+ const key='afw.qa-finite-cleanup.v1:'+x.f.plan.intentId+':completion';
+ const original=x.f.rows.get(key);
+ assert.equal((await x.store.completion()).status,'complete');
+ const changes=[
+  {canaryDeploymentId:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'},
+  {readbackHash:'b'.repeat(64)},
+ ];
+ for(const change of changes){
+  const {receiptHash,...body}=original;
+  const altered={...body,...change};
+  x.f.rows.set(key,{...altered,receiptHash:finiteHash(altered)});
+  await assert.rejects(()=>x.store.completion());
+ }
+});
