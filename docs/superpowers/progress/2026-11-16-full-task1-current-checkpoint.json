@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 11:58:36 UTC",
+  "timestampUTC": "2026-11-18 12:17:14 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "b693af082884bc04abb102b6499e7a9d7e05a8e3",
-  "phase": "PENDING_GET_FIXTURE_ACCEPTED_MODEL_RED_PROPOSAL_RUNNING",
+  "previousCheckpoint": "3a27494db7f7901b8b6fef47960620acefa3c8dd",
+  "phase": "PENDING_GET_MODEL_RED_PROPOSAL_STATIC_REVIEW",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Stage A author prepares actual old M factory + sealed M01 test/runner proposal only. Independent static review and Root one-use finite keyless MODEL GHA gate precede observed RED. New observer implementation remains held.",
+  "next": "Independent review of minimal MODEL RED proposal; only on SPEC/QUALITY approval may Root prepare exact candidate/closed trees, make final one-use keyless GHA gate and observe one model failure. New observer feature/native actor/source/business remain held.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1291,7 +1291,7 @@
       "fixRoundsCompleted": 1
     },
     "pendingAwaitRed": {
-      "status": "PROPOSAL_ONLY_RUNNING",
+      "status": "STATIC_REVIEW_RUNNING",
       "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
       "actor": "/root/pending_get_red_proposal",
       "nomination": {
@@ -1311,11 +1311,21 @@
       "actualREDObserved": false,
       "newObserverImplementationReleased": false,
       "nativeReleased": false,
-      "MODELOnly": true
+      "MODELOnly": true,
+      "proposalIndex": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+      "report": "cc3e9dd439e87ce4dbaebf35bb582349fd576473",
+      "delta": "4f1fb4b6fdbe5751eaf185279ae5f4701078b86f",
+      "rootMeasurement": "d5ca2e3dadc71d05ee153867647e7f47eeed71aa",
+      "reviewPackage": "493ce9dcdfd3e2a25d1263d3edc7d98ab41e4199",
+      "reviewer": "/root/pending_get_red_review",
+      "rootGatePlan": "b7374f5dd0934d993200410f33df822697a8a0dc",
+      "closedWorkflow": "6807f8f0c01ccb11a504abb80cfa9de7504da5c0",
+      "originalSourceBodyAlreadyDurablyPreserved": true,
+      "activationReleased": false
     }
   },
-  "schemaVersion": 118,
-  "updatedAtUTC": "2026-11-18 11:58:36 UTC",
+  "schemaVersion": 119,
+  "updatedAtUTC": "2026-11-18 12:17:14 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

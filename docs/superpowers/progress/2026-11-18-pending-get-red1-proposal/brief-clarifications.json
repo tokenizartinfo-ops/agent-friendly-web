@@ -1,0 +1,14 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.BRIEF_CLARIFICATIONS/1",
+  "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
+  "atUTC": "2026-11-18 12:06:54 UTC",
+  "inventory": "Original Task1 lower bound six launches does not bind this tiny MODEL RED. Do not manufacture launches. Actual minimal Node/process inventory must be declared; <=8 guarded Node probes per target and <=24 overall, no cap rises.",
+  "carrier": "Additionally emit one fixed-label single-line bounded stdout carrier for exact final JSON regular-file evidence bytes, base64 or SHA256+JSON. Sanitized fixture/custody/assertion facts only; no generic stacks/env/proxy/keys. Preserve actual assertion failure exit1, always file artifact. Root cross-checks actual bytes/hash and full REST job/run metadata.",
+  "originalFactoryTextCheck": "f9226035933d4aa0db97dcf82f08c73031adf859",
+  "sourceSlice": {
+    "bytes": 3927,
+    "sha256": "adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf",
+    "gitBlob": "b1576130bd8c6510e92f1992e22476460f746e9a"
+  },
+  "scope": "Clarifications to author before first review. No new Source/natural clocks/implementation/activation released."
+}

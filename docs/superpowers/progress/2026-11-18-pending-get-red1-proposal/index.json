@@ -1,0 +1,152 @@
+{
+  "schema": "afw.c2.pending-get-red1.index/1",
+  "status": "PROPOSAL_SEALED_NOT_RUN",
+  "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
+  "rootClarification": "964cfe0661f11d4e6b84624d02bf750d6c517b50",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "detached immutable Git DATA",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "the proposal bodies, reversible delta, report and index",
+    "ALLOWED_ACTION": "create and full readback of detached proposal blobs only",
+    "ROLLBACK": "Apply no additions. Until Root admits a tree, preserve every ref, tree, commit and run as-is."
+  },
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "untouchedMain": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "sourceExtraction": {
+    "startByte": 72871,
+    "endByteExclusive": 76798,
+    "firstLine": 692,
+    "nextLine": 772,
+    "sourceOnly": "b1576130bd8c6510e92f1992e22476460f746e9a"
+  },
+  "exactMount": {
+    "directions": "Use the Git blob already in this repository for each mount:true entry at its literal repo-relative path with mode 100644 and type blob. Verify that the path is absent in BASE. Apply only these seven additions to the nominated BASE tree, preserving every original leaf. Skip mount:false entries. Do not rematerialize original S09 from a new download or normalize any of the body bytes.",
+    "baselineLeaves": 3203,
+    "baselineWorkflows": 62,
+    "expectedLeafCount": 3210,
+    "expectedWorkflowCount": 63,
+    "onlyNewWorkflow": ".github/workflows/afw-c2-pending-get-red1.yml",
+    "prefix": "docs/superpowers/source-lab/c2-pending-get-red1/",
+    "checkOutputPathAtBase": "Root must verify the fixed output artifact file is absent in BASE before admission.",
+    "artifactPath": "output/c2-pending-get-red1.json",
+    "carrier": "AFW_C2_PENDING_GET_RED1_JSON_BASE64"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-pending-get-20261118-red1",
+    "commitMessage": "AFW-C2-PENDING-GET-RED1-ONEUSE-20261118",
+    "attempt": 1,
+    "event": "push",
+    "job": "c2-pending-get-red1",
+    "runner": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+    "workflow": ".github/workflows/afw-c2-pending-get-red1.yml",
+    "pinnedNode": "22.23.4",
+    "exactCommand": "node docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+    "artifact": "afw-c2-pending-get-red1"
+  },
+  "objects": [
+    {
+      "role": "workflow",
+      "path": ".github/workflows/afw-c2-pending-get-red1.yml",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 1267,
+      "sha256": "f6c4ed0dd6dd4a955495da484d13a773e8935f4d3c7141bcc1907337dea4d84b",
+      "gitBlob": "e2723a4aae5c4fcd0d17d50512d5aa898b944cdb",
+      "fullReadback": true
+    },
+    {
+      "role": "slice",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/create-get-winner-observer.mjs",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 3927,
+      "sha256": "adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf",
+      "gitBlob": "b1576130bd8c6510e92f1992e22476460f746e9a",
+      "fullReadback": true
+    },
+    {
+      "role": "vector",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/M-vectors.json",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+      "gitBlob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "fullReadback": true
+    },
+    {
+      "role": "manifest",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/manifest.json",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 6911,
+      "sha256": "3a68a8e6e77dd0541a2df6ed25d88fb31693693d70a7264dceff1e5dd3babb2b",
+      "gitBlob": "2a933d3e528b66bc75440adea61d5fbd7143e2e8",
+      "fullReadback": true
+    },
+    {
+      "role": "test",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/pending-get-red1.test.mjs",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 3983,
+      "sha256": "4426c615111676afc14450a0194d63543946b5ec3d3adf5baaec72318b35839d",
+      "gitBlob": "14d42533de20ed55ecb294f265d79172944c7cc4",
+      "fullReadback": true
+    },
+    {
+      "role": "runner",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 12184,
+      "sha256": "14dc83b74a71a865f161ebee0e0fb73160b7284db997bd85894bc36ddff75031",
+      "gitBlob": "36b0f8f3e731693f27d9ddf22815c113a0b44ed7",
+      "fullReadback": true
+    },
+    {
+      "role": "source",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/S09-original.txt",
+      "mount": true,
+      "mode": "100644",
+      "type": "blob",
+      "utf8Bytes": 83571,
+      "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80",
+      "gitBlob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "fullReadback": true
+    },
+    {
+      "role": "delta",
+      "path": null,
+      "mount": false,
+      "utf8Bytes": 3090,
+      "sha256": "fa21586284578279f4fc1fad5f8df19e042748af681802c93db93ce585a2dddf",
+      "gitBlob": "4f1fb4b6fdbe5751eaf185279ae5f4701078b86f",
+      "fullReadback": true
+    },
+    {
+      "role": "report",
+      "path": null,
+      "mount": false,
+      "utf8Bytes": 10623,
+      "sha256": "b816d9698a3a2c0e17c63d239565b17e7ca3fa3ea5eb79e5b9cbbb61ecf0d71f",
+      "gitBlob": "cc3e9dd439e87ce4dbaebf35bb582349fd576473",
+      "fullReadback": true
+    }
+  ],
+  "ceiling": {
+    "newAndOrdinaryObjectBytes": 24576,
+    "soleExactUnchangedReferenceException": "S09-original.txt, 83571 UTF-8 bytes"
+  },
+  "rootNext": "Independent spec/quality review and exact tree/provenance admission before optional Root-only GHA. Nothing reported here is observed MODEL RED or native evidence."
+}

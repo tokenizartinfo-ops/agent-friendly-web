@@ -1,0 +1,81 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.ROOT_PROPOSAL_MEASUREMENT/1",
+  "atUTC": "2026-11-18 12:14:04 UTC",
+  "index": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+  "checks": {
+    "mounts": 7,
+    "baseAbsent": 7,
+    "outputAbsent": true,
+    "originalLeaves": 3203,
+    "candidateLeaves": 3210,
+    "deltaForwardInverse": true,
+    "originalSliceMatches": true,
+    "sourceExecution": false
+  },
+  "newBytesGitSHA256Matched": [
+    {
+      "role": "workflow",
+      "bytes": 1267,
+      "blob": "e2723a4aae5c4fcd0d17d50512d5aa898b944cdb",
+      "sha256": "f6c4ed0dd6dd4a955495da484d13a773e8935f4d3c7141bcc1907337dea4d84b"
+    },
+    {
+      "role": "manifest",
+      "bytes": 6911,
+      "blob": "2a933d3e528b66bc75440adea61d5fbd7143e2e8",
+      "sha256": "3a68a8e6e77dd0541a2df6ed25d88fb31693693d70a7264dceff1e5dd3babb2b"
+    },
+    {
+      "role": "test",
+      "bytes": 3983,
+      "blob": "14d42533de20ed55ecb294f265d79172944c7cc4",
+      "sha256": "4426c615111676afc14450a0194d63543946b5ec3d3adf5baaec72318b35839d"
+    },
+    {
+      "role": "runner",
+      "bytes": 12184,
+      "blob": "36b0f8f3e731693f27d9ddf22815c113a0b44ed7",
+      "sha256": "14dc83b74a71a865f161ebee0e0fb73160b7284db997bd85894bc36ddff75031"
+    },
+    {
+      "role": "delta",
+      "bytes": 3090,
+      "blob": "4f1fb4b6fdbe5751eaf185279ae5f4701078b86f",
+      "sha256": "fa21586284578279f4fc1fad5f8df19e042748af681802c93db93ce585a2dddf"
+    },
+    {
+      "role": "report",
+      "bytes": 10623,
+      "blob": "cc3e9dd439e87ce4dbaebf35bb582349fd576473",
+      "sha256": "b816d9698a3a2c0e17c63d239565b17e7ca3fa3ea5eb79e5b9cbbb61ecf0d71f"
+    }
+  ],
+  "indexMeasured": {
+    "bytes": 6150,
+    "gitBlob": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+    "sha256": "e75fa8680ae61d9cc55543ecc80cb8aadbf5148948c289ebec1a8e7601ab4f6a"
+  },
+  "reusedExactMeasuredInputs": [
+    {
+      "role": "slice",
+      "blob": "b1576130bd8c6510e92f1992e22476460f746e9a",
+      "rootCheck": "f9226035933d4aa0db97dcf82f08c73031adf859",
+      "matchesOriginalSourceText": true
+    },
+    {
+      "role": "vector",
+      "blob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "rootFixtureMeasurement": "d000003588912cd4a696826654a03a56b6c60ff0"
+    },
+    {
+      "role": "source",
+      "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "priorRootCarrierMeasurement": "dd2899bb2c0883008ccb12dfb911f0d10aecb072",
+      "source13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "currentFullReadback": true
+    }
+  ],
+  "inheritedWorkflowAudit": "d923fafd9b8f57d820fbb424a3ee672a9b98006f",
+  "localSourceExecuted": false,
+  "nativeReleased": false
+}

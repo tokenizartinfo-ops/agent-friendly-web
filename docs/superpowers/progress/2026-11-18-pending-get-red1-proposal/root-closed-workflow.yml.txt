@@ -1,0 +1,15 @@
+name: AFW C2 pending GET MODEL RED 1 CLOSED
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  c2-pending-get-red1:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1

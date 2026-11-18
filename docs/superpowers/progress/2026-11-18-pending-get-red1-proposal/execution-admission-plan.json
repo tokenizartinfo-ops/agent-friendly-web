@@ -1,0 +1,102 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.ROOT_EXECUTION_ADMISSION_PLAN/1",
+  "atUTC": "2026-11-18 12:15:37 UTC",
+  "status": "PREPARED_NOT_RELEASED_REVIEW_PENDING",
+  "proposal": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+  "staticReviewPackage": "493ce9dcdfd3e2a25d1263d3edc7d98ab41e4199",
+  "rootMeasurement": "d5ca2e3dadc71d05ee153867647e7f47eeed71aa",
+  "nominated": {
+    "branch": "lab/afw-c2-pending-get-20261118-red1",
+    "message": "AFW-C2-PENDING-GET-RED1-ONEUSE-20261118",
+    "workflow": ".github/workflows/afw-c2-pending-get-red1.yml",
+    "job": "c2-pending-get-red1",
+    "prefix": "docs/superpowers/source-lab/c2-pending-get-red1/",
+    "runner": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+    "artifact": "afw-c2-pending-get-red1",
+    "output": "output/c2-pending-get-red1.json",
+    "checkedUnusedAtUTC": "2026-11-18 11:53:09 UTC",
+    "refCreated": false,
+    "activationReleased": false
+  },
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "One finite isolated keyless GHA MODEL job",
+    "ORIGIN": "GitHub API and GitHub Actions for the AFW repository",
+    "RESOURCE_TYPE": "one-use lab ref, seven added leaves, closed restoration commit, one attempt1 push run",
+    "ALLOWED_ACTION": "Prepare exact reversible tree and close commit; release only after static SPEC/QUALITY and final Root gate; recover one result, close one ref. No product/provider resources.",
+    "ROLLBACK": "Before activation prepare a descendant commit changing only this new lab workflow to dispatch-only/literal false. After terminal execution CAS the lab ref to that exact closed head and read back workflow/ref/run census."
+  },
+  "gates": [
+    "Static independent SPEC and QUALITY must approve exact proposal; all Important/Critical findings closed by fix-loop before release.",
+    "Fresh main/base pins unchanged; all original3203 leaves and62 workflows preserved, exact seven proposed absent paths and output path absent BASE. Full candidate tree3210 leaves63 workflows; no unrelated changed modes/paths.",
+    "Fresh exact branch has no ref or prior run; exact activation message unused. Parent BASE, exact workflow/job/action pins/Node and message/ref/attempt1 gates checked; existing triggers inspected. Prepare rollback before activation.",
+    "Root stores exact candidate and closed commit/tree hashes before creating a single ref. Reconcile ambiguous mutation reads, never blind retry; no rerun, force push, new OAuth/token/runtime actions.",
+    "Only actual pre-import custody success + original503/g1 + exact ERR_ASSERTION actualnull/expected sealed24B marker + normal childexit1 + sixclosurechecks true/failurenull count as MODEL RED. Bad syntax/import/pin/guard/cutoff/cleanup/capture/green or partial metadata => no admitted RED.",
+    "Full REST actual run/job/steps with exact head/job/attempt/event/timestamps. Independently recover one bounded raw stdout result frame and validate its bytes plus child frame hash/length; failed run alone insufficient. Verify always-upload exact artifact metadata, no more than one expected artifact.",
+    "CAS exact lab ref to preprepared closed commit after terminal job; readback dispatch-only/literalfalse workflow and branch. Record active count0 and absence of new triggered closed-head run. Preserve actual outcome and independent result review."
+  ],
+  "expectedActualNotObserved": {
+    "resultSchema": "afw.c2.pending-get-red1.result/1",
+    "disposition": "FEATURE_MISSING_RED",
+    "failure": null,
+    "stage": "classify",
+    "checks": {
+      "mounts": true,
+      "extraction": true,
+      "freshNamespaces": true,
+      "childPidAbsent": true,
+      "stagingReadback": true,
+      "tempAbsent": true
+    },
+    "child": {
+      "status": 1,
+      "signal": null,
+      "spawnError": null,
+      "stderrBytes": 0
+    },
+    "frame": {
+      "stage": "private-assertion",
+      "status": 503,
+      "g1": "g1.503.L.0",
+      "privateHeader": null,
+      "errorCode": "ERR_ASSERTION",
+      "assertion": {
+        "code": "ERR_ASSERTION",
+        "operator": "strictEqual",
+        "actual": null,
+        "expected": "m1.1133557799bbddff.T0.-"
+      }
+    }
+  },
+  "caps": {
+    "jobSeconds": 180,
+    "outerChildMs": 10000,
+    "innerPrivilegedSeconds": 8,
+    "childStdoutBytes": 4096,
+    "childStderrBytes": 4096,
+    "resultBytes": 6144,
+    "guardProbeFiles": 0,
+    "actualNodeProcesses": 2,
+    "conservativeTargetProcessSlots": 14,
+    "artifactRetentionDays": 7
+  },
+  "noClaims": {
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nativeCallbackOriginQualified": false,
+    "nativeActorOrQAQualified": false,
+    "GETBugFixed": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  },
+  "oldCounters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  },
+  "nativeOrBusinessReplayReleased": false,
+  "observerImplementationReleased": false
+}

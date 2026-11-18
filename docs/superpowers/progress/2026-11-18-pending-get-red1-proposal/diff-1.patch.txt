@@ -1,0 +1,288 @@
+# Exact addition-only proposal patch
+BASE 6791ce1bab9372e206d3c7b42b3e1394dc6e0c68; no tree/ref created. Existing paths absent.
+
+diff --git a/.github/workflows/afw-c2-pending-get-red1.yml b/.github/workflows/afw-c2-pending-get-red1.yml
+new file mode 100644
+index 0000000..e2723a4aae5c4fcd0d17d50512d5aa898b944cdb
+--- /dev/null
++++ b/.github/workflows/afw-c2-pending-get-red1.yml
+@@ -0,0 +1,38 @@
++name: AFW C2 pending GET MODEL RED 1
++
++on:
++  push:
++    branches:
++      - lab/afw-c2-pending-get-20261118-red1
++
++permissions:
++  contents: read
++
++jobs:
++  c2-pending-get-red1:
++    if: >-
++      ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
++      github.event_name == 'push' &&
++      github.ref == 'refs/heads/lab/afw-c2-pending-get-20261118-red1' &&
++      github.run_attempt == '1' &&
++      github.event.head_commit.message == 'AFW-C2-PENDING-GET-RED1-ONEUSE-20261118' }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 3
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++        with:
++          persist-credentials: false
++          fetch-depth: 2
++      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
++        with:
++          node-version: '22.23.4'
++      - name: Run only the sealed MODEL RED
++        run: node docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs
++      - name: Preserve the bounded evidence frame
++        if: always()
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
++        with:
++          name: afw-c2-pending-get-red1
++          path: output/c2-pending-get-red1.json
++          if-no-files-found: error
++          retention-days: 7
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-red1/create-get-winner-observer.mjs b/docs/superpowers/source-lab/c2-pending-get-red1/create-get-winner-observer.mjs
+new file mode 100644
+index 0000000..b1576130bd8c6510e92f1992e22476460f746e9a
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-red1/create-get-winner-observer.mjs
+@@ -0,0 +1,80 @@
++export function createGetWinnerObserver() {
++  const cells=new WeakMap(), leases=new WeakMap(), facts=new WeakMap(), pending=new WeakMap();
++  const used=new WeakSet(), responsePrototype=Response.prototype, headersPrototype=Headers.prototype;
++  const header='x-afw-lab-get-winner';
++  const responseStatus=Object.getOwnPropertyDescriptor(responsePrototype,'status').get;
++  const responseHeaders=Object.getOwnPropertyDescriptor(responsePrototype,'headers').get;
++  const headerHas=headersPrototype.has, headerSet=headersPrototype.set;
++  let validating=null;
++  const guard=fn=>(...args)=>{try{return fn(...args);}catch{return null;}};
++  const tuple=(w,s,h)=>Number.isInteger(h)&&Number.isInteger(s)&&
++    ((w==='L'||w==='V')?h===503&&s===0:w==='S'?
++      (s===0?h===503:s>=400&&s<=599&&h===([400,401,403,404,405,413,429].includes(s)?s:503)):false);
++  const cell=l=>{const c=leases.get(l);return c&&!c.bad&&c.lease===l?c:null;};
++  function enter(p) {
++    if(cells.has(p)){cells.get(p).bad=true;return null;}
++    const c={p,lease:null,bad:false,sealed:false,w:'U',s:0,escaped:null,b:null,finished:false,forward:false};
++    cells.set(p,c);return c;
++  }
++  function bind(p,l) {
++    const c=cells.get(p);if(!c)return;
++    if(c.lease||leases.has(l)){c.bad=true;return;}
++    c.lease=l;leases.set(l,c);
++  }
++  function record(l,e,w,s) {
++    const c=cell(l);if(!c||c.sealed)return;
++    if((typeof e!=='object'&&typeof e!=='function')||e===null||facts.has(e)){c.bad=true;return;}
++    facts.set(e,{c,w,s});
++  }
++  function deadline(l,e) {record(l,e,'L',0);}
++  function denied(p,l,r,e,status) {
++    const c=cell(l);
++    if(!c||c.p!==p||!c.forward||Object.getPrototypeOf(r)!==responsePrototype)return;
++    record(l,e,'S',Number.isInteger(status)&&status>=400&&status<=599?status:0);
++  }
++  function validate(l,r) {
++    const c=cell(l);if(!c||!c.forward)return;
++    if(validating){validating.c.bad=true;c.bad=true;validating=null;return;}
++    if(Object.getPrototypeOf(r)!==responsePrototype)return;
++    validating={c,r};
++  }
++  function validationDenied(e) {
++    if(validating)record(validating.c.lease,e,'V',0);
++  }
++  function validationEnd(l,r) {
++    if(validating && (validating.c.lease!==l||validating.r!==r))validating.c.bad=true;
++    validating=null;
++  }
++  function race(l,e) {
++    const c=cell(l);if(!c)return;
++    if(c.sealed){c.bad=true;return;}
++    c.sealed=true;c.escaped=e;
++    const f=facts.get(e);
++    if(f?.c===c){c.w=f.w;c.s=f.s;}
++  }
++  function caught(p,l,e,b) {
++    const c=cell(l);
++    if(!c||c.p!==p||cells.get(p)!==c||!c.sealed||c.escaped!==e)return;
++    if(c.b||pending.has(b)||used.has(b)){c.bad=true;return;}
++    if(Object.getPrototypeOf(b)!==responsePrototype)return;
++    const h=Reflect.apply(responseStatus,b,[]);
++    if(!tuple(c.w,c.s,h))return;
++    const headers=Reflect.apply(responseHeaders,b,[]);
++    if(Object.getPrototypeOf(headers)!==headersPrototype||Reflect.apply(headerHas,headers,[header]))return;
++    c.b=b;pending.set(b,{c,p,l,h,headers});
++  }
++  function finish(c,p,l,b) {
++    if(!c||c.finished)return;
++    c.finished=true;
++    const entry=pending.get(b);
++    if(!entry||c.bad||cells.get(p)!==c||leases.get(l)!==c||entry.c!==c||entry.p!==p||entry.l!==l||c.b!==b||used.has(b))return;
++    used.add(b);
++    if(Object.getPrototypeOf(b)!==responsePrototype||Reflect.apply(responseStatus,b,[])!==entry.h||Reflect.apply(responseHeaders,b,[])!==entry.headers||
++      Object.getPrototypeOf(entry.headers)!==headersPrototype||Reflect.apply(headerHas,entry.headers,[header]))return;
++    Reflect.apply(headerSet,entry.headers,[header,'g1.'+entry.h+'.'+c.w+'.'+c.s]);
++  }
++  return Object.freeze({enter:guard(enter),bind:guard(bind),forward:guard((p,l)=>{const c=cell(l);if(c&&c.p===p)c.forward=true;}),
++    deadline:guard(deadline),denied:guard(denied),validate:guard(validate),validationDenied:guard(validationDenied),
++    validationEnd:guard(validationEnd),race:guard(race),caught:guard(caught),finish:guard(finish)});
++}
++
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-red1/manifest.json b/docs/superpowers/source-lab/c2-pending-get-red1/manifest.json
+new file mode 100644
+index 0000000..2a933d3e528b66bc75440adea61d5fbd7143e2e8
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-red1/manifest.json
+@@ -0,0 +1,147 @@
++{
++  "schema": "afw.c2.pending-get-red1.manifest/1",
++  "purpose": "Test-first Node model of the frozen M01 header expectation at the existing get-winner observer",
++  "execution": "NOT_RUN",
++  "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
++  "rootClarification": "964cfe0661f11d4e6b84624d02bf750d6c517b50",
++  "acceptedFixture": {
++    "rootAcceptance": "f260677ba825dd6cb06fc2ce048cbb8eddf37368",
++    "index": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
++    "review": "2b68bdf95611d9ba6e8c360c37b842625a866b9a",
++    "measurement": "d000003588912cd4a696826654a03a56b6c60ff0"
++  },
++  "case": "M01",
++  "expected": {
++    "status": 503,
++    "g1": "g1.503.L.0",
++    "privateHeaderName": "x-afw-lab-pending1",
++    "privateHeader": "m1.1133557799bbddff.T0.-",
++    "privateHeaderAsciiBytes": 24
++  },
++  "extraction": {
++    "startLiteral": "export function createGetWinnerObserver() {",
++    "nextLiteral": "export function prepareGetWinner(name,source) {",
++    "startByte": 72871,
++    "endByteExclusive": 76798,
++    "firstLine": 692,
++    "nextLine": 772,
++    "trailingLFs": 2,
++    "operation": "Each marker occurs once. Select the exact byte interval ending before the next marker. S09-original.txt remains literal input data.",
++    "sourceImports": []
++  },
++  "nomination": {
++    "repository": "tokenizartinfo-ops/agent-friendly-web",
++    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
++    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
++    "branch": "lab/afw-c2-pending-get-20261118-red1",
++    "activationMessage": "AFW-C2-PENDING-GET-RED1-ONEUSE-20261118",
++    "job": "c2-pending-get-red1",
++    "workflow": ".github/workflows/afw-c2-pending-get-red1.yml",
++    "runner": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
++    "command": "node docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
++    "node": "22.23.4",
++    "os": "ubuntu-24.04",
++    "event": "push",
++    "attempt": 1,
++    "timeoutMinutes": 3,
++    "artifact": "afw-c2-pending-get-red1",
++    "path": "output/c2-pending-get-red1.json",
++    "retentionDays": 7,
++    "permissions": "contents: read"
++  },
++  "pins": {
++    "runner": {
++      "path": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
++      "utf8Bytes": 12184,
++      "sha256": "14dc83b74a71a865f161ebee0e0fb73160b7284db997bd85894bc36ddff75031",
++      "gitBlob": "36b0f8f3e731693f27d9ddf22815c113a0b44ed7"
++    },
++    "test": {
++      "path": "docs/superpowers/source-lab/c2-pending-get-red1/pending-get-red1.test.mjs",
++      "utf8Bytes": 3983,
++      "sha256": "4426c615111676afc14450a0194d63543946b5ec3d3adf5baaec72318b35839d",
++      "gitBlob": "14d42533de20ed55ecb294f265d79172944c7cc4"
++    },
++    "workflow": {
++      "path": ".github/workflows/afw-c2-pending-get-red1.yml",
++      "utf8Bytes": 1267,
++      "sha256": "f6c4ed0dd6dd4a955495da484d13a773e8935f4d3c7141bcc1907337dea4d84b",
++      "gitBlob": "e2723a4aae5c4fcd0d17d50512d5aa898b944cdb"
++    },
++    "source": {
++      "path": "docs/superpowers/source-lab/c2-pending-get-red1/S09-original.txt",
++      "utf8Bytes": 83571,
++      "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80",
++      "gitBlob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4"
++    },
++    "slice": {
++      "path": "docs/superpowers/source-lab/c2-pending-get-red1/create-get-winner-observer.mjs",
++      "utf8Bytes": 3927,
++      "sha256": "adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf",
++      "gitBlob": "b1576130bd8c6510e92f1992e22476460f746e9a"
++    },
++    "vector": {
++      "path": "docs/superpowers/source-lab/c2-pending-get-red1/M-vectors.json",
++      "utf8Bytes": 11189,
++      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
++      "gitBlob": "ab82327af902770b12995327658b007e3f0ffe02"
++    }
++  },
++  "protocol": {
++    "resultSchema": "afw.c2.pending-get-red1.result/1",
++    "childSchema": "afw.c2.pending-get-red1.child/1",
++    "carrier": "AFW_C2_PENDING_GET_RED1_JSON_BASE64 <base64 of the exact LF-terminated UTF-8 result bytes>",
++    "maxArtifactBytes": 6144,
++    "streams": "Exactly one LF-terminated UTF-8 JSON frame on child stdout and zero stderr for an admissible RED. Each input pipe is bounded at 4096 bytes. Parent records stdout byte length and SHA256, status, signal, and spawn error.",
++    "expectedFailure": {
++      "resultDisposition": "FEATURE_MISSING_RED",
++      "actualChildExit": 1,
++      "signal": null,
++      "spawnError": null,
++      "stage": "private-assertion",
++      "status": 503,
++      "g1": "g1.503.L.0",
++      "privateHeader": null,
++      "assertion": {
++        "code": "ERR_ASSERTION",
++        "operator": "strictEqual",
++        "actual": null,
++        "expected": "m1.1133557799bbddff.T0.-"
++      },
++      "requiredChecks": [
++        "mounts",
++        "extraction",
++        "freshNamespaces",
++        "childPidAbsent",
++        "stagingReadback",
++        "tempAbsent"
++      ]
++    },
++    "otherDispositions": [
++      "UNEXPECTED_FAILURE covers guard, pins, import/syntax, baseline mismatch, wrong assertion, launch cutoff, or incomplete readback.",
++      "UNEXPECTED_GREEN means the semantic private-header assertion passed with child exit 0. This is outside RED admission.",
++      "The RED-only workflow step always propagates a nonzero status. A failed job without the exact complete feature-missing frame indicates no admitted RED."
++    ],
++    "isolation": {
++      "launch": "sudo -n to env -i with exactly HOME/TMPDIR/LANG/LC_ALL/NODE_ENV/MODEL_UID/MODEL_GID; timeout; unshare network and PID namespaces; setpriv original nonroot runner UID/GID, clear groups, no-new-privs; Node test file only.",
++      "bound": "8s privileged timeout and 10s outer spawn bound. No product deadline, clock, AbortController, timer or actor is run.",
++      "checks": "Child is namespace PID 1, observes no external interfaces, required nonroot IDs, no effective capabilities, no extra groups or environment keys. Parent compares namespace IDs, waits for subprocess, checks the reported host PID is absent, verifies fixed copies and removes only the owned temp files and directory.",
++      "inventory": {
++        "modeledNodeProcesses": 2,
++        "childTestEntrypoints": 1,
++        "executedSourceModules": 1,
++        "guardProbeFiles": 0,
++        "parentGitCommands": 3,
++        "launchImages": [
++          "sudo (command and possible monitor)",
++          "env",
++          "timeout",
++          "unshare (waiting parent plus fork)",
++          "setpriv (exec replacement)",
++          "Node child"
++        ],
++        "countedBound": "At most 14 process/image slots including three serial Git reads, one parent Node and allowance for up to three sudo slots. This is a conservative accounting, independent of the fresh namespaces' checks. No additional target launches were inserted. GitHub checkout/setup/upload and runner infrastructure are outside this one target's process inventory."
++      }
++    }
++  }
++}
