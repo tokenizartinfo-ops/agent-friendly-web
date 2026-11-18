@@ -1,3 +1,4 @@
+import {readPrivateQaFiniteSetupOwnerSource} from '../../lib/mcp-qa-finite-policy-prearm-source.mjs';
 import {readPrivateQaFiniteConfirmationFromActor} from '../../lib/mcp-qa-finite-confirmation-actor.mjs';
 import {createFiniteOwnerNativeReceiver} from '../../lib/mcp-qa-finite-owner-native-receiver.mjs';
 import {createPrivateQaFiniteOwnerOAuthReceiver} from '../../lib/mcp-qa-finite-owner-oauth-qa.mjs';
@@ -40,5 +41,5 @@ export class IndependentClosure extends ClosedIndependentClosure{
   if(args.length!==1)throw Error('Finite confirmation unavailable');
   return readPrivateQaFiniteConfirmationFromActor({ctx:this.ctx,env:this.env,refs:args[0]});
  }
- setupFinitePrivatePolicy(...args){if(args.length!==1)throw Error('Finite setup unavailable');return createPrivateQaFinitePolicySetup({ctx:this.ctx,env:this.env}).run(args[0]);}
+ setupFinitePrivatePolicy(...args){if(args.length!==1)throw Error('Finite setup unavailable');return createPrivateQaFinitePolicySetup({ctx:this.ctx,env:this.env,readOwnerSource:readPrivateQaFiniteSetupOwnerSource}).run(args[0]);}
 }
