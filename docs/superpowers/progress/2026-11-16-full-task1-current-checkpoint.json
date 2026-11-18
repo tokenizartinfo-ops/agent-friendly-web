@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "166f5dc6841b47fd6d79cc5b8b15f2f83821cd67",
-  "phase": "LINKED_SYNTHETIC_NOTICE_VERIFIED_ORIGINAL_503_OPEN",
+  "previousCheckpoint": "43a13677d7cf1f583eb0841cec7b469fe002d1ff",
+  "phase": "FINAL_PREPARATION_503_REPAIRED_IN_SYNTHETIC_LAB",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "The same synthetic notice scenario is now verified in hosted CI. Initial native prep returns 200 and 202; original later mounted stage GET503 remains unresolved. Need new passive observation of the ordinary next-stage path to isolate the pending operation, then real cloud recipient review, withdrawal and restoration in a single valid occurrence.",
+  "next": "Qualify the ordinary final approval using its original corrected GET form. Verify a current cloud candidate and a usable receiver before consuming the authorized live occurrence. Confirm the same delivered event, useful cloud review, withdrawal and closure from primary evidence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -559,7 +559,7 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "eb300a73fd1eeae40ba5ec6b8ffdbcf3ef2365f1",
+  "readinessDocument": "8542440082dc6d2fe7f568ad60dc2b7edc250b0b",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1822,8 +1822,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 139,
-  "updatedAtUTC": "2026-11-18 16:11:46 UTC",
+  "schemaVersion": 140,
+  "updatedAtUTC": "2026-11-18 16:30:57 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2019,5 +2019,15 @@
       "linked": "failed at assertion of raw DB event ID equality with projected webhook ID",
       "sourceFix": false
     }
+  },
+  "finalPreparation503": {
+    "evidence": "49dc3cd947214c5ee57f1fe93929896d9acdb8db",
+    "redRun": 44346369830,
+    "greenRun": 44347526396,
+    "candidate": "47050286b6f62615059e2e6bec4b3ee2e6e7d445",
+    "priorHttp": 503,
+    "verifiedHttp": 200,
+    "verifiedMs": 26365,
+    "deployed": false
   }
 }
