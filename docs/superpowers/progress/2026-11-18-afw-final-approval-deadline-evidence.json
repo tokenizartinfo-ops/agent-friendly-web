@@ -1,0 +1,169 @@
+{
+  "schema": "afw.final-preparation-and-approval.ordinary-flow-continuation.v1",
+  "project": "AFW",
+  "asOfUTC": "2026-11-18 16:42:33 UTC",
+  "initial503": 44346369830,
+  "formFixed": {
+    "atUTC": "2026-11-18 16:30:57 UTC",
+    "run": 44347526396,
+    "job": 134953865660,
+    "head": "e0fbbe66b127e0b0a98f5cd1569a0671dc3d8815",
+    "closed": "439b0c3c8398ac1107e7d05f29ec6ea69bf7fd11",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44347526396",
+    "final": [
+      "2026-11-18T16:29:55.1454534Z # AFW_PREP_TRACE FINAL_GET_START",
+      "2026-11-18T16:29:55.1473424Z # AFW_PREP_TRACE M_CALL",
+      "2026-11-18T16:29:55.1494608Z # AFW_PREP_TRACE QA_ENTRY",
+      "2026-11-18T16:29:55.1495468Z # AFW_PREP_TRACE QA_TIMELINE_START",
+      "2026-11-18T16:29:55.4904971Z # AFW_PREP_TRACE QA_TIMELINE_RETURN",
+      "2026-11-18T16:29:55.4906343Z # AFW_PREP_TRACE QA_CHOICE_START",
+      "2026-11-18T16:29:55.4906939Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_START",
+      "2026-11-18T16:29:59.1177495Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_RETURN",
+      "2026-11-18T16:30:02.0064954Z # AFW_PREP_TRACE QA_APPROVAL_RETURN",
+      "2026-11-18T16:30:18.3551626Z # AFW_PREP_TRACE QA_STAGE_CONTEXT_RETURN",
+      "2026-11-18T16:30:19.0589646Z # AFW_PREP_TRACE QA_TICKET_WRITE_START",
+      "2026-11-18T16:30:20.4590049Z # AFW_PREP_TRACE QA_TICKET_WRITE_RETURN",
+      "2026-11-18T16:30:21.5080318Z # AFW_PREP_TRACE QA_CHOICE_RETURN",
+      "2026-11-18T16:30:21.5081696Z # AFW_PREP_TRACE QA_FORM",
+      "2026-11-18T16:30:21.5082357Z # AFW_PREP_TRACE M_HEADERS 200",
+      "2026-11-18T16:30:21.5084741Z # AFW_PREP_TRACE M_BODY_RETURN",
+      "2026-11-18T16:30:21.5101593Z # AFW_PREP_TRACE FINAL_HTTP 200 26365",
+      "2026-11-18T16:30:21.5116997Z # AFW_PREP_TRACE FINAL_GET_RETURN",
+      "2026-11-18T16:30:21.5478983Z # AFW_PREP_TRACE WORLD_CLOSED"
+    ],
+    "elapsedMs": 26365,
+    "conclusion": "success",
+    "branch": "lab/afw-positive-final-preparation-20261118",
+    "activeRuns": 0
+  },
+  "approvalUnresolved": {
+    "run": 44348580942,
+    "job": 134957634503,
+    "head": "610451cb851312bf366cababd65918ff019c56e1",
+    "closed": "1d807722a127c727883140297c4438bc18f6392f",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44348580942",
+    "trace": [
+      "2026-11-18T16:35:20.0478383Z # AFW_PREP_TRACE FINAL_GET_START",
+      "2026-11-18T16:35:20.0498836Z # AFW_PREP_TRACE M_CALL",
+      "2026-11-18T16:35:20.0517651Z # AFW_PREP_TRACE QA_ENTRY",
+      "2026-11-18T16:35:20.0520733Z # AFW_PREP_TRACE QA_TIMELINE_START",
+      "2026-11-18T16:35:20.4194764Z # AFW_PREP_TRACE QA_TIMELINE_RETURN",
+      "2026-11-18T16:35:20.4199542Z # AFW_PREP_TRACE QA_CHOICE_START",
+      "2026-11-18T16:35:20.4200285Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_START",
+      "2026-11-18T16:35:24.1126991Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_RETURN",
+      "2026-11-18T16:35:27.0454965Z # AFW_PREP_TRACE QA_APPROVAL_RETURN",
+      "2026-11-18T16:35:44.2477870Z # AFW_PREP_TRACE QA_STAGE_CONTEXT_RETURN",
+      "2026-11-18T16:35:45.0010595Z # AFW_PREP_TRACE QA_TICKET_WRITE_START",
+      "2026-11-18T16:35:46.4913015Z # AFW_PREP_TRACE QA_TICKET_WRITE_RETURN",
+      "2026-11-18T16:35:47.6054926Z # AFW_PREP_TRACE QA_CHOICE_RETURN",
+      "2026-11-18T16:35:47.6055901Z # AFW_PREP_TRACE QA_FORM",
+      "2026-11-18T16:35:47.6056833Z # AFW_PREP_TRACE M_HEADERS 200",
+      "2026-11-18T16:35:47.6057255Z # AFW_PREP_TRACE M_BODY_RETURN",
+      "2026-11-18T16:35:47.6073969Z # AFW_PREP_TRACE FINAL_HTTP 200 27560",
+      "2026-11-18T16:35:47.6090654Z # AFW_PREP_TRACE FINAL_GET_RETURN",
+      "2026-11-18T16:36:16.8862875Z # AFW_PREP_TRACE QA_APPROVAL_PUBLISH_START",
+      "2026-11-18T16:36:17.6245665Z # AFW_PREP_TRACE FINAL_APPROVAL_HTTP 503",
+      "2026-11-18T16:36:17.6662758Z # AFW_PREP_TRACE WORLD_CLOSED"
+    ],
+    "finalGet": 200,
+    "finalGetMs": 27560,
+    "finalPost": 503,
+    "publishStarted": true,
+    "publishReturned": false,
+    "activeRuns": 0
+  },
+  "groupedReadsTrial": {
+    "atUTC": "2026-11-18 16:42:33 UTC",
+    "run": 44349595850,
+    "job": 134961262192,
+    "head": "6434d8f4b21b5a37115acb6530a7db0851ec7c44",
+    "closed": "fef02eebe819063681d9c11793dbcad14bf6a2f7",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44349595850",
+    "trace": [
+      "2026-11-18T16:40:56.5651664Z # AFW_PREP_TRACE FINAL_GET_START",
+      "2026-11-18T16:40:56.5676474Z # AFW_PREP_TRACE M_CALL",
+      "2026-11-18T16:40:56.5702964Z # AFW_PREP_TRACE QA_ENTRY",
+      "2026-11-18T16:40:56.5708923Z # AFW_PREP_TRACE QA_TIMELINE_START",
+      "2026-11-18T16:40:57.0637555Z # AFW_PREP_TRACE QA_TIMELINE_RETURN",
+      "2026-11-18T16:40:57.0640786Z # AFW_PREP_TRACE QA_CHOICE_START",
+      "2026-11-18T16:40:57.0643474Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_START",
+      "2026-11-18T16:41:01.2940120Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_RETURN",
+      "2026-11-18T16:41:03.4606370Z # AFW_PREP_TRACE QA_APPROVAL_RETURN",
+      "2026-11-18T16:41:19.6103227Z # AFW_PREP_TRACE QA_STAGE_CONTEXT_RETURN",
+      "2026-11-18T16:41:20.6760397Z # AFW_PREP_TRACE QA_TICKET_WRITE_START",
+      "2026-11-18T16:41:22.7651111Z # AFW_PREP_TRACE QA_TICKET_WRITE_RETURN",
+      "2026-11-18T16:41:24.4238368Z # AFW_PREP_TRACE QA_CHOICE_RETURN",
+      "2026-11-18T16:41:24.4238951Z # AFW_PREP_TRACE QA_FORM",
+      "2026-11-18T16:41:24.4285960Z # AFW_PREP_TRACE M_HEADERS 200",
+      "2026-11-18T16:41:24.4289023Z # AFW_PREP_TRACE M_BODY_RETURN",
+      "2026-11-18T16:41:24.4311224Z # AFW_PREP_TRACE FINAL_HTTP 200 27867",
+      "2026-11-18T16:41:24.4348768Z # AFW_PREP_TRACE FINAL_GET_RETURN",
+      "2026-11-18T16:41:54.1315668Z # AFW_PREP_TRACE QA_APPROVAL_PUBLISH_START",
+      "2026-11-18T16:41:54.4654197Z # AFW_PREP_TRACE FINAL_APPROVAL_HTTP 503",
+      "2026-11-18T16:41:54.5276204Z # AFW_PREP_TRACE WORLD_CLOSED"
+    ],
+    "finalGet": 200,
+    "finalGetMs": 27867,
+    "finalPost": 503,
+    "approvalToPublicationMs": 29697,
+    "timeAfterStartUntil503Ms": 334,
+    "publishReturned": false,
+    "activeRuns": 0,
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+  },
+  "groupedReadsCandidate": "3b7663a6529da5440ade34ea502d837200fa8247",
+  "disposition": "Form GET fix passes independently. Neither final POST test completed. The later publication routine starts about 29.3–29.7 s after the form returned and still has no completion receipt before the original 30 s HTTP deadline. Grouped read-only attempt is rejected for promotion. Earlier passed synthetic same-notice run is unchanged as component/fixture evidence.",
+  "deployment": {
+    "project": "AFW",
+    "scope": "control-plane deployment metadata",
+    "observedAt": "2026-11-18T16:34:42.900Z",
+    "observed": {
+      "qa": {
+        "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+        "versions": [
+          {
+            "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+            "percentage": 100
+          }
+        ]
+      },
+      "canary": {
+        "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "versions": [
+          {
+            "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+            "percentage": 100
+          }
+        ]
+      },
+      "operator": {
+        "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+        "versions": [
+          {
+            "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+            "percentage": 100
+          }
+        ]
+      }
+    }
+  },
+  "environmentInventory": {
+    "available": true,
+    "n": 4,
+    "keys": [
+      "environments",
+      "nextCursor"
+    ],
+    "next": false,
+    "afw": [
+      {
+        "name": "AFW Operations",
+        "runnable": true
+      }
+    ]
+  },
+  "releaseBlockedBy": "No qualified final approval, no published candidate or confirmed native cloud receiving and review occurrence. Do not relaunch the failed test unchanged, replay a consumed occurrence, change authority or infer connection from an environment name.",
+  "noUserActionNeeded": true,
+  "operationalReadiness": false,
+  "PCoff": false
+}

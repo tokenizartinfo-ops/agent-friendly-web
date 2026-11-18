@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "43a13677d7cf1f583eb0841cec7b469fe002d1ff",
-  "phase": "FINAL_PREPARATION_503_REPAIRED_IN_SYNTHETIC_LAB",
+  "previousCheckpoint": "e0860a4e9a5063e9ae62c15bd2bbe4e7ac2d304c",
+  "phase": "FORM_GET_FIXED_FINAL_APPROVAL_POST_DEADLINE_OPEN",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify the ordinary final approval using its original corrected GET form. Verify a current cloud candidate and a usable receiver before consuming the authorized live occurrence. Confirm the same delivered event, useful cloud review, withdrawal and closure from primary evidence.",
+  "next": "Use final approval timings to bound a minimal design for the long publication after valid authorization. Keep owner, expected revision, grant, lease, once-only effects and terminal restoration. No production activation while the final POST does not produce a qualified receipt.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -559,7 +559,7 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "8542440082dc6d2fe7f568ad60dc2b7edc250b0b",
+  "readinessDocument": "bf9c961ad5438805b211909972f5986c2e33e83e",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1822,8 +1822,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 140,
-  "updatedAtUTC": "2026-11-18 16:30:57 UTC",
+  "schemaVersion": 141,
+  "updatedAtUTC": "2026-11-18 16:42:33 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2029,5 +2029,49 @@
     "verifiedHttp": 200,
     "verifiedMs": 26365,
     "deployed": false
+  },
+  "finalApproval503": {
+    "evidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726",
+    "run": 44348580942,
+    "groupedReadsTrial": 44349595850,
+    "groupedReadsCandidate": "3b7663a6529da5440ade34ea502d837200fa8247",
+    "postHTTP": 503,
+    "closedBranch": "fef02eebe819063681d9c11793dbcad14bf6a2f7",
+    "observedPublishingBeforeDeadline": true,
+    "publishReceiptVerified": false,
+    "actualDeploymentReadback": {
+      "project": "AFW",
+      "scope": "control-plane deployment metadata",
+      "observedAt": "2026-11-18T16:34:42.900Z",
+      "observed": {
+        "qa": {
+          "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+          "versions": [
+            {
+              "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+              "percentage": 100
+            }
+          ]
+        },
+        "canary": {
+          "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+          "versions": [
+            {
+              "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+              "percentage": 100
+            }
+          ]
+        },
+        "operator": {
+          "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+          "versions": [
+            {
+              "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+              "percentage": 100
+            }
+          ]
+        }
+      }
+    }
   }
 }
