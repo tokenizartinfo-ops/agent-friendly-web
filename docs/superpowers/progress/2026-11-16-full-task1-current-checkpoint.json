@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "e2471b2b8957e51d949ce8e6c3ac33c0b810b58f",
-  "phase": "BOUNDED_PENDING_AWAIT_OBSERVATION_DESIGN_RUNNING",
+  "phase": "BOUNDED_PENDING_AWAIT_OBSERVATION_DESIGN_REVIEW",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -1195,17 +1195,22 @@
       "noExistingQACutObservation": true
     },
     "pendingAwaitDesign": {
-      "status": "DESIGN_ONLY_RUNNING",
+      "status": "DESIGN_COMPLETE_INDEPENDENT_REVIEW_RUNNING",
       "brief": "f5461fc7334c01360008c3f8bea5eabbd197e5b9",
       "actor": "/root/m_pending_observation_design",
       "premiseChangeUnderEvaluation": "A bounded post-result synthetic fixture observation, explicitly later than M cutoff, may be designed if existing channel is insufficient. No current/public/business contract or implementation change released.",
       "codeReleased": false,
       "nativeReleased": false,
-      "noCounterReset": true
+      "noCounterReset": true,
+      "design": "5a6da67f176c65fe9ea133a08923470d69606a97",
+      "plan": "2b7081d270c017e7e24190fdab3c1923d86a91cd",
+      "reviewBrief": "45db6ef9e3f6d69114a9cb175eee77e45df22f89",
+      "reviewer": "/root/get_winner_full20_carrier_review",
+      "designFixRound": 0
     }
   },
-  "schemaVersion": 109,
-  "updatedAtUTC": "2026-11-18 01:01:33 UTC",
+  "schemaVersion": 110,
+  "updatedAtUTC": "2026-11-18 01:12:50 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
