@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import struct
 import sys
 import tempfile
 import unittest
@@ -126,6 +127,48 @@ class PinnedHistoricalArchiveTests(unittest.TestCase):
                 rejected = self.run_pinned(raw, {**locator, key: value})
                 self.assertEqual(rejected.returncode, 1)
                 self.assertEqual(rejected.stdout, b"")
+
+    def test_draft_assembles_both_compiled_and_all_closed_roles(self):
+        historical = make_archive()
+        locator = self.reference(historical)
+        roles = ("canaryLive", "qaLive")
+        files = {role: f"export default function {role}() {{}}".encode() for role in roles}
+        manifest = {
+            "purpose": "afw.finite-native-compiler-staging.v1",
+            "sourceRevision": "a" * 40,
+            "sourceTree": "b" * 40,
+            "completePackage": False,
+            "operationalReadiness": False,
+            "historicalInput": {
+                **{k: locator[k] for k in ("purpose", "archiveSha256", "archiveBytes", "receiptSha256", "providerSourcePin")},
+                "archiveReadByCompiler": False,
+            },
+            "modules": {role: {"name": "index.mjs", "bytes": len(files[role]),
+                              "sha256": hashlib.sha256(files[role]).hexdigest(), "exports": ["default"]}
+                        for role in roles},
+        }
+        expected = json.dumps(manifest).encode()
+        for altered in (False, True):
+            with self.subTest(altered=altered):
+                stream = io.BytesIO()
+                with zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED) as stage:
+                    stage.writestr("staging.json", expected)
+                    for role in roles:
+                        body = files[role] + (b"\n" if altered and role == "qaLive" else b"")
+                        stage.writestr(role + "/index.mjs", body)
+                staged = stream.getvalue()
+                framed = struct.pack("<III", len(historical), len(staged), len(expected)) + historical + staged + expected
+                outcome = self.run_pinned(framed, locator, "--assemble-private-draft")
+                if altered:
+                    self.assertEqual(outcome.returncode, 1)
+                    self.assertEqual(outcome.stdout, b"")
+                else:
+                    self.assertEqual(outcome.returncode, 0, outcome.stderr)
+                    evidence = json.loads(outcome.stdout)
+                    self.assertEqual(evidence["moduleCount"], 5)
+                    self.assertIs(evidence["completePackage"], False)
+                    self.assertIs(evidence["operationalReadiness"], False)
+                    self.assertNotIn(b"synthetic-private-sentinel", outcome.stdout)
 
 
 if __name__ == "__main__":
