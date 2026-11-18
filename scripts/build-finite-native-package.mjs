@@ -10,6 +10,7 @@ import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
 import {finiteWranglerProfileTemplate,finitePublicStaticExpectation} from '../lib/mcp-qa-finite-profile.mjs';
+import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
 const fail=()=>{throw Error('Finite native package unavailable');};
 const workflow='.github/workflows/afw-finite-native-package.yml';
@@ -18,6 +19,33 @@ const bootstrapPaths={workflowHash:'.github/workflows/afw-finite-qa-bootstrap.ym
 const roles=['canaryLive','qaLive'];
 const paths={qaLive:'wrangler.independent-closure-qa.finite.jsonc',canaryLive:'wrangler.mcp-own.finite.jsonc'};
 const expectedExports={qaLive:['IndependentClosure','PrivateQaBootstrap','PrivateQaCatalog','PrivateQaNamedConfirmation','PrivateQaPreregistration','default','observePrivateQa'],canaryLive:['AfwNodeControl','AfwOwnEventNode','default']};
+const historicalInputPath='scripts/mcp-finite-r2-historical-inputs.json';
+const closedPinPath='lib/mcp-qa-cloud-closed-pins.mjs';
+const historicalKeys={qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'};
+const sha256Hex=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
+async function historicalInputLocator(cwd,sourceRevision){
+ const pinBlob=(await exec('git',['rev-parse',sourceRevision+':'+closedPinPath],{cwd,encoding:'utf8',timeout:10000})).stdout.trim();
+ const text=await readFile(resolve(cwd,historicalInputPath),'utf8');
+ if(Buffer.byteLength(text)>24576)fail();
+ const ref=JSON.parse(text);
+ const keys=['purpose','bucket','objectKey','archiveSha256','archiveBytes','receiptSha256','providerSourcePin','preservedAtUTC','inputs'];
+ if(!ref||Object.keys(ref).sort().join(',')!==keys.sort().join(',')||
+    ref.purpose!=='afw.finite-r2-historical-inputs.v1'||ref.bucket!=='afw-release-backups'||
+    ref.providerSourcePin!=='26213123304eea25e652a52d808d25b7e0e3475e'||ref.providerSourcePin!==pinBlob||
+    !sha256Hex(ref.archiveSha256)||!sha256Hex(ref.receiptSha256)||
+    !Number.isSafeInteger(ref.archiveBytes)||ref.archiveBytes<1||ref.archiveBytes>67108864||
+    ref.objectKey!=='historical-v1/sha256-'+ref.archiveSha256+'.zip'||
+    typeof ref.preservedAtUTC!=='string'||new Date(ref.preservedAtUTC).toISOString()!==ref.preservedAtUTC)fail();
+ assert.deepEqual(Object.keys(ref.inputs).sort(),Object.keys(historicalKeys).sort());
+ for(const [role,key] of Object.entries(historicalKeys)){
+  const item=ref.inputs[role],pin=QA_CLOUD_CLOSED_PINS[key];
+  if(!sha256Hex(item?.metadataSha256))fail();
+  assert.deepEqual(item,{versionId:pin.id,moduleName:pin.module.name,moduleBytes:pin.module.bytes,
+   moduleSha256:pin.module.sha256,configurationSha256:pin.configurationHash,metadataSha256:item.metadataSha256});
+ }
+ return {purpose:ref.purpose,archiveSha256:ref.archiveSha256,archiveBytes:ref.archiveBytes,
+  receiptSha256:ref.receiptSha256,providerSourcePin:ref.providerSourcePin,archiveReadByCompiler:false};
+}
 function options(v){
  if(!v||Object.getPrototypeOf(v)!==Object.prototype||Reflect.ownKeys(v).length!==2)fail();
  for(const k of ['cwd','sourceRevision']){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value')||typeof d.value!=='string')fail();}
@@ -27,7 +55,7 @@ async function inputs(cwd,revision){
  const result={};
  const origin=(await exec('git',['remote','get-url','origin'],{cwd,encoding:'utf8',timeout:10000})).stdout.trim();
  if(!['https://github.com/tokenizartinfo-ops/agent-friendly-web','https://github.com/tokenizartinfo-ops/agent-friendly-web.git'].includes(origin))fail();
- for(const path of [workflow,...Object.values(paths),...Object.values(bootstrapPaths)]){
+ for(const path of [workflow,historicalInputPath,closedPinPath,...Object.values(paths),...Object.values(bootstrapPaths)]){
   const bytes=await readFile(resolve(cwd,path)),tracked=(await exec('git',['show',revision+':'+path],{cwd,encoding:null,timeout:10000,maxBuffer:1048576})).stdout;
   if(!bytes.equals(tracked))fail();result[path]=hash(bytes);
   const role=roles.find(r=>paths[r]===path);if(role)assert.deepEqual(JSON.parse(bytes),finiteWranglerProfileTemplate(role));
@@ -43,6 +71,7 @@ export async function compileFiniteNativeStaging(input){
   // use the canonical path throughout so a caller alias cannot retarget inputs.
   if(cwd!==await realpath(fileURLToPath(new URL('..',import.meta.url))))fail();
   const before=await verifyMcpReleaseSource({cwd,sourceRevision}),inputBefore=await inputs(cwd,sourceRevision);
+  const historicalInput=await historicalInputLocator(cwd,sourceRevision);
   const node=await buildMcpNodeProgram(),files={},modules={},metafiles={};
   if(hash(node.program)!==node.programHash)fail();
   let candidateResidency;
@@ -84,7 +113,7 @@ export async function compileFiniteNativeStaging(input){
    metafiles[role]=compiled.metafile;
   }
   const after=await verifyMcpReleaseSource({cwd,sourceRevision});assert.deepEqual(after,before);assert.deepEqual(await inputs(cwd,sourceRevision),inputBefore);
-  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
+  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,historicalInput,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
  }catch{fail();}
 }
 /** Complete-package boundary. Deliberately no positive path until separately
@@ -93,9 +122,9 @@ export async function compileFiniteNativeStaging(input){
 export async function buildFiniteNativePackage(input){
  options(input);
  await compileFiniteNativeStaging(input);
- // No exact approved historical artifact locator/normalized metadata exists.
- // Native5 launcher, 4C2 factories, 4C3 receiver/nominal and rollback compatibility
- // are also missing. Do not accept a caller boolean, callback or artifact path.
+ // The staged receipt identifies a verified private R2 archive. This build does
+ // not read its bytes. Native material/guard mounts, receiver and rollback
+ // compatibility still need independent qualification before package output.
  fail();
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){

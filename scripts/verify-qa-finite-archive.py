@@ -8,6 +8,7 @@ import io
 import json
 import re
 from datetime import datetime
+from pathlib import Path
 import stat
 import struct
 import sys
@@ -185,10 +186,40 @@ def inspect_historical_inputs(raw):
     return {"receipt": receipt, "receiptText": receipt_text, "files": files}
 
 
+def inspect_pinned_r2_historical_inputs(raw):
+    locator_path = Path(__file__).with_name("mcp-finite-r2-historical-inputs.json")
+    with locator_path.open("rb") as source:
+        locator_bytes = source.read(MANIFEST_LIMIT + 1)
+    require(0 < len(locator_bytes) <= MANIFEST_LIMIT)
+    locator = json.loads(locator_bytes.decode("utf-8"), object_pairs_hook=pairs, parse_constant=invalid_constant)
+    require(isinstance(locator, dict) and set(locator) == {
+        "purpose", "bucket", "objectKey", "archiveSha256", "archiveBytes",
+        "receiptSha256", "providerSourcePin", "preservedAtUTC", "inputs",
+    })
+    digest = hashlib.sha256(raw).hexdigest()
+    require(locator["purpose"] == "afw.finite-r2-historical-inputs.v1"
+            and locator["bucket"] == "afw-release-backups"
+            and locator["providerSourcePin"] == "26213123304eea25e652a52d808d25b7e0e3475e"
+            and locator["objectKey"] == "historical-v1/sha256-" + digest + ".zip"
+            and locator["archiveSha256"] == digest
+            and type(locator["archiveBytes"]) is int and locator["archiveBytes"] == len(raw))
+    result = inspect_historical_inputs(raw)
+    require(locator["receiptSha256"] == hashlib.sha256(result["receiptText"].encode("utf-8")).hexdigest()
+            and locator["inputs"] == result["receipt"]["inputs"]
+            and locator["preservedAtUTC"] == result["receipt"]["preservedAtUTC"])
+    return {**result, "archiveSha256": digest}
+
+
 def main():
     raw = sys.stdin.buffer.read(ARCHIVE_LIMIT + 1)
-    require(sys.argv[1:] in ([], ["--historical-inputs"]))
-    result = inspect_historical_inputs(raw) if sys.argv[1:] else inspect_archive(raw)
+    inspectors = {
+        (): inspect_archive,
+        ("--historical-inputs",): inspect_historical_inputs,
+        ("--pinned-r2-historical-inputs",): inspect_pinned_r2_historical_inputs,
+    }
+    mode = tuple(sys.argv[1:])
+    require(mode in inspectors)
+    result = inspectors[mode](raw)
     output = json.dumps(result, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
     require(len(output) <= 65536)
     sys.stdout.buffer.write(output)

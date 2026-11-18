@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
 import zipfile
 
@@ -80,6 +81,51 @@ class HistoricalArchiveTests(unittest.TestCase):
                 result = self.inspect(change)
                 self.assertEqual(result.returncode, 1)
                 self.assertEqual(result.stdout, b"")
+
+
+class PinnedHistoricalArchiveTests(unittest.TestCase):
+    def run_pinned(self, raw, locator, flag="--pinned-r2-historical-inputs"):
+        with tempfile.TemporaryDirectory() as folder:
+            work = Path(folder)
+            script = work / "verify.py"
+            script.write_bytes(Path(SCRIPT).read_bytes())
+            (work / "mcp-finite-r2-historical-inputs.json").write_text(json.dumps(locator), encoding="utf-8")
+            return subprocess.run([sys.executable, str(script), flag], input=raw, capture_output=True, check=False)
+
+    def reference(self, raw):
+        with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+            receipt_bytes = archive.read("receipt.json")
+        receipt = json.loads(receipt_bytes)
+        digest = hashlib.sha256(raw).hexdigest()
+        return {
+            "purpose": "afw.finite-r2-historical-inputs.v1",
+            "bucket": "afw-release-backups",
+            "objectKey": "historical-v1/sha256-" + digest + ".zip",
+            "archiveSha256": digest,
+            "archiveBytes": len(raw),
+            "receiptSha256": hashlib.sha256(receipt_bytes).hexdigest(),
+            "providerSourcePin": "26213123304eea25e652a52d808d25b7e0e3475e",
+            "preservedAtUTC": receipt["preservedAtUTC"],
+            "inputs": receipt["inputs"],
+        }
+
+    def test_only_the_pinned_r2_archive_can_enter(self):
+        raw = make_archive()
+        locator = self.reference(raw)
+        out = self.run_pinned(raw, locator)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        result = json.loads(out.stdout)
+        self.assertEqual(result["archiveSha256"], locator["archiveSha256"])
+        self.assertNotIn(b"synthetic-private-sentinel", out.stdout)
+        for key, value in (
+            ("bucket", "another-bucket"),
+            ("archiveSha256", "0" * 64),
+            ("receiptSha256", "1" * 64),
+        ):
+            with self.subTest(key=key):
+                rejected = self.run_pinned(raw, {**locator, key: value})
+                self.assertEqual(rejected.returncode, 1)
+                self.assertEqual(rejected.stdout, b"")
 
 
 if __name__ == "__main__":

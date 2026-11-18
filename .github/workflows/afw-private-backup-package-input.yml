@@ -1,0 +1,42 @@
+name: AFW private backup package input validation
+on:
+  push:
+    branches: [lab/afw-private-backup-package-input-20261118]
+permissions:
+  contents: read
+jobs:
+  build:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-private-backup-package-input-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-PRIVATE-BACKUP-PACKAGE-INPUT-20261118' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify exact archive input and package compiler contracts
+        run: |
+          python3 -m unittest discover -s test -p 'finite*archive_test.py'
+          node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-profile.test.mjs
+      - name: Build and verify the source candidate in staging
+        shell: bash
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
+          node <<'AFW_VERIFY'
+          const fs = require('node:fs');
+          const p = JSON.parse(fs.readFileSync('output/finite-native-staging/staging.json', 'utf8'));
+          if (p.purpose !== 'afw.finite-native-compiler-staging.v1' || p.sourceRevision !== process.env.GITHUB_SHA ||
+              p.completePackage !== false || p.operationalReadiness !== false ||
+              Object.keys(p.modules).sort().join(',') !== 'canaryLive,qaLive') process.exit(1);
+          if (p.historicalInput?.archiveSha256 !== '63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28' ||
+              p.historicalInput.receiptSha256 !== '22bf46883ed25f0b480470aab075db6fb298f63ec347235c876e350fe98023d2' ||
+              p.historicalInput.archiveReadByCompiler !== false) process.exit(1);
+          const evidence = {historicalInput:p.historicalInput,sourceRevision:p.sourceRevision,sourceTree:p.sourceTree,completePackage:false,operationalReadiness:false,
+            modules:Object.fromEntries(Object.entries(p.modules).map(([role,value])=>[role,value.module]))};
+          console.log('AFW_PRIVATE_BACKUPS_STAGING ' + JSON.stringify(evidence));
+          AFW_VERIFY
