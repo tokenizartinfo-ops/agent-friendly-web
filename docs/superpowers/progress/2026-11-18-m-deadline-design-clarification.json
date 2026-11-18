@@ -1,0 +1,43 @@
+{
+  "schema": "AFW.C2.M_DEADLINE.STATIC_DESIGN_CLARIFICATION/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "priorInvestigation": "841ccd8a3c288cd797bdbed08c91c2e7fbcb8757",
+  "acceptedObservation": "7dc02ce610fc0f9158cb911c16b81e996e54dec1",
+  "status": "DESIGN_ONLY",
+  "recommendation": "Use the existing in-memory M request/lease/error association for two bounded diagnostic dimensions in an isolated control: the last completed original M operation at the winning callback, and which of that callback's two inputs fired. The current public g1 result carries neither dimension. Current evidence cannot retroactively locate the stalled await. Qualify any proposed observer with inert operands before considering further business diagnostics.",
+  "boundaries": [
+    "M bridge at original request read, stub fetch and bounded response-body read (BASE native-bridge:26,36,41), then synchronous validator (bridge:42; native-wire:88–99). Finite progression: ENTERED before the first completion; REQUEST_READ_RETURNED; STUB_RESPONSE_RETURNED; RESPONSE_BODY_READ_RETURNED; VALIDATOR_RETURNED. A phase means that boundary actually returned normally; validation entry, finally or a throw does not count. Use the existing forward-site flag only to distinguish reaching the call site from not reaching it while the last completion is REQUEST_READ_RETURNED. Reaching the site cannot establish actor delivery or where work was pending.",
+    "At the original wire deadline callback (native-wire:30–38), distinguish OPERATION_TIMER from LEASE_ABORT_EVENT by the invocation source at that instant. Both retain the identical original rejection/error and promise arbitration. A lease event does not distinguish the root's own timer from inbound cancellation. An unrecognized or ambiguous origin remains UNKNOWN. No attribution from time, from an aborted signal after finalization, or from a timer scheduled without winning.",
+    "S09:705–724,739–765 already binds P/L and the exact escaping error. Conceptually the immutable per-error fact can include the current private phase and callback origin when that error is produced. Use only the fact for the same error selected by the existing race. A mutable phase read later at catch/finalization is incorrect: losing work may have advanced. The current cell has no completed-await history or callback-origin field. This is a proposed observer capability, not present evidence.",
+    "No new QA code, actor state query, RPC, clock, timer, promise reaction, await, body/status/header read, cancel or waitUntil. Any future experiment must leave the original business result, rethrow identity, timer/listener cleanup and retained operation intact. Private bounded tags can be asserted inside an isolated synthetic control; transporting them through public g1/C2FT4 or reading them from an existing artifact is outside this design and current authorization."
+  ],
+  "negativeControls": [
+    "Two distinguishable callback inputs in a neutral async model, including nearly coincident arrivals and a later losing callback. Only the exact escaping error binds the snapshot. Foreign, duplicate, unmatched, missing or post-finalization evidence yields UNKNOWN.",
+    "Distinguish a stub invocation that has not returned from one that has returned a response whose body has not completed. A late response/body after the winning callback cannot advance the frozen snapshot. Stub failure, validator rejection and a successful 200 keep their original classifications and results; a validator exception never counts as successful validation.",
+    "Observer disabled and enabled on the same inert successful input must agree on original status, body, normal headers and completion. Any changed business result invalidates the observer. Neither a timeout nor an abort establishes eventual cancellation or physical settlement."
+  ],
+  "nativeControlDecision": [
+    "Reuse the accepted TOOL evidence first. b97a7415951e7fe4ecb988a921cc0d777ea18f35:8–30,36–45,68–83 already compares ordinary M with an inert HTML actor, observer OFF/ON, and checks a 200 and one matched arrival. GB1 08b75777bb39efaad0a439082cd430044c0b07d6 accepted tooling only. Repeating that identical happy path adds no discrimination.",
+    "A tiny native GET with a fixed harmless HTML responder is preferable to another full20 occurrence only if it isolates an untested difference, e.g. the nominated mount/remount lifecycle and original host GET dispatch versus the already-tested fresh fixture, or qualifies the proposed private observation itself. Fix the one comparison in advance. The inert lane needs no QA business actor, grant, ticket, storage, or additional external calls. The actual full20 configuration and QA application are deliberately outside that evidence.",
+    "200 in both comparison arms establishes that the selected benign transport path can complete. A divergence warrants investigation of the single changed construction or observation before considering broader work. A deadline with a sound joined fact before stub return localizes only the M interval up to the missing return. A deadline after stub return but before completed body narrows it to the subsequent interval. Missing or inconsistent facts stay UNKNOWN. None of those outcomes identifies an internal QA wait or establishes the cause of the accepted prior occurrence."
+  ],
+  "timeline": "Public action durations in ms: monitor 5061, case15 30008, case16 30010, case17 38, case18 open. Only case15 has the accepted M winner attribution. Similar duration supplies no classification for case16.",
+  "execution": "NOT_RUN",
+  "source5": 5,
+  "own5": 5,
+  "stageB": 5,
+  "markerChange": false,
+  "activationReleased": false,
+  "SourceQualified": false,
+  "PCoff": false,
+  "extends": "69e953c3f3871210f07e49fa69fafe4a49c9138c",
+  "qaTraceAssessment": {
+    "question": "Can an M-side observation of an outstanding fetch identify the await reached in QA?",
+    "answer": "No. An M callback snapshot can show that the call site was reached without a response being returned to M. It cannot distinguish request delivery, queueing, QA execution or return transport. It does not establish that QA was running when M timed out.",
+    "stdout": "Separate before/after console messages are extra I/O, even without an await and even if stdout already exists. A shared log buffer, timestamp or nearby line does not bind an event to this call or order a QA completion relative to an M timeout. Reusing the terminal response to carry QA-local state loses information precisely when no response returns. A final log snapshot may occur after M's deadline or never occur before the child stops. Silence means unknown.",
+    "scope": "A QA-local finite phase variable could describe the highest normally completed approved coarse step for one invocation, with no new business operation. Publishing or retrieving it, correlating two isolates privately, and proving a cut are separate design problems. There is no admitted invocation-bound intermediate QA receipt in the public capture for this occurrence. Do not substitute API job identity, callback arrival time, raw request metadata or a naked marker for that proof. A qualified later record could at most say a phase was reached sometime in that invocation unless a causal cut is separately established.",
+    "decision": "If QA localization is required, do not spend another full20 occurrence on M-only telemetry. First check, at design time, whether an already-emitted benign fixture event can provide invocation-bound positive arrival/completion facts without extra I/O. Require a neutral control to separate no delivery, delivery without completion, and completion after M's cutoff; a foreign, overlapping, late, missing or truncated observation must not create an earlier completion. If an observation channel cannot distinguish those cases, retain UNKNOWN or obtain separate authorization for changing that channel. No QA field, schema, export or product permission change is proposed here.",
+    "alternative": "For the narrower question of transport capability, use the already-accepted GB1 ordinary-success control, or only a newly justified single-variable remount comparison. An inert GET can qualify the measurement without entering the application's protected workflow. For the different question of actual QA progress in the historical occurrence, neither experiment supplies missing evidence."
+  }
+}
