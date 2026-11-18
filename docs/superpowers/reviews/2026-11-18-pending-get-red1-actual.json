@@ -1,0 +1,180 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.ACTUAL_SPEC_AND_QUALITY_REVIEW/1",
+  "reviewBrief": "b93666fac408036697f2d3e612d6124128cccd1f",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Read-only review of one completed keyless GitHub Actions MODEL run",
+    "ORIGIN": "GitHub API",
+    "RESOURCE_TYPE": "Immutable receipts and selected GitHub metadata",
+    "RESOURCE_ID": "run 44304106803, job 134801079258, exact lab ref, detached review",
+    "ALLOWED_ACTION": "Read evidence and save this detached review. No Source/harness execution or ref/run changes."
+  },
+  "evidence": {
+    "primary": "95268f04ddda8aaecd92d39de89da2b49ae6b5e7",
+    "result": "760a54796b8c63b2babe8c22b38dc7253c829c72",
+    "rootValidation": "8d5cdf7d4a311d458e8713060d5fbdec865128e7",
+    "closure": "50435e00001bb78feb88a11f11b64dc979878ca0",
+    "rootGate": "d2ccf0042b567c407d1caac37b93cefdc4d190dc",
+    "staticReview": "18946d537cffc622aeda07440136664bb75ab310"
+  },
+  "verdicts": {
+    "SPEC": {
+      "verdict": "PASS",
+      "observed": "FEATURE_MISSING_RED_OBSERVED_MODEL_ONLY",
+      "reason": "A normal child exit 1 and empty stderr accompany the exact M01 private-header assertion only after the 503/g1.503.L.0 baseline matched. The outer failure field is null and all six scoped custody and cleanup checks are true."
+    },
+    "QUALITY": {
+      "verdict": "PASS",
+      "reason": "Independent byte fingerprinting and fresh GitHub metadata corroborate the admitted head and attempt, specific command failure, successful evidence upload, closed descendant ref and branch census."
+    }
+  },
+  "independentDataChecks": {
+    "result": {
+      "bytes": 1274,
+      "sha256": "a2b07fb5e168002ba8cd22a9048833a7266a8a1038c0b5cc36d18ab09d1d02ec",
+      "blob": "760a54796b8c63b2babe8c22b38dc7253c829c72"
+    },
+    "childJsonPlusLF": {
+      "bytes": 384,
+      "sha256": "8c53d1c90866bba8d059a68ddf2d8943118227425e5679f658ea5c1936216329",
+      "blob": "8d82feb5b291e740fa8aa2965ca1607edc146c38"
+    },
+    "carrierTimestamp": "2026-11-18T12:27:42.3558708Z",
+    "canonicalSingleLineBase64": true,
+    "carrierBytesEqualExactResultBlob": true,
+    "childFrameFingerprintMatchesRunnerAndRoot": true,
+    "metadataAndAdmissionPredicates": {
+      "primaryPins": true,
+      "runIdentity": true,
+      "jobIdentity": true,
+      "stepSequencing": true,
+      "actualNomination": true,
+      "resultSchema": true,
+      "nestedEvidence": true,
+      "custodyProjection": true,
+      "bounds": true,
+      "artifactMetadata": true,
+      "closedRef": true,
+      "closedWorkflow": true,
+      "oneUseCensus": true,
+      "protectedPinsRootReadbacks": true,
+      "validationCrossCheck": true
+    }
+  },
+  "observed": {
+    "run": {
+      "id": 44304106803,
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "head": "f615bfa5d2183617355b4476c58b4a87d4d8f596",
+      "tree": "1a4269cc1a0bea2c111fc715e3aefa83675db59a",
+      "path": ".github/workflows/afw-c2-pending-get-red1.yml",
+      "createdAt": "2026-11-18T12:27:36Z"
+    },
+    "job": {
+      "id": 134801079258,
+      "conclusion": "failure",
+      "start": "2026-11-18T12:27:38Z",
+      "end": "2026-11-18T12:27:44Z",
+      "elapsedFromApiTimestampsMs": 6000,
+      "failedStep": "4 Run only the sealed MODEL RED",
+      "successfulUploadStep": "5 Preserve the bounded evidence frame"
+    },
+    "outer": {
+      "disposition": "FEATURE_MISSING_RED",
+      "stage": "classify",
+      "failure": null
+    },
+    "child": {
+      "status": 1,
+      "signal": null,
+      "spawnError": null,
+      "stdoutBytes": 384,
+      "stdoutSha256": "8c53d1c90866bba8d059a68ddf2d8943118227425e5679f658ea5c1936216329",
+      "stderrBytes": 0
+    },
+    "assertionFrame": {
+      "schema": "afw.c2.pending-get-red1.child/1",
+      "stage": "private-assertion",
+      "custody": {
+        "hostPid": 2474,
+        "pidNamespace": "pid:[4026532270]",
+        "netNamespace": "net:[4026532271]",
+        "uid": 1001,
+        "gid": 1001
+      },
+      "status": 503,
+      "g1": "g1.503.L.0",
+      "privateHeader": null,
+      "errorCode": "ERR_ASSERTION",
+      "assertion": {
+        "code": "ERR_ASSERTION",
+        "operator": "strictEqual",
+        "actual": null,
+        "expected": "m1.1133557799bbddff.T0.-"
+      }
+    },
+    "namedProcessAndTempChecks": {
+      "mounts": true,
+      "extraction": true,
+      "freshNamespaces": true,
+      "childPidAbsent": true,
+      "stagingReadback": true,
+      "tempAbsent": true
+    },
+    "evidenceUpload": {
+      "id": 14427705406,
+      "name": "afw-c2-pending-get-red1",
+      "size": 889,
+      "digest": "sha256:5b606998f51aa2364636fb5bb4e88b00cefb2218ff764445c9b5e68b9c1ca462",
+      "metadataAndUploadHashMatched": true,
+      "rawZipDownloaded": false,
+      "evidenceBodyRecovered": "Exact bounded trusted-parent stdout carrier after regular-file write/readback; same fixed always-upload path. Raw ZIP body not independently extracted.",
+      "filePath": "output/c2-pending-get-red1.json",
+      "artifactArchiveContentVerified": false
+    },
+    "closure": {
+      "branch": "lab/afw-c2-pending-get-20261118-red1",
+      "head": "0cd2f61f7afc31ca93864e9cf79f5d2206cdc5f0",
+      "tree": "11e36fcd3a42ecf4c657456a072ea7ec3f47705c",
+      "parent": "f615bfa5d2183617355b4476c58b4a87d4d8f596",
+      "workflowBlob": "6807f8f0c01ccb11a504abb80cfa9de7504da5c0",
+      "closedAtUTC": "2026-11-18 12:28:37 UTC",
+      "census": {
+        "total": 1,
+        "active": 0,
+        "closedHeadRuns": 0
+      },
+      "closedPushTrigger": false,
+      "closedJobCondition": false,
+      "protectedRefRootPinsMatching": 23
+    }
+  },
+  "freshGitHubReads": [
+    "Exact branch-filtered repository run census shows one run, attempt 1, terminal failure, matching push event, revision, workflow and activation message. No run exists on the closed head in that census.",
+    "The exact run's jobs API shows one job. Its identity, SHA, attempt, timing and ordered steps match the primary receipt. Step 4 is the sole failure and step 5 uploaded evidence successfully.",
+    "The run artifact collection lists exactly one matching artifact with ID 14427705406, 889 bytes, corresponding workflow run and archive digest. The bounded carrier timestamp precedes command exit 1 and upload success in the primary log.",
+    "The exact lab ref points to the closed commit. Its sole parent is the tested head and its tree matches the approved closure. The workflow at the closed head matches the pinned blob, has workflow_dispatch and a literal false job guard, and has no push trigger.",
+    "The 23 protected-ref before/after claims were compared between the Root gate and Root validation records. Reviewer live reads were limited to the nominated lab ref and run resources."
+  ],
+  "findings": [],
+  "resolvedPriorMinor": {
+    "path": "docs/superpowers/source-lab/c2-pending-get-red1/manifest.json",
+    "line": 96,
+    "resolution": "The Root gate and this evidence review distinguish result.stage === classify from result.frame.stage === private-assertion. They verify result.child.status === 1, separately require result.failure === null and check the complete nested assertion and closure flags."
+  },
+  "evidenceBoundaries": [
+    "The exact JSON was recovered from the fixed-label trusted-parent stdout carrier emitted after the regular-file write/readback. GitHub confirmed the upload and supplied metadata including the archive digest. The ZIP was not downloaded, hashed or extracted by the reviewer. The 889-byte archive digest is a separate value from the independently recomputed 1,274-byte JSON digest.",
+    "The named process, namespace and temp closure evidence comes from the pinned runner and bounded frame. The review did not independently inspect the former runner's procfs or claim a global drain.",
+    "The review does not establish Source qualification, Task1, a native callback or actor, a GET fix, new observer implementation, PC-off operation or operational readiness. No Source or harness execution, import, evaluation, code parsing, tests, builds or reruns were performed."
+  ],
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  }
+}

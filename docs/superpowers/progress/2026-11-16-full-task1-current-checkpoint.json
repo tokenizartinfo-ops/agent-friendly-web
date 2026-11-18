@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 12:31:24 UTC",
+  "timestampUTC": "2026-11-18 12:39:56 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "dedb956b4aec635c55ade237b126b4b0acc5f885",
-  "phase": "PENDING_GET_MODEL_RED_OBSERVED_CLOSED_REVIEW_PENDING",
+  "previousCheckpoint": "1e1a28a6a82ba24473170a56936fcd6330bd836a",
+  "phase": "PENDING_GET_CORE_MODEL_IMPLEMENTATION_PROPOSAL_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independent actual MODEL RED/closure review; only after acceptance release separately scoped diagnostic observer implementation proposal with sealed134fixtures. Original Source/native business/full Task1 and PCoff remain held.",
+  "next": "Fresh B1 implementer proposes core M/QA/host codecs and exact134 MODEL tests, then static review and Root finite GHA qualification. B2 native Source/hook integration waits for accepted core MODEL GREEN. Original Task1/full Source/coupled realPCoff/Max pending.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1291,7 +1291,7 @@
       "fixRoundsCompleted": 1
     },
     "pendingAwaitRed": {
-      "status": "FEATURE_MISSING_RED_OBSERVED_CLOSED_REVIEW_PENDING",
+      "status": "ACTUAL_MODEL_RED_ACCEPTED_CLOSED",
       "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
       "actor": "/root/pending_get_red_proposal",
       "nomination": {
@@ -1309,7 +1309,7 @@
         "activationReleased": false
       },
       "actualREDObserved": true,
-      "newObserverImplementationReleased": false,
+      "newObserverImplementationReleased": true,
       "nativeReleased": false,
       "MODELOnly": true,
       "proposalIndex": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
@@ -1406,11 +1406,52 @@
       "actualValidation": "8d5cdf7d4a311d458e8713060d5fbdec865128e7",
       "actualClosure": "50435e00001bb78feb88a11f11b64dc979878ca0",
       "actualReviewBrief": "b93666fac408036697f2d3e612d6124128cccd1f",
-      "actualIndependentReviewPending": true
+      "actualIndependentReviewPending": false,
+      "actualIndependentReview": "e1d37b68e3524607b200913f5514b252fe5118ca",
+      "rootAcceptance": "c4a19b5b0755c5058abb1f3f20340892f5680531"
+    },
+    "pendingAwaitCoreModel": {
+      "status": "IMPLEMENTATION_PROPOSAL_RUNNING",
+      "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+      "actor": "/root/pending_get_core_model_impl",
+      "nomination": {
+        "branch": "lab/afw-c2-pending-get-20261118-model-green1",
+        "message": "AFW-C2-PENDING-GET-MODEL-GREEN1-ONEUSE-20261118",
+        "workflow": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+        "job": "c2-pending-get-model-green1",
+        "prefix": "docs/superpowers/source-lab/c2-pending-get-model-green1/",
+        "runner": "docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+        "command": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+        "artifact": "afw-c2-pending-get-model-green1",
+        "output": "output/c2-pending-get-model-green1.json",
+        "refCreated": false,
+        "activationReleased": false,
+        "checkedUnusedAtUTC": "2026-11-18 12:38:04 UTC"
+      },
+      "approvedDesign": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+      "fixtureIndex": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+      "modelExpected": {
+        "M": 30,
+        "QA": 35,
+        "host": 57,
+        "row": 12,
+        "total": 134
+      },
+      "implementationProposalReleased": true,
+      "executionReleased": false,
+      "SourceIntegrationReleased": false,
+      "nativeReleased": false,
+      "stageSplitRuling": "c4a19b5b0755c5058abb1f3f20340892f5680531",
+      "originalCounters": {
+        "Source": 5,
+        "OWN": 5,
+        "StageB": 5,
+        "reset": false
+      }
     }
   },
-  "schemaVersion": 121,
-  "updatedAtUTC": "2026-11-18 12:31:24 UTC",
+  "schemaVersion": 122,
+  "updatedAtUTC": "2026-11-18 12:39:56 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

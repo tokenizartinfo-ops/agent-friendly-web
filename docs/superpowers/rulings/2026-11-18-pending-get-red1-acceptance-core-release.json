@@ -1,0 +1,37 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.ROOT_ACCEPTANCE_AND_NEXT_TASK/1",
+  "atUTC": "2026-11-18 12:39:12 UTC",
+  "actualReview": "e1d37b68e3524607b200913f5514b252fe5118ca",
+  "actualPrimary": "95268f04ddda8aaecd92d39de89da2b49ae6b5e7",
+  "actualResult": "760a54796b8c63b2babe8c22b38dc7253c829c72",
+  "rootValidation": "8d5cdf7d4a311d458e8713060d5fbdec865128e7",
+  "closure": "50435e00001bb78feb88a11f11b64dc979878ca0",
+  "accepted": "Actual feature-missing MODEL RED and bounded modeled process/branch closure only",
+  "ruling": {
+    "decision": "Decompose approved P1-P3 into B1 core observer/codecs+sealed134 MODEL proposal, then B2 exact Source/S08/S09/S10 integration and native schedule. Release B1 implementation proposal now; B2/native still held.",
+    "why": "Core synchronous observation/grammar can be reviewed and tested separately from native wiring, without building a monolithic unexecuted change. The original TDD assertion is now an observed missing feature; preserve its meaning for GREEN with an explicit private fixture adapter.",
+    "costIfWrong": "Discard isolated proposal; original Source13, public formats, BASE/Main, clocks and runtime remain unchanged.",
+    "scope": "No new product direction or public capability. Same accepted diagnostic D1-D7 and fixture expectations; no business repair or sixth Source/OWN/StageB cycle."
+  },
+  "ModelGreenNomination": {
+    "branch": "lab/afw-c2-pending-get-20261118-model-green1",
+    "message": "AFW-C2-PENDING-GET-MODEL-GREEN1-ONEUSE-20261118",
+    "workflow": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+    "job": "c2-pending-get-model-green1",
+    "prefix": "docs/superpowers/source-lab/c2-pending-get-model-green1/",
+    "runner": "docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+    "artifact": "afw-c2-pending-get-model-green1",
+    "output": "output/c2-pending-get-model-green1.json",
+    "refCreated": false,
+    "activationReleased": false,
+    "checkedUnusedAtUTC": "2026-11-18 12:38:04 UTC"
+  },
+  "coreImplementationProposalReleased": true,
+  "SourceIntegrationReleased": false,
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}
