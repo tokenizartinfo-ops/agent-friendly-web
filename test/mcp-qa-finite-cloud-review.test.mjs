@@ -53,3 +53,48 @@ test('authenticated cloud finish records a primary receipt for the same event an
  const exactRetry=await f.post(route,f.payload);assert.equal(exactRetry.status,200);
  assert.deepEqual((await exactRetry.json()).receipt,receipt);
 });
+
+test('forged identity, alternate execution and ordinary ACK cannot finish the finite review',async()=>{
+ const f=await setup();
+ const {review,...ordinary}=f.payload;
+ assert.equal((await f.post(route,f.payload,'forged')).status,401);
+ assert.equal((await f.post(route,{...ordinary,review:{...review,executionHash:'f'.repeat(64)}})).status,409);
+ assert.equal((await f.post(route,ordinary)).status,409);
+ assert.equal(f.sqlite.prepare('SELECT outcome FROM dossier_supervision_runs').get().outcome,null);
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_finite_reviews').get().n,0);
+ f.failBatchAt(1);
+ assert.equal((await f.post(route,f.payload)).status,503);
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_finite_reviews').get().n,0);
+ assert.equal(f.sqlite.prepare('SELECT outcome FROM dossier_supervision_runs').get().outcome,null);
+});
+
+import {finiteFinalizerFixture} from './fixtures/finite-finalizer.mjs';
+import {createPrivateQaFiniteTrialFinalizer} from '../lib/mcp-qa-finite-trial-finalizer.mjs';
+import {observePrivateQaFiniteDossierReview} from '../lib/mcp-qa-finite-dossier-review.mjs';
+
+test('QA reads the bound reviewer for its own notice and retains the review through verified restoration', async()=>{
+ const f=await finiteFinalizerFixture({withNotice:true}),output=f.state.output,notice=output.completion.notice;
+ const receipt={purpose:'afw.finite-dossier-review.v1',eventId:notice.eventId,controlHash:f.preview.controlHash,
+  actorHash:'2'.repeat(64),executionHash:'3'.repeat(64),resultHash:'4'.repeat(64),runId:crypto.randomUUID(),
+  revision:f.identity.plan.selectors.expectedProjectRevision+1,receivedAt:f.preview.C0-3000,reviewedAt:f.preview.C0-1000};
+ const env={AFW_FINITE_DOSSIER_REVIEW_RECEIVER:{async readReview(refs){
+  assert.deepEqual(refs,{eventId:notice.eventId,controlHash:f.preview.controlHash});
+  return receipt;
+ }}};
+ const options={env,control:f.identity,completion:output.completion,check:()=>f.f.now()};
+ assert.deepEqual(await observePrivateQaFiniteDossierReview(options),receipt);
+ assert.equal(await observePrivateQaFiniteDossierReview({...options,env:{}}),null);
+ env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER={readReview:async()=>({...receipt,eventId:'f'.repeat(64)})};
+ assert.equal(await observePrivateQaFiniteDossierReview(options),null);
+ env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER={readReview:async()=>({...receipt,reviewedAt:f.preview.C0})};
+ assert.equal(await observePrivateQaFiniteDossierReview(options),null);
+ const {receiptHash,observedAt,...primary}=output.primaryReceipt;
+ void receiptHash;
+ const report={...primary,review:receipt,observedAt};
+ output.primaryReceipt={...report,receiptHash:digest(report)};
+ const result=await createPrivateQaFiniteTrialFinalizer(f.deps).run();
+ assert.equal(result.status,'restored_observed');
+ assert.deepEqual(result.review,receipt);
+ assert.equal(result.notice.eventId,receipt.eventId);
+ assert.equal(f.posts,1);
+});

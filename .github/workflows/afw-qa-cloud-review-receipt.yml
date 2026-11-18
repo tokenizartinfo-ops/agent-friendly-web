@@ -25,3 +25,6 @@ jobs:
         run: |
           node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
           node --input-type=module -e 'import {readFileSync} from "node:fs"; const x=JSON.parse(readFileSync("output/finite-native-staging/staging.json")); if(x.sourceRevision!==process.env.GITHUB_SHA||x.completePackage!==false||x.operationalReadiness!==false)process.exit(1); console.log(JSON.stringify({revision:x.sourceRevision,completePackage:x.completePackage,operationalReadiness:x.operationalReadiness}));'
+      - name: Build the Operations Manager without deployment
+        if: github.event.head_commit.message == 'AFW-QA-CLOUD-REVIEW-GREEN-20261118'
+        run: npx --no-install wrangler deploy --dry-run --config wrangler.operations-manager.jsonc --outdir "$RUNNER_TEMP/afw-receiver"
