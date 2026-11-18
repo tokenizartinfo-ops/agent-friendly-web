@@ -3,10 +3,18 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "3b2325386a7272ed9e3c7d98afa1f4acf3003c75",
-  "phase": "TASK3_FULL20_CAS_INTENT_SAVED",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "3b9f7ed6f67b749331ffae97eee0abae92596523",
+  "phase": "TASK3_FULL20_DIAGNOSTIC_RUNNING",
+  "activeNativeRuns": [
+    {
+      "run": 44208626844,
+      "attempt": 1,
+      "head": "070de7b2165b9e401b893e5efa8d656c003b0f9a",
+      "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+      "kind": "SYNTHETIC_FULL20_GET_DIAGNOSTIC"
+    }
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44110921244,
     "job": 134135963389,
@@ -112,7 +120,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Create Source BASE ref then exactly one CAS activate full20 diagnostic, capture terminal log/archive once, admit with qualified OWN, close and obtain actual review. No guessed repair/unchanged retry.",
+  "next": "Wait for this single Source occurrence to terminate; read full raw REST context, terminal log and sole archive once, preserve before one qualified OWN admission, close and independently review. No unchanged retry or guessed repair.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1116,7 +1124,7 @@
       "actualReview": "4e33d04d9cf5a54a0821d24f0c40955c0427f815"
     },
     "task3": {
-      "status": "EXACT_NATIVE_DIAGNOSTIC_GATE_PREPARED",
+      "status": "FULL20_DIAGNOSTIC_RUNNING",
       "prepared": {
         "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
         "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
@@ -1129,7 +1137,7 @@
         "activationReleased": true,
         "activationAttempted": true,
         "refCreated": true,
-        "unattached": true,
+        "unattached": false,
         "tree": "d29ae038341bd7e3243e0d7cd056793019646540",
         "fullTreeVerified": true,
         "original3203Preserved": true,
@@ -1138,7 +1146,11 @@
         "gate": "9330cbbf6e2acc1c657cd6769bb34c8d970d2943",
         "refCreateAttempted": true,
         "baseRefMatched": true,
-        "activationIntentAtUTC": "2026-11-18 00:31:53 UTC"
+        "activationIntentAtUTC": "2026-11-18 00:31:53 UTC",
+        "activationUTC": "2026-11-18 00:32:13 UTC",
+        "activeRefMatched": true,
+        "run": 44208626844,
+        "runStatus": "in_progress"
       },
       "nativeGate": "9330cbbf6e2acc1c657cd6769bb34c8d970d2943",
       "qualifiedOwnMemoryScope": "cfe56b0636e689f599a515969c9a619c7ba4ebf2",
@@ -1147,8 +1159,8 @@
       "PCoff": false
     }
   },
-  "schemaVersion": 104,
-  "updatedAtUTC": "2026-11-18 00:31:53 UTC",
+  "schemaVersion": 105,
+  "updatedAtUTC": "2026-11-18 00:33:31 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
