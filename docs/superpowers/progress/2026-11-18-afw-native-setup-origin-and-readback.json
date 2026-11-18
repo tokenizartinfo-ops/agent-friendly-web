@@ -1,0 +1,41 @@
+{
+  "purpose": "afw.native-policy-setup-origin-validation.v1",
+  "project": "AFW",
+  "observedAtUTC": "2026-11-18T21:48:46Z",
+  "base": "8a4b81616cbe717ae61d4d2fccb9cfefd11b88c6",
+  "source": "8d347936c0af7e73de1ad30fa5494b49d9a2faf0",
+  "sourceTree": "048e4ed302c6e9f7d533bda732dd1299ec95b7b3",
+  "branch": "lab/afw-native-setup-origin-20261118",
+  "closed": "bb55b9dda900145a16cb2949262967f31de2e105",
+  "verification": {
+    "red": 44404024044,
+    "firstIntegrationRun": 44404549307,
+    "fixtureTransportCorrection": "Seed fixture uses the fixed anonymous GET policy and gives its original seed step matching completed chronology; authenticated finalizer traffic keeps its existing separate transport.",
+    "green": 44404935126,
+    "tests": 92,
+    "failures": 0,
+    "skips": 0,
+    "stagingPass": true
+  },
+  "ruling": "Use a preceding read-only native Workflow step to retain the actual original WorkflowEvent timestamp. The provider's queued timestamp is a separate fact, neither a replacement nor a new lease. The actor re-reads the fixed provider occurrence before accessing private owner material; adoption now requires both the original proof and success at installation. No new secret or extra deadline is introduced.",
+  "workflowApi": "https://developers.cloudflare.com/workflows/build/workers-api/",
+  "custody": {
+    "observedAtUTC": "2026-11-18T21:44:52.964Z",
+    "status": "expired",
+    "expiresAt": "2026-11-08T02:59:59Z"
+  },
+  "remaining": [
+    "The actual owner/prearm context reader inside readPrivateQaFinitePolicySource is still unavailable after qualified actor-side native lineage. It must connect the retained initial anchors and owner phase to the separately verified D1 permission.",
+    "Real launch and finalizer producers and private release package continue to require completion before deployment.",
+    "Install new exact scoped custody for one real business occurrence once the package is eligible."
+  ],
+  "sourceOnly": true,
+  "providerMutation": false,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "sameNoticeReceived": false,
+  "sameNoticeReviewed": false,
+  "nativeUnsubscribeObserved": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
