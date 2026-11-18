@@ -174,3 +174,10 @@ test('launch rechecks the originally bound permission in first-primary D1 after 
  assert.deepEqual(await f.launchPermission('read'),{status:'unavailable'});
  assert.equal(f.posts(),2);
 });
+
+test('launch cannot proceed without the original approval to withdraw this subscription',async t=>{
+ const f=await policyFixture(t);assert.equal((await f.run()).status,'installed');
+ assert.equal((await f.launchPermission('enroll')).valid,true);
+ assert.deepEqual(await f.launchPermission('missing-scope'),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});

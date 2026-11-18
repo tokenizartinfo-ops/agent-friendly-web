@@ -1,3 +1,4 @@
+import {sealFiniteOwnerCleanupScope,finiteOwnerCleanupScopeTextHash} from '../../lib/mcp-qa-finite-owner-cleanup-scope.mjs';
 import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
 import {readPrivateQaFiniteInstalledPolicy} from '../../lib/mcp-qa-finite-installed-policy.mjs';
 import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
@@ -103,6 +104,8 @@ export class SetupFixture extends IndependentClosure{
   const x=await this.ctx.storage.get('fixture:scenario'),storage=this.ctx.storage,p=x.preparation;
   const {connection,owner,project}=p;
   const prefix='connection-preparation:'+p.prepId+':';
+  const scopeKey='afw.finite-preparation-cleanup-scope.v1:'+p.prepId;
+  if(mode==='missing-scope')await storage.delete(scopeKey);
   if(mode==='enroll'){
    const grant={purpose:'afw.finite-grant-link.v1',preconnectionId:p.prepId,authorizationHash:x.authorization.handle_hash,
     grantId:connection.grantId,grantHash:connection.grantHash,acceptedAt:x.T0-300};
@@ -112,12 +115,16 @@ export class SetupFixture extends IndependentClosure{
     sourceRevision:p.sourceRevision,clientId:connection.clientId,resource:connection.resource,projectRef:H,
     subjectHash:hashFiniteOwnerEvidence('subject',{accessRealmHash:owner.accessRealmHash,subject:owner.subject}),
     issuedAt:x.T0-700,expiresAt:Date.parse(x.authorization.expires_at)};
-   await storage.put({[prefix+'grant']:encodeFinitePreparationRecord('GrantLink',grant),
+   const cleanup=sealFiniteOwnerCleanupScope({purpose:'afw.finite-preparation-cleanup-scope.v1',textVersion:1,textHash:finiteOwnerCleanupScopeTextHash,approvedButton:'approve',
+    stageApprovalHash:H,prepId:p.prepId,sourceRevision:p.sourceRevision,issuerReservationHash:H,issuerFenceIdentityHash:H,
+    sdkRootHash:H,sdkGrantHash:H,grantLinkHash:hash('GrantLink',grant),noticeLinkHash:hash('NoticeLink',notice),
+    startAfterMs:240000,endAfterMs:420000,approvedAt:p.approval.approvedAt});
+   await storage.put({[scopeKey]:canonical(cleanup),[prefix+'grant']:encodeFinitePreparationRecord('GrantLink',grant),
     [prefix+'notice']:encodeFinitePreparationRecord('NoticeLink',notice),
     ['connection-authorization:'+grant.authorizationHash]:encodeFinitePreparationRecord('AuthorizationLink',link)});
   }
   const plantime=x.T0;
-  const plan={intentId:refs.intentId,source:{revision:p.sourceRevision},T0:plantime,N1:plantime+300000,R1:plantime+480000,
+  const plan={intentId:refs.intentId,source:{revision:p.sourceRevision},T0:plantime,N1:plantime+300000,C0:plantime+240000,C1:plantime+420000,R1:plantime+480000,
    grantHash:connection.grantHash,monitorHash:connection.noticesHash,
    resources:{actorId:this.ctx.id.toString()},deployments:{qaLive:{versionId:this.env.AFW_QA_VERSION.id}},
    selectors:{grantId:connection.grantId,subject:owner.subject,projectId:project.projectId,
