@@ -3,18 +3,10 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "3b9f7ed6f67b749331ffae97eee0abae92596523",
-  "phase": "TASK3_FULL20_DIAGNOSTIC_RUNNING",
-  "activeNativeRuns": [
-    {
-      "run": 44208626844,
-      "attempt": 1,
-      "head": "070de7b2165b9e401b893e5efa8d656c003b0f9a",
-      "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
-      "kind": "SYNTHETIC_FULL20_GET_DIAGNOSTIC"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "f8a4a5c284bfd36c44e5056983c250d070c86baa",
+  "phase": "TASK3_FULL20_DEADLINE_OR_ABORT_ADMITTED_CLOSED_REVIEW_PENDING",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44110921244,
     "job": 134135963389,
@@ -120,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Wait for this single Source occurrence to terminate; read full raw REST context, terminal log and sole archive once, preserve before one qualified OWN admission, close and independently review. No unchanged retry or guessed repair.",
+  "next": "Independently review admitted current full20 observation/closure. If accepted, investigate M's original deadline/abort boundary with no guessed timer extension, unchanged replay or QA attribution.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1124,7 +1116,7 @@
       "actualReview": "4e33d04d9cf5a54a0821d24f0c40955c0427f815"
     },
     "task3": {
-      "status": "FULL20_DIAGNOSTIC_RUNNING",
+      "status": "DEADLINE_OR_ABORT_ADMITTED_CLOSED_REVIEW_PENDING",
       "prepared": {
         "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
         "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
@@ -1150,17 +1142,44 @@
         "activationUTC": "2026-11-18 00:32:13 UTC",
         "activeRefMatched": true,
         "run": 44208626844,
-        "runStatus": "in_progress"
+        "runStatus": "completed",
+        "job": 134480971206,
+        "jobStatus": "completed",
+        "closurePreparedHead": "8be5b43f46a6757953a1141eb7fd18fa822ba449",
+        "closurePreparedTree": "34f629b4dd93770f16eb53b0c2a4dcd775dc71ee",
+        "closureAttempted": true,
+        "closed": true,
+        "closedHead": "8be5b43f46a6757953a1141eb7fd18fa822ba449",
+        "closedTree": "34f629b4dd93770f16eb53b0c2a4dcd775dc71ee",
+        "closedAtUTC": "2026-11-18 00:42:08 UTC"
       },
       "nativeGate": "9330cbbf6e2acc1c657cd6769bb34c8d970d2943",
       "qualifiedOwnMemoryScope": "cfe56b0636e689f599a515969c9a619c7ba4ebf2",
       "SourceQualified": false,
       "Task1Pass": false,
-      "PCoff": false
+      "PCoff": false,
+      "actualPrimary": "4efc521335c68009091ba20c31630d88c8c0bce3",
+      "qualifiedOwnAdmission": "95e3edcc131291f9ad433b27ae16cbbe2c40c73c",
+      "actualOutcome": "b0712848c479079a736641910d754ed1d08ecfe1",
+      "actualPayload": "0b962ca840e0cf76248ecc277cf06472dbba704a",
+      "actualClosure": "40655a2e8d4efd63c651b78330ab6bea6c6e342b",
+      "currentGET": {
+        "http503": true,
+        "currentAssertion": "S08:18:143",
+        "throwSequence": 58,
+        "first14NativePASS": true,
+        "target15NativeFAIL": true,
+        "closedCountSequence": 60,
+        "getWinner": "DEADLINE_OR_ABORT",
+        "stubStatus": "UNKNOWN",
+        "qaLastCompleted": "UNKNOWN",
+        "targetActionDurationMs": 30008
+      },
+      "actualReviewPending": true
     }
   },
-  "schemaVersion": 105,
-  "updatedAtUTC": "2026-11-18 00:33:31 UTC",
+  "schemaVersion": 106,
+  "updatedAtUTC": "2026-11-18 00:43:51 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",

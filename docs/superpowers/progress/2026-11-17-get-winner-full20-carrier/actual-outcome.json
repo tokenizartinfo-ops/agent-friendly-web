@@ -1,0 +1,179 @@
+{
+  "schema": "AFW.C2.GET_WINNER.FULL20_ACTUAL_OUTCOME/1",
+  "atUTC": "2026-11-18 00:41:33 UTC",
+  "state": "ACTUAL_PUBLIC_PACKET_ADMITTED_CLOSURE_AND_INDEPENDENT_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44208626844,
+  "attempt": 1,
+  "job": 134480971206,
+  "head": "070de7b2165b9e401b893e5efa8d656c003b0f9a",
+  "tree": "d29ae038341bd7e3243e0d7cd056793019646540",
+  "primary": "4efc521335c68009091ba20c31630d88c8c0bce3",
+  "qualifiedOwnAdmission": "95e3edcc131291f9ad433b27ae16cbbe2c40c73c",
+  "payload": "0b962ca840e0cf76248ecc277cf06472dbba704a",
+  "rawArtifact": {
+    "bytes": 3136,
+    "sha256": "4f123bf728c09196c90f41cb5278f2d29b57da5edd4c6370d8d92944821389f2",
+    "blob": "0bd4db37cda5fdfbaa9c0a0fd06d213e8f5d6807"
+  },
+  "payloadHash": {
+    "bytes": 13344,
+    "sha256": "0d2806737ae8998c25d5ad9615b6e224187c4f2bdf3a3a44a7338e0b060c23c2",
+    "blob": "0b962ca840e0cf76248ecc277cf06472dbba704a"
+  },
+  "logHash": {
+    "bytes": 31861,
+    "sha256": "025eb4202545e2c00b9f5671c41c1938943605c29bfc37b6694c9c3c53624745",
+    "blob": "4b484f75f33bede8848bab71e227c5e6ed89ce79"
+  },
+  "admittedObservation": {
+    "getWinner": {
+      "case": "15:firstFiniteGET",
+      "winner": "DEADLINE_OR_ABORT",
+      "stubStatus": "UNKNOWN",
+      "qaLastCompleted": "UNKNOWN"
+    },
+    "finiteGet": {
+      "schema": "afw.c2-finite-get-diag3.v1",
+      "http": {
+        "state": "KNOWN",
+        "reason": "TARGET_GET_ASSERTION",
+        "throwSequence": 58,
+        "actual": 503,
+        "expected": 200
+      },
+      "afterMonitor": {
+        "value": "0",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 56
+      },
+      "afterScopeMissing": {
+        "value": "0",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 60
+      }
+    },
+    "firstFailure": {
+      "schema": "afw.c2-first-failure-post-diag2.v1",
+      "state": "NOT_APPLICABLE",
+      "reason": "EARLIEST_THROW_DIFFERENT",
+      "throwSequence": null,
+      "source": null,
+      "assertion": null
+    },
+    "native": {
+      "integrity": "prefix",
+      "cases": [
+        {
+          "id": "C2T1_CONNECTION",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_OAUTH",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_HANDLE",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PROJECTREF",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SUBJECT",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PHASE_RENAME",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SOURCE_BYTES",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_APPROVAL",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PREDECESSOR",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_GRANT_REVOKED",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_EXTRA_KEY",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_NOTICES",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_MONITOR_COOKIE",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_MONITOR",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SCOPE_MISSING",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_FINITE",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_SELECTION",
+          "status": "fail"
+        }
+      ]
+    },
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 15734,
+        "sha256": "4aaa86f4d07642fdfd6c773fed65fdb6b31671c0b2d0134a7c3e53dab5f61e01"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "witnessFrontier": "action",
+    "openCase": {
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "operation": "action"
+    },
+    "firstThrowSequence": 58,
+    "currentAssertion": {
+      "file": "S08",
+      "line": 18,
+      "column": 143
+    },
+    "publicTargetDurationMs": 30008
+  },
+  "finding": "Current case15 GET503 is qualified at M's original DEADLINE_OR_ABORT boundary, not a disclosed stub status or post-stub validation. Public QA phase remains UNKNOWN; do not infer timer-versus-abort or QA state.",
+  "nextFence": "Independent actual review before any repair; then scoped M lease/abort investigation preserving original clocks/race/IO. UNKNOWN historical cause, no unchanged rerun, no guessed timeout extension.",
+  "task1Full20Passed": false,
+  "independentReviewPending": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

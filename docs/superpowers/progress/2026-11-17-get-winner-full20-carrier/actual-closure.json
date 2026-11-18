@@ -1,0 +1,185 @@
+{
+  "schema": "AFW.C2.GET_WINNER.FULL20_ACTUAL_CLOSURE/1",
+  "atUTC": "2026-11-18 00:43:51 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+  "executedHead": "070de7b2165b9e401b893e5efa8d656c003b0f9a",
+  "executedTree": "d29ae038341bd7e3243e0d7cd056793019646540",
+  "run": 44208626844,
+  "attempt": 1,
+  "job": 134480971206,
+  "primary": "4efc521335c68009091ba20c31630d88c8c0bce3",
+  "qualifiedOwnAdmission": "95e3edcc131291f9ad433b27ae16cbbe2c40c73c",
+  "outcome": "b0712848c479079a736641910d754ed1d08ecfe1",
+  "payload": "0b962ca840e0cf76248ecc277cf06472dbba704a",
+  "closedAtUTC": "2026-11-18 00:42:08 UTC",
+  "closedHead": "8be5b43f46a6757953a1141eb7fd18fa822ba449",
+  "closedTree": "34f629b4dd93770f16eb53b0c2a4dcd775dc71ee",
+  "closedWorkflow": "6fcae9bf6ed9080fccdc7f32be2897133fc3571d",
+  "original3203Preserved": true,
+  "other25SourceBodiesPreserved": true,
+  "leaves": 3231,
+  "refMatched": true,
+  "onlyWorkflowReplacementPlusTwoEvidenceLeaves": true,
+  "closureFiles": [
+    {
+      "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6fcae9bf6ed9080fccdc7f32be2897133fc3571d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-primary.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4efc521335c68009091ba20c31630d88c8c0bce3"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-outcome.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0712848c479079a736641910d754ed1d08ecfe1"
+    }
+  ],
+  "protectedReadbacks": [
+    {
+      "branch": "main",
+      "expected": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "actual": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "matched": true
+    },
+    {
+      "branch": "feat/finite-native-cleanup-20261101",
+      "expected": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "actual": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+      "expected": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+      "actual": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+      "expected": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+      "actual": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "expected": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "actual": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+      "expected": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "actual": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+      "expected": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "actual": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "expected": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "actual": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+      "expected": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "actual": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+      "expected": "067a012121a58f7c2baf938228765242c433a1d5",
+      "actual": "067a012121a58f7c2baf938228765242c433a1d5",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "expected": "08061db79cd0f38f25df8977e1ded8e17542e684",
+      "actual": "08061db79cd0f38f25df8977e1ded8e17542e684",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+      "expected": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "actual": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
+      "expected": "86594c358557023d41cb3cae5d000bca3c67296b",
+      "actual": "86594c358557023d41cb3cae5d000bca3c67296b",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+      "expected": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+      "actual": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+      "expected": "0fe46529b2c0243d977afd54b914184a5b31963c",
+      "actual": "0fe46529b2c0243d977afd54b914184a5b31963c",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+      "expected": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86",
+      "actual": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+      "expected": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+      "actual": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures",
+      "expected": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+      "actual": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+      "expected": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
+      "actual": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-manifest1",
+      "expected": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+      "actual": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-tools1",
+      "expected": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "actual": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-20261117-get-winner-tools",
+      "expected": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+      "actual": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+      "matched": true
+    }
+  ],
+  "protectedReadbacksAtUTC": "2026-11-18 00:43:51 UTC",
+  "closedHeadRuns": 0,
+  "branchRunTotal": 1,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}
