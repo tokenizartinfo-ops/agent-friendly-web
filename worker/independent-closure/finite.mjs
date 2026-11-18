@@ -1,3 +1,4 @@
+import {readPrivateQaFiniteConfirmationFromActor} from '../../lib/mcp-qa-finite-confirmation-actor.mjs';
 import {createFiniteOwnerNativeReceiver} from '../../lib/mcp-qa-finite-owner-native-receiver.mjs';
 import {createPrivateQaFiniteOwnerOAuthReceiver} from '../../lib/mcp-qa-finite-owner-oauth-qa.mjs';
 import {createPrivateQaFiniteOwnerNoticeGetReceiver,createPrivateQaFiniteOwnerNoticeConsentReceiver} from '../../lib/mcp-qa-finite-owner-notice-get-qa.mjs';
@@ -35,5 +36,9 @@ export class IndependentClosure extends ClosedIndependentClosure{
 
  async alarm(){const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});return result===null?super.alarm():result;}
  prepareFiniteInitialMaterial(...args){if(args.length!==1)return Promise.resolve({status:'admin_pending',mayRetry:false,operationalReadiness:false});return createPrivateQaFiniteInitialEntry({ctx:this.ctx,env:this.env}).run(args[0]);}
+ readFiniteNominalConfirmation(...args){
+  if(args.length!==1)throw Error('Finite confirmation unavailable');
+  return readPrivateQaFiniteConfirmationFromActor({ctx:this.ctx,env:this.env,refs:args[0]});
+ }
  setupFinitePrivatePolicy(...args){if(args.length!==1)throw Error('Finite setup unavailable');return createPrivateQaFinitePolicySetup({ctx:this.ctx,env:this.env}).run(args[0]);}
 }

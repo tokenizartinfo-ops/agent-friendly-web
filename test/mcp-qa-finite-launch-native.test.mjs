@@ -9,6 +9,7 @@ import {IndependentClosure,PrivateQaNamedConfirmation} from './worker/independen
 import {fixture,resolvePrivateQaFiniteLaunchContext} from './test/fixtures/finite-launch-operations-native.mjs';
 import {createPrivateQaFiniteLaunchParent,withPrivateQaFiniteLaunchCoordinator} from './lib/mcp-qa-finite-launch-inventory.mjs';
 import {runPrivateQaFiniteLaunchOperation} from './lib/mcp-qa-finite-launch.mjs';
+import {readPrivateQaFiniteNominalExecution} from './lib/mcp-qa-finite-confirmation-provenance.mjs';
 export {PrivateQaNamedConfirmation};
 export class Native extends IndependentClosure{
  async run(mode){
@@ -122,6 +123,22 @@ export class Native extends IndependentClosure{
   const created=await this.createFiniteNominalChild(refs);
   this.ctx.storage.transaction=originalTx;
   const before=await journal();
+  if(mode.startsWith('confirm-')||mode==='lost-create'){
+   const createdAt=f.now();
+   f.setNow(createdAt+1);
+   if(mode==='confirm-foreign-send')await this.ctx.storage.put(prefix+'send',{...before.send,bindingHash:'e'.repeat(64)});
+   const event={bundleHash:f.plan.bundleHash,instanceId:f.plan.workflows.confirmation,createdAt};
+   if(mode==='confirm-old-event')event.createdAt--;
+   if(mode==='confirm-foreign-event')event.instanceId='afw-release-'+'8'.repeat(64);
+   if(mode==='confirm-withdrawn'){
+    const c=await this.ctx.storage.get(controlPrefix+'control');
+    await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});
+   }
+   const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000});
+   const proof=await readPrivateQaFiniteNominalExecution({ctx:this.ctx,env:this.env,refs:event,parent}).catch(()=>null);
+   if(mode.startsWith('confirm-'))return {proof,calls,unchanged:mode==='confirm-exact'&&JSON.stringify(before)===JSON.stringify(await journal())};
+   if(proof!==null)throw Error('A lost native acknowledgement cannot hydrate confirmation');
+  }
   const again=await this.createFiniteNominalChild(refs),read=await this.readFiniteNominalLaunch(refs);
   return {prepared,created,again,read,journal:await journal(),unchanged:JSON.stringify(before)===JSON.stringify(await journal()),calls,callArgs,armedAt,plan:f.plan,consentCrossed:f.consentCrossed??false};
  }
@@ -172,4 +189,17 @@ for(const mode of ['current-consent-crossing','current-consent-no-widen'])test('
 test('narrowed current consent timeout retains actual second snapshot work against a fresh parent',async()=>{
  const r=await native('current-consent-held-snapshot');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.ok(r.elapsedAtReturn<2000,'500ms current consent narrows the caller timeout without waiting for original 5s');
  assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);
+});
+
+test('confirmation reads the same native SEND and acknowledged instance without writing',async()=>{
+ const r=await native('confirm-exact');
+ assert.equal(r.proof.execution.nominalId,'afw-release-'+r.proof.execution.bundleHash);
+ assert.equal(r.proof.execution.bundleHash,JSON.parse(r.proof.plan).bundleHash);
+ assert.equal(r.calls,1);
+ assert.equal(r.unchanged,true);
+});
+for(const mode of ['confirm-old-event','confirm-foreign-event','confirm-foreign-send','confirm-withdrawn'])test('confirmation refuses '+mode,async()=>{
+ const r=await native(mode);
+ assert.equal(r.proof,null);
+ assert.equal(r.calls,1);
 });
