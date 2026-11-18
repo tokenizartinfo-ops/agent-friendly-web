@@ -34,7 +34,7 @@ const finiteWorker={...worker,async fetch(request,env,ctx){
   }
   if(path==='/monitoring'||path==='/monitoring/grant'){
    if(request.method!==(path==='/monitoring'?'GET':'POST'))return finiteNativePending(405);
-   if(env?.AFW_DELEGATED_OAUTH_ENABLED!=='true')return finiteNativePending();
+   if(env?.AFW_DELEGATED_OAUTH_ENABLED!=='true'||env?.AFW_DOSSIER_MONITORING_OWNER_ENABLED!=='true')return finiteNativePending();
    return await (path==='/monitoring'?forwardPrivateFiniteOwnerNoticeGet:forwardPrivateFiniteOwnerNoticeConsent)(input,parent.lease);
   }
   return finiteNativePending(404);
