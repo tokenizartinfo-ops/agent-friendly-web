@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 13:34:34 UTC",
+  "timestampUTC": "2026-11-18 13:41:05 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "ce329a45b99b08aace800ad2ad8ac0db8e682ae6",
-  "phase": "PENDING_GET_CORE_MODEL_FIX2",
+  "previousCheckpoint": "59da0e2420318355945eb5479f705ba1dd978f98",
+  "phase": "PENDING_GET_CORE_MODEL_ONEUSE_ROOT_GATE_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Targeted fix2 of H22/no-hook test; one source and metadata only. Scoped re-review then Root MODEL GREEN gate if approved; no Source/native/business run active.",
+  "next": "Root activate fixed one-use MODEL candidate once, check actual134cases+M01 and scoped closure, acquire primary evidence and independently review. B2 Source/native integration held until accepted actual MODEL GREEN.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1411,7 +1411,7 @@
       "rootAcceptance": "c4a19b5b0755c5058abb1f3f20340892f5680531"
     },
     "pendingAwaitCoreModel": {
-      "status": "FIX2_RUNNING_EXECUTION_HELD",
+      "status": "STATIC_ACCEPTED_ROOT_GATE_READY",
       "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
       "actor": "/root/pending_get_core_model_complete",
       "nomination": {
@@ -1438,7 +1438,7 @@
         "total": 134
       },
       "implementationProposalReleased": true,
-      "executionReleased": false,
+      "executionReleased": true,
       "SourceIntegrationReleased": false,
       "nativeReleased": false,
       "stageSplitRuling": "c4a19b5b0755c5058abb1f3f20340892f5680531",
@@ -1456,8 +1456,8 @@
       "Q32FixtureRuling": "f08c0945cd7021376723870eeebedac9de158b7c",
       "fixRounds": 0,
       "implementationExecutionReleased": false,
-      "manifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
-      "graph": "936001297183dffab0e06da5011b2a1ca500a100",
+      "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+      "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
       "report": "709bafefde2dc4b182163aefd7ba559a61694dd6",
       "rootMeasurement": "6a9410c128786d7f659c29c9fb8d7b8b2b89452f",
       "reviewPackage": "5fd9d6ffd7f0a6f889fc7d7b1301df13260fa944",
@@ -1472,19 +1472,13 @@
         "forwardInverseVerified": true
       },
       "review": "44db4b8fa86ebbd0e37649e9f4639d4e47a06e22",
-      "SPEC": "FAIL_STATIC",
-      "QUALITY": "FAIL_STATIC",
+      "SPEC": "PASS_STATIC",
+      "QUALITY": "PASS_STATIC",
       "fixRound": 2,
       "maxFixRounds": 5,
       "fixBrief": "94b5aa6194889e66a6ced472ada5d7d58d762e69",
-      "openFindings": [
-        {
-          "id": "B1-HOST-COPY-TEST-H22",
-          "severity": "IMPORTANT",
-          "summary": "No-hook model incorrectly executes its first take at duplicate guard; must skip it and preserve0reads"
-        }
-      ],
-      "fixRoundsCompleted": 1,
+      "openFindings": [],
+      "fixRoundsCompleted": 2,
       "fix1": {
         "manifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
         "graph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
@@ -1499,11 +1493,164 @@
           "HOST_COPY_TEST_H22_NO_HOOK"
         ]
       },
-      "fix2Brief": "de6039294c08795601acd8d90bfb27614bd732b3"
+      "fix2Brief": "de6039294c08795601acd8d90bfb27614bd732b3",
+      "fix2": {
+        "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+        "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
+        "appendix": "0e5c9fa9fbc76763ff65c55d80d7afc01b812177",
+        "delta": "2c2bdc347c6e892b6b8313f5950f47b168c896f8",
+        "rootMeasurement": "74510e9acf4502db04d0f08985dc25eaa9503606",
+        "review": "bf0dd7e4e40b80368684562eb357791cab602aea"
+      },
+      "staticAcceptance": "407530eb6be3fca9080303cb0fc4f723b4dca441",
+      "prepared": {
+        "stage": "CANDIDATE_AND_CLOSURE_VERIFIED",
+        "branch": "lab/afw-c2-pending-get-20261118-model-green1",
+        "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+        "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+        "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
+        "staticAcceptance": "407530eb6be3fca9080303cb0fc4f723b4dca441",
+        "entries": [
+          {
+            "path": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b24db9f508408cbd662b3693397e2c976e65c413"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/M-vectors.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "ab82327af902770b12995327658b007e3f0ffe02"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/PROTOCOL.md",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "57b86488b6cef15471eab6c65cc090b6ee2007a1"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/QA-vectors.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/codec.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "18a40467a2900a3e1265f7b90cb115ac072b8858"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/create-get-winner-observer.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "676ce360268ae07c2af0d0b029d89bc7a9e7bbc3"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/extension.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "c7c45196276adb9c203a2301d6edb3e5a2fa1aee"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "249033b347dbb9696f6fd872557b28385617cd90"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "547b7efaa22f2777f19346324261dbf58f8d0dcb"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-vectors.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/m-core.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "65bd3bb57f0ee0c52de2bfdda79bd64e91f3dc81"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/m-model.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "848c310d06e121b4a71511c5a9081dc491d420c0"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/manifest.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "7de81d5aa46a908d381550346dc72d64adfd6e81"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/model-host-input.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "214bbcc0aa6883c85e131c0bd93e90e5e27e5119"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/original-factory.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b1576130bd8c6510e92f1992e22476460f746e9a"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/pending-get-model-green1.child.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "de58adcd1b6f048d9b7b11f52ef8188184a12ef6"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/qa-core.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "ee33f99fadcc0a40efbf64cecbd5a6209356814d"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/qa-model.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "2a76121cd77986b091687bfcf363439328a5a795"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "6d505a78e000b800687b720404dfc2fc003f0af8"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/sites-grammar.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6"
+          }
+        ],
+        "activationAttempted": false,
+        "refCreated": false,
+        "tree": "8b7c46ab36b9e14c3bf71c5ede7cbec9f1b7756b",
+        "fullTreeVerified": true,
+        "original3203Preserved": true,
+        "leaves": 3223,
+        "head": "9afbe0683a0582a5f96712cb84da4805582079b2",
+        "closedTree": "cbed0d4fb221cd57efc704f4654013459b79165b",
+        "closedHead": "2c290229c1461020cc7b1b832e82bf56e920dcf0",
+        "closedTreeVerified": true,
+        "preparedAtUTC": "2026-11-18 13:40:21 UTC"
+      },
+      "rootGate": "af86007a3b96f5c6d73127501adddf26b1207679",
+      "MODELExecutionReleased": true
     }
   },
-  "schemaVersion": 127,
-  "updatedAtUTC": "2026-11-18 13:34:34 UTC",
+  "schemaVersion": 128,
+  "updatedAtUTC": "2026-11-18 13:41:05 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

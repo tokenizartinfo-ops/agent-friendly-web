@@ -1,0 +1,63 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX2.STATIC_REREVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Detached Git DATA for scoped Fix2 re-review",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "review of ca4af804480aec5413bf6d1851dbe29d3b092e51",
+    "ALLOWED_ACTION": "Persist this review as a detached blob and read it back. Leave refs and runtime untouched."
+  },
+  "round": 2,
+  "maxRounds": 5,
+  "pins": {
+    "package": "ca4af804480aec5413bf6d1851dbe29d3b092e51",
+    "previousReview": "ba7d8d14512822fa48a5315984fc6550d2e03ebb",
+    "fixBrief": "de6039294c08795601acd8d90bfb27614bd732b3",
+    "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+    "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
+    "delta": "2c2bdc347c6e892b6b8313f5950f47b168c896f8",
+    "appendix": "0e5c9fa9fbc76763ff65c55d80d7afc01b812177",
+    "rootMeasurement": "74510e9acf4502db04d0f08985dc25eaa9503606",
+    "fullScopedDiff": "13f39d05fd9a04818ddd8a13457333a82b6e6f06"
+  },
+  "verdicts": {
+    "SPEC": {
+      "verdict": "PASS",
+      "scope": "The corrected H22 no-hook and missing-terminal paths implement the sealed negative scenarios. All original findings are addressed on the current static candidate."
+    },
+    "QUALITY": {
+      "verdict": "PASS",
+      "scope": "The one-line test guard is sufficient. Both exact outcome assertions and unaffected duplicate checks remain in place. No new issue was found within the reviewed diff."
+    }
+  },
+  "finding": {
+    "severity": "IMPORTANT",
+    "status": "ADDRESSED",
+    "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+    "line": 124,
+    "title": "H22 no-hook invokes its first eligible take at the duplicate check",
+    "verified": {
+      "noHook": "The fixture retains the handle and sets take=false. The first take at line 95 and the duplicate check at line 124 are both skipped. The actual host state stays captured through the attempted read/completion APIs. It invokes neither recorded callback and stages no row. The unchanged final assertions still require zero copies, zero QA queries and null admission.",
+      "missingTerminal": "The fixture keeps take=true and removes the count-return mark. The first take consumes the mailbox, fails journal qualification and performs no copy. The second take is attempted by the unchanged meaning of the guard and returns false because the mailbox is closed. The same zero-copy, zero-query and null-row assertions still apply.",
+      "remainingCases": "Every other H alternative keeps take=true. The guard does not remove its duplicate check or any copy, query, argument or row assertion."
+    }
+  },
+  "additionalFindings": [],
+  "textChecks": [
+    "Read both scoped patch parts and exact before/after bodies. Verified text reconstruction and exact inverse for hostTest and manifest. The sole code insertion adds ten ASCII bytes at line 124. The manifest's hostTest tuple is the sole updated input edge.",
+    "Compared 20 path/mode/type/hash tuples across Fix1 and Fix2. Eighteen are exact and the only two changed are hostTest and manifest. The current graph and all manifest edges agree, and sealed expectations, nomination and limits match. Fix1's host state guard, outside-callback counters and setup-node adjustment remain pinned.",
+    "The appendix names both covered H22 alternatives and reports the exact command and NOT_RUN status with no output."
+  ],
+  "futureCommand": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+  "executionStatus": "NOT_RUN_BY_DESIGN",
+  "actualOutput": null,
+  "boundary": "Static acceptance of this scoped B1 proposal. The Node child, actual MODEL GREEN, artifact and process closure remain unmeasured. Source/native wiring, Task1, operational readiness and PC-off are outside the reviewed scope. This review authorizes no execution.",
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  }
+}
