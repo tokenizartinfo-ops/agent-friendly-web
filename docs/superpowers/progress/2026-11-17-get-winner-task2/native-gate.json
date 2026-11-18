@@ -1,0 +1,271 @@
+{
+  "schema": "AFW.C2.GET_WINNER.OWN_ROOT_NATIVE_GATE/1",
+  "atUTC": "2026-11-18 00:10:17 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Exact keyless GitHub Actions OWN synthetic controls",
+  "resourceType": "One-use lab git ref and ephemeral GHA job",
+  "resourceId": "lab/afw-c2-own-20261117-get-winner-tools",
+  "allowedAction": "Create exact lab branch at BASE and one CAS fast-forward to fixed candidate; one bounded OWN-control occurrence, then capture once, close and review.",
+  "authority": {
+    "currentOwnerResume": true,
+    "existingPlan": "0b8368869f60978c536b056c37e451f8c899f93f",
+    "brief": "9719704de9811786ee651b163933d18fb7b56d25",
+    "aperture": "875675d93ba35f662d517061b533dce44d099dc5",
+    "staticReview": "e4e460e381a8655e21618e40025fe3db04112cf0",
+    "fixReview": "54fb3f157133f576a34e9b3883f2a387aaba499e"
+  },
+  "branch": "lab/afw-c2-own-20261117-get-winner-tools",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "preparing": false,
+  "activationAttempted": false,
+  "refCreated": false,
+  "unattached": true,
+  "graph": "979f3c7a8c00c39ee530f167a6800caa22bea2df",
+  "map": "94a88d4b5973ab87ac9945fbd1c3afd251e7a24c",
+  "staticReviews": [
+    "e4e460e381a8655e21618e40025fe3db04112cf0",
+    "54fb3f157133f576a34e9b3883f2a387aaba499e"
+  ],
+  "rootMeasurement": "0b3d8f526e5f546b18b7a855acad7e5b55a5a3e8",
+  "SourceExecuted": false,
+  "tree": "339510b6a462496b6bcb1830f379f980e3c3a35d",
+  "fullTreeVerified": true,
+  "original3203Preserved": true,
+  "leaves": 3243,
+  "head": "3de3b7ce284911c4e8aa26569581a60987f33153",
+  "nativeOwnReleased": true,
+  "sourceExecutionReleased": false,
+  "nomination": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "Exact private GitHub one-use OWN lab; currently detached and unactivated",
+    "event": "push",
+    "attempt": 1,
+    "branch": "lab/afw-c2-own-20261117-get-winner-tools",
+    "message": "AFW-C2-OWN-GET-WINNER-TOOLS-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-get-winner-tools.yml",
+    "job": "c2-own-get-winner-tools",
+    "image": "ubuntu-24.04",
+    "node": "v22.23.4",
+    "permissions": {
+      "contents": "read",
+      "persistCredentials": false
+    },
+    "jobMinutes": 7,
+    "totalMs": 330000,
+    "stdoutCap": 32768,
+    "stderrCap": 32768,
+    "runner": "docs/superpowers/root-own/c2-get-winner-dependent/run-controls.mjs",
+    "command": "node docs/superpowers/root-own/c2-get-winner-dependent/run-controls.mjs",
+    "steps": [
+      "Read exact OWN one-use lab head",
+      "Use fixed Node for OWN",
+      "Check independent OWN syntax",
+      "Validate independent public GET reader controls",
+      "Preserve independent OWN control result"
+    ],
+    "artifact": {
+      "name": "afw-c2-own-get-winner-tools",
+      "path": "output/c2-own-get-winner-tools.json",
+      "fileName": "c2-own-get-winner-tools.json",
+      "retentionDays": 7
+    },
+    "actions": {
+      "checkout": "11d5960a326750d5838078e36cf38b85af677262",
+      "setupNode": "49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "uploadArtifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+    },
+    "activationReleased": false,
+    "actualOccurrence": null
+  },
+  "rootMapMeasurement": "0b3d8f526e5f546b18b7a855acad7e5b55a5a3e8",
+  "protectedLeases": [
+    {
+      "name": "main",
+      "branch": "main",
+      "expected": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "actual": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "matched": true
+    },
+    {
+      "name": "source",
+      "branch": "feat/finite-native-cleanup-20261101",
+      "expected": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "actual": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "matched": true
+    },
+    {
+      "name": "own42",
+      "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+      "expected": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+      "actual": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+      "matched": true
+    },
+    {
+      "name": "source35",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+      "expected": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+      "actual": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+      "matched": true
+    },
+    {
+      "name": "diag1",
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "expected": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "actual": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "matched": true
+    },
+    {
+      "name": "host",
+      "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+      "expected": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "actual": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "matched": true
+    },
+    {
+      "name": "toy",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+      "expected": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "actual": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "matched": true
+    },
+    {
+      "name": "diag2",
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "expected": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "actual": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "matched": true
+    },
+    {
+      "name": "source149",
+      "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+      "expected": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "actual": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "matched": true
+    },
+    {
+      "name": "own73",
+      "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+      "expected": "067a012121a58f7c2baf938228765242c433a1d5",
+      "actual": "067a012121a58f7c2baf938228765242c433a1d5",
+      "matched": true
+    },
+    {
+      "name": "diag3Business",
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "expected": "08061db79cd0f38f25df8977e1ded8e17542e684",
+      "actual": "08061db79cd0f38f25df8977e1ded8e17542e684",
+      "matched": true
+    },
+    {
+      "name": "fixture59",
+      "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+      "expected": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "actual": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "matched": true
+    },
+    {
+      "name": "source5ToolFailedClosed",
+      "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
+      "expected": "86594c358557023d41cb3cae5d000bca3c67296b",
+      "actual": "86594c358557023d41cb3cae5d000bca3c67296b",
+      "matched": true
+    },
+    {
+      "name": "launchPassedClosed",
+      "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+      "expected": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+      "actual": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+      "matched": true
+    },
+    {
+      "name": "ownFixtureClosed",
+      "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+      "expected": "0fe46529b2c0243d977afd54b914184a5b31963c",
+      "actual": "0fe46529b2c0243d977afd54b914184a5b31963c",
+      "matched": true
+    },
+    {
+      "name": "ownToolsClosed",
+      "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+      "expected": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86",
+      "actual": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86",
+      "matched": true
+    },
+    {
+      "name": "source5BusinessClosed",
+      "branch": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+      "expected": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+      "actual": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+      "matched": true
+    },
+    {
+      "name": "getWinnerFixtureStageAClosed",
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures",
+      "expected": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+      "actual": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+      "matched": true
+    },
+    {
+      "name": "getWinnerStartup1Closed",
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+      "expected": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
+      "actual": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
+      "matched": true
+    },
+    {
+      "name": "getWinnerManifest1Closed",
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-manifest1",
+      "expected": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+      "actual": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+      "matched": true
+    },
+    {
+      "name": "gb1ToolsClosed",
+      "branch": "lab/afw-c2-get-winner-20261117-tools1",
+      "expected": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "actual": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "matched": true
+    }
+  ],
+  "unusedNomination": {
+    "refs": 0,
+    "runs": 0,
+    "atUTC": "2026-11-18 00:08:06 UTC"
+  },
+  "inheritedTriggers": {
+    "audit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "all62AuditedWorkflowBodiesMatched": true,
+    "watchedPathsUnchanged": true,
+    "noNewPRCreateDispatchScheduleOrConsumer": true,
+    "onlyNewWorkflow": ".github/workflows/afw-c2-own-get-winner-tools.yml",
+    "fallback": "Closed-origin fallback remains its pinned keyless synthetic test only; fixed-origin HTTP and artifact upload are workflow_dispatch-only"
+  },
+  "controls": {
+    "complete": 73,
+    "expectedAdmit": 15,
+    "expectedReject": 58,
+    "crossings": 5,
+    "crossingExpectedAdmit": 1,
+    "crossingExpectedReject": 4,
+    "ledgerSHA256": "89ae320ff0b3d1dbc4199fec14c12e8c17715a9f1e203a4e9ee24d73628771cd",
+    "syntaxModules": 15,
+    "jobMinutes": 7,
+    "totalMs": 330000
+  },
+  "capture": "Root full raw REST run/jobs API; one terminal log read and one artifact download; strict single ZIP and canonical payload plus independently acquired actual IDs.",
+  "close": "Replace only nominated workflow with workflow_dispatch and unconditional-false job; retain all40 bodies otherwise, add primary/outcome evidence, no rerun.",
+  "rollback": "Closed workflow/ref state, preserved candidate and captured evidence; no production/runtime mutation.",
+  "Source5": 5,
+  "OWN5": 5,
+  "StageB": 5,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "receiptAuthenticated": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false
+}
