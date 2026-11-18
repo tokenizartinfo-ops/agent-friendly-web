@@ -66,3 +66,13 @@ test('handoff refuses a different closed target before the original alarm can mo
  assert.equal(f.alarm,handoff.initialC0);
  assert.equal(f.rows.has(HEAD),false);
 });
+
+test('handoff refuses an original plan pinned to a different closed deployment',async()=>{
+ const {f,handoff}=await prepared();
+ const key='afw.finite-initial-cleanup.v1:plan';
+ const original=JSON.parse(f.rows.get(key));
+ f.rows.set(key,JSON.stringify({...original,baselineDeploymentId:f.plan.deployments.canaryLive.deploymentId}));
+ await assert.rejects(stagePrivateQaFiniteOriginalAlarmHandoff({storage:f.storage,control:handoff.control,source:handoff.source,check:f.now}));
+ assert.equal(f.alarm,handoff.initialC0);
+ assert.equal(f.rows.has(HEAD),false);
+});

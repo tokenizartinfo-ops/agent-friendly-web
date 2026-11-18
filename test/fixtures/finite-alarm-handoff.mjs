@@ -1,3 +1,4 @@
+import {QA_CLOUD_CLOSED_PINS} from '../../lib/mcp-qa-cloud-closed-pins.mjs';
 import {finiteLauncherInstanceId} from '../../lib/mcp-qa-finite-launch-records.mjs';
 import {finiteCleanupPolicyHash} from '../../lib/mcp-finite-cleanup-policy.mjs';
 import {finitePrivateQaSetupInstanceId} from '../../lib/mcp-qa-finite-adoption.mjs';
@@ -14,7 +15,8 @@ export async function stageAlarmFixture(f,options){
  const prefix='afw.finite-initial-cleanup.v1:',enroll='afw.finite-preparation-cleanup.v1:',select='source-selection:'+f.plan.source.revision+':';
  const stable={
   'afw.finite-initial-preparation.v1:capsule':c,
-  [prefix+'plan']:{recordHash:source.initialPlanHash,C0:initialC0,C1:initialC1},
+  [prefix+'plan']:{recordHash:source.initialPlanHash,C0:initialC0,C1:initialC1,
+   baselineVersionId:QA_CLOUD_CLOSED_PINS.canary.id,baselineDeploymentId:QA_CLOUD_CLOSED_PINS.canary.deploymentId},
   [prefix+'state']:{recordHash:source.initialStateHash,planHash:source.initialPlanHash,deliveries:0,status:'pending',nextAt:initialC0,previousHash:null},
   [enroll+'enrollment']:{recordHash:source.enrollmentHash,capsuleHash:source.capsuleHash,planHash:source.initialPlanHash,preconnectionId:source.prepId},
   [enroll+'ack']:{enrollmentHash:source.enrollmentHash,stateHash:source.initialStateHash,alarmAt:initialC0},
@@ -35,6 +37,9 @@ export async function stageAlarmFixture(f,options){
 }
 
 export function useNativeAlarmIntent(f){
+ const {canary}=QA_CLOUD_CLOSED_PINS;
+ f.plan.deployments.canaryClosed={versionId:canary.id,deploymentId:canary.deploymentId,
+  configurationHash:canary.configurationHash,module:canary.module};
  f.plan.intentId='e'.repeat(64);
  f.plan.workflows.launcher=finiteLauncherInstanceId({intentId:f.plan.intentId,sourceRevision:f.plan.source.revision});
  f.plan.closePolicyHash=finiteCleanupPolicyHash(f.plan);
