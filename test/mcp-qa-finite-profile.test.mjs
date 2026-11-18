@@ -144,3 +144,19 @@ test('D0.1 exact QA SDK alias changes only qaLive source contract',()=>{
  const changed=structuredClone(q);changed.bindings.find(b=>b.name===alias.name).namespace_id='0'.repeat(32);
  assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:changed}));
 });
+
+test('finite QA requires the named private Operations review receiver verified in Cloudflare',()=>{
+ const role='qaLive';
+ const expected={"type":"service","name":"AFW_FINITE_DOSSIER_REVIEW_RECEIVER","service":"agent-friendly-web-finite-review-qa","environment":"production","entrypoint":"FiniteDossierReviews"};
+ const nominal=structuredClone(api.finitePublicProfileTemplate(role));
+ assert.deepEqual(nominal.bindings.find(b=>b.name===expected.name),expected);
+ assert.deepEqual(api.finiteWranglerProfileTemplate(role).services,[{binding:expected.name,service:expected.service,environment:expected.environment,entrypoint:expected.entrypoint}]);
+ for(const b of nominal.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC-PRIVATE-'+b.name;}
+ assert.deepEqual(api.projectFinitePublicConfiguration({role,metadata:nominal}).bindings.find(b=>b.name===expected.name),expected);
+ for(const field of ['service','environment','entrypoint']){
+  const wrong=structuredClone(nominal);wrong.bindings.find(b=>b.name===expected.name)[field]='foreign';
+  assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:wrong}));
+ }
+ const missing=structuredClone(nominal);missing.bindings=missing.bindings.filter(b=>b.name!==expected.name);
+ assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:missing}));
+});
