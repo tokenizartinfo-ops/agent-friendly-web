@@ -27,7 +27,7 @@ async function fixture(){
    throw Error('lost write acknowledgement');
   },
   async closeFiniteTrial(x){
-   assert.deepEqual(x,refs);calls.push('close');close={closed:true,runtimeStopRequested:true};
+   assert.deepEqual(x,refs);calls.push('close');close={closed:true,runtimeStopRequested:true};return close;
   },
   async readFiniteTrialReductionReceipts(x){
    assert.deepEqual(x,refs);calls.push('read_reductions');return {withdraw,close};
@@ -80,7 +80,7 @@ test('foreign or changed native actor, mismatched claim and expired parent do no
  assert.deepEqual(f.calls,[]);
  const g=await fixture();
  g.options.env.AFW_RELEASE_EVENTS_NODE.idFromName=()=>({toString:()=> '0'.repeat(64)});
- await assert.rejects(()=>create(g.options).seal.execute(g.input,()=>{}));
+ assert.throws(()=>create(g.options),/Finite native closure unavailable/);
  assert.deepEqual(g.calls,[]);
 });
 
