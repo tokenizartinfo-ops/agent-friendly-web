@@ -31,7 +31,7 @@ async function run(t,mode,synthetic=true){
   const r=await build({stdin:{contents:"export {default} from 'synthetic-policy-entry';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'SYNTHETIC-native-entry',setup(b){
    b.onResolve({filter:/^synthetic-policy-entry$/},()=>({path:'entry',namespace:'synthetic'}));
    b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:entry,resolveDir:process.cwd(),loader:'js'}));
-   if(synthetic)b.onLoad({filter:/mcp-qa-finite-policy-setup-source\.mjs$/},()=>({contents:"export {entrySource as readPrivateQaFinitePolicyEntry} from 'synthetic-policy-entry'; export function readPrivateQaFinitePolicySource(){throw Error('SYNTHETIC unavailable');}",loader:'js'}));
+   if(synthetic)b.onLoad({filter:/mcp-qa-finite-policy-setup-source\.mjs$/},()=>({contents:"export {entrySource as readPrivateQaFinitePolicyEntry} from 'synthetic-policy-entry'; export function readPrivateQaFinitePolicySource(){throw Error('SYNTHETIC unavailable');} export function readPrivateQaFinitePolicyOrigin(){throw Error('SYNTHETIC origin unavailable');}",loader:'js'}));
   }}]});bundles.set(synthetic,r.outputFiles[0].text);
  }
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundles.get(synthetic),compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}}}));
