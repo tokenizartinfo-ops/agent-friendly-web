@@ -1,0 +1,161 @@
+{
+  "schema": "afw.b2.fix4-scoped-static-rereview.v1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Detached generic Fix4 text and intact active B2 proposal",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "Review of Fix4 scoped brief 0cbe2e15c40975cd9524de436f005db5cc00202e",
+    "ALLOWED_ACTION": "Literal text and DATA review, detached report write and full readback. Runtime gate remains with Root."
+  },
+  "round": 4,
+  "maxRounds": 5,
+  "brief": "0cbe2e15c40975cd9524de436f005db5cc00202e",
+  "reviewBase": "f1d36b71ecd97d73a2106be9b766ded87025ec94",
+  "fixBase": {
+    "index": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+    "mount": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+    "runner": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+    "graph": "c50198511f93639ec20b32f75ad8cd6110900979"
+  },
+  "report": "7c3a496b77e21fd7dd22b01e961570ce82cbc142",
+  "diff": "badfff06306b5b5d8f345053ba0dc34d59ff8c2a",
+  "deltaGraph": "361bec47c7e1b0b60f1a3e9ddddf00b87e02c03c",
+  "rulings": [
+    "b113b073be02db3fbb01b82c67ec2d3f84baf051",
+    "814aedb69d5f948dbd87e58e4f2374230f844b68",
+    "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1"
+  ],
+  "detachedHelpers": {
+    "node22-private-reporter.mjs": "bdad309a87ba0d378bfb3483f807d6baea5b7798",
+    "node22-evidence.mjs": "48dba5c8a33383bc9786c68f5351296ded2bd0c6",
+    "linux-direct-child-custody.mjs": "d757b53d43a6795ae6a997163ae5348f322d63e8",
+    "serial-admission-ledger.mjs": "c8eacb7098c1b6d5319db045b8dd7073d0ba3992"
+  },
+  "actualIntegratedConsumers": 0,
+  "activeMountedEdits": 0,
+  "verdicts": {
+    "SPEC": {
+      "verdict": "FAIL",
+      "status": "CHANGES_REQUIRED",
+      "reason": "All five Important and the one receipt Minor remain unaddressed in the active packet."
+    },
+    "QUALITY": {
+      "verdict": "FAIL",
+      "status": "CHANGES_REQUIRED",
+      "reason": "The detached observation and evidence helpers also require a common session lifetime and explicit per-run framing before they can support the authorized five-file supervisor."
+    }
+  },
+  "priorFindings": [
+    {
+      "id": "B2-R3-02",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-compile.mjs",
+      "blob": "0d362f8d4cd170f0c4e1a4d5bbbbdb678929cfb2",
+      "line": 39,
+      "status": "NOT_ADDRESSED",
+      "reason": "The scope excludes N06 and the diff has no edit here. The active source still checks a q1 prefix and assigns I0130 without comparing the ordinary sample's exact epoch, key and tuple."
+    },
+    {
+      "id": "B2-R3-03",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "blob": "f6dc963613db8957e51fb8320d572efc1f7742bb",
+      "line": 96,
+      "status": "NOT_ADDRESSED",
+      "reason": "The generic ledger and verifier remain detached. No pre-admission consumer invokes the five public node:test runs one file at a time. Active code still uses one stock aggregate CLI with a group deadline and the original held-worker timing check."
+    },
+    {
+      "id": "B2-R3-04",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "blob": "f6dc963613db8957e51fb8320d572efc1f7742bb",
+      "line": 137,
+      "status": "NOT_ADDRESSED",
+      "reason": "The direct-child custody helper remains detached and supplies only named wrapper/member observations. The active failure path still signals the known group root when available, destroys output streams, unrefs the wrapper and throws without bounded retirement readback."
+    },
+    {
+      "id": "B2-R3-05",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "blob": "0ede2ed95a7b3454bc2001cb7571c9246c64a4e3",
+      "line": 37,
+      "status": "NOT_ADDRESSED",
+      "reason": "The outcome matcher remains detached. The active negative aggregate still has no caller-supplied worker expectations and binding of actual D07 results by file; the composite CLI exit remains insufficient for the individual control outcomes."
+    },
+    {
+      "id": "B2-R3-06",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "blob": "0ede2ed95a7b3454bc2001cb7571c9246c64a4e3",
+      "line": 16,
+      "status": "NOT_ADDRESSED",
+      "reason": "The stream-specific digest and full-line matchers have no mounted consumers. Active negativeAggregate and nativeOne continue using endsWith matching through exactLog, including stock TAP aggregation."
+    },
+    {
+      "id": "B2-R3-07",
+      "severity": "MINOR",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+      "blob": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+      "line": 230,
+      "status": "NOT_ADDRESSED",
+      "reason": "The proposed hunk explicitly names the SDK's SIGKILL convention and scoped evidence, but the active runner pin is unchanged and the hunk is neither mounted nor applied."
+    }
+  ],
+  "newDiffFindings": [
+    {
+      "id": "B2-R4-01",
+      "severity": "IMPORTANT",
+      "status": "OPEN_FOR_HELPER_ADOPTION",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/node22-private-reporter.mjs",
+      "blob": "bdad309a87ba0d378bfb3483f807d6baea5b7798",
+      "line": 50,
+      "related": [
+        {
+          "file": "node22-private-reporter.mjs",
+          "lines": [
+            50,
+            82,
+            100,
+            102
+          ],
+          "blob": "bdad309a87ba0d378bfb3483f807d6baea5b7798"
+        },
+        {
+          "file": "node22-evidence.mjs",
+          "lines": [
+            24,
+            25,
+            58,
+            61,
+            77
+          ],
+          "blob": "48dba5c8a33383bc9786c68f5351296ded2bd0c6"
+        }
+      ],
+      "evidence": "The proposed reporter subscribes to child_process and emits its sole ready at module load. Its async generator emits end then unsubscribes in finally when the first TestsStream finishes. Reusing the fixed ESM instance for the four later public run() calls will not observe their native child lifecycle, while each consumption would emit a separate end. The parser requires exactly one ready/end and the outcome matcher rejects further result events after the first cumulative summary. These invariants suit one original aggregate stream and cannot consume five sequential genuine streams as proposed.",
+      "fix": "Give the fixed programmatic CLI a supported observation session through all five admission and retirement cycles, with explicit run/file framing and independent expected original summaries. Keep one composed terminal boundary at the session level, distinguish it from the five Node summaries, and keep lifecycle observation installed until every acquired child closes. Verify that each run is separately admitted before publication. Keep the six-group plan and existing process/clocks unchanged.",
+      "impactBoundary": "Blocks use of these detached helpers as the authorized multi-stream solution. There is no regression in active code because none of them is connected."
+    }
+  ],
+  "preserved": "The withdrawn PID-namespace finding remains withdrawn. This review does not revisit unchanged native scenarios, Source/OWN/Stage B, B1, P4 or the original D07/recorder semantics.",
+  "verification": {
+    "status": "NOT_RUN",
+    "proposedFutureCommand": "node docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+    "coveredOnPaper": [
+      "literal raw/TAP source separation",
+      "actual per-file outcomes and independent summaries",
+      "slot and reserve arithmetic",
+      "wrapper/member terminal readback",
+      "SDK convention field"
+    ],
+    "runtime": "No executions, builds, code syntax or AST checks, imports, process probes, commands in child runtimes, refs, jobs or live auth actions. The author reported no execution and no integrated proposal. Nothing here authorizes a runtime gate."
+  },
+  "counters": {
+    "source": 5,
+    "own": 5,
+    "stageB": 5,
+    "reset": false
+  }
+}

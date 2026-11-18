@@ -1,0 +1,52 @@
+{
+  "schema": "afw.fix4.generic-partial-root-data.v1",
+  "atUTC": "2026-11-18 15:41:07 UTC",
+  "scope": "DATA only; no module executed or wired",
+  "graph": "361bec47c7e1b0b60f1a3e9ddddf00b87e02c03c",
+  "diff": "badfff06306b5b5d8f345053ba0dc34d59ff8c2a",
+  "report": "7c3a496b77e21fd7dd22b01e961570ce82cbc142",
+  "rows": [
+    {
+      "name": "node22-private-reporter.mjs",
+      "bytes": 4658,
+      "sha256": "50143d6ed12642e3b3e823ef5bf76b28033320dcf207314052c70d8a490af398",
+      "blob": "bdad309a87ba0d378bfb3483f807d6baea5b7798"
+    },
+    {
+      "name": "node22-evidence.mjs",
+      "bytes": 6871,
+      "sha256": "93d3f44cf845e0c54dee58ea924ad27176fa17f22fc9836c60313493ea1ad0f0",
+      "blob": "48dba5c8a33383bc9786c68f5351296ded2bd0c6"
+    },
+    {
+      "name": "linux-direct-child-custody.mjs",
+      "bytes": 5201,
+      "sha256": "5d1649c716d3ef3326d61d77b7c4779a17ec41af17bd9a8bb3404540f76069ee",
+      "blob": "d757b53d43a6795ae6a997163ae5348f322d63e8"
+    },
+    {
+      "name": "separable-fix4.diff",
+      "bytes": 20683,
+      "sha256": "85231158838ae4123771b34c350488d3ab34b9d5ccd5e3a68bfd7479a3ccaad4",
+      "blob": "badfff06306b5b5d8f345053ba0dc34d59ff8c2a"
+    },
+    {
+      "name": "serial-admission-ledger.mjs",
+      "bytes": 2518,
+      "sha256": "ecef100e345ffc05b88133698fcfae77adab3c020d5aed68da074fed0993084c",
+      "blob": "c8eacb7098c1b6d5319db045b8dd7073d0ba3992"
+    }
+  ],
+  "additionsRoundTripExact": [
+    "node22-private-reporter.mjs",
+    "node22-evidence.mjs",
+    "linux-direct-child-custody.mjs",
+    "serial-admission-ledger.mjs"
+  ],
+  "receiptPreimageLine230Exact": true,
+  "receiptLiteralInverseExact": true,
+  "reportPrefixExact": true,
+  "integrationCount": 0,
+  "tests": "NOT_RUN",
+  "release": false
+}

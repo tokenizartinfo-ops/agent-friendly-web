@@ -1,0 +1,85 @@
+{
+  "schema": "afw.fix4.separable-observation-delta.v1",
+  "state": "DETACHED_UNMOUNTED_NOT_RUN",
+  "originalProposal": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+  "originalGraph": "c50198511f93639ec20b32f75ad8cd6110900979",
+  "originalMount": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+  "originalRunner": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+  "baseReport": "a4358d6724c1483e0b5435a2c21d63e1b2370aaa",
+  "durableDocsCheckpoint": "eee54974686e71e0f43e4a1514271cb9df9699f4",
+  "scope": "Four detached generic observation, evidence and pre-admission units; one optional SDK receipt hunk. No application entry wired or offered for execution.",
+  "proposedPrefix": "docs/superpowers/source-lab/c2-pending-get-native-tools1/",
+  "assets": {
+    "node22-private-reporter.mjs": {
+      "blob": "bdad309a87ba0d378bfb3483f807d6baea5b7798",
+      "bytes": 4658,
+      "sha256": "50143d6ed12642e3b3e823ef5bf76b28033320dcf207314052c70d8a490af398",
+      "fullReadback": true
+    },
+    "node22-evidence.mjs": {
+      "blob": "48dba5c8a33383bc9786c68f5351296ded2bd0c6",
+      "bytes": 6871,
+      "sha256": "93d3f44cf845e0c54dee58ea924ad27176fa17f22fc9836c60313493ea1ad0f0",
+      "fullReadback": true
+    },
+    "linux-direct-child-custody.mjs": {
+      "blob": "d757b53d43a6795ae6a997163ae5348f322d63e8",
+      "bytes": 5201,
+      "sha256": "5d1649c716d3ef3326d61d77b7c4779a17ec41af17bd9a8bb3404540f76069ee",
+      "fullReadback": true
+    },
+    "separable-fix4.diff": {
+      "blob": "badfff06306b5b5d8f345053ba0dc34d59ff8c2a",
+      "bytes": 20683,
+      "sha256": "85231158838ae4123771b34c350488d3ab34b9d5ccd5e3a68bfd7479a3ccaad4",
+      "fullReadback": true
+    },
+    "serial-admission-ledger.mjs": {
+      "blob": "c8eacb7098c1b6d5319db045b8dd7073d0ba3992",
+      "bytes": 2518,
+      "sha256": "ecef100e345ffc05b88133698fcfae77adab3c020d5aed68da074fed0993084c",
+      "fullReadback": true
+    }
+  },
+  "dependencyEdges": {
+    "node22-private-reporter.mjs": [
+      "node:crypto",
+      "node:diagnostics_channel",
+      "node:fs",
+      "node:path"
+    ],
+    "node22-evidence.mjs": [
+      "node:assert/strict",
+      "node:crypto"
+    ],
+    "linux-direct-child-custody.mjs": [
+      "node:assert/strict",
+      "node:fs",
+      "node:timers/promises"
+    ],
+    "serial-admission-ledger.mjs": [
+      "node:assert/strict"
+    ]
+  },
+  "receiptHunk": {
+    "before": "      SDKDisposeUsesOwnSignal:true,hostForcedNativeCutoff:false,negativeHeldWorkerCutoff:true},",
+    "after": "      SDKDisposeUsesOwnSignal:true,SDKDisposeConvention:'SIGKILL',\n      SDKDisposeEvidence:'benign ACK, dispose returned, original owned PID retired',\n      hostForcedNativeCutoff:false,negativeHeldWorkerCutoff:true},",
+    "oneBasedLine": 230,
+    "fullSourceInverseChecked": true
+  },
+  "rollback": "Discard the unmounted proposal. Reverse the receipt hunk and remove the four new files for the literal inverse. No runtime effects.",
+  "gate": {
+    "programmaticRunChangeAdopted": false,
+    "preSpawnAdmissionImplemented": false,
+    "activeWorkflowIntegration": false,
+    "N06Open": true,
+    "tests": "NOT_RUN",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "preAdmissionLedgerProposed": true,
+    "cliEntryIntegrated": false
+  },
+  "ruling": "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1",
+  "priorSeparableGraph": "e256daebbd90aad05b6479ee25ecef68f6661f22"
+}

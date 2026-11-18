@@ -1,0 +1,139 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+
+const nsPerMs = 1_000_000n;
+const digest = value => createHash('sha256').update(value, 'utf8').digest('hex');
+const own = (object, key) => Object.hasOwn(object, key);
+const only = (items, predicate) => {
+  const matches = items.filter(predicate);
+  assert.equal(matches.length, 1, 'missing or duplicate evidence');
+  return matches[0];
+};
+
+export function parsePrivateCapture(stdout, stderr) {
+  assert.equal(stderr, '', 'unexpected outer CLI stderr');
+  assert(Buffer.byteLength(stdout) <= 1048576 && stdout.endsWith('\n'));
+  const lines = stdout.slice(0, -1).split('\n');
+  assert(lines.length > 1 && lines.length <= 4096);
+  const events = lines.map((line, index) => {
+    const event = JSON.parse(line);
+    assert.equal(event.sequence, index + 1);
+    assert(['ready','construct','spawn','exit','close','line','test','summary','end'].includes(event.kind));
+    return event;
+  });
+  const ready = only(events, e => e.kind === 'ready');
+  const end = only(events, e => e.kind === 'end');
+  assert.equal(ready.sequence, 1);
+  assert(Number.isSafeInteger(ready.pid) && ready.pid > 0);
+  assert(events.slice(end.sequence).every(e => e.kind === 'close'));
+  return events;
+}
+
+// Reject the same witness on any other source file or stream, even if the correct source also emitted it.
+// A packet can call this once for a shared literal with all expected file/stream counts.
+export function requireLineSources(events, literal, expected) {
+  assert(!/[\r\n]/.test(literal) && literal.length > 0);
+  const hash = digest(literal), length = Buffer.byteLength(literal);
+  const actual = new Map();
+  for (const e of events) {
+    if (e.kind !== 'line' || e.sha256 !== hash || e.length !== length) continue;
+    assert(['test:stdout','test:stderr'].includes(e.origin));
+    const key = JSON.stringify([e.file, e.origin]);
+    actual.set(key, (actual.get(key) ?? 0) + 1);
+  }
+  const allowed = new Map();
+  for (const {file, origin, count} of expected) {
+    const key = JSON.stringify([file, origin]);
+    assert(Number.isSafeInteger(count) && count > 0 && !allowed.has(key));
+    allowed.set(key, count);
+  }
+  assert.deepEqual(actual, allowed, 'exact line source/cardinality');
+}
+
+// Pinned Node emits ordered test results, and a file summary for each normally completed file.
+// A result's source location may identify an imported file shared by several workers.
+// Partition with genuine file summaries, compare every outcome, and explicitly describe any interrupted tail.
+export function requireOriginalResults(events, files, tail, totalSummary) {
+  const pending = [];
+  let index = 0, completed = false;
+  for (const e of events) {
+    if (e.kind !== 'test' && e.kind !== 'summary') continue;
+    assert(!completed, 'result after cumulative summary');
+    if (e.kind === 'test') {
+      const {sequence, kind, ...result} = e;
+      pending.push(result);
+      continue;
+    }
+    if (e.file !== null) {
+      const plan = files[index++];
+      assert(plan && e.file === plan.file);
+      assert.deepEqual(pending, plan.results);
+      assert.deepEqual({success:e.success, counts:e.counts}, plan.summary);
+      pending.length = 0;
+    } else {
+      assert.equal(index, files.length);
+      assert.deepEqual(pending, tail);
+      assert.deepEqual({success:e.success, counts:e.counts}, totalSummary);
+      completed = true;
+    }
+  }
+  assert(completed, 'missing cumulative summary');
+}
+
+// Direct runs have separate pipes. Escape sequences and TAP-like prefixes remain ordinary payload bytes.
+export function requireDirectLine(stdout, stderr, wantedStream, literal, count) {
+  assert(['stdout','stderr'].includes(wantedStream) && literal.length > 0 && !/[\r\n]/.test(literal));
+  for (const [stream, raw] of [['stdout',stdout],['stderr',stderr]]) {
+    assert(raw === '' || raw.endsWith('\n'));
+    const all = raw === '' ? [] : raw.slice(0, -1).split('\n');
+    const hits = all.filter(line => (line.endsWith('\r') ? line.slice(0, -1) : line) === literal);
+    assert.equal(hits.length, stream === wantedStream ? count : 0);
+  }
+}
+
+function stamp(value) {
+  assert(typeof value === 'string' && /^[0-9]{1,24}$/.test(value));
+  return BigInt(value);
+}
+
+// Independent evidence is supplied by the outer supervisor, never generated from reporter events.
+// terminalAt is timed after the kernel readback. All clocks are monotonic nanoseconds on the same host.
+// Record a separate plan row for every file, including any intentionally interrupted final file.
+export function verifySerialSlots(events, plans, proofs, group) {
+  const start = stamp(group.start), end = stamp(group.end);
+  const ready = only(events, e => e.kind === 'ready');
+  assert.equal(ready.pid, group.namespaceCliPid);
+  const cap = BigInt(group.slotMs) * nsPerMs;
+  assert(cap > 0n && start < end && plans.length > 0 && plans.length <= 8);
+  assert.equal(plans.length, proofs.length);
+  assert.equal(only(events,e => e.kind === 'end').children, plans.length);
+  assert.equal(events.filter(e => ['construct','spawn','exit','close'].includes(e.kind)).length, 4 * plans.length);
+  let previousReadback = start;
+  for (const [i, plan] of plans.entries()) {
+    const get = kind => only(events, e => e.kind === kind && e.index === i + 1);
+    const a = get('construct'), b = get('spawn'), x = get('exit'), c = get('close');
+    assert(a.sequence < b.sequence && b.sequence < x.sequence && x.sequence < c.sequence);
+    assert(stamp(ready.at) <= stamp(a.at) && stamp(a.at) <= stamp(b.at) && stamp(b.at) <= stamp(x.at) && stamp(x.at) <= stamp(c.at));
+    const p = proofs[i];
+    assert(p.ownedExact === true && p.terminalObserved === true);
+    assert.equal(p.file, plan.file);
+    assert.equal(b.file, plan.file);
+    assert(Number.isSafeInteger(b.pid) && b.pid > 0 && b.pid === p.namespacePid);
+    for (const terminal of [x,c]) {
+      assert(terminal.spawned && terminal.pid === b.pid && terminal.code === plan.code && terminal.signal === plan.signal);
+    }
+    const anchor = i === 0 ? start : stamp(a.at);
+    const terminal = stamp(p.terminalAt);
+    assert(previousReadback <= stamp(a.at) && start <= anchor && anchor + cap * BigInt(plans.length - i) <= end);
+    assert(terminal >= stamp(b.at)); // kernel retirement may precede delivery of 'exit'.
+    assert(terminal <= anchor + cap && stamp(c.at) <= anchor + cap);
+    if (own(plan, 'enterMs')) {
+      const enter = stamp(p.enterObservedAt), confirm = stamp(p.confirmedAt);
+      assert(stamp(b.at) <= enter && enter <= anchor + BigInt(plan.enterMs) * nsPerMs);
+      assert(enter <= confirm && confirm - enter <= BigInt(plan.confirmMs) * nsPerMs);
+      assert(confirm <= terminal && confirm + BigInt(plan.retirementReserveMs) * nsPerMs <= anchor + cap);
+      assert(stamp(group.wrapperClosedAt) <= anchor + cap);
+    }
+    previousReadback = terminal;
+  }
+}

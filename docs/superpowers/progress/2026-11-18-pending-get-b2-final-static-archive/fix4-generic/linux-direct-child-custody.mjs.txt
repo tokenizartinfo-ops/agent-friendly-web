@@ -1,0 +1,120 @@
+import assert from 'node:assert/strict';
+import { readFileSync, readlinkSync } from 'node:fs';
+import { setTimeout as delay } from 'node:timers/promises';
+
+const now = () => process.hrtime.bigint();
+const gone = error => error.code === 'ENOENT' || error.code === 'ESRCH';
+
+function stat(pid) {
+  try {
+    const raw = readFileSync('/proc/' + pid + '/stat', 'utf8');
+    const cut = raw.lastIndexOf(') ');
+    assert(cut >= 0 && Number(raw.slice(0, raw.indexOf(' '))) === pid);
+    const fields = raw.slice(cut + 2).split(' ');
+    const identity = { pid, parent: Number(fields[1]), pgid: Number(fields[2]), sid: Number(fields[3]), born: fields[19] };
+    assert(/^[1-9]\d*$/.test(identity.born) && Number.isSafeInteger(identity.pgid) && identity.pgid > 0);
+    return identity;
+  } catch (error) {
+    if (gone(error)) return null;
+    throw error;
+  }
+}
+
+function identity(pid) {
+  const first = stat(pid);
+  if (!first) return null;
+  let uids;
+  try {
+    const status = readFileSync('/proc/' + pid + '/status', 'utf8');
+    const match = /^Uid:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/m.exec(status);
+    assert(match);
+    uids = match.slice(1).map(Number);
+  } catch (error) {
+    if (gone(error)) return null;
+    throw error;
+  }
+  const second = stat(pid);
+  if (!second) return null;
+  assert.deepEqual(second, first);
+  return {...first, uids};
+}
+
+function sameProcess(initial, observed) {
+  return observed !== null && observed.pid === initial.pid && observed.born === initial.born;
+}
+
+function originalGroupAbsent(pgid) {
+  try {
+    process.kill(-pgid, 0); // existence check only; no termination signal is sent to a numeric group
+    return false;
+  } catch (error) {
+    if (error.code === 'ESRCH') return true;
+    if (error.code === 'EPERM') return false;
+    throw error;
+  }
+}
+
+// Call in the same JS turn immediately after spawn(..., {detached:true}) on an owned Linux direct child.
+// The caller must already have installed error/close handlers that retain the original operation error.
+export function acquireWrapper(child) {
+  assert(process.platform === 'linux' && Number(readlinkSync('/proc/self')) === process.pid);
+  assert(Number.isSafeInteger(child.pid) && child.pid > 1);
+  const initial = identity(child.pid);
+  assert(initial && initial.parent === process.pid && initial.pgid === child.pid && initial.sid === child.pid);
+  const receipt = { closed: false, code: null, signal: null };
+  child.once('close', (code, signal) => Object.assign(receipt, {closed:true, code, signal}));
+  return { child, initial, receipt };
+}
+
+function exactWrapperSignal(owner, signal) {
+  const observed = identity(owner.initial.pid);
+  if (!sameProcess(owner.initial, observed)) return false;
+  // Refuse PID reparenting, a credential transition, group/session changes, or an already-terminated handle.
+  assert.deepEqual(observed, owner.initial);
+  if (owner.receipt.closed || owner.child.exitCode !== null || owner.child.signalCode !== null) return false;
+  return owner.child.kill(signal);
+}
+
+// A witness can be read for a previously authenticated namespace member; it never authorizes numeric-PID signaling.
+export function originalRetired(processIdentity) {
+  assert(processIdentity && Number.isSafeInteger(processIdentity.pid) && processIdentity.pid > 1 && /^[1-9]\d*$/.test(processIdentity.born));
+  const observed = stat(processIdentity.pid);
+  return !sameProcess(processIdentity, observed);
+}
+
+export async function stopOwnedWrapper(owner, members, stopAtNs) {
+  // Absolute monotonic deadline supplied from the existing phase/final reserve.
+  const outcome = { wrapperClosed:false, wrapperRetired:false, originalGroupAbsent:false,
+    namedMembersRetired:false, boundedReadback:false, forcedWrapperSignal:false, scopeComplete:false };
+  if (!owner || typeof stopAtNs !== 'bigint' || now() >= stopAtNs) return outcome;
+  const budgetStart = now();
+  const escalationAt = budgetStart + (stopAtNs - budgetStart) / 2n;
+  let attemptedTerm = false, attemptedKill = false;
+  try {
+    while (now() < stopAtNs) {
+      outcome.wrapperClosed = owner.receipt.closed;
+      outcome.wrapperRetired = originalRetired(owner.initial);
+      outcome.originalGroupAbsent = originalGroupAbsent(owner.initial.pgid);
+      outcome.namedMembersRetired = members.every(originalRetired);
+      if (outcome.wrapperClosed && outcome.wrapperRetired && outcome.originalGroupAbsent && outcome.namedMembersRetired) {
+        outcome.boundedReadback = now() <= stopAtNs;
+        break;
+      }
+      if (!attemptedTerm && now() < stopAtNs) {
+        attemptedTerm = true;
+        exactWrapperSignal(owner, 'SIGTERM');
+      } else if (!attemptedKill && now() >= escalationAt && now() < stopAtNs) {
+        attemptedKill = true;
+        outcome.forcedWrapperSignal = exactWrapperSignal(owner, 'SIGKILL');
+      }
+      const remainingMs = Number((stopAtNs - now()) / 1_000_000n);
+      if (remainingMs <= 0) break;
+      await delay(Math.min(5, remainingMs));
+    }
+  } catch {
+    outcome.boundedReadback = false;
+  }
+  // An absent private PGID cannot certify a descendant that changed groups.
+  // Acquisition before an independent namespace proof always leaves the larger scope unqualified.
+  return outcome;
+}

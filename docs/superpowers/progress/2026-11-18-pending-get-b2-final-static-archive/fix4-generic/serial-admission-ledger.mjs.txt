@@ -1,0 +1,55 @@
+import assert from 'node:assert/strict';
+
+// Pure pre-admission ledger. The caller is responsible for obtaining the evidence and,
+// only after admit() returns, deciding whether to invoke a separately authorized unit of work.
+// This module has no filesystem, process control, worker or network API.
+export function newSerialLedger({ startNs, endNs, finalCapNs, finalReserveNs, files, slotNs }) {
+  assert([startNs,endNs,finalCapNs,finalReserveNs,slotNs].every(v => typeof v === 'bigint'));
+  assert(startNs >= 0n && slotNs > 0n && finalReserveNs >= 0n);
+  assert(Array.isArray(files) && files.length > 0 && files.length <= 8);
+  const ordered = Object.freeze([...files]);
+  assert(ordered.every(s => typeof s === 'string' && s.length > 0));
+  assert.equal(new Set(ordered).size, ordered.length);
+  assert(startNs + BigInt(ordered.length) * slotNs <= endNs);
+  assert(endNs + finalReserveNs <= finalCapNs);
+  let next = 0, pending = null, stopped = false, last = startNs;
+
+  return Object.freeze({
+    admit(file, observedAtNs) {
+      try {
+        assert(!stopped && pending === null && next < ordered.length);
+        assert.equal(file, ordered[next]);
+        assert(typeof observedAtNs === 'bigint' && observedAtNs >= last);
+        // Group start includes CLI startup in slot 1.
+        const anchor = next === 0 ? startNs : observedAtNs;
+        const deadline = anchor + slotNs;
+        assert(observedAtNs < deadline);
+        assert(anchor + BigInt(ordered.length - next) * slotNs <= endNs);
+        assert(endNs + finalReserveNs <= finalCapNs);
+        pending = Object.freeze({ file, sequence:next + 1, anchor, deadline });
+        last = observedAtNs;
+        return pending;
+      } catch (error) {
+        stopped = true;
+        throw error;
+      }
+    },
+    retire(ticket, evidence, observedAtNs) {
+      try {
+        assert(!stopped && pending !== null && ticket === pending);
+        assert(typeof observedAtNs === 'bigint' && observedAtNs >= last && observedAtNs <= ticket.deadline);
+        assert(evidence.file === ticket.file && evidence.outcomesVerified === true);
+        assert(evidence.directExitObserved === true && evidence.kernelIdentityRetired === true);
+        assert(evidence.unverifiedClosure === false);
+        last = observedAtNs;
+        pending = null;
+        next++;
+      } catch (error) {
+        stopped = true;
+        throw error;
+      }
+    },
+    stop() { stopped = true; },
+    closed() { return !stopped && pending === null && next === ordered.length; },
+  });
+}

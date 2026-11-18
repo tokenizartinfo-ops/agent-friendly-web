@@ -1,0 +1,88 @@
+{
+  "schema": "afw.b2.fix4-scoped-review-brief.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "task": "B2 native TOOL proposal / Fix4 generic process-and-evidence hardening",
+  "correctionRound": 4,
+  "maxRounds": 5,
+  "readFirst": [
+    "b113b073be02db3fbb01b82c67ec2d3f84baf051",
+    "814aedb69d5f948dbd87e58e4f2374230f844b68",
+    "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1"
+  ],
+  "reviewBase": "f1d36b71ecd97d73a2106be9b766ded87025ec94",
+  "fixBase": {
+    "index": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+    "mount": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+    "runner": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+    "graph": "c50198511f93639ec20b32f75ad8cd6110900979"
+  },
+  "report": "7c3a496b77e21fd7dd22b01e961570ce82cbc142",
+  "diff": "badfff06306b5b5d8f345053ba0dc34d59ff8c2a",
+  "deltaGraph": "361bec47c7e1b0b60f1a3e9ddddf00b87e02c03c",
+  "authorStatus": "PARTIAL_STATIC / zero real consumers connected; not full packet or released execution",
+  "requirements": "The original five Important findings and one receipt Minor remain the review list. Verdict each addressed/not addressed with exact relation to active code; then flag only actual new breakage in proposed four-helper/receipt diff, not untouched scenario modules. Scope is a partial static correction; an unused helper does not satisfy a consumer requirement. Do not infer runtime timing or credit a proposed hunk as mounted.",
+  "originalFindings": [
+    {
+      "id": "B2-R3-02",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-compile.mjs",
+      "line": 39,
+      "also": "native-tool.mjs:200–215 and producer-collect.mjs:82",
+      "title": "N06 manufactures the expected phase if the ordinary QA reply is some other q1",
+      "evidence": "The host now proves that the one RPC returned the exact foreign scalar. The compiled QA modifier still accepts value.startsWith('q1.') and constructs a fresh fixed I0130 suffix. If the actual underlying observer returned another positive tuple, that control could still pass.",
+      "fix": "Require the ordinary sample to equal q1.<read epoch>.<exact read key>.I0130 before replacing only its key with the fixed benign foreign value. Keep the existing host-success attestation and one read. Publish no raw correlation values."
+    },
+    {
+      "id": "B2-R3-03",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "line": 96,
+      "also": "producer-child.mjs:108–132",
+      "title": "The P3 supervisor enforces the group clock but omits the five sealed worker slots",
+      "evidence": "The first four workers have no enforced 1600 ms slot. For the held worker the current guard permits a first hold observation up to 1350 ms after scope proof, whereas FI2 requires count-enter by 1250 ms and 250 ms reserved for exact terminal readback. The loop enforces the 8000 ms group deadline but never binds held retirement to its 1600 ms slot. Scope proof time by itself also excludes worker startup.",
+      "fix": "Define the five ordered owner-approved 1600 ms slot anchors including startup. Verify raw held count-enter by 1250 ms in its slot, bound the allowed confirmation wait and require exact owned worker terminal readback by 1600 ms. Track all four prior workers against their slots and refuse work if reserve is unavailable. Preserve the same group and job ceilings."
+    },
+    {
+      "id": "B2-R3-04",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "line": 137,
+      "also": "runner:196–197",
+      "title": "Unexpected cutoff sends a signal without verified wrapper and owned-group retirement",
+      "evidence": "On failure the catch sends SIGKILL only if a scope proof was collected and still matches. It then destroys streams, unrefs and immediately throws, with no bounded wait for sudo/unshare close or verified process-group retirement. When the fault happens before the first proof, no cleanup of the launched wrapper is attempted. The parent correctly retains scratch and rejects evidence, but does not establish that the acquired group is actually gone.",
+      "fix": "Preserve an immediately acquired trusted identity for the owned wrapper, use only exact reconciled process identities and bounded cleanup for launched workers, and independently verify terminal state within existing reserve. Failure or incomplete cleanup remains STOPPED_UNQUALIFIED with explicit unverified closure. Do not signal unrelated processes or delete uncertified scratch."
+    },
+    {
+      "id": "B2-R3-05",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "line": 37,
+      "also": "producer-child.mjs:126–136",
+      "title": "Expected aggregate exit 1 does not prove the first four actual frozen-D07 outcomes",
+      "evidence": "negativeAggregate checks journal shape, per-file witnesses, zero tripwire and existence of the held cutoff. It does not bind individual worker TAP status and expected original test outcomes, or case 1 pass and case 15 C2SOURCE fail/missing where applicable. The intentional held worker already makes the composite CLI fail, so aggregate exit 1 cannot distinguish an unrelated failure or altered original outcome in the other workers. The new C2FT4 assertion is under nativeOne's ordinary D07 branch for N03/N04. It does not repair negativeAggregate.",
+      "fix": "Bind the exact first four worker and original selected test outcomes from genuine runner output and own terminal proof, including exact case 1 pass and appropriate case 15 error/frame outcome. Keep count-throw frame absent and held-worker cutoff separate, and retain missing-mark recorder fault interpretation and neutral AFTER evidence. Reject extra/unknown failures."
+    },
+    {
+      "id": "B2-R3-06",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "line": 16,
+      "title": "Evidence called exact uses unrestricted suffix matching",
+      "evidence": "tokenCount accepts any stdout or stderr line ending in a claimed witness after trimEnd. Prefix garbage, a diagnostic that merely ends in the expected token, or a transport source mismatch could be credited as actual census, gate, promise or frozen public frame evidence.",
+      "fix": "Recognize only the actual raw fixed line or specifically admitted TAP framing of that line. Match the complete normalized payload, permitted stream and exact occurrence count. Preserve the strict per-instance N07 marker checks."
+    },
+    {
+      "id": "B2-R3-07",
+      "severity": "MINOR",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+      "line": 230,
+      "title": "The packet does not name the canonical SDK SIGKILL disposal convention",
+      "evidence": "SDKDisposeUsesOwnSignal is true but the packet does not identify that the pinned SDK disposes its owned workerd with SIGKILL after the benign cleanup acknowledgement. This is distinct from supervisor forced cutoff. The final author report explicitly describes SIGKILL; this concern is limited to the structured run receipt's projection.",
+      "fix": "Name the pinned SDK disposal convention explicitly and retain verified benign ACK, await dispose return, and observed scoped PID retirement. Keep the original worker process exit and the supervisor cutoff distinct. Do not infer graceful exit or physical RPC settlement."
+    }
+  ],
+  "coveringTests": "Author explicitly NOT_RUN: no Source/core/harness execution, parse/AST/syntax/import/deps/probe or ref/workflow by reviewer. Static gate precedes any separate finite Root GHA. You may review generic helper text as DATA only, full-readback detached report. No subagents.",
+  "decisionContract": "Return SPEC and QUALITY verdicts separately, every prior ID disposition, any new breakage confined to diff, actual integrated paths count, exact artifacts and NOT_RUN. Do not widen into original sealed cases/schedules. Retain proper primary-source distinction Node events vs lossy TAP; original D07/recorder immutable; same1CLI+5workers public-run aggregation change only proposed.",
+  "reportPath": "Detached immutable report, full readback; no refs/runtime/OTP/credentials or mails. Return SHA and concise verdict."
+}

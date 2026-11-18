@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "4d35ca5de5ecd51342f08b0644c768708e300dc2",
-  "phase": "PENDING_GET_B2_FIX4_GENERIC_COLLECTOR_HARDENING",
+  "previousCheckpoint": "9c4d0fdd712223d54adadc023a56c1017e826219",
+  "phase": "PENDING_GET_B2_FINAL_WIRED_FIX5_RUNNING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete the narrowed generic collector/process-safety correction, preserve reversible diff, scoped independent review. N06 tuple validation remains explicitly open; no B2 execution until all load-bearing findings are resolved. Do not replay original business Source or extend budgets.",
+  "next": "Finish final5/5 wired correction, independent scoped review, then Root adjudication at cap. No further fix rounds/reset. Only a qualified complete defensive packet could allow fresh finite TOOL run; original real Source GET503 and PC-off remain unresolved.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -280,6 +280,14 @@
       "atUTC": "2026-11-18 15:37:09 UTC",
       "ref": "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1",
       "summary": "Ruling: replace only stock aggregate scheduling inside the same one neutral CLI with supported sequential single-file run() admission. Five genuine worker outcomes, no added process/case/time; original D07/recorder unchanged. Costs if wrong: reject static or finite TOOL qualification, no business/runtime release."
+    },
+    {
+      "atUTC": "2026-11-18 15:45:45 UTC",
+      "summary": "Task B2: fix round4/5 (0 addressed in active packet;6open,1new conditional helper-adoption issue; original active proposal unchanged). Final fresh Fix5 author owns wiring and the defensive exact tuple check; no new faults or live OAuth actions.",
+      "refs": [
+        "6eb37b443b925a63b811f35b8f5147b88da49776",
+        "5bf93933f998aedb6f02fee5ab218fa34dc04c7a"
+      ]
     }
   ],
   "source5": {
@@ -1685,9 +1693,9 @@
       "actualModelAccepted": true
     },
     "pendingAwaitNativeTool": {
-      "status": "FULL_PROPOSAL_STATIC_REVIEW_FAILED_FIX4_GENERIC_HARDENING_IN_PROGRESS",
+      "status": "FINAL_FIX5_WIRED_DEFENSIVE_INTEGRATION_IN_PROGRESS",
       "brief": "5f7b70fc25bbc43814a7e05fa40552aaa544e9d3",
-      "actor": "/root/pending_get_native_tools_fix4",
+      "actor": "/root/pending_get_b2_fix5",
       "nomination": {
         "branch": "lab/afw-c2-pending-get-20261118-native-tools1",
         "message": "AFW-C2-PENDING-GET-NATIVE-TOOLS1-ONEUSE-20261118",
@@ -1742,14 +1750,14 @@
         "fullNativeHarnessAndRunner": "IN_PROGRESS"
       },
       "staticFix": {
-        "round": 4,
+        "round": 5,
         "max": 5,
         "brief": "b113b073be02db3fbb01b82c67ec2d3f84baf051",
         "activeTaskContext": "0668a6192ff18fec4a9c860fe28eb6ada91c636d",
         "priorAuthorReport": "961bd2d328e77e75ec2cdd3bcb2f65353cb62300",
         "partialAuthorReport": "a4358d6724c1483e0b5435a2c21d63e1b2370aaa",
         "narrowedRuling": "814aedb69d5f948dbd87e58e4f2374230f844b68",
-        "status": "PARTIAL_STATIC_REPORT_THEN_NARROWED_GENERIC_WORK_RESUMED",
+        "status": "FIX4_SCOPED_REVIEW_FAILED_ZERO_INTEGRATED_CONSUMERS_FIX5_FRESH_AUTHOR_RUNNING",
         "importantOpen": [
           "R3-02 ordinary sample exact tuple before key substitution; unchanged and outside narrowed work",
           "R3-03 startup-inclusive individual worker timing",
@@ -1764,7 +1772,24 @@
         "coveringTests": "Future fixed CAL56/P3/native finite GHA packet only after independent acceptance",
         "testStatus": "NOT_RUN",
         "admissionRuling": "d9b8aa3e28f221d7e5e9850469f03d455ba49fe1",
-        "aggregationPremise": "One existing neutral CLI process may use public Node22 run() for five sequential single-file TestsStreams with explicit terminal admission, instead of stock aggregated scheduling. All original cases/clocks/workers/guards unchanged; static proposal only."
+        "aggregationPremise": "One existing neutral CLI process may use public Node22 run() for five sequential single-file TestsStreams with explicit terminal admission, instead of stock aggregated scheduling. All original cases/clocks/workers/guards unchanged; static proposal only.",
+        "fix4": {
+          "report": "7c3a496b77e21fd7dd22b01e961570ce82cbc142",
+          "graph": "361bec47c7e1b0b60f1a3e9ddddf00b87e02c03c",
+          "diff": "badfff06306b5b5d8f345053ba0dc34d59ff8c2a",
+          "review": "6eb37b443b925a63b811f35b8f5147b88da49776",
+          "rootData": "6f93290ab87f9e8c1acc1d1c19e46e2e0f6e3db3",
+          "addressedInActivePacket": 0,
+          "open": 6,
+          "newConditionalHelperIssue": "B2-R4-01: single-stream lifetime/framing incompatible with five genuine runs; helpers remain unmounted"
+        },
+        "fix5": {
+          "brief": "5bf93933f998aedb6f02fee5ab218fa34dc04c7a",
+          "author": "/root/pending_get_b2_fix5",
+          "scope": "Wire actual defensive controller/collector/worker-admission and strict original scalar validation into coherent static packet, without new scenarios/caps/targets",
+          "tests": "NOT_RUN",
+          "executionReleased": false
+        }
       },
       "reviewer": "/root/pending_get_red_review",
       "finalProposal": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
@@ -1778,8 +1803,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 135,
-  "updatedAtUTC": "2026-11-18 15:37:09 UTC",
+  "schemaVersion": 136,
+  "updatedAtUTC": "2026-11-18 15:45:45 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
