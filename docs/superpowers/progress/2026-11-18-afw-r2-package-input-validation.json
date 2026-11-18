@@ -1,0 +1,100 @@
+{
+  "project": "AFW",
+  "atUTC": "2026-11-18 17:40:51 UTC",
+  "privateBackupEvidence": "bdcaf755f43c6ffb5fc9f7f827135155c1e2f279",
+  "independentR2Readback": {
+    "verified": true,
+    "atUTC": "2026-11-18T17:34:49.407Z",
+    "members": 7,
+    "versions": [
+      "qaClosed",
+      "canaryClosed",
+      "operatorClosed"
+    ],
+    "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "archiveBytes": 4209422,
+    "receiptSha256": "22bf46883ed25f0b480470aab075db6fb298f63ec347235c876e350fe98023d2",
+    "managedDomainEnabled": false,
+    "customDomains": 0,
+    "objects": 1
+  },
+  "sourceIntegration": {
+    "run": 44360862508,
+    "job": 135001523857,
+    "head": "adae0ada2c498f315a8fa069f1215f4be275a417",
+    "closed": "5bfe4c99b086dcbe5051d715ae19dc37e4cf0b27",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "manifest": {
+      "historicalInput": {
+        "purpose": "afw.finite-r2-historical-inputs.v1",
+        "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+        "archiveBytes": 4209422,
+        "receiptSha256": "22bf46883ed25f0b480470aab075db6fb298f63ec347235c876e350fe98023d2",
+        "providerSourcePin": "26213123304eea25e652a52d808d25b7e0e3475e",
+        "archiveReadByCompiler": false
+      },
+      "sourceRevision": "adae0ada2c498f315a8fa069f1215f4be275a417",
+      "sourceTree": "8258844101b816ca4cd9092525c99341138f1686",
+      "completePackage": false,
+      "operationalReadiness": false,
+      "modules": {
+        "canaryLive": {
+          "name": "index.mjs",
+          "sha256": "0829f42f32c5a5cc88232d0be775797b5e1074744cd02783354484614ac8d8df",
+          "bytes": 1989585,
+          "exports": [
+            "AfwNodeControl",
+            "AfwOwnEventNode",
+            "default"
+          ]
+        },
+        "qaLive": {
+          "name": "index.mjs",
+          "sha256": "6be646e7e0e9fee996118268f9361fee3e0f76537f87f161a7c91dbf10c83665",
+          "bytes": 2695121,
+          "exports": [
+            "IndependentClosure",
+            "PrivateQaBootstrap",
+            "PrivateQaCatalog",
+            "PrivateQaNamedConfirmation",
+            "PrivateQaPreregistration",
+            "default",
+            "observePrivateQa"
+          ]
+        }
+      }
+    },
+    "lines": [
+      "2026-11-18T17:38:42.9410802Z Ran 28 tests in 0.995s",
+      "2026-11-18T17:38:42.9411102Z OK",
+      "2026-11-18T17:38:57.2894795Z # pass 121",
+      "2026-11-18T17:38:57.2895023Z # fail 0",
+      "2026-11-18T17:38:57.7759569Z AFW_PRIVATE_BACKUPS_STAGING {\"historicalInput\":{\"purpose\":\"afw.finite-r2-historical-inputs.v1\",\"archiveSha256\":\"63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28\",\"archiveBytes\":4209422,\"receiptSha256\":\"22bf46883ed25f0b480470aab075db6fb298f63ec347235c876e350fe98023d2\",\"providerSourcePin\":\"26213123304eea25e652a52d808d25b7e0e3475e\",\"archiveReadByCompiler\":false},\"sourceRevision\":\"adae0ada2c498f315a8fa069f1215f4be275a417\",\"sourceTree\":\"8258844101b816ca4cd9092525c99341138f1686\",\"completePackage\":false,\"operationalReadiness\":false,\"modules\":{\"canaryLive\":{\"name\":\"index.mjs\",\"sha256\":\"0829f42f32c5a5cc88232d0be775797b5e1074744cd02783354484614ac8d8df\",\"bytes\":1989585,\"exports\":[\"AfwNodeControl\",\"AfwOwnEventNode\",\"default\"]},\"qaLive\":{\"name\":\"index.mjs\",\"sha256\":\"6be646e7e0e9fee996118268f9361fee3e0f76537f87f161a7c91dbf10c83665\",\"bytes\":2695121,\"exports\":[\"IndependentClosure\",\"PrivateQaBootstrap\",\"PrivateQaCatalog\",\"PrivateQaNamedConfirmation\",\"PrivateQaPreregistration\",\"default\",\"observePrivateQa\"]}}}"
+    ],
+    "artifactCount": 0,
+    "activeRuns": 0
+  },
+  "releaseGate": [
+    "2026-11-18T17:38:43.7079521Z ok 1 - missing_factory_blocks_package",
+    "2026-11-18T17:38:43.7113361Z ok 2 - stale_historical_artifact_blocks_upload",
+    "2026-11-18T17:38:44.1404414Z ok 3 - actual compiler staging hashes final bytes and retains source classes without eligible manifest"
+  ],
+  "verifiedScope": "Pinned reference comparison and bounded archive verifier using synthetic fixtures. Exact private backup and each member verified separately within Cloudflare.",
+  "remaining": {
+    "privateArchiveConsumedInCompleteBuilder": false,
+    "nativeMaterialFactoryMounted": false,
+    "nativeClosureGuardQualified": false,
+    "completePackage": false,
+    "actualSameNoticeReceipt": false,
+    "actualCloudReview": false,
+    "actualNativeWithdrawal": false,
+    "operationalReadiness": false
+  },
+  "nativeBlocker": {
+    "source": "adae0ada2c498f315a8fa069f1215f4be275a417",
+    "materialFactory": "lib/mcp-qa-finite-observer-native.mjs requires an installed actual producer before resolving control/first primary/custody",
+    "guardFactory": "lib/mcp-qa-finite-trial-guard.mjs returns admin_pending when native factory is absent; worker/independent-closure/finite.mjs uses the initial cleanup alarm",
+    "builder": "scripts/build-finite-native-package.mjs keeps complete output unavailable while semantic gates remain unqualified"
+  },
+  "ownerActionNeededNow": false
+}

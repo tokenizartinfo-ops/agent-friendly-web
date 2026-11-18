@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "5d13757a3dec8997c7025cee52ed933bf3000a12",
-  "phase": "THREE_PRIVATE_R2_BACKUPS_PRESERVED_AND_VERIFIED_PACKAGE_INTEGRATION_PENDING",
+  "previousCheckpoint": "79d9fcdd980348767e4261b731272deb77fe1a8c",
+  "phase": "PRIVATE_R2_BACKUPS_VERIFIED_AND_PINNED_NATIVE_CLOSURE_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Bind the exact historical archive receipt to the staged source, then close the outstanding native material/guard factories, package compatibility and artifact custody before the real cloud same-notice trial.",
+  "next": "Implement and qualify the real finite native material and closure guard composition, connect trusted private archive intake to complete builder, verify restoration and full native route, then perform one real cloud same-notice occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 145,
-  "updatedAtUTC": "2026-11-18 17:35:56 UTC",
+  "schemaVersion": 146,
+  "updatedAtUTC": "2026-11-18 17:40:51 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2089,7 +2089,7 @@
     "evidence": "4c0a3097b402edfed5d0131ec348d25f98d9e641",
     "priorEvidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726"
   },
-  "readinessDocument": "0c3feeda634c94f2bb8e9ca03d25d9b7d3965d4b",
+  "readinessDocument": "a668b2a7597f905f62fab530ba6232c8773b244a",
   "releaseRollbackValidation": {
     "evidence": "224140ecd301b21db93c387c605843591a5abb9b",
     "path": "docs/superpowers/progress/2026-11-18-afw-release-rollback-validation.json",
@@ -2121,5 +2121,16 @@
     "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
     "objectKey": "historical-v1/sha256-63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28.zip",
     "verifiedAtUTC": "2026-11-18T17:34:49.407Z"
+  },
+  "privateR2PackageInput": {
+    "evidence": "0d03c0b77e46798ad708ad0a4ba188b1fc0a39fb",
+    "path": "docs/superpowers/progress/2026-11-18-afw-r2-package-input-validation.json",
+    "source": "adae0ada2c498f315a8fa069f1215f4be275a417",
+    "closed": "5bfe4c99b086dcbe5051d715ae19dc37e4cf0b27",
+    "run": 44360862508,
+    "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "pointerCrossChecked": true,
+    "actualArchiveReadByCompiler": false,
+    "completePackage": false
   }
 }
