@@ -3,10 +3,12 @@ import test from 'node:test';
 import {finiteFixture} from './fixtures/qa-finite-trial.mjs';
 import {buildPrivateQaFiniteSharedPlan} from '../lib/mcp-qa-finite-shared-plan.mjs';
 import {readFiniteDeploymentPair} from '../lib/mcp-qa-finite-plan-roles.mjs';
+import {finiteLauncherInstanceId} from '../lib/mcp-qa-finite-launch-records.mjs';
 import {readPrivateQaFinitePlan} from '../lib/mcp-qa-finite-trial-control.mjs';
 
 function fixture(){
  const {plan:p}=finiteFixture();
+ p.intentId='a'.repeat(64);p.workflows.launcher=finiteLauncherInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});
  const source={revision:p.source.revision,tree:p.source.tree,profileHash:p.source.profileHash,bindingsHash:p.source.bindingsHash};
  const {qaLive,qaClosed,canaryLive,canaryClosed,operatorClosed}=p.deployments,receipt={
   intentId:p.intentId,sourceRevision:source.revision,qaVersionId:qaLive.versionId,seedHash:'1'.repeat(64),
