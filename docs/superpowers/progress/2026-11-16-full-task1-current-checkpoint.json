@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "0e802307ea7529482714bc31310e446e8ead8513",
-  "phase": "FINAL_APPROVAL_VERIFIED_LAB_RELEASE_PACKAGE_PENDING",
+  "previousCheckpoint": "f5feaaf87422f955b6562f13853b1f9c075e468b",
+  "phase": "STAGED_MODULES_AND_ROLLBACK_REFERENCES_VERIFIED_COMPLETE_PACKAGE_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify the release package and verify restoration, then use one finite live occurrence for cloud same-notice delivery, review and native withdrawal.",
+  "next": "Qualify historical input custody and exact artifact locator, complete source packaging and compose the compatible native restore path. With a qualified package and fresh provider/readiness evidence, execute one real cloud same-notice receive, review, and native withdrawal occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 142,
-  "updatedAtUTC": "2026-11-18 16:57:34 UTC",
+  "schemaVersion": 143,
+  "updatedAtUTC": "2026-11-18 17:17:43 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2089,5 +2089,15 @@
     "evidence": "4c0a3097b402edfed5d0131ec348d25f98d9e641",
     "priorEvidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726"
   },
-  "readinessDocument": "b16fee83110224f9a632a4bf118f5d1e91b92333"
+  "readinessDocument": "773fce5478777c4ed882c78adcd3ba283aa1e955",
+  "releaseRollbackValidation": {
+    "evidence": "224140ecd301b21db93c387c605843591a5abb9b",
+    "path": "docs/superpowers/progress/2026-11-18-afw-release-rollback-validation.json",
+    "source": "aa58fe754a9ef06949fa65dad747ff7da07906f7",
+    "run": 44356770340,
+    "rollbackRun": 44354228813,
+    "verifiedReferenceReadback": true,
+    "completePackage": false,
+    "realCloudOccurrenceStarted": false
+  }
 }

@@ -1,0 +1,221 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "phase": "release-rollback-qualification",
+  "candidate": "c71df5630d866ed5ed800e20a8f6157506f8a869",
+  "rollbackContracts": {
+    "run": 44354228813,
+    "head": "91fc1e415944d15ee9e76f55e7ed1435e3efb62c",
+    "job": 134977856140,
+    "branchClosedAt": "412c6dc9a3fbc28d68020a4671d186de88061a0a",
+    "jsPassed": 206,
+    "archiveTestsPassed": 24,
+    "fail": 0,
+    "stagingWithoutEligibleManifest": true,
+    "artifactCount": 0
+  },
+  "rollbackReferences": {
+    "scope": "Control-plane GETs, historical source pins. No deployment or durable state transition.",
+    "historicalPinBlob": "26213123304eea25e652a52d808d25b7e0e3475e",
+    "versions": {
+      "atUTC": "2026-11-18T17:05:42.301Z",
+      "facts": {
+        "qaClosed": {
+          "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+          "bytes": 395915,
+          "exactImmutableCode": true,
+          "exactHistoricalConfiguration": true,
+          "restorationConfigurationSha256": "1b9e78f70e967990c2b530fb628b6fe0f37cc954c597d8aecbe7a2093f705eab",
+          "bindingsChecked": 31,
+          "closedFlagCount": 14,
+          "closed": true,
+          "redactedSecretBindings": true
+        },
+        "canary": {
+          "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+          "bytes": 1830202,
+          "exactImmutableCode": true,
+          "exactHistoricalConfiguration": true,
+          "restorationConfigurationSha256": "dcedc6ca0103750d5c24e51bc9066e257f9acc369b26b2fe1bca73fcdc6041d3",
+          "bindingsChecked": 29,
+          "closedFlagCount": 8,
+          "closed": true,
+          "redactedSecretBindings": true
+        },
+        "operator": {
+          "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+          "bytes": 1971922,
+          "exactImmutableCode": true,
+          "exactHistoricalConfiguration": true,
+          "restorationConfigurationSha256": "5c3088ab597fabab6cdc4cceaf49c10dfcae0bf2b86b2665c3df2e7ec79de82c",
+          "bindingsChecked": 7,
+          "closedFlagCount": 3,
+          "closed": true,
+          "redactedSecretBindings": true
+        }
+      },
+      "literalCodeRetained": false
+    },
+    "deployments": {
+      "qaClosed": {
+        "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+        "versions": [
+          {
+            "id": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+            "percentage": 100
+          }
+        ],
+        "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "bindings": 31,
+        "resourcesFields": [
+          "bindings",
+          "script",
+          "script_runtime"
+        ]
+      },
+      "canary": {
+        "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "versions": [
+          {
+            "id": "2607abae-cec3-4e35-89eb-8b8572262b54",
+            "percentage": 100
+          }
+        ],
+        "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "bindings": 29,
+        "resourcesFields": [
+          "bindings",
+          "script",
+          "script_runtime"
+        ]
+      },
+      "operator": {
+        "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+        "versions": [
+          {
+            "id": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+            "percentage": 100
+          }
+        ],
+        "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+        "bindings": 7,
+        "resourcesFields": [
+          "bindings",
+          "script",
+          "script_runtime"
+        ]
+      }
+    }
+  },
+  "cloudCatalog": {
+    "status": "ready",
+    "runnable": true,
+    "repoMatch": true
+  },
+  "remaining": {
+    "historicalInputArchiveQualified": false,
+    "publishablePackage": false,
+    "realCloudReceipt": false,
+    "realCloudReview": false,
+    "nativeSubscriptionWithdrawn": false,
+    "pcOff": false
+  },
+  "actualRuntimeChanged": false,
+  "ownerActionNeededNow": false,
+  "atUTC": "2026-11-18 17:17:43 UTC",
+  "verifiedDryRuns": {
+    "verifiedBothDryRuns": true,
+    "wrangler": "4.164.0",
+    "run": 44356770340,
+    "job": 134986858607,
+    "closed": "b72fdc063cdfce2dfe6924e716820a2852d55e34",
+    "head": "aa58fe754a9ef06949fa65dad747ff7da07906f7",
+    "branch": "lab/afw-release-wrangler-validation-20261118",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "activeRuns": 0,
+    "log": [
+      "2026-11-18T17:16:34.3212345Z AFW_FINAL_APPROVAL_STAGING {\"sourceRevision\":\"aa58fe754a9ef06949fa65dad747ff7da07906f7\",\"sourceTree\":\"731a1f096e6e2da7d773db12507ac6a40d6a809f\",\"completePackage\":false,\"operationalReadiness\":false,\"modules\":{\"canaryLive\":{\"name\":\"index.mjs\",\"sha256\":\"e3ce3bc50bc5cfdeaebb40cf56301864616245ddd3b568499e0c4c167a5dfe2a\",\"bytes\":1989585,\"exports\":[\"AfwNodeControl\",\"AfwOwnEventNode\",\"default\"]},\"qaLive\":{\"name\":\"index.mjs\",\"sha256\":\"45cbe2cb27e746fb7c0397594e83598003a8c40dac260bb2fa87f5064706d337\",\"bytes\":2695121,\"exports\":[\"IndependentClosure\",\"PrivateQaBootstrap\",\"PrivateQaCatalog\",\"PrivateQaNamedConfirmation\",\"PrivateQaPreregistration\",\"default\",\"observePrivateQa\"]}}}",
+      "2026-11-18T17:16:36.5560037Z # pass 100",
+      "2026-11-18T17:16:36.5560195Z # fail 0",
+      "2026-11-18T17:16:42.6368711Z AFW_EXACT_STAGE_DRY_RUN_PASS canary",
+      "2026-11-18T17:16:43.5446033Z AFW_EXACT_STAGE_DRY_RUN_PASS qa"
+    ],
+    "artifactCount": 0,
+    "temporaryCanaryDryRunConfiguration": true,
+    "noBundleByteComparison": true,
+    "actualRuntimeChanged": false
+  },
+  "containerReadback": {
+    "idMatches": true,
+    "nameMatches": true,
+    "schedulingPolicy": "durable_object",
+    "resourceKeys": [
+      "account_id",
+      "configuration",
+      "created_at",
+      "durable_objects",
+      "health",
+      "id",
+      "name",
+      "scheduling_policy",
+      "updated_at"
+    ],
+    "configurationKeys": [],
+    "hasImage": false,
+    "atUTC": "2026-11-18T17:11:57.217Z"
+  },
+  "runClosure": [
+    {
+      "branch": "lab/afw-release-rollback-validation-20261118",
+      "closed": "412c6dc9a3fbc28d68020a4671d186de88061a0a",
+      "run": 44354228813,
+      "result": "success"
+    },
+    {
+      "branch": "lab/afw-release-dryrun-20261118",
+      "closed": "46ee1b4497f7607b64f2cd99ead5e09a4edc3288",
+      "run": 44355005726,
+      "result": "failure"
+    },
+    {
+      "branch": "lab/afw-release-dryrun-diagnostic-20261118",
+      "closed": "806716c105775b3408646d617f61b756598391e9",
+      "run": 44355319689,
+      "result": "failure"
+    },
+    {
+      "branch": "lab/afw-release-profile-readback-20261118",
+      "closed": "0dc6ced94471af1e76bfa23832c44c3d333ec7d7",
+      "run": 44355676973,
+      "result": "failure"
+    },
+    {
+      "branch": "lab/afw-release-profile-container-20261118",
+      "closed": "a4d1dc2be19c3d1326adc44816c24fe9e9dd1bde",
+      "run": 44356121048,
+      "result": "failure"
+    },
+    {
+      "branch": "lab/afw-release-validation-only-container-20261118",
+      "closed": "bc13a464e12c32237760bb62df86ff6e1ada1e24",
+      "run": 44356406023,
+      "result": "failure"
+    },
+    {
+      "branch": "lab/afw-release-wrangler-validation-20261118",
+      "closed": "b72fdc063cdfce2dfe6924e716820a2852d55e34",
+      "run": 44356770340,
+      "result": "success"
+    }
+  ],
+  "diagnosticDecision": {
+    "originalWrangler": "4.128.0",
+    "configurationIssue": "Canary deployment profile links the existing Container by name through provider metadata. Wrangler requires a named validation entry. The pinned older CLI also rejects durable_object.",
+    "temporaryCheck": "Wrangler 4.164.0 and an ephemeral validation-only canary config in GitHub Actions validated both generated staged modules byte-for-byte. Actual source profile, package lock and provider configuration remained unchanged.",
+    "scope": "Cloudflare deployment and historical version reads only. CI dry run and synthetic rollback contract only. No package publication, deployment rollback, notification or consent."
+  },
+  "blockingReasons": [
+    "Exact approved historical input archive/locator still unavailable to complete-package builder.",
+    "Current finite package builder and source qualifier intentionally reject complete publication until historical custody, native launch/receiver composition and rollback compatibility are qualified."
+  ]
+}
