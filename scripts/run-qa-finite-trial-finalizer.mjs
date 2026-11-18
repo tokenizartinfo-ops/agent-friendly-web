@@ -1,4 +1,3 @@
-import {readFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-http.mjs';
 import {createFiniteAdoptionParent,waitForFiniteObserverAdoption} from '../lib/mcp-qa-finite-adoption.mjs';
 import {issueFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-issuer.mjs';
 import {readFile,writeFile,appendFile} from 'node:fs/promises';
@@ -27,23 +26,21 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   if(phase==='seed-material'){
    return await issueFiniteMaterialSeed({admission,githubToken:env.GITHUB_TOKEN,credential:env.AFW_QA_CLOSED_TOKEN,fetchImpl,now,signal});
   }
-  // Missing actual Task4 constructor fails before reading CF custody.
+  // Bootstrap facts identify only the original QA publication and custody.
   const source=await resolvePrivateQaFiniteExternalSource({admission,phase,sourceRevision:admission.sourceRevision,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
-  if(phase==='admit'){
-   adoption.parent.check();
-   // Primary completed-success seed is prerequisite, never a waitable absence.
-   await readFiniteMaterialSeed({intentId:admission.intentId,sourceRevision:admission.sourceRevision,fetchImpl,now,signal});adoption.parent.check();
-  }
+  if(phase==='admit')adoption.parent.check();
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const githubToken=env.GITHUB_TOKEN,finalizer=await readFiniteFinalizerGithubContext({admission,githubToken,fetchImpl,now,signal});
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const credential=env.AFW_QA_CLOSED_TOKEN;
-  const observer=createPrivateQaFiniteObserverHttp({admission:{intentId:admission.intentId,sourceRevision:admission.sourceRevision,T0:admission.createdAt,R1:admission.cleanupExpiresAt},source:{qaLive:source.deployments.qaLive,custody:source.custody},credential,githubToken,fetchImpl,now,signal});
+  const observer=createPrivateQaFiniteObserverHttp({admission:{intentId:admission.intentId,sourceRevision:admission.sourceRevision,T0:admission.createdAt,R1:admission.cleanupExpiresAt},source,credential,githubToken,fetchImpl,now,signal});
   if(phase==='admit'){
    const check=()=>{adoption.parent.check();assertQaFiniteConfirmationAdmission(admission);};
    check();
-   const preview=await waitForFiniteObserverAdoption({parent:adoption.parent,T0:admission.createdAt,observer,sleep,now});check();
-   const plan=validateFiniteExternalPlan({...source,preview,commandId:admission.commentId,finalizer});
+   const adopted=await waitForFiniteObserverAdoption({parent:adoption.parent,T0:admission.createdAt,observer,sleep,now});check();
+   const plan=validateFiniteExternalPlan(adopted.plan);
+   if(plan.preview.intentId!==admission.intentId||plan.preview.sourceRevision!==admission.sourceRevision||
+      plan.commandId!==admission.commentId||JSON.stringify(plan.finalizer)!==JSON.stringify(finalizer))fail();
    const github=createPrivateQaFiniteGithub({plan,githubToken,fetchImpl,now,signal});
    await github.persistAdmission(credential,admission);check();
    await write('afw-finite-plan.json',JSON.stringify(plan));return {status:'ready',operationalReadiness:false};

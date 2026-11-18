@@ -25,7 +25,6 @@ export function syntheticSetupReceipt(p,seedHash='6'.repeat(64)){
 
 /** Explicit test SOURCE composition only; production CLI accepts no factory. */
 export async function finiteCliSyntheticSource(plan,{setupMode='normal',seedHash}={}){
- const source='export async function resolvePrivateQaFiniteExternalSource(){return '+JSON.stringify(plan)+';}';
  const setup=`
 import {createHash} from 'node:crypto';
 const canonical=v=>JSON.stringify(sort(v)),sort=v=>Array.isArray(v)?v.map(sort):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,sort(v[k])])):v;
@@ -40,6 +39,6 @@ export async function readPrivateQaFiniteSetupCompletion({intentId,sourceRevisio
  return {receipt,instance,observedAt};
 }
 `;
- const b=await build({stdin:{contents:"export {runFiniteFinalizerCli} from './scripts/run-qa-finite-trial-finalizer.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*'],banner:{js:"import {createRequire as __createRequire} from 'node:module'; const require = __createRequire(process.cwd()+'/package.json');"},plugins:[{name:'synthetic-source-module-only',setup(builder){builder.onLoad({filter:/mcp-qa-finite-source\.mjs$/},()=>({contents:source,loader:'js'}));builder.onLoad({filter:/mcp-qa-finite-adoption-source\.mjs$/},()=>({contents:setup,resolveDir:process.cwd(),loader:'js'}));}}]});
+ const b=await build({stdin:{contents:"export {runFiniteFinalizerCli} from './scripts/run-qa-finite-trial-finalizer.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*'],banner:{js:"import {createRequire as __createRequire} from 'node:module'; const require = __createRequire(process.cwd()+'/package.json');"},plugins:[{name:'synthetic-source-module-only',setup(builder){builder.onLoad({filter:/mcp-qa-finite-adoption-source\.mjs$/},()=>({contents:setup,resolveDir:process.cwd(),loader:'js'}));}}]});
  return import('data:text/javascript;base64,'+Buffer.from(b.outputFiles[0].text).toString('base64')+'#'+randomUUID());
 }

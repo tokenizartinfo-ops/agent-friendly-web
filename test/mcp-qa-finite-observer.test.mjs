@@ -51,7 +51,7 @@ test('finite-only observer records the setup receipt from its fixed QA actor',as
  f.actor.fetch=async request=>{
   assert.equal(request.url,'https://afw-private.invalid/_finite-native/observer-preview');
   assert.equal(request.method,'GET');assert.equal(request.body,null);
-  return Response.json({material:f.v,setupReceiptHash:receipt});
+  return Response.json({material:f.v,setupReceiptHash:receipt,plan:f.f.plan});
  };
  const step={...f.step,do:async(name,opts,fn)=>{
   const value=await f.step.do(name,opts,fn);
@@ -73,7 +73,7 @@ test('finite-only observer refuses a preview without the setup receipt before an
 
 test('adoption only accepts a preview with the independently read setup receipt',async()=>{
  const f=await fixture(),expected='8'.repeat(64),provenance=f.f.output.provenance,material=f.v;
- const receipt={purpose:'afw.finite-observer-preview.v2',provenance,material,setupReceiptHash:expected};
+ const receipt={purpose:'afw.finite-observer-preview.v2',provenance,material,setupReceiptHash:expected,plan:f.f.plan};
  assert.deepEqual(validateFiniteObserverPreviewEnvelope(receipt,{setupReceiptHash:expected}),receipt);
  assert.throws(()=>validateFiniteObserverPreviewEnvelope(receipt,{setupReceiptHash:'9'.repeat(64)}));
  const legacy={purpose:'afw.finite-observer-preview.v1',provenance,material};
