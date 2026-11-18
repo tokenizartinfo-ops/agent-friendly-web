@@ -1,18 +1,9 @@
-name: AFW historical archive validation
-on:
-  push:
-    branches: [lab/afw-historical-archive-validation-20261118]
-permissions:
-  contents: read
+name: AFW historical archive validation closed
+on: workflow_dispatch
+permissions: {}
 jobs:
-  verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-historical-archive-validation-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-HISTORICAL-ARCHIVE-VALIDATION-20261118' }}
+  closed:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - name: Test bounded release and historical archive validation
-        run: python3 -m unittest discover -s test -p 'finite*archive_test.py' -v
+      - run: exit 1
