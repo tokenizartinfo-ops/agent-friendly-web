@@ -241,7 +241,10 @@ async function choice({ctx,env,request},lease,ownedContext=null){
  if(c.ticket.projectRef!==form.get('projectRef'))fail(403);
  if(stage==='connection'){
   if(c.source.phase!=='closed_ui'||canonical(c.source)!==canonical(c.snapshot.source)||c.snapshot.initialTicketHash!==c.ticket.ticketHash)fail(403);
- }else c=await stageContext(options,lease,stage,ownedContext);
+ }else{
+  const qualified=await validateApprovedTicket(c,stagePhase(stage));
+  c=await finishStageContext(qualified,stage,options.ctx.storage);
+ }
  const approvedAt=Date.now(),expiresAt=Math.min(c.ticket.expiresAt,c.identity.expiresAt,c.pre?.expiresAt??Infinity,c.connection?.expiresAt??Infinity);
  const csrfReceiptHash=evidence('decision',{ticket:c.ticket,decision:'approve',projectHash:projectHash(c.source.project),goal:c.source.goal,clientId:c.source.clientId,approvedAt,expiresAt});
  const used=await c.step(childLease=>c.store.consumeTicket({ticketHash:c.ticket.ticketHash,recordHash:csrfReceiptHash},childLease));
@@ -424,10 +427,6 @@ async function finishStageContext(c,stage,storage){
  return c;
 }
 
-async function stageContext(options,lease,stage,ownedContext=null){
- const c=await approved(options,lease,stagePhase(stage),ownedContext);
- return finishStageContext(c,stage,options.ctx.storage);
-}
 /** Factual candidate data only: fresh fixed source, primary and exact immutable history.
  * This reader cannot mint native admission or issue a provider/storage mutation. */
 export async function readFiniteOwnerPreparationFacts(options,lease){return readPreparationFacts(options,lease);}

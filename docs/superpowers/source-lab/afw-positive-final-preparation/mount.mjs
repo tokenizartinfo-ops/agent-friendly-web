@@ -11,7 +11,7 @@ const inputs = [
   {
     "from": "docs/superpowers/source-lab/afw-positive-final-preparation/owner-preparation-candidate.txt",
     "to": "lib/mcp-qa-finite-owner-preparation.mjs",
-    "sha256": "a99fe72cae3d27fd2e82834f171578c66d398c4e994196de4af48f2d6e89cef8",
+    "sha256": "3a15bb2390b34e96c282cb31c1370d3895f663dd9bf2eed017ca90d5fc79593a",
     "before": "152e730f83af7ef063b6b1db89f8b0a779c2b60e"
   },
   {
@@ -101,7 +101,7 @@ const edits = {
   "test/fixtures/finite-coupled-native.mjs": [
     [
       "  counts:observer.counts,",
-      "  counts:observer.counts,\n  async readFinalPreparation(){\n   const f=main,started=performance.now();\n   const response=await f.call('/connections/finite-prepare',{headers:headers(f)});\n   console.info('AFW_PREP_TRACE FINAL_HTTP '+response.status+' '+Math.ceil(performance.now()-started));\n   const text=await response.text();\n   assert.equal(response.status,200);\n   assert.match(text,/Preparar único ensayo finito/);\n  },"
+      "  counts:observer.counts,\n  async readFinalPreparation(){\n   const f=main,started=performance.now();\n   const response=await f.call('/connections/finite-prepare',{headers:headers(f)});\n   console.info('AFW_PREP_TRACE FINAL_HTTP '+response.status+' '+Math.ceil(performance.now()-started));\n   const text=await response.text();\n   assert.equal(response.status,200);\n   assert.match(text,/Preparar único ensayo finito/);\n   const handle=/name=\"handle\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],projectRef=/name=\"projectRef\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],cookie=response.headers.get('set-cookie')?.split(';')[0];\n   assert(handle&&projectRef&&cookie);\n   pendingForm={handle,projectRef,cookie,text};\n  },"
     ]
   ],
   "lib/mcp-qa-finite-owner-preparation.mjs": [
@@ -123,6 +123,9 @@ const edits = {
     ]
   ]
 };
+edits['test/fixtures/finite-coupled-native.mjs'].push(["    assert.equal(await discard(await post(f,form)),200);f.choice=form;","    const response=await post(f,form);\n    if(stage==='finite')console.info('AFW_PREP_TRACE FINAL_APPROVAL_HTTP '+response.status);\n    assert.equal(await discard(response),200);f.choice=form;"]);
+edits['lib/mcp-qa-finite-owner-phase-context.mjs'].push(["   return await publishApprovedStage({ctx,env},originalLease,admission,initial);","   console.info('AFW_PREP_TRACE QA_APPROVAL_PUBLISH_START');\n   const published=await publishApprovedStage({ctx,env},originalLease,admission,initial);\n   console.info('AFW_PREP_TRACE QA_APPROVAL_PUBLISH_RETURN');\n   return published;"]);
+
 function digest(algorithm, bytes) {
   return createHash(algorithm).update(bytes).digest('hex');
 }
