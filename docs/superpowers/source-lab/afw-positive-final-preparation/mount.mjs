@@ -9,9 +9,9 @@ const inputs = [
     "before": "7eb8f28760de60f143e487eeb6988705059a0a44"
   },
   {
-    "from": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+    "from": "docs/superpowers/source-lab/afw-positive-final-preparation/owner-preparation-candidate.txt",
     "to": "lib/mcp-qa-finite-owner-preparation.mjs",
-    "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+    "sha256": "a99fe72cae3d27fd2e82834f171578c66d398c4e994196de4af48f2d6e89cef8",
     "before": "152e730f83af7ef063b6b1db89f8b0a779c2b60e"
   },
   {
@@ -102,6 +102,24 @@ const edits = {
     [
       "  counts:observer.counts,",
       "  counts:observer.counts,\n  async readFinalPreparation(){\n   const f=main,started=performance.now();\n   const response=await f.call('/connections/finite-prepare',{headers:headers(f)});\n   console.info('AFW_PREP_TRACE FINAL_HTTP '+response.status+' '+Math.ceil(performance.now()-started));\n   const text=await response.text();\n   assert.equal(response.status,200);\n   assert.match(text,/Preparar único ensayo finito/);\n  },"
+    ]
+  ],
+  "lib/mcp-qa-finite-owner-preparation.mjs": [
+    [
+      "   const previous=await ticketContext(options,lease,ownedContext);",
+      "   console.info('AFW_PREP_TRACE QA_TICKET_CONTEXT_START');\n   const previous=await ticketContext(options,lease,ownedContext);\n   console.info('AFW_PREP_TRACE QA_TICKET_CONTEXT_RETURN');"
+    ],
+    [
+      "   const qualified=await validateApprovedTicket(previous,stagePhase(stage));",
+      "   const qualified=await validateApprovedTicket(previous,stagePhase(stage));\n   console.info('AFW_PREP_TRACE QA_APPROVAL_RETURN');"
+    ],
+    [
+      "   c=await finishStageContext(qualified,stage,options.ctx.storage);connectionRef=c.connection.connectionRef;",
+      "   c=await finishStageContext(qualified,stage,options.ctx.storage);connectionRef=c.connection.connectionRef;\n   console.info('AFW_PREP_TRACE QA_STAGE_CONTEXT_RETURN');"
+    ],
+    [
+      "  await durable(c,childLease=>c.store.putTicket(ticket,childLease),childLease=>c.store.readTicket({ticketHash},childLease),'Ticket',ticket);",
+      "  console.info('AFW_PREP_TRACE QA_TICKET_WRITE_START');\n  await durable(c,childLease=>c.store.putTicket(ticket,childLease),childLease=>c.store.readTicket({ticketHash},childLease),'Ticket',ticket);\n  console.info('AFW_PREP_TRACE QA_TICKET_WRITE_RETURN');"
     ]
   ]
 };
