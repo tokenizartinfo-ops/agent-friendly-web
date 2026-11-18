@@ -1,50 +1,9 @@
-name: AFW private cloud receiver build
-on:
-  push:
-    branches: [lab/afw-cloud-receiver-binding-20261118]
-permissions:
-  contents: read
+name: AFW private receiver build closed
+on: workflow_dispatch
+permissions: {}
 jobs:
-  build:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-cloud-receiver-binding-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-CLOUD-RECEIVER-BINDING-20261118' }}
+  closed:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          ref: ${{ github.sha }}
-          fetch-depth: 2
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - name: Verify unchanged receiver source
-        run: |
-          test "$(git rev-parse HEAD^)" = "e4d5f17b5e6260667c14e176c3269f4a29515665"
-          test "$(git diff-tree --no-commit-id --name-only -r HEAD)" = ".github/workflows/afw-cloud-receiver-binding.yml"
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Build the exact receiver without deploying
-        run: |
-          npx --no-install wrangler deploy --dry-run --config wrangler.operations-manager.jsonc --outdir "$RUNNER_TEMP/afw-receiver-build"
-          mkdir "$RUNNER_TEMP/afw-receiver-transfer"
-          python3 - <<'PY'
-          from pathlib import Path
-          from hashlib import sha256
-          import json, os
-          temp = Path(os.environ['RUNNER_TEMP'])
-          files = list((temp / 'afw-receiver-build').glob('*.js'))
-          assert len(files) == 1
-          source = files[0].read_bytes()
-          assert 0 < len(source) < 2097152 and b'FiniteDossierReviews' in source
-          target = temp / 'afw-receiver-transfer'
-          (target / 'index.mjs').write_bytes(source)
-          receipt = {'sourceRevision':os.environ['GITHUB_SHA'],'receiverParentRevision':'e4d5f17b5e6260667c14e176c3269f4a29515665','bytes':len(source),'sha256':sha256(source).hexdigest(),'deploymentPerformed':False}
-          (target / 'receipt.json').write_text(json.dumps(receipt))
-          print(json.dumps(receipt))
-          PY
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: afw-private-receiver-source-build
-          path: ${{ runner.temp }}/afw-receiver-transfer
-          if-no-files-found: error
-          retention-days: 1
+      - run: exit 1
