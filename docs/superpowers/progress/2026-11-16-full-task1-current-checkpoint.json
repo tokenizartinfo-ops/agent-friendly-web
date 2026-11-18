@@ -1703,11 +1703,22 @@
       "focusedCoreTestsProposed": 51,
       "executionReleased": false,
       "newOverlapAndNativeSeedProposalReleased": true,
-      "processCapClarified": "24 cumulative guarded Node PID proofs; full OS/native lifecycle inventory separately required, no cap increase"
+      "processCapClarified": "24 cumulative guarded Node PID proofs; full OS/native lifecycle inventory separately required, no cap increase",
+      "partial": {
+        "index": "f9684031f24f17ec6cbe4ee13cbac58b9eb080f0",
+        "sourceDelta": "568f5fde50c99d764f2162045b85c24a9b657ca1",
+        "fixtureWiringDelta": "47bdab4bda154d4efa115c6974d5d100fcdbea8e",
+        "rootMeasurement": "d0e3afdf207a1e1dd70b5b3a4b5ba060959e807a",
+        "recoveryPrefix": "docs/superpowers/progress/2026-11-18-pending-get-b2-partial-source-text/",
+        "codeExecution": "NOT_RUN",
+        "fullToolPacket": "IN_PROGRESS",
+        "semanticsReviewed": false,
+        "nativeExecutionReleased": false
+      }
     }
   },
-  "schemaVersion": 131,
-  "updatedAtUTC": "2026-11-18 14:04:42 UTC",
+  "schemaVersion": 132,
+  "updatedAtUTC": "2026-11-18 14:12:14 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

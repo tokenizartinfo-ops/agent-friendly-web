@@ -1,0 +1,76 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.fixture-wiring-delta.v1",
+  "state": "PROPOSED_NOT_RUN",
+  "prior": "f9684031f24f17ec6cbe4ee13cbac58b9eb080f0",
+  "pins": {
+    "s09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "s10": "9ffce28ba28961937c4f24f1cc00eb8d899bc495"
+  },
+  "edits": {
+    "s09": [
+      {
+        "before": "import {createBudgetCompiler} from './finite-budget-world.mjs';",
+        "after": "import {createBudgetCompiler} from './finite-budget-world.mjs';\nimport {isEpoch} from './pending-get/codec.mjs';\nimport {preparePendingMain} from './pending-get/prepare-source.mjs';"
+      },
+      {
+        "before": "dropWinner=false,getWinner=false}={}){",
+        "after": "dropWinner=false,getWinner=false,pendingGetEpoch=null}={}){\n if(pendingGetEpoch!==null)assert(isEpoch(pendingGetEpoch)&&getWinner===true,'private pending owner fixture only');"
+      },
+      {
+        "before": "const m=await build({...options,entryPoints:['worker/mcp-own/finite.mjs'],...budget?{plugins:[budget.plugin()]}:getWinner?{plugins:[getWinnerPlugin()]}:dropWinner?{plugins:[dropMPlugin()]}:{}});",
+        "after": "const m=await build({...options,define:pendingGetEpoch===null?define:{...define,'globalThis.__AFW_PENDING_GET_EPOCH__':JSON.stringify(pendingGetEpoch)},entryPoints:['worker/mcp-own/finite.mjs'],...budget?{plugins:[budget.plugin()]}:getWinner?{plugins:[getWinnerPlugin(pendingGetEpoch!==null)]}:dropWinner?{plugins:[dropMPlugin()]}:{}});"
+      },
+      {
+        "before": "export function prepareGetWinner(name,source) {",
+        "after": "export function prepareGetWinner(name,source,pendingGet=false) {"
+      },
+      {
+        "before": "    return source+'\\nglobalThis.__afwGetWinner=('+createGetWinnerObserver.toString()+')();\\n';",
+        "after": "    if(pendingGet)return preparePendingMain('s03-prepared',source);\n    return source+'\\nglobalThis.__afwGetWinner=('+createGetWinnerObserver.toString()+')();\\n';"
+      },
+      {
+        "before": "__afwGetWinner?.caught(request,originalLease,error,b);return b;');\n    return source;",
+        "after": "__afwGetWinner?.caught(request,originalLease,error,b);return b;');\n    return pendingGet?preparePendingMain('bridge-prepared',source):source;"
+      },
+      {
+        "before": "return source.slice(0,start)+changed;\n}\n\nfunction getWinnerPlugin() {",
+        "after": "source=source.slice(0,start)+changed;\n  return pendingGet?preparePendingMain('wire-prepared',source):source;\n}\n\nfunction getWinnerPlugin(pendingGet=false) {"
+      },
+      {
+        "before": "return {contents:prepareGetWinner(name,prepared),loader:'js'};",
+        "after": "return {contents:prepareGetWinner(name,prepared,pendingGet),loader:'js'};"
+      }
+    ],
+    "s10": [
+      {
+        "before": "import {createBudgetCompiler,attachBudgetEpochCapture,beginFixedBudgetOwnedAllocation,attachFixedBudgetRecoveryOwner} from './finite-budget-world.mjs';",
+        "after": "import {createBudgetCompiler,attachBudgetEpochCapture,beginFixedBudgetOwnedAllocation,attachFixedBudgetRecoveryOwner} from './finite-budget-world.mjs';\nimport {isEpoch} from './pending-get/codec.mjs';\nimport {preparePendingQaEntry,preparePendingQaSource} from './pending-get/prepare-source.mjs';"
+      },
+      {
+        "before": "dropWinner=false,dropCompilerOnly=false}={}){",
+        "after": "dropWinner=false,dropCompilerOnly=false,pendingGetEpoch=null}={}){\n const pendingGet=pendingGetEpoch!==null;\n if(pendingGet)assert(isEpoch(pendingGetEpoch)&&dropWinner&&!dropCompilerOnly&&process.env.AFW_C2_GET_WINNER==='1'&&process.env.AFW_C2_GET_TRANSPORT==='verified');"
+      },
+      {
+        "before": "getWinner:dropWinner&&process.env.AFW_C2_GET_WINNER==='1'}):null;",
+        "after": "getWinner:dropWinner&&process.env.AFW_C2_GET_WINNER==='1',pendingGetEpoch}):null;"
+      },
+      {
+        "before": "if(firstConnection)entry=extendFirstConnectionPublication(entry);if(dropWinner||dropCompilerOnly)entry=prepareDropEntry(entry);",
+        "after": "if(firstConnection)entry=extendFirstConnectionPublication(entry);if(dropWinner||dropCompilerOnly)entry=prepareDropEntry(entry);\n if(pendingGet)entry=preparePendingQaEntry(entry);"
+      },
+      {
+        "before": "  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:dropWinner||dropCompilerOnly?prepareDropCatch:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8').then(text=>{if(coupledStages&&process.env.AFW_C2_T1_MUTANT==='prefix'){const needle=\"for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();\";assert.equal(text.split(needle).length,2,'SYN c2 single exact prefix mutant');return text.replace(needle,'');}return text;}),{mutation:firstConnectionMutation})),loader:'js'}));",
+        "after": "  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\\.mjs$/},async args=>({contents:((s)=>pendingGet?preparePendingQaSource('s00',s):s)((ownerCleanup?instrumentFiniteOwnerCleanup:dropWinner||dropCompilerOnly?prepareDropCatch:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8').then(text=>{if(coupledStages&&process.env.AFW_C2_T1_MUTANT==='prefix'){const needle=\"for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();\";assert.equal(text.split(needle).length,2,'SYN c2 single exact prefix mutant');return text.replace(needle,'');}return text;}),{mutation:firstConnectionMutation}))),loader:'js'}));\n   if(pendingGet)b.onLoad({filter:/mcp-qa-finite-owner-native-receiver\\.mjs$/},async args=>({contents:preparePendingQaSource('s02',await readFile(args.path,'utf8')),loader:'js'}));"
+      },
+      {
+        "before": "'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':J(w.expected)}};",
+        "after": "'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':J(w.expected),...pendingGet?{'globalThis.__AFW_PENDING_GET_EPOCH__':J(pendingGetEpoch)}:{}}};"
+      },
+      {
+        "before": "  let getDirectCall;const getDispatch=mf.dispatchFetch;f.getWinnerDirect=()=>{const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');return process.env.AFW_C2_GET_TRANSPORT==='verified' && f.call===getDirectCall && mf.dispatchFetch===getDispatch && Boolean(m) && sha(m.script)===resident.module.sha256;};",
+        "after": "  let getDirectCall;const getDispatch=mf.dispatchFetch;f.getWinnerDirect=()=>{const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');return process.env.AFW_C2_GET_TRANSPORT==='verified' && f.call===getDirectCall && mf.dispatchFetch===getDispatch && Boolean(m) && sha(m.script)===resident.module.sha256;};\n   if(pendingGet){\n    const qaHash=sha(built.outputFiles[0].contents);\n    f.pendingGetTarget=()=>{\n     const generation=currentMountedOptions,actor=f.stub;\n     const qa=generation.workers.find(w=>w.name==='qa-first-connection');\n     if(!actor||!qa||!f.getWinnerDirect()||sha(qa.script)!==qaHash)return null;\n     return Object.freeze({actor,generation,epoch:pendingGetEpoch,\n      validate:()=>generation===currentMountedOptions&&actor===f.stub&&f.getWinnerDirect()&&\n       generation.workers.find(w=>w.name==='qa-first-connection')===qa&&sha(qa.script)===qaHash});\n    };\n   }"
+      }
+    ]
+  },
+  "inverse": "Reverse each exact unique text replacement in reverse order. Inputs and outputs are full Source-body legacy exceptions S09/S10; never replace a tracked business file."
+}

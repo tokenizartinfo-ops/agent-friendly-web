@@ -1,0 +1,71 @@
+import {createPendingQa} from './qa-core.mjs';
+import {isEpoch,isUuid} from './codec.mjs';
+
+const epoch = globalThis.__AFW_PENDING_GET_EPOCH__;
+const directProof = Object.freeze({});
+const registered = new WeakMap();
+const byOptions = new WeakMap();
+const timelines = new WeakMap();
+const live = new Map();
+let expectedActor;
+let admitted = 0;
+let mountFault = null;
+const qa = createPendingQa({enabled: isEpoch(epoch), epoch, directProof});
+
+export function pendingQaArrival(actor, request, originalMethod, target, key) {
+  if (mountFault || originalMethod !== 'GET' || target !== 'https://afw-private.invalid/_finite-owner/choice' || !isUuid(key)) return;
+  if (expectedActor && expectedActor !== actor) { mountFault = 'V'; return; }
+  expectedActor = actor;
+  if (!registered.has(request) && admitted === 64) {
+    qa.arrive(request,key,directProof);
+    mountFault = 'X';
+    return;
+  }
+  qa.arrive(request,key,directProof);
+  if (registered.has(request)) return;
+  admitted += 1;
+  registered.set(request,key);
+  for (const [prior, priorKey] of live) if (priorKey !== key) qa.overlap(prior,request,directProof);
+  live.set(request,key);
+}
+
+export function pendingQaReaction(request,edge) {
+  qa.reaction(request,edge);
+  live.delete(request);
+}
+
+export function pendingPhase(request,phase) {
+  if (!mountFault) qa.phase(request,phase);
+}
+
+export function pendingPair(request,options,caller) {
+  if (!mountFault && live.has(request)) {
+    byOptions.set(options,request);
+    qa.enterPair(request,options,caller);
+  }
+  return options;
+}
+
+export function pendingAggregate(options,name,edge) {
+  if (mountFault) return;
+  const request = byOptions.get(options);
+  if (request) qa.aggregate(request,options,name,edge);
+  if (name === 'qualify2' && edge === 'return') byOptions.delete(options);
+}
+
+export function pendingTimeline(request,options) {
+  if (!mountFault && live.has(request)) timelines.set(options,request);
+  return options;
+}
+
+export function takePendingTimeline(options) {
+  const request = timelines.get(options);
+  timelines.delete(options);
+  return request;
+}
+
+export function pendingQaSample(actor,readEpoch,key) {
+  if (mountFault) return 'q0.' + mountFault;
+  if (expectedActor && expectedActor !== actor) return 'q0.V';
+  return qa.sample(readEpoch,key,directProof);
+}

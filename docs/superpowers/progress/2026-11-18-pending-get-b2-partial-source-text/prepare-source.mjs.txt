@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+
+const {patches} = JSON.parse(readFileSync(new URL('./source-site-delta.json',import.meta.url),'utf8'));
+
+function one(text, from, to) {
+  assert.equal(text.split(from).length,2,'pending GET literal site must occur exactly once');
+  return text.replace(from,()=>to);
+}
+
+function verified(source, unit) {
+  const edits=patches[unit];
+  assert(Array.isArray(edits)&&edits.length>0);
+  const post=edits.reduce((body,patch)=>one(body,patch.before,patch.after),source);
+  const recovered=edits.slice().reverse().reduce((body,patch)=>one(body,patch.after,patch.before),post);
+  assert.equal(recovered,source,'pending GET site inverse must recover exact source bytes');
+  return post;
+}
+
+export function preparePendingMain(unit, source) {
+  assert(['s03-prepared','bridge-prepared','wire-prepared'].includes(unit));
+  return verified(source,unit);
+}
+
+export function preparePendingQaSource(unit, source) {
+  assert(unit==='s00'||unit==='s02');
+  return verified(source,unit);
+}
+
+export function preparePendingQaEntry(source) {
+  const imports="import {pendingQaArrival,pendingQaReaction,pendingQaSample} from './test/fixtures/pending-get/qa-link.mjs';\n";
+  const post=imports+verified(source,'qa-entry-prepared');
+  assert.equal(post.slice(0,imports.length),imports);
+  return post;
+}
