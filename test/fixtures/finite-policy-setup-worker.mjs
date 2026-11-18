@@ -35,7 +35,7 @@ function make(env,T0,mode){
  const baseline={versionId:V,deploymentId:D,module:descriptor,configuration:config},rollback={versionId:R,deploymentId:U,module:descriptor,configuration:closed};
  return {T0,mode,preparation,selection,originalContext,baseline,rollback,module:descriptor,notice,authorization};
 }
-export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
+export async function syntheticFacts({ctx,env,intentId,sourceRevision,readOwnerSource},lease){
  lease.assertCurrent();const x=await ctx.storage.get('fixture:scenario');lease.assertCurrent();
  if(x.mode==='held_hydration'){
   const state=hydrations.get(ctx)??{reads:0,lateDenied:0};hydrations.set(ctx,state);state.reads++;
@@ -44,6 +44,10 @@ export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
   throw Error('SYNTHETIC held qualification unavailable');
  }
  if(intentId!==H||sourceRevision!==M||x.mode==='owner_incomplete'||x.mode==='seed_incomplete')throw Error('SYNTHETIC qualification denied');
+ if(x.mode==='qa-source-mounted'){
+  const s=hydrations.get(ctx)??{};hydrations.set(ctx,{...s,qaSourceMounted:typeof readOwnerSource==='function'});
+  throw Error('SYNTHETIC stop before provider writes');
+ }
  const n=native(x.T0);if(x.mode==='queue_expired')n.queuedAt=Date.now()-30001;if(x.mode==='setup_expired')n.T0=Date.now()-50001;
  narrowFinitePolicySetupClock(lease,n,refs,env);
  const selected=await createFiniteOwnerPreparationStore({storage:ctx.storage,now:Date.now}).readSelected({sourceRevision:M},lease);

@@ -135,3 +135,10 @@ test('tampered original Cloudflare proof cannot reach the setup callback',async 
  assert.deepEqual(r.callbacks,['finite-private-policy-origin']);
  assert.equal(f.posts(),0);
 });
+
+test('the finite QA actor passes its fixed private expediente source',async t=>{
+ const f=await policyFixture(t,'qa-source-mounted');
+ assert.equal((await f.run()).status,'admin_pending');
+ assert.equal((await f.hydration()).qaSourceMounted,true);
+ assert.equal(f.posts(),0);
+});
