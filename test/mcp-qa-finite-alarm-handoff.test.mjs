@@ -30,16 +30,23 @@ test('changed original alarm evidence and original issued restore deny before an
 test('native dispatch restores the original alarm before entering business and never rewrites a due original wakeup',async()=>{
  const {f,handoff,control}=await prepared();assert.equal((await control.prepare()).status,'armed');
  f.setNow(f.plan.C0+2);await f.storage.transaction(tx=>tx.setAlarm(null));
- const before=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,now:f.now});
+ const before=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
  assert.equal(before.kind,'business');assert.equal(f.alarm,handoff.initialC0);
  f.setNow(f.plan.C1+1);
- assert.equal((await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,now:f.now})).kind,'waiting');
+ assert.equal((await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now})).kind,'waiting');
  f.setNow(handoff.initialC0);
- assert.equal((await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,now:f.now})).kind,'original_due');
+ assert.equal((await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now})).kind,'original_due');
  assert.equal(f.alarm,handoff.initialC0);
 });
 test('missing alarm acknowledgement stops the dispatcher before business code can run',async()=>{
  const {f,control}=await prepared();assert.equal((await control.prepare()).status,'armed');
  f.setNow(f.plan.C0+2);f.storage.getAlarm=async()=>null;
- await assert.rejects(protectPrivateQaFiniteBusinessAlarm({storage:f.storage,now:f.now}));
+ await assert.rejects(protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now}));
+});
+
+test('an alarm carried by a different actor cannot take over original recovery',async()=>{
+ const {f,control}=await prepared();assert.equal((await control.prepare()).status,'armed');
+ f.setNow(f.plan.C0+4);
+ await assert.rejects(protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:'a'.repeat(64),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now}));
+ assert.equal(f.alarm,f.plan.C0);
 });

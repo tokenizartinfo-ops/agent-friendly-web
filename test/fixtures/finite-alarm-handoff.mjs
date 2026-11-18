@@ -1,3 +1,5 @@
+import {finitePrivateQaSetupInstanceId} from '../../lib/mcp-qa-finite-adoption.mjs';
+import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {readPrivateQaFiniteControlIdentity} from '../../lib/mcp-qa-finite-trial-control.mjs';
 import {stagePrivateQaFiniteOriginalAlarmHandoff} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
 
@@ -17,6 +19,11 @@ export async function stageAlarmFixture(f,options){
   ['afw.finite-preparation-cleanup-scope.v1:'+source.prepId]:{scopeHash:source.cleanupScopeHash,prepId:source.prepId,sourceRevision:f.plan.source.revision},
   [select+'publication:'+source.selectionHash]:{selectionHash:source.selectionHash},
   ['afw.qa-finite-policy-setup.v1:'+f.plan.intentId+':context']:{selectionHash:source.selectionHash,intentId:f.plan.intentId,sourceRevision:f.plan.source.revision,C0:f.plan.C0,C1:f.plan.C1},
+ };
+ const refs={intentId:f.plan.intentId,sourceRevision:f.plan.source.revision};
+ const identity={kind:'policy',...refs,setupInstanceId:finitePrivateQaSetupInstanceId(refs),effect:'activation'};
+ stable['afw.finite-policy-effect.v1:'+hashFinitePolicyEffectIdentity(identity)+':receipt']={
+  receiptHash:source.setupReceiptHash,...refs,qaVersionId:f.plan.deployments.qaLive.versionId,
  };
  for(const [key,data] of Object.entries(stable))f.rows.set(key,JSON.stringify(data));
  f.rows.set(select+'head',source.selectionHash);
