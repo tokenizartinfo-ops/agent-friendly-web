@@ -4,6 +4,7 @@ import {createLocalJWKSet, exportJWK, generateKeyPair, SignJWT} from 'jose';
 import {syntheticSaveFixture} from './fixtures/mcp-own-synthetic-save.mjs';
 import {createOwnSubscriptionObservationHandler} from '../lib/mcp-own-subscription-observation-http.mjs';
 import {saveOwnSyntheticGoal} from '../lib/mcp-own-synthetic-save.mjs';
+import {projectDossierEvent} from '../lib/dossier-supervision.mjs';
 import {verifyCloudflareAccessJwt} from '../lib/cloudflare-access-identity.mjs';
 
 const origin = 'https://delegated-canary.agentfriendlyweb.dev';
@@ -66,8 +67,17 @@ test('one synthetic dossier event is received, reviewed and withdrawn under the 
       'SELECT subscription_id FROM dossier_event_subscription_receipts',
     ).get();
     assert.equal(delivery.subscriptionId, subscriptionId);
-    assert.equal(delivery.webhookId, saved.eventId);
-    assert.equal(delivery.event.eventId, saved.eventId);
+    const [eventRow] = f.db.prepare(
+      'SELECT id, project_id AS projectId, type, created_at AS createdAt FROM project_events',
+    ).all();
+    assert.equal(eventRow.id, saved.eventId);
+    const signal = await projectDossierEvent(
+      {...eventRow, revision: saved.revision}, f.config.projectionSecret,
+    );
+    assert.equal(delivery.webhookId, signal.eventId);
+    assert.equal(delivery.event.eventId, signal.eventId);
+    assert.equal(delivery.event.timestamp, signal.observedAt);
+    assert.equal(projectRef, signal.projectRef);
     assert.equal(delivery.event.name, 'afw.dossier.changed');
     assert.deepEqual(delivery.event.data, {projectRef, revision: 2, kind: 'project_updated'});
     assert.deepEqual(f.db.prepare('SELECT id FROM project_events').all().map(row => row.id), [saved.eventId]);
