@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {createFiniteCoupledOwnerWorld} from './fixtures/finite-coupled-native.mjs';
+
+test('ordinary owned preparation after notice consent', {timeout: 150000}, async () => {
+  for (const name of ['AFW_C2_DROP_WINNER','AFW_C2_GET_WINNER','AFW_T3_MUTANT']) {
+    assert.equal(process.env[name], undefined);
+  }
+  const world = await createFiniteCoupledOwnerWorld();
+  try {
+    await world.approve('connection');
+    await world.oauth();
+    await world.approve('notices');
+    await world.monitor();
+    console.info('AFW_PREP_TRACE FINAL_GET_START');
+    await world.readFinalPreparation();
+    console.info('AFW_PREP_TRACE FINAL_GET_RETURN');
+  } finally {
+    await world.close();
+    console.info('AFW_PREP_TRACE WORLD_CLOSED');
+  }
+});
