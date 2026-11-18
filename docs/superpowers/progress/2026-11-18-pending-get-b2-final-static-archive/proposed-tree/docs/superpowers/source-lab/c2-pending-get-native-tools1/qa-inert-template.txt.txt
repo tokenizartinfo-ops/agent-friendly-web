@@ -1,0 +1,102 @@
+import {DurableObject} from 'cloudflare:workers';
+/*AFW_QA_TOOL_LINK*/
+const controlled=new WeakMap();
+const receiptRows=[['afw.finite-policy-effect.v1:synthetic:receipt','{}']];
+const fixedTarget='https://afw-private.invalid/_finite-owner/choice';
+const ordinaryBody='<html><form>synthetic</form></html>';
+const badEcho='e3000000-0000-4000-8000-000000000006';
+const controlOf=request=>controlled.get(request);
+const readyMark=(item,property)=>{if(!item||item[property])throw Error('TOOL original promise lineage');item[property]=true;};
+
+class FiniteClosure extends DurableObject {
+  constructor(ctx,env){
+    super(ctx,env);
+    this.tool=[];this.census=0;this.countCalls=0;this.closed=false;
+  }
+
+  fetch(request){
+    const item={request,superPromise:null,held:null,reached:false,form:false,registered:false,reaction:false};
+    if(this.closed||this.tool.length===(this.env.AFW_TOOL_MODE==='OVERLAP'?2:1))throw Error('TOOL unexpected delegate');
+    this.tool.push(item);controlled.set(request,item);
+    return this.inertPairAndForm(item);
+  }
+
+  async inertPairAndForm(item){
+    const request=item.request;
+    const member=Object.freeze({});
+    toolPhase(request,'B');toolPhase(request,'I');
+    toolPair(request,member);
+    toolAggregate(member,'facts1','enter');
+    await Promise.resolve();
+    toolAggregate(member,'facts1','return');
+    toolAggregate(member,'primary1','enter');
+    await new Promise(resolve=>{item.reached=true;item.held=resolve;this.observeTwoLive();});
+    toolAggregate(member,'primary1','return');
+    toolAggregate(member,'qualify1','enter');await Promise.resolve();toolAggregate(member,'qualify1','return');
+    toolAggregate(member,'primary2','enter');await Promise.resolve();toolAggregate(member,'primary2','return');
+    toolAggregate(member,'facts2','enter');await Promise.resolve();toolAggregate(member,'facts2','return');
+    toolAggregate(member,'qualify2','enter');await Promise.resolve();toolAggregate(member,'qualify2','return');
+    toolPhase(request,'J');toolPhase(request,'C');await Promise.resolve();toolPhase(request,'D');
+    const form=new Response(ordinaryBody,{headers:{'Content-Type':'text/html; charset=utf-8'}});
+    item.form=true;toolPhase(request,'F');return form;
+  }
+
+  observeTwoLive(){
+    if(this.env.AFW_TOOL_MODE!=='OVERLAP'||this.twoLive||this.census!==2||this.tool.length!==2)return;
+    const [a,b]=this.tool;
+    if(a.request===b.request||!a.originalKey||!b.originalKey||a.originalKey===b.originalKey)return;
+    if(![a,b].every(item=>item.reached&&item.held&&item.registered&&item.superPromise instanceof Promise&&!item.reaction))return;
+    this.twoLive=true;console.info('N07_TWO_LIVE_ARRIVALS v1');
+  }
+
+  async snapshot() {
+    const mode=this.env.AFW_TOOL_MODE;
+    this.countCalls+=1;
+    if(mode==='LATE'&&this.countCalls<=2){
+      if(this.census!==0)throw Error('TOOL early ordinary count');
+      return receiptRows;
+    }
+    const slot=this.env.AFW_TOOL_SLOT,expected=mode==='NO_DELIVERY'?0:mode==='OVERLAP'?2:1;
+    if(this.census!==expected||this.tool.length!==expected||this.tool.some(item=>!item.reached||!item.registered||!(item.superPromise instanceof Promise)))
+      throw Error('TOOL raw arrival mismatch');
+    if(!['N01','N02','N03','N04','N05','N06','N07','N08'].includes(slot))throw Error('TOOL slot');
+    console.info(slot+'_RAW_ENTRY_CENSUS v1 c'+this.census);
+    if(mode==='OVERLAP'){
+      const [a,b]=this.tool;
+      if(a.request===b.request||!a.originalKey||!b.originalKey||a.originalKey===b.originalKey)throw Error('TOOL overlap identity');
+      console.info('N07_DISTINCT_INPUTS v1');
+    }
+    if(mode==='TRUNCATED'){
+      if(!toolSeeded())throw Error('TOOL budget 255 missing');
+      console.info('N08_SEED255 v1');
+    }
+    if(mode==='LATE') {
+      const item=this.tool[0];
+      if(item.reaction||!item.held)throw Error('TOOL original late promise not held');
+      const witness=item.superPromise.then(()=> 'FULFILLED');
+      const release=item.held;item.held=null;release();
+      if(await witness!=='FULFILLED'||!item.reaction||!item.form)throw Error('TOOL original reaction not observed before scalar witness');
+      console.info(slot+'_ORIGINAL_PROMISE_WITNESS v1');
+    }
+    return receiptRows;
+  }
+
+  async finishForClose(){
+    if(this.closed)throw Error('TOOL duplicate dispose');
+    this.closed=true;
+    for(const item of this.tool){
+      if(!item.form){
+        if(!item.held||!item.registered)throw Error('TOOL hold unavailable at close');
+        const witness=item.superPromise.then(()=> 'FULFILLED');
+        const release=item.held;item.held=null;release();
+        if(await witness!=='FULFILLED'||!item.reaction||!item.form)throw Error('TOOL hold closure');
+      }
+    }
+    return 'SYN_TOOL_CLEANUP_RETURN';
+  }
+}
+
+ export class Initial extends FiniteClosure{
+ /*AFW_QA_ORIGINAL_FETCH*/
+}
+export default {fetch(){return new Response(null,{status:410});}};

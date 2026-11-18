@@ -1,0 +1,35 @@
+{
+  "schema": "afw.b2.fix4-narrowed-collector-ruling.v1",
+  "atUTC": "2026-11-18 15:30:31 UTC",
+  "project": "AFW",
+  "priorBrief": "b113b073be02db3fbb01b82c67ec2d3f84baf051",
+  "originalReview": "f1d36b71ecd97d73a2106be9b766ded87025ec94",
+  "partialAuthorReport": "a4358d6724c1483e0b5435a2c21d63e1b2370aaa",
+  "fixRound": 4,
+  "maxRounds": 5,
+  "author": "/root/pending_get_native_tools_fix4",
+  "status": "PARTIAL_STATIC_REPORT_THEN_NARROWED_WORK_RESUMED",
+  "ruling": "Do not require completion of the fault-injection/reproduction integration the author declined. Narrow continuation to generic process supervision, evidence provenance, individual worker outcomes, strict fixed-line collector and scoped SDK-disposal labeling. Preserve the synthetic scenario modules and OAuth/business integration unchanged. R3-02 remains explicitly open; no readiness/acceptance inferred.",
+  "allowed": [
+    "R3-03 startup-inclusive worker slots with supported lifecycle entry proof",
+    "R3-04 exact owned failure retirement and fail-closed custody",
+    "R3-05 actual individual worker/test outcomes",
+    "R3-06 retain original Node event categories before lossy TAP, strict whole payload/stream/cardinality",
+    "R3-07 explicit scoped canonical SDK SIGKILL label"
+  ],
+  "forbidden": [
+    "new or changed correlation substitution/overlap controls",
+    "OAuth/routes/runtime/credentials",
+    "execution/probes/ref creation",
+    "D07 or recorder edits"
+  ],
+  "staticFindings": {
+    "tap": "Node22.23.4 default TAP merges stdout/stderr/diagnostic; cannot infer original stream from TAP text",
+    "preload": "Import/reporter registration before first spawn must be established; CLI preload assumed without entry proof is insufficient",
+    "lifecycle": "ChildProcess synchronous diagnostic channel is a candidate anchor, requires no monkeypatch and actual later proof"
+  },
+  "consequence": "Partial hardening is not B2 qualification. No new execution can be released while load-bearing findings remain.",
+  "tests": "NOT_RUN",
+  "operationalReadiness": false,
+  "PCoff": false
+}

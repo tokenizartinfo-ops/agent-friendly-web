@@ -1,0 +1,117 @@
+import assert from 'node:assert/strict';
+import {existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {negativeIds,small} from './producer-child.mjs';
+
+const selected='C2T1_SCOPE_MISSING',first='C2T1_CONNECTION';
+const counts={upload:1,activation:1,receipts:1};
+const f1='C2SOURCE '+JSON.stringify({id:first,status:'pass',phase:'connection',counters:counts,code:'OK'});
+const f15='C2SOURCE '+JSON.stringify({id:selected,status:'fail',phase:'scope',counters:counts,code:'TEST_FAILED'});
+const firstSteps=[first+':action:enter',first+':action:return',first+':count:enter',first+':count:return'];
+const action=[selected+':action:enter',selected+':action:throw',selected+':count:enter'];
+const counting=selected+':count:return', throwing=selected+':count:throw';
+const close=['AFTER:close:enter','AFTER:close:return'];
+const row=/^p1\.[JAOVX]\.[TE]3\.[A-Z0-9a-z-]{5}$/;
+
+function tokenCount(raw,literal) {
+  return raw.split('\n').filter(line=>line.replace(/\r$/,'').trimEnd().endsWith(literal)).length;
+}
+
+function exactLog(run,literal,n=1) {
+  assert.equal(tokenCount(run.stdout,literal)+tokenCount(run.stderr,literal),n,'fixed TOOL witness '+literal);
+}
+
+function readMarks(root,mode=0o600) {
+  const text=small(join(root,'green-progress.ndjson'),32768,mode);
+  assert(text.endsWith('\n'));
+  const lines=text.slice(0,-1).split('\n');assert(lines.length<=128);
+  let elapsed=-1;
+  return lines.map((line,index)=>{
+    const e=JSON.parse(line);
+    assert(e.sequence===index+1&&Number.isSafeInteger(e.elapsedMs)&&e.elapsedMs>=elapsed);
+    elapsed=e.elapsedMs;
+    return e.id+':'+e.operation+':'+e.edge;
+  });
+}
+
+export function negativeAggregate(root,run) {
+  assert.equal(run.heldCutoff,'HELD_COUNT_CUTOFF');
+  exactLog(run,'AFW_C2_GREEN_RECORDER_FAULT',1);
+  const reported=[];
+  for(const [i,id] of negativeIds.entries()){
+    const dir=join(root,id);
+    assert.equal(small(join(dir,'read-attempts'),16),'');
+    assert(!existsSync(join(dir,'pending-private.row')));
+    const witness=small(join(dir,'negative-witness'),4096).trimEnd().split('\n');
+    assert.deepEqual(witness.slice(0,2),['RAW_ACTION '+id,'RAW_COUNT '+id]);
+    const designated=i===3?'REJECT_CARRIER':'REJECT_COUNT';
+    if(i<4)assert.deepEqual(witness.slice(2),['ENTER',designated,'NEUTRAL_CLOSE_RETURN']);
+    else assert.deepEqual(witness.slice(2),[]);
+    const marks=readMarks(dir,i===1?0o400:0o600),base=[...firstSteps,...action];
+    const expected=i===0?[...base,throwing,...close]:i===1||i===4?base:
+      i===2?[...base,counting,counting,...close]:[...base,counting,...close];
+    assert.deepEqual(marks,expected);
+    reported.push({id,hookEntered:i<4,rejection:i<4?designated:null,readAttempts:0,row:null,
+      neutralCloseReturned:i<4,recorderFault:i===1,heldCutoff:i===4});
+  }
+  return reported;
+}
+
+function nativeOne(result,root,run,plan,d07) {
+  assert.equal(result.id,plan[0]);
+  const endSteps=[...action,counting,...close];
+  assert.deepEqual(readMarks(root),d07?[...firstSteps,...endSteps]:endSteps);
+  assert.equal(result.queries,plan[7]);
+  assert.equal(result.privateOn,plan[2]==='ON');
+  assert.equal(result.ordinary.status,503);
+  assert.equal(result.ordinary.g1,'g1.503.L.0');
+  assert.equal(result.gateCalls,result.id.startsWith('N05')?1:0);
+  assert.deepEqual(result.closed,{disposeReturned:true,workerdTerminated:true,initialWorkerdObserved:true,restartSignalled:false,ownedWorkerdAfterDispose:0,hadCompanion:result.id.startsWith('N07')});
+  assert(/^[0-9a-f]{64}$/.test(result.ordinary.bodySha256));
+  assert(Number.isSafeInteger(result.setupMs)&&result.setupMs>=0);
+  if(result.privateOn)assert(row.test(result.row)&&plan[6].includes(result.row)&&small(join(root,'pending-private.row'),14)===result.row+'\n');
+  else assert(result.row===null&&!existsSync(join(root,'pending-private.row')));
+  const slot=result.id.slice(0,3), census=slot==='N05'?0:slot==='N07'?2:1;
+  exactLog(run,slot+'_RAW_ENTRY_CENSUS v1 c'+census);
+  if(d07){
+    exactLog(run,f1);exactLog(run,f15);exactLog(run,slot+'_ORIGINAL_PROMISE_WITNESS v1');
+    exactLog(run,'C2FT4 '+JSON.stringify({id:selected,value:'UNKNOWN',w:'L',s:0,h:503}));
+    if(result.privateOn)assert.equal(small(join(root,'native-hook-witness'),1024),'ENTER\nSTAGED\n');
+    else assert(!existsSync(join(root,'native-hook-witness')));
+  }
+  if(slot==='N05'){exactLog(run,'N05_GATE_SEALED v1 held1 sent0 queued0');exactLog(run,'N05_GATE_CLOSED v1 held1 sent0 queued0');}
+  if(slot==='N06')assert.deepEqual(result.foreignWitness,{returned:true,exactForeignReply:true,sameEpoch:true,dispatchedKeyDifferent:true,tuple:'I0130',invocations:1});
+  else assert.equal(result.foreignWitness,null);
+  if(slot==='N07'){
+    exactLog(run,'N07_DISTINCT_INPUTS v1');
+    assert.deepEqual(result.overlapWitness,{preCaptureWitness:true,marker:'N07_TWO_LIVE_ARRIVALS v1'});
+  }else assert.equal(result.overlapWitness,null);
+  if(slot==='N08')exactLog(run,'N08_SEED255 v1');
+  const cap=d07?5500:2000;
+  assert(result.setupMs<=cap);
+  return {...result,originalMarks:d07?10:6,rawCensus:census,originalPublicFrame:d07?'CASE1_OK_CASE15_EXPECTED_FAIL':null,
+    originalSamePromiseWitness:d07,gateWitness:slot==='N05'?'held1/sent0/queued0':null,seed255Witness:slot==='N08'};
+}
+
+export function collectToolGroup({root,run,schedule,phase,slot}) {
+  assert(!run.stderr.includes('AFW_C2_GREEN_RECORDER_FAULT'));
+  if(phase==='CAL_PREFLIGHT'){
+    const cal=JSON.parse(small(join(root,'group-result.json'),24576));
+    const labels=[...Array.from({length:35},(_,i)=>'Q'+String(i+1).padStart(2,'0')),
+      ...Array.from({length:10},(_,i)=>'O'+String(i+1).padStart(2,'0')),
+      ...Array.from({length:6},(_,i)=>'S0'+(i+1)),...Array.from({length:5},(_,i)=>'W0'+(i+1))];
+    assert.deepEqual(cal.models,labels);
+    assert.deepEqual(cal.shapes,['CAL_T_ZERO_ARGS','CAL_E_ONE_EVENT']);
+    assert(cal.esbuildTerminated===true&&cal.workerdTerminated===true);
+    return cal;
+  }
+  if(slot){
+    const n=JSON.parse(small(join(root,'tool-slot.json'),8192));
+    assert.equal(n.id,slot);
+    return [nativeOne(n,root,run,schedule.nativeExpected.find(x=>x[0]===slot),true)];
+  }
+  const raw=JSON.parse(small(join(root,'group-result.json'),24576));
+  const expected=phase==='TOOL_PENDING'?schedule.nativeExpected.slice(0,2):schedule.nativeExpected.slice(4);
+  assert.equal(raw.occurrences.length,expected.length);
+  return raw.occurrences.map((n,i)=>nativeOne(n,join(root,expected[i][0]),run,expected[i],false));
+}

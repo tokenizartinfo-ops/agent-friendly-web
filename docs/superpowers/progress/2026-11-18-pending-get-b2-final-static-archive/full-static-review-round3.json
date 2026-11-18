@@ -1,0 +1,159 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.round3-full-static-review.v1",
+  "status": "CHANGES_REQUIRED",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Detached B2 TOOL-only static proposal",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "Round3 all-component static review of nominated run inputs",
+    "ALLOWED_ACTION": "Literal inspection and detached report persistence/readback only."
+  },
+  "correctionRound": 3,
+  "maxRounds": 5,
+  "pins": {
+    "mounts": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+    "runner": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+    "workflow": "9cc21bf63f8c73e212965a288f7119536faf9fb8",
+    "nativeRound3Delta": "e24d16e840d6e06c99ff2cc06d21295a0cbbc5e0",
+    "previousNativeReview": "01cf72cd749a95d7343522d74f998455e9b5f801",
+    "sdkScope": "ff0f6877635441d8ab2fd73a53b0e3f182d3198f",
+    "priorNativeRuling": "de57d83b0e28ef765ddf7729ce27fa538b443787",
+    "schedule": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+    "fiWitness": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+    "controller": "f6dc963613db8957e51fb8320d572efc1f7742bb",
+    "collector": "0ede2ed95a7b3454bc2001cb7571c9246c64a4e3",
+    "scopeGuard": "fa6f8c2b6e1e077f9e119452155cff70910317b5",
+    "packet": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+    "graph": "c50198511f93639ec20b32f75ad8cd6110900979",
+    "authorReport": "961bd2d328e77e75ec2cdd3bcb2f65353cb62300",
+    "publicFrameDelta": "da654b5cac1e4d8fef4d1b59f968caf315a55dc0"
+  },
+  "exactCandidateBodies": {
+    "native-tool.mjs": "6f4596923cd998abcd6cb3b250ff07dc727183c3",
+    "native-compile.mjs": "0d362f8d4cd170f0c4e1a4d5bbbbdb678929cfb2",
+    "native-group-child.mjs": "5b3dc893aad90b20dff7762880ecd5533f5f7ccb",
+    "native-late.test.mjs": "0b8e0b08d937064e74ed260b7aba3b798dfeb2af",
+    "qa-inert-template.txt": "06eab6d5c9241c64217f2d292453e319e3b77fbd",
+    "gate-worker.txt": "e3712979ae78e72d13f2d79dd849c7bf3cb8418d",
+    "host-negatives.mjs": "17adfe7f9a0bc6d03a4e60d0ba18f42e92a3a3b1",
+    "cal-model.mjs": "69c1457194d36d8464f55d6962c8278339146962",
+    "driver-D07.txt": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "progress-recorder.txt": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "fixture-host.mjs": "836632fcfec33d610a4a9ee870643cd184d357d4"
+  },
+  "verdicts": {
+    "SPEC": {
+      "verdict": "FAIL",
+      "status": "CHANGES_REQUIRED",
+      "reason": "The exact ordinary N06 sample remains unverified before key substitution. FI2 per-worker deadlines, individual frozen-D07 outcomes and exact witness admission are incomplete."
+    },
+    "QUALITY": {
+      "verdict": "FAIL",
+      "status": "CHANGES_REQUIRED",
+      "reason": "The producer's failure path can return before owned wrapper/group retirement is verified. Final evidence validation needs the specified strict worker and log handling."
+    }
+  },
+  "priorDispositions": [
+    {
+      "id": "N06",
+      "status": "PARTIALLY_ADDRESSED",
+      "reason": "The existing single RPC now has to fulfill with exact foreign echo, read epoch and I0130, and collector checks its sanitized evidence. The prior requirement to validate the actual underlying ordinary q1 tuple before key replacement is still open."
+    },
+    {
+      "id": "N07",
+      "status": "ADDRESSED_STATIC_ONLY",
+      "reason": "Exact dedicated instance INFO payload, static sole QA emitter, two distinct live admitted promises and marker observed before synchronous capture are bound. No source field is invented. Actual transport ordering still needs the gated run."
+    },
+    {
+      "id": "TOOL_POST_OPEN_CLEANUP",
+      "status": "ADDRESSED_STATIC_ONLY",
+      "reason": "The direct helper and frozen-D07 fixture factory put acquisition under cleanup on post-open setup errors and preserve the initial failure. This disposition is separate from newly reviewed outer producer failure cleanup."
+    },
+    {
+      "id": "PREVIOUS_BINDING_AND_ROUND2",
+      "status": "PRIOR_DISPOSITIONS_PRESERVED",
+      "reason": "The three initial Source binding fixes and P3 outer tripwire plus O10 coverage remain pinned; no reopening or unchanged B1 replay."
+    },
+    {
+      "id": "HOST_PID_NAMESPACE",
+      "status": "WITHDRAWN_FOR_FINAL_PIN",
+      "reason": "Active native-tool 6f4596923cd998abcd6cb3b250ff07dc727183c3 lines 25–36 uses the procfs-visible host PID from readlink('/proc/self') for the task lookup and PPid check. The interim namespace-local concern does not apply to the final packet."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B2-R3-02",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-compile.mjs",
+      "line": 39,
+      "also": "native-tool.mjs:200–215 and producer-collect.mjs:82",
+      "title": "N06 manufactures the expected phase if the ordinary QA reply is some other q1",
+      "evidence": "The host now proves that the one RPC returned the exact foreign scalar. The compiled QA modifier still accepts value.startsWith('q1.') and constructs a fresh fixed I0130 suffix. If the actual underlying observer returned another positive tuple, that control could still pass.",
+      "fix": "Require the ordinary sample to equal q1.<read epoch>.<exact read key>.I0130 before replacing only its key with the fixed benign foreign value. Keep the existing host-success attestation and one read. Publish no raw correlation values."
+    },
+    {
+      "id": "B2-R3-03",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "line": 96,
+      "also": "producer-child.mjs:108–132",
+      "title": "The P3 supervisor enforces the group clock but omits the five sealed worker slots",
+      "evidence": "The first four workers have no enforced 1600 ms slot. For the held worker the current guard permits a first hold observation up to 1350 ms after scope proof, whereas FI2 requires count-enter by 1250 ms and 250 ms reserved for exact terminal readback. The loop enforces the 8000 ms group deadline but never binds held retirement to its 1600 ms slot. Scope proof time by itself also excludes worker startup.",
+      "fix": "Define the five ordered owner-approved 1600 ms slot anchors including startup. Verify raw held count-enter by 1250 ms in its slot, bound the allowed confirmation wait and require exact owned worker terminal readback by 1600 ms. Track all four prior workers against their slots and refuse work if reserve is unavailable. Preserve the same group and job ceilings."
+    },
+    {
+      "id": "B2-R3-04",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "line": 137,
+      "also": "runner:196–197",
+      "title": "Unexpected cutoff sends a signal without verified wrapper and owned-group retirement",
+      "evidence": "On failure the catch sends SIGKILL only if a scope proof was collected and still matches. It then destroys streams, unrefs and immediately throws, with no bounded wait for sudo/unshare close or verified process-group retirement. When the fault happens before the first proof, no cleanup of the launched wrapper is attempted. The parent correctly retains scratch and rejects evidence, but does not establish that the acquired group is actually gone.",
+      "fix": "Preserve an immediately acquired trusted identity for the owned wrapper, use only exact reconciled process identities and bounded cleanup for launched workers, and independently verify terminal state within existing reserve. Failure or incomplete cleanup remains STOPPED_UNQUALIFIED with explicit unverified closure. Do not signal unrelated processes or delete uncertified scratch."
+    },
+    {
+      "id": "B2-R3-05",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "line": 37,
+      "also": "producer-child.mjs:126–136",
+      "title": "Expected aggregate exit 1 does not prove the first four actual frozen-D07 outcomes",
+      "evidence": "negativeAggregate checks journal shape, per-file witnesses, zero tripwire and existence of the held cutoff. It does not bind individual worker TAP status and expected original test outcomes, or case 1 pass and case 15 C2SOURCE fail/missing where applicable. The intentional held worker already makes the composite CLI fail, so aggregate exit 1 cannot distinguish an unrelated failure or altered original outcome in the other workers. The new C2FT4 assertion is under nativeOne's ordinary D07 branch for N03/N04. It does not repair negativeAggregate.",
+      "fix": "Bind the exact first four worker and original selected test outcomes from genuine runner output and own terminal proof, including exact case 1 pass and appropriate case 15 error/frame outcome. Keep count-throw frame absent and held-worker cutoff separate, and retain missing-mark recorder fault interpretation and neutral AFTER evidence. Reject extra/unknown failures."
+    },
+    {
+      "id": "B2-R3-06",
+      "severity": "IMPORTANT",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "line": 16,
+      "title": "Evidence called exact uses unrestricted suffix matching",
+      "evidence": "tokenCount accepts any stdout or stderr line ending in a claimed witness after trimEnd. Prefix garbage, a diagnostic that merely ends in the expected token, or a transport source mismatch could be credited as actual census, gate, promise or frozen public frame evidence.",
+      "fix": "Recognize only the actual raw fixed line or specifically admitted TAP framing of that line. Match the complete normalized payload, permitted stream and exact occurrence count. Preserve the strict per-instance N07 marker checks."
+    },
+    {
+      "id": "B2-R3-07",
+      "severity": "MINOR",
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+      "line": 230,
+      "title": "The packet does not name the canonical SDK SIGKILL disposal convention",
+      "evidence": "SDKDisposeUsesOwnSignal is true but the packet does not identify that the pinned SDK disposes its owned workerd with SIGKILL after the benign cleanup acknowledgement. This is distinct from supervisor forced cutoff. The final author report explicitly describes SIGKILL; this concern is limited to the structured run receipt's projection.",
+      "fix": "Name the pinned SDK disposal convention explicitly and retain verified benign ACK, await dispose return, and observed scoped PID retirement. Keep the original worker process exit and the supervisor cutoff distinct. Do not infer graceful exit or physical RPC settlement."
+    }
+  ],
+  "composition": "Final packet binds 61 mounted or parent-read objects and 64 additions including runner, workflow and mounts. The extra object is the final public-frame delta. The final collector adds C2FT4 for N03/N04, while the final runner only updates its manifest pin. Reviewed the active candidate's controller, collector, scope guard, selected native changes, exact workflow and sealed schedule. The six groups sum to 326 seconds with three seconds reserved for final custody under 330. Setup cap 65 and publication reserve 24 fit seven minutes. Thirteen guarded Node launches are planned under per-target eight and aggregate 24. CAL56, two native shapes, five P3 negatives, eight selected inert native cases, one overlap companion, six QA reads and one N05 M control are the intended finite work. Root owns whole-tree and trigger audit plus body hash/inverse measurements. No author or reviewer execution has taken place.",
+  "scopeBoundary": "Native inert QA drives benign manual phase/aggregate hooks using the actual observer and selected native transport. S00/S02 original QA is an independent linkage build only. Actual Source QA/P4, live routes, authorization/consent state, original business qualification, Task1 and PC-off remain held. Same unprivileged filesystem identity is shared. SDK-owned resource disposal has a scoped process conclusion only, with no graceful workerd exit, global drain or physical RPC settlement claim.",
+  "futureCommand": "node docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+  "execution": "NOT_RUN_BY_DESIGN. No Source/core/harness execution, import, evaluation, AST/syntax, tests/builds, ref/workflow or runtime mutation. No release or full acceptance.",
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  },
+  "supersedes": {
+    "review": "a460e9afe359c035343b04a1279980ab9987577e",
+    "reason": "The earlier assessment was against interim package pins and incorrectly attributed the older namespace-local native census to the active node. This final review reconciles the final packet and withdraws that finding."
+  }
+}

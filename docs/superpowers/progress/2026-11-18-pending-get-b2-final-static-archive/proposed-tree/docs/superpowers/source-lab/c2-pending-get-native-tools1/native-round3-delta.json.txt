@@ -1,0 +1,137 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.native-round3-delta.v1",
+  "prior": {
+    "native": "5f1943ffff466e2472a687d04075396ee83be826",
+    "qa": "40937e70441ca17b7bd7879c06ce7c589375acbb",
+    "child": "f42e61e71008918deeb338e7f9d92cd4a05e72aa",
+    "late": "6feab19870fd91254a025e9735bdbeab126cdff5",
+    "compile": "4ea29b53fcd26a855df3a4a4b77416b5994f6b88",
+    "collect": "8b799abbf0f7889ce3424c0ad5717e45c466dcbd"
+  },
+  "edits": {
+    "native": [
+      {
+        "before": "assert.equal(worker.name,identity);",
+        "after": "assert.equal(worker.config.name,identity);"
+      },
+      {
+        "before": "  raw.upstream=origin;",
+        "after": "  raw.upstream=origin;raw.cf=false;\n  let overlapMarkers=0,preCapture=false,captureBegun=false,runtimeFault=false;\n  let foreignWitness=null,restartSignalled=false;\n  raw.unsafeHandleRuntimeRestart=()=>{restartSignalled=true;runtimeFault=true;};\n  raw.handleStructuredLogs=entry=>{\n    const value=entry?.message;\n    if(entry?.level==='error'||typeof value==='string'&&/different request context|different request's handler/i.test(value))runtimeFault=true;\n    if(entry?.level!=='info'&&entry?.level!=='log')return;\n    if(value==='N07_TWO_LIVE_ARRIVALS v1'){\n      if(plan.slot!=='N07'||entry.level!=='info'){runtimeFault=true;return;}\n      overlapMarkers+=1;\n      if(!captureBegun&&overlapMarkers===1)preCapture=true;\n      return;\n    }\n    if(typeof value==='string'&&/^(?:N0[1-8]_RAW_ENTRY_CENSUS v1 c[012]|N0[34]_ORIGINAL_PROMISE_WITNESS v1|N07_DISTINCT_INPUTS v1|N08_SEED255 v1)$/.test(value))console.info(value);\n  };"
+      },
+      {
+        "before": "  const main={uploads:[{},{}]",
+        "after": "  function beforeCapture() {\n    captureBegun=true;\n    assert(!runtimeFault);\n    if(plan.slot==='N07')assert(preCapture&&overlapMarkers===1,'native overlap event must precede capture');\n  }\n  const main={uploads:[{},{}]"
+      },
+      {
+        "before": "    open=false;\n    await mf.dispose();",
+        "after": "    const stillOriginal=!terminated(workerd)&&!runtimeFault;\n    open=false;\n    await mf.dispose();\n    assert(stillOriginal,'same native process until SDK disposal');"
+      },
+      {
+        "before": "      invokeRead(stub,epoch,key){\n        assert(stub===actor&&main.getWinnerDirect()&&open&&queries===0);\n        queries+=1;return stub.pendingGetSample(epoch,key);\n      }",
+        "after": "      async invokeRead(stub,epoch,key){\n        assert(stub===actor&&main.getWinnerDirect()&&open&&queries===0);\n        queries+=1;const reply=await stub.pendingGetSample(epoch,key);\n        if(plan.slot==='N06'){\n          const foreign='e3000000-0000-4000-8000-000000000006';\n          assert(open&&main.getWinnerDirect()&&epoch===plan.epoch&&key!==foreign&&reply==='q1.'+epoch+'.'+foreign+'.I0130');\n          foreignWitness={returned:true,exactForeignReply:true,sameEpoch:true,dispatchedKeyDifferent:true,tuple:'I0130',invocations:1};\n        }\n        return reply;\n      }"
+      },
+      {
+        "before": "    assert.equal(gateCalls,plan.slot==='N05'?1:0);",
+        "after": "    assert.equal(gateCalls,plan.slot==='N05'?1:0);\n    if(plan.slot==='N06')assert(foreignWitness?.exactForeignReply===true);\n    if(plan.slot==='N07')assert(preCapture&&overlapMarkers===1);"
+      },
+      {
+        "before": "      privateOn:plan.on,setupMs:",
+        "after": "      foreignWitness,overlapWitness:plan.slot==='N07'?{preCaptureWitness:preCapture,marker:'N07_TWO_LIVE_ARRIVALS v1'}:null,\n      privateOn:plan.on,setupMs:"
+      },
+      {
+        "before": "return {main,boundary,gateBeforeCount,close,recordCompanion,emitReceipt,route,plan};",
+        "after": "return {main,boundary,gateBeforeCount,close,beforeCapture,recordCompanion,emitReceipt,route,plan};"
+      },
+      {
+        "before": "export function ownedNative(name) {",
+        "after": "export function ownedNativeList(name) {"
+      },
+      {
+        "before": "  assert.equal(found.length,1,'single native process of expected type');\n  return Object.freeze(found[0]);\n}",
+        "after": "  return found;\n}\n\nexport function ownedNative(name) {\n  const found=ownedNativeList(name);\n  assert.equal(found.length,1,'single native process of expected type');\n  return Object.freeze(found[0]);\n}"
+      },
+      {
+        "before": "    assert.equal(terminated(workerd),true,'workerd terminated after genuine disposal');",
+        "after": "    assert.equal(terminated(workerd),true,'observed native PID terminal after SDK dispose');\n    assert.equal(ownedNativeList('workerd').length,0,'no owned workerd remains after SDK dispose');\n    assert(!restartSignalled);"
+      },
+      {
+        "before": "closed={disposeReturned:true,workerdTerminated:true,workerdStarts:1,hadCompanion:Boolean(companion)};",
+        "after": "closed={disposeReturned:true,workerdTerminated:true,initialWorkerdObserved:true,restartSignalled:false,ownedWorkerdAfterDispose:0,hadCompanion:Boolean(companion)};"
+      }
+    ],
+    "qa": [
+      {
+        "before": "await new Promise(resolve=>{item.reached=true;item.held=resolve;});",
+        "after": "await new Promise(resolve=>{item.reached=true;item.held=resolve;this.observeTwoLive();});"
+      },
+      {
+        "before": "  async snapshot() {",
+        "after": "  observeTwoLive(){\n    if(this.env.AFW_TOOL_MODE!=='OVERLAP'||this.twoLive||this.census!==2||this.tool.length!==2)return;\n    const [a,b]=this.tool;\n    if(a.request===b.request||!a.originalKey||!b.originalKey||a.originalKey===b.originalKey)return;\n    if(![a,b].every(item=>item.reached&&item.held&&item.registered&&item.superPromise instanceof Promise&&!item.reaction))return;\n    this.twoLive=true;console.info('N07_TWO_LIVE_ARRIVALS v1');\n  }\n\n  async snapshot() {"
+      }
+    ],
+    "child": [
+      {
+        "before": "import {Miniflare,Response as DispatchResponse} from 'miniflare';",
+        "after": "import {Miniflare,Response as DispatchResponse,convertV4MiniflareOptions} from 'miniflare';"
+      },
+      {
+        "before": "const mf=new Miniflare({modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']});",
+        "after": "const mf=new Miniflare(convertV4MiniflareOptions({cf:false,modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));"
+      },
+      {
+        "before": "  const tool=await openNativeTool(plan,dir,catalogDir,slotEnd),{main}=tool;\n  const witnesses=[];\n  const host=plan.on?createPendingHostBoundary(tool.boundary(dir,value=>{witnesses.push(value);})):null;\n  if(plan.on)assert(host);\n  const legacy=createGetWinnerHost(main,()=>main.getWinnerDirect(),DispatchResponse,host);\n  const target={id:label},token=legacy.begin(target);\n  let error,counts;\n  try{",
+        "after": "  const tool=await openNativeTool(plan,dir,catalogDir,slotEnd);\n  let primaryFailure=false,counts;\n  try{\n    const {main}=tool,witnesses=[];\n    const host=plan.on?createPendingHostBoundary(tool.boundary(dir,value=>{witnesses.push(value);})):null;\n    if(plan.on)assert(host);\n    const legacy=createGetWinnerHost(main,()=>main.getWinnerDirect(),DispatchResponse,host);\n    const target={id:label},token=legacy.begin(target);\n    let error;"
+      },
+      {
+        "before": "      token.capture(main,response,status);main.captureToolSurface(response,status,body);",
+        "after": "      tool.beforeCapture();token.capture(main,response,status);main.captureToolSurface(response,status,body);"
+      },
+      {
+        "before": "  }finally{\n    mark('AFTER','close','enter');\n    try{await tool.close();}catch(error){mark('AFTER','close','throw',error);throw error;}\n    mark('AFTER','close','return');\n  }\n  assert(mono()<=slotEnd);",
+        "after": "  }catch(error){primaryFailure=true;throw error;}\n  finally{\n    mark('AFTER','close','enter');\n    let failed;\n    try{await tool.close();}catch(error){failed=error;mark('AFTER','close','throw',error);}\n    if(!failed)mark('AFTER','close','return');\n    else if(!primaryFailure)throw failed;\n  }\n  assert(mono()<=slotEnd);"
+      },
+      {
+        "before": "openNativeTool,ownedNative,terminated}",
+        "after": "openNativeTool,ownedNative,ownedNativeList,terminated}"
+      },
+      {
+        "before": "assert(processProof&&terminated(processProof));",
+        "after": "assert(processProof&&terminated(processProof)&&ownedNativeList('workerd').length===0);"
+      }
+    ],
+    "late": [
+      {
+        "before": "  tool=await openNativeTool(plan,root,catalog,end);\n  proof=tool.boundary(root,stages);\n  const main=tool.main,observer=createFiniteSnapshotObserver(main,()=>main);\n  return {",
+        "after": "  const acquired=await openNativeTool(plan,root,catalog,end);\n  try{\n    tool=acquired;\n    proof=tool.boundary(root,stages);\n    const main=tool.main,observer=createFiniteSnapshotObserver(main,()=>main);\n    return {"
+      },
+      {
+        "before": "  };\n}});\nawait import(",
+        "after": "    };\n  }catch(original){\n    try{await acquired.close();}catch{console.info('TOOL_INIT_CLOSE_UNVERIFIED');}\n    throw original;\n  }\n}});\nawait import("
+      }
+    ],
+    "compile": [
+      {
+        "before": "    const sourceQa=await qaSourceLinkage();",
+        "after": "    assert(![m0,m1,off.spyScript].some(body=>body.includes('N07_TWO_LIVE_ARRIVALS v1')));\n    assert([q0.script,q1.script,q8.script].every(body=>body.split('N07_TWO_LIVE_ARRIVALS v1').length===2));\n    const sourceQa=await qaSourceLinkage();"
+      }
+    ],
+    "collect": [
+      {
+        "before": "  if(slot==='N07')exactLog(run,'N07_DISTINCT_INPUTS v1');",
+        "after": "  if(slot==='N06')assert.deepEqual(result.foreignWitness,{returned:true,exactForeignReply:true,sameEpoch:true,dispatchedKeyDifferent:true,tuple:'I0130',invocations:1});\n  else assert.equal(result.foreignWitness,null);\n  if(slot==='N07'){\n    exactLog(run,'N07_DISTINCT_INPUTS v1');\n    assert.deepEqual(result.overlapWitness,{preCaptureWitness:true,marker:'N07_TWO_LIVE_ARRIVALS v1'});\n  }else assert.equal(result.overlapWitness,null);"
+      },
+      {
+        "before": "{disposeReturned:true,workerdTerminated:true,workerdStarts:1,hadCompanion:result.id.startsWith('N07')}",
+        "after": "{disposeReturned:true,workerdTerminated:true,initialWorkerdObserved:true,restartSignalled:false,ownedWorkerdAfterDispose:0,hadCompanion:result.id.startsWith('N07')}"
+      }
+    ]
+  },
+  "authority": "de57d83b0e28ef765ddf7729ce27fa538b443787",
+  "proof": {
+    "N06": "Actual successful wrong-key scalar checked inside the existing query, sanitized proof only.",
+    "N07": "Pinned handleStructuredLogs, dedicated isolated exact two-script mount, sole emitter fixed info payload received before synchronous capture.",
+    "closure": "Own acquired tool immediately. Benign cleanup ACK + SDK dispose + exact terminal observed PID + no owned workerd after close, no restart signal. No graceful workerd exit, physical drain or global-drain claim.",
+    "source": "Native inert QA drives benign boundaries. Original QA S00/S02 separately built as linkage only."
+  },
+  "execution": "NOT_RUN"
+}

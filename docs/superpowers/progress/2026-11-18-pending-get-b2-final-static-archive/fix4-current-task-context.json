@@ -1,0 +1,24 @@
+{
+  "schema": "afw.fix4.active-user-context.v1",
+  "readAtUTC": "2026-11-18 15:12:46 UTC",
+  "source": "Codex first-party read_thread",
+  "thread": {
+    "id": "01a0c10a-1966-7fc0-bece-3a2b432e33f7",
+    "title": "Agent Friendly Web · Producto y entregas",
+    "hostId": "local",
+    "status": {
+      "type": "active",
+      "activeFlags": []
+    }
+  },
+  "userMessages": [
+    {
+      "turnId": "01a1ee60-d1a9-7561-bb96-b2475f40ca3c",
+      "itemId": "01a1ee60-db2b-7d53-963c-9d03af9f3e1e",
+      "text": "continua\n"
+    }
+  ],
+  "notCopied": "No assistant reasoning, prior tool arguments, credentials or unrelated project messages.",
+  "interpretation": "Root current user task is continuing AFW; latest actual user message is continua. The long AGENTS.md INSTRUCTIONS is workspace context, including a quoted historical Hermes design request, not replacement of the active AFW request. Parent directly delegates narrow immutable AFW code proposal within this continuing task. No live API/deploy/Auth/OTP/permissions/token runtime action is authorized by this handoff.",
+  "delegatedBrief": "b113b073be02db3fbb01b82c67ec2d3f84baf051"
+}

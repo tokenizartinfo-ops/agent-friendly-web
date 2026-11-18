@@ -1,0 +1,264 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.site-delta.v1",
+  "state": "PROPOSED_NOT_RUN",
+  "pins": {
+    "literals": "7500c3a94d730735f8680a8a1832d5de0c316469",
+    "s00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "s02": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+    "s03": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+    "s08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+    "s09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "s10": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "d07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "factory": "676ce360268ae07c2af0d0b029d89bc7a9e7bbc3",
+    "m": "65bd3bb57f0ee0c52de2bfdda79bd64e91f3dc81",
+    "qa": "ee33f99fadcc0a40efbf64cecbd5a6209356814d",
+    "host": "249033b347dbb9696f6fd872557b28385617cd90",
+    "codec": "18a40467a2900a3e1265f7b90cb115ac072b8858",
+    "gb1": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+    "runner": "50acdda42fd32a706b4a33bb214dc195b4485766",
+    "guard": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+    "ruling": "45bec1fff9fd89fc8cafa0930987f0da14d18bf7"
+  },
+  "fixtureIndex": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+  "ruling": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
+  "directions": {
+    "forward": "listed sequence old->new, each exact single match",
+    "inverse": "reverse per-unit sequence new->old, each exact single match"
+  },
+  "dynamicPreimages": {
+    "M": "S09 getWinner prepared DROP intermediates, before earlier standalone toString factory suffix",
+    "QA": "existing extendFirstConnectionPublication then prepareDropEntry input"
+  },
+  "patches": {
+    "s03-prepared": [
+      {
+        "id": "M00-enter",
+        "before": "getCell=globalThis.__afwGetWinner?.enter(request);",
+        "after": "getCell=pendingMainEnter(request);"
+      },
+      {
+        "id": "s03-prepared-link",
+        "before": "import {createFiniteOwnerRequestLease} from '../../lib/mcp-qa-finite-owner-preparation.mjs';",
+        "after": "import {createFiniteOwnerRequestLease} from '../../lib/mcp-qa-finite-owner-preparation.mjs';\nimport {pendingWinner,pendingMainEnter} from '../../test/fixtures/pending-get/m-link.mjs';"
+      },
+      {
+        "id": "M00-factory-assignment",
+        "before": "export default {...finiteWorker,fetch(p,env,ctx){",
+        "after": "globalThis.__afwGetWinner=pendingWinner;\nexport default {...finiteWorker,fetch(p,env,ctx){"
+      }
+    ],
+    "bridge-prepared": [
+      {
+        "id": "M00-bind",
+        "before": "globalThis.__afwGetWinner?.bind(request,originalLease);",
+        "after": "pendingMainBind(request,originalLease);"
+      },
+      {
+        "id": "M01-request",
+        "before": "const first=error=>{failed=true;signalFailure(error);};\n   const body=await (request.method==='POST'?readChoicePostBody:finiteNativeBytes)(request,check,first);check();",
+        "after": "const first=error=>{pendingWinner.pendingM?.invalidate(originalLease);failed=true;signalFailure(error);};\n   pendingWinner.pendingM?.mark(originalLease,'requestBytesEnter');\n   const body=await (request.method==='POST'?readChoicePostBody:finiteNativeBytes)(request,check,first);\n   pendingWinner.pendingM?.mark(originalLease,'requestBytesReturn');check();"
+      },
+      {
+        "id": "M02-native-uuid",
+        "before": "headers.set('x-afw-finite-version',version);headers.set('x-afw-finite-request-id',crypto.randomUUID());",
+        "after": "headers.set('x-afw-finite-version',version);const pendingUuid=crypto.randomUUID();\n   pendingWinner.pendingM?.captureUuid(originalLease,pendingUuid);headers.set('x-afw-finite-request-id',pendingUuid);"
+      },
+      {
+        "id": "M02-nominated-stub",
+        "before": "globalThis.__afwGetWinner?.forward(request,originalLease);const response=await Reflect.apply(fetcher,stub,[forwarded]);",
+        "after": "globalThis.__afwGetWinner?.forward(request,originalLease);\n   pendingWinner.pendingM?.mark(originalLease,'stubEnter');\n   const response=await Reflect.apply(fetcher,stub,[forwarded]);\n   pendingWinner.pendingM?.mark(originalLease,'stubReturn',response);"
+      },
+      {
+        "id": "M03-non-ok",
+        "before": "if(!response.ok){let getStatus;",
+        "after": "if(!response.ok){pendingWinner.pendingM?.invalidate(originalLease);let getStatus;"
+      },
+      {
+        "id": "M03-bound-response",
+        "before": "const responseCheck=()=>{check();if(response.headers!==responseHeaders||JSON.stringify([...responseHeaders])!==responseHeaderBytes||response.body!==responseBody)fail();};\n   const bytes=await finiteNativeBytes(response,responseCheck,first,503);responseCheck();",
+        "after": "const responseCheck=()=>{try{check();if(response.headers!==responseHeaders||JSON.stringify([...responseHeaders])!==responseHeaderBytes||response.body!==responseBody)fail();}catch(error){pendingWinner.pendingM?.invalidate(originalLease);throw error;}};\n   pendingBeginResponse(originalLease,response,responseCheck,first);\n   const bytes=await finiteNativeBytes(response,responseCheck,first,503);\n   pendingWinner.pendingM?.markRead(originalLease,response,'responseBytesReturn');responseCheck();"
+      },
+      {
+        "id": "bridge-prepared-link",
+        "before": "import {readFiniteOwnerRequestContext,readFiniteOwnerRequestBoundary} from './mcp-qa-finite-owner-preparation.mjs';",
+        "after": "import {readFiniteOwnerRequestContext,readFiniteOwnerRequestBoundary} from './mcp-qa-finite-owner-preparation.mjs';\nimport {pendingWinner,pendingMainBind,pendingBeginResponse} from '../test/fixtures/pending-get/m-link.mjs';"
+      }
+    ],
+    "wire-prepared": [
+      {
+        "id": "M04-native-cut",
+        "before": "abort=()=>{try{finiteNativeFailure();}catch(error){globalThis.__afwDropM?.deadline(lease,error);globalThis.__afwGetWinner?.deadline(lease,error);reject(error);}};",
+        "after": "abort=function(){try{finiteNativeFailure();}catch(error){globalThis.__afwDropM?.deadline(lease,error);const arity=arguments.length;globalThis.__afwGetWinner?.deadline(lease,error,arity===0?'T':arity===1?'E':undefined,arity);reject(error);}};"
+      },
+      {
+        "id": "M03-wire-bind",
+        "before": "const reader=message.body?.getReader();if(!reader){check();return new Uint8Array();}",
+        "after": "const pendingLease=pendingWireCall(message,check,first);let reader;\n try{reader=message.body?.getReader();}catch(error){if(pendingLease)pendingWinner.pendingM?.invalidate(pendingLease);throw error;}\n if(!pendingLease)pendingUnexpectedRequestReader(message,reader);\n if(!reader){try{check();}catch(error){if(pendingLease)pendingWinner.pendingM?.invalidate(pendingLease);throw error;}return new Uint8Array();}"
+      },
+      {
+        "id": "M03-reader",
+        "before": "for(;;){const {done,value}=await reader.read();check();",
+        "after": "for(;;){if(pendingLease)pendingWinner.pendingM?.markRead(pendingLease,message,'enter');const part=await reader.read();\n   if(pendingLease)pendingWinner.pendingM?.markRead(pendingLease,message,'return');const {done,value}=part;check();"
+      },
+      {
+        "id": "M03-read-failure",
+        "before": "}catch(error){first(error);try{await reader.cancel();}catch{}throw error;}",
+        "after": "}catch(error){if(pendingLease)pendingWinner.pendingM?.invalidate(pendingLease);first(error);try{await reader.cancel();}catch{}throw error;}"
+      },
+      {
+        "id": "wire-prepared-link",
+        "before": "import {readFiniteOwnerRequestBoundary} from './mcp-qa-finite-owner-preparation.mjs';",
+        "after": "import {readFiniteOwnerRequestBoundary} from './mcp-qa-finite-owner-preparation.mjs';\nimport {pendingWinner,pendingWireCall,pendingUnexpectedRequestReader} from '../test/fixtures/pending-get/m-link.mjs';"
+      }
+    ],
+    "s02": [
+      {
+        "id": "QA1-receiver",
+        "before": "   check();\n   return await handlePrivateQaFiniteOwnerChoice({request,env,ctx},parent.lease);",
+        "after": "   check();pendingPhase(request,'B');\n   return await handlePrivateQaFiniteOwnerChoice({request,env,ctx},parent.lease);"
+      },
+      {
+        "id": "s02-link",
+        "before": "import {handlePrivateQaFiniteOwnerChoice} from './mcp-qa-finite-owner-phase-context.mjs';",
+        "after": "import {handlePrivateQaFiniteOwnerChoice} from './mcp-qa-finite-owner-phase-context.mjs';\nimport {pendingPhase} from '../test/fixtures/pending-get/qa-link.mjs';"
+      }
+    ],
+    "s00": [
+      {
+        "id": "QA4-facts1",
+        "before": "const first=await facts(),{capsule,material,plan}=first,p=material.ownerSelection;",
+        "after": "pendingAggregate(options,'facts1','enter');const first=await facts();pendingAggregate(options,'facts1','return');\n   const {capsule,material,plan}=first,p=material.ownerSelection;"
+      },
+      {
+        "id": "QA4-primary1",
+        "before": "const observed=await primary();",
+        "after": "pendingAggregate(options,'primary1','enter');const observed=await primary();pendingAggregate(options,'primary1','return');"
+      },
+      {
+        "id": "QA4-round-continuation",
+        "before": "const qualified=await qualify(first,observed),again=await primary(),second=await facts(),secondQualified=await qualify(second,again);",
+        "after": "pendingAggregate(options,'qualify1','enter');const qualified=await qualify(first,observed);pendingAggregate(options,'qualify1','return');\n   pendingAggregate(options,'primary2','enter');const again=await primary();pendingAggregate(options,'primary2','return');\n   pendingAggregate(options,'facts2','enter');const second=await facts();pendingAggregate(options,'facts2','return');\n   pendingAggregate(options,'qualify2','enter');const secondQualified=await qualify(second,again);pendingAggregate(options,'qualify2','return');"
+      },
+      {
+        "id": "QA3-nested-options",
+        "before": "const pair=await observeOwnerPhasePair({ctx,env,parent:lease,...preconnectionId?{preconnectionId}:{}});",
+        "after": "const pendingOptions={ctx,env,parent:lease,...preconnectionId?{preconnectionId}:{}};\n const pendingRequest=takePendingTimeline(arguments[0]);if(pendingRequest)pendingPair(pendingRequest,pendingOptions,'nested');\n const pair=await observeOwnerPhasePair(pendingOptions);"
+      },
+      {
+        "id": "QA2-initial-pair",
+        "before": "const grammar=qualifyFiniteOwnerChoiceRequest(original,bytes),initial=await wait(()=>observeOwnerPhasePair({ctx,env,parent:originalLease})),initialState=initial.second;",
+        "after": "const grammar=qualifyFiniteOwnerChoiceRequest(original,bytes);pendingPhase(request,'I');\n   const initial=await wait(()=>observeOwnerPhasePair(pendingPair(request,{ctx,env,parent:originalLease},'initial')));\n   pendingPhase(request,'J');const initialState=initial.second;"
+      },
+      {
+        "id": "QA3-timeline-options",
+        "before": "check();const pair=await wait(()=>readOwnerTimeline({ctx,env},parent,requested));",
+        "after": "check();const pair=await wait(()=>readOwnerTimeline(pendingTimeline(request,{ctx,env}),parent,requested));"
+      },
+      {
+        "id": "QA2-choice",
+        "before": "const choice=await wait(()=>continuePrivateQaFiniteOwnerChoice({ctx,env,request:original},originalLease,readChoice));",
+        "after": "pendingPhase(request,'C');const choice=await wait(()=>continuePrivateQaFiniteOwnerChoice({ctx,env,request:original},originalLease,readChoice));pendingPhase(request,'D');"
+      },
+      {
+        "id": "QA2-form",
+        "before": "check();return new Response(html,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Set-Cookie':'__Host-afw-finite-prepare='+choice.handle+'; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age='+Math.max(0,Math.floor((choice.expiresAt-Date.now())/1000))}});",
+        "after": "check();const pendingFormResponse=new Response(html,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Set-Cookie':'__Host-afw-finite-prepare='+choice.handle+'; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age='+Math.max(0,Math.floor((choice.expiresAt-Date.now())/1000))}});pendingPhase(request,'F');return pendingFormResponse;"
+      },
+      {
+        "id": "s00-link",
+        "before": "import {readPrivateQaFiniteOwnerSdkGrant} from './mcp-qa-finite-owner-cleanup.mjs';",
+        "after": "import {readPrivateQaFiniteOwnerSdkGrant} from './mcp-qa-finite-owner-cleanup.mjs';\nimport {pendingPhase,pendingPair,pendingAggregate,pendingTimeline,takePendingTimeline} from '../test/fixtures/pending-get/qa-link.mjs';"
+      }
+    ],
+    "qa-entry-prepared": [
+      {
+        "id": "QA0-arrival",
+        "before": "target=request.url,trace=this.firstState?.trace,actual=super.fetch(request);",
+        "after": "target=request.url,trace=this.firstState?.trace;\n  pendingQaArrival(this,request,originalMethod,target,requestId);const actual=super.fetch(request);"
+      },
+      {
+        "id": "QA0-existing-reaction",
+        "before": "const observed=response=>{",
+        "after": "let pendingReaction=false;const observed=response=>{if(pendingReaction)pendingQaReaction(request,'F');"
+      },
+      {
+        "id": "QA0-rejection",
+        "before": "if(actual&&typeof actual.then==='function')actual.then(observed,()=>{}).catch(()=>{});else observed(actual);",
+        "after": "if(actual&&typeof actual.then==='function'){pendingReaction=true;actual.then(observed,()=>{pendingQaReaction(request,'R');}).catch(()=>{});}else observed(actual);"
+      },
+      {
+        "id": "QA0-fixed-read",
+        "before": " export class Initial extends FiniteClosure{\n async fetch(request){",
+        "after": " export class Initial extends FiniteClosure{\n pendingGetSample(epoch,key){return pendingQaSample(this,epoch,key);}\n async fetch(request){"
+      }
+    ]
+  },
+  "coreVariantEdits": {
+    "qa-core-model.mjs": {
+      "pre": "qa",
+      "edits": [
+        {
+          "before": "  function phase(request, next) {",
+          "after": "\n  function overlap(first, second, proof) {\n    if (!on || overflow || proof !== directProof || first === second) return;\n    const a = requestCells.get(first), b = requestCells.get(second);\n    if (!a || !b || a === b || a.poison || b.poison || a.sampled || b.sampled ||\n        a.reaction !== '0' || b.reaction !== '0') return;\n    poison(a, 'O');\n    poison(b, 'O');\n  }\n\n  function phase(request, next) {"
+        },
+        {
+          "before": "{arrive, phase, enterPair, aggregate, reaction, sample}",
+          "after": "{arrive, overlap, phase, enterPair, aggregate, reaction, sample}"
+        }
+      ]
+    },
+    "qa-core-source.mjs": {
+      "pre": "qa-core-model.mjs",
+      "edits": [
+        {
+          "before": "{enabled, epoch, directProof, registerModelSeeds}",
+          "after": "{enabled, epoch, directProof}"
+        },
+        {
+          "before": "  // These two capabilities are issued only to an explicit MODEL fixture.\n  // B2 must remove this registration and cannot inherit the ordinal seed.\n  if (on && typeof registerModelSeeds === 'function') {\n    let budgetSeedUsed = false;\n    let ordinalSeedUsed = false;\n    registerModelSeeds(Object.freeze({\n      budget255(request) {\n        const cell = active(request);\n        if (!cell || budgetSeedUsed) return false;\n        budgetSeedUsed = true;\n        cell.writes = writeLimit;\n        return true;\n      },\n      ordinal63(request) {\n        const cell = active(request);\n        if (!cell || ordinalSeedUsed || cell.phase !== 'A') return false;\n        ordinalSeedUsed = true;\n        Object.assign(cell, {phase: 'C', ordinal: ordinalLimit, progress: 12, writes: 0});\n        return true;\n      },\n    }));\n  }\n\n  return Object.freeze({arrive, overlap",
+          "after": "  return Object.freeze({arrive, overlap"
+        }
+      ]
+    },
+    "qa-core-tool255.mjs": {
+      "pre": "qa-core-model.mjs",
+      "edits": [
+        {
+          "before": "{enabled, epoch, directProof, registerModelSeeds}",
+          "after": "{enabled, epoch, directProof, registerToolBudgetSeed}"
+        },
+        {
+          "before": "  // These two capabilities are issued only to an explicit MODEL fixture.\n  // B2 must remove this registration and cannot inherit the ordinal seed.\n  if (on && typeof registerModelSeeds === 'function') {\n    let budgetSeedUsed = false;\n    let ordinalSeedUsed = false;\n    registerModelSeeds(Object.freeze({\n      budget255(request) {\n        const cell = active(request);\n        if (!cell || budgetSeedUsed) return false;\n        budgetSeedUsed = true;\n        cell.writes = writeLimit;\n        return true;\n      },\n      ordinal63(request) {\n        const cell = active(request);\n        if (!cell || ordinalSeedUsed || cell.phase !== 'A') return false;\n        ordinalSeedUsed = true;\n        Object.assign(cell, {phase: 'C', ordinal: ordinalLimit, progress: 12, writes: 0});\n        return true;\n      },\n    }));\n  }\n\n  return Object.freeze({arrive, overlap",
+          "after": "  if (on && typeof registerToolBudgetSeed === 'function') {\n    let used = false;\n    registerToolBudgetSeed(request => {\n      const cell = active(request);\n      if (!cell || used) return false;\n      used = true;\n      cell.writes = writeLimit;\n      return true;\n    });\n  }\n\n  return Object.freeze({arrive, overlap"
+        }
+      ]
+    },
+    "m-core-source.mjs": {
+      "pre": "m",
+      "edits": [
+        {
+          "before": "{enabled, epoch, directProof, registerModelBudgetSeed}",
+          "after": "{enabled, epoch, directProof}"
+        },
+        {
+          "before": "  // B1 fixture injection only. B2 must exclude this registration and mutation seam.\n  if (typeof registerModelBudgetSeed === 'function') {\n    let seedUsed = false;\n    registerModelBudgetSeed(lease => {\n      const cell = active(lease);\n      if (!cell || seedUsed) return false;\n      seedUsed = true;\n      cell.writes = writeLimit;\n      return true;\n    });\n  }\n\n  const hooks = ",
+          "after": "  const hooks = "
+        }
+      ]
+    }
+  },
+  "tool255QEdits": [
+    {
+      "before": "const qa = createPendingQa({enabled: isEpoch(epoch), epoch, directProof});",
+      "after": "let seedBudget;\nlet seeded = false;\nconst qa = createPendingQa({enabled: isEpoch(epoch), epoch, directProof, registerToolBudgetSeed: capability => { seedBudget = capability; }});\nexport function pendingTool255Seeded() { return seeded; }"
+    },
+    {
+      "before": "  qa.arrive(request,key,directProof);\n  if (registered.has(request)) return;",
+      "after": "  qa.arrive(request,key,directProof);\n  if (registered.has(request)) return;\n  seeded = seedBudget?.(request) === true || seeded;"
+    }
+  ]
+}

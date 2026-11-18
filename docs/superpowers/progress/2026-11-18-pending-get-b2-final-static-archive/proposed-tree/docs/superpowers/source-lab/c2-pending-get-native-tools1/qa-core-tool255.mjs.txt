@@ -1,0 +1,170 @@
+import {isEpoch, isQaTuple, isUuid} from './codec.mjs';
+
+const phaseOrder = 'ABIJCDF';
+const aggregateOrder = ['facts1', 'primary1', 'qualify1', 'primary2', 'facts2', 'qualify2'];
+const pairCodes = '0123456789abc';
+const cellLimit = 64;
+const writeLimit = 255;
+const ordinalLimit = 63;
+const object = value => value !== null && (typeof value === 'object' || typeof value === 'function');
+
+export function createPendingQa(config) {
+  const keyCells = new Map();
+  const requestCells = new WeakMap();
+  const optionCells = new WeakMap();
+  const {enabled, epoch, directProof, registerToolBudgetSeed} = config ?? {};
+  const on = enabled === true && isEpoch(epoch) && object(directProof);
+  let overflow = false;
+
+  function poison(cell, reason) {
+    if (!cell.poison) {
+      cell.poison = reason;
+      cell.options = null;
+    }
+  }
+
+  function active(request) {
+    const cell = requestCells.get(request);
+    return overflow || !cell || cell.poison || cell.reaction !== '0' ? null : cell;
+  }
+
+  function write(cell) {
+    if (cell.writes === writeLimit) {
+      poison(cell, 'X');
+      return false;
+    }
+    cell.writes += 1;
+    return true;
+  }
+
+  function arrive(request, key, proof) {
+    if (!on || overflow || proof !== directProof || !object(request) || !isUuid(key)) return;
+    const sameRequest = requestCells.get(request);
+    const sameKey = keyCells.get(key);
+    if (sameRequest) poison(sameRequest, 'O');
+    if (sameKey) {
+      poison(sameKey, 'O');
+      return;
+    }
+    if (keyCells.size === cellLimit) {
+      overflow = true;
+      return;
+    }
+    const cell = {
+      phase: 'A', ordinal: 0, progress: 0, options: null, reaction: '0',
+      poison: sameRequest ? 'O' : null, writes: 1, sampled: false,
+    };
+    keyCells.set(key, cell);
+    if (!sameRequest) requestCells.set(request, cell);
+  }
+
+
+  function overlap(first, second, proof) {
+    if (!on || overflow || proof !== directProof || first === second) return;
+    const a = requestCells.get(first), b = requestCells.get(second);
+    if (!a || !b || a === b || a.poison || b.poison || a.sampled || b.sampled ||
+        a.reaction !== '0' || b.reaction !== '0') return;
+    poison(a, 'O');
+    poison(b, 'O');
+  }
+
+  function phase(request, next) {
+    const cell = active(request);
+    if (!cell) return;
+    if (typeof next !== 'string' || next !== phaseOrder[phaseOrder.indexOf(cell.phase) + 1] ||
+        (next === 'J' && (cell.ordinal !== 1 || cell.progress !== 12)) ||
+        (next === 'D' && cell.progress !== 12)) {
+      poison(cell, 'V');
+      return;
+    }
+    if (write(cell)) cell.phase = next;
+  }
+
+  function enterPair(request, options, caller) {
+    const cell = active(request);
+    if (!cell) return;
+    const owner = optionCells.get(options);
+    if (owner && owner !== cell) {
+      poison(owner, 'O');
+      poison(cell, 'O');
+      return;
+    }
+    if (owner || (cell.ordinal > 0 && cell.progress !== 12)) {
+      poison(cell, 'O');
+      return;
+    }
+    const correctCaller = (caller === 'initial' && cell.phase === 'I' && cell.ordinal === 0) ||
+      (caller === 'nested' && cell.phase === 'C' && cell.ordinal >= 1);
+    if (!object(options) || !correctCaller) {
+      poison(cell, 'V');
+      return;
+    }
+    if (cell.ordinal === ordinalLimit) {
+      poison(cell, 'X');
+      return;
+    }
+    if (!write(cell)) return;
+    optionCells.set(options, cell);
+    cell.options = options;
+    cell.ordinal += 1;
+    cell.progress = 0;
+  }
+
+  function aggregate(request, options, name, edge) {
+    const cell = active(request);
+    if (!cell) return;
+    const expectedName = aggregateOrder[Math.floor(cell.progress / 2)];
+    const expectedEdge = cell.progress % 2 === 0 ? 'enter' : 'return';
+    if (cell.progress >= 12 || !cell.options || cell.options !== options ||
+        (cell.phase !== 'I' && cell.phase !== 'C') || name !== expectedName || edge !== expectedEdge) {
+      poison(cell, 'V');
+      return;
+    }
+    if (write(cell)) cell.progress += 1;
+  }
+
+  function reaction(request, edge) {
+    if (overflow) return;
+    const cell = requestCells.get(request);
+    if (!cell || cell.poison) return;
+    if (cell.reaction !== '0') {
+      poison(cell, 'O');
+      return;
+    }
+    if (edge !== 'F' && edge !== 'R') {
+      poison(cell, 'V');
+      return;
+    }
+    if (write(cell)) cell.reaction = edge;
+  }
+
+  function sample(readEpoch, key, proof) {
+    if (!on) return null;
+    if (proof !== directProof || readEpoch !== epoch || !isUuid(key)) return 'q0.V';
+    if (overflow) return 'q0.X';
+    const cell = keyCells.get(key);
+    if (!cell) return 'q0.A';
+    if (cell.poison) return 'q0.' + cell.poison;
+    if (cell.sampled) {
+      poison(cell, 'O');
+      return 'q0.O';
+    }
+    cell.sampled = true;
+    const ordinal = cell.ordinal.toString(16).toUpperCase().padStart(2, '0');
+    const tuple = cell.phase + ordinal + pairCodes[cell.progress] + cell.reaction;
+    return isQaTuple(tuple) ? 'q1.' + epoch + '.' + key + '.' + tuple : 'q0.V';
+  }
+
+  if (on && typeof registerToolBudgetSeed === 'function') {
+    let used = false;
+    registerToolBudgetSeed(request => {
+      const cell = active(request);
+      if (!cell || used) return false;
+      used = true;
+      cell.writes = writeLimit;
+      return true;
+    });
+  }
+
+  return Object.freeze({arrive, overlap, phase, enterPair, aggregate, reaction, sample});
+}

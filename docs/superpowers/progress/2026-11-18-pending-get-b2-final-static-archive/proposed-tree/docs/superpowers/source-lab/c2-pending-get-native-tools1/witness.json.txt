@@ -1,0 +1,238 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.NEGATIVE_WITNESSES/1",
+  "execution": "NOT_RUN_DATA_ONLY",
+  "scope": "Detached fixture premise and literal expectations; no code, runtime or execution release.",
+  "review": "dbc45288628aae4e670cae968d677e3da913a16c",
+  "fixBrief": "04e278c5561b1f9cc421b24481e4a9d9e2a40156",
+  "preserved": {
+    "originalFixtureIndex": "7115a056bed39c2d0a4d3de1f804bb7594dab382",
+    "D07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "Source5": 5,
+    "OWN5": 5,
+    "StageB": 5
+  },
+  "FI1": {
+    "id": "N05_NO_DELEGATION_WITNESS",
+    "scope": "Only N05 fixed inert native control. One benign held M dispatch can reach the hold gate. Separate zero target-fetch dispatch/delivery to the nominated raw actor boundary is proven only under the sole-path and phase agreement below.",
+    "independence": [
+      [
+        "GATE",
+        "At the inert M stub-await transport edge before any native actor fetch delegate, own an independent bounded append-once gate state. It records selected gate entry and actual attempts across its outgoing raw target actor fetch invocation edge. It neither reads nor shares the private observer, QA key, q0/q1 or QA cell."
+      ],
+      [
+        "RAW",
+        "Use a separate independent one-place monotonic actor census set at the first unconditional raw fetch wrapper entry, before S09:153 observer/route/key checks. The wrapper knows no model key, does not consult the QA record and cannot be skipped for an invalid private branch. Any raw fetch counts; existence of count/read RPCs never increments it. Capped values are 0, 1, overflow."
+      ],
+      [
+        "ACCESS",
+        "One-use fixture mount. Verify exact designated gate is sole possible target-fetch ingress/delegate for this selected original calling path, and raw census and actual benign count belong to the same nominated actor identity and mounted generation. Isolate other target fetch inputs and reject alternate path/replacement/remount."
+      ],
+      [
+        "CENSUS_READ",
+        "Sample raw census once inside the already-required same actor benign ordinary count, before it returns. Emit one fixed, bounded separate control witness in the already captured TOOL-only evidence channel without altering the original returned counters or adding actor query, callback or read inside measured M/QA. No post-read census RPC and no new method."
+      ],
+      [
+        "CAL",
+        "Use the already planned N01/N02 one-arrival benign count on each side of its OFF/ON pairing to require the same raw census placement/custody and a positive c1 witness; no extra selected target or query. Independently observe one explicit inert delivery in each. An always-zero/absent counter cannot qualify N05."
+      ]
+    ],
+    "window": [
+      [
+        "W0",
+        "Native mount ready and watchers live before selected dispatch. Gate untouched and raw census per-mount fresh, exact sole-path and actor generation verified. Missing bounded evidence invalidates control."
+      ],
+      [
+        "W1",
+        "M enters held stub path once; retain original pending operation at gate, no delegate invoked or queued. Original T or E wins normally; original public terminal result 503/g1. Gate cannot cause or change original deadline."
+      ],
+      [
+        "W2",
+        "After selected original M terminal and before ordinary count, seal gate irrevocably with exact state held=1/delegates=0/queued=0/no override. Retire benign hold locally without any deferred target invocation, while leaving the nominated actor accessible for ordinary count and its single diagnostic read. Seal is nonreopening until same mount disposal."
+      ],
+      [
+        "W3",
+        "Existing benign actual raw actor count produces literal independent c0 marker on same actor generation after gate seal, then returns ordinary counters. Recorder/custody must independently establish qualified normal count. q0.A is then at most one post-count read; private row expected p1.A.T3.----- or p1.A.E3.-----."
+      ],
+      [
+        "W4",
+        "Genuine normal native disposal + terminal result close the outer gate witness window. Require exact gate record ready→held→sealed→normal close, no alternate/late outgoing delegate or queued send before disposal. Raw sampled count covers actor initialization to count admission only. Its target conclusion remains final through disposal because gate was sealed before the sample and latest sole-path/custody readback rules out any further selected target delegation. No second actor census read or inference of whole-runtime drain."
+      ]
+    ],
+    "expected": {
+      "nativeSelectedStubGateEntries": 1,
+      "actualOutgoingTargetFetchAttempts": 0,
+      "queuedTargetSendsAtSeal": 0,
+      "rawTargetActorFetchEntriesAtCount": 0,
+      "rawWitness": "N05_RAW_ENTRY_CENSUS v1 c0",
+      "gateFinalWitness": "N05_GATE_CLOSED v1 held1 sent0 queued0",
+      "positiveWitnesses": [
+        "N01_RAW_ENTRY_CENSUS v1 c1",
+        "N02_RAW_ENTRY_CENSUS v1 c1"
+      ],
+      "targetCountReturns": 1,
+      "originalPostCountQaQuery": 1,
+      "qaReply": "q0.A",
+      "privateRows": [
+        "p1.A.T3.-----",
+        "p1.A.E3.-----"
+      ],
+      "addedNativeInvocations": 0,
+      "addedDiagnosticQueries": 0
+    },
+    "failure": "Wrong/missing/duplicate/overflow census, calibration failure, unmatched actor/generation, unexpected target path/history, gate seal after count, late delegation, any queued send or incomplete closure => N05 unqualified even if q0.A matched. q0.A only means absence of a usable record and delivery remains UNKNOWN outside this inert control."
+  },
+  "FI2": {
+    "scope": "Run five named serial host-only negative fixtures in proposed later TOOL job. Real pinned Node lifecycle, real byte-identical frozen D07/recorder and actual S08 afterEach boundary. M response inputs and fixture count returns are modeled, no workerd actor or native actor effect. Existing native N01-N08 still require genuine native disposal.",
+    "tiers": {
+      "real": "Pinned Node 22.23.4 process-isolated separate file realm per child. Actual D07 case1 constructor/assert and fixed-wrapper count callbacks, selected case15, original count and error flow, real recorder using per-worker private journal, actual nominated S08 root afterEach registered once before D07 registrations, root AFTER where it runs.",
+      "modeled": "Only declared inert constructor, benign events and M operands. Supply otherwise-valid candidate inputs at the existing same-fixture capture seam and inject the designated raw fault, not an already-classified rejection. No hardcoded host-gate outcome, synthetic end-to-end pass or replacement hook. Actual source eligibility/native identity is not established by modeled data.",
+      "native": "No native actor/protected M traffic or lease in these five children. No native query, new application effect, deadline replay or native disposal evidence. N04 remains the native-positive co-witness."
+    },
+    "common": {
+      "D07selected": [
+        "C2T1_CONNECTION",
+        "C2T1_SCOPE_MISSING"
+      ],
+      "case1Counts": [
+        1,
+        1,
+        1
+      ],
+      "case1OriginalCountCalls": 2,
+      "case15OriginalCountCalls": 1,
+      "originalD07TimeoutMs": 120000,
+      "addedThirtySecondInvocations": 0,
+      "extraRootAfterEach": 0,
+      "nominalPrivateRows": null,
+      "expectedDiagnosticCallAttempts": 0,
+      "expectedExtraQueryCount": 0,
+      "case15Action": "An actual D07 action failure EA from its inert selected fixture argument path. Keep original D07 throw priority, report exact identity when admissible, and never rewrite its original test result."
+    },
+    "witness": {
+      "entry": "Actual same S08 hook deliberately exposes a bounded fixture-only hook-enter/qualification witness under later implementation review, separate from the injected count fault and separate from dispatch telemetry. Require entered=true and designated failed stage for all normal-entered negatives. No other eligibility failure can masquerade as targeted guard evidence.",
+      "attempt": "Existing supervisor owns independent one-way tripwire at the outermost permitted read dispatch seam in each neutral fixture. Open/certify before selected action, count attempted dispatch on first instruction even if no native connection or response exists. Requirement is continuously armed and closed/finally zero at terminal child. An attempt fails control immediately. No sentinel probe or added dispatch; preserved neutral non-network mount and exact sole authorized read path must be statically checked.",
+      "outcome": "Joint evidence must prove intended raw fault was encountered, original D07/recorder/hook relation, normal or intentional hard termination as declared, no query/row. No credit if worker never starts, fixture control marker absent or mismatch unrelated to seeded fault. Node cause or hook/order observed only if actually demonstrated."
+    },
+    "columns": [
+      "id",
+      "links",
+      "actual events and sole injected variation",
+      "expected hook entry",
+      "expected private read attempts",
+      "expected final row",
+      "expected original process and custody interpretation"
+    ],
+    "controls": [
+      [
+        "DNEG_THROW",
+        [
+          "H20"
+        ],
+        "Case15 action throws EA. Real D07 count-enter then inert designated count throws distinct EC. Real recorder logs count-throw, with no return/frame. Original D07 rethrows EA as in frozen body. Actual hook enters and rejects missing normal count terminal.",
+        true,
+        0,
+        null,
+        "Require actual hook and independent zero tripwire; normal fixture cleanup and terminal expected failed test/exit1 if attributable."
+      ],
+      [
+        "DNEG_MISSING_MARK",
+        [
+          "H24",
+          "H26"
+        ],
+        "Case15 real count-enter on original fixture-owned 0600 regular scratch journal. Deliberately deny only the next recorder append validation by switching that same disposable journal to mode0400 at the benign inert count seam, then return ordinary counters. Frozen recorder produces own fault, without count-return mark, leaves previous genuine marks intact. Actual hook entry must see independently verified original count mark absent or journal unqualified and issue no read.",
+        true,
+        0,
+        null,
+        "Expect original fail and exact recorder fault. Independently distinguish actual neutral fixture process/close evidence from recorder AFTER unavailable; native closure UNVERIFIED here. The fixture journal custody failure is the declared negative, never repaired while deciding."
+      ],
+      [
+        "DNEG_DUPLICATE_MARK",
+        [
+          "H24",
+          "H25"
+        ],
+        "After genuine D07 case15 count-enter and immediately before inert count returns, inject one extra count-return mark for that exact target through the same byte-identical frozen recorder. Frozen D07 then writes its original count-return. Sequence/custody otherwise coherent, harmless target frame and exact rethrow preserved. Actual same hook sees duplicate rather than a preclassified model.",
+        true,
+        0,
+        null,
+        "Exactly two count-return marks before hook, original failed outcome and normally closed neutral fixture."
+      ],
+      [
+        "DNEG_FOREIGN_CARRIER",
+        [
+          "H17",
+          "H54"
+        ],
+        "Case15 normal real count and journal, exact simulated original status/body/private header bytes. Feed raw foreign response carrier whose prototype/identity does not match independently expected authorized modeled DispatchResponse at the ordinary capture or hook qualification boundary. Actual host side must detect the designated mismatch there; no preclassified poisoned marker.",
+        true,
+        0,
+        null,
+        "Require actual hook entry and observed designated identity/custody rejection rather than a decoder-only claim. A coherent equal-string copy is still indistinguishable to the decoder alone. Neutral close and terminal status verified."
+      ],
+      [
+        "DNEG_HELD_CUTOFF",
+        [
+          "H22",
+          "H28"
+        ],
+        "D07 reaches actual case15 count-enter and inert count remains held; raw witness of same-case action/enter and count-enter with no terminal mark. After verified count-enter and while held, existing supervisor applies intentional 1600ms-slot bounded worker cutoff without altering D07 120s. No other process or native child targeted; exact owned worker terminal readback.",
+        null,
+        0,
+        null,
+        "Actual hook-enter is a separately recorded boolean. Null here means outcome may be never-entered or entered by real runner cancellation; require entered=false acknowledged as no hook-guard coverage, or entered=true with independent no-return guard evidence. Zero-query-by-cutoff alone never proves the hook branch. Expected bounded negative termination only, no actor disposal or progress credit. Unreconciled kill, premature exit or no count-enter is a failed control."
+      ]
+    ],
+    "coverageBoundary": "The five real boundary controls supplement frozen H20–H28 models; individual alternate grammar/custody combinations remain model-only. In particular the H21 count-alone throw, H23 substitute count result and H27 remaining custody variants are not claimed real. H49 bears on host wait only. DNEG_MISSING_MARK and DNEG_THROW give entered-hook coverage independently of DNEG_HELD_CUTOFF.",
+    "topology": {
+      "group": "P3_NEGATIVE_HOST_GROUP",
+      "orderedWorkers": [
+        "DNEG_THROW",
+        "DNEG_MISSING_MARK",
+        "DNEG_DUPLICATE_MARK",
+        "DNEG_FOREIGN_CARRIER",
+        "DNEG_HELD_CUTOFF"
+      ],
+      "groupCapMs": 8000,
+      "workerCapMs": 1600,
+      "rootD07RealmPerWorker": 1,
+      "slotsPerWorkerMs": {
+        "launcherAndWorkerStartup": 600,
+        "case1SetupAndBothCounts": 250,
+        "case15HookAndJournalOrHeldEvidence": 400,
+        "terminalProofAndNeutralCleanup": 350,
+        "total": 1600
+      },
+      "cutoffReserve": "Held is last. Verify count-enter by 1250 ms within its slot and contained live worker, then allow at most 100 ms outside original clock for confirming held state; reserve remaining 250 ms to terminate/read back exact owned worker and upstream CLI result. Never signal an unmatched process. Host watchdog caps waiting only.",
+      "processAccounting": {
+        "neutralCLILaunches": 1,
+        "neutralWorkerLaunches": 5,
+        "concurrentTestWorkers": 1,
+        "concurrentGroupNodeProcessesIncludingCLI": 2,
+        "newNativeProcesses": 0,
+        "orderedCompositeNodeLaunches": 13,
+        "baselineCompositeNodeLaunches": 7,
+        "additionalNodeLaunches": 6,
+        "includesNativeRuntimeSubprocesses": false,
+        "supervisor": "Reuse only the existing reviewed outer supervisor/custody boundary. No new controller, parent or orphan."
+      },
+      "gate": "Process isolation and one file worker at a time (Node v22.23.4 default isolation is per file, concurrency pinned to one). Require exact ordered admitted worker list, effective parent/child/custody/launch-cap readback and direct observation of terminal worker then gate next slot. Full inherited process and native subprocess caps remain enforced. Six extra Node launches are an explicit proposed scope increment, never automatically admissible. If existing per-phase spawn policy cannot admit 1 CLI + 5 serial workers, the smallest premise is separate Root approval of that exact new host-only launch set within unchanged max-two Node concurrency and existing time caps, or leave real boundary qualification open. No split across jobs or new concurrency.",
+      "nodePrimary": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/doc/api/test.md"
+    }
+  },
+  "nonclaims": {
+    "sourceExecuted": false,
+    "ownExecuted": false,
+    "nativeExecuted": false,
+    "implementationReleased": false,
+    "nativeReleased": false,
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

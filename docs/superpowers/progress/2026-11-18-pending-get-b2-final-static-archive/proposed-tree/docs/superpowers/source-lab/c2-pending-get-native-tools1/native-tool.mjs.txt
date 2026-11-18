@@ -1,0 +1,230 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {existsSync,readFileSync,readlinkSync} from 'node:fs';
+import {readFile,writeFile} from 'node:fs/promises';
+import {basename,join} from 'node:path';
+import {Miniflare,Response as DispatchResponse,convertV4MiniflareOptions} from 'miniflare';
+import {firstConnectionWorkers} from '../fixtures/finite-first-connection-publication.mjs';
+
+const schedule=JSON.parse(readFileSync(new URL('schedule.json',import.meta.url),'utf8'));
+const origin='https://delegated-canary.agentfriendlyweb.dev';
+export const route='/connections/finite-prepare';
+export const publicBody='{"status":"admin_pending","mayRetry":false,"operationalReadiness":false}';
+export const label='C2T1_SCOPE_MISSING';
+export const mono=()=>Number(process.hrtime.bigint()/1000000n);
+const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+const digestPin=bytes=>({bytes:Buffer.byteLength(bytes),sha256:digest(bytes)});
+
+function startTime(pid) {
+  const s=readFileSync('/proc/'+pid+'/stat','utf8'), rest=s.slice(s.lastIndexOf(') ')+2).split(' ');
+  assert.match(rest[19],/^[1-9][0-9]*$/);
+  return rest[19];
+}
+
+export function ownedNativeList(name) {
+  const host=Number(readlinkSync('/proc/self'));assert(Number.isSafeInteger(host)&&host>1);
+  const path='/proc/self/task/'+host+'/children';
+  const pids=readFileSync(path,'utf8').trim().split(/\s+/).filter(Boolean);
+  assert(pids.length<=4);
+  const found=[];
+  for(const pid of pids){
+    assert.match(pid,/^[1-9][0-9]{0,9}$/);
+    let executable;
+    try{executable=readlinkSync('/proc/'+pid+'/exe');}catch(error){if(error.code==='ENOENT')continue;throw error;}
+    if(basename(executable)!==name)continue;
+    const status=readFileSync('/proc/'+pid+'/status','utf8');
+    assert(status.includes('\nPPid:\t'+host+'\n'));
+    const ids=/^Uid:\s+([0-9]+)\s+([0-9]+)/m.exec(status);
+    assert(ids&&Number(ids[1])===process.getuid()&&Number(ids[2])===process.getuid());
+    found.push({pid:Number(pid),started:startTime(pid),binary:name});
+  }
+  return found;
+}
+
+export function ownedNative(name) {
+  const found=ownedNativeList(name);
+  assert.equal(found.length,1,'single native process of expected type');
+  return Object.freeze(found[0]);
+}
+
+export function terminated(proc) {
+  try{return startTime(proc.pid)!==proc.started;}catch(error){if(error.code==='ENOENT')return true;throw error;}
+}
+
+export function casePlan(id) {
+  const entry=schedule.nativeExpected.find(x=>x[0]===id);
+  const times=schedule.timing.slotCaps.find(x=>x[0]===id);
+  const epoch=schedule.epoch.mounts.find(x=>x[0]===id)?.[1];
+  assert(entry&&times&&epoch);
+  return {id,slot:id.slice(0,3),on:entry[2]==='ON',rows:entry[6],queries:entry[7],epoch,
+    mode:entry[1]==='DELIVERED_PENDING'?'PENDING':entry[1]==='COMPLETED_LATE'?'LATE':entry[1],
+    setupMs:times[1],originalMs:times[2],countMs:times[3],readMs:times[4],closeMs:times[5],capMs:times[6]};
+}
+
+function checkedModule(worker,identity,expected) {
+  assert.equal(worker.config.name,identity);
+  const manifest=worker.config.manifest,main=manifest.mainModule;
+  assert.deepEqual(Object.keys(manifest.modules),[main]);
+  const exact=manifest.modules[main];
+  assert.equal(exact.type,'esm');assert.equal(exact.contents,expected);
+}
+
+async function catalogFile(dir,catalog,name,ep=null) {
+  let body=await readFile(join(dir,name),'utf8');
+  const expected=catalog.files[name];
+  assert.deepEqual(digestPin(body),{bytes:expected.bytes,sha256:expected.sha256});
+  if(ep){
+    const token='af0000000000000f';assert.equal(body.split(token).length,2);
+    body=body.replace(token,()=>ep);assert.equal(body.split(ep).length,2);
+  }
+  return body;
+}
+
+export async function openNativeTool(plan,root,catalogDir,slotEnd) {
+  const catalog=JSON.parse(await readFile(join(catalogDir,'catalog.json'),'utf8'));
+  assert.equal(catalog.schema,'AFW_C2_PENDING_GENERATED_TOOL_CATALOG/1');
+  const m=await catalogFile(catalogDir,catalog,plan.on?'M1.mjs':'M0.mjs',plan.on?plan.epoch:null);
+  const q=await catalogFile(catalogDir,catalog,plan.slot==='N08'?'Q8.mjs':plan.on?'Q1.mjs':'Q0.mjs',plan.on?plan.epoch:null);
+  const negative=await catalogFile(catalogDir,catalog,'negative.mjs');
+  const binding={AFW_TOOL_MODE:plan.mode,AFW_TOOL_SLOT:plan.slot};
+  const qa={name:'qa-first-connection',modules:true,script:q,compatibilityDate:'2026-09-07',
+    compatibilityFlags:['nodejs_compat'],bindings:binding,durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Initial',useSQLite:true,uniqueKey:'initial-c2a'}},
+    outboundService:async()=>new Response(null,{status:503}),
+    ...(plan.slot==='N05'?{serviceBindings:{PENDING_GATE_CONTROL:{name:'canary-first-connection',entrypoint:'PendingToolGate'}}}:{})};
+  const raw=firstConnectionWorkers(qa,{script:m,spyScript:negative});
+  raw.upstream=origin;raw.cf=false;
+  let overlapMarkers=0,preCapture=false,captureBegun=false,runtimeFault=false;
+  let foreignWitness=null,restartSignalled=false;
+  raw.unsafeHandleRuntimeRestart=()=>{restartSignalled=true;runtimeFault=true;};
+  raw.handleStructuredLogs=entry=>{
+    const value=entry?.message;
+    if(entry?.level==='error'||typeof value==='string'&&/different request context|different request's handler/i.test(value))runtimeFault=true;
+    if(entry?.level!=='info'&&entry?.level!=='log')return;
+    if(value==='N07_TWO_LIVE_ARRIVALS v1'){
+      if(plan.slot!=='N07'||entry.level!=='info'){runtimeFault=true;return;}
+      overlapMarkers+=1;
+      if(!captureBegun&&overlapMarkers===1)preCapture=true;
+      return;
+    }
+    if(typeof value==='string'&&/^(?:N0[1-8]_RAW_ENTRY_CENSUS v1 c[012]|N0[34]_ORIGINAL_PROMISE_WITNESS v1|N07_DISTINCT_INPUTS v1|N08_SEED255 v1)$/.test(value))console.info(value);
+  };
+  raw.workers[0].bindings={...raw.workers[0].bindings,...binding};
+  raw.workers=raw.workers.slice(0,2);
+  const mounted=convertV4MiniflareOptions(raw);
+  checkedModule(mounted.workers[0],'canary-first-connection',m);
+  checkedModule(mounted.workers[1],'qa-first-connection',q);
+  assert.equal(mounted.upstream,origin);
+  const mf=new Miniflare(mounted);
+  let open=true,queries=0,gateCalls=0,terminal=false,retained=null,companion=null,surface=null,closed=null;
+  const generation=Object.freeze({main:digestPin(m),qa:digestPin(q)});
+  let openedAt,workerd,actor,gate;
+  try{
+    await mf.ready;
+    workerd=ownedNative('workerd');
+    const bindings=await mf.getBindings('qa-first-connection');
+    const self=bindings.AFW_INDEPENDENT_CLOSURE;
+    actor=self.get(self.idFromName('afw-own-successor-closure-v1'));
+    gate=bindings.PENDING_GATE_CONTROL;
+    assert.equal(Boolean(gate),plan.slot==='N05');
+    openedAt=mono();
+    assert(openedAt<=slotEnd-plan.capMs+plan.setupMs,'native setup reserve');
+  }catch(error){try{await mf.dispose();}catch{}throw error;}
+  const dispatch=mf.dispatchFetch;
+  const direct=(path, options)=>{
+    assert(open&&mf.dispatchFetch===dispatch&&path===route);
+    assert.equal(options?.method,undefined);assert.equal(options?.body,undefined);
+    return Reflect.apply(dispatch,mf,[origin+path,{...options,redirect:'manual'}]);
+  };
+  function beforeCapture() {
+    captureBegun=true;
+    assert(!runtimeFault);
+    if(plan.slot==='N07')assert(preCapture&&overlapMarkers===1,'native overlap event must precede capture');
+  }
+  const main={uploads:[{},{}],activations:[{},{}],token:'fixture-synthetic',stub:actor,call:direct,
+    getWinnerDirect:()=>open&&main.call===direct&&mf.dispatchFetch===dispatch&&main.stub===actor,
+    captureToolSurface(r,status,text) {
+      assert(!retained&&r instanceof DispatchResponse&&status===503);
+      retained=r;terminal=true;
+      assert.equal(text,publicBody);
+      const h=r.headers;
+      assert.equal(h.get('cache-control'),'no-store');
+      assert.equal(h.get('x-afw-lab-get-winner'),'g1.503.L.0');
+      surface={status,bodySha256:digest(text),cache:h.get('cache-control'),type:h.get('content-type'),g1:'g1.503.L.0'};
+    }};
+  function targetFor(f) {
+    if(f!==main||!main.getWinnerDirect())return null;
+    return Object.freeze({actor,generation,epoch:plan.epoch,
+      validate:()=>main.getWinnerDirect()&&mounted.workers[0].config.manifest!==null});
+  }
+  const stopAfter=()=>slotEnd-plan.closeMs;
+  async function gateBeforeCount() {
+    if(plan.slot!=='N05')return;
+    assert(terminal&&open&&gateCalls===0&&stopAfter()-mono()>=1000+plan.readMs);
+    gateCalls+=1;
+    const actual=gate.sealGate();
+    let timer;
+    try {
+      const v=await Promise.race([actual,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('TOOL gate wait')),1000);})]);
+      assert.equal(v,'N05_GATE_SEALED v1 held1 sent0 queued0');
+      console.info(v);
+    } finally {clearTimeout(timer);}
+  }
+  async function close() {
+    if(!open)throw Error('TOOL gate closed');
+    let failed;
+    try {
+      if(companion){
+        const r=await companion;assert.equal(r.status,503);assert.equal(await r.text(),publicBody);
+      }
+      assert.equal(await actor.finishForClose(),'SYN_TOOL_CLEANUP_RETURN');
+    }catch(error){failed=error;}
+    const stillOriginal=!terminated(workerd)&&!runtimeFault;
+    open=false;
+    await mf.dispose();
+    assert(stillOriginal,'same native process until SDK disposal');
+    assert.equal(terminated(workerd),true,'observed native PID terminal after SDK dispose');
+    assert.equal(ownedNativeList('workerd').length,0,'no owned workerd remains after SDK dispose');
+    assert(!restartSignalled);
+    if(failed)throw failed;
+    if(plan.slot==='N05')console.info('N05_GATE_CLOSED v1 held1 sent0 queued0');
+    closed={disposeReturned:true,workerdTerminated:true,initialWorkerdObserved:true,restartSignalled:false,ownedWorkerdAfterDispose:0,hadCompanion:Boolean(companion)};
+  }
+  function recordCompanion() {
+    assert(plan.slot==='N07'&&!companion);
+    companion=direct(route,{headers:{'Cf-Access-Jwt-Assertion':'fixture-synthetic'}});
+    companion.catch(()=>{});
+  }
+  function boundary(rootDir,witness){
+    return {epoch:plan.epoch,root:rootDir,reserve:()=>open&&mono()+1000<=stopAfter(),
+      targetFor,isDispatchResponse:value=>value instanceof DispatchResponse,witness,
+      async invokeRead(stub,epoch,key){
+        assert(stub===actor&&main.getWinnerDirect()&&open&&queries===0);
+        queries+=1;const reply=await stub.pendingGetSample(epoch,key);
+        if(plan.slot==='N06'){
+          const foreign='e3000000-0000-4000-8000-000000000006';
+          assert(open&&main.getWinnerDirect()&&epoch===plan.epoch&&key!==foreign&&reply==='q1.'+epoch+'.'+foreign+'.I0130');
+          foreignWitness={returned:true,exactForeignReply:true,sameEpoch:true,dispatchedKeyDifferent:true,tuple:'I0130',invocations:1};
+        }
+        return reply;
+      }};
+  }
+  async function emitReceipt() {
+    assert(terminal&&surface&&closed&&queries===plan.queries);
+    assert.equal(gateCalls,plan.slot==='N05'?1:0);
+    if(plan.slot==='N06')assert(foreignWitness?.exactForeignReply===true);
+    if(plan.slot==='N07')assert(preCapture&&overlapMarkers===1);
+    let row=null;
+    if(plan.on){
+      const path=join(root,'pending-private.row');
+      const data=await readFile(path,'utf8');
+      assert.equal(data.length,14);assert.equal(data[13],'\n');
+      row=data.slice(0,-1);assert(plan.rows.includes(row));
+    }else assert.equal(existsSync(join(root,'pending-private.row')),false);
+    const summary={id:plan.id,ordinary:surface,queries,gateCalls,row,closed,generation,
+      foreignWitness,overlapWitness:plan.slot==='N07'?{preCaptureWitness:preCapture,marker:'N07_TWO_LIVE_ARRIVALS v1'}:null,
+      privateOn:plan.on,setupMs:openedAt-(slotEnd-plan.capMs)};
+    await writeFile(join(root,'tool-slot.json'),JSON.stringify(summary)+'\n',{flag:'wx',mode:0o600});
+    return summary;
+  }
+  return {main,boundary,gateBeforeCount,close,beforeCapture,recordCompanion,emitReceipt,route,plan};
+}

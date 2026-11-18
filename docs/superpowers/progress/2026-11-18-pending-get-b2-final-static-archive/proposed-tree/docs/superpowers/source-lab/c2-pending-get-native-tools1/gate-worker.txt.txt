@@ -1,0 +1,52 @@
+import {WorkerEntrypoint} from 'cloudflare:workers';
+import source,{AfwNodeControl,AfwOwnEventNode} from 'afw-tool-compiled-m';
+
+export {AfwNodeControl,AfwOwnEventNode};
+const selectedActor='afw-own-successor-closure-v1';
+const worlds=new WeakMap();
+let hold=null;
+let admittedMode=null;
+let total=0,delegates=0,queued=0,sealed=false;
+
+function inertEnvironment(env) {
+  const prior=worlds.get(env);
+  if(prior)return prior;
+  if(admittedMode!==null)throw Error('TOOL gate replacement');
+  const mode=env.AFW_TOOL_MODE;
+  if(!['PENDING','LATE','NO_DELIVERY','FOREIGN','OVERLAP','TRUNCATED'].includes(mode))throw Error('TOOL gate mode');
+  admittedMode=mode;
+  const actual=env.AFW_FINITE_TRIAL_CONTROL;
+  const nativeId=actual.idFromName(selectedActor);
+  const nativeStub=actual.get(nativeId);
+  const nativeFetch=nativeStub.fetch;
+  const forward=Object.freeze({fetch(request){
+    if(sealed||total===(mode==='OVERLAP'?2:1))throw Error('TOOL gate outside selected path');
+    total+=1;
+    if(mode==='NO_DELIVERY'){
+      if(hold)throw Error('TOOL gate duplicate hold');
+      return new Promise((_,reject)=>{hold=reject;});
+    }
+    delegates+=1;
+    return Reflect.apply(nativeFetch,nativeStub,[request]);
+  }});
+  const actor=Object.freeze({
+    idFromName(name){if(name!==selectedActor)throw Error('TOOL actor name');return nativeId;},
+    get(id){if(id!==nativeId)throw Error('TOOL actor identity');return forward;},
+  });
+  const mounted=Object.freeze({...env,AFW_FINITE_TRIAL_CONTROL:actor});
+  worlds.set(env,mounted);
+  return mounted;
+}
+
+export class PendingToolGate extends WorkerEntrypoint {
+  sealGate() {
+    if(arguments.length||admittedMode!=='NO_DELIVERY'||sealed||total!==1||delegates!==0||queued!==0||!hold)throw Error('TOOL gate unqualified');
+    const reject=hold;hold=null;sealed=true;
+    reject(Error('TOOL selected gate sealed'));
+    return 'N05_GATE_SEALED v1 held1 sent0 queued0';
+  }
+}
+
+export default {...source,fetch(request,env,ctx){
+  return source.fetch(request,inertEnvironment(env),ctx);
+}};

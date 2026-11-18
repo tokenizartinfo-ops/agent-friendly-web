@@ -1,0 +1,17 @@
+import {closeSync,constants,fstatSync,openSync,realpathSync,writeSync} from 'node:fs';
+export const containedReadCode='AFW_C2_P3_CONTAINED_READ_ATTEMPT';
+
+export function makeOuterTripwire(path) {
+  if(realpathSync(path)!==path)throw Error('P3 attempt custody');
+  const fd=openSync(path,constants.O_WRONLY|constants.O_APPEND|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+  try{
+    const s=fstatSync(fd);
+    if(!s.isFile()||(s.mode&0o777)!==0o600||s.nlink!==1||s.size!==0||
+       s.uid!==process.getuid()||s.gid!==process.getgid())throw Error('P3 attempt file custody');
+    function invokeRead() {
+      if(writeSync(fd,'1\n')!==2)throw Error('P3 attempt write');
+      throw Object.assign(Error('Unexpected TOOL outer read attempt'),{code:containedReadCode});
+    }
+    return Object.freeze({invokeRead,close:()=>closeSync(fd)});
+  }catch(error){closeSync(fd);throw error;}
+}

@@ -3,9 +3,9 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "233298696d5580b3b2a8adef5708d2780dedaf19",
-  "phase": "PENDING_GET_NATIVE_SOURCE_TOOL_PROPOSAL_RUNNING",
-  "activeNativeRuns": [],
+  "previousCheckpoint": "f8d855f3e0fe637c3c36901713ef0f8000e4416d",
+  "phase": "PENDING_GET_B2_FIX4_GENERIC_COLLECTOR_HARDENING",
+  "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44110921244,
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish and review B2 exact native TOOL harness/controller/workflow, qualify changed CAL55 and native controls under original bounds, then assess one real Source observation. No new B2 execution released. No manual intervention currently required.",
+  "next": "Complete the narrowed generic collector/process-safety correction, preserve reversible diff, scoped independent review. N06 tuple validation remains explicitly open; no B2 execution until all load-bearing findings are resolved. Do not replay original business Source or extend budgets.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -252,8 +252,14 @@
       "replyComment": 6957793271,
       "action": "RECORDED_ONLY_NO_ACTIVATION_OR_CONSUMPTION"
     },
-    "lastRead": "2026-11-18 12:41:17 UTC",
-    "newRequests": 0
+    "lastRead": "2026-11-18 15:31:00 UTC",
+    "newRequests": 0,
+    "readback": {
+      "atUTC": "2026-11-18 15:31 UTC",
+      "querySince": "2026-11-18T14:06:43Z",
+      "count": 0,
+      "refs": []
+    }
   },
   "rulings": [
     {
@@ -264,6 +270,11 @@
       "actor": "/root/scope_winner_diagnostic_design",
       "codeReleased": false,
       "nativeReleased": false
+    },
+    {
+      "atUTC": "2026-11-18 15:31:00 UTC",
+      "ref": "814aedb69d5f948dbd87e58e4f2374230f844b68",
+      "summary": "Fix4 resumes as generic supervisor/collector hardening only. Partial implementation does not qualify B2; all six findings remain open until reviewed. No integration of the refused reproduction changes."
     }
   ],
   "source5": {
@@ -524,7 +535,7 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "8a683eb3e367b6286a3a2aafc55fa3dd98fc5323",
+  "readinessDocument": "8a732c11fbb38f10845cb9a3ee3b11ecbd026810",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1669,9 +1680,9 @@
       "actualModelAccepted": true
     },
     "pendingAwaitNativeTool": {
-      "status": "IMPLEMENTATION_PROPOSAL_RUNNING",
+      "status": "FULL_PROPOSAL_STATIC_REVIEW_FAILED_FIX4_GENERIC_HARDENING_IN_PROGRESS",
       "brief": "5f7b70fc25bbc43814a7e05fa40552aaa544e9d3",
-      "actor": "/root/pending_get_native_tools_impl",
+      "actor": "/root/pending_get_native_tools_fix4",
       "nomination": {
         "branch": "lab/afw-c2-pending-get-20261118-native-tools1",
         "message": "AFW-C2-PENDING-GET-NATIVE-TOOLS1-ONEUSE-20261118",
@@ -1700,7 +1711,7 @@
         "reset": false
       },
       "processOverlapSeedRuling": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
-      "focusedCoreTestsProposed": 55,
+      "focusedCoreTestsProposed": 56,
       "executionReleased": false,
       "newOverlapAndNativeSeedProposalReleased": true,
       "processCapClarified": "24 cumulative guarded Node PID proofs; full OS/native lifecycle inventory separately required, no cap increase",
@@ -1726,22 +1737,42 @@
         "fullNativeHarnessAndRunner": "IN_PROGRESS"
       },
       "staticFix": {
-        "round": 1,
+        "round": 4,
         "max": 5,
-        "priorReport": "dac59d8e298ec0d05468d436080e68fa2cc5774a",
-        "status": "AUTHOR_CORRECTIONS_DELIVERED_SCOPED_REREVIEW_PENDING",
-        "findings": [
-          "legacy private mailbox invalidation",
-          "duplicate M response binding",
-          "minor OFF eager DATA load"
+        "brief": "b113b073be02db3fbb01b82c67ec2d3f84baf051",
+        "activeTaskContext": "0668a6192ff18fec4a9c860fe28eb6ada91c636d",
+        "priorAuthorReport": "961bd2d328e77e75ec2cdd3bcb2f65353cb62300",
+        "partialAuthorReport": "a4358d6724c1483e0b5435a2c21d63e1b2370aaa",
+        "narrowedRuling": "814aedb69d5f948dbd87e58e4f2374230f844b68",
+        "status": "PARTIAL_STATIC_REPORT_THEN_NARROWED_GENERIC_WORK_RESUMED",
+        "importantOpen": [
+          "R3-02 ordinary sample exact tuple before key substitution; unchanged and outside narrowed work",
+          "R3-03 startup-inclusive individual worker timing",
+          "R3-04 exact bounded owned cleanup on failure",
+          "R3-05 individual genuine D07 worker/test outcomes",
+          "R3-06 exact payload and original stream provenance"
         ],
-        "coveringTests": "CAL55 W01-W04 plus changedQA35/O10/S6; P3 five real frozenD07 controls",
-        "testStatus": "NOT_RUN_ROOT_FINITE_GHA_GATE_REQUIRED"
-      }
+        "minorOpen": [
+          "R3-07 canonical SDK SIGKILL explicitly scoped in receipt"
+        ],
+        "withdrawn": "Earlier host PID concern addressed obsolete body; active6f459 already uses correct proc-visible PID; no new flags.",
+        "coveringTests": "Future fixed CAL56/P3/native finite GHA packet only after independent acceptance",
+        "testStatus": "NOT_RUN"
+      },
+      "reviewer": "/root/pending_get_red_review",
+      "finalProposal": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+      "finalGraph": "c50198511f93639ec20b32f75ad8cd6110900979",
+      "finalMounts": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+      "finalRunner": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+      "finalWorkflow": "9cc21bf63f8c73e212965a288f7119536faf9fb8",
+      "fullStaticReview": "f1d36b71ecd97d73a2106be9b766ded87025ec94",
+      "rootDataReconciliation": "a51852b0842f1b6c97668aee0aa53c3a1486772b",
+      "recoveryArchive": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/",
+      "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 133,
-  "updatedAtUTC": "2026-11-18 14:32:55 UTC",
+  "schemaVersion": 134,
+  "updatedAtUTC": "2026-11-18 15:31:00 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1800,5 +1831,46 @@
     "activeNativeRuns": 0,
     "scope": "Scoped AFW lab branches and relay only; no Cloudflare runtime assertion"
   },
-  "readinessDocumentPath": "docs/superpowers/progress/2026-11-18-afw-pcoff-readiness.es.md"
+  "readinessDocumentPath": "docs/superpowers/progress/2026-11-18-afw-pcoff-readiness.es.md",
+  "latestB2Readback": {
+    "atUTC": "2026-11-18 15:31:00 UTC",
+    "refs": [
+      {
+        "branch": "main",
+        "expected": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+        "actual": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+        "match": true
+      },
+      {
+        "branch": "feat/finite-native-cleanup-20261101",
+        "expected": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "actual": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "match": true
+      },
+      {
+        "branch": "lab/afw-c2-pending-get-20261118-model-green1",
+        "expected": "2c290229c1461020cc7b1b832e82bf56e920dcf0",
+        "actual": "2c290229c1461020cc7b1b832e82bf56e920dcf0",
+        "match": true
+      },
+      {
+        "branch": "lab/afw-c2-pending-get-20261118-red1",
+        "expected": "0cd2f61f7afc31ca93864e9cf79f5d2206cdc5f0",
+        "actual": "0cd2f61f7afc31ca93864e9cf79f5d2206cdc5f0",
+        "match": true
+      }
+    ],
+    "wrongRefProbe": {
+      "path": "lab/afw-c2-pending-get-20261118-model-red1",
+      "http": 404,
+      "reason": "Root used wrong branch label; actual red1 readback matches closed ref. Not an infrastructure failure."
+    },
+    "nominatedB2Runs": {
+      "total_count": 0,
+      "runs": []
+    },
+    "scope": "Dated own Git refs/run history only; no fresh Cloudflare runtime status inferred"
+  },
+  "PCoff": false,
+  "operationalReadiness": false
 }

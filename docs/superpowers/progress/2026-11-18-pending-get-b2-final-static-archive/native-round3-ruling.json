@@ -1,0 +1,57 @@
+{
+  "schema": "afw.pending-get.b2-native-round3-ruling.v1",
+  "atUTC": "2026-11-18 14:48:01 UTC",
+  "task": "B2 private defensive diagnostic TOOL integration",
+  "scope": "PROPOSAL_CORRECTIONS_ONLY_NO_EXECUTION",
+  "review": "01cf72cd749a95d7343522d74f998455e9b5f801",
+  "reviewedIndex": "b0e61f14bd15c6d70ffe19540160f77d9d666c3e",
+  "round": 3,
+  "maximumRounds": 5,
+  "implementer": "/root/pending_get_native_tools_impl",
+  "originalCounters": "Source/OWN/StageB remain5/5, never reset",
+  "findings": {
+    "N06_FOREIGN_REPLY": {
+      "problem": "p1.V also results from failed/thrown/malformed RPC, so a V row plus attempted count alone cannot qualify intended wrong-key control.",
+      "required": "Within the existing single diagnostic RPC return path, independently verify successful actual return equals the sealed literal q1.<same dispatched read epoch>.e3000000-0000-4000-8000-000000000006.I0130 and that this foreign constant differs from dispatched own key. Check nominated actor/generation and one invocation. A thrown/rejected RPC or any other bytes leaves N06 unqualified even if host produces V.",
+      "evidence": "Record only bounded sanitized returned=true,exactForeignReply=true,sameEpoch=true,dispatchedKeyDifferent=true,tuple='I0130',invocations=1 in this occurrence's receipt. No raw epoch/UUID/returned string. Tuple here describes the deliberately returned control string, not QA phase at M cutoff or a claim of actual QA state.",
+      "bounds": "No extra RPC/target/header copy; existing host post-count read completion may perform this local verification under current1000ms. No measured original M/QA awaits or reactions."
+    },
+    "N07_PRECAPTURE_ORDER": {
+      "problem": "Companion started early and count census2 afterward does not prove two genuine live QA arrivals before selected capture.",
+      "permittedMinimalWitness": "One fixed one-way bounded TOOL-only control marker from nominated inert QA after both distinct original requests/keys are registered, both original super promises live and both real raw entries reached the held primary point. Fixed marker N07_TWO_LIVE_ARRIVALS v1; emit once, no keys/epochs. Capture through supported pinned Miniflare logging API only, not patched console/Promise/D07/recorder. Pin exact generation/scripts/sole emitter and match exact event payload+source, not substring/error text.",
+      "requiredOrder": "Host must have already received this native control event before its synchronous selected capture seam. Do not await/defer the selected capture to manufacture that order. Node-local event-before-capture establishes order without comparing cross-process clocks. If missing/late/ambiguous return no eligibility/private read and classify N07 unqualified.",
+      "accounting": "Explicit additional inert control signal only. It is not original-source observation, an actor read or diagnostic RPC. Inert fixture controls may emit this one signal; original M/QA business sources on disk and observer instrumentation add no original effect/IO. No extra native invocation, group, process, QA query or deadline. Include exact signal/event and preCaptureWitness boolean in native receipt.",
+      "heldIfUnsupported": "If the pinned Miniflare API cannot deliver an attributable event before capture, stop this implementation branch and report minimal supported alternative. Do not add pre-count actor polling, HTTP routes, proxy/network access, a new service/process, compatibility flags or asynchronous capture delay under this ruling."
+    },
+    "ACQUIRED_TOOL_CLEANUP": {
+      "problem": "Direct and D07 adapter setup can throw after openNativeTool succeeds but before surrounding finally or returning w, skipping actual close with live workerd.",
+      "required": "Take unconditional cleanup ownership immediately after successful acquisition, before any host/token/custody/assertion setup. Both direct and D07 adapter paths must close exactly the acquired tool on setup failure, preserve original failure identity and not claim success/closure when cleanup is unknown. Avoid double close when original D07 AFTER owns a successfully returned world. No other resources/signals targeted.",
+      "scope": "Move/bound setup under existing cleanup; static failure-path trace plus genuine per-case native lifecycle proof under later run. No new timed native probe/case or process."
+    }
+  },
+  "qualificationScope": {
+    "inertQa": "Actual native transport/observer and retained original-wrapper promise with manually driven benign phase/aggregate boundaries. It does not execute original QA business S00/S02 path.",
+    "actualQaSource": "qaSourceLinkage builds actual S00/S02 linkage separately. Build is not runtime proof.",
+    "next": "Only later separately authorized P4 original Source occurrence can observe that path; never label B2 TOOL pass as SourceQualified/Task1Pass/PC-off.",
+    "wording": "Keep scopes explicit in graph/protocol/result/acceptance."
+  },
+  "fixedLimits": {
+    "CALmodels": 56,
+    "guardedNodeProcessesMax": 24,
+    "perTargetMax": 8,
+    "groups": 6,
+    "producerMs": 330000,
+    "jobMs": 420000,
+    "originalMms": 30000,
+    "addedN05McontrolRpc": 1,
+    "nativeQaReadsMax": 6
+  },
+  "holds": {
+    "executionReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "operationalReadiness": false,
+    "PCoff": false
+  },
+  "tests": "Native N06 intended returned wrong-key witness; N07 pre-capture ordering plus distinct arrival evidence; actual per-mount disposal. Current CAL56 and P3 five controls unchanged. NOT_RUN; Root finite GHA gate required."
+}

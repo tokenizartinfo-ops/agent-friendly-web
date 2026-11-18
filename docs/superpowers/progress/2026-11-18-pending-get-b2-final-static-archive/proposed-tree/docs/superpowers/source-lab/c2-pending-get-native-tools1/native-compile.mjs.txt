@@ -1,0 +1,126 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {gzipSync,gunzipSync} from 'node:zlib';
+import {build,stop} from 'esbuild';
+import {compileFirstConnectionCandidate,instrumentFirstConnection,prepareDropCatch} from '../fixtures/finite-first-connection-publication.mjs';
+import {preparePendingQaEntry,preparePendingQaSource} from '../fixtures/pending-get/prepare-source.mjs';
+
+const root=process.cwd(), here=new URL('./',import.meta.url), digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+export const epochToken='af0000000000000f';
+const text=name=>readFile(new URL(name,here),'utf8');
+const pin=b=>({bytes:Buffer.byteLength(b),sha256:digest(b)});
+const external=['node:*','cloudflare:*'];
+const base={bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],
+  format:'esm',target:'es2022',external,legalComments:'none'};
+const replaceOne=(s,a,b)=>{
+  assert.equal(s.split(a).length,2,'exact unique tool literal');
+  return s.replace(a,()=>b);
+};
+const define={'globalThis.__AFW_PENDING_GET_EPOCH__':JSON.stringify(epochToken)};
+const sdk='node_modules/@cloudflare/workers-oauth-provider/';
+
+async function buildQa(kind) {
+  const on=kind!=='OFF', seeded=kind==='N08';
+  let source=await text('qa-inert-template.txt');
+  let wrapper=await text('qa-original-wrapper.txt');
+  wrapper=replaceOne(wrapper,' async fetch(request){',' async fetch(request){\n  this.census=Math.min(3,this.census+1);');
+  wrapper=replaceOne(wrapper,'actual=super.fetch(request);','actual=super.fetch(request);\n  const item=controlOf(request);if(!item||item.superPromise)throw Error("TOOL duplicate promise");item.superPromise=actual;item.originalKey=requestId;');
+  wrapper=replaceOne(wrapper,'const observed=response=>{','const observed=response=>{readyMark(item,"reaction");');
+  wrapper=replaceOne(wrapper,'else observed(actual);','else observed(actual);readyMark(item,"registered");');
+  source=replaceOne(source,' /*AFW_QA_ORIGINAL_FETCH*/',wrapper.trimEnd());
+  const normalPath='./test/fixtures/pending-get/qa-link.mjs';
+  const sourcePath=seeded?'./test/pending-native-tools/tool255/qa-link.mjs':normalPath;
+  if(on){
+    source=preparePendingQaEntry(source);
+    if(seeded)source=replaceOne(source,"from '"+normalPath+"';","from '"+sourcePath+"';");
+    const instrument="pendingGetSample(epoch,key){return pendingQaSample(this,epoch,key);}";
+    source=replaceOne(source,instrument,"pendingGetSample(epoch,key){const value=pendingQaSample(this,epoch,key);if(this.env.AFW_TOOL_MODE==='FOREIGN'){if(typeof value!=='string'||!value.startsWith('q1.')||key===badEcho)throw Error('TOOL foreign control');return 'q1.'+epoch+'.'+badEcho+'.I0130';}return value;}");
+  }
+  const linkage=on?
+    "import {pendingPhase as toolPhase,pendingPair,pendingAggregate as toolAggregate"+(seeded?",pendingTool255Seeded as toolSeeded":"")+"} from '"+sourcePath+"';\n"+
+      "const toolPair=(request,options)=>pendingPair(request,options,'initial');"+(seeded?"":"const toolSeeded=()=>false;"):
+    "const toolPhase=()=>{},toolPair=()=>{},toolAggregate=()=>{},toolSeeded=()=>false;";
+  source=replaceOne(source,'/*AFW_QA_TOOL_LINK*/',linkage);
+  const made=await build({...base,define:on?define:{},stdin:{contents:source,sourcefile:'afw-tool-qa-'+kind+'.mjs',resolveDir:root}});
+  const script=made.outputFiles[0].text,input=Object.keys(made.metafile.inputs);
+  assert(!script.includes('registerModelSeeds')&&!script.includes('ordinal63'));
+  if(on)assert(input.some(name=>name.endsWith('/qa-core.mjs')));
+  if(!on)assert(!script.includes('pendingGetSample')&&!input.some(name=>name.endsWith('/qa-core.mjs')));
+  if(seeded)assert(input.some(name=>name.includes('/tool255/qa-core.mjs')));
+  return {script,source:pin(source),inputs:input};
+}
+
+async function assembleMain(candidate, gate, on) {
+  const virtual='afw-tool-compiled-m';
+  const r=await build({...base,stdin:{contents:gate,sourcefile:'afw-tool-gate.mjs',resolveDir:root},
+    plugins:[{name:'exact reviewed synthetic gate composition',setup(b){
+      b.onResolve({filter:/^afw-tool-compiled-m$/},()=>({path:virtual,namespace:'afw-tool-fixed'}));
+      b.onLoad({filter:/^afw-tool-compiled-m$/,namespace:'afw-tool-fixed'},()=>({contents:candidate.script,resolveDir:root,loader:'js'}));
+    }}]});
+  const script=r.outputFiles[0].text;
+  assert.equal(script.includes('x-afw-lab-pending1'),on);
+  assert(script.includes('x-afw-lab-get-winner')&&!script.includes('registerModelBudgetSeed'));
+  assert(script.includes('sealGate')&&script.includes('N05_GATE_SEALED'));
+  return script;
+}
+
+async function qaSourceLinkage() {
+  const phase='lib/mcp-qa-finite-owner-phase-context.mjs',receiver='lib/mcp-qa-finite-owner-native-receiver.mjs';
+  const [on,off]=await Promise.all([true,false].map(enabled=>build({...base,entryPoints:[receiver],define:enabled?define:{},
+    plugins:enabled?[{name:'exact pending GET QA source linkage only',setup(b){
+      b.onLoad({filter:/mcp-qa-finite-owner-(?:phase-context|native-receiver)\.mjs$/},async args=>{
+        const name=args.path.slice(root.length+1),raw=await readFile(args.path,'utf8');
+        assert(name===phase||name===receiver);
+        const contents=name===phase?preparePendingQaSource('s00',prepareDropCatch(instrumentFirstConnection(raw))):preparePendingQaSource('s02',raw);
+        return {contents,loader:'js'};
+      });
+    }}]:[]})));
+  const hasLink=x=>Object.keys(x.metafile.inputs).some(name=>name.endsWith('pending-get/qa-link.mjs'));
+  assert.equal(hasLink(on),true);assert.equal(hasLink(off),false);
+  return {on:pin(on.outputFiles[0].contents),off:pin(off.outputFiles[0].contents)};
+}
+
+export async function buildCatalog(dir,beforeStop) {
+  assert.equal(resolve(dir),dir);
+  await mkdir(dir,{mode:0o700});
+  try {
+    const revision='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68',tree='62e78926635d6b74f288d6c0d69e0f2516306989';
+    const off=await compileFirstConnectionCandidate(revision,tree,{dropWinner:true,getWinner:true});
+    const on=await compileFirstConnectionCandidate(revision,tree,{dropWinner:true,getWinner:true,pendingGetEpoch:epochToken});
+    assert.equal(off.spyScript,on.spyScript,'unchanged non-direct M input');
+    assert(!off.spyScript.includes('x-afw-lab-pending1'));
+    for(const c of [off,on]){
+      assert(Buffer.from(c.bytes).equals(gunzipSync(Buffer.from(c.resident.content,'base64'))));
+      assert.equal(c.resident.module.sha256,digest(c.bytes));
+      assert(Object.keys(c.metafile.inputs).some(name=>name.includes(sdk)));
+    }
+    const onInputs=Object.keys(on.metafile.inputs),offInputs=Object.keys(off.metafile.inputs);
+    for(const file of ['m-link.mjs','create-get-winner-observer.mjs','m-core.mjs','codec.mjs']){
+      assert(onInputs.some(name=>name.endsWith('pending-get/'+file)));
+      assert(!offInputs.some(name=>name.endsWith('pending-get/'+file)));
+    }
+    const gate=await text('gate-worker.txt');
+    const m0=await assembleMain(off,gate,false),m1=await assembleMain(on,gate,true);
+    const q0=await buildQa('OFF'),q1=await buildQa('ON'),q8=await buildQa('N08');
+    assert(![m0,m1,off.spyScript].some(body=>body.includes('N07_TWO_LIVE_ARRIVALS v1')));
+    assert([q0.script,q1.script,q8.script].every(body=>body.split('N07_TWO_LIVE_ARRIVALS v1').length===2));
+    const sourceQa=await qaSourceLinkage();
+    const bodies={'M0.mjs':m0,'M1.mjs':m1,'Q0.mjs':q0.script,'Q1.mjs':q1.script,'Q8.mjs':q8.script,'negative.mjs':off.spyScript};
+    const files={};
+    for(const [name,body] of Object.entries(bodies)){
+      const compressed=gzipSync(body,{level:9,mtime:0});
+      assert(gunzipSync(compressed).equals(Buffer.from(body)));
+      files[name]={...pin(body),gzip:pin(compressed)};
+      assert(files[name].bytes>0&&files[name].bytes<=8388608);
+      if(['M1.mjs','Q1.mjs','Q8.mjs'].includes(name))assert.equal(body.split(epochToken).length,2);
+      await writeFile(join(dir,name),body,{flag:'wx',mode:0o600});
+    }
+    const summary={schema:'AFW_C2_PENDING_GENERATED_TOOL_CATALOG/1',files,
+      untouchedNegative:pin(off.spyScript),baseM:{off:pin(off.bytes),on:pin(on.bytes)},sourceQa,
+      nativeQaVirtual:{off:q0.source,on:q1.source,tool255:q8.source}};
+    await writeFile(join(dir,'catalog.json'),JSON.stringify(summary)+'\n',{flag:'wx',mode:0o600});
+    beforeStop();return summary;
+  } finally {stop();}
+}

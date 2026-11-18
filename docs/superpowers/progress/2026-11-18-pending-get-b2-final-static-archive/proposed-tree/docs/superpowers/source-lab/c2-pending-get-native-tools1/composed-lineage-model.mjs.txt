@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import {existsSync,mkdtempSync,rmSync,writeFileSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {Response as DispatchResponse} from 'miniflare';
+import {createGetWinnerHost} from '../fixtures/finite-first-connection-publication.mjs';
+import {createPendingHostBoundary,selectedId} from '../fixtures/pending-get/fixture-host.mjs';
+
+export async function checkComposedLineage(control) {
+  const {expected}=control,base=process.env.TMPDIR;
+  assert(base&&resolve(base)===base);
+  const root=mkdtempSync(join(base,'w04-')),journal=join(root,'green-progress.ndjson');
+  try {
+    writeFileSync(journal,'',{flag:'wx',mode:0o600});
+    const epoch='af0000000000000f',key='e3000000-0000-4000-8000-000000000001';
+    const marks=[],main={},actor={},generation={};
+    const proof={actor,generation,epoch,validate:()=>true};
+    let headerCopies=0,attempts=0;
+    class ModeledDispatchResponse extends DispatchResponse {
+      get headers() {
+        const headers=super.headers, get=headers.get.bind(headers);
+        return {get(name){if(name==='x-afw-lab-pending1')headerCopies+=1;return get(name);}};
+      }
+    }
+    const response=new ModeledDispatchResponse(null,{status:503,headers:{
+      'x-afw-lab-get-winner':'g1.503.L.0','x-afw-lab-pending1':'m1.'+epoch+'.T3.'+key}});
+    const boundary=createPendingHostBoundary({epoch,root,reserve:()=>true,targetFor:x=>x===main?proof:null,
+      isDispatchResponse:value=>value instanceof DispatchResponse,witness:stage=>marks.push(stage),
+      invokeRead(){attempts+=1;return 'q0.A';}});
+    assert(boundary);
+    const producer=createGetWinnerHost(main,()=>true,DispatchResponse,boundary);
+    const label={id:selectedId},token=producer.begin(label),error=new Error('SYN exact action value');
+    token.capture(main,response,503);token.capture(main,response,503);
+    producer.finish(label);
+    assert.deepEqual(producer.take(label,main),expected.publicLegacyTake);
+    boundary.recordError(main,token,error);
+    boundary.recordCount(main,{upload:1,activation:1,receipts:1});
+    const rows=[['action','enter'],['action','throw'],['count','enter'],['count','return']].map(([operation,edge],i)=>
+      ({sequence:i+1,id:selectedId,operation,edge,elapsedMs:i,error:edge==='throw'?{name:'Error',code:null,site:null}:null}));
+    writeFileSync(journal,rows.map(x=>JSON.stringify(x)).join('\n')+'\n');
+    await boundary.afterOriginal(error);
+    assert.deepEqual(marks,['ENTER','REJECT_LINEAGE']);
+    assert.equal(headerCopies,expected.privateHeaderCopies);
+    assert.equal(attempts,expected.diagnosticDispatchAttempts);
+    assert.equal(existsSync(join(root,'pending-private.row')),false);
+  } finally {rmSync(root,{recursive:true,force:false});}
+}

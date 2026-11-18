@@ -1,0 +1,142 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {constants,closeSync,existsSync,fstatSync,lstatSync,openSync,readFileSync,readlinkSync,readdirSync} from 'node:fs';
+import {basename,dirname,join} from 'node:path';
+
+export const mono=()=>Number(process.hrtime.bigint()/1000000n);
+const stdoutCap=1048576,stderrCap=65536;
+const decoder=new TextDecoder('utf-8',{fatal:true});
+export const negativeIds=['DNEG_THROW','DNEG_MISSING_MARK','DNEG_DUPLICATE_MARK','DNEG_FOREIGN_CARRIER','DNEG_HELD_CUTOFF'];
+export const negativeFiles=negativeIds.map((_,i)=>'p3-0'+(i+1)+'.test.mjs');
+
+export function small(path,cap,mode=0o600) {
+  const fd=openSync(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+  try{
+    const first=fstatSync(fd);
+    assert(first.isFile()&&first.size<=cap&&first.nlink===1&&first.uid===process.getuid()&&first.gid===process.getgid()&&(first.mode&0o777)===mode);
+    const bytes=readFileSync(fd),after=fstatSync(fd),lookup=lstatSync(path);
+    assert(bytes.length===first.size&&after.size===first.size&&after.ctimeMs===first.ctimeMs&&
+      after.dev===lookup.dev&&after.ino===lookup.ino&&after.ctimeMs===lookup.ctimeMs);
+    return decoder.decode(bytes);
+  }finally{closeSync(fd);}
+}
+
+function startTime(pid) {
+  const s=readFileSync('/proc/'+pid+'/stat','utf8');
+  return s.slice(s.lastIndexOf(') ')+2).split(' ')[19];
+}
+
+function stillExact(pid,proof) {
+  try {
+    const root='/proc/'+pid;
+    const status=readFileSync(root+'/status','utf8');
+    const uid=/^Uid:\s+(\d+)\s+(\d+)/m.exec(status), nspid=/^NSpid:\s+(\d+)\s+(\d+)$/m.exec(status);
+    return startTime(pid)===proof.started&&readlinkSync(root+'/ns/pid')===proof.pidNs&&
+      readlinkSync(root+'/ns/net')===proof.net&&uid&&Number(uid[1])===proof.uid&&Number(uid[2])===proof.uid&&
+      nspid&&Number(nspid[1])===proof.host&&Number(nspid[2])===proof.pid&&
+      /^NoNewPrivs:\s*1$/m.test(status)&&/^CapEff:\s*0+$/m.test(status);
+  } catch(error) {if(error.code==='ENOENT'||error.code==='ESRCH')return false;throw error;}
+}
+
+function collectProbe(root) {
+  const dir=join(root,'custody-probes');
+  if(!existsSync(dir))return [];
+  const info=lstatSync(dir);
+  assert(info.isDirectory()&&info.uid===process.getuid()&&info.gid===process.getgid());
+  const names=readdirSync(dir);
+  assert(names.length<=16&&names.every(name=>/^(?:scope-)?[1-9]\d{0,4}\.json$/.test(name)));
+  return names.filter(x=>x.startsWith('scope-')).map(name=>{
+    const p=JSON.parse(small(join(dir,name),1024));
+    assert(Number.isSafeInteger(p.host)&&p.host>1&&Number.isSafeInteger(p.pid)&&p.pid>0&&
+      name==='scope-'+p.pid+'.json'&&Number.isSafeInteger(p.entered)&&
+      p.uid===process.getuid()&&p.gid===process.getgid()&&
+      /^pid:\[[0-9]+\]$/.test(p.pidNs)&&/^net:\[[0-9]+\]$/.test(p.net)&&/^[1-9]\d*$/.test(p.started));
+    const legacy=JSON.parse(small(join(dir,p.pid+'.json'),1024));
+    assert.equal(legacy.schema,'afw.c2-oauth-custody.v1');
+    assert([legacy.uidMatches,legacy.gidMatches,legacy.groupsCleared,legacy.loopbackOnly].every(x=>x===true));
+    return p;
+  });
+}
+
+function holdEvidence(root) {
+  const d=join(root,negativeIds[4]),w=join(d,'negative-witness'), j=join(d,'green-progress.ndjson');
+  if(!existsSync(w))return false;
+  const lines=small(w,4096).trimEnd().split('\n');
+  if(!lines.includes('RAW_COUNT '+negativeIds[4]))return false;
+  const marks=small(j,32768).trimEnd().split('\n').map(line=>JSON.parse(line));
+  const target=marks.filter(row=>row.id==='C2T1_SCOPE_MISSING');
+  return target.map(r=>r.operation+':'+r.edge).join(',')==='action:enter,action:throw,count:enter'&&
+    small(join(d,'read-attempts'),16)==='';
+}
+
+function physicalExit(proof) {
+  try{return startTime(proof.host)!==proof.started;}catch(error){if(error.code==='ENOENT')return true;throw error;}
+}
+
+export async function isolatedLaunch({cwd,temp,root,catalog,phase,node,start,end,args,negative=false,slot='',expected}) {
+  const groupEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:temp,TMPDIR:temp,LANG:'C.UTF-8',LC_ALL:'C.UTF-8',
+    CI:'true',NODE_ENV:'test',AFW_C2_DIAG_ROOT:root,AFW_C2_DIAG_PARENT_UID:String(process.getuid()),AFW_C2_DIAG_PARENT_GID:String(process.getgid()),
+    AFW_C2_CATALOG:catalog,AFW_C2_NATIVE_GROUP:phase,AFW_C2_NATIVE_SLOT:slot,AFW_C2_GROUP_START:String(start),AFW_C2_GROUP_END:String(end),
+    AFW_C2_NEGATIVE_ROOT:negative?root:''};
+  const shell='uid="$1"; gid="$2"; shift 2; /usr/sbin/ip link set lo up && exec /usr/bin/setpriv --reuid "$uid" --regid "$gid" --clear-groups --no-new-privs "$@"';
+  const helper=['-n','/usr/bin/env','-i',...Object.entries(groupEnv).map(([k,v])=>k+'='+v),
+    '/usr/bin/unshare','--net','--pid','--fork','--kill-child=SIGTERM','/bin/sh','-c',shell,'afw-pending-tool',
+    String(process.getuid()),String(process.getgid()),node,'--import',join(cwd,'test/pending-native-tools/scope-guard.mjs'),...args];
+  const proc=spawn('/usr/bin/sudo',helper,{cwd,env:{PATH:groupEnv.PATH,LANG:groupEnv.LANG},stdio:['ignore','pipe','pipe']});
+  let failure=null,done=false,result,bytes=[0,0],outputs=[[],[]],holdSeen=null,killed=null,max=0,last=[];
+  proc.on('error',error=>{failure??=error;});
+  proc.on('close',(code,signal)=>{done=true;result={code,signal};});
+  for(const [stream,i] of [[proc.stdout,0],[proc.stderr,1]])stream.on('data',chunk=>{
+    bytes[i]+=chunk.length;
+    if(bytes[i]<=(i===0?stdoutCap:stderrCap))outputs[i].push(chunk);
+    else failure??=Error('AFW_TOOL_CAPTURE_CAP');
+  });
+  let groupRoot;
+  try {
+    while(!done&&mono()<end){
+      const current=collectProbe(root);
+      if(current.length){
+        groupRoot=current.find(x=>x.pid===1);
+        assert(groupRoot&&current.every(x=>x.pidNs===groupRoot.pidNs&&x.net===groupRoot.net));
+        assert.notEqual(groupRoot.pidNs,readlinkSync('/proc/self/ns/pid'));
+        assert.notEqual(groupRoot.net,readlinkSync('/proc/self/ns/net'));
+        last=current;
+      }
+      max=Math.max(max,last.filter(p=>!physicalExit(p)).length);
+      if(failure)throw failure;
+      if(negative){
+        const active=last.filter(p=>p.pid!==1&&!physicalExit(p));
+        assert(active.length<=1);
+        for(const p of active)assert(negativeFiles.includes(basename(p.role)));
+        const held=active.find(p=>p.role===negativeFiles[4]);
+        if(held&&!killed){
+          assert(mono()-held.entered<=1350);
+          if(holdEvidence(root)){
+            holdSeen??=mono();
+            if(mono()-holdSeen>=50){
+              assert(mono()-held.entered<=1350&&stillExact(held.host,held));
+              process.kill(held.host,'SIGTERM');
+              killed={host:held.host,started:held.started,reason:'HELD_COUNT_CUTOFF'};
+            }
+          }
+        }
+      }
+      await new Promise(resolve=>setTimeout(resolve,10));
+    }
+    assert(done&&mono()<=end&&!failure&&result?.signal===null&&result.code===expected,'isolated group terminal status');
+    const proofs=collectProbe(root);
+    assert.equal(proofs.length,negative?6:slot?2:1);
+    assert(proofs.every(physicalExit));
+    if(negative){
+      assert(killed&&physicalExit(killed));
+      assert.deepEqual(proofs.filter(x=>x.pid!==1).sort((a,b)=>a.entered-b.entered).map(x=>x.role),negativeFiles);
+    }
+    const stdout=decoder.decode(Buffer.concat(outputs[0])),stderr=decoder.decode(Buffer.concat(outputs[1]));
+    return {stdout,stderr,guarded:proofs.length,maximumObservedGuardedLive:max,childExit:result.code,
+      heldCutoff:killed?.reason??null,allGuardedTerminal:true};
+  }catch(error) {
+    if(!done&&groupRoot&&stillExact(groupRoot.host,groupRoot))process.kill(groupRoot.host,'SIGKILL');
+    proc.stdout.destroy();proc.stderr.destroy();proc.unref();
+    throw error;
+  }
+}

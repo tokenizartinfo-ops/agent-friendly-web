@@ -1,0 +1,40 @@
+name: AFW C2 pending GET native TOOL one-use
+on:
+  push:
+    branches:
+      - lab/afw-c2-pending-get-20261118-native-tools1
+permissions:
+  contents: read
+jobs:
+  c2-pending-get-native-tools1:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-pending-get-20261118-native-tools1' &&
+      github.event.head_commit.message == 'AFW-C2-PENDING-GET-NATIVE-TOOLS1-ONEUSE-20261118' &&
+      github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Anchor the job time bound
+        shell: bash
+        run: |
+          printf 'AFW_B2_JOB_START_MS=%s\n' "$(/usr/bin/python3 -c 'import time; print(time.monotonic_ns() // 1000000)')" >> "$GITHUB_ENV"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - name: Install the frozen dependency lock
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run the isolated finite TOOL proposal
+        run: node docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: afw-c2-pending-get-native-tools1
+          path: output/c2-pending-get-native-tools1.json
+          if-no-files-found: error
+          retention-days: 7

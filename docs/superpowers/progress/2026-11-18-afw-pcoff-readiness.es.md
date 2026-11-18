@@ -1,23 +1,15 @@
-# AFW — preparación del ensayo con PC apagada
-Actualizado: 2026-11-18 13:52:47 UTC. Proyecto AFW; repositorio tokenizartinfo-ops/agent-friendly-web. Estado documental con evidencia fechada, sin lectura actual del runtime ni del proveedor.
+# AFW · preparación de la prueba con el ordenador apagado
 
-## Qué está probado
-El diagnóstico real de fuente run44208626844/job134480971206 quedó conservado y cerrado; revisión7dc02ce610fc0f9158cb911c16b81e996e54dec1. Los primeros14 casos pasaron. El GET del caso15 devolvió503 en vez de200 tras30008ms; la captura identifica el ganador como DEADLINE_OR_ABORT y confirma el count posterior. Aún no distingue temporizador/señal ni el punto de espera en QA. Los casos16 y17 fallaron;18 quedó abierto al límite del hijo;19–20 no fueron observados. Esto no califica Task1 completo ni demuestra un fallo de Cloudflare.
+Comprobación de avance: 18 de noviembre de 2026, 15:31 UTC.
 
-El diseño del diagnóstico acotado y sus134 casos independientes quedaron aprobados (diseño4bc09a1df89e4fe5eef57d95e238a2718d01e62e; datos41376717eae5ec5d9d2850bb323f23c4cd43bd40). En GitHub, run44304106803/job134801079258 verificó el RED mínimo: el observador original conserva503/g1 y carece del campo nuevo, con la aserción esperada. Custodia/cierre del proceso modelado y de la rama pasaron; revisióne1d37b68e3524607b200913f5514b252fe5118ca. Fue un modelo aislado, sin actores, operaciones de consentimiento ni llamadas productivas.
+La prueba final todavía no está habilitada. El bloqueo de trabajo actual es el diagnóstico de AFW y la fiabilidad de su recolector; no se ha atribuido este fallo a un incidente de Cloudflare.
 
-## Bloque actual y criterio de cierre
-B1 quedó calificado en su ámbito MODEL: run44316286948/job134843146190 pasó30 pruebas M,35 QA,57 de admisión y12 de filas, con cierre de proceso/rama y revisión independiente66571d025cf3f353dba60f2611705ef52decf862. Esto valida el núcleo privado de observación y sus códecs sobre datos sintéticos; no valida todavía su integración en el Source original. B2 prepara ahora esa integración y sus controles nativos. No hace falta intervención manual para esta preparación.
+Lo acreditado hoy: el bloque MODEL B1 pasó sus 134 comprobaciones en GitHub Actions y quedó cerrado. La propuesta B2 de diagnóstico está conservada íntegra, con sus 64 archivos y huellas reconciliados como datos. Su revisión estática sigue requiriendo cambios: eso no acredita que B2 haya ejecutado o pasado. No hay ninguna ejecución B2 registrada en la rama nominada al último readback.
 
-B2 conectará el núcleo ya validado al fixture original y al hook posterior al count, manteniendo D07, recorder, formatos públicos y relojes. Requiere sus propios controles nativos y de cierre antes de una observación del caso afectado. El modelo RED no acredita esa conexión. Source5/OWN5/StageB permanecen5/5: estas tareas diagnósticas no reinician sus contadores ni liberan un sexto arreglo de negocio.
+Se está endureciendo el controlador para medir cada trabajador desde su arranque, conservar el origen de stdout/stderr y resultados individuales, y verificar el retiro de los procesos propios incluso ante error. La validación exacta del valor previo de N06 permanece pendiente explícito. Ninguna corrección parcial habilita el lanzamiento.
 
-## Cierres restantes, en orden
-1. Validar B1, integrar y validar B2; obtener una observación que localice el bloqueo. Elegir y revisar una corrección fundada, sin ampliar relojes.
-2. Calificar Source/Task1 completo con controles positivos, negativos, mutantes y regresiones del protocolo congelado (plana4cebfbb3c91ec706429253c9809a0096774108b, todavía retenido).
-3. Completar las tareas dependientes de material instalado/invocaciones/guardia y la composición aviso → adopción → trabajo/ACK → retirada/alarmas/restauración (plan3434f31d432084d1b6153f85d3b8c64c8e043850). Los lectores o catálogos aislados no sustituyen esos cierres.
-4. Preparar candidata cerrada y rollback recuperable; revisar fuente, bundles, bindings, permisos/vencimientos y el plan completo. Verificar proveedor y runtime con evidencia nueva cuando corresponda; no inferir vigencia desde resultados históricos.
-5. Coordinar una única ocurrencia real: arranque atendido/READY/ARM → PC apagada → ejecución cloud y recepción útil/ACK → retirada/restauración verificadas. Regla3d7dc69c4ccc4ec8c7e3268318a1a10fc79bb238: no consumir Entry en un ensayo completo PC-encendida aparte.
-6. Preparar el caso de Max solo después de ese cierre, con su alcance y consentimiento propios.
+Falta completar y revisar ese diagnóstico; obtener una observación acotada nueva del fallo real; corregir su causa con evidencia; validar el recorrido completo; preparar candidata, reversión y permisos vigentes; y comprobar en una misma prueba autorizada el aviso útil, su recepción, retirada y cierre desde la nube con el equipo apagado. El caso de Max va después, con su consentimiento propio.
 
-El bloqueo actual es un comportamiento aún no localizado del laboratorio de fuente; no estamos únicamente esperando un correo para poder desarrollar. No hay una fecha fiable para el ensayo final antes de aislarlo y validar la corrección. Las pruebas finitas en GitHub no acreditan guardia permanente ni autonomía integral con el PC apagado.
-SourceQualified=false; Task1Pass=false; operationalReadiness=false; completePackage=false; PCoff=false.
+La última observación real de Source sigue siendo GET 503 en el caso 15. Aún no está aislada su causa. No hay un plazo fiable hasta resolverla; un pase de laboratorio o una compilación no equivale al ensayo final.
+
+No se solicita apagar el equipo como parte de una prueba. No se han abierto accesos, renovado claves ni iniciado ensayos remotos en este bloque. Los contadores originales Source/OWN/StageB conservan 5/5, sin reiniciarlos. operationalReadiness y PCoff permanecen false.

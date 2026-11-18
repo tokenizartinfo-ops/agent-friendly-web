@@ -1,0 +1,55 @@
+{
+  "schema": "afw.pending-get.b2-outer-tripwire-control.v1",
+  "atUTC": "2026-11-18 14:35:08 UTC",
+  "prior": "73c27264b5fd40867f46d854b07f6196dd3e333d",
+  "scope": "Fixed MODEL control DATA and scoped correction authority, no execution",
+  "finding": {
+    "id": "P3_OUTERMOST_READ_ATTEMPT",
+    "source": "host-negatives.mjs5655e541a5d148c1236289eae24f4c9a0e9c8807",
+    "problem": "invokeRead dereferences stub.pendingGetSample before trip counter. A dispatch attempt with missing/wrong stub could throw before counting and masquerade as zero attempts.",
+    "authority": "FI2 witness/attempt in 3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+    "required": "Increment at the first instruction of the actual outer invokeRead seam, without inspecting args/stub/properties first; immediately throw declared containment error. No actor call needed or permitted in P3. Failed counter custody/write invalidates control; never silently treat as0."
+  },
+  "additionalControl": {
+    "id": "W05",
+    "input": "Exact same outermost attempt-tripwire implementation as P3, separately nominated private MODEL counter file initially empty/0600. Invoke once with undefined stub and fixed synthetic epoch/key.",
+    "expected": {
+      "modelOuterAttemptCount": 1,
+      "counterFileExact": "1\n",
+      "declaredContainmentError": true,
+      "actualActorMethodCalls": 0,
+      "realNativeOrQaQueries": 0
+    },
+    "significance": "Demonstrates a bad stub cannot fail before the counter observes an attempted dispatch. A handwritten lookalike or late actor-method trap is insufficient. Factor the fixed non-network trap only as needed to share exact implementation; no D07 run or new process for this CAL control.",
+    "separation": "This deliberately counted MODEL attempt is not one of native QA queries and must be labeled separately. All five actual P3 negative instances still require their own continuous attempt count0 through terminal.",
+    "execution": "NOT_RUN"
+  },
+  "O10Minor": "Pass an actual registerModelSeeds sentinel callback to the disabled MODEL observer and assert never issued. S04 remains separate TOOL disabled callback coverage. No behavior change to QA core.",
+  "CAL": {
+    "previous": 55,
+    "added": 1,
+    "total": 56,
+    "timeIncreaseMs": 0,
+    "processesAdded": 0,
+    "groupsAdded": 0,
+    "capMs": 8000,
+    "unchanged134NotReplayed": true
+  },
+  "fix": {
+    "task": "B2 diagnostic Source/TOOL integration",
+    "round": 2,
+    "maximum": 5,
+    "priorRound": "three interim findings addressed statically; full native/controller unreviewed",
+    "implementer": "/root/pending_get_native_tools_impl",
+    "tests": "CAL56 W05/O10 and proposed five P3 realD07 controls",
+    "testStatus": "NOT_RUN_ROOT_FINITE_GHA_GATE_REQUIRED",
+    "SourceOwnStageBCounters": "5/5 unchanged"
+  },
+  "hold": {
+    "executionReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  }
+}

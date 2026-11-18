@@ -1,0 +1,314 @@
+{
+  "schema": "afw.b2.final-static-archive.v1",
+  "atUTC": "2026-11-18 15:31:00 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "state": "QUARANTINED_TEXT_PROPOSAL_NOT_RUN",
+  "archivePrefix": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/",
+  "originalGraph": "c50198511f93639ec20b32f75ad8cd6110900979",
+  "files": [
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/.github/workflows/afw-c2-pending-get-native-tools1.yml.txt",
+      "sha": "9cc21bf63f8c73e212965a288f7119536faf9fb8"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/attempt-tripwire-model.mjs.txt",
+      "sha": "76514cbf6ca7a17b0e08782794b8e452f15a44e7"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/attempt-tripwire.mjs.txt",
+      "sha": "73a9c4afc619fba16426f461bafe1dec24949ca4"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/cal-model.mjs.txt",
+      "sha": "69c1457194d36d8464f55d6962c8278339146962"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/codec.mjs.txt",
+      "sha": "18a40467a2900a3e1265f7b90cb115ac072b8858"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/composed-lineage-model.mjs.txt",
+      "sha": "e12742cd664468d9e49dafbb0fbb0c162af481cf"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/create-get-winner-observer.mjs.txt",
+      "sha": "676ce360268ae07c2af0d0b029d89bc7a9e7bbc3"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/custody-origin-guard.mjs.txt",
+      "sha": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/driver-D07.txt.txt",
+      "sha": "9e29c5197207b03bdb4b10069089f37df289e88c"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/fixture-host.mjs.txt",
+      "sha": "836632fcfec33d610a4a9ee870643cd184d357d4"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/gate-ruling.json.txt",
+      "sha": "2771057d706832993a155954adef67a2efb12be2"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/gate-worker.txt.txt",
+      "sha": "e3712979ae78e72d13f2d79dd849c7bf3cb8418d"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/host-core.mjs.txt",
+      "sha": "249033b347dbb9696f6fd872557b28385617cd90"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/host-negatives.mjs.txt",
+      "sha": "17adfe7f9a0bc6d03a4e60d0ba18f42e92a3a3b1"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/lineage-ruling.json.txt",
+      "sha": "73c27264b5fd40867f46d854b07f6196dd3e333d"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/m-core.mjs.txt",
+      "sha": "7b10783bb99981e7f9da426bd655ebfbcc91f716"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/m-link.mjs.txt",
+      "sha": "bec88448705f042bd7286d3d9e4953d93c79f07e"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/model-host-input.mjs.txt",
+      "sha": "214bbcc0aa6883c85e131c0bd93e90e5e27e5119"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/mounts.json.txt",
+      "sha": "c40fea6bc115e4ecb852b38574dcb0f13febf65d"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/native-compile.mjs.txt",
+      "sha": "0d362f8d4cd170f0c4e1a4d5bbbbdb678929cfb2"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/native-group-child.mjs.txt",
+      "sha": "5b3dc893aad90b20dff7762880ecd5533f5f7ccb"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/native-late.test.mjs.txt",
+      "sha": "0b8e0b08d937064e74ed260b7aba3b798dfeb2af"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/native-round3-delta.json.txt",
+      "sha": "e24d16e840d6e06c99ff2cc06d21295a0cbbc5e0"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/native-tool.mjs.txt",
+      "sha": "6f4596923cd998abcd6cb3b250ff07dc727183c3"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-01.test.mjs.txt",
+      "sha": "7274d823617d51422265b2e32c2751388de1346e"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-02.test.mjs.txt",
+      "sha": "c6ee74656e10c626d626cc6e794a3fc4954bf4ee"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-03.test.mjs.txt",
+      "sha": "845c3943dd7c73543d6507ddd44ae09828441231"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-04.test.mjs.txt",
+      "sha": "48ceac52ba145b13acf5828400e02f8405b86a56"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-05.test.mjs.txt",
+      "sha": "a7aa3459469cb6c004886f70834ec696897e7c48"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/prepare-source.mjs.txt",
+      "sha": "5c6cf5756e8cc809572dda4a73bc21be1f4ee9fc"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs.txt",
+      "sha": "f6dc963613db8957e51fb8320d572efc1f7742bb"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs.txt",
+      "sha": "0ede2ed95a7b3454bc2001cb7571c9246c64a4e3"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/progress-recorder.txt.txt",
+      "sha": "662ec8170bbfe81831b557824d1a466e722842d7"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/public-frame-delta.json.txt",
+      "sha": "da654b5cac1e4d8fef4d1b59f968caf315a55dc0"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-core-model.mjs.txt",
+      "sha": "aa56e5e9c5e7e0178f8ca9be84a1fb844d53fe54"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-core-source.mjs.txt",
+      "sha": "e08c278b46294131adeb98902f3b2210a698ff75"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-core-tool255.mjs.txt",
+      "sha": "908b92fbae7f4ab2d6fa73b2760e1b491958e7d8"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-inert-template.txt.txt",
+      "sha": "06eab6d5c9241c64217f2d292453e319e3b77fbd"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-link-tool255.mjs.txt",
+      "sha": "ffaab437a1597afc827d8e5e57624d2fce5398e9"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-link.mjs.txt",
+      "sha": "05895733d639025bfc5d9a5c53a515396ccf394f"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-original-wrapper.txt.txt",
+      "sha": "879f859bdb211e2a040296ff7463abda379bc0c4"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-regression.mjs.txt",
+      "sha": "51bdc3fa2e935ee9dec8d997c7380836e5a2144e"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/QA-vectors.json.txt",
+      "sha": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/root-ruling.json.txt",
+      "sha": "03dcd340a4161b37adc2d73f1899de6dc8a486a4"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs.txt",
+      "sha": "84cdfcabf0714a08821af7b9902c3685535aa3b0"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/schedule.json.txt",
+      "sha": "266994c0ad63792dbf9dbe4e527e804b2a736134"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/scope-guard.mjs.txt",
+      "sha": "fa6f8c2b6e1e077f9e119452155cff70910317b5"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source-index.json.txt",
+      "sha": "adf5e3d04562a34718cce9a04ccb480bc70fa694"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source-site-delta.json.txt",
+      "sha": "568f5fde50c99d764f2162045b85c24a9b657ca1"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S00.txt.txt",
+      "sha": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S01.txt.txt",
+      "sha": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S02.txt.txt",
+      "sha": "8505cfe4e020c570ec37cb5943b703770e4d06c8"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S03.txt.txt",
+      "sha": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S04.txt.txt",
+      "sha": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S05.txt.txt",
+      "sha": "a177d50ff73f8fad1d60827ef904a204126796fb"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S06.txt.txt",
+      "sha": "4c1d7355e1759a5d597b520fcb79c2689b9bb966"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S07.txt.txt",
+      "sha": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S08.txt.txt",
+      "sha": "b1adcd5dca7b239cfa59f1d33323f51b1887aebc"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S09.txt.txt",
+      "sha": "d27116cbd39a393c1a887ffaba8b25d46390124f"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S10.txt.txt",
+      "sha": "a8d261f8f4ee18e64e35b9dce1de077d50fdd2eb"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S11.txt.txt",
+      "sha": "19441f9aa4a464b9594431b6e196d4318a7809b3"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S12.txt.txt",
+      "sha": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/tripwire-ruling.json.txt",
+      "sha": "6eeea42118c71babb1e103438d1ef372620f688a"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-tree/docs/superpowers/source-lab/c2-pending-get-native-tools1/witness.json.txt",
+      "sha": "3c2bb077ddbf6521e80ee73f1580da61224afa2c"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposal-index.json",
+      "sha": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/proposed-flat-tree.json",
+      "sha": "c50198511f93639ec20b32f75ad8cd6110900979"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/author-report-before-fix4.md",
+      "sha": "961bd2d328e77e75ec2cdd3bcb2f65353cb62300"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/full-static-review-round3.json",
+      "sha": "f1d36b71ecd97d73a2106be9b766ded87025ec94"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/fix4-brief.json",
+      "sha": "b113b073be02db3fbb01b82c67ec2d3f84baf051"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/fix4-current-task-context.json",
+      "sha": "0668a6192ff18fec4a9c860fe28eb6ada91c636d"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/fix4-static-partial-report.md",
+      "sha": "a4358d6724c1483e0b5435a2c21d63e1b2370aaa"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/fix4-narrowed-collector-ruling.json",
+      "sha": "814aedb69d5f948dbd87e58e4f2374230f844b68"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/root-final-data-measurement.json",
+      "sha": "a51852b0842f1b6c97668aee0aa53c3a1486772b"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/native-round3-ruling.json",
+      "sha": "de57d83b0e28ef765ddf7729ce27fa538b443787"
+    },
+    {
+      "path": "docs/superpowers/progress/2026-11-18-pending-get-b2-final-static-archive/sdk-scope-ruling.json",
+      "sha": "ff0f6877635441d8ab2fd73a53b0e3f182d3198f"
+    }
+  ],
+  "rationale": "All proposed code/workflow bodies preserved as .txt under docs only, with exact existing blob identities. This archive creates no .github workflow and releases no execution. Full review failed; Fix4 generic hardening is in progress; N06 tuple-validation remains open.",
+  "readiness": false,
+  "PCoff": false
+}

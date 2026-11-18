@@ -1,0 +1,80 @@
+{
+  "schema": "afw.pending-get.b2-gate-control-and-binding-ruling.v1",
+  "atUTC": "2026-11-18 14:19:45 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "PROPOSAL_ONLY_NO_EXECUTION",
+  "prior": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
+  "authority": "98c9394ced5982acdb4e2f7a3afb61131cd5019a",
+  "fixedWitness": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+  "N05": {
+    "admitted": "One additional fixed TOOL control RPC sealGate() into the same isolated M runtime, after selected original M terminal and strictly before same actor ordinary count. It is not a QA read and cannot substitute for actor raw-entry census or q0.A.",
+    "scope": "Only disposable inert TOOL entry/control export. No extra service/runtime in Cloudflare, no real network, production binding, compatibility flag, grant, auth or business Source change. Preserve original M/QA source wrappers and immutable identity; proposed helper must be independently reviewed and actual native linked before credit.",
+    "semantics": "No arguments. Atomically seal the exact sole nominated held M->actor delegate path irrevocably. Permit one success, return one fixed bounded scalar containing held1/sent0/queued0 and sealed result. No Response/Request/stream/stub/key/epoch/object exported in result. No outbound call or actor effect inside seal. No cached I/O access.",
+    "witness": "Exact same M mount/generation/worker/script and designated gate must be proven. Gate cannot be reopened, override transport, schedule later delegation, or access other actors. N01/N02 positive one-entry calibrations must exercise same raw census placement and corresponding sole gate implementation with pass-through delivery, not unrelated code. Final normal native disposal and terminal evidence required. Any missing gate or wrong/no terminal witness invalidates N05.",
+    "counts": {
+      "selectedTimedMInvocations": 8,
+      "companionTimedMInvocations": 1,
+      "qaPostCountReadMaximum": 6,
+      "addedN05MControlRpcMaximum": 1,
+      "addedNativeProcesses": 0,
+      "newGroups": 0
+    },
+    "deadline": "One call only, no retries, host waiting cap<=1000ms outside original30s, included existing TOOL_REMAINING148s and full329/330s schedule; no time budget increase. Failure/timeout/context mismatch => N05 unqualified, stop without claimed absence.",
+    "acknowledgement": "This is an explicit finite TOOL control-call scope increment to implement FI1 W2. It is not a claim the previous frozen schedule already included that RPC, or a new protected business invocation."
+  },
+  "N04": {
+    "preserved": "Use original super.fetch native promise and its already existing fulfillment/rejection reaction; no new observer reaction to outward async wrapper, no invented F. Ordinary benign count may register the independently specified FIFO witness only on that exact promise, as previously designed.",
+    "strictScalar": "Witness callback must ignore the resolved I/O value and record/return only fixed scalar completion evidence. It may not read/cancel/cache/return original Response/Request/stream/body/stub, perform I/O on its behalf, transplant request context, detach genuine cleanup or add a compatibility flag.",
+    "state": "Documentation does not prove this exact pinned native topology. If workerd rejects context/ownership, cancellation or genuine close, N03/N04 qualification fails and Root must decide a new supported premise; no swallowed error/model replacement/timing expansion. No claim shared Promise alone universally violates or permits request I/O rules.",
+    "primary": {
+      "url": "https://developers.cloudflare.com/workers/observability/errors/#cannot-perform-io-on-behalf-of-a-different-request",
+      "checkedAtUTC": "2026-11-18 14:19:45 UTC",
+      "summary": "Cloudflare documents that request/response streams and other I/O objects belong to their originating invocation and must not be accessed from another invocation; retain plain data instead. The source does not certify this fixture's promise topology."
+    }
+  },
+  "binding": {
+    "defect": "m-link128af37 duplicate same-lease response attachment silently returns, preserving original private observation despite ambiguity.",
+    "required": "Known lease repeat attachment terminally invalidates that exact private M cell while retaining at most one stored Response binding. Preserve public g1 and exact original application operation.",
+    "columns": [
+      "id",
+      "fixed input sequence",
+      "expected"
+    ],
+    "independentControls": [
+      [
+        "W01",
+        "Set approved epoch, ordinary synthetic M request/lease; advance actual factory/core through requestBytesEnter/return, capture own v4 UUID, stubEnter/return original Response, pendingBeginResponse once then repeat with same response/check/first; nominate actual T0 error, race/caught/finish same503 pending Response",
+        "Public g1.503.L.0 present; private x-afw-lab-pending1 absent; no replacement response enrollment"
+      ],
+      [
+        "W02",
+        "Same as W01, second pendingBeginResponse supplies a distinct Response on exact same lease",
+        "Public g1.503.L.0 present; private header absent; pendingWireCall(new response,check,first) returns null; no second mapping"
+      ],
+      [
+        "W03",
+        "Clean control: unknown lease attachment rejected; known request/lease follows same sequence once with no duplicate, timerT0 selected at cursor5",
+        "Public g1.503.L.0; private literal m1.af0000000000000f.T5.e3000000-0000-4000-8000-000000000001; known exact pendingWireCall returns own lease once, then null"
+      ]
+    ],
+    "execution": "Not run. Add these3 exact input/output controls to current CAL process; previous35Q+10overlap+6seed=51 becomes54. No extra Node/group/time. No replay unchanged134.",
+    "comparison": "Use actual proposed helper/qualified factory/core modules, not a model of helper classification. Identity equality checked directly; original error object preserved; no input generated by output parser."
+  },
+  "limits": {
+    "guardedNodeProcesses": 24,
+    "perTarget": 8,
+    "CALms": 8000,
+    "producerMs": 330000,
+    "jobMs": 420000,
+    "phaseScheduleUnchanged": true
+  },
+  "hold": {
+    "nativeExecutionReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "operationalReadiness": false,
+    "SourceOwnStageB": "5/5 unchanged"
+  }
+}

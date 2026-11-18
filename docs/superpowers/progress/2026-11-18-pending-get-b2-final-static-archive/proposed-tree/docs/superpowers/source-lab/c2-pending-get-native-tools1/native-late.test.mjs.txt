@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import {appendFileSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {casePlan,label,mono,openNativeTool} from './native-tool.mjs';
+import {installPendingFixture} from '../fixtures/finite-coupled-native.mjs';
+
+const id=process.env.AFW_C2_NATIVE_SLOT,root=resolve(process.env.AFW_C2_DIAG_ROOT??'');
+const catalog=process.env.AFW_C2_CATALOG;
+const start=Number(process.env.AFW_C2_GROUP_START),end=Number(process.env.AFW_C2_GROUP_END);
+assert(['N03_OFF_LATE','N04_ON_LATE_FROZEN_D07'].includes(id)&&catalog&&Number.isSafeInteger(start)&&Number.isSafeInteger(end));
+const plan=casePlan(id);
+assert.equal(end,start+plan.capMs);
+let tool,proof;
+const stages=value=>appendFileSync(join(root,'native-hook-witness'),value+'\n',{flag:'a',mode:0o600});
+const boundary=plan.on?{
+  root,epoch:plan.epoch,reserve:()=>proof?.reserve()===true,targetFor:main=>proof?.targetFor(main),
+  isDispatchResponse:r=>proof?.isDispatchResponse(r)===true,witness:stages,
+  invokeRead:(...args)=>proof.invokeRead(...args),
+}:null;
+installPendingFixture({boundary,openToolWorld:async({choose,createFiniteSnapshotObserver})=>{
+  assert(!tool&&mono()<=start+plan.setupMs);
+  const acquired=await openNativeTool(plan,root,catalog,end);
+  try{
+    tool=acquired;
+    proof=tool.boundary(root,stages);
+    const main=tool.main,observer=createFiniteSnapshotObserver(main,()=>main);
+    return {
+    async approve(value){assert.equal(value,'connection');},counts:observer.counts,
+    async noScope(){
+      assert(mono()<=start+plan.setupMs);
+      const expected=observer.enter(label);
+      try{await choose(main,observer.getToken(expected));}
+      finally{observer.finish(expected);}
+    },
+    async close(){
+      await tool.close();
+      assert(mono()<=end);
+      await tool.emitReceipt();
+    },
+    };
+  }catch(original){
+    try{await acquired.close();}catch{console.info('TOOL_INIT_CLOSE_UNVERIFIED');}
+    throw original;
+  }
+}});
+await import('../mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs');

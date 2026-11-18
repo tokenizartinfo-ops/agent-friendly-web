@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {containedReadCode,makeOuterTripwire} from './attempt-tripwire.mjs';
+
+export function checkOuterTripwire(control) {
+  assert.equal(control.id,'W05');
+  const base=process.env.TMPDIR;
+  assert(base&&resolve(base)===base);
+  const dir=mkdtempSync(join(base,'w05-')),path=join(dir,'read-attempts');
+  try{
+    writeFileSync(path,'',{flag:'wx',mode:0o600});
+    const trip=makeOuterTripwire(path);
+    try{
+      assert.throws(()=>trip.invokeRead(undefined,'af0000000000000f','e3000000-0000-4000-8000-000000000001'),{code:containedReadCode});
+      assert.equal(readFileSync(path,'utf8'),control.expected.counterFileExact);
+      assert.equal(control.expected.actualActorMethodCalls,0);
+    }finally{trip.close();}
+  }finally{rmSync(dir,{recursive:true,force:false});}
+}

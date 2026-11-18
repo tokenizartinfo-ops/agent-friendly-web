@@ -1,0 +1,244 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {lstat,mkdir,mkdtemp,readFile,realpath,rm,symlink,writeFile} from 'node:fs/promises';
+import {dirname,join,resolve,sep} from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const repo='tokenizartinfo-ops/agent-friendly-web';
+const base='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68',tree='62e78926635d6b74f288d6c0d69e0f2516306989';
+const main='0c9c475b3ebaa970fc11d628b40e50a90cceb727';
+const branch='lab/afw-c2-pending-get-20261118-native-tools1',message='AFW-C2-PENDING-GET-NATIVE-TOOLS1-ONEUSE-20261118';
+const job='c2-pending-get-native-tools1',prefix='docs/superpowers/source-lab/'+job+'/',runner=prefix+'run-pending-get-native-tools1.mjs';
+const workflow='.github/workflows/afw-c2-pending-get-native-tools1.yml';
+const mountPin={"bytes":18605,"sha256":"a3532ae4b3bef9297c8e7a619e204bad40fe1a7ab0a8a6da97b7e891d7df5372","blob":"c40fea6bc115e4ecb852b38574dcb0f13febf65d"};
+const slots=[
+ ['CAL_PREFLIGHT',8000,0,1,''],
+ ['P3_NEGATIVE_HOST_GROUP',8000,1,6,''],
+ ['TOOL_PENDING',73000,0,1,''],
+ ['P3_FROZEN_D07_OFF',44000,1,2,'N03_OFF_LATE'],
+ ['P3_FROZEN_D07_ON',45000,1,2,'N04_ON_LATE_FROZEN_D07'],
+ ['TOOL_REMAINING',148000,0,1,''],
+];
+const host=resolve(process.cwd()), tempRoot=resolve(process.env.RUNNER_TEMP??'');
+const node=process.execPath,clock=()=>Number(process.hrtime.bigint()/1000000n),now=clock();
+const jobStarted=Number(process.env.AFW_B2_JOB_START_MS);
+const hostEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:tempRoot,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};
+const hash=(algorithm,b)=>createHash(algorithm).update(b).digest('hex');
+const gitBlob=b=>hash('sha1',Buffer.concat([Buffer.from('blob '+b.length+'\0'),b]));
+const sha256=b=>hash('sha256',b);
+const exactDecoder=new TextDecoder('utf-8',{fatal:true});
+const safePath=/^(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+$/;
+const archiveCap=33554432;
+const baseArchive=['lib','worker','scripts','test','db','config','.github/workflows/afw-finite-qa-bootstrap.yml',
+ 'package-lock.json','package.json','tsconfig.json','wrangler.a2a-canary.jsonc','wrangler.a2a-production.jsonc',
+ 'wrangler.assistance-goal-context.jsonc','wrangler.assistance-goal-context.qa.jsonc','wrangler.assistance-supervision-producer.jsonc',
+ 'wrangler.contact.jsonc','wrangler.delegated-canary.jsonc','wrangler.delegated-real-pilot.example.jsonc','wrangler.delegated-real-pilot.jsonc',
+ 'wrangler.delegated.jsonc','wrangler.dossier-supervision-producer.jsonc','wrangler.independent-closure-qa.finite.jsonc',
+ 'wrangler.independent-closure-qa.jsonc','wrangler.independent-closure-qa.rollback.jsonc','wrangler.mail-canary.jsonc',
+ 'wrangler.mcp-own-events.example.jsonc','wrangler.mcp-own.finite.jsonc','wrangler.mcp.jsonc','wrangler.operations-manager.jsonc',
+ 'wrangler.operations-producer.jsonc','wrangler.operations-review-qa.jsonc','wrangler.operations-review.jsonc','wrangler.operations-watchdog.jsonc',
+ 'wrangler.operations.jsonc','wrangler.release-operator.jsonc'];
+
+function hostCommand(exe,args,{limit=1048576,input}={}) {
+  const remaining=jobStarted+65000-clock();
+  assert(remaining>0);
+  const out=spawnSync(exe,args,{cwd:host,env:hostEnv,encoding:null,input,maxBuffer:limit,timeout:Math.min(remaining,30000),stdio:['pipe','pipe','pipe']});
+  assert(!out.error&&out.signal===null&&out.status===0&&out.stdout.length<=limit&&out.stderr.length<=65536);
+  return out.stdout;
+}
+const git=(...args)=>exactDecoder.decode(hostCommand('/usr/bin/git',args)).trimEnd();
+
+async function exists(path) {
+  try { return await lstat(path); } catch(error){if(error.code==='ENOENT')return null;throw error;}
+}
+function admittedPath(root,path) {
+  assert(safePath.test(path)&&path.split('/').every(x=>x!=='.'&&x!=='..'));
+  const full=join(root,path);assert(full.startsWith(root+sep));return full;
+}
+async function pinned(path,p) {
+  const old=await lstat(path);
+  assert(old.isFile()&&await realpath(path)===path&&old.size===p.bytes);
+  const data=await readFile(path), after=await lstat(path);
+  assert(old.dev===after.dev&&old.ino===after.ino&&old.ctimeMs===after.ctimeMs&&data.length===p.bytes&&gitBlob(data)===p.blob&&sha256(data)===p.sha256);
+  return data;
+}
+
+function admitEnvironment() {
+  const env=process.env;
+  assert(process.platform==='linux'&&process.getuid()>0&&process.version==='v22.23.4'&&process.argv.length===2);
+  assert(env.GITHUB_REPOSITORY===repo&&env.GITHUB_EVENT_NAME==='push'&&env.GITHUB_REF==='refs/heads/'+branch&&
+    env.GITHUB_RUN_ATTEMPT==='1'&&env.GITHUB_JOB===job&&/^[1-9][0-9]{0,19}$/.test(env.GITHUB_RUN_ID??'')&&
+    /^[0-9a-f]{40}$/.test(env.GITHUB_SHA??'')&&env.RUNNER_TEMP&&env.GITHUB_WORKSPACE===host&&
+    fileURLToPath(import.meta.url)===join(host,runner));
+  assert(Number.isSafeInteger(jobStarted)&&jobStarted>0&&jobStarted<=now&&now-jobStarted<65000);
+  assert.equal(git('rev-parse','HEAD'),env.GITHUB_SHA);
+  assert.equal(git('rev-parse','HEAD^'),base);
+  assert.equal(git('rev-parse',base+'^{tree}'),tree);
+  assert.equal(git('show','-s','--format=%B','HEAD'),message);
+  return {head:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:1,headTree:git('rev-parse','HEAD^{tree}')};
+}
+
+async function beforeLaunch(manifest,cwd,temp) {
+  const archive=hostCommand('/usr/bin/git',['archive','--format=tar',base,'--',...baseArchive],{limit:archiveCap});
+  hostCommand('/usr/bin/tar',['-xf','-','-C',cwd],{limit:65536,input:archive});
+  const lock=await readFile(join(host,'package-lock.json'));
+  assert.equal(gitBlob(lock),manifest.baselineRechecks['package-lock.json']);
+  const dependencyLock=JSON.parse(lock).packages;
+  assert.equal(dependencyLock['node_modules/@cloudflare/workers-oauth-provider'].version,'1.2.1');
+  assert.equal(dependencyLock['node_modules/miniflare'].version,'5.20260831.0-alpha');
+  assert.equal(dependencyLock['node_modules/workerd'].version,'1.20260831.1');
+  assert.equal(dependencyLock['node_modules/esbuild'].version,'0.28.2');
+  for(const [file,sha] of Object.entries(manifest.baselineRechecks)){
+    const path=admittedPath(cwd,file);assert.equal(gitBlob(await readFile(path)),sha);
+  }
+  const seen=new Set();
+  for(const [relative,pin] of Object.entries(manifest.objects)) {
+    const bytes=await pinned(admittedPath(host,prefix+relative),pin);
+    for(const target of pin.targets){
+      assert(!seen.has(target));seen.add(target);
+      const path=admittedPath(cwd,target);
+      if(pin.before){
+        const old=await readFile(path);
+        assert(old.length===pin.before.bytes&&gitBlob(old)===pin.before.blob);
+      }else assert.equal(await exists(path),null);
+      await mkdir(dirname(path),{recursive:true,mode:0o700});
+      await writeFile(path,bytes,{flag:pin.before?'w':'wx',mode:0o600});
+    }
+  }
+  assert(await realpath(join(host,'node_modules'))===join(host,'node_modules'));
+  await symlink(join(host,'node_modules'),join(cwd,'node_modules'),'dir');
+  return {targetCount:seen.size};
+}
+
+async function recheck(manifest,dir) {
+  for(const pin of Object.values(manifest.objects))for(const target of pin.targets)await pinned(admittedPath(dir,target),pin);
+  for(const [file,sha] of Object.entries(manifest.baselineRechecks))assert.equal(gitBlob(await readFile(admittedPath(dir,file))),sha);
+}
+
+const output=join(host,'output',job+'.json');
+const toolPath='test/pending-native-tools/';
+const prefixMeta={repository:repo,base,tree,protectedMain:main,job,branch,locks:{node:'22.23.4',
+  oauthSdk:'1.2.1',miniflare:'5.20260831.0-alpha',workerd:'1.20260831.1',esbuild:'0.28.2'}};
+const flags={SourceQualified:false,Task1Pass:false,operationalReadiness:false,PCoff:false,completePackage:false,
+  receiptAuthenticated:false,historicalCauseProven:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+const selection='^(C2T1_CONNECTION|C2T1_SCOPE_MISSING)$';
+const childTest=['--test','--test-reporter=tap','--test-concurrency=1','--test-name-pattern='+selection];
+const groups=[];
+let phase='admission',context=null,cleanupAllowed=true,temp=null,originalTemp=null,finishCap=null,packet;
+
+async function makeScope(tempPath,id,negativeIds,slot) {
+  const root=join(tempPath,id);await mkdir(root,{mode:0o700});
+  if(slot)await writeFile(join(root,'green-progress.ndjson'),'',{flag:'wx',mode:0o600});
+  if(id==='P3_NEGATIVE_HOST_GROUP')for(const item of negativeIds){
+    const dir=join(root,item);await mkdir(dir,{mode:0o700});
+    for(const name of ['green-progress.ndjson','read-attempts','negative-witness'])
+      await writeFile(join(dir,name),'',{flag:'wx',mode:0o600});
+  }
+  return root;
+}
+
+async function removeOwnTemp() {
+  const last=await lstat(temp);
+  assert(dirname(temp)===tempRoot&&await realpath(temp)===temp&&last.isDirectory()&&
+   last.uid===process.getuid()&&last.gid===process.getgid()&&last.dev===originalTemp.dev&&last.ino===originalTemp.ino);
+  await rm(temp,{recursive:true,force:false});
+  assert.equal(await exists(temp),null);temp=null;
+}
+
+async function writePacket(value) {
+  const bytes=Buffer.from(JSON.stringify(value)+'\n');
+  assert(bytes.length<=24577);
+  await mkdir(dirname(output),{recursive:true,mode:0o700});
+  assert(await realpath(dirname(output))===dirname(output));
+  await writeFile(output,bytes,{flag:'wx',mode:0o600});
+  assert((await readFile(output)).equals(bytes));
+  process.stdout.write('AFW_C2_PENDING_GET_NATIVE_TOOLS1_BASE64 '+bytes.toString('base64')+'\n');
+}
+
+try {
+  context=admitEnvironment();
+  assert(await realpath(tempRoot)===tempRoot&&tempRoot!==host);
+  const raw=await pinned(admittedPath(host,prefix+'mounts.json'),mountPin),manifest=JSON.parse(raw);
+  assert(manifest.schema==='afw.c2.pending-get-native-tools1.mounts.v1'&&manifest.baseline===base&&manifest.tree===tree&&manifest.main===main);
+  const original=git('ls-tree','-r','--name-only','HEAD^').split('\n');
+  assert.equal(original.length,3203);
+  assert.equal(original.filter(path=>path.startsWith('.github/workflows/')).length,62);
+  const allowed=[...Object.keys(manifest.objects).map(name=>prefix+name),prefix+'mounts.json',runner,workflow].sort();
+  const diff=git('diff','--no-renames','--name-status','HEAD^','HEAD').split('\n');
+  assert(diff.every(x=>x.startsWith('A\t')));
+  assert.deepEqual(diff.map(x=>x.slice(2)).sort(),allowed);
+  assert.equal(git('ls-tree','-r','--name-only','HEAD').split('\n').length,original.length+allowed.length);
+
+  phase='materialize';
+  temp=await mkdtemp(join(tempRoot,'afw-pending-native-tools1-'));originalTemp=await lstat(temp);
+  const sandbox=join(temp,'source');await mkdir(sandbox,{mode:0o700});
+  const {targetCount}=await beforeLaunch(manifest,sandbox,temp);
+  const schedule=JSON.parse(await readFile(join(sandbox,toolPath+'schedule.json'),'utf8'));
+  assert.equal(schedule.nativeExpected.length,8);
+  await recheck(manifest,sandbox);
+  const controller=await import('./producer-child.mjs'),collector=await import('./producer-collect.mjs');
+  const producerStart=clock(),setupMs=producerStart-jobStarted;
+  assert(setupMs<=65000&&slots.reduce((sum,s)=>sum+s[1],0)===326000);
+  finishCap=Math.min(producerStart+330000,jobStarted+420000-24000);
+
+  const collected=[],catalog=join(temp,'generated');
+  let guarded=0,cal,negatives;
+  for(const [index,[id,limit,expected,probeCount,slot]] of slots.entries()){
+    phase=id;
+    const root=await makeScope(temp,id,controller.negativeIds,slot);
+    const start=clock();
+    assert(start+slots.slice(index).reduce((sum,s)=>sum+s[1],0)+3000<=finishCap,
+      'full remaining original clocks and cleanup must fit before launch');
+    const negative=id==='P3_NEGATIVE_HOST_GROUP';
+    const args=negative?[...childTest,...controller.negativeFiles.map(name=>toolPath+name)]:
+      slot?[...childTest,toolPath+'native-late.test.mjs']:[toolPath+'native-group-child.mjs'];
+    cleanupAllowed=false;
+    const run=await controller.isolatedLaunch({cwd:sandbox,temp,root,catalog,phase:id,node,start,end:start+limit,args,negative,slot,expected});
+    cleanupAllowed=run.allGuardedTerminal===true;
+    assert(run.guarded===probeCount&&run.guarded<=8);
+    guarded+=run.guarded;assert(guarded<=24);
+    const measurement=negative?collector.negativeAggregate(root,run):
+      collector.collectToolGroup({root,run,schedule,phase:id,slot});
+    if(id==='CAL_PREFLIGHT')cal=measurement;
+    else if(negative)negatives=measurement;
+    else collected.push(...measurement);
+    groups.push({id,capMs:limit,elapsedMs:clock()-start,guarded:run.guarded,childExit:run.childExit,
+      maximumObservedGuardedLive:run.maximumObservedGuardedLive,allGuardedTerminal:true});
+  }
+  phase='final-custody';
+  assert(guarded===13&&collected.length===8&&negatives.length===5);
+  assert.deepEqual(collected.map(x=>x.id),schedule.nativeExpected.map(x=>x[0]));
+  assert.deepEqual(collected[0].ordinary,collected[1].ordinary);
+  assert.deepEqual(collected[2].ordinary,collected[3].ordinary);
+  assert.equal(collected.reduce((a,x)=>a+x.queries,0),6);
+  assert.equal(collected.filter(x=>x.row!==null).length,6);
+  assert.equal(collected.reduce((a,x)=>a+x.gateCalls,0),1);
+  assert.equal(collected.filter(x=>x.closed.hadCompanion).length,1);
+  await recheck(manifest,sandbox);
+  await removeOwnTemp();
+  assert(clock()<=finishCap);
+  packet={schema:'afw.c2.pending-get-native-tools1.result.v1',status:'SYNTHETIC_NATIVE_TOOL_CONTROLS_MATCH',
+    ...prefixMeta,context,manifest:mountPin,targetsRechecked:targetCount,
+    bounds:{setupMs,producerMs:clock()-producerStart,setupCapMs:65000,producerCapMs:330000,jobCapMs:420000,
+      jobPublicationReserveMs:24000,originalMOperationMs:30000,perQaHostWaitMs:1000},
+    groups,cal,negatives,selected:collected,
+    census:{guardedNodeFresh:guarded,guardedCap:24,perTargetCap:8,outerProducerNode:1,
+      initialWorkerdIdentitiesObserved:collected.length+1,esbuildIdentityObserved:1,
+      processChainPerGroup:['sudo','env','unshare PID/net parent','shell','ip lo setup','setpriv exec','guarded Node group'],
+      allSelectedWorkerdOwnedPidsTerminal:true,actorCloseScope:'benign fixture ACK, SDK dispose, observed PID terminal',
+      SDKDisposeUsesOwnSignal:true,hostForcedNativeCutoff:false,negativeHeldWorkerCutoff:true},
+    scope:{actualNative:'inert QA fixtures and actual transport/observer',sourceQa:'S00/S02 linkage build only',
+      Source5:5,OWN5:5,StageB:5},checks:{mountsBeforeAfter:true,ownTempRemoved:true,ordinaryPairs:true,
+        sameMountPerSlot:true,normalNodeTerminal:true},...flags};
+}catch{
+  if(temp&&cleanupAllowed){try{await removeOwnTemp();}catch{}}
+  packet={schema:'afw.c2.pending-get-native-tools1.result.v1',status:'STOPPED_UNQUALIFIED',
+    ...prefixMeta,context,phase,completedGroups:groups,closure:'UNVERIFIED',...flags};
+  process.exitCode=1;
+}
+try{
+  if(finishCap!==null&&clock()>finishCap)process.exitCode=1;
+  await writePacket(process.exitCode&&packet.status==='SYNTHETIC_NATIVE_TOOL_CONTROLS_MATCH'?
+    {schema:packet.schema,status:'STOPPED_UNQUALIFIED',...prefixMeta,context,phase:'publication-clock',...flags}:packet);
+}catch{process.exitCode=1;process.stderr.write('AFW_C2_PENDING_GET_NATIVE_TOOLS1_PUBLICATION_FAILED\n');}

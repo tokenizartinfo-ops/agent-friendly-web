@@ -1,0 +1,414 @@
+{
+  "schema": "afw.b2.final-packet-data-reconciliation.v1",
+  "atUTC": "2026-11-18 15:30:31 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "proposal": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+  "graph": "c50198511f93639ec20b32f75ad8cd6110900979",
+  "mounts": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+  "basis": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+  },
+  "leaves": [
+    {
+      "path": ".github/workflows/afw-c2-pending-get-native-tools1.yml",
+      "blob": "9cc21bf63f8c73e212965a288f7119536faf9fb8",
+      "bytes": 1614,
+      "sha256": "a2237c155b47fd78cfd881d85efcd9fdb0442c6d60a6b65c62b0734dfce3b43e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/attempt-tripwire-model.mjs",
+      "blob": "76514cbf6ca7a17b0e08782794b8e452f15a44e7",
+      "bytes": 926,
+      "sha256": "40c982d1d391b0848712751403208c54ccba92998a159a681b01da2df62178a9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/attempt-tripwire.mjs",
+      "blob": "73a9c4afc619fba16426f461bafe1dec24949ca4",
+      "bytes": 879,
+      "sha256": "ec1e550cb4e6b611a89ae7bdb5656d8f2d5e05b2e45d36b31e9237edff786204"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/cal-model.mjs",
+      "blob": "69c1457194d36d8464f55d6962c8278339146962",
+      "bytes": 7415,
+      "sha256": "87ab2d2ac2f10ec4ff63545ffc1d061523d7f54aeb94c5187572b23787c7e164"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/codec.mjs",
+      "blob": "18a40467a2900a3e1265f7b90cb115ac072b8858",
+      "bytes": 2815,
+      "sha256": "f79c487d50f034cad53752408bc2ac2c521ca3698a107ccc08dc7655344f57c0"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/composed-lineage-model.mjs",
+      "blob": "e12742cd664468d9e49dafbb0fbb0c162af481cf",
+      "bytes": 2754,
+      "sha256": "595b306062a6f8a561430d5d713b62544e4dd3fec7db216d020162ebbd4320ec"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/create-get-winner-observer.mjs",
+      "blob": "676ce360268ae07c2af0d0b029d89bc7a9e7bbc3",
+      "bytes": 4368,
+      "sha256": "bcba65a442f95c997cc8929d248bb43edc32a14f39c66dc4250db62a6b21f348"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/custody-origin-guard.mjs",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/driver-D07.txt",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/fixture-host.mjs",
+      "blob": "836632fcfec33d610a4a9ee870643cd184d357d4",
+      "bytes": 6658,
+      "sha256": "ac919c056c445e833f3a96d9aa4b242306bf3261c855625f7ee239ff41def569"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/gate-ruling.json",
+      "blob": "2771057d706832993a155954adef67a2efb12be2",
+      "bytes": 6435,
+      "sha256": "171375277762421839e9904266e3f3050a6cc6db124eaa4a95f2019167667526"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/gate-worker.txt",
+      "blob": "e3712979ae78e72d13f2d79dd849c7bf3cb8418d",
+      "bytes": 2032,
+      "sha256": "3a39d0a862560dcc0711d8ec0a2f6f48340340634a600d44cfee8bedb313e40d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/host-core.mjs",
+      "blob": "249033b347dbb9696f6fd872557b28385617cd90",
+      "bytes": 4227,
+      "sha256": "5aaa332786812d8f838ce4d42c68837b3a4215a1ea4fd7f725108ffe6b5c088b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/host-negatives.mjs",
+      "blob": "17adfe7f9a0bc6d03a4e60d0ba18f42e92a3a3b1",
+      "bytes": 3758,
+      "sha256": "e0b4d8f6ac12783e4cf697a85e8d8b30a38b8f3dc282673da39de9982cee5398"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/lineage-ruling.json",
+      "blob": "73c27264b5fd40867f46d854b07f6196dd3e333d",
+      "bytes": 2265,
+      "sha256": "506355836bf93ad443b5492a88edc509620be8f11e58467986c3242642097e4c"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/m-core.mjs",
+      "blob": "7b10783bb99981e7f9da426bd655ebfbcc91f716",
+      "bytes": 4844,
+      "sha256": "6a2a7195a455c207186d7616882532fc479e8bd9e717a848557659f25b421d92"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/m-link.mjs",
+      "blob": "bec88448705f042bd7286d3d9e4953d93c79f07e",
+      "bytes": 2074,
+      "sha256": "0812a0b4a4d9db2cfb13d7cd8355c763d9f598fda71bcf637089ca115cf9d3a1"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/model-host-input.mjs",
+      "blob": "214bbcc0aa6883c85e131c0bd93e90e5e27e5119",
+      "bytes": 1326,
+      "sha256": "19a3d356bcb98d36e3d637ee3fd2c15ebdfd0f4c12046d324452ba8ba44c74a2"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/mounts.json",
+      "blob": "c40fea6bc115e4ecb852b38574dcb0f13febf65d",
+      "bytes": 18605,
+      "sha256": "a3532ae4b3bef9297c8e7a619e204bad40fe1a7ab0a8a6da97b7e891d7df5372"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-compile.mjs",
+      "blob": "0d362f8d4cd170f0c4e1a4d5bbbbdb678929cfb2",
+      "bytes": 8437,
+      "sha256": "1cf126180d115deda2cba1f3d88ff94706559fb5a1b0869b4f5afd6c7b2f4ba2"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-group-child.mjs",
+      "blob": "5b3dc893aad90b20dff7762880ecd5533f5f7ccb",
+      "bytes": 5983,
+      "sha256": "1cd42e1748c3da17fb331d083eb8e026e6c9f70ade3891113f26479f5e51c9a7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-late.test.mjs",
+      "blob": "0b8e0b08d937064e74ed260b7aba3b798dfeb2af",
+      "bytes": 2056,
+      "sha256": "e7d3a28c0f2d35a20f4f4cc5c80d9493f657dc2eed571a19cab980e2b4f028e2"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-round3-delta.json",
+      "blob": "e24d16e840d6e06c99ff2cc06d21295a0cbbc5e0",
+      "bytes": 11193,
+      "sha256": "460e6be7ecbe7c65f6a35cb792931084a87a7b564856f54a38bfd30f740c0ca9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/native-tool.mjs",
+      "blob": "6f4596923cd998abcd6cb3b250ff07dc727183c3",
+      "bytes": 11824,
+      "sha256": "04d12e139b2b15379cf6227090965dc4747f1affad23e635fa31add75b667196"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-01.test.mjs",
+      "blob": "7274d823617d51422265b2e32c2751388de1346e",
+      "bytes": 80,
+      "sha256": "71354f05adee14b76880cb7fb74cab3f2ca51eb69e4117b23da7723d212d9e39"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-02.test.mjs",
+      "blob": "c6ee74656e10c626d626cc6e794a3fc4954bf4ee",
+      "bytes": 80,
+      "sha256": "6a0237732ca42f5f54716590107bfbd5e422ceb27d25c37094ae53426e0ff8b3"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-03.test.mjs",
+      "blob": "845c3943dd7c73543d6507ddd44ae09828441231",
+      "bytes": 80,
+      "sha256": "71ee3b8c93418f3d6a8a09a1c68c7c2d052c05f2e71bfdb8f7adb7ef490a27a9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-04.test.mjs",
+      "blob": "48ceac52ba145b13acf5828400e02f8405b86a56",
+      "bytes": 80,
+      "sha256": "a67476cdfb8cd1fabb750cf44d1c6ecb6fb198887ea87bdfb0ee1352573c2783"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/p3-05.test.mjs",
+      "blob": "a7aa3459469cb6c004886f70834ec696897e7c48",
+      "bytes": 80,
+      "sha256": "5f87c58adea0b885f9787c0ccbc5e6be52bbf3a49e14bfe1ca204188864a8463"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/prepare-source.mjs",
+      "blob": "5c6cf5756e8cc809572dda4a73bc21be1f4ee9fc",
+      "bytes": 1373,
+      "sha256": "435f7631bd6f09282202b52a43fa6eb02f9ca39d920cc673898d32fc0232f74f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-child.mjs",
+      "blob": "f6dc963613db8957e51fb8320d572efc1f7742bb",
+      "bytes": 7705,
+      "sha256": "a41acbf650e5785711edfc48c224b0cc74e98be53a6b7b3e8069884316e365e5"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/producer-collect.mjs",
+      "blob": "0ede2ed95a7b3454bc2001cb7571c9246c64a4e3",
+      "bytes": 6440,
+      "sha256": "f6fa0470106d6df8b53d04527b34e52701e98a860b83dc2ff1fba2a6b85182fb"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/progress-recorder.txt",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/public-frame-delta.json",
+      "blob": "da654b5cac1e4d8fef4d1b59f968caf315a55dc0",
+      "bytes": 699,
+      "sha256": "efb484fd60da7f61f22cd3edf3dcafe153e3ec71066f1eb206b384d4c7211e69"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-core-model.mjs",
+      "blob": "aa56e5e9c5e7e0178f8ca9be84a1fb844d53fe54",
+      "bytes": 5903,
+      "sha256": "5c6e1c4549e1b237231367875df5ad87c409497e8470c19e821ceca38d4ed422"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-core-source.mjs",
+      "blob": "e08c278b46294131adeb98902f3b2210a698ff75",
+      "bytes": 5057,
+      "sha256": "4f8e454b4b494c306878e55c804560b645a52e0bad379e6a07e9c5536d7837f4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-core-tool255.mjs",
+      "blob": "908b92fbae7f4ab2d6fa73b2760e1b491958e7d8",
+      "bytes": 5361,
+      "sha256": "3058735b64466244b6fb50b7da3cdc1cd4c434d4ebfa8cfbe37965149d62124d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-inert-template.txt",
+      "blob": "06eab6d5c9241c64217f2d292453e319e3b77fbd",
+      "bytes": 4903,
+      "sha256": "d65554f37f79aa64b6bf19eca86d3bc87967e1ae7d1495539088641dca13da15"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-link-tool255.mjs",
+      "blob": "ffaab437a1597afc827d8e5e57624d2fce5398e9",
+      "bytes": 2510,
+      "sha256": "feba5fca6568d33e12c7b453b9cb0a20e992e25a431ec7097ae3d23cd3ec193d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-link.mjs",
+      "blob": "05895733d639025bfc5d9a5c53a515396ccf394f",
+      "bytes": 2295,
+      "sha256": "5942c10ffd5447f458f487af0076a501c9e4ff63044ebe45404092e514f003ee"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-original-wrapper.txt",
+      "blob": "879f859bdb211e2a040296ff7463abda379bc0c4",
+      "bytes": 1110,
+      "sha256": "e09d0d39219ee7069bbbe865b5c3bc467c2c20d5484f8a020a86b42bd61fc538"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/qa-regression.mjs",
+      "blob": "51bdc3fa2e935ee9dec8d997c7380836e5a2144e",
+      "bytes": 4593,
+      "sha256": "480aefe1d9a1265c54e28ec65bf692c1d0024442462363bca6022db78b31a3a8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/QA-vectors.json",
+      "blob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/root-ruling.json",
+      "blob": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
+      "bytes": 10476,
+      "sha256": "63219f658853bb5547ea9d54e8bf07f69d8d4ef4963f359b4fa3a63719b4c6f0"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+      "blob": "84cdfcabf0714a08821af7b9902c3685535aa3b0",
+      "bytes": 15071,
+      "sha256": "72fe228918feb50c7bee50930f86138a11b1ec9b61c0842a0cfeb27c7c1fb845"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/schedule.json",
+      "blob": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+      "bytes": 20982,
+      "sha256": "883a0545aee6d9eb16e1513ac92747032f00ebfa0f41ed5cfe1adf0474b9dfeb"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/scope-guard.mjs",
+      "blob": "fa6f8c2b6e1e077f9e119452155cff70910317b5",
+      "bytes": 1490,
+      "sha256": "7ce753ce2c8f4b238e03cde98439d839b4b26ff7ab87735b007d6576e248b0b0"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source-index.json",
+      "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "bytes": 9228,
+      "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source-site-delta.json",
+      "blob": "568f5fde50c99d764f2162045b85c24a9b657ca1",
+      "bytes": 18892,
+      "sha256": "58cfc0545c6590551d7bde15a295cf06ec2bff5f97055ff4bb308711a8a61968"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S00.txt",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S01.txt",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S02.txt",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S03.txt",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S04.txt",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S05.txt",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S06.txt",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S07.txt",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S08.txt",
+      "blob": "b1adcd5dca7b239cfa59f1d33323f51b1887aebc",
+      "bytes": 24375,
+      "sha256": "9d33fd28debd8d911aa8d111b58ff0febd7b5dd56ace5a6a3f3bf0a0ddfde45c"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S09.txt",
+      "blob": "d27116cbd39a393c1a887ffaba8b25d46390124f",
+      "bytes": 84427,
+      "sha256": "a6b5e66cadcfd3d5899a62f17f23f4b0ee21aed962cd3adad5f4865720549a60"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S10.txt",
+      "blob": "a8d261f8f4ee18e64e35b9dce1de077d50fdd2eb",
+      "bytes": 100184,
+      "sha256": "9853b1f3b205a7af82e280ccdb06b6cdcb9b9ab4be73fbef15ca4c1c7156dc43"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S11.txt",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/source/S12.txt",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/tripwire-ruling.json",
+      "blob": "6eeea42118c71babb1e103438d1ef372620f688a",
+      "bytes": 2967,
+      "sha256": "2874d9519627e836e9af8df1c709c1cc5e9eb1a515988a1198f0fb7b425464ad"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-native-tools1/witness.json",
+      "blob": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+      "bytes": 16345,
+      "sha256": "779ddad548444f664d29d1951874713b44cb875a0c78e5390e24f81f20abce1d"
+    }
+  ],
+  "checks": {
+    "all64FullBodiesCached": true,
+    "allMeasuredIndependentlyAsData": true,
+    "all64ByteAndSha256Matches": true,
+    "manifestObjects61AllInGraph": true,
+    "duplicatePaths": 0,
+    "overlapOriginal3203Paths": 0,
+    "expectedTreeLeaves": 3267,
+    "expectedWorkflows": 63
+  },
+  "scope": "DATA text hashing/comparison only; no Source imports, parsing, tests or execution; no tree runtime creation",
+  "staticReview": "f1d36b71ecd97d73a2106be9b766ded87025ec94",
+  "staticStatus": "CHANGES_REQUIRED",
+  "release": false
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.final-public-frame-delta.v1",
+  "beforeBlob": "b4d25bc2f2242da98fcfd4724df4909b33f7ffa9",
+  "before": "    exactLog(run,f1);exactLog(run,f15);exactLog(run,slot+'_ORIGINAL_PROMISE_WITNESS v1');",
+  "after": "    exactLog(run,f1);exactLog(run,f15);exactLog(run,slot+'_ORIGINAL_PROMISE_WITNESS v1');\n    exactLog(run,'C2FT4 '+JSON.stringify({id:selected,value:'UNKNOWN',w:'L',s:0,h:503}));",
+  "scope": "Both existing frozen D07 TOOL native children must independently emit identical original C2FT4 frame. Inert subject supplies no choice/project context; public winner is unchanged original g1. No new control or app read.",
+  "execution": "NOT_RUN"
+}

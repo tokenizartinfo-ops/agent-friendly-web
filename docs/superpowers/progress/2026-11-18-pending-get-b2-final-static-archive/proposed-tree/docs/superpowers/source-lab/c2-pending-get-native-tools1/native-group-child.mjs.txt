@@ -1,0 +1,112 @@
+import assert from 'node:assert/strict';
+import {writeFile,mkdir} from 'node:fs/promises';
+import {join,resolve} from 'node:path';
+import {Miniflare,Response as DispatchResponse,convertV4MiniflareOptions} from 'miniflare';
+import {createGetWinnerHost} from '../fixtures/finite-first-connection-publication.mjs';
+import {createPendingHostBoundary} from '../fixtures/pending-get/fixture-host.mjs';
+import {casePlan,label,mono,openNativeTool,ownedNative,ownedNativeList,terminated} from './native-tool.mjs';
+
+const root=resolve(process.env.AFW_C2_DIAG_ROOT??''),catalogDir=process.env.AFW_C2_CATALOG;
+const group=process.env.AFW_C2_NATIVE_GROUP,start=Number(process.env.AFW_C2_GROUP_START),end=Number(process.env.AFW_C2_GROUP_END);
+const output=join(root,'group-result.json');
+const groups={TOOL_PENDING:['N01_OFF_PENDING','N02_ON_PENDING'],
+ TOOL_REMAINING:['N05_ON_NO_DELIVERY','N06_ON_FOREIGN','N07_ON_OVERLAP','N08_ON_TRUNCATED']};
+assert(catalogDir&&resolve(catalogDir)===catalogDir&&Number.isSafeInteger(start)&&Number.isSafeInteger(end));
+
+async function direct(plan,slotStart) {
+  const slotEnd=slotStart+plan.capMs;
+  assert(slotEnd<=end&&mono()<=slotStart+plan.setupMs);
+  const dir=join(root,plan.id);
+  await mkdir(dir,{mode:0o700});await writeFile(join(dir,'green-progress.ndjson'),'',{flag:'wx',mode:0o600});
+  process.env.AFW_C2_DIAG_ROOT=dir;
+  const source=new URL('../finite-green-progress-recorder.mjs',import.meta.url);
+  source.searchParams.set('toolSlot',plan.id);
+  const {mark}=await import(source.href);
+  const tool=await openNativeTool(plan,dir,catalogDir,slotEnd);
+  let primaryFailure=false,counts;
+  try{
+    const {main}=tool,witnesses=[];
+    const host=plan.on?createPendingHostBoundary(tool.boundary(dir,value=>{witnesses.push(value);})):null;
+    if(plan.on)assert(host);
+    const legacy=createGetWinnerHost(main,()=>main.getWinnerDirect(),DispatchResponse,host);
+    const target={id:label},token=legacy.begin(target);
+    let error;
+    assert(mono()<=slotStart+plan.setupMs);
+    mark(label,'action','enter');
+    try{
+      const actual=main.call(tool.route,{headers:{'Cf-Access-Jwt-Assertion':main.token}});
+      if(plan.slot==='N07')tool.recordCompanion();
+      const response=await actual,status=response.status,body=await response.text();
+      tool.beforeCapture();token.capture(main,response,status);main.captureToolSurface(response,status,body);
+      assert.equal(status,200);
+    }catch(original){
+      error=original;host?.recordError(main,token,error);mark(label,'action','throw',error);
+    }finally{legacy.finish(target);}
+    assert.equal(error?.code,'ERR_ASSERTION');
+    await tool.gateBeforeCount();
+    assert(mono()<=slotEnd-plan.readMs-plan.closeMs);
+    mark(label,'count','enter');
+    const rows=await main.stub.snapshot();
+    counts={upload:main.uploads.length-1,activation:main.activations.length-1,
+      receipts:rows.filter(([key])=>key.startsWith('afw.finite-policy-effect.v1:')&&key.endsWith(':receipt')).length};
+    host?.recordCount(main,counts);mark(label,'count','return');
+    assert.deepEqual(legacy.take(target,main),{w:'L',s:0,h:503});
+    assert.deepEqual(counts,{upload:1,activation:1,receipts:1});
+    if(host){await host.afterOriginal(error);assert.deepEqual(witnesses,['ENTER','STAGED']);}
+  }catch(error){primaryFailure=true;throw error;}
+  finally{
+    mark('AFTER','close','enter');
+    let failed;
+    try{await tool.close();}catch(error){failed=error;mark('AFTER','close','throw',error);}
+    if(!failed)mark('AFTER','close','return');
+    else if(!primaryFailure)throw failed;
+  }
+  assert(mono()<=slotEnd);
+  return {...await tool.emitReceipt(),counts};
+}
+
+async function shapeControls() {
+  const script=`export default {async fetch() {
+    let finish,arityT,arityE;
+    const callback=function(){finish(arguments.length);};
+    let registeredTimer,registeredSignal,removed;
+    arityT=await new Promise(resolve=>{finish=resolve;registeredTimer=callback;setTimeout(registeredTimer,0);});
+    const c=new AbortController();
+    arityE=await new Promise(resolve=>{
+      finish=resolve;registeredSignal=callback;c.signal.addEventListener('abort',registeredSignal,{once:true});c.abort();
+      removed=callback;c.signal.removeEventListener('abort',removed);
+    });
+    return Response.json({arityT,arityE,same:registeredTimer===registeredSignal&&registeredSignal===removed});
+  }};`;
+  const mf=new Miniflare(convertV4MiniflareOptions({cf:false,modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
+  let processProof;
+  try{
+    await mf.ready;processProof=ownedNative('workerd');
+    const r=await mf.dispatchFetch('https://afw-shape.invalid/callback');
+    assert.equal(r.status,200);assert.deepEqual(await r.json(),{arityT:0,arityE:1,same:true});
+  }finally{await mf.dispose();}
+  assert(processProof&&terminated(processProof)&&ownedNativeList('workerd').length===0);
+  return ['CAL_T_ZERO_ARGS','CAL_E_ONE_EVENT'];
+}
+
+if(group==='CAL_PREFLIGHT'){
+  const {runCalibrationModels}=await import('./cal-model.mjs'),{buildCatalog}=await import('./native-compile.mjs');
+  const result=await runCalibrationModels();
+  assert.equal(result.labels.length,56);
+  let esbuild;
+  const graph=await buildCatalog(catalogDir,()=>{esbuild=ownedNative('esbuild');});
+  assert(esbuild);
+  const stopAt=Math.min(end,mono()+300);
+  while(!terminated(esbuild)&&mono()<stopAt)await new Promise(resolve=>setTimeout(resolve,10));
+  assert(terminated(esbuild));
+  const shapes=await shapeControls();
+  assert(mono()<=end);
+  await writeFile(output,JSON.stringify({models:result.labels,shapes,graph,esbuildTerminated:true,workerdTerminated:true})+'\n',{flag:'wx',mode:0o600});
+}else{
+  const ids=groups[group];assert(ids);
+  let slotStart=start;
+  const occurrences=[];
+  for(const id of ids){occurrences.push(await direct(casePlan(id),slotStart));slotStart=mono();}
+  assert(mono()<=end);
+  await writeFile(output,JSON.stringify({occurrences})+'\n',{flag:'wx',mode:0o600});
+}

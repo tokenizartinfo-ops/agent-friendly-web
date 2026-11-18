@@ -1,0 +1,69 @@
+{
+  "schema": "afw.pending-get.b2-sdk-logging-disposal-scope.v1",
+  "atUTC": "2026-11-18 14:54:41 UTC",
+  "sourceVersion": "miniflare@5.20260831.0-alpha",
+  "scope": "Root independent primary-source verification; proposal scope clarification only",
+  "priorNativeRuling": "de57d83b0e28ef765ddf7729ce27fa538b443787",
+  "primary": [
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/workers-sdk/miniflare@5.20260831.0-alpha/packages/miniflare/src/config/schema.ts",
+      "lines": [
+        643,
+        648
+      ],
+      "fact": "Instance schema accepts handleStructuredLogs callback."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/workers-sdk/miniflare@5.20260831.0-alpha/packages/miniflare/src/index.ts",
+      "lines": [
+        2461,
+        2473
+      ],
+      "fact": "Passes the instance callback into runtime options."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/workers-sdk/miniflare@5.20260831.0-alpha/packages/miniflare/src/runtime/index.ts",
+      "lines": [
+        264,
+        274
+      ],
+      "fact": "Native stdout/stderr go through structured stream parser and selected callback."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/workers-sdk/miniflare@5.20260831.0-alpha/packages/miniflare/src/runtime/index.ts",
+      "lines": [
+        352,
+        380
+      ],
+      "fact": "Canonical runtime dispose destroys streams, sends SIGKILL to its owned process, then returns process-exit promise."
+    }
+  ],
+  "N07Attribution": {
+    "metadata": "Structured event has timestamp/level/message, no worker/source identity field.",
+    "admitted": "Dedicated per-mount Miniflare instance with exact admitted generated M/QA script hashes; verify marker has one sole inert QA emitter across admitted code. Exact info-level/payload via that instance's supported handler received before synchronous selected capture. Do not invent source metadata, use producer timestamp ordering, substring/error-text match, patched console or extra query.",
+    "scope": "Native inert fixture control only; actual old QA business path still P4-held. Script/sole-emitter and event-before-capture proof must pass actual GHA; public docs alone do not qualify it."
+  },
+  "disposal": {
+    "allowedConclusion": "After verified benign original promise cleanup ACK, canonical await mf.dispose plus exact owned PID/start-identity retirement can qualify disposal of this finite TOOL resource. Record SDK stop uses SIGKILL.",
+    "excluded": "Do not call workerd exit graceful/natural or infer native RPC physical settlement, full SDK/native global drain, real AFW cleanup or PC-off. Node/test-child terminal status is separately observed. Timeout/watchdog/signal by supervisor is forced cutoff and cannot acquire native-positive qualification.",
+    "failure": "Benign cleanup, SDK return, own process terminal or ownership failure leaves closure unqualified. Acquired resources must still be disposed on all setup failure paths. No change to original Source/QA/custody clocks.",
+    "processCounts": "An initial observed PID does not establish cumulative workerd starts in presence of SDK automatic restart. Label observation accurately and gate unexpected restart/no remaining own child before accepting resource closure; never hardcode complete start census1."
+  },
+  "controls": {
+    "CAL": 56,
+    "nativeSelected": 8,
+    "companions": 1,
+    "maxDiagnosticQaReads": 6,
+    "N05McontrolCalls": 1,
+    "originalMms": 30000,
+    "producerMs": 330000,
+    "jobMs": 420000
+  },
+  "holds": {
+    "executionReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  }
+}

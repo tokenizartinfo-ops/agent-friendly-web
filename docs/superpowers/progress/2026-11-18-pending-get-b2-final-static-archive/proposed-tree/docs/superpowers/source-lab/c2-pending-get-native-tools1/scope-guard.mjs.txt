@@ -1,0 +1,20 @@
+import './custody-origin-guard.mjs';
+import {isMainThread} from 'node:worker_threads';
+import {readFileSync,readlinkSync,writeFileSync} from 'node:fs';
+import {basename,join} from 'node:path';
+
+if(isMainThread){
+  const status=readFileSync('/proc/self/status','utf8');
+  const host=Number(readlinkSync('/proc/self')),scope=process.env.AFW_C2_DIAG_ROOT,role=basename(process.argv[1]??'CLI');
+  const names=['PATH','HOME','TMPDIR','LANG','LC_ALL','NODE_ENV','CI','AFW_C2_DIAG_ROOT','AFW_C2_DIAG_PARENT_UID',
+    'AFW_C2_DIAG_PARENT_GID','AFW_C2_CATALOG','AFW_C2_NATIVE_GROUP','AFW_C2_NATIVE_SLOT','AFW_C2_GROUP_START','AFW_C2_GROUP_END',
+    'AFW_C2_NEGATIVE_ROOT','NODE_TEST_CONTEXT'];
+  if(!scope||!Number.isSafeInteger(host)||host<2||process.version!=='v22.23.4'||
+     !/^NoNewPrivs:\s*1$/m.test(status)||!/^CapEff:\s*0+$/m.test(status)||
+     !Object.keys(process.env).every(name=>names.includes(name)))throw Error('AFW_C2_NATIVE_SCOPE_GUARD');
+  const time=readFileSync('/proc/self/stat','utf8'),started=time.slice(time.lastIndexOf(') ')+2).split(' ')[19];
+  if(!/^[1-9][0-9]*$/.test(started))throw Error('AFW_C2_NATIVE_PID_CLOCK');
+  const proof={host,pid:process.pid,role,started,net:readlinkSync('/proc/self/ns/net'),pidNs:readlinkSync('/proc/self/ns/pid'),
+    entered:Number(process.hrtime.bigint()/1000000n),uid:process.getuid(),gid:process.getgid()};
+  writeFileSync(join(scope,'custody-probes','scope-'+process.pid+'.json'),JSON.stringify(proof)+'\n',{flag:'wx',mode:0o600});
+}
