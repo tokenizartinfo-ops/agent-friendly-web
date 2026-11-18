@@ -1,0 +1,50 @@
+{
+  "purpose": "afw.finite-native-policy-entry-validation.v1",
+  "project": "AFW",
+  "observedAtUTC": "2026-11-18T21:30:07Z",
+  "source": "ee842e045071225d96d0946e5e7f381cf429b5ab",
+  "sourceTree": "b808fe4a1cd1a9c8e1024ef3bee5eb5a7d6c3ee7",
+  "base": "b4c360910ff81141db532eeb78fba78fb239112f",
+  "branch": "lab/afw-finite-native-setup-entry-20261118",
+  "closed": "804d2dcdabc779f198ff1db66b16f863d673fe8e",
+  "verification": {
+    "red": 44400910950,
+    "initialFixtureRuns": [
+      44401207918,
+      44401471930
+    ],
+    "green": 44401754228,
+    "tests": 107,
+    "failures": 0,
+    "skips": 0,
+    "staging": true
+  },
+  "verifiedNativeEntry": [
+    "Original provider instance and definition, exact payload, original event and independent queue clocks bound to the primary completed seed.",
+    "Cloudflare Workflow version lineage, exact active QA deployment at 100%, module bytes and role configuration matched to seed manifest.",
+    "Provider requests are fixed GET-only, bounded by the original invocation and first child lease with redirection blocked."
+  ],
+  "packagePreflight": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "nativePackageWorkflowOnMain": false,
+    "compileStagingOnly": true,
+    "githubSecretMetadataUpdatedAt": "2026-10-31T15:54:32Z",
+    "matchedPackageCredentialStatus": "expired",
+    "matchedPackageCredentialCheckedAtUTC": "2026-11-18T21:10:30.077Z",
+    "activeEquivalentObserved": false,
+    "credentialValuesRead": false
+  },
+  "remaining": [
+    "The Durable Object's source producer for the private owner context still fails closed. The occurrence read may not be used as a substitute for the owner grant or for source-qualified forwarding.",
+    "Complete launch and finalizer producer coverage, then qualify the complete package with the private R2 inputs and the new scoped credential."
+  ],
+  "noRemoteRuntimeMutation": true,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "sameNoticeReceived": false,
+  "sameNoticeReviewed": false,
+  "nativeUnsubscribeObserved": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

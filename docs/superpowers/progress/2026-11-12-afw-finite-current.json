@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "606d6e2245e75442a5d8131e0486c10e296e16cc",
-  "phase": "Cloudflare's original launcher prepare is checked before SEND and rechecked by confirmation. The private archive and three closed Workers matched on authenticated inspection. Complete package and live trial remain closed.",
+  "previousCheckpoint": "9233182ea89efc28b2ccb0f4b4e69c1348ccdba3",
+  "phase": "The finite Workflow native policy setup entry now qualifies original provider/seed and exact approved QA source before the private step. Source-only staging verified.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete the fixed private setup and launch source with real primary inputs, bind the observer/finalizer to the same plan, then qualify the private complete package and its fresh scoped credential. Execute one exact same-notice cloud occurrence and retain the independent review, unsubscribe and closure evidence.",
+  "next": "Implement the actual private setup Durable Object source/forwarding and the fixed launch/finalizer runtime producers. Then qualify the protected complete package with fresh scoped custody and run one real cloud occurrence for the same notice, assistant review and native unsubscribe.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 154,
-  "updatedAtUTC": "2026-11-18T21:18:18Z",
+  "schemaVersion": 155,
+  "updatedAtUTC": "2026-11-18T21:30:07Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2224,6 +2224,16 @@
     "archiveRead": true,
     "actualClosedReadback": true,
     "packageCredentialStatus": "expired",
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "nativePolicyEntry": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-native-policy-entry-validation.json",
+    "evidence": "fc44db9508afc7c3cd637afcc4f23f0d217486fd",
+    "head": "ee842e045071225d96d0946e5e7f381cf429b5ab",
+    "closed": "804d2dcdabc779f198ff1db66b16f863d673fe8e",
+    "verifiedRun": 44401754228,
+    "tests": 107,
     "completePackage": false,
     "realCloudOccurrence": false
   }
