@@ -1,0 +1,26 @@
+{
+  "schema": "AFW.PENDING.GET.NODE_PRIMARY_STATIC_FEASIBILITY/1",
+  "project": "AFW",
+  "runtimeVersion": "v22.23.4",
+  "method": "Official pinned primary documentation/source read on web; no runtime execution",
+  "sources": [
+    {
+      "url": "https://github.com/nodejs/node/blob/v22.23.4/doc/api/test.md#L3241-L3251",
+      "fact": "Public TestContext error access is documented; the wrapped failure reason is accessible through cause."
+    },
+    {
+      "url": "https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/test.js#L273-L275",
+      "fact": "The context getter returns the underlying test error."
+    },
+    {
+      "url": "https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/test.js#L1011-L1022",
+      "fact": "For an ordinary callback error the test records a failure wrapper before running afterEach."
+    },
+    {
+      "url": "https://github.com/nodejs/node/blob/v22.23.4/lib/internal/errors.js#L1698-L1709",
+      "fact": "The failure wrapper constructor assigns the supplied error to cause."
+    }
+  ],
+  "inference": "A same-realm fixture may have a documented candidate surface to compare a privately captured ordinary action error with the hook context's cause without changing frozen D07. This is a static feasibility inference only, not proof of current hook identity, callback ordering or source noninterference.",
+  "limits": "Exact original error capture, hook source/realm, error class and native behavior still require implementation/static review and finite native qualification. No alternate runner or D07 mutation released. No physical settlement, Source qualification or PCoff claim."
+}

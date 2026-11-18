@@ -1,0 +1,626 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.HOST_ADMISSION/1",
+  "execution": "NOT_RUN",
+  "columns": [
+    "id",
+    "explicit variation on joined host path",
+    "M wire or default",
+    "QA reply or default",
+    "captured private row or null",
+    "post-count queries",
+    "scope/expected disposition"
+  ],
+  "defaults": {
+    "M": "m1.1133557799bbddff.T3.11111111-1111-4111-8111-111111111111",
+    "QA": "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.I0130",
+    "ordinary": "Status 503 independently known on all rows except stated alternatives. Original g1.503.L.0 joined, actual direct route, exact captured DispatchResponse/main/label/actor/mount identity, unchanged count, no custody fault.",
+    "journal": [
+      "case15 action enter",
+      "case15 action throw identity E",
+      "case15 count enter",
+      "case15 count return",
+      "C2SOURCE original fail/TEST_FAILED frame and callback rethrows E",
+      "isolated root afterEach takes retained handle",
+      "one private read if key valid",
+      "private row persists",
+      "next test or actual AFTER close enter/return",
+      "terminal child status and original output confirmed"
+    ],
+    "unknown": "On every vector the QA state at M, outward async wrapper settlement/delivery/return to M, catch attribution and business outcome are UNKNOWN. For a synthesized response in this table, a known original HTTP stays known when diagnostics are missing. Only NATIVE future evidence may qualify cleanup."
+  },
+  "vectors": [
+    [
+      "H01",
+      "Use all defaults, with correct journal custody and exact four case15 marks",
+      "DEFAULT",
+      "DEFAULT",
+      "p1.J.T3.I0130",
+      1,
+      "normal joined read/write"
+    ],
+    [
+      "H02",
+      "Exact valid E2 original deadline and captured UUID",
+      "m1.1133557799bbddff.E2.11111111-1111-4111-8111-111111111111",
+      "DEFAULT",
+      "p1.J.E2.I0130",
+      1,
+      "wire accepts E and c2 UUID; timing relation still unknown"
+    ],
+    [
+      "H03",
+      "Exact valid T0 original deadline no UUID",
+      "m1.1133557799bbddff.T0.-",
+      null,
+      "p1.K.T0.-----",
+      0,
+      "24-byte M supported; no QA query"
+    ],
+    [
+      "H04",
+      "Exact valid E1 original deadline no UUID",
+      "m1.1133557799bbddff.E1.-",
+      null,
+      "p1.K.E1.-----",
+      0,
+      "24-byte M supported; no QA query"
+    ],
+    [
+      "H05",
+      "Exact valid T2 original deadline before UUID",
+      "m1.1133557799bbddff.T2.-",
+      null,
+      "p1.K.T2.-----",
+      0,
+      "24-byte M supported"
+    ],
+    [
+      "H06",
+      "No header survives transport",
+      null,
+      null,
+      null,
+      0,
+      "original known HTTP 503 and g1 preserved; private UNKNOWN"
+    ],
+    [
+      "H07",
+      "M says T3 with missing required UUID",
+      "m1.1133557799bbddff.T3.-",
+      null,
+      null,
+      0,
+      "length valid but tuple invalid"
+    ],
+    [
+      "H08",
+      "M says E1 with prohibited UUID",
+      "m1.1133557799bbddff.E1.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "length valid but tuple invalid"
+    ],
+    [
+      "H09",
+      "M epoch wrong but well formed",
+      "m1.2233557799bbddff.T3.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "foreign epoch before dispatch"
+    ],
+    [
+      "H10",
+      "M wrong UUID version and RFC variant",
+      "m1.1133557799bbddff.T3.11111111-1111-6111-7111-111111111111",
+      null,
+      null,
+      0,
+      "UUID grammar rejects"
+    ],
+    [
+      "H11",
+      "M wrong T/E case",
+      "m1.1133557799bbddff.t3.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "literal uppercase only"
+    ],
+    [
+      "H12",
+      "M code outside ladder",
+      "m1.1133557799bbddff.T9.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "cursor range"
+    ],
+    [
+      "H13",
+      "M copied with final LF",
+      "m1.1133557799bbddff.T0.-\n",
+      null,
+      null,
+      0,
+      "LF is row-file option only"
+    ],
+    [
+      "H14",
+      "M joined comma value from duplicate header",
+      "m1.1133557799bbddff.T0.-, m1.1133557799bbddff.T0.-",
+      null,
+      null,
+      0,
+      "no combined header"
+    ],
+    [
+      "H15",
+      "Different g1 observed Deadline-like private text independent only",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "503 g1.503.V.0; no attempted diagnostic"
+    ],
+    [
+      "H16",
+      "Mailbox receives two captures or retained handle label conflicts",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "poison host mailbox; no query"
+    ],
+    [
+      "H17",
+      "Original response replaced with byte-equivalent DispatchResponse instance",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "identity/custody fails independently of decoder contents"
+    ],
+    [
+      "H18",
+      "Wrong token/main/direct route or foreign test same label",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "independent identity/custody fails"
+    ],
+    [
+      "H19",
+      "Mount generation replaced, remounted or wrong actor before dispatch",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "ambiguous mount; blocked before dispatch"
+    ],
+    [
+      "H20",
+      "D07 action enter + throw E, count enters then throws E2; no C2SOURCE",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "D07 rethrows action E first; no count-return proof"
+    ],
+    [
+      "H21",
+      "D07 action enters then returns, count throws E2",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "D07 rethrows E2 exactly; no count return, no C2SOURCE"
+    ],
+    [
+      "H22",
+      "D07 action throws E, native count never returns; root afterEach unavailable or journal lacks count terminal",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "zero read; hard cutoff or incomplete original count UNKNOWN"
+    ],
+    [
+      "H23",
+      "Unqualified or substitute fixture count returns null/undefined despite a mark; actual fixed S08 count-route identity/custody is not established",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "No evidence that the genuine fixed S08 count returning counters completed. No new read."
+    ],
+    [
+      "H24",
+      "Case15 count return missing or repeated",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "exactly one expected enter and return"
+    ],
+    [
+      "H25",
+      "Duplicate action terminal or intervening count row from another case",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "original action/count adjacency and one target ownership fail"
+    ],
+    [
+      "H26",
+      "Original recorder fault, truncated action/count row, or >32768B/128 rows",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "zero read if incomplete before dispatch"
+    ],
+    [
+      "H27",
+      "Journal nonregular/symlink, wrong uid/gid/mode/link count, missing terminal LF or path changed",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "journal custody failure"
+    ],
+    [
+      "H28",
+      "Host callback/hook reached after child expired or outside presealed cleanup reserve",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "zero read after time gate"
+    ],
+    [
+      "H29",
+      "Wrong epoch in otherwise valid QA echo",
+      "DEFAULT",
+      "q1.2233557799bbddff.11111111-1111-4111-8111-111111111111.I0130",
+      "p1.V.T3.-----",
+      1,
+      "M preserved, foreign QA epoch rejected"
+    ],
+    [
+      "H30",
+      "Foreign valid QA key, independently known request key unchanged",
+      "DEFAULT",
+      "q1.1133557799bbddff.22222222-2222-4222-9222-222222222222.I0130",
+      "p1.V.T3.-----",
+      1,
+      "M preserved, foreign QA key rejected"
+    ],
+    [
+      "H31",
+      "Coherently copied equal key/epoch/tuple into decoder with no alternate custody evidence",
+      "DEFAULT",
+      "DEFAULT",
+      "p1.J.T3.I0130",
+      1,
+      "decoder equality cannot authenticate or distinguish copy; no independent identity conclusion"
+    ],
+    [
+      "H32",
+      "Actor no record",
+      "DEFAULT",
+      "q0.A",
+      "p1.A.T3.-----",
+      1,
+      "absence; no delivery inference"
+    ],
+    [
+      "H33",
+      "Actor overlap/duplicate",
+      "DEFAULT",
+      "q0.O",
+      "p1.O.T3.-----",
+      1,
+      "poison, no QA facts"
+    ],
+    [
+      "H34",
+      "Actor budget overflow",
+      "DEFAULT",
+      "q0.X",
+      "p1.X.T3.-----",
+      1,
+      "terminal overflow"
+    ],
+    [
+      "H35",
+      "Actor invalid/unjoined",
+      "DEFAULT",
+      "q0.V",
+      "p1.V.T3.-----",
+      1,
+      "no QA facts"
+    ],
+    [
+      "H36",
+      "Invalid q0 enum",
+      "DEFAULT",
+      "q0.T",
+      "p1.V.T3.-----",
+      1,
+      "transport reply uses q0.A/O/X/V only"
+    ],
+    [
+      "H37",
+      "Truncated q0",
+      "DEFAULT",
+      "q0.",
+      "p1.V.T3.-----",
+      1,
+      "expected exact 4-byte reply"
+    ],
+    [
+      "H38",
+      "Positive QA exceeds 62; extra trailing LF",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.I0130\n",
+      "p1.V.T3.-----",
+      1,
+      "actor fixed string limit applies"
+    ],
+    [
+      "H39",
+      "Positive QA below 62; no S",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.I013",
+      "p1.V.T3.-----",
+      1,
+      "truncated"
+    ],
+    [
+      "H40",
+      "QA ordinal 40 exceeds 3F",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.C4030",
+      "p1.V.T3.-----",
+      1,
+      "closed ordinal grammar"
+    ],
+    [
+      "H41",
+      "QA ordinal uses lower-case f",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.C3f30",
+      "p1.V.T3.-----",
+      1,
+      "uppercase ordinal"
+    ],
+    [
+      "H42",
+      "QA K uses uppercase C",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.F01CF",
+      "p1.V.T3.-----",
+      1,
+      "K case"
+    ],
+    [
+      "H43",
+      "QA reaction lacks allowed enum",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.I013X",
+      "p1.V.T3.-----",
+      1,
+      "closed S grammar"
+    ],
+    [
+      "H44",
+      "QA A has impossible ordinal/data",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.A0110",
+      "p1.V.T3.-----",
+      1,
+      "A requires NN00,K0"
+    ],
+    [
+      "H45",
+      "QA I claims a second pair too early",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.I0230",
+      "p1.V.T3.-----",
+      1,
+      "I max 01"
+    ],
+    [
+      "H46",
+      "QA J before K=c",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.J01b0",
+      "p1.V.T3.-----",
+      1,
+      "J requires 01,c"
+    ],
+    [
+      "H47",
+      "QA C pair01 before c",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.C01b0",
+      "p1.V.T3.-----",
+      1,
+      "C requires completed initial pair"
+    ],
+    [
+      "H48",
+      "QA F pair incomplete",
+      "DEFAULT",
+      "q1.1133557799bbddff.11111111-1111-4111-8111-111111111111.F021F",
+      "p1.V.T3.-----",
+      1,
+      "F requires completed latest pair"
+    ],
+    [
+      "H49",
+      "Never-resolving private read fake; one outer host wait expires by 1000ms",
+      "DEFAULT",
+      null,
+      "p1.T.T3.-----",
+      1,
+      "local waiting only; FAKE cannot qualify disposal/RPC settlement"
+    ],
+    [
+      "H50",
+      "Real read reports local timeout; response arrives late after final bounded snapshot",
+      "DEFAULT",
+      null,
+      "p1.T.T3.-----",
+      1,
+      "keep one row; ignore response, no retry; independently require genuine cleanup"
+    ],
+    [
+      "H51",
+      "Successful timely read but private file write is torn or missing",
+      "DEFAULT",
+      "DEFAULT",
+      null,
+      1,
+      "no accepted row; zero rows UNKNOWN"
+    ],
+    [
+      "H52",
+      "Public C2SOURCE/frame absent or contradicted when independently checked after hook read",
+      "DEFAULT",
+      "DEFAULT",
+      null,
+      1,
+      "reject staged private evidence retroactively; no second read"
+    ],
+    [
+      "H53",
+      "After valid read, actual AFTER close hangs/throws or child hard terminated",
+      "DEFAULT",
+      "DEFAULT",
+      null,
+      1,
+      "closure UNVERIFIED, no TOOL progression; captured bytes never count as admitted row"
+    ],
+    [
+      "H54",
+      "Wrong shape or external/non-exact host invocation with no retained native handle",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "no read side effect; known original facts independently"
+    ],
+    [
+      "H55",
+      "OFF overlay with unchanged original public deadline and count",
+      null,
+      null,
+      null,
+      0,
+      "visible private M absent and no hook read despite eligible public 503"
+    ],
+    [
+      "H56",
+      "Actual native actor count had completed, but subsequent query call itself synchronously fails",
+      "DEFAULT",
+      null,
+      "p1.V.T3.-----",
+      1,
+      "one attempted dispatch, no QA fact, cleanup required"
+    ],
+    [
+      "H57",
+      "Unqualified original success status 200",
+      "DEFAULT",
+      null,
+      null,
+      0,
+      "retain actual 200; no candidate g1 deadline"
+    ]
+  ],
+  "rowFileCases": [
+    [
+      "R01",
+      "p1.J.T3.I0130",
+      "ACCEPT 13 bytes",
+      0
+    ],
+    [
+      "R02",
+      "p1.J.T3.I0130\n",
+      "ACCEPT 14 bytes",
+      0
+    ],
+    [
+      "R03",
+      "",
+      "UNKNOWN: no row",
+      0
+    ],
+    [
+      "R04",
+      "p1.J.T3.I013",
+      "DROP: 12 bytes",
+      0
+    ],
+    [
+      "R05",
+      "p1.J.T3.I0130\n\n",
+      "DROP: 15 bytes",
+      0
+    ],
+    [
+      "R06",
+      "p1.J.T3.-----",
+      "DROP: J missing QA",
+      0
+    ],
+    [
+      "R07",
+      "p1.A.T3.I0130",
+      "DROP: non-J cannot carry QA",
+      0
+    ],
+    [
+      "R08",
+      "p1.J.T3.I0130\r",
+      "DROP: CR forbidden",
+      0
+    ],
+    [
+      "R09",
+      "p1.J.T3.I0130\np1.J.T3.I0130\n",
+      "DROP: duplicate row",
+      0
+    ],
+    [
+      "R10",
+      "p1.K.T0.-----",
+      "ACCEPT 13 bytes",
+      0
+    ],
+    [
+      "R11",
+      "p1.Z.T3.-----",
+      "DROP: unknown h",
+      0
+    ],
+    [
+      "R12",
+      "p1.J.T3.C02c0",
+      "ACCEPT 13 bytes; D7 continuation UNKNOWN",
+      0
+    ]
+  ],
+  "rowFileColumns": [
+    "id",
+    "literal file contents",
+    "literal qualification",
+    "post-count queries in file-reader-only vector"
+  ]
+}

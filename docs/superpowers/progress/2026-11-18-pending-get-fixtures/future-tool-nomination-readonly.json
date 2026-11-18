@@ -1,0 +1,16 @@
+{
+  "branch": "lab/afw-c2-pending-get-20261118-tools1",
+  "message": "AFW-C2-PENDING-GET-TOOLS1-ONEUSE-20261118",
+  "workflow": ".github/workflows/afw-c2-pending-get-tools1.yml",
+  "job": "c2-pending-get-tools1",
+  "prefix": "docs/superpowers/source-lab/c2-pending-get-tools1/",
+  "command": "node docs/superpowers/source-lab/c2-pending-get-tools1/run-pending-get-tools1.mjs",
+  "artifact": "afw-c2-pending-get-tools1",
+  "output": "output/c2-pending-get-tools1.json",
+  "availableAtUTC": "2026-11-18 01:45:24 UTC",
+  "mainMatched": true,
+  "baseMatched": true,
+  "reserved": false,
+  "refCreated": false,
+  "nativeReleased": false
+}

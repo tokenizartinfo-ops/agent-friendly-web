@@ -1,0 +1,115 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.ROOT_DATA_MEASUREMENT/1",
+  "atUTC": "2026-11-18 02:02:34 UTC",
+  "index": "7115a056bed39c2d0a4d3de1f804bb7594dab382",
+  "bodies": [
+    {
+      "role": "index",
+      "bytes": 5044,
+      "sha256": "716a79eec85e0afaf4479baf28972ef888323b00b3f83f4155063528aac373ae",
+      "blob": "7115a056bed39c2d0a4d3de1f804bb7594dab382",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "sites-enums-grammar",
+      "bytes": 10277,
+      "sha256": "14da33c689da0310de7f0cfe434e19b970be38f4edf25c366a50dc344464cfd8",
+      "blob": "ab73477e5f563af05e12fc1f41204b3f1973f963",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "exact-literal-preimages",
+      "bytes": 16513,
+      "sha256": "ea886eafed6d4697d75d136f3ef7fd674974cf0401807e43e220a041ca8c7c7e",
+      "blob": "7500c3a94d730735f8680a8a1832d5de0c316469",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "m-callback-cursor-expectations",
+      "bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+      "blob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "qa-phase-pair-expectations",
+      "bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "blob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "host-and-row-admission-expectations",
+      "bytes": 14585,
+      "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4",
+      "blob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "native-topology-schedule-expectations",
+      "bytes": 18199,
+      "sha256": "1c35f9df9cf587993de6e7da3dc5457f57ac8abd1ea61e88d4ad1ca80e304347",
+      "blob": "4e213927be1108cf9e55968cbb5defb42df5c669",
+      "matches": true,
+      "capOK": true
+    },
+    {
+      "role": "fixture-data-verification-report",
+      "bytes": 6838,
+      "sha256": "0c1badb3ca758e02702188d62cfbaddb6968e926ac66a5255ef56b287c5e707f",
+      "blob": "7ec4ffd9de4da3ffc408006821a3f98df9d894cb",
+      "matches": true,
+      "capOK": true
+    }
+  ],
+  "sourceAnchors": {
+    "sourceAnchorCounts": {
+      "S00": 18,
+      "S02": 2,
+      "S03": 5,
+      "S08": 12,
+      "S09": 18,
+      "S10": 9,
+      "bridge": 9,
+      "wire": 13,
+      "D07": 17,
+      "recorder": 11
+    },
+    "totalAnchors": 114,
+    "mismatches": [],
+    "unique134": true,
+    "groups": {
+      "M": 30,
+      "QA": 35,
+      "H": 57,
+      "row": 12
+    }
+  },
+  "fixedWidthLiteralChecks": {
+    "errors": 0,
+    "allExpectedMLengths": true,
+    "allExpectedQALengths": true,
+    "allExpectedRows13": true
+  },
+  "arithmetic": {
+    "slots": true,
+    "processes": 326000,
+    "producer": 329000,
+    "job": 418000,
+    "queries": 6,
+    "off": 2,
+    "on": 6
+  },
+  "limits": "Only DATA sizes, references, exact literal text and arithmetic. No runtime feasibility/semantic execution proof.",
+  "execution": "NOT_RUN",
+  "SourceExecuted": false,
+  "OWNExecuted": false,
+  "SourceQualified": false,
+  "PCoff": false
+}

@@ -1,0 +1,38 @@
+{
+  "atUTC": "2026-11-18 02:03:11 UTC",
+  "branches": [
+    {
+      "role": "gb1",
+      "branch": "lab/afw-c2-get-winner-20261117-tools1",
+      "expected": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "actual": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "closedHeadMatched": true,
+      "total": 1,
+      "active": [],
+      "closedHeadRuns": 0
+    },
+    {
+      "role": "source",
+      "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+      "expected": "8be5b43f46a6757953a1141eb7fd18fa822ba449",
+      "actual": "8be5b43f46a6757953a1141eb7fd18fa822ba449",
+      "closedHeadMatched": true,
+      "total": 1,
+      "active": [],
+      "closedHeadRuns": 0
+    },
+    {
+      "role": "own",
+      "branch": "lab/afw-c2-own-20261117-get-winner-tools",
+      "expected": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+      "actual": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+      "closedHeadMatched": true,
+      "total": 1,
+      "active": [],
+      "closedHeadRuns": 0
+    }
+  ],
+  "relayNewCount": 0,
+  "activeNativeRuns": 0,
+  "scope": "Scoped AFW lab branches and relay only; no Cloudflare runtime assertion"
+}

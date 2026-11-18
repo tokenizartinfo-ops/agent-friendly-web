@@ -1,0 +1,127 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.DATA_REPORT/1",
+  "status": "DATA_SEALED_FULL_READBACK",
+  "execution": "NOT_RUN",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "brief": "0d01d4dee99918fe7a68d6953a98a3714d66c5cb",
+    "design": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+    "plan": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+    "acceptance": "c6118aff825467b6f10a21b7ead22fa5f4891eb2",
+    "pass": "f9dd22e934f1d3cdd483076a887afd1a250088f9",
+    "scheduleRuling": "45bec1fff9fd89fc8cafa0930987f0da14d18bf7"
+  },
+  "fixtureData": {
+    "table": {
+      "utf8Bytes": 10277,
+      "sha256": "14da33c689da0310de7f0cfe434e19b970be38f4edf25c366a50dc344464cfd8",
+      "gitBlob": "ab73477e5f563af05e12fc1f41204b3f1973f963",
+      "fullReadback": true
+    },
+    "excerpts": {
+      "utf8Bytes": 16513,
+      "sha256": "ea886eafed6d4697d75d136f3ef7fd674974cf0401807e43e220a041ca8c7c7e",
+      "gitBlob": "7500c3a94d730735f8680a8a1832d5de0c316469",
+      "fullReadback": true
+    },
+    "m": {
+      "utf8Bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+      "gitBlob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "fullReadback": true
+    },
+    "q": {
+      "utf8Bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "gitBlob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "fullReadback": true
+    },
+    "h": {
+      "utf8Bytes": 14585,
+      "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4",
+      "gitBlob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+      "fullReadback": true
+    },
+    "n": {
+      "utf8Bytes": 18199,
+      "sha256": "1c35f9df9cf587993de6e7da3dc5457f57ac8abd1ea61e88d4ad1ca80e304347",
+      "gitBlob": "4e213927be1108cf9e55968cbb5defb42df5c669",
+      "fullReadback": true
+    }
+  },
+  "checks": {
+    "allIdsUnique": true,
+    "validSites": true,
+    "hexModelEpoch": true,
+    "neutralTotal": true,
+    "MpositiveLengths": true,
+    "QAliteralExpectedLengths": true,
+    "modelRowLengths": true,
+    "nativeRowLengths": true,
+    "offZeroAndNull": true,
+    "nativeAlternatives": true,
+    "selectedQueries": true,
+    "zeroCountQueries": true,
+    "slotMath": true,
+    "producerMath": true,
+    "jobMath": true,
+    "childMath": true,
+    "preflightMath": true
+  },
+  "counts": {
+    "siteClasses": 14,
+    "literalSourceTextAnchors": 114,
+    "neutralM": 30,
+    "neutralQA": 35,
+    "neutralHost": 57,
+    "neutralRowFiles": 12,
+    "neutralTotal": 134,
+    "nativeScenarios": 6,
+    "selectedNativeControls": 8,
+    "overlapCompanion": 1,
+    "nativeCalibrations": 2,
+    "maxSelectedNativeQueriesAndRows": 6,
+    "originalInertActorCountCallsPlanned": 12,
+    "frozenD07ControlChildren": 2,
+    "additionalP3TargetDispatches": 0
+  },
+  "coverage": [
+    "M01–M30 keep exact original callback/request/lease/error provenance and cursor cuts separate from raw host input. Both callback orders, frozen M despite losing work, all cursor states with first/repeated reader and both response-byte edges, missing key, malformed/foreign identity, conflict/duplicate, independent original HTTP and saturation.",
+    "Q01–Q35 exercise every phase, both edges of each named aggregate, exact pair joins and ordinal increments, escaped/frozen super reaction meanings, invalid transitions/ownership, overlap, cells 64/65 and accepted writes 255/256. Q20 retains the additional D7 continuations at C/02/c; Q32 seeds an artificial ordinal-boundary model without claiming native reachability.",
+    "H01–H57 and R01–R12 cover explicit input and literal outputs for all encoded lengths, malformed grammar and tuples, exact post-count gate, regular journal, host custody, equality limits, malformed foreign replies, incomplete evidence and explicit zero/one read. A normally joined M can survive absent QA; an invalid candidate cannot replace independently known original HTTP. Native timeout and proof of closure are independent.",
+    "N01–N08 freeze exact two rows per ON ID covering mechanically identified T3/E3 alternatives, and none for OFF, across six scenarios and one companion. OFF/ON late comparison uses two separate identical frozen-D07 inert fixture occurrences; ON co-witnesses P3. Timer/event neutral calibration is separate from selected native integration classification. Accepted GB1 reused without ordinary replay."
+  ],
+  "schedule": {
+    "originalSerialSelectedClocksMs": 240000,
+    "outsideReadMaxMs": 1000,
+    "longestChildMs": 152000,
+    "producerPlannedMs": 329000,
+    "jobPlannedMs": 418000,
+    "condition": "Single proposed topology fits arithmetic caps only. Current realizability and native side effects remain unqualified. Exact fixture setup/custody, closings and control prerequisites must fit listed phase caps including 134 neutral controls, calibration, startup, journal/read, teardown, terminal status and serialization. No execution release."
+  },
+  "concerns": [
+    "Future review must qualify original timer/listener argument shape under pinned native runtime, exact same-file afterEach order and unchanged throw identity. Verify actual benign native count uses nominated actor and the original promise, including closed-state comparability and genuine native cleanup. If a custody-preserving identity evidence surface does not exist, stop.",
+    "The proposed seed255 is a test-only initialization premise on the actual private cell with gated coverage of the actual next lawful overflow branch. There is no approved seed API or current reachable QA path implied. Use no handmade q0.X for observer qualification.",
+    "Setup and cleanup budgets are tight declared admission caps and are presently unmeasured. No slot may borrow an original clock, reopen custody, repeat a candidate or split an occurrence. Hard cutoff leaves closure unverified. The original P4 full prefix/state/count accessibility remains a separate gate."
+  ],
+  "verification": "Full GitHub blob fetch by SHA after create for each fixture object, exact byte-equivalent UTF-8 text comparison against originally hashed body, JSON shape and NOT_RUN readback. Independent memory-only SHA-256, UTF-8 and Git blob SHA calculated before create. No Source/OWN execution or parsing as code. Six fixtures are detached immutable objects. Rollback is discard their pins.",
+  "preserved": {
+    "Source5": 5,
+    "OWN5": 5,
+    "StageB": 5
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "codeReleased": false,
+    "nativeReleased": false
+  }
+}

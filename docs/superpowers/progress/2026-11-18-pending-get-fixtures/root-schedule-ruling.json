@@ -1,0 +1,15 @@
+{
+  "schema": "AFW.PENDING.GET.FIXTURE_SCHEDULE.RULING/1",
+  "atUTC": "2026-11-18 01:43:46 UTC",
+  "project": "AFW",
+  "fixtureBrief": "0d01d4dee99918fe7a68d6953a98a3714d66c5cb",
+  "actor": "/root/pending_get_fixture_seal",
+  "decision": "A P3 frozen-D07 hook qualification may share the ON COMPLETED_LATE benign P2 target, provided exact same-file original D07/recorder/action/count/throw/frame/AFTER and same inert native actor count are preserved. Case1-only initialization may use a plainly labeled inert world fixture. No monkeypatch of D07/recorder/count/close, no actor-independent fake count as native proof.",
+  "limits": "TOOL driver/count/hook evidence only. Does not establish actual business prefix/state/count accessibility. P4 still requires original prerequisites through case15 and independent parity gate. If concrete group schedule/custody cannot fit original bounds, report plan gap; no partial or invented positive.",
+  "why": "Reuse one native observation for two independent measurements avoids an unnecessary timed request without substituting inert state for actual business evidence.",
+  "costIfWrong": "Reject the fixture DATA/schedule before any native release; Base/Main/runtime unchanged.",
+  "codeReleased": false,
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "PCoff": false
+}

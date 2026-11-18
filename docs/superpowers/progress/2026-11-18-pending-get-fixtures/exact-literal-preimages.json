@@ -1,0 +1,498 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.LITERAL_PREIMAGE_SITES/1",
+  "scope": "Bounded excerpts from immutable text, including golden anchors and the close fences. No code in the excerpt is evaluated, parsed as code, transformed or executed.",
+  "execution": "NOT_RUN",
+  "blobs": {
+    "source": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "S00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "S08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+    "S09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "S10": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "D07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "GB1": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+    "GB1accept": "08b75777bb39efaad0a439082cd430044c0b07d6",
+    "S02": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+    "S03": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+  },
+  "excerpts": {
+    "S00": [
+      [
+        100,
+        "async function observeOwnerPhasePair(options){"
+      ],
+      [
+        196,
+        "   const first=await facts(),{capsule,material,plan}=first,p=material.ownerSelection;"
+      ],
+      [
+        275,
+        "   const observed=await primary();"
+      ],
+      [
+        512,
+        "   const qualified=await qualify(first,observed),again=await primary(),second=await facts(),secondQualified=await qualify(second,again);"
+      ],
+      [
+        523,
+        "   const pair={first:snapshot(first,observed,qualified),second:snapshot(second,again,secondQualified)};"
+      ],
+      [
+        524,
+        "   if(canonical(pair.first)!==canonical(pair.second))fail();"
+      ],
+      [
+        525,
+        "   current(clock.lease);return freezeOwnerPhaseData(pair);"
+      ],
+      [
+        527,
+        "  return await run();"
+      ],
+      [
+        528,
+        " }finally{if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}"
+      ],
+      [
+        587,
+        "async function readOwnerTimeline({ctx,env},lease,preconnectionId=null){"
+      ],
+      [
+        588,
+        " const pair=await observeOwnerPhasePair({ctx,env,parent:lease,...preconnectionId?{preconnectionId}:{}});"
+      ],
+      [
+        589,
+        " return pair;"
+      ],
+      [
+        637,
+        "   const grammar=qualifyFiniteOwnerChoiceRequest(original,bytes),initial=await wait(()=>observeOwnerPhasePair({ctx,env,parent:originalLease})),initialState=initial.second;"
+      ],
+      [
+        642,
+        "    check();const pair=await wait(()=>readOwnerTimeline({ctx,env},parent,requested));"
+      ],
+      [
+        649,
+        "    if(canonical(source)!==canonical(initialContext.source))fail();"
+      ],
+      [
+        650,
+        "    return Object.freeze({source,preconnectionId:id,capsuleHash:pair.second.capsuleHash});"
+      ],
+      [
+        652,
+        "   const choice=await wait(()=>continuePrivateQaFiniteOwnerChoice({ctx,env,request:original},originalLease,readChoice));"
+      ],
+      [
+        659,
+        "    check();return new Response(html,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Set-Cookie':'__Host-afw-finite-prepare='+choice.handle+'; Secure; HttpOnly; SameSite=Strict; Path=/; Max-Age='+Math.max(0,Math.floor((choice.expiresAt-Date.now())/1000))}});"
+      ]
+    ],
+    "S02": [
+      [
+        24,
+        "   check();"
+      ],
+      [
+        25,
+        "   return await handlePrivateQaFiniteOwnerChoice({request,env,ctx},parent.lease);"
+      ]
+    ],
+    "S03": [
+      [
+        22,
+        " const parent=createFiniteOwnerRequestLease(request);"
+      ],
+      [
+        26,
+        "  if(path==='/connections/finite-prepare'){"
+      ],
+      [
+        27,
+        "   if(!['GET','POST'].includes(request.method))return finiteNativePending(405);"
+      ],
+      [
+        28,
+        "   return await forwardFiniteOwnerChoice(input,parent.lease);"
+      ],
+      [
+        41,
+        " }catch{return finiteNativePending();}finally{parent.finish();}"
+      ]
+    ],
+    "S08": [
+      [
+        14,
+        "async function close(f){if(!f)return;try{await f.stub.firstConnectionRestore();await f.stub.c2ScopeRestore();await f.stub.restoreMethods();}finally{await f.mf.dispose();await f.cleanup();}}"
+      ],
+      [
+        17,
+        "async function choose(f,get=null){"
+      ],
+      [
+        18,
+        " const r=await f.call('/connections/finite-prepare',{headers:headers(f)}),status=r.status,text=await r.text();get?.capture(f,r,status);assert.equal(status,200);"
+      ],
+      [
+        22,
+        "async function count(f,observe){const rows=await plain(f.stub.snapshot());const counters={upload:f.uploads.length-1,activation:f.activations.length-1,receipts:records(rows).filter(([k])=>k.endsWith(':receipt')).length};if(observe)observe(rows);return counters;}"
+      ],
+      [
+        32,
+        "  async close(){await close(negative);await close(main);},"
+      ],
+      [
+        110,
+        "  async noScope(){const label=observer.enter('C2T1_SCOPE_MISSING');try{"
+      ],
+      [
+        111,
+        "   const f=main,form=await choose(f,observer.getToken(label)),snapshot=await plain(f.stub.c2Snapshot()),before=await count(f);assert(form.text.includes('revocar únicamente la concesión OAuth creada aquí.'));"
+      ],
+      [
+        203,
+        " const get=createGetWinnerHost(main,()=>main.getWinnerDirect?.()===true,DispatchResponse);let getToken=null;"
+      ],
+      [
+        209,
+        "  pending={id};state='active';if(id==='C2T1_SCOPE_MISSING')getToken=get.begin(pending);return pending;"
+      ],
+      [
+        212,
+        "  if(state==='active'&&label===pending){state='ready';if(label.id==='C2T1_SCOPE_MISSING')get.finish(label);}"
+      ],
+      [
+        226,
+        "     const winner=get.take(label,active)??{w:'U',s:0,h:0};"
+      ],
+      [
+        227,
+        "     emit('C2FT4 '+JSON.stringify({id:label.id,value,...winner}));"
+      ]
+    ],
+    "S09": [
+      [
+        155,
+        "  const originalMethod=this.firstOriginalMethod,requestId=this.firstRequestId,target=request.url,trace=this.firstState?.trace,actual=super.fetch(request);"
+      ],
+      [
+        156,
+        "  const observed=response=>{if(originalMethod==='POST'&&target==='https://afw-private.invalid/_finite-owner/choice')trace?.push({kind:'native-response-return',requestId,originalMethod,target,status:response.status,at:Date.now()});};"
+      ],
+      [
+        157,
+        "  if(actual&&typeof actual.then==='function')actual.then(observed,()=>{}).catch(()=>{});else observed(actual);"
+      ],
+      [
+        158,
+        "  return actual;"
+      ],
+      [
+        720,
+        "  function deadline(l,e) {record(l,e,'L',0);}"
+      ],
+      [
+        742,
+        "    c.sealed=true;c.escaped=e;"
+      ],
+      [
+        748,
+        "    if(!c||c.p!==p||cells.get(p)!==c||!c.sealed||c.escaped!==e)return;"
+      ],
+      [
+        754,
+        "    if(Object.getPrototypeOf(headers)!==headersPrototype||Reflect.apply(headerHas,headers,[header]))return;"
+      ],
+      [
+        765,
+        "    Reflect.apply(headerSet,entry.headers,[header,'g1.'+entry.h+'.'+c.w+'.'+c.s]);"
+      ],
+      [
+        785,
+        "    source=dropReplace(source,'if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();',"
+      ],
+      [
+        787,
+        "    source=dropReplace(source,'const response=await Reflect.apply(fetcher,stub,[forwarded]);',"
+      ],
+      [
+        793,
+        "    source=dropReplace(source,'globalThis.__afwDropM?.caught(request,originalLease,error,b);return b;',"
+      ],
+      [
+        798,
+        "  source=dropReplace(source,'globalThis.__afwDropM?.deadline(lease,error);reject(error);',"
+      ],
+      [
+        799,
+        "    'globalThis.__afwDropM?.deadline(lease,error);globalThis.__afwGetWinner?.deadline(lease,error);reject(error);');"
+      ],
+      [
+        800,
+        "  source=dropReplace(source,'try{return await Promise.race([actual,first,deadline]);}',"
+      ],
+      [
+        801,
+        "    'try{return await Promise.race([actual,first,deadline]);}catch(error){globalThis.__afwGetWinner?.race(lease,error);throw error;}');"
+      ],
+      [
+        830,
+        "export function createGetWinnerHost(main,directRoute=()=>false,DispatchResponse) {"
+      ],
+      [
+        854,
+        "  function take(label,f) {"
+      ]
+    ],
+    "S10": [
+      [
+        153,
+        " const rawFinalOptions=finalOptions;let currentMountedOptions=rawFinalOptions;"
+      ],
+      [
+        169,
+        " finalOptions=convertV4MiniflareOptions(finalOptions);"
+      ],
+      [
+        170,
+        " mark('harness-setOptions-start');await mf.setOptions(finalOptions);mark('harness-setOptions-ready');"
+      ],
+      [
+        171,
+        " mark('QA-bindings-start');const bindings=await mf.getBindings(firstConnection?'qa-first-connection':mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB',firstConnection?'qa-first-connection':mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);"
+      ],
+      [
+        188,
+        "  f.mountFirstConnection=async()=>{mark('mount-start');assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert.equal(f.pointerMode,'candidate');"
+      ],
+      [
+        190,
+        "   const mountedRaw={...rawFinalOptions,workers:rawFinalOptions.workers.map(worker=>worker.name==='qa-first-connection'?worker:{...worker,bindings:{...vars,AFW_FINITE_TRIAL_VERSION:{id:f.uploaded.id}}})},mounted=convertV4MiniflareOptions(mountedRaw);"
+      ],
+      [
+        199,
+        "  let getDirectCall;const getDispatch=mf.dispatchFetch;f.getWinnerDirect=()=>{const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');return process.env.AFW_C2_GET_TRANSPORT==='verified' && f.call===getDirectCall && mf.dispatchFetch===getDispatch && Boolean(m) && sha(m.script)===resident.module.sha256;};"
+      ],
+      [
+        200,
+        "  f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');f.call=(path,options)=>{f.providerPhase=(options?.method??'GET')+' '+new URL('https://delegated-canary.agentfriendlyweb.dev'+path).pathname;return mf.dispatchFetch('https://delegated-canary.agentfriendlyweb.dev'+path,options);};getDirectCall=f.call;}"
+      ],
+      [
+        220,
+        " f.cleanup=async()=>{if(persist){if(owned&&!await owned.beforeDelete())return;assert.ok(resolve(persist).startsWith(resolve(tmpdir())+'/afw-entry-restart-'));await rm(persist,{recursive:true,force:true});}};"
+      ]
+    ],
+    "bridge": [
+      [
+        24,
+        "  return await observeFiniteOwnerRequestWork({ctx,env,originalLease},()=>finiteNativeOperation(originalLease,ctx,async signalFailure=>{"
+      ],
+      [
+        26,
+        "   const body=await (request.method==='POST'?readChoicePostBody:finiteNativeBytes)(request,check,first);check();"
+      ],
+      [
+        27,
+        "   qualifyFiniteOwnerChoiceRequest(request,body);"
+      ],
+      [
+        33,
+        "   headers.set('x-afw-finite-version',version);headers.set('x-afw-finite-request-id',crypto.randomUUID());"
+      ],
+      [
+        36,
+        "   const response=await Reflect.apply(fetcher,stub,[forwarded]);"
+      ],
+      [
+        38,
+        "   if(!response.ok){try{fail([400,401,403,404,405,413,429].includes(response.status)?response.status:503);}catch(error){return finiteNativeCancel(response,error,first);}}"
+      ],
+      [
+        41,
+        "   const bytes=await finiteNativeBytes(response,responseCheck,first,503);responseCheck();"
+      ],
+      [
+        42,
+        "   return finiteNativeChoiceHtml(response,bytes);"
+      ],
+      [
+        44,
+        " }catch(error){return pending([400,401,403,404,405,413,429].includes(error?.status)?error.status:503);}"
+      ]
+    ],
+    "wire": [
+      [
+        26,
+        "export async function finiteNativeOperation(lease,ctx,operation){"
+      ],
+      [
+        30,
+        " const deadline=new Promise((_,reject)=>{"
+      ],
+      [
+        31,
+        "  abort=()=>{try{finiteNativeFailure();}catch(error){reject(error);}};"
+      ],
+      [
+        32,
+        "  lease.signal.addEventListener('abort',abort,{once:true});"
+      ],
+      [
+        33,
+        "  timer=setTimeout(abort,remainingMs);"
+      ],
+      [
+        38,
+        " try{return await Promise.race([actual,first,deadline]);}"
+      ],
+      [
+        39,
+        " finally{clearTimeout(timer);lease.signal.removeEventListener('abort',abort);}"
+      ],
+      [
+        42,
+        "export async function finiteNativeBytes(message,check,first,status=400){"
+      ],
+      [
+        43,
+        " const reader=message.body?.getReader();if(!reader){check();return new Uint8Array();}"
+      ],
+      [
+        47,
+        "  for(;;){const {done,value}=await reader.read();check();if(done)break;if(!(value instanceof Uint8Array)||(length+=value.length)>16384)finiteNativeFailure(status);chunks.push(value);}"
+      ],
+      [
+        49,
+        " }catch(error){first(error);try{await reader.cancel();}catch{}throw error;}"
+      ],
+      [
+        51,
+        "export async function finiteNativeCancel(message,error,first){"
+      ],
+      [
+        52,
+        " first(error);try{await message.body?.cancel();}catch{}throw error;"
+      ]
+    ],
+    "D07": [
+      [
+        6,
+        "after(async()=>{"
+      ],
+      [
+        7,
+        " mark('AFTER','close','enter');"
+      ],
+      [
+        8,
+        " try{await w?.close();}catch(error){mark('AFTER','close','throw',error);throw error;}"
+      ],
+      [
+        9,
+        " mark('AFTER','close','return');"
+      ],
+      [
+        14,
+        " mark(id,'action','enter');"
+      ],
+      [
+        15,
+        " try{await work();mark(id,'action','return');}catch(error){actionThrew=true;actionError=error;mark(id,'action','throw',error);}"
+      ],
+      [
+        17,
+        "  if(w)mark(id,'count','enter');"
+      ],
+      [
+        18,
+        "  counts=w?await w.counts():null;"
+      ],
+      [
+        19,
+        "  if(w)mark(id,'count','return');"
+      ],
+      [
+        20,
+        " }catch(error){counterThrew=true;counterError=error;mark(id,'count','throw',error);}"
+      ],
+      [
+        24,
+        "  console.info('C2SOURCE '+JSON.stringify({id,status:passed?'pass':'fail',phase,counters:counts,code:passed?'OK':'TEST_FAILED'}));"
+      ],
+      [
+        27,
+        " if(actionThrew)throw actionError;"
+      ],
+      [
+        28,
+        " if(counterThrew)throw counterError;"
+      ],
+      [
+        30,
+        "fixed('C2T1_CONNECTION','connection',async()=>{"
+      ],
+      [
+        31,
+        " w=await createFiniteCoupledOwnerWorld();"
+      ],
+      [
+        33,
+        " assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});"
+      ],
+      [
+        51,
+        "fixed('C2T1_SCOPE_MISSING','scope',async()=>{await w.noScope();});"
+      ]
+    ],
+    "recorder": [
+      [
+        34,
+        "export function mark(id,operation,edge,error) {"
+      ],
+      [
+        38,
+        "    if ((!cases.includes(id) && id !== 'AFTER') || sequence >= 128) throw 0;"
+      ],
+      [
+        39,
+        "    const event = {sequence:sequence+1,elapsedMs:Number((process.hrtime.bigint()-started)/1000000n),"
+      ],
+      [
+        41,
+        "    const bytes = Buffer.from(JSON.stringify(event)+'\\n');"
+      ],
+      [
+        42,
+        "    if (written+bytes.length > 32768) throw 0;"
+      ],
+      [
+        43,
+        "    fd = openSync(join(root,'green-progress.ndjson'),constants.O_WRONLY|constants.O_APPEND|constants.O_NOFOLLOW);"
+      ],
+      [
+        45,
+        "    if (!s.isFile() || (s.mode&0o777)!==0o600 || s.nlink!==1 || s.uid!==process.getuid() ||"
+      ],
+      [
+        46,
+        "      s.gid!==process.getgid() || s.size!==written) throw 0;"
+      ],
+      [
+        47,
+        "    if (writeSync(fd,bytes)!==bytes.length) throw 0;"
+      ],
+      [
+        50,
+        "    disabled=true;"
+      ],
+      [
+        51,
+        "    try {process.stderr.write('AFW_C2_GREEN_RECORDER_FAULT\\n');} catch {}"
+      ]
+    ]
+  }
+}
