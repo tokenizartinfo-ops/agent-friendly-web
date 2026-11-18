@@ -1,0 +1,42 @@
+{
+  "purpose": "afw.original-setup-permission-validation.v1",
+  "project": "AFW",
+  "observedAtUTC": "2026-11-18T21:38:11Z",
+  "base": "804d2dcdabc779f198ff1db66b16f863d673fe8e",
+  "source": "9eb7b67d645c393151c64e3217af0965cf146dfc",
+  "sourceTree": "33165e250eecb95df2e108158a233aa4004a832c",
+  "branch": "lab/afw-original-permission-fence-20261118",
+  "closed": "8a4b81616cbe717ae61d4d2fccb9cfefd11b88c6",
+  "verification": {
+    "red": 44402873304,
+    "redCases": 6,
+    "green": 44403182185,
+    "tests": 96,
+    "failures": 0,
+    "skips": 0,
+    "stagingPass": true
+  },
+  "implementation": {
+    "permission": "An original qualified owner context supplies the original OAuth authorization hash and notice sequence and request. The setup service opens a fresh D1 first-primary read to correlate the current project revision and owner, original OAuth consent and grant, original monitoring record and absence of any competing/revoking record. The original lease narrows to current relevant expiry and readback repeats before selection and both provider mutations.",
+    "withdrawalDuringUpload": "Native D1 fixture withdrew monitoring permission after an acknowledged upload. The second provider POST, confirmation record and activation were absent.",
+    "sourceOnly": true
+  },
+  "custody": {
+    "observedAtUTC": "2026-11-18T21:36:45.523Z",
+    "status": "expired",
+    "expiresAt": "2026-11-08T02:59:59Z"
+  },
+  "remaining": [
+    "The real Durable Object source and forwarding remain closed in readPrivateQaFinitePolicySource. The new current-permission check does not create new owner admission or stand in for an original invocation.",
+    "Real launch material and finalizer producer coverage are still required. The current compiler intentionally only produces staging.",
+    "Install and qualify a new exact scoped package credential once the eligible private package is available. No occurrence was dispatched."
+  ],
+  "remoteRuntimeWrite": false,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "sameNoticeReceived": false,
+  "sameNoticeReviewed": false,
+  "nativeUnsubscribeObserved": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "9233182ea89efc28b2ccb0f4b4e69c1348ccdba3",
-  "phase": "The finite Workflow native policy setup entry now qualifies original provider/seed and exact approved QA source before the private step. Source-only staging verified.",
+  "previousCheckpoint": "468c5af34985d90948df9cf202eb9725887f3379",
+  "phase": "The setup re-reads the original purpose-bound permission on native D1 before publication. Withdrawal after upload prevents activation in CI. The real source and complete package remain closed.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement the actual private setup Durable Object source/forwarding and the fixed launch/finalizer runtime producers. Then qualify the protected complete package with fresh scoped custody and run one real cloud occurrence for the same notice, assistant review and native unsubscribe.",
+  "next": "Finish the real Durable Object setup-source/forwarding guard on the independently qualified original invocation, upstream owner facts and fixed provider. Qualify launch/finalizer, complete package and current scope; execute one actual correlated cloud notice, review and unsubscribe.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 155,
-  "updatedAtUTC": "2026-11-18T21:30:07Z",
+  "schemaVersion": 156,
+  "updatedAtUTC": "2026-11-18T21:38:11Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2234,6 +2234,17 @@
     "closed": "804d2dcdabc779f198ff1db66b16f863d673fe8e",
     "verifiedRun": 44401754228,
     "tests": 107,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "originalSetupPermission": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-original-setup-permission-validation.json",
+    "evidence": "6e062041df48491be156b78ed41193a7fa4b4035",
+    "head": "9eb7b67d645c393151c64e3217af0965cf146dfc",
+    "closed": "8a4b81616cbe717ae61d4d2fccb9cfefd11b88c6",
+    "verifiedRun": 44403182185,
+    "tests": 96,
+    "packageCredentialStatus": "expired",
     "completePackage": false,
     "realCloudOccurrence": false
   }
