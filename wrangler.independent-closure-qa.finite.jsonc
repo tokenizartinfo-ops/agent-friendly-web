@@ -124,5 +124,6 @@
   "version_metadata": {
     "binding": "AFW_QA_VERSION"
   },
-  "tail_consumers": []
+  "tail_consumers": [],
+  "services": [{"binding":"AFW_FINITE_DOSSIER_REVIEW_RECEIVER","service":"agent-friendly-web-finite-review-qa","environment":"production","entrypoint":"FiniteDossierReviews"}]
 }
