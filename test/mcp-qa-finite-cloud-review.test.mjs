@@ -84,6 +84,10 @@ test('QA reads the bound reviewer for its own notice and retains the review thro
  const options={env,control:f.identity,completion:output.completion,check:()=>f.f.now()};
  assert.deepEqual(await observePrivateQaFiniteDossierReview(options),receipt);
  assert.equal(await observePrivateQaFiniteDossierReview({...options,env:{}}),null);
+ let calls=0;
+ const slow={AFW_FINITE_DOSSIER_REVIEW_RECEIVER:{readReview:async()=>{calls++;return receipt;}}};
+ assert.equal(await observePrivateQaFiniteDossierReview({...options,env:slow,remainingMs:()=>100}),null);
+ assert.equal(calls,0);
  env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER={readReview:async()=>({...receipt,eventId:'f'.repeat(64)})};
  assert.equal(await observePrivateQaFiniteDossierReview(options),null);
  env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER={readReview:async()=>({...receipt,reviewedAt:f.preview.C0})};
