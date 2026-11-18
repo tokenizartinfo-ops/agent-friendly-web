@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "79d9fcdd980348767e4261b731272deb77fe1a8c",
-  "phase": "PRIVATE_R2_BACKUPS_VERIFIED_AND_PINNED_NATIVE_CLOSURE_PENDING",
+  "previousCheckpoint": "7d308db44938e251e0b7ef7ef4c6eff2d9ab704d",
+  "phase": "R2_AND_CLOUD_MODULES_ASSEMBLED_PRIVATE_DRAFT_QA_CLOSED_NATIVE_REGISTRATIONS_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement and qualify the real finite native material and closure guard composition, connect trusted private archive intake to complete builder, verify restoration and full native route, then perform one real cloud same-notice occurrence.",
+  "next": "Implement the source-qualified finite material and guard factory registrations and prove native close with a single correlated occurrence. Then qualify the publishable package against the actual private assembly and do one real cloud reception/review/withdrawal trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 146,
-  "updatedAtUTC": "2026-11-18 17:40:51 UTC",
+  "schemaVersion": 147,
+  "updatedAtUTC": "2026-11-18 17:58:44 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2089,7 +2089,7 @@
     "evidence": "4c0a3097b402edfed5d0131ec348d25f98d9e641",
     "priorEvidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726"
   },
-  "readinessDocument": "a668b2a7597f905f62fab530ba6232c8773b244a",
+  "readinessDocument": "3b93e4a021dac9838f7f3b3b37f9c0594a63c7e3",
   "releaseRollbackValidation": {
     "evidence": "224140ecd301b21db93c387c605843591a5abb9b",
     "path": "docs/superpowers/progress/2026-11-18-afw-release-rollback-validation.json",
@@ -2132,5 +2132,16 @@
     "pointerCrossChecked": true,
     "actualArchiveReadByCompiler": false,
     "completePackage": false
+  },
+  "privateAssemblyQaClosure": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-private-package-assembly-qa-closure.json",
+    "evidence": "7d0295f4d83ba983a35b7c7028e9f55261d22593",
+    "assembly": "b03696d35b315ac6a0247a17c73373dc0129dd3d3d9f2c77cd8063f5a09bc182",
+    "compileRun": 44362436956,
+    "verifiedCode": "59eb2867e2eac24e6c6f5e29afe4a7ac4415f7a5",
+    "qaVerifiedAtUTC": "2026-11-18T17:56:00.724Z",
+    "qaDeploymentReadback": true,
+    "completePackage": false,
+    "realCloudOccurrence": false
   }
 }

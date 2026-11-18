@@ -1,0 +1,185 @@
+{
+  "project": "AFW",
+  "atUTC": "2026-11-18 17:58:44 UTC",
+  "backupEvidence": "bdcaf755f43c6ffb5fc9f7f827135155c1e2f279",
+  "assembly": {
+    "draft": {
+      "verified": true,
+      "completePackage": false,
+      "draftBytes": 2057175,
+      "draftSha256": "b03696d35b315ac6a0247a17c73373dc0129dd3d3d9f2c77cd8063f5a09bc182",
+      "files": {
+        "canaryClosed/index.mjs": {
+          "bytes": 1830202,
+          "sha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3"
+        },
+        "canaryLive/index.mjs": {
+          "bytes": 1989585,
+          "sha256": "737751868d8556d2d39d662607453ca0218709bba681316fa3c94806779fbea9"
+        },
+        "operatorClosed/index.mjs": {
+          "bytes": 1971922,
+          "sha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51"
+        },
+        "qaClosed/closed-rollback.mjs": {
+          "bytes": 395915,
+          "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
+        },
+        "qaLive/index.mjs": {
+          "bytes": 2695125,
+          "sha256": "bff5ab5cc4a9da9c0778a42e6512d5e66044be590283724b6530bf63a76cd739"
+        }
+      },
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "moduleCount": 5,
+      "operationalReadiness": false,
+      "purpose": "afw.finite-native-private-draft.v1",
+      "sourceRevision": "3226036fba409b6700fa97dea47b7c1a177a826b",
+      "sourceTree": "1bdf3527cc2295ae2baccb9fb95ca4d0076cef49"
+    },
+    "compiledSourceArtifact": {
+      "run": 44362436956,
+      "job": 135007142924,
+      "head": "3226036fba409b6700fa97dea47b7c1a177a826b",
+      "closed": "2bec081aeae183a41142d50df3b966bd78b18420",
+      "artifact": {
+        "id": 14454407449,
+        "digest": "sha256:894ced4dc3e8a2f3c1fcbd8e46ba958c18dd8513f9134891858ba2f41c148590",
+        "bytes": 1243209,
+        "expiresAt": "2026-11-19T17:47:20Z"
+      },
+      "activeRuns": 0
+    },
+    "algorithmValidation": {
+      "run": 44363940758,
+      "job": 135012495236,
+      "head": "59eb2867e2eac24e6c6f5e29afe4a7ac4415f7a5",
+      "closed": "df6629bec54bcc975dd378cd59766b64fb732a78",
+      "activeRuns": 0,
+      "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "privateArtifactCount": 0,
+      "points": 29,
+      "lines": [
+        "2026-11-18T17:55:14.5385982Z test_draft_assembles_both_compiled_and_all_closed_roles (finite_historical_archive_test.PinnedHistoricalArchiveTests.test_draft_assembles_both_compiled_and_all_closed_roles) ... ok",
+        "2026-11-18T17:55:14.6653559Z Ran 29 tests in 1.318s",
+        "2026-11-18T17:55:14.6653814Z OK"
+      ]
+    },
+    "privateRowsExported": false,
+    "temporaryAssemblyRetained": false,
+    "cleanup": {
+      "temporaryDirectoryRemoved": true,
+      "privateArchiveCleared": true,
+      "temporaryKeyReleased": true
+    }
+  },
+  "qa": {
+    "controlPlane": {
+      "phase": "control_plane_read_only",
+      "atUTC": "2026-11-18T17:52:02.222Z",
+      "versions": {
+        "qaClosed": {
+          "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+          "exact": true,
+          "flags": 14,
+          "closedFlags": true,
+          "crons": 0,
+          "tails": 0
+        },
+        "canary": {
+          "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+          "exact": true,
+          "flags": 8,
+          "closedFlags": true,
+          "crons": 0,
+          "tails": 0
+        },
+        "operator": {
+          "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+          "exact": true,
+          "flags": 3,
+          "closedFlags": true,
+          "crons": 0,
+          "tails": 0
+        }
+      },
+      "workflows": {
+        "AfwReleaseWorkflow": {
+          "definition": true,
+          "instances": 0,
+          "nonterminal": 0,
+          "enumerated": true
+        },
+        "PrivateQaNamedConfirmation": {
+          "definition": true,
+          "instances": 0,
+          "nonterminal": 0,
+          "enumerated": true
+        },
+        "PrivateQaBootstrap": {
+          "definition": true,
+          "instances": 7,
+          "nonterminal": 0,
+          "enumerated": true
+        }
+      },
+      "container": {
+        "count": 1,
+        "enumerated": true
+      },
+      "verified": false,
+      "inventoryAllStates": {
+        "count": 1,
+        "enumerated": true
+      },
+      "activeInventory": {
+        "atUTC": "2026-11-18T17:56:00.724Z",
+        "success": true,
+        "activeCount": 0,
+        "perPage": 100,
+        "paginationExhausted": true
+      },
+      "verifiedDeployedClosure": true
+    },
+    "unfilteredContainerHistory": "1 stopped, 0 active in separate complete listing; no deletion",
+    "exactQaModuleSandbox": {
+      "verified": true,
+      "isolatedNativeRuntime": true,
+      "closedHttpStatuses": [
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "moduleSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
+    },
+    "nativeWiringAudit": {
+      "existingAlarmForwarding": true,
+      "head": "d0e9a92ac7c9802546e9e33cac636854bbfd08f1",
+      "packageOrLiveOperation": false,
+      "symbols": {
+        "installPrivateQaFiniteMaterialFactory": {
+          "declarations": 1,
+          "otherSourceReferences": 0
+        },
+        "installPrivateQaFiniteNativeGuardFactory": {
+          "declarations": 1,
+          "otherSourceReferences": 0
+        }
+      },
+      "closed": "9797829548e5b754c60b33ea619ab3709c3a7016",
+      "run": 44364395121,
+      "job": 135014105687,
+      "activeRuns": 0
+    }
+  },
+  "deploymentWritten": false,
+  "releaseEligible": false,
+  "completePackage": false,
+  "actualTrialAttempted": false,
+  "cloudSameNoticeReceived": false,
+  "cloudSameNoticeReviewed": false,
+  "actualSubscriptionWithdrawn": false,
+  "ownerActionNeededNow": false
+}
