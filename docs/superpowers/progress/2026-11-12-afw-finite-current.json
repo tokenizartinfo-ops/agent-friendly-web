@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "cfba03ad76f73ad2a440e3852f2bf2ec3f17e71a",
-  "phase": "Native shared plan and GitHub adoption use the original observer-projected plan and completed Cloudflare installation.",
+  "previousCheckpoint": "0aff367b509594ace73e11a0cbd15afb19157884",
+  "phase": "QA launch source rechecks original GitHub READY and first-primary permission with original scoped withdrawal authority.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement fixed native primary launch, observation and guard/closure operations and qualify the full package with current scoped custody, then run one correlated cloud notice, review and withdrawal trial.",
+  "next": "Correct exact consent proof for native finite withdrawal, preserve original and business alarm duties and wire the remaining effect/finalizer producers. Complete package and valid custody before one real same-notice trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 162,
-  "updatedAtUTC": "2026-11-18T22:53:56Z",
+  "schemaVersion": 163,
+  "updatedAtUTC": "2026-11-18T23:19:07Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2307,6 +2307,16 @@
     "closed": "d81d7e14b6f50b9bb57edb3a3041be07cad59ce7",
     "verifiedRun": 44415680874,
     "tests": 76,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "launchPrimaryQualification": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-finite-launch-primary-validation.json",
+    "evidence": "fb18a908d26c12d43ed26e4671a6bad30cfcec2c",
+    "head": "23c70e82c969e316a24a74c638d447c3cb3d93cc",
+    "closed": "10173f17691add0feacacbf8ef8a8363a4e5e2e6",
+    "verifiedRun": 44419391206,
+    "tests": 121,
     "completePackage": false,
     "realCloudOccurrence": false
   }

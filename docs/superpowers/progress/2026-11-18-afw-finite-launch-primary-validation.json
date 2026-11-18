@@ -1,0 +1,29 @@
+{
+  "schema": "afw.finite-launch-primary-validation.v1",
+  "observedAtUTC": "2026-11-18T23:19:07Z",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-launch-primary-20261118",
+  "verifiedHead": "23c70e82c969e316a24a74c638d447c3cb3d93cc",
+  "closedHead": "10173f17691add0feacacbf8ef8a8363a4e5e2e6",
+  "run": 44419391206,
+  "tests": {
+    "pass": 121,
+    "fail": 0,
+    "skipped": 0
+  },
+  "verified": [
+    "Actual fixed QA launch source reads the original GitHub READY ref/tag, command, successful step and exact custody commitment through GET-only code.",
+    "At every material lookup the first-primary D1 verification preserves the original consent and monitoring event plus separately approved cleanup scope and original deadlines.",
+    "Workerd/D1 tests reject a withdrawn grant and missing cleanup approval without issuing a new effect. Scope tests use synthetic credentials."
+  ],
+  "pending": [
+    "Correct finite permissions reduction using the original notice clock and exact primary evidence.",
+    "Preserve original and business cleanup duties over the one native alarm. Wire native effect/guard/finalizer capacities.",
+    "Complete the releasable package and validate current scoped custody before a live correlated cloud trial."
+  ],
+  "deployed": false,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
