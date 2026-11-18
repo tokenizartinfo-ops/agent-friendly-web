@@ -1,0 +1,91 @@
+{
+  "schema": "afw.b2.integration-correction-cap-adjudication.v1",
+  "atUTC": "2026-11-18 15:48:18 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "correctionRounds": 5,
+  "maxRounds": 5,
+  "originalCounters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  },
+  "review": "6eb37b443b925a63b811f35b8f5147b88da49776",
+  "fix5Record": "89e8359181dda23752b019460b20517ee916598f",
+  "decision": "Reject the active B2 packet for execution. Stop correction dispatches at the cap; no sixth fix round or fake acceptance. Preserve all useful partial work. Real load-bearing findings cannot be parked as qualified, and no dependent P4/Source or PC-off work may build on them.",
+  "dispositions": [
+    {
+      "id": "B2-R3-02",
+      "severity": "IMPORTANT",
+      "real": true,
+      "loadBearing": true,
+      "decision": "Unresolved; active compiler still accepts a prefix then manufactures fixed phase.",
+      "minimum": "Validate the exact ordinary epoch/key/I0130 reply before the existing one-key control transformation. One read only; no new effect. Rejection on mismatch.",
+      "release": "BLOCKED"
+    },
+    {
+      "id": "B2-R3-03",
+      "severity": "IMPORTANT",
+      "real": true,
+      "loadBearing": true,
+      "decision": "Unresolved; stock aggregate launcher has no verified next-slot admission.",
+      "minimum": "One supported programmatic CLI session for five actual isolated one-file runs with pre-admission, startup-inclusive per-worker clocks and independent terminal readback before next admission. Same process/time caps.",
+      "release": "BLOCKED"
+    },
+    {
+      "id": "B2-R3-04",
+      "severity": "IMPORTANT",
+      "real": true,
+      "loadBearing": true,
+      "decision": "Unresolved; active catch can return without wrapper/tree retirement proof.",
+      "minimum": "Acquire the directly owned wrapper identity at spawn, bounded exact-owned cleanup and independent closure readback; retain original error/scratch and STOPPED_UNQUALIFIED on unknown.",
+      "release": "BLOCKED"
+    },
+    {
+      "id": "B2-R3-05",
+      "severity": "IMPORTANT",
+      "real": true,
+      "loadBearing": true,
+      "decision": "Unresolved; aggregate failed exit does not bind the individual original outcomes.",
+      "minimum": "Bind genuine Node events and per-worker exit/identity to independently fixed original case results and expected recorder/frame differences; held cutoff remains separate.",
+      "release": "BLOCKED"
+    },
+    {
+      "id": "B2-R3-06",
+      "severity": "IMPORTANT",
+      "real": true,
+      "loadBearing": true,
+      "decision": "Unresolved; every real consumer still accepts suffix matches or lossy TAP.",
+      "minimum": "Connect strict original stream/category/cardinality matching across negativeAggregate, native D07 and direct nativeOne. No arbitrary trim/prefix/suffix acceptance; reject ambiguous provenance.",
+      "release": "BLOCKED"
+    },
+    {
+      "id": "B2-R3-07",
+      "severity": "MINOR",
+      "real": true,
+      "loadBearing": false,
+      "decision": "Deferred as explicit structured SDK-disposal label; exact proposed hunk preserved but not installed.",
+      "minimum": "Apply SIGKILL convention label without graceful/global/RPC-settlement claims when the runner is revised.",
+      "release": "Not independently sufficient; full packet already blocked"
+    },
+    {
+      "id": "B2-R4-01",
+      "severity": "IMPORTANT_FOR_ADOPTION_ONLY",
+      "real": true,
+      "loadBearing": "Conditional on adopting detached helpers",
+      "decision": "Do not adopt the unmounted single-stream helpers unchanged; there is no active regression.",
+      "minimum": "If reused, maintain one observation session through all five separately framed streams and summaries; otherwise keep the helpers archived and out of the execution graph.",
+      "release": "Adoption held"
+    }
+  ],
+  "minimumNextPremise": "A coherent defensive process-and-evidence controller integrated into actual consumers, using the supported sequential public Node API and exact tuple check. A future replan must explicitly carry the dispositions and unchanged original limits; unconnected helpers are insufficient. No such new task or execution is started by this ruling.",
+  "noExternalDependencyClaim": "This static integration barrier is not evidence of a current Cloudflare outage, credential failure or owner misclick.",
+  "tests": "NOT_RUN",
+  "ownerActionNeededNow": false,
+  "activeExecutions": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}

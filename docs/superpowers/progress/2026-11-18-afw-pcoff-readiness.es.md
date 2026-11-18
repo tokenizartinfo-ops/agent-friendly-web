@@ -1,15 +1,15 @@
 # AFW · preparación de la prueba con el ordenador apagado
 
-Comprobación de avance: 18 de noviembre de 2026, 15:31 UTC.
+Estado guardado: 2026-11-18 15:49:15 UTC.
 
-La prueba final todavía no está habilitada. El bloqueo de trabajo actual es el diagnóstico de AFW y la fiabilidad de su recolector; no se ha atribuido este fallo a un incidente de Cloudflare.
+La prueba final sigue pendiente. El bloqueo actual está en el diagnóstico interno: el recolector y el controlador todavía no acreditan de forma conjunta el resultado de cada trabajador, el origen exacto de las marcas y el retiro de sus procesos ante un fallo.
 
-Lo acreditado hoy: el bloque MODEL B1 pasó sus 134 comprobaciones en GitHub Actions y quedó cerrado. La propuesta B2 de diagnóstico está conservada íntegra, con sus 64 archivos y huellas reconciliados como datos. Su revisión estática sigue requiriendo cambios: eso no acredita que B2 haya ejecutado o pasado. No hay ninguna ejecución B2 registrada en la rama nominada al último readback.
+El bloque MODEL B1 pasó 134 comprobaciones en GitHub Actions y quedó cerrado. La propuesta B2 completa, las revisiones, las mediciones y los componentes parciales están preservados en esta rama. Los componentes parciales tienen cero consumidores conectados. La última ronda no entregó una corrección integrada; se alcanzó el límite de correcciones y la propuesta activa quedó rechazada para ejecución. B2 no se lanzó.
 
-Se está endureciendo el controlador para medir cada trabajador desde su arranque, conservar el origen de stdout/stderr y resultados individuales, y verificar el retiro de los procesos propios incluso ante error. La validación exacta del valor previo de N06 permanece pendiente explícito. Ninguna corrección parcial habilita el lanzamiento.
+Antes de retomar el diagnóstico hay que definir e integrar el controlador mínimo compatible con la API pública de Node, conservando los cinco trabajadores, sus casos, tiempos y límites. Debe verificar la terminación antes de admitir el siguiente, conservar las categorías auténticas de salida, comprobar los resultados individuales y validar la respuesta original completa. Los helpers archivados no satisfacen esto por sí solos.
 
-Falta completar y revisar ese diagnóstico; obtener una observación acotada nueva del fallo real; corregir su causa con evidencia; validar el recorrido completo; preparar candidata, reversión y permisos vigentes; y comprobar en una misma prueba autorizada el aviso útil, su recepción, retirada y cierre desde la nube con el equipo apagado. El caso de Max va después, con su consentimiento propio.
+Después faltan una observación válida del fallo real, la corrección de su causa, la validación del recorrido completo y la preparación de candidata, reversión y permisos vigentes. La prueba final deberá acreditar en una misma ocurrencia la ejecución cloud, el aviso útil, su recepción, la retirada y el cierre con el equipo apagado. El piloto de Max requiere su consentimiento propio y va después.
 
-La última observación real de Source sigue siendo GET 503 en el caso 15. Aún no está aislada su causa. No hay un plazo fiable hasta resolverla; un pase de laboratorio o una compilación no equivale al ensayo final.
+La última observación real de Source sigue siendo GET 503 en el caso 15; su causa no está aislada. Este bloqueo de integración no demuestra una incidencia actual de Cloudflare ni un problema de credenciales. No hay un plazo fiable para el ensayo final mientras esto siga abierto.
 
-No se solicita apagar el equipo como parte de una prueba. No se han abierto accesos, renovado claves ni iniciado ensayos remotos en este bloque. Los contadores originales Source/OWN/StageB conservan 5/5, sin reiniciarlos. operationalReadiness y PCoff permanecen false.
+No hay una ejecución nueva activa ni trabajo de fondo iniciado por este cierre. No hace falta reconectar Chrome, copiar claves o pedir códigos para este punto. Se preservaron los contadores originales Source/OWN/StageB 5/5 sin reiniciarlos. SourceQualified, Task1Pass, operationalReadiness y PCoff siguen false.

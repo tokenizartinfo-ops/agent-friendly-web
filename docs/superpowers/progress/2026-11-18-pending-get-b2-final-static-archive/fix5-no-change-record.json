@@ -1,0 +1,27 @@
+{
+  "schema": "afw.b2.fix5-no-change-controller-record.v1",
+  "atUTC": "2026-11-18 15:48:18 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "brief": "5bf93933f998aedb6f02fee5ab218fa34dc04c7a",
+  "author": "/root/pending_get_b2_fix5",
+  "round": 5,
+  "maxRounds": 5,
+  "status": "NO_CHANGED_CODE_DELIVERED",
+  "rootObservation": "The author declined the integrated fixture request and interpreted the workspace AGENTS context as a Hermes user request. First-party current AFW task evidence0668a6192ff18fec4a9c860fe28eb6ada91c636d had been provided; Root does not treat the author report as proof of a changed user objective or a Cloudflare/runtime fault.",
+  "authoredBlobs": 0,
+  "refsCreated": 0,
+  "jobsCreated": 0,
+  "activePacketUnchanged": {
+    "index": "5cd5ecae5e35fa580a3fc554e6880c0a0f38a337",
+    "graph": "c50198511f93639ec20b32f75ad8cd6110900979",
+    "runner": "84cdfcabf0714a08821af7b9902c3685535aa3b0"
+  },
+  "lastActualScopedReview": "6eb37b443b925a63b811f35b8f5147b88da49776",
+  "newDiff": null,
+  "scopedReviewOfNewCode": "NOT_APPLICABLE_NO_DIFF; prior active defects remain, no approval inferred",
+  "codeExecution": "NOT_RUN",
+  "automaticApprovalReviewRejected": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
