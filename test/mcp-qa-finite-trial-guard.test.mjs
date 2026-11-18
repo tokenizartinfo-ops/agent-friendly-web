@@ -1,4 +1,4 @@
-import {stageAlarmFixture} from './fixtures/finite-alarm-handoff.mjs';
+import {stageAlarmFixture,useNativeAlarmIntent} from './fixtures/finite-alarm-handoff.mjs';
 import {finiteAdmissionIdentity} from '../lib/mcp-own-finite-cleanup-proof.mjs';
 import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
@@ -17,6 +17,7 @@ async function setup({missing,pending=false,ownNamespace,coupled=false}={}){
  let store,armed;
  f.primary.effect=async kind=>{const r=await store.read();if(r.status!=='observed')return null;return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
  if(pending)f.primary.finalizer=async()=>{throw Error('synthetic unavailable first finalizer');};
+ if(coupled)useNativeAlarmIntent(f);
  const opts=f.options(controls),handoff=coupled?await stageAlarmFixture(f,opts):null;
  let control=controls.createPrivateQaFiniteTrialControl({...opts,...handoff?{alarmHandoff:handoff.token}:{}});armed=await control.prepare();assert.equal(armed.status,pending?'uncertain':'armed');if(pending)armed=await control.read();
  const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash});store=stores.createPrivateQaFiniteCleanupStore({storage:f.storage,control:proof.control,now:f.now});

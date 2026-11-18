@@ -1,3 +1,5 @@
+import {finiteLauncherInstanceId} from '../../lib/mcp-qa-finite-launch-records.mjs';
+import {finiteCleanupPolicyHash} from '../../lib/mcp-finite-cleanup-policy.mjs';
 import {finitePrivateQaSetupInstanceId} from '../../lib/mcp-qa-finite-adoption.mjs';
 import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {readPrivateQaFiniteControlIdentity} from '../../lib/mcp-qa-finite-trial-control.mjs';
@@ -30,4 +32,11 @@ export async function stageAlarmFixture(f,options){
  await f.storage.transaction(tx=>tx.setAlarm(initialC0));
  const token=await stagePrivateQaFiniteOriginalAlarmHandoff({storage:f.storage,control,source,check:f.now});
  return {initialC0,initialC1,token,control,source};
+}
+
+export function useNativeAlarmIntent(f){
+ f.plan.intentId='e'.repeat(64);
+ f.plan.workflows.launcher=finiteLauncherInstanceId({intentId:f.plan.intentId,sourceRevision:f.plan.source.revision});
+ f.plan.closePolicyHash=finiteCleanupPolicyHash(f.plan);
+ return f;
 }

@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import * as api from '../lib/mcp-qa-finite-trial-control.mjs';
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../lib/mcp-qa-finite-alarm-handoff.mjs';
 import {finiteFixture,HEAD} from './fixtures/qa-finite-trial.mjs';
-import {stageAlarmFixture} from './fixtures/finite-alarm-handoff.mjs';
+import {stageAlarmFixture,useNativeAlarmIntent} from './fixtures/finite-alarm-handoff.mjs';
 
 async function prepared(f=finiteFixture()){
+ useNativeAlarmIntent(f);
  const options=f.options(api),handoff=await stageAlarmFixture(f,options),control=api.createPrivateQaFiniteTrialControl({...options,alarmHandoff:handoff.token});
  return {f,handoff,control};
 }
