@@ -1,0 +1,46 @@
+{
+  "purpose": "afw.launch-confirmation-validation.v1",
+  "observedAtUTC": "2026-11-18T20:57:53Z",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-launch-confirmation-20261118",
+  "source": "6b2c348762b3d6e3dcab23ef451829111b695cc3",
+  "sourceTree": "80c9a4d596f3e71a04380901c8e212c89cb89920",
+  "closedBranch": "7c4ddd7d39924542f11e38c816a352d73bb48e1c",
+  "verification": {
+    "regressionRedRun": 44395091627,
+    "regression": "Cloudflare emits the first occurrence suffix -1 in the real step name",
+    "initialGreenRun": 44395775411,
+    "finalGreenRun": 44396181603,
+    "tests": 147,
+    "failures": 0,
+    "skips": 0,
+    "stagingCompiler": true
+  },
+  "actualProviderRead": {
+    "observedAtUTC": "2026-11-18T20:45:12.958Z",
+    "tokenStatus": "expired",
+    "expiresAt": "2026-11-08T02:59:59Z",
+    "source": "Cloudflare account token metadata requested with the connected reader",
+    "stepNaming": "exact logical name or first occurrence only"
+  },
+  "implemented": [
+    "Retain the exact named canary bundle commitment atomically with the installed policy receipt without persisting script bytes.",
+    "Use the finite QA actor to qualify the same immutable launch plan, PREPARED, SEND, native ACK, guard state and original event before reconstructing the bundle.",
+    "Qualify the fixed running Workflow, pinned QA deployment and module, and current canary version/configuration via read-only fixed Cloudflare paths.",
+    "Use the existing Known confirmation path and original lease."
+  ],
+  "remaining": [
+    "Concrete launch source qualification from approved setup, actual preparatory Workflow and original finalizer READY is still unavailable in the candidate.",
+    "Complete package builder retains its fail-closed branch and staged artifact is not eligible for publication.",
+    "Prepare new scoped package custody and verify active token and required reads after package source prerequisites close.",
+    "One authorized cloud occurrence still needs same-notice intake, assistant review receipt, native unsubscribe, rollback and readback."
+  ],
+  "sourceOnly": true,
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "cloudflareMutations": false,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "pcOffVerified": false,
+  "operationalReadiness": false
+}
