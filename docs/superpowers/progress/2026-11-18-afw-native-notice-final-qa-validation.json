@@ -1,0 +1,66 @@
+{
+  "purpose": "afw.finite-notice-final-qa-source-validation.v1",
+  "atUTC": "2026-11-18T19:50:19Z",
+  "base": "6c526cc295b81f76ea242e58d09e74511814e9c4",
+  "source": "b15e7a87a6a428924cad5210d72d4b1d795ae167",
+  "closedVerification": "9b6678fcca58ac88cb48dccd6e15abe3597d012e",
+  "regression": {
+    "run": 44383283323,
+    "passed": 34,
+    "expectedFailure": 1
+  },
+  "verification": {
+    "run": 44384157419,
+    "job": 135084046010,
+    "passed": 37,
+    "failed": 0,
+    "skipped": 0,
+    "stagingBuilt": true,
+    "completePackage": false
+  },
+  "scope": {
+    "originalSubscriptionFromBoundPrimary": true,
+    "nativeSealedSubscriptionReduction": true,
+    "independentStateReadback": true,
+    "savedEventProjectedFromFixedPrimary": true,
+    "matchedEventTransportReceiptRetainedThroughQaClosure": true,
+    "wrongEventDidNotInheritDelivery": true,
+    "cloudReviewCannotBeInferredFromTransport": true,
+    "verifiedInFixtures": true
+  },
+  "observedCloudflare": {
+    "observedAtUTC": "2026-11-18T19:47:46.863Z",
+    "custody": {
+      "status": "expired",
+      "expiresAt": "2026-11-08T02:59:59Z"
+    },
+    "deployments": [
+      {
+        "name": "agent-friendly-web-independent-closure-qa",
+        "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "onlyExpected": true
+      },
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "onlyExpected": true
+      },
+      {
+        "name": "agent-friendly-web-release-operator",
+        "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+        "onlyExpected": true
+      }
+    ]
+  },
+  "liveCandidateDeployed": false,
+  "liveReceiverReviewVerified": false,
+  "liveSubscriptionWithdrawal": false,
+  "liveTrialExecuted": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "remaining": [
+    "Mount the exact source-qualified receiver and retain the cloud assistant's own review receipt for the same event.",
+    "Finish the native package semantic gates. Reassemble this exact revision with the private backups and qualify scoped fresh custody.",
+    "Execute one real occurrence and verify notice received, reviewed, withdrawn and QA restored."
+  ]
+}

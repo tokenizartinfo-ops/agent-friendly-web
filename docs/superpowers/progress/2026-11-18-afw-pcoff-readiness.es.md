@@ -25,3 +25,9 @@ El código de la alarma de QA ya enlaza el control guardado con el actor nativo 
 La lectura de Cloudflare confirmó la vigencia del acceso de consulta y las tres versiones cerradas. El respaldo sigue en R2 privado, con un objeto de 4.209.422 bytes y sin dominios habilitados. La credencial del paquete figura vencida en Cloudflare desde el 8 de noviembre a las 02:59 UTC. El compilador sigue bloqueando la salida de un paquete publicable.
 
 Falta montar los proveedores nativos de la ejecución y del receptor, y validar la restauración final de QA. Después corresponde verificar una credencial vigente y volver a ensamblar la revisión nueva con los respaldos. El ensayo real sigue pendiente. Debe vincular la recepción y revisión al mismo aviso, y comprobar la retirada de su suscripción y la restauración. Por ahora Gabriel no necesita intervenir.
+
+## El mismo aviso en el cierre de QA
+
+La candidata usa el recibo original de la suscripción en D1 y comprueba el registro autenticado de esa misma suscripción antes de retirarla. La lectura posterior vuelve a comprobar el estado retirado. Para adjuntar la entrega al cierre, deriva la referencia del aviso a partir del evento guardado en la base primaria. Si la referencia no coincide, el cierre conserva la retirada comprobada y deja vacía la evidencia de entrega. La comprobación de restauración final de QA conserva el recibo coincidente y su huella. Pasaron 37 pruebas dirigidas. [GitHub Actions](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44384157419)
+
+Sigue pendiente la integración del recibo que debe producir el asistente en la nube cuando revise el aviso. El recibo HTTP solo registra la respuesta al envío. La compilación de esta revisión generó módulos para preparación. Cloudflare confirmó que la credencial fijada en el paquete sigue vencida y que las tres versiones cerradas conservan el 100 % del tráfico. La prueba real sigue pendiente. Por ahora Gabriel no necesita intervenir.

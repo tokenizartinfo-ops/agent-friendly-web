@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d14166297011e823a5fb3541bd18ec923b16e056",
-  "phase": "QA_NATIVE_CLOSURE_EFFECTS_COMPOSED_SOURCE_VERIFIED_CUSTODY_EXPIRED_LIVE_PENDING",
+  "previousCheckpoint": "09346f5fc0618cbe435132bb0dca11e0f5f93287",
+  "phase": "SOURCE_NOTICE_SUBSCRIPTION_WITHDRAWAL_AND_FINAL_QA_CORRELATION_VERIFIED_LIVE_RECEIVER_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Install the source-qualified execution and owned-candidate cleanup producers and validate the real receiver and final QA restoration. Then qualify current custody, reassemble the exact private package, and correlate receipt, useful review, native unsubscribe and restoration in one real cloud occurrence.",
+  "next": "Mount the exact source-qualified receiver and retain the cloud assistant's own review receipt for the same event. Finish the native package semantic gates. Reassemble this exact revision with the private backups and qualify scoped fresh custody. Execute one real occurrence and verify notice received, reviewed, withdrawn and QA restored.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 149,
-  "updatedAtUTC": "2026-11-18T18:35:57Z",
+  "schemaVersion": 150,
+  "updatedAtUTC": "2026-11-18T19:50:19Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2163,6 +2163,17 @@
     "verifiedRun": 44371035797,
     "tests": 47,
     "providerCustodyStatus": "expired",
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "finiteNoticeFinalQa": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-native-notice-final-qa-validation.json",
+    "evidence": "437bd49404b93270dd78a7b21cf10d70d12eafeb",
+    "head": "b15e7a87a6a428924cad5210d72d4b1d795ae167",
+    "closed": "9b6678fcca58ac88cb48dccd6e15abe3597d012e",
+    "verifiedRun": 44384157419,
+    "tests": 37,
+    "currentCustody": "expired",
     "completePackage": false,
     "realCloudOccurrence": false
   }
