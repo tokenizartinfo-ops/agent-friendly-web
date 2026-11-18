@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e65434ff5a6fbd48ae857767e0ddf64bb2f1e643",
-  "phase": "QA_PRIMARY_SETUP_READER_AND_RETAINED_GUARD_CHECKS_VERIFIED_NATIVE_PRODUCERS_PENDING",
+  "previousCheckpoint": "d14166297011e823a5fb3541bd18ec923b16e056",
+  "phase": "QA_NATIVE_CLOSURE_EFFECTS_COMPOSED_SOURCE_VERIFIED_CUSTODY_EXPIRED_LIVE_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Compose the native setup, nominal and closure capability providers using exact current source and retained occurrence evidence. Qualify fresh custody and rebuild a publishable private package from this new revision before one real cloud receive/review/unsubscribe occurrence.",
+  "next": "Install the source-qualified execution and owned-candidate cleanup producers and validate the real receiver and final QA restoration. Then qualify current custody, reassemble the exact private package, and correlate receipt, useful review, native unsubscribe and restoration in one real cloud occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 148,
-  "updatedAtUTC": "2026-11-18 18:15:35 UTC",
+  "schemaVersion": 149,
+  "updatedAtUTC": "2026-11-18T18:35:57Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2152,6 +2152,17 @@
     "verifiedRun": 44367371881,
     "tests": 60,
     "privateDraftNeedsRebuildForThisRevision": true,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "nativeClosureComposition": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-native-closure-composition-validation.json",
+    "evidence": "ecc267750c7c99501ac6ffa8ee17c96f59ea9cdc",
+    "head": "1535ebfe318fca5797c95aa8567c82f5db2e4506",
+    "closed": "6c526cc295b81f76ea242e58d09e74511814e9c4",
+    "verifiedRun": 44371035797,
+    "tests": 47,
+    "providerCustodyStatus": "expired",
     "completePackage": false,
     "realCloudOccurrence": false
   }

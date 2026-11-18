@@ -1,0 +1,154 @@
+{
+  "purpose": "afw.native-closure-composition.source-validation.v1",
+  "observedAtUTC": "2026-11-18T18:35:57Z",
+  "sourceRevision": "1535ebfe318fca5797c95aa8567c82f5db2e4506",
+  "parentCandidate": "4deb3e59d2f0fe88d5f93080fa10f2ff6fa048a7",
+  "verificationBranch": "lab/afw-native-closure-composition-20261118",
+  "verificationWorkflowDisabledRevision": "6c526cc295b81f76ea242e58d09e74511814e9c4",
+  "red": {
+    "run": 44370110703,
+    "passed": 44,
+    "failedExpected": 3
+  },
+  "green": {
+    "run": 44371035797,
+    "job": 135037553498,
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0,
+    "compiledStaging": true,
+    "completePackage": false
+  },
+  "scope": {
+    "guardRequiresExactRetainedControl": true,
+    "ownNativeBindingAndClaimRequired": true,
+    "effects": [
+      "withdraw",
+      "close",
+      "seal",
+      "collect-bound-proof",
+      "restore-pinned-closed-canary"
+    ],
+    "recoversLostAcknowledgmentByReadback": true,
+    "oneRestorePostInSyntheticTest": true,
+    "sourceFactoryRequired": true,
+    "productionRuntimeMutated": false,
+    "primaryNativeOccurrenceCreated": false
+  },
+  "cloudflareReadback": {
+    "deployments": {
+      "observedAt": "2026-11-18T18:26:15.980Z",
+      "results": [
+        {
+          "name": "agent-friendly-web-independent-closure-qa",
+          "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+          "versions": [
+            {
+              "id": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "name": "agent-friendly-web-delegated-canary",
+          "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+          "versions": [
+            {
+              "id": "2607abae-cec3-4e35-89eb-8b8572262b54",
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "name": "agent-friendly-web-release-operator",
+          "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+          "versions": [
+            {
+              "id": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+              "percentage": 100
+            }
+          ]
+        }
+      ]
+    },
+    "flags": {
+      "observedAtUTC": "2026-11-18T18:31:26.560Z",
+      "reads": [
+        {
+          "worker": "agent-friendly-web-independent-closure-qa",
+          "id": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+          "flags": 14,
+          "flagsFalse": 14,
+          "flagsTrue": 0
+        },
+        {
+          "worker": "agent-friendly-web-delegated-canary",
+          "id": "2607abae-cec3-4e35-89eb-8b8572262b54",
+          "flags": 8,
+          "flagsFalse": 8,
+          "flagsTrue": 0
+        },
+        {
+          "worker": "agent-friendly-web-release-operator",
+          "id": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+          "flags": 3,
+          "flagsFalse": 3,
+          "flagsTrue": 0
+        }
+      ]
+    },
+    "schedulesTailsContainerStates": {
+      "observedAtUTC": "2026-11-18T18:33:56.420Z",
+      "states": {
+        "stopped": 1
+      },
+      "paginationExhausted": true,
+      "workers": [
+        {
+          "worker": "agent-friendly-web-independent-closure-qa",
+          "schedules": 0,
+          "tails": 0
+        },
+        {
+          "worker": "agent-friendly-web-delegated-canary",
+          "schedules": 0,
+          "tails": 0
+        },
+        {
+          "worker": "agent-friendly-web-release-operator",
+          "schedules": 0,
+          "tails": 0
+        }
+      ]
+    },
+    "privateBackup": {
+      "observedAtUTC": "2026-11-18T18:31:54.815Z",
+      "exactObjects": [
+        {
+          "size": 4209422
+        }
+      ],
+      "managedEnabled": false,
+      "customDomains": 0
+    },
+    "packageCustody": {
+      "observedAtUTC": "2026-11-18T18:31:27.432Z",
+      "status": "expired",
+      "expiresAt": "2026-11-08T02:59:59Z"
+    },
+    "connectorPermissionsDoNotRefreshReleaseCustody": true
+  },
+  "pending": [
+    "Install the source-qualified producers for launch, retained cleanup material and the first-primary reader, using actual QA and owned candidate bindings",
+    "Qualify actual original-event receiver and final QA restoration from current native evidence",
+    "Use fresh scoped release custody only after the candidate meets private package semantic gates",
+    "Reassemble the exact new private package with its three historical backups",
+    "Run one own synthetic notice in the real cloud receiver and correlate receipt, useful review, native withdrawal and restoration"
+  ],
+  "realSameNoticeReceipt": false,
+  "realSameNoticeReview": false,
+  "realSubscriptionWithdrawn": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
