@@ -1,3 +1,4 @@
+import {stageAlarmFixture} from './fixtures/finite-alarm-handoff.mjs';
 import {finiteAdmissionIdentity} from '../lib/mcp-own-finite-cleanup-proof.mjs';
 import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
@@ -10,13 +11,14 @@ const stores=await import('../lib/mcp-qa-finite-cleanup-store.mjs').catch(()=>({
 test('finite guard and fixed native alarm adapter are available',()=>{
  for(const k of ['createPrivateQaFiniteTrialGuard','runPrivateQaFiniteTrialAlarm'])assert.equal(typeof api[k],'function');
 });
-async function setup({missing,pending=false,ownNamespace}={}){
+async function setup({missing,pending=false,ownNamespace,coupled=false}={}){
  const f=finiteFixture(),base=f.storage.transaction;f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
  if(ownNamespace)f.env.AFW_RELEASE_EVENTS_NODE=ownNamespace(f.plan);
  let store,armed;
  f.primary.effect=async kind=>{const r=await store.read();if(r.status!=='observed')return null;return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
  if(pending)f.primary.finalizer=async()=>{throw Error('synthetic unavailable first finalizer');};
- let control=controls.createPrivateQaFiniteTrialControl(f.options(controls));armed=await control.prepare();assert.equal(armed.status,pending?'uncertain':'armed');if(pending)armed=await control.read();
+ const opts=f.options(controls),handoff=coupled?await stageAlarmFixture(f,opts):null;
+ let control=controls.createPrivateQaFiniteTrialControl({...opts,...handoff?{alarmHandoff:handoff.token}:{}});armed=await control.prepare();assert.equal(armed.status,pending?'uncertain':'armed');if(pending)armed=await control.read();
  const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash});store=stores.createPrivateQaFiniteCleanupStore({storage:f.storage,control:proof.control,now:f.now});
  const calls=[],receipts=new Map();
  const withdrawal={purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false};
@@ -26,7 +28,7 @@ async function setup({missing,pending=false,ownNamespace}={}){
   execute:async({claim,proofHash})=>{
    calls.push(kind);assert.equal(claim.phase,'issued');
    const state=f.rows.get('afw.qa-finite-guard.v1:'+f.plan.intentId+':state');assert.ok(state.deliveries>=1);
-   assert.equal(f.alarm,state.nextAt); // recovery committed BEFORE this effect
+   assert.equal(f.alarm,handoff?handoff.initialC0:state.nextAt); // recovery committed BEFORE this effect
    if(kind===missing)throw Error('synthetic lost provider ACK');
    const receipt=kind==='canary_restore'?{purpose:'afw.finite-canary-restored.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,proofHash,versionId:f.plan.deployments.canaryClosed.versionId,deploymentId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',readbackHash:'f'.repeat(64),observedAt:f.now()}:values[kind];
    receipts.set(kind,receipt);
@@ -35,7 +37,7 @@ async function setup({missing,pending=false,ownNamespace}={}){
  };
  
  const options=()=>({ctx:f.ctx,env:f.env,control,capabilities,now:f.now});
- return {f,store,calls,capabilities,options,reconstruct:()=>{control=controls.createPrivateQaFiniteTrialControl(f.options(controls));},control};
+ return {f,store,calls,capabilities,handoff,options,reconstruct:()=>{control=controls.createPrivateQaFiniteTrialControl(f.options(controls));},control};
 }
 test('nominal death and reconstruction leave durable cleanup independent of live nominal grant',async()=>{
  const x=await setup(),guard=api.createPrivateQaFiniteTrialGuard(x.options());assert.equal((await guard.arm()).status,'armed');
@@ -141,4 +143,17 @@ test('native QA alarm derives fixed effects only for the retained control',async
  assert.deepEqual(rpcCalls,['withdraw','close','seal','ready']);
  assert.deepEqual(x.calls,[]);
  assert.equal((await x.store.completion()).status,'not_yet_observed');
+});
+
+test('successful business close leaves the original recovery armed',async()=>{
+ const x=await setup({coupled:true}),guard=api.createPrivateQaFiniteTrialGuard(x.options());assert.equal((await guard.arm()).status,'armed');
+ x.f.setNow(x.f.plan.C0+3);
+ assert.equal((await guard.alarm()).status,'complete');
+ assert.equal(x.f.alarm,x.handoff.initialC0);
+});
+test('third business delivery keeps original fallback even with an unresolved effect',async()=>{
+ const x=await setup({coupled:true,missing:'withdraw'});await api.createPrivateQaFiniteTrialGuard(x.options()).arm();
+ for(let n=0;n<3;n++){x.reconstruct();x.f.setNow(x.f.plan.C0+n*60000+3);assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).alarm()).status,'admin_pending');}
+ assert.equal(x.f.alarm,x.handoff.initialC0);
+ assert.deepEqual(x.calls,['withdraw','close','seal']);
 });

@@ -1,3 +1,4 @@
+import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
 import {privateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-origin.mjs';
 import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
@@ -46,7 +47,18 @@ export class IndependentClosure extends ClosedIndependentClosure{
   return super.fetch(request);
  }
 
- async alarm(){const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});return result===null?super.alarm():result;}
+ async alarm(){
+  if(await this.ctx.storage.get(FINITE_ALARM_HANDOFF)!==undefined){
+   // No business callback may consume the only physical alarm while original
+   // recovery is still owed. The due original route needs its own handler.
+   const delivery=await protectPrivateQaFiniteBusinessAlarm({storage:this.ctx.storage});
+   if(!delivery||delivery.kind==='original_due')throw Error('Finite original recovery requires reconciliation');
+   if(delivery.kind==='business')return super.alarm();
+   return {status:'admin_pending',operationalReadiness:false};
+  }
+  const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});
+  return result===null?super.alarm():result;
+ }
  prepareFiniteInitialMaterial(...args){if(args.length!==1)return Promise.resolve({status:'admin_pending',mayRetry:false,operationalReadiness:false});return createPrivateQaFiniteInitialEntry({ctx:this.ctx,env:this.env}).run(args[0]);}
  readFiniteNominalConfirmation(...args){
   if(args.length!==1)throw Error('Finite confirmation unavailable');
