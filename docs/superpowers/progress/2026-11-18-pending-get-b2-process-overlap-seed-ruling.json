@@ -1,0 +1,182 @@
+{
+  "schema": "afw.pending-get.b2-process-overlap-seed-ruling.v1",
+  "timestampUTC": "2026-11-18 14:02:07 UTC",
+  "scope": "PROPOSAL_AUTHORING_ONLY_NO_EXECUTION",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "parentBrief": "5f7b70fc25bbc43814a7e05fa40552aaa544e9d3",
+  "coreActualAcceptance": "98c9394ced5982acdb4e2f7a3afb61131cd5019a",
+  "decisions": {
+    "processCap": {
+      "definition": "Cumulative fresh guarded Node main-thread PID proof records. Not simultaneous count and not all OS processes.",
+      "evidence": [
+        {
+          "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+          "path": "/frames/custody",
+          "quote": "Re-read actual probe files after every launch; fresh 1..8/launch, <=8/target and <=24 cross-target."
+        },
+        {
+          "blob": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+          "lines": [
+            73,
+            85
+          ],
+          "fact": "Before/after custody-probes names, actual fresh count checked and accumulated; >24 fails."
+        },
+        {
+          "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+          "path": "/$defs/custody/properties/checkedProcesses",
+          "maximum": 24
+        },
+        {
+          "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+          "fact": "Guard writes PID proof only for Node isMainThread."
+        }
+      ],
+      "preserved": {
+        "maximumFreshGuardedNodeProcesses": 24,
+        "maximumPerTarget": 8,
+        "producerMs": 330000,
+        "childMs": 180000,
+        "originalOperationMs": 30000,
+        "jobMs": 420000
+      },
+      "b2": "Nominate exact six ordered groups and all their guarded child/test-worker launches. Previously sealed13 guarded Node launches is allowed only if actual complete census reproduces it; any extra preflight Node is included and must be declared. Reuse existing producer, not a new supervisor. Outer producer is separately inventoried and not silently added to checkedProcesses or falsely called guarded.",
+      "separateNativeCensus": "Declare workerd/esbuild and sudo/env/unshare/shell/setpriv helper topology, actual lifecycle/termination and maximum concurrency separately. These are NOT fresh guarded Node proof records and must not be represented as such. No missing/unbounded subprocesses, lingering service, implicit global-drain or credential-file-inaccessibility claim. Genuine closure and exact own process terminal readback required. UNKNOWN means stop. This ruling is not a cap increase or permission to omit lifecycle evidence.",
+      "originalSix": "The old full-Task1 six-launch custody frame is historical evidence of semantics, not an output template for B2. B2 must label its own group/process schema and actual counts; no six-launch claim from six group names alone.",
+      "budget": "326s six phases +3s final within330;65setup+329producer+24publication=418<420. Unmeasured estimates, not established performance. Stop before admission if remaining reserve insufficient. Serial native mounts; no extra business replay."
+    },
+    "overlap": {
+      "choice": "Add explicit private QA-core method; do not fabricate duplicate arrival/options/UUID or preclassified q0.O.",
+      "proposalAPI": "overlap(firstExactRequest,secondExactRequest,proof)",
+      "admission": "Enabled same observer instance, exact directProof, distinct object identities, both separately registered requestCells, distinct cells, both unpoisoned/reaction0/unsampled. If any condition fails return without writes or sampling. No accepting a third argument other than proof identity, no key reassignment.",
+      "effect": "For admitted pair invoke existing terminal poison O once on each exact cell. Earlier public behavior/phase/aggregate/reaction/sample algorithms unchanged. Repeated call is a bounded no-op; prior X/V/O never replaced and no promotion.",
+      "sourceBinding": "Private adapter owns a bounded per-mount identity set/map of live exact requests (max64, terminal overflow). Track registration and remove/retire only at the existing original super.fetch reaction. A second genuinely live distinct registered request on the same actor/mount permits this method with those exact identities before selected capture. Never use an ambient current-request variable to bind wrapper/options/reaction to an arbitrary request. All original per-request hooks continue exact request lookup. Source must prove two distinct native UUIDs and request objects. No new measured await/reaction/effect/getter; no additional invocation beyond sealed N07 companion.",
+      "late": "If both-live/unsampled conditions cannot be established N07 is unqualified, not synthetic O. This narrow helper does not infer state at M cutoff or solve general delivery.",
+      "tests": "Seal focused overlap controls below; existing35Q tests must execute against the changed MODEL QA core in CAL. Old B1 acceptance is not qualification of the changed body. Do not replay unchanged134."
+    },
+    "nativeSeed": {
+      "choice": "A separate exact N08 TOOL-only generated QA variant may issue a one-use transition-budget255 capability. No ordinal63 seam.",
+      "variant": "Replace/remove original MODEL registration by reversible literal edit. Ordinary generated QA contains neither MODEL callbacks nor TOOL seed callback. N08 generated QA contains only explicit registerToolBudgetSeed(callback) capability with active exact request + one-use successful admission; assignment writes=255 only. Invalid/unknown/disabled/settled/poisoned inputs do not mutate/consume; no numeric parameter, reset, ordinal change or public method. No MODEL ordinal registration in any native/ordinary bundle. M MODEL budget seam removed from generated Source too.",
+      "use": "Only fixed N08 inert fixture obtains the captured capability. After real normal arrival and before next legal original hook, invoke once with that exact request. Next real legal transition attempts256 and produces terminal X through existing core. Header string q0.X alone is insufficient.",
+      "qualification": "Focused MODEL tests of the exact generated N08 variant below plus native N08 actual transition witness. Body hashes and inverse for ordinary/tool variants; assert forbidden MODEL/ordinal registration absent before build. No behavior change in business/source on disk.",
+      "noLeak": "No seed capability in request/response/public API/env/RPC/returned result; trusted fixture closure only."
+    }
+  },
+  "focusedData": {
+    "schema": "afw.pending-get.b2-focused-inputs.v1",
+    "epoch": "af0000000000000f",
+    "firstKey": "e3000000-0000-4000-8000-000000000001",
+    "secondKey": "e3000000-0000-4000-8000-000000000002",
+    "qaRegression": {
+      "count": 35,
+      "vectors": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "driver": "2a76121cd77986b091687bfcf363439328a5a795",
+      "change": "relative QA-core dependency only; original35inputs/expected literals unchanged"
+    },
+    "overlapColumns": [
+      "id",
+      "precondition/call",
+      "expected"
+    ],
+    "overlap": [
+      [
+        "O01",
+        "Two distinct registered A/00/0/0 requests; overlap correct proof",
+        "Both first samples exactly q0.O"
+      ],
+      [
+        "O02",
+        "Both exact live requests independently advanced normally to I/01/3/0; overlap",
+        "Both first samples exactly q0.O"
+      ],
+      [
+        "O03",
+        "Two A requests, wrong proof object",
+        "First positive samples q1.<epoch>.<own key>.A0000 each"
+      ],
+      [
+        "O04",
+        "Unknown first object + registered second A request, correct proof",
+        "Second q1.<epoch>.<second key>.A0000; unknown key q0.A"
+      ],
+      [
+        "O05",
+        "Same registered request supplied twice",
+        "First q1.<epoch>.<first key>.A0000"
+      ],
+      [
+        "O06",
+        "First A request has actual existing reaction F; second A/0 request",
+        "First q1.<epoch>.<first key>.A000F; second q1.<epoch>.<second key>.A0000; no poison"
+      ],
+      [
+        "O07",
+        "Two live A requests; call overlap twice",
+        "Both q0.O; repeated call bounded no-op without changing reason"
+      ],
+      [
+        "O08",
+        "First actual budget-triggered X; second clean A; then overlap",
+        "First q0.X; second q1.<epoch>.<second key>.A0000"
+      ],
+      [
+        "O09",
+        "First A request sampled once before overlap; second A unsampled",
+        "First prior sample q1.<epoch>.<first key>.A0000, second q1.<epoch>.<second key>.A0000; no overlap poison; any later first sample obeys original repeated-read O"
+      ],
+      [
+        "O10",
+        "Disabled observer with two would-be requests",
+        "sample returns null; no overlap effect or seed registration"
+      ]
+    ],
+    "seedColumns": [
+      "id",
+      "precondition/call",
+      "expected"
+    ],
+    "seed": [
+      [
+        "S01",
+        "N08 variant enabled, exact active A request; one successful255seed then legal phaseB",
+        "seed true then q0.X"
+      ],
+      [
+        "S02",
+        "same successful seed attempt followed by repeat before legal phaseB",
+        "true,false then q0.X; no reset"
+      ],
+      [
+        "S03",
+        "unknown request first, then exact active A request; legal phaseB",
+        "false,true then q0.X; unsuccessful call does not consume"
+      ],
+      [
+        "S04",
+        "disabled variant with registration callback",
+        "callback not issued; no seed; sample null"
+      ],
+      [
+        "S05",
+        "exact request has existing original reactionF, attempt seed",
+        "false, q1.<epoch>.<first key>.A000F"
+      ],
+      [
+        "S06",
+        "ordinary generated QA variant given otherwise identical TOOL callback config",
+        "callback not issued, ordinary legal phaseB then q1.<epoch>.<first key>.B0000"
+      ]
+    ],
+    "totalFocusedAndRegression": 51,
+    "execution": "Not executed. Proposed CAL existing guarded process only, no extra process/group/time. Must be finite exact51, not claimed before actual Root-gated GHA."
+  },
+  "hold": {
+    "activationReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "operationalReadiness": false,
+    "PCoff": false,
+    "originalSourceOwnStageBCounters": "5/5 unchanged"
+  }
+}
