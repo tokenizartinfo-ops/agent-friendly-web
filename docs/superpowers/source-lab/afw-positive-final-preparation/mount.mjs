@@ -11,7 +11,7 @@ const inputs = [
   {
     "from": "docs/superpowers/source-lab/afw-positive-final-preparation/owner-preparation-candidate.txt",
     "to": "lib/mcp-qa-finite-owner-preparation.mjs",
-    "sha256": "9957f98f87f4434daf63d23110f6dc023df4aa770c9f670a7bd4e79025ac4961",
+    "sha256": "d13d95036b8e5371c48274a3a30dc62e913cba228616717a491fd573a15faf26",
     "before": "152e730f83af7ef063b6b1db89f8b0a779c2b60e"
   },
   {
@@ -125,6 +125,25 @@ const edits = {
 };
 edits['test/fixtures/finite-coupled-native.mjs'].push(["    assert.equal(await discard(await post(f,form)),200);f.choice=form;","    const response=await post(f,form);\n    if(stage==='finite')console.info('AFW_PREP_TRACE FINAL_APPROVAL_HTTP '+response.status);\n    assert.equal(await discard(response),200);f.choice=form;"]);
 edits['lib/mcp-qa-finite-owner-phase-context.mjs'].push(["   return await publishApprovedStage({ctx,env},originalLease,admission,initial);","   console.info('AFW_PREP_TRACE QA_APPROVAL_PUBLISH_START');\n   const published=await publishApprovedStage({ctx,env},originalLease,admission,initial);\n   console.info('AFW_PREP_TRACE QA_APPROVAL_PUBLISH_RETURN');\n   return published;"]);
+
+edits['lib/mcp-qa-finite-owner-phase-context.mjs'].push(...[
+  [
+    "    await withChild(async l=>{await engine.readPointer(baseline,l);await engine.readVersion(baseline,l);await engine.readVersion(rollback,l,true);await recheckOwned();});",
+    "    await withChild(async l=>{await engine.readPointer(baseline,l);await engine.readVersion(baseline,l);await engine.readVersion(rollback,l,true);await recheckOwned();});\n    if(stage==='finite')console.info('AFW_PREP_TRACE QA_PUBLISH_BASELINE_RETURN');"
+  ],
+  [
+    "     actualUploadResult=await wait(()=>actualUploadPromise);uploadSettled=true;",
+    "     actualUploadResult=await wait(()=>actualUploadPromise);uploadSettled=true;\n     if(stage==='finite')console.info('AFW_PREP_TRACE QA_PUBLISH_UPLOAD_RETURN');"
+  ],
+  [
+    "     actualActivationResult=await wait(()=>actualActivationPromise);activationSettled=true;",
+    "     actualActivationResult=await wait(()=>actualActivationPromise);activationSettled=true;\n     if(stage==='finite')console.info('AFW_PREP_TRACE QA_PUBLISH_ACTIVATION_RETURN');"
+  ],
+  [
+    "     const facts=await wait(()=>readPrivateQaFiniteOwnerPreparationFacts({ctx,env,preconnectionId:id},originalLease,readPreparationSource));",
+    "     console.info('AFW_PREP_TRACE QA_FINAL_FACTS_START');\n     const facts=await wait(()=>readPrivateQaFiniteOwnerPreparationFacts({ctx,env,preconnectionId:id},originalLease,readPreparationSource));\n     console.info('AFW_PREP_TRACE QA_FINAL_FACTS_RETURN');"
+  ]
+]);
 
 function digest(algorithm, bytes) {
   return createHash(algorithm).update(bytes).digest('hex');
