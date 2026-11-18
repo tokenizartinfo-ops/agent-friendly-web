@@ -11,7 +11,7 @@ const inputs = [
   {
     "from": "docs/superpowers/source-lab/afw-positive-final-preparation/owner-preparation-candidate.txt",
     "to": "lib/mcp-qa-finite-owner-preparation.mjs",
-    "sha256": "3a15bb2390b34e96c282cb31c1370d3895f663dd9bf2eed017ca90d5fc79593a",
+    "sha256": "9957f98f87f4434daf63d23110f6dc023df4aa770c9f670a7bd4e79025ac4961",
     "before": "152e730f83af7ef063b6b1db89f8b0a779c2b60e"
   },
   {

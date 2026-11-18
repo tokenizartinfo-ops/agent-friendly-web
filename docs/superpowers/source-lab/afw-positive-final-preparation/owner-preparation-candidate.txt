@@ -187,8 +187,10 @@ async function ticketContext(options,lease,ownedContext=null){
  const c=await resolve({...options,preconnectionId:ticket.preconnectionId},lease,null,ownedContext);
  const realm=evidence('realm',{...c.source.access,origin:c.source.origin}),subjectHash=evidence('subject',{accessRealmHash:realm,subject:c.identity.subject});
  if(ticket.subjectHash!==subjectHash||ticket.sourceRevision!==c.source.sourceRevision||Date.now()<ticket.createdAt||Date.now()>=ticket.expiresAt)fail(403);
- const map=observed(await c.step(childLease=>c.store.readProjectRef({projectRef:ticket.projectRef},childLease)));
- const snapshot=observed(await c.step(childLease=>c.store.readOwnerSourceSnapshot({preconnectionId:ticket.preconnectionId},childLease)));
+ const [map,snapshot]=await c.step(async l=>[
+  observed(await c.store.readProjectRef({projectRef:ticket.projectRef},l)),
+  observed(await c.store.readOwnerSourceSnapshot({preconnectionId:ticket.preconnectionId},l)),
+ ]);
  if(map.preconnectionId!==ticket.preconnectionId||map.subjectHash!==subjectHash||map.sourceRevision!==ticket.sourceRevision||map.projectId!==c.source.project.projectId||map.revision!==c.source.project.revision||map.expiresAt<ticket.expiresAt||snapshot.preconnectionId!==ticket.preconnectionId)fail(403);
  const stable=Object.fromEntries(Object.entries(c.source).filter(([k])=>!['phase','currentPublication'].includes(k)));
  const initialStable=Object.fromEntries(Object.entries(snapshot.source).filter(([k])=>!['phase','currentPublication'].includes(k)));
@@ -273,9 +275,11 @@ async function validateApprovedTicket(c,phase){
  if(c.source.phase!==phase)fail();
  const id=c.ticket.preconnectionId;
  const pre=observed(await c.step(childLease=>c.store.readPreconnection({preconnectionId:id},childLease)));
- const approval=observed(await c.step(childLease=>c.store.readConfigurationApproval({approvalHash:pre.approvalHash},childLease)));
- const ticket=observed(await c.step(childLease=>c.store.readTicket({ticketHash:c.snapshot.initialTicketHash},childLease)));
- const use=observed(await c.step(childLease=>c.store.readTicketUse({ticketHash:c.snapshot.initialTicketHash},childLease)));
+ const [approval,ticket,use]=await c.step(async l=>[
+  observed(await c.store.readConfigurationApproval({approvalHash:pre.approvalHash},l)),
+  observed(await c.store.readTicket({ticketHash:c.snapshot.initialTicketHash},l)),
+  observed(await c.store.readTicketUse({ticketHash:c.snapshot.initialTicketHash},l)),
+ ]);
  qualifyFiniteOwnerApprovedTicket({source:c.source,identity:c.identity,currentTicket:c.ticket,ticket,use,pre,approval,snapshot:c.snapshot,realm:c.realm,subjectHash:c.subjectHash,observedAt:Date.now()});
  return {...c,pre,approval};
 }
@@ -389,9 +393,16 @@ async function stageHistory(c,count){
  let finalApproval=null,finalStageApproval=null;
  for(let i=0;i<count;i++){
   const stage=preparationStages[i],sa=observed(await c.step(l=>c.store.readStageApproval({preconnectionId:id,stage},l)));
-  const a=observed(await c.step(l=>c.store.readConfigurationApproval({approvalHash:sa.approvalHash},l))),ticket=observed(await c.step(l=>c.store.readTicket({ticketHash:sa.ticketHash},l))),use=observed(await c.step(l=>c.store.readTicketUse({ticketHash:sa.ticketHash},l)));
-  const journal=effect=>createFinitePolicyEffectJournal({storage:c.storage,identity:{kind:'connection',preconnectionId:id,sourceRevision:c.source.sourceRevision,stage,effect},now:Date.now});
-  const upload=await c.step(l=>journal('upload').read(l)),activation=await c.step(l=>journal('activation').read(l));
+   const journal=effect=>createFinitePolicyEffectJournal({storage:c.storage,identity:{kind:'connection',preconnectionId:id,sourceRevision:c.source.sourceRevision,stage,effect},now:Date.now});
+   // These reads collect the facts for one installed stage. All comparisons
+   // still run after the same owner, source and request lease have been rechecked.
+   const [a,ticket,use,upload,activation]=await c.step(async l=>[
+    observed(await c.store.readConfigurationApproval({approvalHash:sa.approvalHash},l)),
+    observed(await c.store.readTicket({ticketHash:sa.ticketHash},l)),
+    observed(await c.store.readTicketUse({ticketHash:sa.ticketHash},l)),
+    await journal('upload').read(l),
+    await journal('activation').read(l),
+   ]);
   const receipt=qualifyFiniteOwnerInstalledStage({source:c.source,preconnection:c.pre,sourceSnapshot:c.snapshot,initialTicket,connection:c.connection??null,stage,stageApproval:sa,approval:a,ticket,ticketUse:use,upload,activation,predecessors,grantLink:c.grantLink??null,noticeLink:c.noticeLink??null,observedAt:Date.now()});
   approvals[stage]=hash('StageApproval',sa);receipts[stage]=receipt.receiptHash;predecessors.push(receipt);finalApproval=a;finalStageApproval=sa;
  }
