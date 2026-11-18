@@ -28,7 +28,7 @@ test('native first cleanup after N1 uses original C1; unknown close ACK never re
    const env={DB:db,AFW_DOSSIER_EVENTS_NODE:this.env.QA,AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),AFW_OAUTH_ISSUER:'https://fixed.invalid',AFW_OAUTH_RESOURCE:s.resource,AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED:'true',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:raw};
    p.eventPlanHash=createHash('sha256').update(env.AFW_DOSSIER_EVENTS_POLICY).digest('hex');
    const control={plan:p,planHash:digest(p.purpose,p),controlHash:'1'.repeat(64)},refs={intentId:p.intentId,controlHash:control.controlHash};
-   const actions=createFiniteOwnReductionActions({ctx:this.ctx,env,control,program,programSourceRevision:s.sourceRevision,close:async boundary=>{const r=await a.close(boundary);if(this.env.LOST==='true')throw Error('synthetic lost close ACK');return r;},now:Date.now});
+   const actions=createFiniteOwnReductionActions({ctx:this.ctx,env,control,program,programSourceRevision:s.sourceRevision,close:async boundary=>{const r=await a.close(boundary);if(this.env.LOST==='true')throw Error('synthetic lost close ACK');if(this.env.FOREIGN_EVENT==='true')return {...r,notice:{purpose:'afw.finite-native-subscription-closure.v1',subscriptionHash:'a'.repeat(64),eventId:'b'.repeat(64),httpReceipt:null,withdrawn:true,cloudReviewConfirmed:false}};return r;},now:Date.now});
    const path=new URL(request.url).pathname;
    try{
     if(path==='/withdraw')return Response.json(await actions.withdraw(refs));
@@ -51,15 +51,15 @@ test('native first cleanup after N1 uses original C1; unknown close ACK never re
  }};
  `;
  const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*']});
- for(const mode of ['normal','lost','expired','foreign']){
-  const T0=Date.now()-(mode==='expired'?420001:301000),opts=revision=>convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{T0:String(T0),REV:revision,LOST:mode==='lost'?'true':'false',FOREIGN:mode==='foreign'?'true':'false'},durableObjects:{QA:{className:'Own',useSQLite:true,uniqueKey:'finite-reduce-'+mode}},d1Databases:{DB:'finite-reduce-'+mode}});
+ for(const mode of ['normal','lost','expired','foreign','other-event']){
+  const T0=Date.now()-(mode==='expired'?420001:301000),opts=revision=>convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{T0:String(T0),REV:revision,LOST:mode==='lost'?'true':'false',FOREIGN:mode==='foreign'?'true':'false',FOREIGN_EVENT:mode==='other-event'?'true':'false'},durableObjects:{QA:{className:'Own',useSQLite:true,uniqueKey:'finite-reduce-'+mode}},d1Databases:{DB:'finite-reduce-'+mode}});
   const mf=new Miniflare(opts('first'));const call=async(path,status=200)=>{const r=await mf.dispatchFetch('https://fixture.invalid'+path);assert.equal(r.status,status);return r.json();};
   try{
    await call('/seed');const first=await call('/state');assert.ok(first.now>first.N1);
    if(mode==='expired'){await call('/withdraw',409);await call('/close',409);assert.equal((await call('/state')).stop,0);continue;}
    if(mode==='foreign'){await call('/withdraw',409);await call('/close',409);assert.equal((await call('/state')).monitor,1);continue;}
    assert.ok(first.now<first.C1);assert.equal((await call('/withdraw')).permissionsWithdrawn,true);
-   const close=await call('/close',mode==='lost'?409:200);if(mode==='normal')assert.equal(close.runtimeStopRequested,true);
+   const close=await call('/close',['lost','other-event'].includes(mode)?409:200);if(mode==='normal')assert.equal(close.runtimeStopRequested,true);
    await mf.setOptions(opts('recreated'));await call('/withdraw',409);await call('/close',409);
    const read=await call('/read');assert.equal(read.withdraw.permissionsWithdrawn,true);assert.equal(read.close?.runtimeStopRequested??null,mode==='normal'?true:null);
    const state=await call('/state');assert.equal(state.stop,1);assert.equal(state.monitor,2);
