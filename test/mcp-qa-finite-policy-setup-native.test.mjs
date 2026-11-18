@@ -164,3 +164,13 @@ for(const change of ['wrong-context','lost-selection-witness'])test('native inst
  assert.deepEqual(await f.installedSource(change),{status:'unavailable'});
  assert.equal(f.posts(),2);
 });
+
+test('launch rechecks the originally bound permission in first-primary D1 after the same notice is withdrawn',async t=>{
+ const f=await policyFixture(t);assert.equal((await f.run()).status,'installed');
+ const before=await f.launchPermission('enroll');
+ assert.equal(before.valid,true);
+ assert.equal(before.expiresAt,f.state.T0+300000);
+ await f.withdrawNotice();
+ assert.deepEqual(await f.launchPermission('read'),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});

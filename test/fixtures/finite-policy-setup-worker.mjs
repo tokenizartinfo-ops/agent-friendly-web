@@ -2,6 +2,8 @@ import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.
 import {readPrivateQaFiniteInstalledPolicy} from '../../lib/mcp-qa-finite-installed-policy.mjs';
 import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
 import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
+import {createPrivateQaFiniteLaunchPermission} from '../../lib/mcp-qa-finite-launch-permission.mjs';
+import {encodeFinitePreparationRecord} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {createHash} from 'node:crypto';
 import {PrivateQaBootstrap,IndependentClosure} from '../../worker/independent-closure/finite.mjs';
 import {narrowFinitePolicySetupClock} from '../../lib/mcp-qa-finite-policy-setup.mjs';
@@ -97,6 +99,34 @@ export class SetupFixture extends IndependentClosure{
    return {status:'observed',receiptHash:receipt.receiptHash,original};
   }catch{return {status:'unavailable'};}
  }
+ async launchPermission(mode){
+  const x=await this.ctx.storage.get('fixture:scenario'),storage=this.ctx.storage,p=x.preparation;
+  const {connection,owner,project}=p;
+  const prefix='connection-preparation:'+p.prepId+':';
+  if(mode==='enroll'){
+   const grant={purpose:'afw.finite-grant-link.v1',preconnectionId:p.prepId,authorizationHash:x.authorization.handle_hash,
+    grantId:connection.grantId,grantHash:connection.grantHash,acceptedAt:x.T0-300};
+   const notice={purpose:'afw.finite-notice-link.v1',preconnectionId:p.prepId,grantHash:connection.grantHash,
+    eventHash:connection.noticesHash,sequence:x.notice.sequence,acceptedAt:x.T0-200};
+   const link={purpose:'afw.finite-authorization-link.v1',preconnectionId:p.prepId,authorizationHash:grant.authorizationHash,
+    sourceRevision:p.sourceRevision,clientId:connection.clientId,resource:connection.resource,projectRef:H,
+    subjectHash:hashFiniteOwnerEvidence('subject',{accessRealmHash:owner.accessRealmHash,subject:owner.subject}),
+    issuedAt:x.T0-700,expiresAt:Date.parse(x.authorization.expires_at)};
+   await storage.put({[prefix+'grant']:encodeFinitePreparationRecord('GrantLink',grant),
+    [prefix+'notice']:encodeFinitePreparationRecord('NoticeLink',notice),
+    ['connection-authorization:'+grant.authorizationHash]:encodeFinitePreparationRecord('AuthorizationLink',link)});
+  }
+  const plantime=x.T0;
+  const plan={intentId:refs.intentId,source:{revision:p.sourceRevision},T0:plantime,N1:plantime+300000,R1:plantime+480000,
+   grantHash:connection.grantHash,monitorHash:connection.noticesHash,
+   resources:{actorId:this.ctx.id.toString()},deployments:{qaLive:{versionId:this.env.AFW_QA_VERSION.id}},
+   selectors:{grantId:connection.grantId,subject:owner.subject,projectId:project.projectId,
+    clientId:connection.clientId,resource:connection.resource,consentHash:connection.consentHash,
+    expectedProjectRevision:project.revision,goal:p.goal,expiresAt:plantime+300000}};
+  const parent={check:Date.now,deadline:Date.now()+5000,signal:new AbortController().signal};
+  try{return await createPrivateQaFiniteLaunchPermission({ctx:this.ctx,env:this.env,control:{plan},parent})();}
+  catch{return {status:'unavailable'};}
+ }
  async testMode(){return (await this.ctx.storage.get('fixture:scenario')).mode;}
  async hydrationState(){return hydrations.get(this.ctx)??{reads:0,lateDenied:0};}
  async rows(){return [...await this.ctx.storage.list()].filter(([k])=>k!=='fixture:scenario');}
@@ -107,6 +137,7 @@ const worker={async fetch(request,env,ctx){
  if(path==='/hydration')return Response.json(await actor.hydrationState());
  if(path==='/installed-source')return Response.json(await actor.observeInstalledSource((await request.json()).mode));
  if(path==='/installed-journal')return Response.json(await actor.observeInstalledJournal((await request.json()).mode));
+ if(path==='/launch-permission')return Response.json(await actor.launchPermission((await request.json()).mode));
  if(path==='/rows')return Response.json(await actor.rows());
  const {T0,direct}=await request.json();if(direct)return Response.json(await actor.setupFinitePrivatePolicy(refs));
  const event={timestamp:new Date(T0+200),instanceId:native(T0).setupInstanceId,workflowName:'afw-own-qa-private-bootstrap',payload:{operation:'finite_private_policy_setup',...refs}};
