@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "0aff367b509594ace73e11a0cbd15afb19157884",
-  "phase": "QA launch source rechecks original GitHub READY and first-primary permission with original scoped withdrawal authority.",
+  "previousCheckpoint": "bfb3bc61ead028e182aa17e6695c35bde5102aa5",
+  "phase": "Original launch permission and exact native reduction are source-verified. D1 rechecks the original notice even after the active event window.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Correct exact consent proof for native finite withdrawal, preserve original and business alarm duties and wire the remaining effect/finalizer producers. Complete package and valid custody before one real same-notice trial.",
+  "next": "Implement validated handoff and independent fallback of the one Cloudflare alarm across original and business closure. Mount the actual control and guard effects with the original source. Complete the publishable bundle and valid custody, then test one live correlated receipt, review, and native withdrawal.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 163,
-  "updatedAtUTC": "2026-11-18T23:19:07Z",
+  "schemaVersion": 164,
+  "updatedAtUTC": "2026-11-18T23:24:48Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2317,6 +2317,17 @@
     "closed": "10173f17691add0feacacbf8ef8a8363a4e5e2e6",
     "verifiedRun": 44419391206,
     "tests": 121,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "exactNativeWithdrawal": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-finite-exact-withdrawal-validation.json",
+    "evidence": "2f82eb71425e47b9f79cfd4a9faaa1bc116074cd",
+    "head": "eecbaf0ca8232a03f5235c3279caa83549445ebc",
+    "closed": "30d7c5fc3b57555eff3b720f8e4a66d47dbc6e40",
+    "verifiedRun": 44420262231,
+    "tests": 95,
+    "operationalReadiness": false,
     "completePackage": false,
     "realCloudOccurrence": false
   }

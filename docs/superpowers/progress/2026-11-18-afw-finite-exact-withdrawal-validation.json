@@ -1,0 +1,34 @@
+{
+  "schema": "afw.finite-exact-withdrawal-validation.v1",
+  "observedAtUTC": "2026-11-18T23:24:48Z",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-exact-withdrawal-20261118",
+  "verifiedHead": "eecbaf0ca8232a03f5235c3279caa83549445ebc",
+  "verifiedTree": "b6174b55fbaa7d4fb31c6cc64d9fb6eb63e14f1c",
+  "closedHead": "30d7c5fc3b57555eff3b720f8e4a66d47dbc6e40",
+  "closedTree": "6da970c2ccc9fc3a1895bd7c223877442077113b",
+  "regression": {
+    "head": "c9963b470b414389c5b649230d4f403137130520",
+    "run": 44419859707,
+    "reason": "finite reduction rejected pre-trial original permission because it incorrectly required the consent dates to be contained in the shorter event window"
+  },
+  "tests": {
+    "run": 44420262231,
+    "pass": 95,
+    "fail": 0,
+    "skipped": 0
+  },
+  "verified": [
+    "Provider-shaped native workerd/D1 test now exercises original permission issued before T0 and same stored notice after N1, under original bounded C0/C1.",
+    "Fixed original first-primary row, latest decision, duration, scope, exact request and semantic digest before and after effects. D1 mutations retain the original request ID constraint for the finite variant; legacy callers remain on the existing grammar.",
+    "Foreign original consent and a closure receipt for a different notice fail. Unknown close ACK admits no repeat send. QA reuses the identical semantic event digest."
+  ],
+  "limits": [
+    "Synthetic Workerd/D1 evidence. No real assistant receipt, native subscription withdrawal, deployment or PC-off evidence.",
+    "Remaining the original/business single-alarm handoff, actual guard and effect factories and a fully qualified publishable package with valid scoped custody."
+  ],
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
