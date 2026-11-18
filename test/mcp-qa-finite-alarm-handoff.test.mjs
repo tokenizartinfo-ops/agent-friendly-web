@@ -48,6 +48,6 @@ test('missing alarm acknowledgement stops the dispatcher before business code ca
 test('an alarm carried by a different actor cannot take over original recovery',async()=>{
  const {f,control}=await prepared();assert.equal((await control.prepare()).status,'armed');
  f.setNow(f.plan.C0+4);
- await assert.rejects(protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:'a'.repeat(64),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now}));
+ await assert.rejects(protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:'9'.repeat(64),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now}));
  assert.equal(f.alarm,f.plan.C0);
 });
