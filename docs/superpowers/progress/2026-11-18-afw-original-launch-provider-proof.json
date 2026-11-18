@@ -1,0 +1,89 @@
+{
+  "purpose": "afw.native-launch-provider-proof-validation.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "observedAtUTC": "2026-11-18T21:18:18Z",
+  "branch": "lab/afw-finite-launch-provider-proof-20261118",
+  "base": "7c4ddd7d39924542f11e38c816a352d73bb48e1c",
+  "source": "a671d7196274411fd0913f63e2c0b1effbc39276",
+  "sourceTree": "57e04039c078ea3589932aa840cdd3e9dbe40cc2",
+  "disabledBranch": "b4c360910ff81141db532eeb78fba78fb239112f",
+  "mainReadback": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "verification": {
+    "red": 44399082799,
+    "regressedScenarios": 6,
+    "fixtureChronologyRun": 44399431829,
+    "passing": 44399739659,
+    "tests": 130,
+    "failures": 0,
+    "skips": 0,
+    "stagingPass": true
+  },
+  "newGate": "Before writing SEND, read the original Cloudflare launcher instance, successful single prepare step, exact retained PREPARED and workflow version. The confirmation rechecks that proof for the same launcher. Foreign, failed, duplicate and replayed step evidence produce no SEND or child creation.",
+  "providerFormat": {
+    "observedAtUTC": "2026-11-18T21:17:22.998Z",
+    "example": "closed_private_probe",
+    "status": "complete",
+    "success": true,
+    "stepName": "observe-private-review-rpc-1",
+    "stepType": "step",
+    "stepCountMatches": true,
+    "timeStrings": true,
+    "stepOutputType": "string",
+    "firstAttemptSuccess": true
+  },
+  "privateArchive": {
+    "observedAtUTC": "2026-11-18T21:13:16.229Z",
+    "bytes": 4209422,
+    "byteLengthMatches": true,
+    "hashMatches": true,
+    "customDomainCount": 0,
+    "managedDomainEnabled": false
+  },
+  "closedDeploymentReadback": {
+    "checkedAt": "2026-11-18T21:15:05.446Z",
+    "roles": {
+      "qaClosed": {
+        "versionMatches": true,
+        "activeClosedAt100": true,
+        "moduleMatches": true,
+        "allEnableFlagsFalse": true,
+        "flagCount": 14
+      },
+      "canaryClosed": {
+        "versionMatches": true,
+        "activeClosedAt100": true,
+        "moduleMatches": true,
+        "allEnableFlagsFalse": true,
+        "flagCount": 8
+      },
+      "operatorClosed": {
+        "versionMatches": true,
+        "activeClosedAt100": true,
+        "moduleMatches": true,
+        "allEnableFlagsFalse": true,
+        "flagCount": 3
+      }
+    }
+  },
+  "credential": {
+    "checkedAt": "2026-11-18T21:10:30.077Z",
+    "preflightReadConnectionWorked": true,
+    "packageCredentialStatus": "expired",
+    "packageCredentialExpiry": "2026-11-08T02:59:59Z",
+    "samePurposeActive": 0
+  },
+  "remaining": [
+    "The fixed launch context/material and effect source remain unavailable for an actual native occurrence.",
+    "The external finalizer source only resolves seed material. The private setup producer also lacks its independent source qualification.",
+    "The complete compiler deliberately fails closed until semantic qualification and protected archive consumption. Current GitHub CI only built staging.",
+    "A fresh matching package credential must be installed and qualified before any real trial."
+  ],
+  "remoteWrites": false,
+  "realOccurrence": false,
+  "sameNoticeReceived": false,
+  "sameNoticeReviewed": false,
+  "nativeUnsubscribeObserved": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

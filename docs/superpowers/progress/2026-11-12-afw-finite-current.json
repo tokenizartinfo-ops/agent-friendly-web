@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "2d34ae03eb1c83822985f898b6fe7b704a27ddb5",
-  "phase": "Finite QA confirmation wired to the original launch journal and exact installed bundle in source. Cloud staging passed. Complete package and real occurrence remain closed.",
+  "previousCheckpoint": "606d6e2245e75442a5d8131e0486c10e296e16cc",
+  "phase": "Cloudflare's original launcher prepare is checked before SEND and rechecked by confirmation. The private archive and three closed Workers matched on authenticated inspection. Complete package and live trial remain closed.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete the fixed launch admission producer and complete package boundary. Qualify current scoped Cloudflare custody before one exact cloud occurrence and independently correlate the same notice, assistant review, native unsubscribe and closure.",
+  "next": "Complete the fixed private setup and launch source with real primary inputs, bind the observer/finalizer to the same plan, then qualify the private complete package and its fresh scoped credential. Execute one exact same-notice cloud occurrence and retain the independent review, unsubscribe and closure evidence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 153,
-  "updatedAtUTC": "2026-11-18T20:57:53Z",
+  "schemaVersion": 154,
+  "updatedAtUTC": "2026-11-18T21:18:18Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2211,6 +2211,19 @@
     "verifiedRun": 44396181603,
     "tests": 147,
     "custodyStatus": "expired",
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "originalLaunchProviderProof": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-original-launch-provider-proof.json",
+    "evidence": "83dd75f92a966953058adfad64d56bdb9f6c8ba5",
+    "head": "a671d7196274411fd0913f63e2c0b1effbc39276",
+    "closed": "b4c360910ff81141db532eeb78fba78fb239112f",
+    "verifiedRun": 44399739659,
+    "tests": 130,
+    "archiveRead": true,
+    "actualClosedReadback": true,
+    "packageCredentialStatus": "expired",
     "completePackage": false,
     "realCloudOccurrence": false
   }
