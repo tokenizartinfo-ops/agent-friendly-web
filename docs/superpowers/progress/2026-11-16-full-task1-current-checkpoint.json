@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-17 17:15:00 UTC",
+  "timestampUTC": "2026-11-18 02:09:26 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e2471b2b8957e51d949ce8e6c3ac33c0b810b58f",
-  "phase": "OWNER_STOP_REQUESTED_FINISHING_FIXTURE_DATA_REVIEW",
+  "previousCheckpoint": "6518d7bb93478dd2c90d3d76286e93841c044985",
+  "phase": "PAUSED_BY_OWNER_FIXTURE_DATA_REVIEW_PENDING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,11 +112,11 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish only current independent fixture DATA review, preserve verdict/open findings, then stop. Tomorrow resume at fixture review disposition; no implementation/native release before its gate.",
+  "next": "On explicit owner return, resume ONLY pending independent fixture DATA review with a6adea6a3b2f5f637b840ce24d08fa48bbf03951/index7115a056bed39c2d0a4d3de1f804bb7594dab382/Root measurementbb6ee7096cdfb4f64a56c238c7a6645a7a8339cd. Preserve any findings, fix/re-review if required, then consider code release. No new native trial or permission without its separate concrete gate.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
-    "temporarilyDisconnecting": false,
+    "temporarilyDisconnecting": true,
     "resumedAtUTC": "2026-11-16 20:51:24 UTC",
     "currentBlockNeedsManualAction": false,
     "ownerAwayUntilUTC": "2026-11-17T11:00:00Z",
@@ -1255,7 +1255,7 @@
       "rootAcceptance": "c6118aff825467b6f10a21b7ead22fa5f4891eb2"
     },
     "pendingAwaitFixtures": {
-      "status": "DATA_SEALED_INDEPENDENT_REVIEW_CLOSING_FOR_OWNER_STOP",
+      "status": "DATA_SEALED_ROOT_MEASURED_REVIEW_PAUSED_INCOMPLETE",
       "brief": "0d01d4dee99918fe7a68d6953a98a3714d66c5cb",
       "actor": "/root/pending_get_fixture_seal",
       "implementationReleased": false,
@@ -1272,11 +1272,14 @@
         "nativeProposed": 8,
         "companions": 1,
         "calibrations": 2
-      }
+      },
+      "independentReviewVerdict": "NOT_COMPLETED",
+      "reviewerStatus": "INTERRUPTED_FOR_OWNER_SHUTDOWN",
+      "resumeReviewBrief": "a6adea6a3b2f5f637b840ce24d08fa48bbf03951"
     }
   },
-  "schemaVersion": 115,
-  "updatedAtUTC": "2026-11-18 02:03:56 UTC",
+  "schemaVersion": 116,
+  "updatedAtUTC": "2026-11-18 02:09:26 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1289,10 +1292,13 @@
     "sourceAuthorAndReviewerSavedAndStopped": true,
     "noRuntimeMutationThisTurn": true,
     "noLocalSourceExecution": true,
-    "active": false,
+    "active": true,
     "resumedByOwner": true,
     "resumedAtUTC": "2026-11-17 19:21:53 UTC",
-    "closingCurrentBlock": true
+    "closingCurrentBlock": false,
+    "finishedSavingAtUTC": "2026-11-18 02:09:26 UTC",
+    "resumeOnlyOnOwnerRequest": true,
+    "allDelegatedWorkStopped": true
   },
   "latestScopedClosureReadback": {
     "atUTC": "2026-11-18 02:03:11 UTC",
