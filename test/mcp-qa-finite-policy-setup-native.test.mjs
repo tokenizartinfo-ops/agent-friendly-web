@@ -60,6 +60,11 @@ test('Task4 actual native wrapper DO store and two-effect engine installs only a
  assert.deepEqual(context.rollback.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);
  assert(f.reads.some(url=>url.includes(context.baseline.versionId)));assert(f.reads.some(url=>url.includes(context.rollback.versionId)));
  assert.equal(context.C0,context.T0+240000);assert.equal(context.C1,context.T0+420000);
+ const retained=JSON.parse(rows.find(([k])=>k.endsWith(':confirmation'))[1]);
+ assert.equal(retained.receiptHash,outcome.receipt.receiptHash);
+ assert.equal(retained.policy.observation.versionId,outcome.receipt.versionId);
+ assert.equal(retained.artifact.workerHash,outcome.receipt.moduleHash);
+ assert.equal(Object.hasOwn(retained.artifact,'script'),false);
  const withdrawal=JSON.parse(context.policies.AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY);assert.equal(withdrawal.startAt,context.C0);assert.equal(withdrawal.expiresAt,context.C1);
  const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:a>b?1:0)):x);
  for(const request of f.requests){
@@ -87,7 +92,7 @@ for(const mode of ['lost_ack','late_upload','provider404','wrong_bytes','wrong_f
 }
 test('Task4 lost activation ACK cannot produce installed receipt or repeat effects',async t=>{
  const f=await policyFixture(t,'lost_activation');assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),2);
- assert.equal((await f.rows()).filter(([k])=>k.endsWith(':receipt')).length,0);
+ assert.equal((await f.rows()).filter(([k])=>k.endsWith(':receipt')||k.endsWith(':confirmation')).length,0);
  assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),2);
 });
 

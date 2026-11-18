@@ -9,6 +9,7 @@ import {IndependentClosure,PrivateQaNamedConfirmation} from './worker/independen
 import {fixture,resolvePrivateQaFiniteLaunchContext} from './test/fixtures/finite-launch-operations-native.mjs';
 import {createPrivateQaFiniteLaunchParent,withPrivateQaFiniteLaunchCoordinator} from './lib/mcp-qa-finite-launch-inventory.mjs';
 import {runPrivateQaFiniteLaunchOperation} from './lib/mcp-qa-finite-launch.mjs';
+import {hashFiniteLaunchRecord} from './lib/mcp-qa-finite-launch-records.mjs';
 import {readPrivateQaFiniteNominalExecution} from './lib/mcp-qa-finite-confirmation-provenance.mjs';
 export {PrivateQaNamedConfirmation};
 export class Native extends IndependentClosure{
@@ -126,7 +127,11 @@ export class Native extends IndependentClosure{
   if(mode.startsWith('confirm-')||mode==='lost-create'){
    const createdAt=f.now();
    f.setNow(createdAt+1);
-   if(mode==='confirm-foreign-send')await this.ctx.storage.put(prefix+'send',{...before.send,bindingHash:'e'.repeat(64)});
+   if(mode==='confirm-foreign-send'){
+    const foreign={...before.send,bindingHash:'e'.repeat(64)};
+    await this.ctx.storage.put(prefix+'send',foreign);
+    await this.ctx.storage.put(prefix+'ack',{...before.ack,sendHash:hashFiniteLaunchRecord(foreign)});
+   }
    const event={bundleHash:f.plan.bundleHash,instanceId:f.plan.workflows.confirmation,createdAt};
    if(mode==='confirm-old-event')event.createdAt--;
    if(mode==='confirm-foreign-event')event.instanceId='afw-release-'+'8'.repeat(64);
