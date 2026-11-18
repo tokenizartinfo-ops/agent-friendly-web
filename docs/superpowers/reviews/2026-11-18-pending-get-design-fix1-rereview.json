@@ -1,0 +1,61 @@
+{
+  "schema": "AFW.PENDING_GET.DESIGN_SCOPED_REREVIEW/1",
+  "round": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "package": "7528fd8a4aaeb6b41c028e0d2a4fc697d69c7b15",
+  "previousReview": "7fb85a90e687c5d77cee3009b2378ac288a0e2e4",
+  "design": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+  "plan": "411ba4fc5e6ff4cd2db2b2c05e2e5dde3610c6e4",
+  "fixReport": "bde64dc7991edbbe577b07fbbf828b6d64270de6",
+  "diff": "61127e65f8c510d3bac1a124b268b289df46636e",
+  "rootMeasurement": "8645bf8358cf1f9fd88845f47d662e82b3a62d2f",
+  "SPEC": "FAIL_DECISION_INTERPRETATION_ONLY",
+  "QUALITY": "FAIL_DECISION_INTERPRETATION_ONLY",
+  "scope": "Original findings and new fix-diff breakage only. All original findings addressed. One new decision-table inference requires a wording correction before acceptance.",
+  "previousFindings": [
+    {
+      "id": "I1",
+      "disposition": "ADDRESSED",
+      "evidence": "D2/D4/D7 and P2 now define the observed reaction on super.fetch precisely, keep the lack of a reaction distinct, remove catch inference, and make no outward-wrapper/delivery claim."
+    },
+    {
+      "id": "I2",
+      "disposition": "ADDRESSED",
+      "evidence": "D5 and P3/P4 specify a fixture-local handle and afterEach following the completed frozen D07 callback, independent verification of the count-return marks and result, then at most one private query before teardown. Blocked/absent/thrown count is ineligible. Pinned native hook ordering is explicitly a future qualification gate."
+    },
+    {
+      "id": "I3",
+      "disposition": "ADDRESSED",
+      "evidence": "P2's benign late-count witness attaches after the original super.fetch reaction on the same pending ordinary promise, then releases the latch and waits for that independent witness. D6/P3 distinguish bounded local timeout, native verified disposal, and hard termination with RPC settlement unknown. Native closure is not credited from a fake."
+    },
+    {
+      "id": "I4",
+      "disposition": "ADDRESSED",
+      "evidence": "D1–D4 replace broad leaf/lane tracking with a fixed M ladder and six static aggregate awaits for the QA pair. Fixed widths, transition and cell caps, terminal overflow and late/foreign handling are specified. Wire sizes agree with the literal grammar: M 24/59 ASCII bytes, QA 4/62, final 13 (14 with LF). No repeated storage-iteration ordinal is inferred. One new wording regression in D7 is listed separately."
+    },
+    {
+      "id": "M1",
+      "disposition": "ADDRESSED",
+      "evidence": "P1 pins known preimages before implementation and measures generated postimages after they exist."
+    }
+  ],
+  "newFindings": {
+    "critical": [],
+    "important": [
+      {
+        "id": "R1-I1",
+        "where": "Revised design D3, D4, D7; S00:512–528,587–589,641–650 (a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5).",
+        "finding": "D7 locates C with a completed nested pair in the interval after readChoice returned. The new cursor has no normal-return marker for readChoice. At NN>=02 and K=c, it proves only the sixth aggregate's await resumed inside the latest observed pair. Snapshot construction/comparison, the original guard and finally, the enclosing timeline await, and readChoice's own checks/return follow that marker. C says that the outer choice return has not been observed. It cannot distinguish these continuations, including a subsequent failure. The current rule would exclude source still compatible with the observation.",
+        "acceptance": "Replace that single inference with: C, NN>=02 and K=c show the last aggregate of that nested pair returned normally by the later QA read. Return from the pair wrapper, timeline and readChoice remains unknown, as does QA state at the M cutoff. Include those intervening continuations in the static review interval until a later directly observed outer phase. No new probe, field or native control is needed."
+      }
+    ],
+    "minor": []
+  },
+  "outsideDiff": [],
+  "method": "Read complete revised documents, appended author report, package and Root measurement. Reconstructed the full revised texts from the added sides of all three ordered diff parts and matched them exactly to the two current blobs. Checked the cited S00 continuation and frozen D07/recorder boundaries as source text.",
+  "cannotVerify": "NOT_RUN_DESIGN_ONLY. Node hook order, runtime callback input, privacy/epoch/route, noninterference, actual native closure, business and PC-off results remain outside this review. All Source/OWN/StageB counters remain 5/5.",
+  "activated": false,
+  "SourceQualified": false,
+  "PCoff": false
+}
