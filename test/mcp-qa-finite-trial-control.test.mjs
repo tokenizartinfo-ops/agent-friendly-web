@@ -259,3 +259,12 @@ test('external projection removes nominal GHA identity and preserves exact final
   const p=structuredClone(f.plan);p.finalizer[key]=value;assert.throws(()=>validateFiniteExternalPlan(p));
  }
 });
+
+test('prepare preserves an occupied alarm when the original cleanup has no qualified handoff',async()=>{
+ const f=finiteFixture(),original=f.plan.R1+60000;
+ await f.storage.transaction(tx=>tx.setAlarm(original));
+ const before=[...f.rows];
+ assert.equal((await control(f).prepare()).status,'blocked');
+ assert.equal(f.alarm,original);
+ assert.deepEqual([...f.rows],before);
+});
