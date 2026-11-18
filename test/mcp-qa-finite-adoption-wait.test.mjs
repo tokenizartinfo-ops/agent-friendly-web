@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-http.mjs';
 import {cfFiniteFixture} from './fixtures/finite-cf-http.mjs';
-import {finiteCliSyntheticSource} from './fixtures/finite-http-module.mjs';
+import {finiteCliSyntheticSource,syntheticSetupReceipt} from './fixtures/finite-http-module.mjs';
 import {finiteObserverInstanceId} from '../lib/mcp-qa-finite-observer.mjs';
 import {validateQaFiniteConfirmationCommand} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 const hash=s=>createHash('sha256').update(s).digest('hex');
@@ -14,7 +14,8 @@ async function fixture(mode='normal',offset=100){
  const a=validateQaFiniteConfirmationCommand({event,context,now:()=>T0}),f=await cfFiniteFixture({at:T0,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:sha});}});
  f.base.f.setNow(T0+offset);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
  const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:context.repository,GITHUB_REPOSITORY_ID:context.repositoryId,GITHUB_REF:context.ref,GITHUB_EVENT_NAME:context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:sha,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'};
- const reads=[],sleeps=[],writes=[],all=[];const material=await readFiniteMaterialSeed({intentId:a.intentId,sourceRevision:sha,fetchImpl:f.fetchImpl,now:f.base.f.now});const api=await finiteCliSyntheticSource(f.p,{setupMode:mode,seedHash:material.seedHash});
+ const reads=[],sleeps=[],writes=[],all=[];const material=await readFiniteMaterialSeed({intentId:a.intentId,sourceRevision:sha,fetchImpl:f.fetchImpl,now:f.base.f.now});if(mode!=='preview-receipt-missing')f.state.setupReceiptHash=mode==='preview-receipt-changed'?'9'.repeat(64):syntheticSetupReceipt(f.p,material.seedHash).receiptHash;
+ const api=await finiteCliSyntheticSource(f.p,{setupMode:mode,seedHash:material.seedHash});
  const fetchImpl=async(url,init)=>{
   all.push({url,method:init.method,at:f.base.f.now()-T0});
   if(mode==='missing-seed'&&url.includes('/git/ref/tags/afw-finite-observer-create/'))return response({},404);
@@ -50,3 +51,9 @@ test('last eligible slot clips child to remaining original two seconds',async()=
 test('early sleep wake cannot spend a future absolute slot',async()=>{const r=await fixture('early-wake',50001);assert.equal(r.result.status,'admin_pending');assert.equal(r.reads.length,0);});
 
 test('held source setup read is bounded by the original five-second child',async()=>{const entered=performance.now(),r=await fixture('setup-held',50000);assert.equal(r.result.status,'admin_pending');assert.ok(performance.now()-entered<7000);assert.equal(r.reads.length,1);assert.equal(r.sleeps.length,0);});
+
+for(const mode of ['preview-receipt-missing','preview-receipt-changed'])test('actual adoption rejects '+mode+' before persisting READY',async()=>{
+ const r=await fixture(mode);assert.equal(r.result.status,'admin_pending');
+ assert.equal(r.writes.some(write=>write.path==='afw-finite-plan.json'),false);
+ assert.equal(r.all.some(request=>request.method!=='GET'&&request.url.includes('api.cloudflare.com')),false);
+});
