@@ -1,0 +1,465 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.M_CALLBACK_CURSOR/1",
+  "execution": "NOT_RUN",
+  "columns": [
+    "id",
+    "input/event sequence",
+    "expected original status and g1",
+    "literal private M field or null",
+    "literal QA reply",
+    "literal final row",
+    "post-count queries",
+    "case-specific limit"
+  ],
+  "shared": "P/L/B are exact original Request/lease/pending Response; eT/eE are distinct thrown objects even with identical public error text and status. T() and E(evt) are source-specific registrations, never inferred from timing. M-only symbolic controls end at finish with no host dispatch. QA state at M, wrapper settlement, delivery, catch at QA and business outcome are UNKNOWN for all entries. These are symbolic boundaries, including cuts in synchronous sections, without asserting each is schedulable as an actual native occurrence.",
+  "vectors": [
+    [
+      "M01",
+      [
+        "admit bodyless P/L",
+        "T() throws eT before byte await",
+        "race/catch exact eT",
+        "finish B"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T0.-",
+      null,
+      null,
+      0,
+      "last NONE"
+    ],
+    [
+      "M02",
+      [
+        "admit P/L",
+        "enter request bytes",
+        "E(evt) throws eE",
+        "race/catch exact eE",
+        "finish B"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.E1.-",
+      null,
+      null,
+      0,
+      "last NONE"
+    ],
+    [
+      "M03",
+      [
+        "request bytes normally return",
+        "T() throws eT before UUID",
+        "race/catch exact eT",
+        "finish B"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T2.-",
+      null,
+      null,
+      0,
+      "last REQ_BYTES"
+    ],
+    [
+      "M04",
+      [
+        "request bytes normally return",
+        "capture original UUID once",
+        "E(evt) throws eE before stub await",
+        "race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.E2.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "last REQ_BYTES"
+    ],
+    [
+      "M05",
+      [
+        "normal request bytes + UUID",
+        "enter stub",
+        "T() throws eT",
+        "race/catch exact eT",
+        "losing E(evt) throws eE after race",
+        "late original stub returns",
+        "finish exact B"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T3.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "late losing work cannot update selected snapshot"
+    ],
+    [
+      "M06",
+      [
+        "normal request bytes + UUID",
+        "enter stub",
+        "E(evt) throws eE",
+        "race/catch exact eE",
+        "losing T() throws eT before finish",
+        "finish B"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.E3.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "reverse callback order; exact eE"
+    ],
+    [
+      "M07",
+      [
+        "normal request bytes + UUID",
+        "stub normally returns R",
+        "T() throws eT before response bytes await",
+        "race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T4.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "last STUB_RESPONSE; no status claim"
+    ],
+    [
+      "M08",
+      [
+        "normal stub return R",
+        "enter response bytes",
+        "enter first read on bound R",
+        "E(evt) throws",
+        "exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.E5.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "last STUB_RESPONSE"
+    ],
+    [
+      "M09",
+      [
+        "enter response bytes on R",
+        "first reader.read normally returns",
+        "T() throws before next enter",
+        "exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T6.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "first normal reader result"
+    ],
+    [
+      "M10",
+      [
+        "first reader.read normally returns",
+        "enter next reader.read",
+        "E(evt) throws",
+        "exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.E7.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "last READER_READ still first"
+    ],
+    [
+      "M11",
+      [
+        "first reader.read normally returns",
+        "enter next reader.read",
+        "next normally returns",
+        "T() throws",
+        "exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T6.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "same code for later reader return"
+    ],
+    [
+      "M12",
+      [
+        "enter response bytes on R",
+        "same original read normally returns done",
+        "response bytes normally return",
+        "E(evt) throws before checks finish",
+        "exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.E8.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "includes checks, no normal validation inferred"
+    ],
+    [
+      "M13",
+      [
+        "enter response bytes on bodyless R",
+        "no original reader returned",
+        "response bytes normally return",
+        "T() throws",
+        "exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T8.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "5>8 without reader"
+    ],
+    [
+      "M14",
+      [
+        "enter stub; UUID capture missing",
+        "T() throws",
+        "original exact race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "no required M key; no claim from missing diagnostic"
+    ],
+    [
+      "M15",
+      [
+        "response bytes entered on R1",
+        "R2 with foreign request/key has read normally return",
+        "T() throws on L",
+        "race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      "m1.1133557799bbddff.T5.11111111-1111-4111-8111-111111111111",
+      null,
+      null,
+      0,
+      "foreign hook cannot move bound cursor"
+    ],
+    [
+      "M16",
+      [
+        "request bytes entered",
+        "attempt reader-normal return without eligible response identity/order",
+        "T() throws",
+        "race/catch/finish"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "invalid bound cursor"
+    ],
+    [
+      "M17",
+      [
+        "response reader rejects",
+        "original first-failure/cancel begins",
+        "then T() throws",
+        "T escapes original race/catch"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "ongoing cursor invalid before exceptional path; rejection is not return"
+    ],
+    [
+      "M18",
+      [
+        "enter stub",
+        "T() throws eT",
+        "original race/catch chooses foreign eX with same status/text but distinct identity",
+        "finish B"
+      ],
+      "503 independently known; no qualified g1",
+      null,
+      null,
+      null,
+      0,
+      "no error substitution"
+    ],
+    [
+      "M19",
+      [
+        "enter stub",
+        "same-looking original callback on different L2 throws e2",
+        "foreign e2 sent to observer for P/L1",
+        "local response B"
+      ],
+      "503 independently known; no qualified g1",
+      null,
+      null,
+      null,
+      0,
+      "foreign lease/observer lineage"
+    ],
+    [
+      "M20",
+      [
+        "first timer/lease callback shape uses two arguments",
+        "exact original g1 deadline winner by its original error",
+        "finish B"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "unexpected callback arity"
+    ],
+    [
+      "M21",
+      [
+        "normal stub denial HTTP 413 raises original S",
+        "losing callback T() later",
+        "catches exact S and finishes"
+      ],
+      "413 g1.413.S.413",
+      null,
+      null,
+      null,
+      0,
+      "different known original winner"
+    ],
+    [
+      "M22",
+      [
+        "normal validation throws exact original V",
+        "original race/catch V",
+        "losing E(evt) later"
+      ],
+      "503 g1.503.V.0",
+      null,
+      null,
+      null,
+      0,
+      "different known original winner"
+    ],
+    [
+      "M23",
+      [
+        "valid 200 ordinary result",
+        "finish original success; no pending Response"
+      ],
+      "200; no g1",
+      null,
+      null,
+      null,
+      0,
+      "positive request result is not diagnostic"
+    ],
+    [
+      "M24",
+      [
+        "T3 candidate",
+        "same pending Response already carries conflicting g1 header",
+        "finish"
+      ],
+      "503 independently known; preexisting g1 ineligible",
+      null,
+      null,
+      null,
+      0,
+      "original g1 collision"
+    ],
+    [
+      "M25",
+      [
+        "correct T3 exact error",
+        "re-use the original local B for a second candidate",
+        "existing g1 custody collision"
+      ],
+      "503 independently known; no qualified g1 on duplicate",
+      null,
+      null,
+      null,
+      0,
+      "M private response may emit once only; expectation applies to the duplicate attempt, leaving any original already-admitted emission intact."
+    ],
+    [
+      "M26",
+      [
+        "T3 eT selected",
+        "call private finish with a different pending Response equal by content",
+        "original response identity admission fails"
+      ],
+      "503 independently known; no qualified g1 on foreign response",
+      null,
+      null,
+      null,
+      0,
+      "observer identity distinct from host coherent tuple copy"
+    ],
+    [
+      "M27",
+      [
+        "valid original request, lease and T3 candidate",
+        "preseed optional diagnostic M write count 255",
+        "next legal transition attempts 256 before winner capture",
+        "subsequent late hooks"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "one terminal M poison; no later writes"
+    ],
+    [
+      "M28",
+      [
+        "64 independently admitted cells in M mount",
+        "attempt cell 65",
+        "original deadline of an already admitted cell occurs after latch"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "no further mount diagnostic admission/use"
+    ],
+    [
+      "M29",
+      [
+        "exact candidate otherwise by copy",
+        "private field not enabled or exact fixture route absent"
+      ],
+      "503 independently known; original public output retained",
+      null,
+      null,
+      null,
+      0,
+      "OFF, non-direct and external routes cannot expose private evidence"
+    ],
+    [
+      "M30",
+      [
+        "T() throws eT",
+        "E(evt) throws eE before original race admission",
+        "synthetic impossible third candidate is injected before selection to test cap",
+        "original g1 still deadline503"
+      ],
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "negative cap input only, never an actual third timer/listener registration; no third snapshot."
+    ]
+  ]
+}

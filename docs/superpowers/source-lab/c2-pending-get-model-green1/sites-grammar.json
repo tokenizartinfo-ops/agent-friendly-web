@@ -1,0 +1,345 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.SITES_GRAMMAR/1",
+  "scope": "TOOL_LITERAL_DATA",
+  "execution": "NOT_RUN",
+  "model": {
+    "epoch": "1133557799bbddff",
+    "invalidForeignEpoch": "2233557799bbddff",
+    "uuid": "11111111-1111-4111-8111-111111111111",
+    "foreignUuid": "22222222-2222-4222-9222-222222222222",
+    "meaning": "Syntax and correlation only. Native uses each unique presealed mount epoch and exact original generated UUID."
+  },
+  "preimage": {
+    "source": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "S00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "S08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+    "S09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "S10": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "D07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "GB1": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+    "GB1accept": "08b75777bb39efaad0a439082cd430044c0b07d6",
+    "S02": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+    "S03": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+  },
+  "sites": [
+    [
+      "M00",
+      "S03:22,24,26-28,41; S09:705-714,757-765,772-786",
+      "Exact original request, route, lease and locally constructed pending response. Private field only after unchanged g1 finish on validated headers."
+    ],
+    [
+      "M01",
+      "bridge:23-27",
+      "Original bodyless request-byte await enter and normal return before check/grammar. Prove bodyless regime independently."
+    ],
+    [
+      "M02",
+      "bridge:30-36; S09:787-788",
+      "Capture sole original UUID result at bridge:33 before original header set. Enter/leave sole original stub await."
+    ],
+    [
+      "M03",
+      "bridge:37-42; wire:42-53; S09:789-792",
+      "Exact original response identity for reader hooks. Await entry, original reader normal returns and response-byte normal return. Invalidate ongoing cursor on exceptional check/first-failure/cancel path."
+    ],
+    [
+      "M04",
+      "wire:26-39; S09:715-720,739-755,793-801",
+      "Same original callback identity at timer, signal listener and removal. At reject, snapshot exact newly thrown error, input, cursor/key. Race/catch match exact error."
+    ],
+    [
+      "QA0",
+      "S09:153-158",
+      "OriginalMethod GET and fixed target only. Exact Request before super.fetch. Assign inside existing handlers only; no reaction to outward wrapper."
+    ],
+    [
+      "QA1",
+      "S02:24-25",
+      "After original receiver check returns, before original choice handler on same Request."
+    ],
+    [
+      "QA2",
+      "S00:610,635-642,652-659",
+      "Original initial pair, choice and form Response construction boundaries. No catch/status/body inspection."
+    ],
+    [
+      "QA3",
+      "S00:100,637,642,587-589",
+      "Exact existing options identity once at each pair caller. Keep original destructuring/evaluation."
+    ],
+    [
+      "QA4",
+      "S00:196,275,512",
+      "Six original aggregate awaits only, left to right; mark normal returns before following continuations."
+    ],
+    [
+      "H01",
+      "S08:2,17-22,110-116,202-232; S09:830-860",
+      "Original DispatchResponse capture; private S08 same-file root afterEach registered before D07. Frozen count actor and public token untouched."
+    ],
+    [
+      "H02",
+      "S10:153,161-164,169-171,188-200",
+      "Direct-call identity and current nominated mounted scripts, generation and actor; remount/replacement invalidates."
+    ],
+    [
+      "H03",
+      "D07:6-10,11-29,30-34,49-51; recorder:34-54",
+      "Frozen label, action/count terminal, C2SOURCE and close. Existing regular 0600 journal, uid/gid/nlink custody and caps."
+    ],
+    [
+      "H04",
+      "S08:14,27-32; S10:220; GB1:99-102",
+      "Require genuine normal disposable closure and terminal child. Host timeout does not qualify native cancellation."
+    ]
+  ],
+  "M": {
+    "callback": {
+      "T": "zero arguments at sole original timer",
+      "E": "one event argument at sole original lease listener; no event getter",
+      "other": "no qualifying M"
+    },
+    "cursor": [
+      [
+        "0",
+        "NONE",
+        "before request-byte await"
+      ],
+      [
+        "1",
+        "NONE",
+        "request-byte await entered"
+      ],
+      [
+        "2",
+        "REQ_BYTES",
+        "request bytes normally returned"
+      ],
+      [
+        "3",
+        "REQ_BYTES",
+        "stub await entered"
+      ],
+      [
+        "4",
+        "STUB_RESPONSE",
+        "stub await normally returned"
+      ],
+      [
+        "5",
+        "STUB_RESPONSE",
+        "response-byte await entered, no reader result"
+      ],
+      [
+        "6",
+        "READER_READ",
+        "original response reader read normally returned"
+      ],
+      [
+        "7",
+        "READER_READ",
+        "next original reader read entered"
+      ],
+      [
+        "8",
+        "RESPONSE_BYTES",
+        "response bytes normally returned, following checks unresolved"
+      ]
+    ],
+    "edges": [
+      "0>1",
+      "1>2",
+      "2>3",
+      "3>4",
+      "4>5",
+      "5>6",
+      "5>8",
+      "6>7",
+      "6>8",
+      "7>6"
+    ],
+    "key": {
+      "0": "hyphen",
+      "1": "hyphen",
+      "2": "hyphen or exact original v4",
+      "3..8": "exact original v4"
+    }
+  },
+  "QA": {
+    "phase": "A>B>I>J>C>D>F",
+    "tuples": {
+      "A": "00,0",
+      "B": "00,0",
+      "I": "00,0 before pair, or 01 with any K",
+      "J": "01,c",
+      "C": "01,c before nested pair, or 02..3F with any K",
+      "D": "01..3F,c",
+      "F": "01..3F,c"
+    },
+    "pair": "NN starts at 00. Each explicitly joined original invocation increments once and sets K=0, with completed predecessor c required.",
+    "K": [
+      [
+        "1",
+        "2",
+        "facts(1)",
+        "S00:196"
+      ],
+      [
+        "3",
+        "4",
+        "primary(1)",
+        "S00:275"
+      ],
+      [
+        "5",
+        "6",
+        "qualify(1)",
+        "S00:512"
+      ],
+      [
+        "7",
+        "8",
+        "primary(2)",
+        "S00:512"
+      ],
+      [
+        "9",
+        "a",
+        "facts(2)",
+        "S00:512"
+      ],
+      [
+        "b",
+        "c",
+        "qualify(2)",
+        "S00:512"
+      ]
+    ],
+    "S": {
+      "0": "no original super.fetch promise reaction observed at later sample; synchronous fallback contributes none",
+      "F": "its original fulfillment handler ran by sample",
+      "R": "its original rejection handler ran by sample"
+    },
+    "freeze": "First real reaction freezes record. Only warranted terminal integrity poison allowed. Late descendants do not advance it."
+  },
+  "grammar": {
+    "M": {
+      "pattern": "m1.e.tc.u",
+      "bytes": [
+        24,
+        59
+      ],
+      "privateField": "x-afw-lab-pending1"
+    },
+    "qaPositive": {
+      "pattern": "q1.e.u.PNNKS",
+      "bytes": [
+        62
+      ]
+    },
+    "qaAbsent": {
+      "pattern": "q0.x",
+      "bytes": [
+        4
+      ],
+      "x": {
+        "A": "absent",
+        "O": "overlap or duplicate",
+        "X": "budget or overflow",
+        "V": "invalid or unjoined"
+      }
+    },
+    "row": {
+      "pattern": "p1.h.tc.PNNKS",
+      "bytes": [
+        13,
+        14
+      ],
+      "lf": "optional single trailing LF only in file",
+      "h": {
+        "J": "joined M plus valid later QA",
+        "A": "QA absent",
+        "O": "QA overlap",
+        "X": "QA overflow",
+        "V": "QA invalid",
+        "T": "host timeout after one dispatch",
+        "K": "no UUID, zero dispatch"
+      }
+    },
+    "chars": "ASCII only, exact case, no whitespace, literal dots; e is 16 lowercase hex; u is lowercase hyphenated v4 UUID with correct variant; NN is uppercase hexadecimal 00..3F; K is 0..9,a,b,c; S is 0,F,R. Every non-J row ends in five literal hyphens."
+  },
+  "bounds": {
+    "cellsPerObserverMount": 64,
+    "overflowCell": 65,
+    "acceptedWritesPerCell": 255,
+    "poisonOnAttempt": 256,
+    "maxPairOrdinal": 63,
+    "overflowPairOrdinal": 64,
+    "maxOriginalCallbackSnapshots": 2,
+    "maxMHeaderAndCapturedCopy": 1,
+    "maxHandleReleases": 1,
+    "maxQAQueries": 1,
+    "maxFinalRows": 1,
+    "additionalOutsideReadWaitMs": 1000,
+    "journalBytes": 32768,
+    "journalRows": 128,
+    "originalOperationClockNominalMs": 30000,
+    "childCapMs": 180000,
+    "producerCapMs": 330000,
+    "jobCapMs": 420000
+  },
+  "unknown": {
+    "m": "No qualifying M or count means zero private rows. Independently known original HTTP remains known.",
+    "qa": "Every row leaves QA state at M cutoff and outward async wrapper settlement, delivery and return to M UNKNOWN. S is the original super.fetch promise reaction only. Catch outcome and business result UNKNOWN.",
+    "copy": "Decoder-only copies with all correlation fields identical are indistinguishable. A substitute may be rejected by independently joined identities and custody."
+  },
+  "D7": [
+    [
+      "no M or other winner",
+      "Unresolved/use known independent public classification and stop."
+    ],
+    [
+      "M0..2",
+      "Original request and lease branch only."
+    ],
+    [
+      "M3 + no valid QA",
+      "Undistinguished stub await; delivery UNKNOWN."
+    ],
+    [
+      "M3 + A/B",
+      "Wrapper/receiver or pre-pair interval respectively."
+    ],
+    [
+      "M3 + I/C odd K",
+      "Named entered aggregate and enclosing lease only."
+    ],
+    [
+      "M3 + I/C even K",
+      "Last normal return only; next await may never enter."
+    ],
+    [
+      "M3 + C/NN>=02/K=c",
+      "Sixth aggregate alone resumed in latest joined nested pair by sample. Include snapshot construction/comparison, guard/finally, timeline await and readChoice checks/return including possible failure. Pair wrapper/timeline/readChoice return and state at M are UNKNOWN."
+    ],
+    [
+      "M3 + J/D/F",
+      "Initial pair to choice, choice return to form generation, or downstream return path respectively."
+    ],
+    [
+      "M4..7",
+      "Original response/body path."
+    ],
+    [
+      "M8",
+      "Synchronous checks after response bytes."
+    ],
+    [
+      "T or E",
+      "Original timer or lease-listener review respectively; upstream signal source unknown."
+    ]
+  ]
+}
