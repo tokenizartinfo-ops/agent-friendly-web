@@ -8,7 +8,8 @@ import {finiteObserverInstanceId} from '../lib/mcp-qa-finite-observer.mjs';
 import {validateQaFiniteConfirmationCommand} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 const hash=s=>createHash('sha256').update(s).digest('hex');
 async function fixture(mode='normal',offset=100){
- const T0=Date.now(),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'},context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:sha};
+ // Synthetic occurrence uses the dated fixture custody. The production clock remains live.
+ const T0=Date.parse('2026-11-01T18:00:00Z'),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'},context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:sha};
  const event={action:'created',repository:{id:1347578006,full_name:context.repository},issue:{number:497},sender:actor,comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+sha,created_at:new Date(T0).toISOString(),author_association:'OWNER',user:actor}};
  const a=validateQaFiniteConfirmationCommand({event,context,now:()=>T0}),f=await cfFiniteFixture({at:T0,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:sha});}});
  f.base.f.setNow(T0+offset);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
