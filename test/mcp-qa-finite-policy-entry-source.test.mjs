@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {createHash} from 'node:crypto';
 import {seedPrimaryFixture,SEED_GH} from './fixtures/finite-seed-primary.mjs';
-import {finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
+import {hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
+import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../lib/mcp-qa-finite-profile.mjs';
 import {qaClosedConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';
 import {finitePrivateQaSetupInstanceId} from '../lib/mcp-qa-finite-adoption.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../lib/mcp-fixed-terminal-workflows.mjs';
@@ -24,6 +25,12 @@ async function scenario(t,mode){
  const module={name:'index.mjs',sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,exports:[]};
  const configuration=structuredClone(finitePublicProfileTemplate('qaLive'));
  const seed=await seedPrimaryFixture({sourceRevision,qaLive:{versionId:qaVersionId,deploymentId,module,configurationHash:qaClosedConfigurationHash(configuration)}});
+ const publicStatic={...finitePublicStaticExpectation('qaLive')};
+ if(mode==='profile-drift')publicStatic.profileHash='e'.repeat(64);
+ seed.seed.manifest.modules.qaLive.publicStatic=publicStatic;
+ seed.seed.qaPublication.qaLive.publicStatic=publicStatic;
+ seed.seed.build.manifestHash=hashFinitePackageManifest(seed.seed.manifest);
+ seed.refresh();
  const {T0}=seed,{intentId}=seed.seed,setupInstanceId=finitePrivateQaSetupInstanceId({intentId,sourceRevision});
  const payload={operation:'finite_private_policy_setup',intentId,sourceRevision};
  const event={payload,instanceId:setupInstanceId,workflowName:definition.name,timestamp:new Date(T0+2400)};
@@ -70,7 +77,7 @@ test('fixed setup source verifies original native occurrence, seed and active QA
  assert.equal(f.provider.length,5);
  assert.equal(f.seed.calls.length,11);
 });
-for(const mode of ['queued-before-seed','event-before-seed','failed-step','foreign-definition','foreign-version','pointer-drift','code-drift','foreign-seed','missing-credential','denied'])test('fixed setup source rejects '+mode,async t=>{
+for(const mode of ['queued-before-seed','event-before-seed','failed-step','foreign-definition','foreign-version','pointer-drift','code-drift','profile-drift','foreign-seed','missing-credential','denied'])test('fixed setup source rejects '+mode,async t=>{
  const f=await scenario(t,mode);
  await assert.rejects(f.read());
  if(mode==='missing-credential')assert.equal(f.provider.length,0);
