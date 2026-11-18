@@ -1,0 +1,54 @@
+{
+  "schema": "AFW.C2.GET_WINNER.OWN_ACTUAL_OUTCOME/1",
+  "atUTC": "2026-11-18 00:17:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "state": "NATIVE_CONTROLS_SUCCEEDED_CLOSURE_AND_REVIEW_PENDING",
+  "primary": "90f39ded6f31b9da40462f509fa72681fdc4ab60",
+  "run": 44205744978,
+  "attempt": 1,
+  "job": 134471078189,
+  "head": "3de3b7ce284911c4e8aa26569581a60987f33153",
+  "tree": "339510b6a462496b6bcb1830f379f980e3c3a35d",
+  "graph": "979f3c7a8c00c39ee530f167a6800caa22bea2df",
+  "rootGate": "689bc2bc99a7135a6807c7ef25a4793dd75d7044",
+  "counts": {
+    "complete": 73,
+    "admit": 15,
+    "reject": 58,
+    "crossing": 5,
+    "crossingAdmit": 1,
+    "crossingReject": 4
+  },
+  "totalMatched": 78,
+  "programNode": "v22.23.4",
+  "log": {
+    "bytes": 25873,
+    "sha256": "d5c4bbde4a8e8d8a320735c29e8f13d1e5d75f3b76fab3c75afd1eb9bc9332b7",
+    "blob": "d3b7259545a3eee0f92da33f76e18e02773b27e2"
+  },
+  "archive": {
+    "bytes": 1725,
+    "sha256": "56d135c80e091aa58f8c8f9663873e38d342a0d0159ca2eae7d6ca37e4748934",
+    "blob": "a77e261d332678e2739eb40adf44f05d6f105191"
+  },
+  "payload": {
+    "bytes": 6133,
+    "sha256": "09aea1125fe361eb7c7569f3ba60ddfdc82d6c91a0f2dc8e46d9321d40b06d04",
+    "blob": "ff4f71a44ec4556b84676ce499e965bee4a61860"
+  },
+  "ledgerSHA256": "89ae320ff0b3d1dbc4199fec14c12e8c17715a9f1e203a4e9ee24d73628771cd",
+  "all78MatchedSealedMetadata": true,
+  "SourceOrBusinessExecution": false,
+  "actualFull20Admission": false,
+  "independentReviewPending": true,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

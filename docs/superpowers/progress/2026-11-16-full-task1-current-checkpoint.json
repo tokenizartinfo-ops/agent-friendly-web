@@ -3,18 +3,10 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "57cdee05d8773fb48a77d45839b68c072592140d",
-  "phase": "TASK2_OWN_NATIVE_RUNNING",
-  "activeNativeRuns": [
-    {
-      "run": 44205744978,
-      "attempt": 1,
-      "head": "3de3b7ce284911c4e8aa26569581a60987f33153",
-      "branch": "lab/afw-c2-own-20261117-get-winner-tools",
-      "kind": "OWN_PUBLIC_READER_SYNTHETIC_CONTROLS"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "cd09c23e2553b0e872e8dfe41273deb35e75749e",
+  "phase": "TASK2_OWN_NATIVE_CLOSED_ACTUAL_REVIEW_PENDING",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44110921244,
     "job": 134135963389,
@@ -120,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Create BASE ref, one CAS activate exact OWN control candidate, capture terminal evidence once and close, then independent actual review. No Source full20 activation before OWN acceptance.",
+  "next": "Independent actual OWN evidence review. If accepted, prepare the separate fresh Source full20 diagnostic gate; no PC-off or business qualification from OWN controls.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -953,7 +945,7 @@
       }
     },
     "task2": {
-      "status": "OWN_NATIVE_RUNNING",
+      "status": "OWN_NATIVE_CLOSED_ACTUAL_REVIEW_PENDING",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -1095,12 +1087,36 @@
         "activationUTC": "2026-11-18 00:11:16 UTC",
         "activeRefMatched": true,
         "run": 44205744978,
-        "runStatus": "in_progress"
-      }
+        "runStatus": "completed",
+        "job": 134471078189,
+        "jobStatus": "completed",
+        "closurePreparedHead": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+        "closurePreparedTree": "2c665415c0f6fa29df4e3f9f26c2512885b7caf6",
+        "closureAttempted": true,
+        "closed": true,
+        "closedHead": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+        "closedTree": "2c665415c0f6fa29df4e3f9f26c2512885b7caf6",
+        "closedAtUTC": "2026-11-18 00:17:45 UTC"
+      },
+      "actualPrimary": "90f39ded6f31b9da40462f509fa72681fdc4ab60",
+      "actualOutcome": "0088dec63f8c844cd69955ae5e3e97f99b45b146",
+      "actualPayload": "ff4f71a44ec4556b84676ce499e965bee4a61860",
+      "actualClosure": "70fd011e12bd3a92248e2f01959179146f5b1519",
+      "actualCounts": {
+        "syntaxInputs": 15,
+        "complete": 73,
+        "admit": 15,
+        "reject": 58,
+        "crossing": 5,
+        "crossingAdmit": 1,
+        "crossingReject": 4,
+        "totalMatched": 78
+      },
+      "actualReviewPending": true
     }
   },
-  "schemaVersion": 101,
-  "updatedAtUTC": "2026-11-18 00:11:55 UTC",
+  "schemaVersion": 102,
+  "updatedAtUTC": "2026-11-18 00:19:37 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
