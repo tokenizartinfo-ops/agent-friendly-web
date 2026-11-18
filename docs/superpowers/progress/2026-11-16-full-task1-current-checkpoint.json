@@ -1,9 +1,9 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 12:50:09 UTC",
+  "timestampUTC": "2026-11-18 12:54:59 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "fcf9c994aa8dc18a66afaf5d9e0693bb9f635c8c",
+  "previousCheckpoint": "415fc4004b0a8e4e5bf22d4db7d8857769462c8e",
   "phase": "PENDING_GET_CORE_MODEL_PROPOSAL_CONTINUATION",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
@@ -524,7 +524,7 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
+  "readinessDocument": "fb238e695ab91890133a9b7a0bc63f0b306c6ca7",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1458,8 +1458,8 @@
       "implementationExecutionReleased": false
     }
   },
-  "schemaVersion": 123,
-  "updatedAtUTC": "2026-11-18 12:50:09 UTC",
+  "schemaVersion": 124,
+  "updatedAtUTC": "2026-11-18 12:54:59 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1517,5 +1517,6 @@
     "relayNewCount": 0,
     "activeNativeRuns": 0,
     "scope": "Scoped AFW lab branches and relay only; no Cloudflare runtime assertion"
-  }
+  },
+  "readinessDocumentPath": "docs/superpowers/progress/2026-11-18-afw-pcoff-readiness.es.md"
 }
