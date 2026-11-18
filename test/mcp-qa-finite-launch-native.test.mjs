@@ -78,6 +78,7 @@ export class Native extends IndependentClosure{
    };
   }
   if(mode==='prepare-step-failed')f.prepareSuccess=false;
+  if(mode.startsWith('provider-'))f.launchProvider=mode.slice('provider-'.length);
   if(mode==='sealed')f.sealed=true;
   if(mode==='withdrawn'){const c=await this.ctx.storage.get(controlPrefix+'control');await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});}
   if(mode==='pin-changed')this.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};
@@ -145,7 +146,7 @@ export class Native extends IndependentClosure{
    if(proof!==null)throw Error('A lost native acknowledgement cannot hydrate confirmation');
   }
   const again=await this.createFiniteNominalChild(refs),read=await this.readFiniteNominalLaunch(refs);
-  return {prepared,created,again,read,journal:await journal(),unchanged:JSON.stringify(before)===JSON.stringify(await journal()),calls,callArgs,armedAt,plan:f.plan,consentCrossed:f.consentCrossed??false};
+  return {prepared,created,again,read,journal:await journal(),unchanged:JSON.stringify(before)===JSON.stringify(await journal()),calls,callArgs,armedAt,plan:f.plan,paths:f.paths,consentCrossed:f.consentCrossed??false};
  }
 }
 export default{async fetch(r,e){const {mode}=await r.json();const s=e.AFW_INDEPENDENT_CLOSURE.get(e.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));try{return Response.json(await s.run(mode));}catch(error){return Response.json({error:String(error)},{status:500});}}};
@@ -207,4 +208,17 @@ for(const mode of ['confirm-old-event','confirm-foreign-event','confirm-foreign-
  const r=await native(mode);
  assert.equal(r.proof,null);
  assert.equal(r.calls,1);
+});
+
+for(const mode of ['provider-failed','provider-wrong-envelope','provider-replayed','provider-duplicate','provider-wrong-version'])test('native create requires provider launch preparation evidence: '+mode,async()=>{
+ const r=await native(mode);
+ assert.equal(r.created.status,'admin_pending');
+ assert.equal(r.journal.send,null);
+ assert.equal(r.calls,0);
+});
+test('native create reads the original provider launcher and version before sending',async()=>{
+ const r=await native('create');
+ assert.equal(r.calls,1);
+ assert(r.paths.includes('/workflows/afw-own-qa-private-bootstrap/instances/'+r.plan.workflows.launcher));
+ assert(r.paths.includes('/workflows/afw-own-qa-private-bootstrap/versions/70000000-0000-4000-8000-000000000007'));
 });
