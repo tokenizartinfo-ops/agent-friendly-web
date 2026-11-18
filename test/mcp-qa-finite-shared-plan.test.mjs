@@ -18,7 +18,7 @@ function fixture(){
  const original={T0:p.T0,C0:p.C0,C1:p.C1,permissionExpiresAt:p.R1+30001,selectors:p.selectors,
   grantHash:p.grantHash,monitorHash:p.monitorHash,eventPlanHash:p.eventPlanHash,withdrawalPolicyHash:p.withdrawalPolicyHash,
   legacy:p.legacy,rollback:{versionId:canaryClosed.versionId,deploymentId:canaryClosed.deploymentId,
-   configurationHash:canaryClosed.configurationHash,module:canaryClosed.module}};
+   rawConfigurationHash:canaryClosed.configurationHash,module:canaryClosed.module}};
  const record={bundleHash:p.bundleHash,artifact:{sourceRevision:source.revision,sourceTree:source.tree,programHash:p.selectors.programHash,
   workerHash:receipt.moduleHash},policy:{plan:{trialId:p.trialId}}};
  const material={
