@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import {PrivateQaBootstrap,IndependentClosure} from '../../worker/independent-closure/finite.mjs';
 import {narrowFinitePolicySetupClock} from '../../lib/mcp-qa-finite-policy-setup.mjs';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
-import {hashFinitePreparationRecord as hash,hashFiniteOwnerPreparationProject} from '../../lib/mcp-qa-finite-preparation-records.mjs';
+import {hashFinitePreparationRecord as hash,hashFiniteOwnerPreparationProject,hashFiniteOwnerEvidence} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../../lib/mcp-qa-finite-profile.mjs';
 import {finiteActivationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
 import {finiteFixture} from './qa-finite-trial.mjs';
@@ -27,11 +27,13 @@ function make(env,T0,mode){
  const {script:unused,...artifactIdentity}=artifact;void unused;
  const originalContextHash=sha('afw.finite-original-context.v1\n'+canonical({...originalContext,artifact:artifactIdentity}));
  const project={projectId:'SYNTHETIC_OWN_PROJECT',revision:1,synthetic:true},expiry=T0+510001;
- const preparation=seal('OwnerPreparation',{purpose:'afw.finite-owner-preparation.v1',prepId:H,sourceRevision:M,actorId:env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString(),selectedAt:T0-100,expiresAt:expiry,commandBy:mode==='command_at_boundary'?T0:T0+1,owner:{subject:'SYNTHETIC_OWNER',accessRealmHash:H,accessVerifiedAt:T0-1000,accessExpiresAt:expiry},connection:{connectionRef:H,grantId:'SYNTHETIC_GRANT',clientId:'SYNTHETIC_CLIENT',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',grantHash:H,consentHash:H,noticesHash:H,permissionExpiresAt:expiry},project,goal:'discovery',programContext:{programHash:'f'.repeat(64),sourceRevision:Q,originalContextHash},approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash:hashFiniteOwnerPreparationProject(project),goal:'discovery',approvedAt:T0-1000,expiresAt:expiry,csrfReceiptHash:H},auditHash:H},'preparationHash');
+ const authorization={handle_hash:'8'.repeat(64),user_id:'SYNTHETIC_OWNER',kind:'authorize',project_id:project.projectId,client_id:'SYNTHETIC_CLIENT',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',scopes:['afw:project:read'],expires_at:new Date(expiry).toISOString(),consumed_at:new Date(T0-400).toISOString()};
+ const notice={grantId:'SYNTHETIC_GRANT',projectId:project.projectId,subject:authorization.user_id,clientId:authorization.client_id,resource:authorization.resource,revision:1,action:'grant',purpose:'afw.dossier-monitoring.v1',requestId:D,sequence:1,issuedAt:T0-200,expiresAt:expiry};
+ const preparation=seal('OwnerPreparation',{purpose:'afw.finite-owner-preparation.v1',prepId:H,sourceRevision:M,actorId:env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString(),selectedAt:T0-100,expiresAt:expiry,commandBy:mode==='command_at_boundary'?T0:T0+1,owner:{subject:'SYNTHETIC_OWNER',accessRealmHash:H,accessVerifiedAt:T0-1000,accessExpiresAt:expiry},connection:{connectionRef:H,grantId:'SYNTHETIC_GRANT',clientId:'SYNTHETIC_CLIENT',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',grantHash:sha(notice.grantId),consentHash:hashFiniteOwnerEvidence('consent',authorization),noticesHash:hashFiniteOwnerEvidence('event',notice),permissionExpiresAt:expiry},project,goal:'discovery',programContext:{programHash:'f'.repeat(64),sourceRevision:Q,originalContextHash},approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash:hashFiniteOwnerPreparationProject(project),goal:'discovery',approvedAt:T0-1000,expiresAt:expiry,csrfReceiptHash:H},auditHash:H},'preparationHash');
  const selection=seal('Selection',{purpose:'afw.finite-owner-selection.v1',sourceRevision:M,prepId:H,preparationHash:preparation.preparationHash,selectedAt:T0-100,sequence:1,previousSelectionHash:null},'selectionHash');
  const descriptor={name:'index.mjs',sha256:artifact.workerHash,bytes:Buffer.byteLength(artifact.script)};
  const baseline={versionId:V,deploymentId:D,module:descriptor,configuration:config},rollback={versionId:R,deploymentId:U,module:descriptor,configuration:closed};
- return {T0,mode,preparation,selection,originalContext,baseline,rollback,module:descriptor};
+ return {T0,mode,preparation,selection,originalContext,baseline,rollback,module:descriptor,notice,authorization};
 }
 export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
  lease.assertCurrent();const x=await ctx.storage.get('fixture:scenario');lease.assertCurrent();
@@ -48,10 +50,10 @@ export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
  const assertCurrent=async c=>{c.assertCurrent();if(['changed_grant','changed_revision','changed_selection','publisher_unavailable'].includes(x.mode))throw Error('SYNTHETIC primary drift');};
  const {script:bytes}=x.originalContext.artifact,source={native:n,ownerSource:{window:{startedAt:x.T0-1000,expiresAt:x.preparation.expiresAt}},originalContext:x.originalContext,baseline:x.baseline,rollback:x.rollback,bytes:{baseline:new TextEncoder().encode(bytes),rollback:new TextEncoder().encode(bytes),candidate:new TextEncoder().encode(bytes)},assertCurrent};
  const material={seedHash:H,seed:{sourceRevision:M,intentId:H,manifest:{sourceRevision:M,sourceTree:'d'.repeat(40),modules:{canaryLive:{module:{...x.module,exports:['AfwNodeControl','AfwOwnEventNode','default']},publicStatic:finitePublicStaticExpectation('canaryLive')}}},qaPublication:{qaLive:{versionId:U}}},primaryEvidence:{T0:x.T0,N1:x.T0+300000,R1:x.T0+480000,seedStepCompletedAt:x.T0+50}};
- const notice={sequence:1,revision:1,issuedAt:x.T0-200,expiresAt:x.preparation.connection.permissionExpiresAt};
+ const {notice,authorization}=x;
  const receipt={versionId:V,deploymentId:D,moduleHash:x.module.sha256,configurationHash:finiteActivationConfigurationHash(x.baseline.configuration)};
  await assertCurrent(lease);
- return {value:{},selected,witness:{selectionHash:x.selection.selectionHash,publishedAt:x.T0-50},receipt,ownerSource:source.ownerSource,source,material,notice};
+ return {value:{},selected,witness:{selectionHash:x.selection.selectionHash,publishedAt:x.T0-50},receipt,ownerSource:source.ownerSource,source,material,notice,authorizationHash:authorization.handle_hash};
 }
 export async function syntheticEntry({env,event},lease){lease.assertCurrent();return {...native(event.timestamp.getTime()-200),qaVersionId:env.AFW_QA_VERSION.id};}
 export class SetupFixture extends IndependentClosure{
@@ -60,7 +62,7 @@ export class SetupFixture extends IndependentClosure{
   const lease={signal:new AbortController().signal,assertCurrent(){}},store=createFiniteOwnerPreparationStore({storage:this.ctx.storage,now:()=>T0-50});
   await store.publishSelection({preparation:x.preparation,selection:x.selection,expectedHeadHash:null},lease);
   if(mode==='head_touched')await this.ctx.storage.put('afw.qa-finite-trial.v1:head',{SYNTHETIC:true});
-  return {T0,baseline:x.baseline,rollback:x.rollback,script:x.originalContext.artifact.script};
+  return {T0,baseline:x.baseline,rollback:x.rollback,script:x.originalContext.artifact.script,notice:x.notice,authorization:x.authorization};
  }
  async hydrationState(){return hydrations.get(this.ctx)??{reads:0,lateDenied:0};}
  async rows(){return [...await this.ctx.storage.list()].filter(([k])=>k!=='fixture:scenario');}

@@ -106,3 +106,20 @@ test('Task4 held nested hydration retains original lineage after response until 
  assert.deepEqual(await f.hydration(),{reads:1,lateDenied:1});
  assert.equal((await f.rows()).some(([k])=>k==='fixture:late-write'),false);
 });
+
+for(const mode of ['permission-grant-revoked','permission-consent-replaced','permission-notice-replaced','permission-notice-withdrawn','permission-project-revised'])test('real primary denies setup with changed original permission: '+mode,async t=>{
+ const f=await policyFixture(t,mode);
+ const r=await f.run();
+ assert.equal(r.status,'admin_pending');
+ assert.equal(f.posts(),0);
+ assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,0);
+});
+test('real primary blocks activation when the original notice permission is withdrawn after upload',async t=>{
+ const f=await policyFixture(t,'notice-withdrawn-after-upload');
+ const r=await f.run();
+ assert.equal(r.status,'admin_pending');
+ assert.equal(f.posts(),1);
+ const rows=await f.rows();
+ assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,1);
+ assert.equal(rows.some(([k])=>k.endsWith(':confirmation')),false);
+});
