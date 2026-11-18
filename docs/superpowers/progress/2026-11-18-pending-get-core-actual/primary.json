@@ -1,0 +1,129 @@
+{
+  "schema": "AFW.PENDING_GET.B1.PRIMARY_RECEIPT/1",
+  "acquiredAtUTC": "2026-11-18 13:44:27 UTC",
+  "sources": {
+    "run": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/44316286948",
+    "jobs": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/44316286948/jobs?filter=latest&per_page=100",
+    "logs": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/jobs/134843146190/logs",
+    "artifacts": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/44316286948/artifacts"
+  },
+  "method": "Single completed job logs and expected artifact metadata, through GitHub connector. One exact bounded carrier line retained, all other logs omitted. No raw ZIP download.",
+  "run": {
+    "id": 44316286948,
+    "run_attempt": 1,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "9afbe0683a0582a5f96712cb84da4805582079b2",
+    "head_branch": "lab/afw-c2-pending-get-20261118-model-green1",
+    "path": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+    "workflow_id": 422652843,
+    "created_at": "2026-11-18T13:41:34Z",
+    "updated_at": "2026-11-18T13:41:46Z",
+    "run_started_at": "2026-11-18T13:41:34Z",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44316286948"
+  },
+  "job": {
+    "id": 134843146190,
+    "run_id": 44316286948,
+    "run_attempt": 1,
+    "name": "c2-pending-get-model-green1",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "9afbe0683a0582a5f96712cb84da4805582079b2",
+    "started_at": "2026-11-18T13:41:37Z",
+    "completed_at": "2026-11-18T13:41:45Z",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44316286948/job/134843146190",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-11-18T13:41:38Z",
+        "completed_at": "2026-11-18T13:41:39Z"
+      },
+      {
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-11-18T13:41:39Z",
+        "completed_at": "2026-11-18T13:41:41Z"
+      },
+      {
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-11-18T13:41:41Z",
+        "completed_at": "2026-11-18T13:41:41Z"
+      },
+      {
+        "name": "Run only the sealed MODEL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-11-18T13:41:41Z",
+        "completed_at": "2026-11-18T13:41:42Z"
+      },
+      {
+        "name": "Preserve the bounded evidence frame",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-11-18T13:41:42Z",
+        "completed_at": "2026-11-18T13:41:43Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-11-18T13:41:43Z",
+        "completed_at": "2026-11-18T13:41:43Z"
+      },
+      {
+        "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-11-18T13:41:43Z",
+        "completed_at": "2026-11-18T13:41:43Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-11-18T13:41:43Z",
+        "completed_at": "2026-11-18T13:41:43Z"
+      }
+    ]
+  },
+  "artifact": {
+    "id": 14433245420,
+    "name": "afw-c2-pending-get-model-green1",
+    "size_in_bytes": 1284,
+    "digest": "sha256:7482fc310349d23dc0476edbe708864493bfd9e7b87d84f5334640c907cea080",
+    "expired": false,
+    "created_at": "2026-11-18T13:41:43Z",
+    "expires_at": "2026-11-25T13:41:42Z",
+    "workflow_run": {
+      "id": 44316286948,
+      "repository_id": 1347578006,
+      "head_repository_id": 1347578006,
+      "head_branch": "lab/afw-c2-pending-get-20261118-model-green1",
+      "head_sha": "9afbe0683a0582a5f96712cb84da4805582079b2"
+    }
+  },
+  "exactCarrierLine": "2026-11-18T13:41:42.1487672Z AFW_C2_PENDING_GET_MODEL_GREEN1_JSON_BASE64 eyJzY2hlbWEiOiJhZncuYzIucGVuZGluZy1nZXQtbW9kZWwtZ3JlZW4xLnJlc3VsdC8xIiwiZGlzcG9zaXRpb24iOiJNT0RFTF9HUkVFTiIsInN0YWdlIjoiY2xhc3NpZnkiLCJmYWlsdXJlIjpudWxsLCJub21pbmF0aW9uIjp7InJlcG9zaXRvcnkiOiJ0b2tlbml6YXJ0aW5mby1vcHMvYWdlbnQtZnJpZW5kbHktd2ViIiwiYnJhbmNoIjoibGFiL2Fmdy1jMi1wZW5kaW5nLWdldC0yMDI2MTExOC1tb2RlbC1ncmVlbjEiLCJqb2IiOiJjMi1wZW5kaW5nLWdldC1tb2RlbC1ncmVlbjEiLCJiYXNlIjoiNjc5MWNlMWJhYjkzNzJlMjA2ZDNjN2I0MmIzZTEzOTRkYzZlMGM2OCIsImJhc2VUcmVlIjoiNjJlNzg5MjY2MzVkNmI3NGYyODhkNmMwZDY5ZTBmMjUxNjMwNjk4OSIsImhlYWQiOiI5YWZiZTA2ODNhMDU4MmE1Zjk2NzEyY2I4NGRhNDgwNTU4MjA3OWIyIiwidHJlZSI6IjhiN2M0NmFiMzZiOWUxNGMzYmY3MWM1ZWRlN2NiZWM5ZjFiNzc1NmIiLCJydW4iOiI0NDMxNjI4Njk0OCIsImF0dGVtcHQiOjF9LCJjaGVja3MiOnsibW91bnRzIjp0cnVlLCJyZXZlcnNpYmxlRXh0ZW5zaW9uIjp0cnVlLCJmcmVzaE5hbWVzcGFjZXMiOnRydWUsImNoaWxkUGlkQWJzZW50Ijp0cnVlLCJzdGFnaW5nUmVhZGJhY2siOnRydWUsInRlbXBBYnNlbnQiOnRydWUsImNhc2VDb3VudCI6dHJ1ZX0sImNoaWxkIjp7InN0YXR1cyI6MCwic2lnbmFsIjpudWxsLCJzcGF3bkVycm9yIjpudWxsLCJzdGRvdXRCeXRlcyI6MTIxNCwic3Rkb3V0U2hhMjU2IjoiMzcwZjhmNTU1Njc5NzExZDg5NTU4ZjZjZDI5ZTFlNWZhYTBjYTE1ODQ0NDg1NzVhNDY0Mjg1ODY2NjI2Mzk5MyIsInN0ZGVyckJ5dGVzIjowfSwibmFtZXNwYWNlUGFyZW50Ijp7InBpZE5hbWVzcGFjZSI6InBpZDpbNDAyNjUzMTgzNl0iLCJuZXROYW1lc3BhY2UiOiJuZXQ6WzQwMjY1MzE4MzNdIn0sImZyYW1lIjp7InNjaGVtYSI6ImFmdy5jMi5wZW5kaW5nLWdldC1tb2RlbC1ncmVlbjEuY2hpbGQvMSIsInN0YWdlIjoiYXNzZXJ0aW9ucy1wYXNzZWQiLCJhY3RpdmVDYXNlIjpudWxsLCJlcnJvciI6bnVsbCwiZmFpbHVyZSI6bnVsbCwiY29tcGxldGVkIjp7Ik0iOlsiTTAxIiwiTTAyIiwiTTAzIiwiTTA0IiwiTTA1IiwiTTA2IiwiTTA3IiwiTTA4IiwiTTA5IiwiTTEwIiwiTTExIiwiTTEyIiwiTTEzIiwiTTE0IiwiTTE1IiwiTTE2IiwiTTE3IiwiTTE4IiwiTTE5IiwiTTIwIiwiTTIxIiwiTTIyIiwiTTIzIiwiTTI0IiwiTTI1IiwiTTI2IiwiTTI3IiwiTTI4IiwiTTI5IiwiTTMwIl0sIlEiOlsiUTAxIiwiUTAyIiwiUTAzIiwiUTA0IiwiUTA1IiwiUTA2IiwiUTA3IiwiUTA4IiwiUTA5IiwiUTEwIiwiUTExIiwiUTEyIiwiUTEzIiwiUTE0IiwiUTE1IiwiUTE2IiwiUTE3IiwiUTE4IiwiUTE5IiwiUTIwIiwiUTIxIiwiUTIyIiwiUTIzIiwiUTI0IiwiUTI1IiwiUTI2IiwiUTI3IiwiUTI4IiwiUTI5IiwiUTMwIiwiUTMxIiwiUTMyIiwiUTMzIiwiUTM0IiwiUTM1Il0sIkgiOlsiSDAxIiwiSDAyIiwiSDAzIiwiSDA0IiwiSDA1IiwiSDA2IiwiSDA3IiwiSDA4IiwiSDA5IiwiSDEwIiwiSDExIiwiSDEyIiwiSDEzIiwiSDE0IiwiSDE1IiwiSDE2IiwiSDE3IiwiSDE4IiwiSDE5IiwiSDIwIiwiSDIxIiwiSDIyIiwiSDIzIiwiSDI0IiwiSDI1IiwiSDI2IiwiSDI3IiwiSDI4IiwiSDI5IiwiSDMwIiwiSDMxIiwiSDMyIiwiSDMzIiwiSDM0IiwiSDM1IiwiSDM2IiwiSDM3IiwiSDM4IiwiSDM5IiwiSDQwIiwiSDQxIiwiSDQyIiwiSDQzIiwiSDQ0IiwiSDQ1IiwiSDQ2IiwiSDQ3IiwiSDQ4IiwiSDQ5IiwiSDUwIiwiSDUxIiwiSDUyIiwiSDUzIiwiSDU0IiwiSDU1IiwiSDU2IiwiSDU3Il0sIlIiOlsiUjAxIiwiUjAyIiwiUjAzIiwiUjA0IiwiUjA1IiwiUjA2IiwiUjA3IiwiUjA4IiwiUjA5IiwiUjEwIiwiUjExIiwiUjEyIl19LCJtMDEiOnsic3RhdHVzIjo1MDMsImcxIjoiZzEuNTAzLkwuMCIsInByaXZhdGVIZWFkZXJTaGEyNTYiOiI0YzBjZmJiOTZmOWE5YjNmNjU2ZWFhNzA4MzA4OTNhNDU2NmFjOWFkMzQ4MGY2MDQ2NDFiMTAwYjkwZWEyYTVjIn0sImN1c3RvZHkiOnsiaG9zdFBpZCI6MjQ1MiwicGlkTmFtZXNwYWNlIjoicGlkOls0MDI2NTMyMjY4XSIsIm5ldE5hbWVzcGFjZSI6Im5ldDpbNDAyNjUzMjI2OV0iLCJ1aWQiOjEwMDEsImdpZCI6MTAwMX19LCJsaW1pdHMiOnsic291cmNlIjpmYWxzZSwibmF0aXZlIjpmYWxzZSwicGNPZmYiOmZhbHNlLCJmaWxlc3lzdGVtSXNvbGF0aW9uIjpmYWxzZX19Cg==",
+  "resultBlob": "f565a6c9c2bade7d12f9edf4f6085955dc59db98",
+  "resultFingerprint": {
+    "bytes": 2230,
+    "sha256": "fd50870328713046259425655e3096135945c2bbe6d34a3efa8cd518afae2ec2",
+    "blob": "f565a6c9c2bade7d12f9edf4f6085955dc59db98"
+  },
+  "uploadLine": "2026-11-18T13:41:43.2736085Z Artifact afw-c2-pending-get-model-green1 has been successfully uploaded! Final size is 1284 bytes. Artifact ID is 14433245420",
+  "uploadDigestPresentInOriginalLog": true
+}

@@ -1,0 +1,183 @@
+{
+  "schema": "AFW.PENDING_GET.B1.ROOT_ACTUAL_VALIDATION/1",
+  "atUTC": "2026-11-18 13:43:46 UTC",
+  "rootGate": "af86007a3b96f5c6d73127501adddf26b1207679",
+  "result": "f565a6c9c2bade7d12f9edf4f6085955dc59db98",
+  "resultFingerprint": {
+    "bytes": 2230,
+    "sha256": "fd50870328713046259425655e3096135945c2bbe6d34a3efa8cd518afae2ec2",
+    "blob": "f565a6c9c2bade7d12f9edf4f6085955dc59db98"
+  },
+  "childFingerprint": {
+    "bytes": 1214,
+    "sha256": "370f8f555679711d89558f6cd29e1e5faa0ca1584448575a4642858666263993",
+    "blob": "9f2c279f403d56418258b515a04326d8d07668e2"
+  },
+  "childReconstruction": "Original child key order schema,stage,custody,completed,activeCase,m01,error,failure; all values sourced from validated named projection; rawJSON+LF length/hash matched.",
+  "run": 44316286948,
+  "job": 134843146190,
+  "head": "9afbe0683a0582a5f96712cb84da4805582079b2",
+  "tree": "8b7c46ab36b9e14c3bf71c5ede7cbec9f1b7756b",
+  "verdict": "MODEL_GREEN_134_OBSERVED",
+  "actualCounts": {
+    "M": 30,
+    "Q": 35,
+    "H": 57,
+    "R": 12,
+    "total": 134
+  },
+  "allCaseLabelsInSealedOrder": true,
+  "m01": {
+    "status": 503,
+    "g1": "g1.503.L.0",
+    "privateHeaderSha256": "4c0cfbb96f9a9b3f656eaa70830893a4566ac9ad3480f604641b100b90ea2a5c"
+  },
+  "sevenChecksPassed": true,
+  "jobMilliseconds": 8000,
+  "artifact": {
+    "id": 14433245420,
+    "name": "afw-c2-pending-get-model-green1",
+    "size": 1284,
+    "digest": "sha256:7482fc310349d23dc0476edbe708864493bfd9e7b87d84f5334640c907cea080",
+    "metadataAndUploadHashMatched": true,
+    "ZIPDownloaded": false,
+    "bodySource": "Exact trusted-parent stdout carrier after regular-file readback; distinct from independently extracted ZIP."
+  },
+  "closedHead": "2c290229c1461020cc7b1b832e82bf56e920dcf0",
+  "closedTree": "cbed0d4fb221cd57efc704f4654013459b79165b",
+  "census": {
+    "runs": 1,
+    "active": 0,
+    "closedHeadRuns": 0
+  },
+  "protectedRefs": [
+    {
+      "branch": "feat/finite-native-cleanup-20261101",
+      "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+      "sha": "8be5b43f46a6757953a1141eb7fd18fa822ba449",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures",
+      "sha": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-manifest1",
+      "sha": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+      "sha": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-get-winner-20261117-tools1",
+      "sha": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+      "sha": "0fe46529b2c0243d977afd54b914184a5b31963c",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+      "sha": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-20261117-get-winner-tools",
+      "sha": "62e3c7469e98eaed08766e767b5b08e894f21d23",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+      "sha": "067a012121a58f7c2baf938228765242c433a1d5",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+      "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+      "sha": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+      "sha": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
+      "sha": "86594c358557023d41cb3cae5d000bca3c67296b",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+      "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+      "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+      "sha": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+      "sha": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "sha": "08061db79cd0f38f25df8977e1ded8e17542e684",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+      "sha": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+      "matched": true
+    },
+    {
+      "branch": "main",
+      "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "matched": true
+    },
+    {
+      "branch": "lab/afw-c2-pending-get-20261118-red1",
+      "sha": "0cd2f61f7afc31ca93864e9cf79f5d2206cdc5f0",
+      "matched": true
+    }
+  ],
+  "scope": "B1 fixed-code synchronous MODEL and namespace/PID/env/temp closure only; same file identity, no filesystem or credential-file inaccessibility claim.",
+  "SourceIntegrationReleased": false,
+  "nativeQualified": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "independentActualReviewPending": true
+}

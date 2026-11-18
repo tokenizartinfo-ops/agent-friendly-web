@@ -1,0 +1,70 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX2.ROOT_MEASUREMENT/1",
+  "atUTC": "2026-11-18 13:37:06 UTC",
+  "previous": "c79c4f2edd2fb0cde93c37c7f7d331afdb34cd99",
+  "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+  "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
+  "delta": "2c2bdc347c6e892b6b8313f5950f47b168c896f8",
+  "appendix": "0e5c9fa9fbc76763ff65c55d80d7afc01b812177",
+  "changed": 2,
+  "unchangedExact": 18,
+  "literalForwardInverse": true,
+  "manifestEdges": 19,
+  "nominationUnchanged": true,
+  "oldSourceFactoryAndSealedDataUnchanged": true,
+  "measures": [
+    {
+      "role": "hostTest",
+      "bytes": 6790,
+      "sha256": "2dfbe443c914836cd97d1c366c5123a2e0adb15ebc4f9f68fd6270c7bcce540c",
+      "blob": "547b7efaa22f2777f19346324261dbf58f8d0dcb"
+    },
+    {
+      "role": "manifest",
+      "bytes": 6914,
+      "sha256": "438b8b288a8e5089ae45e167635b960975ff3fbb92cc69d79ddae05644e0ce78",
+      "blob": "7de81d5aa46a908d381550346dc72d64adfd6e81"
+    },
+    {
+      "role": "graph",
+      "bytes": 16187,
+      "sha256": "a3dcbba205c7a2cd5f7776e512f6b0b3f6624ef227616d398af8e674e2f8269e",
+      "blob": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2"
+    },
+    {
+      "role": "delta",
+      "bytes": 2557,
+      "sha256": "705746d9425f623cff2ed7338eb79ccb91a0b3c00eb99358c6e0238626e7ae46",
+      "blob": "2c2bdc347c6e892b6b8313f5950f47b168c896f8"
+    },
+    {
+      "role": "appendix",
+      "bytes": 6161,
+      "sha256": "ee630732ecda880bb48906b614994243ab21e87a5295427c3ba3ae4733a35b78",
+      "blob": "0e5c9fa9fbc76763ff65c55d80d7afc01b812177"
+    }
+  ],
+  "coveringCases": [
+    {
+      "case": "H22/no-hook",
+      "reasonedPath": "The fixture retains a handle but skips both the first take and the duplicate-take check. The attempted model read callbacks are not invoked and no final row is admitted.",
+      "sealedExpected": {
+        "mainCopies": 0,
+        "queries": 0,
+        "row": null
+      }
+    },
+    {
+      "case": "H22/missing-terminal",
+      "reasonedPath": "The first take consumes the mailbox and fails the journal qualification before reading M. A second take is checked and rejected. No query or final row is admitted.",
+      "sealedExpected": {
+        "mainCopies": 0,
+        "queries": 0,
+        "row": null
+      }
+    }
+  ],
+  "futureCommand": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs",
+  "executionStatus": "NOT_RUN_BY_DESIGN",
+  "sourceExecution": false
+}

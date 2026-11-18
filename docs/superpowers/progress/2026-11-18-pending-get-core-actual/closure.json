@@ -1,0 +1,33 @@
+{
+  "schema": "AFW.PENDING_GET.B1.CLOSURE/1",
+  "atUTC": "2026-11-18 13:44:27 UTC",
+  "rootGate": "af86007a3b96f5c6d73127501adddf26b1207679",
+  "branch": "lab/afw-c2-pending-get-20261118-model-green1",
+  "activeHead": "9afbe0683a0582a5f96712cb84da4805582079b2",
+  "activeTree": "8b7c46ab36b9e14c3bf71c5ede7cbec9f1b7756b",
+  "closedHead": "2c290229c1461020cc7b1b832e82bf56e920dcf0",
+  "closedTree": "cbed0d4fb221cd57efc704f4654013459b79165b",
+  "closedWorkflow": "ee8023e3d3b304fb21133f849e02e0cd763ce111",
+  "run": 44316286948,
+  "job": 134843146190,
+  "status": "completed",
+  "conclusion": "success",
+  "closedAtUTC": "2026-11-18 13:42:25 UTC",
+  "readback": "Exact candidate/closed trees compared before activation; only new workflow becomes dispatch-only/literalfalse. Terminal job followed by expected-head CAS to exact closed descendant, ref readback and one-run0active0closed-head census.",
+  "census": {
+    "runs": 1,
+    "active": 0,
+    "closedHeadRuns": 0
+  },
+  "protectedRefCount": 24,
+  "childChecks": {
+    "mounts": true,
+    "reversibleExtension": true,
+    "freshNamespaces": true,
+    "childPidAbsent": true,
+    "stagingReadback": true,
+    "tempAbsent": true,
+    "caseCount": true
+  },
+  "scope": "Trusted fixed-code MODEL namespace/PID/env/temp only; no global/native drain or credential-files isolation claim."
+}

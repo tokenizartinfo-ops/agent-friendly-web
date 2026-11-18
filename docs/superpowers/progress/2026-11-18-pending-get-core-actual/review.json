@@ -1,0 +1,182 @@
+{
+  "schema": "AFW.PENDING_GET.B1.ACTUAL_SPEC_AND_QUALITY_REVIEW/1",
+  "reviewBrief": "2496ac73f03c5d03696476a4eae7faf8571b57d9",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "One completed fixed-code GitHub Actions MODEL and scoped closure",
+    "ORIGIN": "GitHub API",
+    "RESOURCE_TYPE": "Immutable receipts plus fresh bounded GitHub metadata",
+    "RESOURCE_ID": "run 44316286948, job 134843146190, exact closed lab ref, detached review",
+    "ALLOWED_ACTION": "Read evidence and save/re-read this detached review. No re-execution or ref/run changes."
+  },
+  "pins": {
+    "staticReview": "bf0dd7e4e40b80368684562eb357791cab602aea",
+    "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+    "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
+    "rootGate": "af86007a3b96f5c6d73127501adddf26b1207679",
+    "primary": "efcd68cd3160f152499572134274ceaaa59a5c50",
+    "result": "f565a6c9c2bade7d12f9edf4f6085955dc59db98",
+    "rootValidation": "1fb0e2ffdc68c9bb540e28edc380fdcd32ee4ba0",
+    "closure": "cef969200ba9f26a8ac02e5cb5ef74a7543a7c59"
+  },
+  "verdicts": {
+    "SPEC": {
+      "verdict": "PASS",
+      "observation": "MODEL_GREEN_134_OBSERVED",
+      "reason": "Exit zero, M01 baseline status 503 and g1.503.L.0 with the matching sealed private-header digest, exact completion of all ordered 134 labels, all seven scoped checks and no outer or child failure."
+    },
+    "QUALITY": {
+      "verdict": "PASS",
+      "reason": "Independent carrier and reconstructed-frame fingerprints matched byte length, SHA256, Git SHA1 and the runner report. Fresh GitHub metadata binds the approved attempt and showed the exact closed ref with no live or closed-head run."
+    }
+  },
+  "independentData": {
+    "result": {
+      "bytes": 2230,
+      "sha256": "fd50870328713046259425655e3096135945c2bbe6d34a3efa8cd518afae2ec2",
+      "blob": "f565a6c9c2bade7d12f9edf4f6085955dc59db98"
+    },
+    "child": {
+      "bytes": 1214,
+      "sha256": "370f8f555679711d89558f6cd29e1e5faa0ca1584448575a4642858666263993",
+      "blob": "9f2c279f403d56418258b515a04326d8d07668e2"
+    },
+    "carrierTimestamp": "2026-11-18T13:41:42.1487672Z",
+    "childJsonKeyOrder": [
+      "schema",
+      "stage",
+      "custody",
+      "completed",
+      "activeCase",
+      "m01",
+      "error",
+      "failure"
+    ],
+    "subject": "The original child JSON plus a single LF was reconstructed from the trusted parent's named projection and compared to the recorded stdout digest and length. The outer carrier decoded canonically to the full immutable result bytes.",
+    "expectedM01HeaderDigest": "4c0cfbb96f9a9b3f656eaa70830893a4566ac9ad3480f604641b100b90ea2a5c",
+    "checks": {
+      "hashes": true,
+      "exactLabels": true,
+      "m01": true,
+      "outerResult": true,
+      "nestedResult": true,
+      "sevenChecks": true,
+      "custody": true,
+      "runBinding": true,
+      "jobBinding": true,
+      "workflowEvidence": true,
+      "artifactMetadata": true,
+      "ordering": true,
+      "bounds": true,
+      "closureRef": true,
+      "closureWorkflow": true,
+      "census": true,
+      "protectedRootReadbacks": true,
+      "scopeBinding": true
+    }
+  },
+  "observed": {
+    "run": {
+      "id": 44316286948,
+      "job": 134843146190,
+      "attempt": 1,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "9afbe0683a0582a5f96712cb84da4805582079b2",
+      "tree": "8b7c46ab36b9e14c3bf71c5ede7cbec9f1b7756b",
+      "branch": "lab/afw-c2-pending-get-20261118-model-green1",
+      "workflow": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+      "command": "node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs"
+    },
+    "job": {
+      "apiElapsedMilliseconds": 8000,
+      "step4": "Run only the sealed MODEL — success",
+      "step5": "Preserve the bounded evidence frame — success"
+    },
+    "result": {
+      "disposition": "MODEL_GREEN",
+      "stage": "classify",
+      "failure": null,
+      "child": {
+        "status": 0,
+        "signal": null,
+        "spawnError": null,
+        "stdoutBytes": 1214,
+        "stdoutSha256": "370f8f555679711d89558f6cd29e1e5faa0ca1584448575a4642858666263993",
+        "stderrBytes": 0
+      },
+      "checks": {
+        "mounts": true,
+        "reversibleExtension": true,
+        "freshNamespaces": true,
+        "childPidAbsent": true,
+        "stagingReadback": true,
+        "tempAbsent": true,
+        "caseCount": true
+      }
+    },
+    "frame": {
+      "stage": "assertions-passed",
+      "activeCase": null,
+      "failure": null,
+      "error": null,
+      "counts": {
+        "M": 30,
+        "Q": 35,
+        "H": 57,
+        "R": 12,
+        "total": 134
+      },
+      "order": "Exact sealed M01..M30, Q01..Q35, H01..H57 and R01..R12",
+      "m01": {
+        "status": 503,
+        "g1": "g1.503.L.0",
+        "privateHeaderSha256": "4c0cfbb96f9a9b3f656eaa70830893a4566ac9ad3480f604641b100b90ea2a5c"
+      }
+    },
+    "artifact": {
+      "id": 14433245420,
+      "name": "afw-c2-pending-get-model-green1",
+      "bytes": 1284,
+      "githubArchiveDigest": "sha256:7482fc310349d23dc0476edbe708864493bfd9e7b87d84f5334640c907cea080",
+      "archiveDownloaded": false
+    },
+    "closure": {
+      "head": "2c290229c1461020cc7b1b832e82bf56e920dcf0",
+      "tree": "cbed0d4fb221cd57efc704f4654013459b79165b",
+      "parent": "9afbe0683a0582a5f96712cb84da4805582079b2",
+      "workflowSha": "ee8023e3d3b304fb21133f849e02e0cd763ce111",
+      "status": "completed",
+      "conclusion": "success",
+      "atUTC": "2026-11-18 13:42:25 UTC",
+      "census": {
+        "runs": 1,
+        "active": 0,
+        "closedHeadRuns": 0
+      },
+      "workflowDispatch": true,
+      "pushTrigger": false,
+      "jobGuard": false,
+      "protectedRootPinsMatched": 24
+    }
+  },
+  "freshMetadata": [
+    "GitHub branch-filtered runs showed exactly the single completed attempt-1 push and the active head, tree and activation message. The exact run jobs endpoint returned the one expected job. Its ordered step metadata and timestamps matched the primary receipt. The approved workflow slice at the active head binds the exact command and fixed upload path.",
+    "GitHub artifact listing showed the single expected 1,284-byte archive, correct digest and tested run/head. The exact archived log line in the primary receipt records the same artifact ID and byte size after the result carrier.",
+    "The exact ref now points to the approved closed commit, whose sole parent is the run head. The closed workflow blob matches the expected dispatch-only trigger and literal false job guard. The branch census showed one successful run, zero active and zero on the closed head. The 24 protected-ref claims were compared across the Root gate and result validation. The fresh ref lookup here was limited to the nominated branch."
+  ],
+  "findings": [],
+  "evidenceBoundaries": [
+    "The exact 2,230-byte JSON comes from the trusted parent's fixed single-line stdout carrier after a regular-file write/readback. GitHub upload success and archive metadata were verified separately. This review did not download, hash or extract the ZIP. The 1,284-byte archive digest in GitHub metadata is distinct from the independently checked JSON and child stdout digests.",
+    "The model child shared the runner's unprivileged file identity. Scope is the named PID, validated namespace/env checks, staged-copy readback and temporary cleanup. There is no filesystem isolation, credential-file inaccessibility, global drain or independent inspection of the former runner's procfs claim.",
+    "This is an observed result only for the already executed finite B1 synchronous MODEL. No implementation re-review, Source or harness execution/import/eval/AST/syntax check/tests/builds or rerun occurred. It does not authorize B2 or qualify native callback/actor or Source integration, Task1, readiness or PC-off operation."
+  ],
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  }
+}

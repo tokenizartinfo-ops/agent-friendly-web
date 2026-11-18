@@ -1,0 +1,52 @@
+{
+  "schema": "AFW.PENDING_GET.B1.ROOT_ACTUAL_ACCEPTANCE/1",
+  "atUTC": "2026-11-18 13:49:22 UTC",
+  "review": "66571d025cf3f353dba60f2611705ef52decf862",
+  "primary": "efcd68cd3160f152499572134274ceaaa59a5c50",
+  "result": "f565a6c9c2bade7d12f9edf4f6085955dc59db98",
+  "validation": "1fb0e2ffdc68c9bb540e28edc380fdcd32ee4ba0",
+  "closure": "cef969200ba9f26a8ac02e5cb5ef74a7543a7c59",
+  "accepted": "B1 MODEL134 cases and bounded modeled process/branch closure only",
+  "counts": {
+    "M": 30,
+    "Q": 35,
+    "H": 57,
+    "R": 12,
+    "total": 134
+  },
+  "MODELOnly": true,
+  "B1Complete": true,
+  "fixRounds": 2,
+  "rulings": [
+    {
+      "decision": "Release B2 Source/fixture integration and finite native TOOL proposal only; no author or native execution yet.",
+      "why": "Core/codec/guard logic now has actual accepted MODEL_GREEN; real callback origin, generated transport, original D07 hook and actor route/cleanup remain unmeasured.",
+      "costIfWrong": "Discard detached integration proposal; BASE/Main/runtime and qualified B1 unchanged."
+    },
+    {
+      "decision": "Reuse accepted134 B1 MODEL evidence by exact core and vector pins; CAL_PREFLIGHT8s need not replay unchanged134 unless a B2 edit changes their implementation.",
+      "why": "Decomposed B1 already passed once; repeat only for changed behavior. Preserve original329/418 schedule ceilings and reserve input/generation/custody/newT/Eshape work.",
+      "costIfWrong": "Stop prelaunch if source/interface/custody/new controls cannot fit; no cap increase or unchanged replay."
+    }
+  ],
+  "B2Nomination": {
+    "branch": "lab/afw-c2-pending-get-20261118-native-tools1",
+    "message": "AFW-C2-PENDING-GET-NATIVE-TOOLS1-ONEUSE-20261118",
+    "workflow": ".github/workflows/afw-c2-pending-get-native-tools1.yml",
+    "job": "c2-pending-get-native-tools1",
+    "prefix": "docs/superpowers/source-lab/c2-pending-get-native-tools1/",
+    "runner": "docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-pending-get-native-tools1/run-pending-get-native-tools1.mjs",
+    "artifact": "afw-c2-pending-get-native-tools1",
+    "output": "output/c2-pending-get-native-tools1.json",
+    "refCreated": false,
+    "activationReleased": false,
+    "checkedUnusedAtUTC": "2026-11-18 13:49:22 UTC"
+  },
+  "SourceIntegrationProposalReleased": true,
+  "nativeExecutionReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

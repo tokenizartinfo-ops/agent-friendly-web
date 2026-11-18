@@ -1,0 +1,25 @@
+{
+  "schema": "AFW.PENDING_GET.B1.ACTUAL_REVIEW_BRIEF/1",
+  "atUTC": "2026-11-18 13:44:27 UTC",
+  "task": "Verify actual B1 MODEL_GREEN and scoped closure without rerun",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "staticReview": "bf0dd7e4e40b80368684562eb357791cab602aea",
+  "manifest": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+  "graph": "c8f6b1093ef8a0bc3008d5287eb3025be97240d2",
+  "rootGate": "af86007a3b96f5c6d73127501adddf26b1207679",
+  "primary": "efcd68cd3160f152499572134274ceaaa59a5c50",
+  "result": "f565a6c9c2bade7d12f9edf4f6085955dc59db98",
+  "RootValidation": "1fb0e2ffdc68c9bb540e28edc380fdcd32ee4ba0",
+  "closure": "cef969200ba9f26a8ac02e5cb5ef74a7543a7c59",
+  "expectedM01HeaderDigest": "4c0cfbb96f9a9b3f656eaa70830893a4566ac9ad3480f604641b100b90ea2a5c",
+  "requirements": "Independently decode exact carrier DATA and compare result rawbytes/hash/GitSHA. Reconstruct original child JSON+LF key order schema,stage,custody,completed,activeCase,m01,error,failure, compare1214B/hash. Verify134 exact ordered labels30M/35Q/57H/12R, M01actual503/g1/private-marker digest, stageassertionspassed/no activeCase/error/failure, all7checks, normalexit0/empty stderr/no signal/spawn error; bind actual attempt1push/job/head/tree/command success/upload metadata. Verify exact closed ref one run0active and no closed-head run. Be explicit raw ZIP not downloaded and no credential-file isolation/native Source proof. Scope actual fixed-code MODEL only, not another implementation review. DATA/text/hash and fresh bounded GitHub metadata reads allowed; no Source/core/harness execution/import/eval/AST/syntax/test/build, refs/runs/live auth/otherproject/subagents. Persist both SPEC+QUALITY verdicts/findings and fullreadback review<=24576B; final<=15lines.",
+  "nonclaims": {
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "SourceIntegrationReleased": false,
+    "nativeQualified": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  }
+}

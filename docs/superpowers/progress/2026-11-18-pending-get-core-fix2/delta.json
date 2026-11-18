@@ -1,0 +1,57 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX2.REVERSIBLE_LITERAL_DELTA/1",
+  "status": "PROPOSAL_NOT_RUN",
+  "reviewedBase": {
+    "manifest": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+    "graph": "d3f0eb7bb5d4f2fa61b89526a98560fb7bb63944",
+    "appendix": "0c1c3f5e8acf6564f4bfffc4dc066eeb5ef44962",
+    "package": "464750c843a09ac62b1e15a07a742d7c47a4ddff"
+  },
+  "review": "ba7d8d14512822fa48a5315984fc6550d2e03ebb",
+  "fixBrief": "de6039294c08795601acd8d90bfb27614bd732b3",
+  "changedMountedLeaves": [
+    {
+      "role": "hostTest",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "before": {
+        "gitBlob": "d326e347ab2de6c97b941a756f4b728ebfb4d3d0",
+        "utf8Bytes": 6780,
+        "sha256": "a390cc997123c27a6310d39dfa9eeb3334693afde63fa43afcb55f3984d3daee"
+      },
+      "after": {
+        "gitBlob": "547b7efaa22f2777f19346324261dbf58f8d0dcb",
+        "utf8Bytes": 6790,
+        "sha256": "2dfbe443c914836cd97d1c366c5123a2e0adb15ebc4f9f68fd6270c7bcce540c"
+      },
+      "literalReplacement": {
+        "line": 124,
+        "offsetBytes": 5463,
+        "remove": "    assert.equal(host.take(context, proof, readMain), false);\n",
+        "insert": "    if (take) assert.equal(host.take(context, proof, readMain), false);\n"
+      }
+    },
+    {
+      "role": "manifest",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/manifest.json",
+      "before": {
+        "gitBlob": "54d87513cab6ab5db7a0ef0e1ea6bfadf18b5025",
+        "utf8Bytes": 6914,
+        "sha256": "165418c8d6cedc87f1fd9befc22962bd07d61894715edd6b5c27c77553f9c0c9"
+      },
+      "after": {
+        "gitBlob": "7de81d5aa46a908d381550346dc72d64adfd6e81",
+        "utf8Bytes": 6914,
+        "sha256": "438b8b288a8e5089ae45e167635b960975ff3fbb92cc69d79ddae05644e0ce78"
+      },
+      "literalReplacement": {
+        "offsetBytes": 3614,
+        "remove": "80,\n      \"sha256\": \"a390cc997123c27a6310d39dfa9eeb3334693afde63fa43afcb55f3984d3daee\",\n      \"gitBlob\": \"d326e347ab2de6c97b941a756f4b728ebfb4d3d0",
+        "insert": "90,\n      \"sha256\": \"2dfbe443c914836cd97d1c366c5123a2e0adb15ebc4f9f68fd6270c7bcce540c\",\n      \"gitBlob\": \"547b7efaa22f2777f19346324261dbf58f8d0dcb"
+      }
+    }
+  ],
+  "apply": "At each byte offset, require the exact remove preimage, then replace it with insert. Inverse requires exact insert at the same offset and replaces it with remove. Preserve other bytes.",
+  "literalRoundtripVerifiedInRam": true,
+  "unchangedMountedLeaves": 18,
+  "treeActuallyCreated": false
+}
