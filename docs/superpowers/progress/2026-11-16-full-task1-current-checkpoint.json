@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "f8a4a5c284bfd36c44e5056983c250d070c86baa",
-  "phase": "TASK3_FULL20_DEADLINE_OR_ABORT_ADMITTED_CLOSED_REVIEW_PENDING",
+  "previousCheckpoint": "e2471b2b8957e51d949ce8e6c3ac33c0b810b58f",
+  "phase": "M_ORIGINAL_DEADLINE_ABORT_INVESTIGATION_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independently review admitted current full20 observation/closure. If accepted, investigate M's original deadline/abort boundary with no guessed timer extension, unchanged replay or QA attribution.",
+  "next": "Complete bounded static original M lease/abort/outstanding-work/cancellation/settlement investigation against accepted current occurrence; decide the smallest evidence-based next seam or repair without timer extension, extra IO or unchanged rerun.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1116,7 +1116,7 @@
       "actualReview": "4e33d04d9cf5a54a0821d24f0c40955c0427f815"
     },
     "task3": {
-      "status": "DEADLINE_OR_ABORT_ADMITTED_CLOSED_REVIEW_PENDING",
+      "status": "CURRENT_DEADLINE_OR_ABORT_OBSERVATION_ACCEPTED",
       "prepared": {
         "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
         "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
@@ -1175,11 +1175,24 @@
         "qaLastCompleted": "UNKNOWN",
         "targetActionDurationMs": 30008
       },
-      "actualReviewPending": true
+      "actualReviewPending": false,
+      "actualReview": "7dc02ce610fc0f9158cb911c16b81e996e54dec1",
+      "observationAccepted": true,
+      "repairReleased": false
+    },
+    "mDeadlineInvestigation": {
+      "status": "READ_ONLY_CODE_DEPENDENCY_INVESTIGATION_RUNNING",
+      "brief": "da0a80215e3a63cc8e61afa4e09295c999670ded",
+      "actor": "/root/get_winner_full20_carrier_review",
+      "currentBoundary": "DEADLINE_OR_ABORT",
+      "targetDurationMs": 30008,
+      "QAphase": "UNKNOWN",
+      "timerVsAbort": "UNKNOWN",
+      "sourceRepairOrNewRunReleased": false
     }
   },
-  "schemaVersion": 106,
-  "updatedAtUTC": "2026-11-18 00:43:51 UTC",
+  "schemaVersion": 107,
+  "updatedAtUTC": "2026-11-18 00:50:15 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
