@@ -1,3 +1,4 @@
+import {finiteCleanupPolicyHash} from '../lib/mcp-finite-cleanup-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as api from '../lib/mcp-qa-finite-trial-control.mjs';
@@ -59,6 +60,7 @@ test('handoff refuses a different closed target before the original alarm can mo
  const {f,handoff}=await prepared();
  const target=f.plan.deployments.canaryClosed;
  f.plan.deployments.canaryClosed={...target,configurationHash:'8'.repeat(64)};
+ f.plan.closePolicyHash=finiteCleanupPolicyHash(f.plan);
  const options=f.options(api),foreign=readPrivateQaFiniteControlIdentity({nativePin:options.nativePin,raw:options.plan});
  await assert.rejects(stagePrivateQaFiniteOriginalAlarmHandoff({storage:f.storage,control:foreign,source:handoff.source,check:f.now}));
  assert.equal(f.alarm,handoff.initialC0);
