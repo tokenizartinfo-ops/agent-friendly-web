@@ -71,7 +71,7 @@ test('fixed setup source verifies original native occurrence, seed and active QA
  assert.equal(f.seed.calls.length,11);
 });
 for(const mode of ['queued-before-seed','event-before-seed','failed-step','foreign-definition','foreign-version','pointer-drift','code-drift','foreign-seed','missing-credential','denied'])test('fixed setup source rejects '+mode,async t=>{
- const f=await scenario(t);
+ const f=await scenario(t,mode);
  await assert.rejects(f.read());
  if(mode==='missing-credential')assert.equal(f.provider.length,0);
 });
