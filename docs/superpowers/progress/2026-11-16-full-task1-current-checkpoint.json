@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "09346f5fc0618cbe435132bb0dca11e0f5f93287",
-  "phase": "SOURCE_NOTICE_SUBSCRIPTION_WITHDRAWAL_AND_FINAL_QA_CORRELATION_VERIFIED_LIVE_RECEIVER_PENDING",
+  "previousCheckpoint": "29a8119dedd7e087543daa082dca08c4ff86f50f",
+  "phase": "CLOUD_REVIEW_RECEIPT_AND_QA_LINK_SOURCE_VERIFIED_RECEIVER_DISABLED_CUSTODY_EXPIRED",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount the exact source-qualified receiver and retain the cloud assistant's own review receipt for the same event. Finish the native package semantic gates. Reassemble this exact revision with the private backups and qualify scoped fresh custody. Execute one real occurrence and verify notice received, reviewed, withdrawn and QA restored.",
+  "next": "Compose the source-qualified finite activation, exact-event delivery producer and receiver binding from the approved occurrence. Use the same opaque projected event at sender, authenticated recipient and QA. Install the separate review receipt schema on the approved trial DB only with rollback evidence. Approve and bind a dedicated cloud identity and exact execution to this original time window. Qualify a current scoped credential and assemble the exact private package with original rollback modules; staging build is incomplete. Run one real occurrence, read the assistant result and correlate the review and native subscription withdrawal; independently verify restored deployment.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 150,
-  "updatedAtUTC": "2026-11-18T19:50:19Z",
+  "schemaVersion": 151,
+  "updatedAtUTC": "2026-11-18T20:12:31Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2176,5 +2176,18 @@
     "currentCustody": "expired",
     "completePackage": false,
     "realCloudOccurrence": false
+  },
+  "cloudReviewReceipt": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-cloud-review-receipt-validation.json",
+    "evidence": "e85bcc844849c553b432306235fccf31e0f2fe85",
+    "head": "4fc9952cd938e4996e36d148dd148e985582aa2b",
+    "closed": "e4d5f17b5e6260667c14e176c3269f4a29515665",
+    "verifiedRun": 44388285681,
+    "tests": 40,
+    "receiverDryRun": true,
+    "currentCustody": "expired",
+    "actualReview": false,
+    "realTrial": false,
+    "completePackage": false
   }
 }

@@ -31,3 +31,11 @@ Falta montar los proveedores nativos de la ejecución y del receptor, y validar 
 La candidata usa el recibo original de la suscripción en D1 y comprueba el registro autenticado de esa misma suscripción antes de retirarla. La lectura posterior vuelve a comprobar el estado retirado. Para adjuntar la entrega al cierre, deriva la referencia del aviso a partir del evento guardado en la base primaria. Si la referencia no coincide, el cierre conserva la retirada comprobada y deja vacía la evidencia de entrega. La comprobación de restauración final de QA conserva el recibo coincidente y su huella. Pasaron 37 pruebas dirigidas. [GitHub Actions](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44384157419)
 
 Sigue pendiente la integración del recibo que debe producir el asistente en la nube cuando revise el aviso. El recibo HTTP solo registra la respuesta al envío. La compilación de esta revisión generó módulos para preparación. Cloudflare confirmó que la credencial fijada en el paquete sigue vencida y que las tres versiones cerradas conservan el 100 % del tráfico. La prueba real sigue pendiente. Por ahora Gabriel no necesita intervenir.
+
+## Recibo de revisión del asistente
+
+La candidata guarda el resultado de la revisión junto con su reserva original en una sola transacción. El servicio exige la identidad autenticada, la ejecución prevista y el identificador exacto del aviso. El recibo contiene referencias, huellas y fechas. QA solo lo adjunta al cierre si coincide con el aviso entregado y retirado y la revisión ocurrió antes del cierre. Si el recibo falta, la protección de cierre y restauración sigue disponible.
+
+Pasaron 40 pruebas dirigidas con datos sintéticos. El candidato de QA compiló para preparación y el gestor de Operaciones pasó una compilación sin despliegue. Cloudflare confirmó que la supervisión y el consumidor siguen desactivados y que la credencial de publicación sigue vencida. [GitHub Actions](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44388285681)
+
+Queda pendiente montar la entrega y el receptor en el entorno del ensayo, comprobar que compartan la referencia exacta, validar el paquete completo con acceso vigente y ejecutar la prueba. Ninguna de estas comprobaciones acredita un aviso revisado por el asistente real, una baja real ni la prueba con el ordenador apagado.

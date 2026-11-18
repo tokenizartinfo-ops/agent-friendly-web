@@ -1,0 +1,65 @@
+{
+  "purpose": "afw.finite-cloud-review-receipt.source-validation.v1",
+  "observedAtUTC": "2026-11-18T20:12:31Z",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "base": "9b6678fcca58ac88cb48dccd6e15abe3597d012e",
+  "source": "4fc9952cd938e4996e36d148dd148e985582aa2b",
+  "verificationDisabled": "e4d5f17b5e6260667c14e176c3269f4a29515665",
+  "red": {
+    "run": 44387399916,
+    "passed": 37,
+    "expectedFailure": 1
+  },
+  "green": {
+    "run": 44388285681,
+    "job": 135098703214,
+    "tests": 40,
+    "passed": 40,
+    "failed": 0,
+    "skipped": 0,
+    "qaStagingCompiled": true,
+    "operationsManagerDryRun": true,
+    "completePackage": false
+  },
+  "sourceVerification": {
+    "scopedServiceJwtRequired": true,
+    "exactExecutionAndEventRequired": true,
+    "atomicOriginalRunAndReviewReceipt": true,
+    "forgedActorAndAlternateExecutionRejected": true,
+    "rollbackOfAbortedD1BatchVerified": true,
+    "qaReadOnlyBindingAndSameNoticeRequired": true,
+    "receiptPreservedAfterQaRestorationInFixture": true,
+    "reviewUnavailableDoesNotAuthorizeEffects": true
+  },
+  "provider": {
+    "observedAtUTC": "2026-11-18T20:04:19.426Z",
+    "publicationCustody": {
+      "status": "expired",
+      "expiresAt": "2026-11-08T02:59:59Z"
+    },
+    "receiverFlags": [
+      {
+        "name": "AFW_DOSSIER_SUPERVISION_ENABLED",
+        "enabled": false
+      },
+      {
+        "name": "AFW_OPERATIONS_CONSUMER_ENABLED",
+        "enabled": false
+      }
+    ]
+  },
+  "activeReleaseMutations": false,
+  "receiverLiveForThisOccurrence": false,
+  "realCloudReviewVerified": false,
+  "realSameNoticeReceipt": false,
+  "realSubscriptionWithdrawalVerified": false,
+  "realTrialExecuted": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "remaining": [
+    "Compose the source-qualified finite activation, exact-event delivery producer and receiver binding from the approved occurrence. Use the same opaque projected event at sender, authenticated recipient and QA.",
+    "Install the separate review receipt schema on the approved trial DB only with rollback evidence. Approve and bind a dedicated cloud identity and exact execution to this original time window.",
+    "Qualify a current scoped credential and assemble the exact private package with original rollback modules; staging build is incomplete.",
+    "Run one real occurrence, read the assistant result and correlate the review and native subscription withdrawal; independently verify restored deployment."
+  ]
+}
