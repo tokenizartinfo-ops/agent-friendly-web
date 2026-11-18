@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "32184e07382d32edfba07b021adf2def14f02574",
-  "phase": "Native QA observer and GET-only launch now reconstruct the same canonical plan from original installed private expediente, GitHub seed and provider role pins.",
+  "previousCheckpoint": "cfba03ad76f73ad2a440e3852f2bf2ec3f17e71a",
+  "phase": "Native shared plan and GitHub adoption use the original observer-projected plan and completed Cloudflare installation.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Pass the actual observer-supplied external plan into GitHub finalizer adoption, wire the fixed effect producers and cleanup, then validate and publish the complete package with a valid scoped credential for one real same-notice trial.",
+  "next": "Implement fixed native primary launch, observation and guard/closure operations and qualify the full package with current scoped custody, then run one correlated cloud notice, review and withdrawal trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 161,
-  "updatedAtUTC": "2026-11-18T22:49:31Z",
+  "schemaVersion": 162,
+  "updatedAtUTC": "2026-11-18T22:53:56Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2297,6 +2297,16 @@
     "closed": "2f5f9220ff27f38b344f654d05a023e7c62f26d1",
     "verifiedRun": 44414900785,
     "tests": 68,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "observerDerivedAdoption": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-observer-derived-adoption-validation.json",
+    "evidence": "c4190c502bda26f9bdea51eba97ead21ee1f7092",
+    "head": "39e2a0442cc6d6473ea2a1d02a0bfbf513aa355e",
+    "closed": "d81d7e14b6f50b9bb57edb3a3041be07cad59ce7",
+    "verifiedRun": 44415680874,
+    "tests": 76,
     "completePackage": false,
     "realCloudOccurrence": false
   }

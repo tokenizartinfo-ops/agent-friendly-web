@@ -1,0 +1,32 @@
+{
+  "schema": "afw.observer-derived-adoption-validation.v1",
+  "observedAtUTC": "2026-11-18T22:53:56Z",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-observer-derived-adoption-20261118",
+  "head": "39e2a0442cc6d6473ea2a1d02a0bfbf513aa355e",
+  "tree": "8a72f817b89a5eb6db055ae5da47b1e06cd4455c",
+  "closed": "d81d7e14b6f50b9bb57edb3a3041be07cad59ce7",
+  "closedTree": "b1a1797e67a1a37c569135856ff135a666b3e3cc",
+  "run": 44415680874,
+  "tests": {
+    "pass": 76,
+    "fail": 0,
+    "skipped": 0
+  },
+  "validated": [
+    "Private QA observer publishes its checked external plan and setup receipt hash in one bounded first read.",
+    "GitHub finalizer resolves original seed and QA publication, reads the native observer and independently matches the actual setup receipt, canary version/deployment/configuration, original command and finalizer job, before attempting READY.",
+    "The real CLI/source path ran against synthetic provider evidence and rejected absent or foreign plans, missing or different receipts, and a later preview attempt.",
+    "The observer only returns terminal output if the finalizer returns the same source-derived plan."
+  ],
+  "remaining": [
+    "Wire actual primary launch, guard and closure/finalizer capabilities. Functions remain fail-closed.",
+    "Validate a complete publishable package and configure scoped current credentials. Existing scoped custody expired.",
+    "Perform one real cloud occurrence and independently verify correlated receipt, assistant review and native unsubscribe before physical PC-off evidence."
+  ],
+  "completePackage": false,
+  "operationalReadiness": false,
+  "realCloudOccurrence": false,
+  "ownerActionNeededNow": false,
+  "cloudflareMutated": false
+}
