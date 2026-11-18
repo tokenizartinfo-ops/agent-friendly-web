@@ -18,7 +18,7 @@ function fixture(){
  const original={T0:p.T0,C0:p.C0,C1:p.C1,permissionExpiresAt:p.R1+30001,selectors:p.selectors,
   grantHash:p.grantHash,monitorHash:p.monitorHash,eventPlanHash:p.eventPlanHash,withdrawalPolicyHash:p.withdrawalPolicyHash,
   legacy:p.legacy,rollback:{versionId:canaryClosed.versionId,deploymentId:canaryClosed.deploymentId,
-   rawConfigurationHash:canaryClosed.configurationHash,module:canaryClosed.module}};
+   rawConfigurationHash:canaryClosed.configurationHash,module:structuredClone(canaryClosed.module)}};
  const record={bundleHash:p.bundleHash,artifact:{sourceRevision:source.revision,sourceTree:source.tree,programHash:p.selectors.programHash,
   workerHash:receipt.moduleHash},policy:{plan:{trialId:p.trialId}}};
  const material={
@@ -26,7 +26,7 @@ function fixture(){
   seed:{repository:p.command.repository,commandId:p.command.id,intentId:p.intentId,sourceRevision:source.revision,
    finalizer:{runId:p.finalizer.runId,jobId:p.finalizer.jobId,attempt:1},manifest:{sourceRevision:source.revision,sourceTree:source.tree,
     modules:{qaLive:{module:qaLive.module,publicStatic:{profileHash:source.profileHash,bindingsHash:source.bindingsHash}},canaryLive:{module:canaryLive.module,publicStatic:{profileHash:p.canaryContainment.profileHash,bindingsHash:p.canaryContainment.bindingsHash}}}},
-   qaPublication:{qaLive,qaClosed}},
+   qaPublication:{qaLive:structuredClone(qaLive),qaClosed:structuredClone(qaClosed)}},
  };
  const roles={deployments:{qaLive,qaClosed,canaryLive,canaryClosed,operatorClosed},resources:p.resources};
  return {p,input:{material,roles,installed:{receipt,record,original},trialId:p.trialId}};
@@ -46,6 +46,7 @@ test('shared plan denies drift in seed, role pins, original time, and trial iden
   x=>x.material.primaryEvidence.T0++,
   x=>x.roles.deployments.canaryLive.configurationHash='b'.repeat(64),
   x=>x.roles.deployments.qaLive.deploymentId='00000000-0000-4000-8000-000000000001',
+  x=>x.roles.deployments.canaryClosed.module.bytes++,
   x=>x.trialId='c'.repeat(64),
  ]){const x=structuredClone(fixture().input);mutate(x);assert.throws(()=>buildPrivateQaFiniteSharedPlan(x));}
 });
