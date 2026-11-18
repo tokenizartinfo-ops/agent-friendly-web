@@ -15,6 +15,8 @@ async function fixture(mode='normal',offset=100){
  f.base.f.setNow(T0+offset);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
  const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:context.repository,GITHUB_REPOSITORY_ID:context.repositoryId,GITHUB_REF:context.ref,GITHUB_EVENT_NAME:context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:sha,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'};
  const reads=[],sleeps=[],writes=[],all=[];const material=await readFiniteMaterialSeed({intentId:a.intentId,sourceRevision:sha,fetchImpl:f.fetchImpl,now:f.base.f.now});if(mode!=='preview-receipt-missing')f.state.setupReceiptHash=mode==='preview-receipt-changed'?'9'.repeat(64):syntheticSetupReceipt(f.p,material.seedHash).receiptHash;
+ if(mode==='observer-native-step')f.state.previewStepName='finite-material-preview-1';
+ if(mode==='observer-retried-step')f.state.previewStepName='finite-material-preview-2';
  if(mode.startsWith('observer-plan-')){
   f.state.observerPlan=structuredClone(f.p);
   if(mode==='observer-plan-other-job')f.state.observerPlan.finalizer.jobId++;
@@ -68,4 +70,9 @@ for(const mode of ['observer-plan-other-job','observer-plan-other-canary','obser
  const r=await fixture(mode);
  assert.equal(r.result.status,'admin_pending');
  assert.equal(r.writes.some(write=>write.path==='afw-finite-plan.json'),false);
+});
+
+test('adoption accepts the first native receipt suffix and rejects a different attempt',async()=>{
+ assert.equal((await fixture('observer-native-step')).result.status,'ready');
+ assert.equal((await fixture('observer-retried-step')).result.status,'admin_pending');
 });
