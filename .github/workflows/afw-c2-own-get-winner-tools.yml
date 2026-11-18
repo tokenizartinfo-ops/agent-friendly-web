@@ -1,18 +1,11 @@
 name: AFW independent public GET winner controls
 on:
-  push:
-    branches:
-      - lab/afw-c2-own-20261117-get-winner-tools
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
   c2-own-get-winner-tools:
-    if: >-
-      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
-      github.event_name == 'push' &&
-      github.ref == 'refs/heads/lab/afw-c2-own-20261117-get-winner-tools' &&
-      github.run_attempt == 1 &&
-      github.event.head_commit.message == 'AFW-C2-OWN-GET-WINNER-TOOLS-ONEUSE-20261117'
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
