@@ -1,3 +1,4 @@
+import {finiteAdmissionIdentity} from '../lib/mcp-own-finite-cleanup-proof.mjs';
 import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -9,8 +10,9 @@ const stores=await import('../lib/mcp-qa-finite-cleanup-store.mjs').catch(()=>({
 test('finite guard and fixed native alarm adapter are available',()=>{
  for(const k of ['createPrivateQaFiniteTrialGuard','runPrivateQaFiniteTrialAlarm'])assert.equal(typeof api[k],'function');
 });
-async function setup({missing,pending=false}={}){
+async function setup({missing,pending=false,ownNamespace}={}){
  const f=finiteFixture(),base=f.storage.transaction;f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
+ if(ownNamespace)f.env.AFW_RELEASE_EVENTS_NODE=ownNamespace(f.plan);
  let store,armed;
  f.primary.effect=async kind=>{const r=await store.read();if(r.status!=='observed')return null;return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
  if(pending)f.primary.finalizer=async()=>{throw Error('synthetic unavailable first finalizer');};
@@ -77,26 +79,66 @@ test('unavailable first finalizer leaves pending native cleanup, never nominal a
  await assert.rejects(()=>x.store.completion());
 });
 
-test('native QA alarm resolves capabilities only for the retained control',async()=>{
- const x=await setup(),headKey='afw.qa-finite-trial.v1:head',original=x.f.rows.get(headKey);
+test('native QA alarm derives fixed effects only for the retained control',async()=>{
+ const rpcCalls=[];
+ let observed;
+ const x=await setup({ownNamespace:p=>{
+  const id={toString:()=>p.resources.containerId};
+  return {
+   idFromName(name){assert.equal(name,'afw-own-event-first-successor-v1');return id;},
+   get(value){
+    assert.equal(value,id);
+    return {
+     async withdrawFiniteTrialPermissions(){rpcCalls.push('withdraw');},
+     async closeFiniteTrial(){rpcCalls.push('close');},
+     async readFiniteTrialReductionReceipts(){
+      return {
+       withdraw:{purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,
+        permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false},
+       close:{closed:true,runtimeStopRequested:true}
+      };
+     },
+     async sealFiniteTrialAdmission(){
+      rpcCalls.push('seal');
+      const identity=finiteAdmissionIdentity(x.capabilities.identity);
+      const purpose='afw.own-finite-admission.v1',identityHash=finiteHash({purpose,identity});
+      const seal={purpose:purpose+':seal',identityHash,sealedAt:x.f.now()};
+      observed={status:'observed',identity,identityHash,sealed:true,seal,sealHash:finiteHash(seal),
+       writers:{},unresolvedWriters:0,launchNeverIssued:true,authorizesEffects:false,operationalReadiness:false};
+     },
+     async readFiniteTrialAdmissionJournal(){return observed;},
+     async readFiniteTrialCleanupReadiness(){rpcCalls.push('ready');return {status:'not_yet_observed'};}
+    };
+   }
+  };
+ }});
+ const headKey='afw.qa-finite-trial.v1:head',original=x.f.rows.get(headKey);
  const guard=api.createPrivateQaFiniteTrialGuard(x.options());
  assert.equal((await guard.arm()).status,'armed');
+ const {identity,readPrimary}=x.capabilities,p=x.f.plan;
  let loads=0;
  api.installPrivateQaFiniteNativeGuardFactory(async({ctx,env,head})=>{
   loads++;assert.equal(ctx,x.f.ctx);assert.equal(env,x.f.env);
   assert.deepEqual(head,original);
-  return x.options();
+  return {ctx,env,control:x.control,now:x.f.now,capabilities:{identity,readPrimary},closureSource:{
+   readPrimary:async()=>{throw Error('no native proof yet');},
+   readReadCredential:async()=>{throw Error('no native proof yet');},
+   readPublishCredential:async()=>{throw Error('no native proof yet');},
+   qualifiedExecution:{intentId:p.intentId,controlHash:identity.controlHash,sourceRevision:p.source.revision,
+    moduleHash:p.source.moduleHash,confirmationId:p.workflows.confirmation,observerId:p.workflows.bootstrap,admissionHash:'a'.repeat(64)}
+  }};
  });
- x.f.setNow(x.f.plan.C0+3);
+ x.f.setNow(p.C0+3);
  x.f.rows.set(headKey,{...original,controlHash:'b'.repeat(64)});
  assert.equal((await api.runPrivateQaFiniteTrialAlarm({ctx:x.f.ctx,env:x.f.env})).status,'admin_pending');
  assert.equal(loads,0);
- assert.deepEqual(x.calls,[]);
+ assert.deepEqual(rpcCalls,[]);
 
  x.f.rows.set(headKey,original);
  const result=await api.runPrivateQaFiniteTrialAlarm({ctx:x.f.ctx,env:x.f.env});
- assert.equal(result.status,'complete');
+ assert.equal(result.status,'admin_pending');
  assert.equal(loads,1);
- assert.deepEqual(x.calls,['withdraw','close','seal','canary_restore']);
- assert.equal((await x.store.completion()).status,'complete');
+ assert.deepEqual(rpcCalls,['withdraw','close','seal','ready']);
+ assert.deepEqual(x.calls,[]);
+ assert.equal((await x.store.completion()).status,'not_yet_observed');
 });
