@@ -1,0 +1,165 @@
+{
+  "schema": "AFW.C2.GET_WINNER.QUALIFIED_OWN_MEMORY_INTAKE_SCOPE/1",
+  "atUTC": "2026-11-18 00:27:46 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "plan": "0b8368869f60978c536b056c37e451f8c899f93f",
+    "task": "Task2 explicit prior tiny pure-OWN memory admission exception, exact graph/data/scope separately recorded",
+    "nativeOwnActualReview": "4e33d04d9cf5a54a0821d24f0c40955c0427f815",
+    "nativeGraph": "979f3c7a8c00c39ee530f167a6800caa22bea2df"
+  },
+  "allowedAction": "Initialize only exact already-qualified pure OWN module graph and invoke readGetWinnerActual once on separately preserved future Source primary plus independently acquired Root context. No rerun of MODEL tests or producer evaluation.",
+  "modules": [
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/reader.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "44a8fd8dfb1e7869dde55967935d4e213c85ef5b",
+      "bytes": 6535,
+      "sha256": "e6fffeed29576f3a7ef61b9ca5f8c6de24b9c7f084c1ceeddb0a34c8fd4a7037"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/bindings.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dd4f2c1899f204be38dacf25e0559809ba870256",
+      "bytes": 10695,
+      "sha256": "b210a36fdf99c7c5618ec8f6b35154d921d5d89e53200412dfe0719999c5afeb"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/get-winner.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cdd6f2a40d379251999c6f80e9eb43228635ff84",
+      "bytes": 4218,
+      "sha256": "a34e522816005114d725bd6b1b911421b740e075ba3bc6f686657172a7f2dab8"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+      "bytes": 9733,
+      "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+      "bytes": 3355,
+      "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+      "bytes": 4511,
+      "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+      "bytes": 2440,
+      "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8e794a8039575694aa53064eccc4ed397e8d19a4",
+      "bytes": 2726,
+      "sha256": "2d24ac7238028ce13eac83eaf20539d49710f011ba8914fcb5626f1fe592ec9a"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+      "bytes": 5365,
+      "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+      "bytes": 35339,
+      "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+    }
+  ],
+  "data": [
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-source-proposal.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5",
+      "bytes": 26775,
+      "sha256": "652c72ff3c54691c3135bb031c73ca5038621619d06d28b3cc4fc428efa43393"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-root26.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dd2899bb2c0883008ccb12dfb911f0d10aecb072",
+      "bytes": 14965,
+      "sha256": "3d10759d3f6ac2bc76d6dc5320fbc7f279f4893a509a5f336adacdffda56fb0a"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+      "bytes": 35611,
+      "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+      "bytes": 4403,
+      "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/model26.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "75154471e2ea014677fc5176ff2f734262a3c365",
+      "bytes": 7052,
+      "sha256": "dc70e49b84bb834a38d2306440d977eaf4d8f5a6d802da29b0ddea13b1fc4bfc"
+    }
+  ],
+  "builtins": {
+    "crypto": [
+      "createHash"
+    ],
+    "fs": [
+      "readFileSync: sealed RAM-only allowlist; copy buffers; deny all other paths"
+    ],
+    "zlib": [
+      "inflateRawSync"
+    ]
+  },
+  "context": "Isolated VM with primitive JS/Buffer/URL/TextDecoder/structuredClone, no process, network, dynamic import or local filesystem capability; modules source bytes/hash independently rechecked.",
+  "rootInput": "Saved immutable actual GHA primary and independent expected head/tree/run/job/step/artifact IDs, never recovered from public payload.",
+  "calls": 0,
+  "SourceOrBusinessExecution": false,
+  "localFilesCreated": false,
+  "reasonForMinimalLocalUse": "Tiny qualified read-only evidence admission in RAM; avoids clones/builds/dependencies and never operates product runtime. Actual jobs and durable evidence stay in GitHub.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
