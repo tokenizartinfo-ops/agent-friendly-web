@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "29a8119dedd7e087543daa082dca08c4ff86f50f",
-  "phase": "CLOUD_REVIEW_RECEIPT_AND_QA_LINK_SOURCE_VERIFIED_RECEIVER_DISABLED_CUSTODY_EXPIRED",
+  "previousCheckpoint": "fc80511327b1c1c22f9d189b9659964c2875b30e",
+  "phase": "PRIVATE_CLOUDFLARE_RECEIVER_RPC_AND_RESTORATION_VERIFIED_QA_PROFILE_PINNED_FULL_PACKAGE_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,9 +112,9 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Compose the source-qualified finite activation, exact-event delivery producer and receiver binding from the approved occurrence. Use the same opaque projected event at sender, authenticated recipient and QA. Install the separate review receipt schema on the approved trial DB only with rollback evidence. Approve and bind a dedicated cloud identity and exact execution to this original time window. Qualify a current scoped credential and assemble the exact private package with original rollback modules; staging build is incomplete. Run one real occurrence, read the assistant result and correlate the review and native subscription withdrawal; independently verify restored deployment.",
+  "next": "Build and qualify the missing native launch and confirmation sources with the fixed isolated review binding. Qualify current package custody and the exact candidate before one new end-to-end cloud occurrence. Correlate the received notice with the authenticated review, native unsubscribe and the restored deployment.",
   "noLocalSourceExecution": true,
-  "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
+  "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
     "temporarilyDisconnecting": false,
     "resumedAtUTC": "2026-11-16 20:51:24 UTC",
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 151,
-  "updatedAtUTC": "2026-11-18T20:12:31Z",
+  "schemaVersion": 152,
+  "updatedAtUTC": "2026-11-18T20:37:27Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1938,7 +1938,7 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": true,
+  "noRuntimeMutationThisBlock": false,
   "ownerActionNeededNow": false,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
@@ -2188,6 +2188,19 @@
     "currentCustody": "expired",
     "actualReview": false,
     "realTrial": false,
+    "completePackage": false
+  },
+  "privateCloudReceiverLink": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-private-cloud-review-binding-validation.json",
+    "evidence": "aca88d93e4155a8f576dd545b107abffca8056d2",
+    "source": "1dacd9239884d4f4822b1b3bd147d594d3143c53",
+    "closed": "d2f77e24efd2420561e23451d8dbb6796e8a15fc",
+    "run": 44392388447,
+    "db": "5461cad0-4cde-45b4-ab09-ed48e1f72b1a",
+    "receiver": "agent-friendly-web-finite-review-qa",
+    "caller": "agent-friendly-web-finite-review-link-qa",
+    "actualCloudBindingVerified": true,
+    "liveBusinessTrial": false,
     "completePackage": false
   }
 }

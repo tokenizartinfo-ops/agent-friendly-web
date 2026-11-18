@@ -1,0 +1,226 @@
+{
+  "purpose": "afw.cloud-private-dossier-review-link-validation.v1",
+  "observedAtUTC": "2026-11-18T20:37:27Z",
+  "project": "AFW",
+  "boundaries": {
+    "isolatedQaOnly": true,
+    "workerPublicRoutesCreated": false,
+    "sharedDeploymentsMutated": false,
+    "transferTemporariesRemoved": true
+  },
+  "sources": {
+    "receiverBuild": {
+      "run": 44390147145,
+      "source": "64751bade50e96c7bada26c4e64b58e7e61c05d2",
+      "parent": "e4d5f17b5e6260667c14e176c3269f4a29515665",
+      "retiredVerification": "1f2740b4dd14318072ad07cbc8abd38ff0cea9c0",
+      "artifact": 14467339098,
+      "moduleSha256": "4aeeca1fd074b8da6d9256dd94c09489669323bd3d28a5f1fade6708b14d0dc7",
+      "moduleBytes": 93145
+    },
+    "qaProfile": {
+      "run": 44392388447,
+      "job": 135113196442,
+      "source": "1dacd9239884d4f4822b1b3bd147d594d3143c53",
+      "retiredVerification": "d2f77e24efd2420561e23451d8dbb6796e8a15fc",
+      "passed": 28,
+      "completePackage": false
+    }
+  },
+  "database": {
+    "atUTC": "2026-11-18T20:22:24.624Z",
+    "id": "5461cad0-4cde-45b4-ab09-ed48e1f72b1a",
+    "name": "agent-friendly-web-finite-review-qa",
+    "appliedStatements": 7,
+    "objects": [
+      {
+        "type": "table",
+        "name": "dossier_supervision_events"
+      },
+      {
+        "type": "trigger",
+        "name": "dossier_supervision_finite_review_no_delete"
+      },
+      {
+        "type": "trigger",
+        "name": "dossier_supervision_finite_review_no_update"
+      },
+      {
+        "type": "table",
+        "name": "dossier_supervision_finite_reviews"
+      },
+      {
+        "type": "index",
+        "name": "dossier_supervision_project_revision"
+      },
+      {
+        "type": "index",
+        "name": "dossier_supervision_run_time"
+      },
+      {
+        "type": "table",
+        "name": "dossier_supervision_runs"
+      }
+    ],
+    "rows": {
+      "events": 0,
+      "runs": 0,
+      "reviews": 0
+    }
+  },
+  "receiverClosed": {
+    "atUTC": "2026-11-18T20:24:41.635Z",
+    "created": true,
+    "name": "agent-friendly-web-finite-review-qa",
+    "dbId": "5461cad0-4cde-45b4-ab09-ed48e1f72b1a",
+    "deploymentId": "7d7ae80d-7d64-4c99-9c86-99f111b0549c",
+    "versionId": "47e8e866-8656-4e6a-b922-3abe33d9c68d",
+    "sha256": "4aeeca1fd074b8da6d9256dd94c09489669323bd3d28a5f1fade6708b14d0dc7",
+    "workersDev": false,
+    "previews": false,
+    "closedFlags": 3
+  },
+  "caller": {
+    "name": "agent-friendly-web-finite-review-link-qa",
+    "atUTC": "2026-11-18T20:29:25.007Z",
+    "versionId": "ca5a88b6-c0de-4c27-a760-1fa6f27dfbc3",
+    "previousVersion": "b50dd818-cde8-4535-97b9-2ccc8c50e9cd",
+    "deploymentId": "3f3a6d50-e529-48d4-ae65-6b9a6459035d",
+    "service": "agent-friendly-web-finite-review-qa",
+    "entrypoint": "FiniteDossierReviews"
+  },
+  "workflow": {
+    "atUTC": "2026-11-18T20:26:02.720Z",
+    "created": true,
+    "id": "bc8b39a8-0e03-4820-9b06-1daf327a6622",
+    "name": "afw-finite-review-link-qa",
+    "script": "agent-friendly-web-finite-review-link-qa"
+  },
+  "diagnostics": [
+    {
+      "id": "afw-private-review-link-smoke-20261118-1",
+      "status": "errored",
+      "beforeStep": true,
+      "cause": "Workflows rejected the initial step configuration",
+      "restoredVersionReadback": "47e8e866-8656-4e6a-b922-3abe33d9c68d"
+    },
+    {
+      "id": "afw-private-review-link-smoke-20261118-2",
+      "status": "complete",
+      "version": "c9e04c6f-f9f4-41c8-abc5-202b79beffb1",
+      "steps": 1,
+      "attempts": 1,
+      "receipt": {
+        "purpose": "afw.private-receiver-link-receipt.v1",
+        "privateRpcReached": true,
+        "exactScopeEmpty": true,
+        "foreignScopeEmpty": true,
+        "cloudReviewConfirmed": false,
+        "operationalReadiness": false
+      },
+      "reviewCounts": {
+        "events": 0,
+        "runs": 0,
+        "reviews": 0
+      },
+      "namedBinding": {
+        "entrypoint": "FiniteDossierReviews",
+        "environment": "production",
+        "name": "AFW_FINITE_DOSSIER_REVIEW_RECEIVER",
+        "service": "agent-friendly-web-finite-review-qa",
+        "type": "service"
+      },
+      "restoredVersion": "47e8e866-8656-4e6a-b922-3abe33d9c68d",
+      "closedDeployment": "57891230-01ab-4ae4-a38d-9465bcebe544",
+      "closedFlags": 3
+    }
+  ],
+  "finalControlPlane": {
+    "atUTC": "2026-11-18T20:33:18.927Z",
+    "deployed": [
+      {
+        "name": "agent-friendly-web-independent-closure-qa",
+        "baseline": true
+      },
+      {
+        "name": "agent-friendly-web-operations-manager",
+        "baseline": true
+      },
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "baseline": true
+      },
+      {
+        "name": "agent-friendly-web-release-operator",
+        "baseline": true
+      }
+    ],
+    "lab": [
+      {
+        "name": "agent-friendly-web-finite-review-qa",
+        "version": "47e8e866-8656-4e6a-b922-3abe33d9c68d",
+        "percentage": 100,
+        "activeFlags": [
+          [
+            "AFW_DOSSIER_FINITE_REVIEW_ENABLED",
+            "false"
+          ],
+          [
+            "AFW_DOSSIER_SUPERVISION_ENABLED",
+            "false"
+          ],
+          [
+            "AFW_OPERATIONS_CONSUMER_ENABLED",
+            "false"
+          ]
+        ],
+        "workersDev": false,
+        "previews": false,
+        "schedules": 0,
+        "tails": 0
+      },
+      {
+        "name": "agent-friendly-web-finite-review-link-qa",
+        "version": "ca5a88b6-c0de-4c27-a760-1fa6f27dfbc3",
+        "percentage": 100,
+        "activeFlags": [],
+        "workersDev": false,
+        "previews": false,
+        "schedules": 0,
+        "tails": 0
+      }
+    ],
+    "workflow": {
+      "id": "bc8b39a8-0e03-4820-9b06-1daf327a6622",
+      "script": "agent-friendly-web-finite-review-link-qa",
+      "schedules": null,
+      "instances": [
+        {
+          "id": "afw-private-review-link-smoke-20261118-2",
+          "status": "complete"
+        },
+        {
+          "id": "afw-private-review-link-smoke-20261118-1",
+          "status": "errored"
+        }
+      ],
+      "total": 2
+    }
+  },
+  "cloudflareConnectorReadWriteVerified": true,
+  "pinnedPublicationCustody": {
+    "status": "expired",
+    "expiresAt": "2026-11-08T02:59:59Z"
+  },
+  "sourceGates": [
+    "Native launch context, material and operations remain unavailable",
+    "Native confirmation material remains unavailable",
+    "Native source qualification and custody remain unavailable",
+    "The complete package compiler stops after staging"
+  ],
+  "realEvent": false,
+  "realCloudReview": false,
+  "realSubscriptionWithdrawn": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}
