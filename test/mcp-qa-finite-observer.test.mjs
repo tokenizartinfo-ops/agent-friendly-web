@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finiteFinalizerFixture} from './fixtures/finite-finalizer.mjs';
-import {runPrivateQaFiniteObserver,installPrivateQaFiniteObserverSource,FINITE_OBSERVER_OPERATION,FINITE_PREVIEW_STEP,FINITE_CLAIM_STEP} from '../lib/mcp-qa-finite-observer.mjs';
+import {runPrivateQaFiniteObserver,installPrivateQaFiniteObserverSource,FINITE_OBSERVER_OPERATION,FINITE_PREVIEW_STEP,FINITE_CLAIM_STEP,validateFiniteObserverPreviewEnvelope} from '../lib/mcp-qa-finite-observer.mjs';
 let installed=false;
 async function fixture(){
  const f=await finiteFinalizerFixture(),v=f.preview;let samples=0,claims=0,finalReads=0,at=v.T0,readyAt=v.C0;
@@ -69,4 +69,14 @@ test('finite-only observer refuses a preview without the setup receipt before an
  f.actor.fetch=async()=>Response.json({material:f.v});
  const result=await runPrivateQaFiniteObserver({...f,requireSetupReceipt:true});
  assert.equal(result.status,'admin_pending');assert.equal(f.samples,0);assert.equal(f.claims,0);
+});
+
+test('adoption only accepts a preview with the independently read setup receipt',async()=>{
+ const f=await fixture(),expected='8'.repeat(64),provenance=f.f.output.provenance,material=f.v;
+ const receipt={purpose:'afw.finite-observer-preview.v2',provenance,material,setupReceiptHash:expected};
+ assert.deepEqual(validateFiniteObserverPreviewEnvelope(receipt,{setupReceiptHash:expected}),receipt);
+ assert.throws(()=>validateFiniteObserverPreviewEnvelope(receipt,{setupReceiptHash:'9'.repeat(64)}));
+ const legacy={purpose:'afw.finite-observer-preview.v1',provenance,material};
+ assert.throws(()=>validateFiniteObserverPreviewEnvelope(legacy,{setupReceiptHash:expected}));
+ assert.deepEqual(validateFiniteObserverPreviewEnvelope(legacy),legacy);
 });

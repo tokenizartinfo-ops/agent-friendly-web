@@ -1,3 +1,5 @@
+import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
+import {readPrivateQaFiniteObserverInstallation} from '../../lib/mcp-qa-finite-observer-installation.mjs';
 import {readPrivateQaFiniteSetupOwnerSource} from '../../lib/mcp-qa-finite-policy-prearm-source.mjs';
 import {readPrivateQaFiniteConfirmationFromActor} from '../../lib/mcp-qa-finite-confirmation-actor.mjs';
 import {createFiniteOwnerNativeReceiver} from '../../lib/mcp-qa-finite-owner-native-receiver.mjs';
@@ -15,13 +17,18 @@ import {runPrivateQaFiniteLauncher,FINITE_LAUNCHER_OPERATION} from '../../lib/mc
 import {runPrivateQaFiniteConfirmation} from '../../lib/mcp-qa-finite-confirmation.mjs';
 export {PrivateQaCatalog,PrivateQaPreregistration,observePrivateQa,default} from './index.mjs';
 export class PrivateQaBootstrap extends ClosedBootstrap{
- run(event,step){if(event?.payload?.operation===FINITE_INITIAL_PREPARATION_OPERATION)return runPrivateQaFiniteInitialPreparation({env:this.env,event,step});if(event?.payload?.operation===FINITE_POLICY_SETUP_OPERATION)return runFinitePrivatePolicySetup({env:this.env,event,step});if(event?.payload?.operation===FINITE_LAUNCHER_OPERATION)return runPrivateQaFiniteLauncher({env:this.env,event,step});return super.run(event,step);}
+ run(event,step){if(event?.payload?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step,requireSetupReceipt:true});if(event?.payload?.operation===FINITE_INITIAL_PREPARATION_OPERATION)return runPrivateQaFiniteInitialPreparation({env:this.env,event,step});if(event?.payload?.operation===FINITE_POLICY_SETUP_OPERATION)return runFinitePrivatePolicySetup({env:this.env,event,step});if(event?.payload?.operation===FINITE_LAUNCHER_OPERATION)return runPrivateQaFiniteLauncher({env:this.env,event,step});return super.run(event,step);}
 }
 export class PrivateQaNamedConfirmation extends ClosedConfirmation{
  run(event,step){if(event?.payload&&Object.hasOwn(event.payload,'planHash'))return runPrivateQaFiniteConfirmation({env:this.env,event,step});return super.run(event,step);}
 }
 export class IndependentClosure extends ClosedIndependentClosure{
- fetch(request){
+ async fetch(request){
+  if(request.url===FINITE_OBSERVER_INSTALLATION_URL){
+   if(request.method!=='GET'||request.body!==null)return finiteNativePending(405);
+   try{return Response.json(await readPrivateQaFiniteObserverInstallation({ctx:this.ctx,env:this.env}),{headers:{'Cache-Control':'no-store'}});}
+   catch{return finiteNativePending(503);}
+  }
   const factories={
    'https://afw-private.invalid/_finite-owner/choice':createFiniteOwnerNativeReceiver,
    'https://afw-private.invalid/_finite-owner/authorize':createPrivateQaFiniteOwnerOAuthReceiver,
@@ -31,6 +38,7 @@ export class IndependentClosure extends ClosedIndependentClosure{
   const factory=Object.hasOwn(factories,request.url)?factories[request.url]:null;
   if(factory){if(request.method!=='POST')return finiteNativePending(405);return factory({ctx:this.ctx,env:this.env}).fetch(request);}
   const path=new URL(request.url).pathname;
+  if(path==='/_finite-native'||path.startsWith('/_finite-native/'))return finiteNativePending(404);
   if(path==='/_finite-owner'||path.startsWith('/_finite-owner/'))return finiteNativePending(404);
   return super.fetch(request);
  }
