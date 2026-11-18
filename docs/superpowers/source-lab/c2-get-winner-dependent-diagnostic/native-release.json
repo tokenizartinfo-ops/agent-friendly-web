@@ -1,0 +1,55 @@
+{
+  "schema": "AFW.C2.GET_WINNER.FULL20_NATIVE_RELEASE/1",
+  "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+  "toolEvidence": {
+    "review": "08b75777bb39efaad0a439082cd430044c0b07d6",
+    "primary": "a290e3c26382660f67c5ae8d2f8b0571c9f61956",
+    "payload": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c",
+    "closure": "bd3c3c583a17209be9390084eb390a24e515aeae",
+    "closedHead": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+    "proposal": "597f4f4091700a2a046b37ccefb1c53ac488a284",
+    "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "ordinaryControl": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+    "ordinaryOnResident": {
+      "sha256": "faec968dcc56d51f7273c62c9456252f723ae56903e41c411f2edfa440d2c5cc",
+      "bytes": 2010306
+    },
+    "limits": {
+      "adverseTransportDirectRoute": false,
+      "full20BusinessRouteExecuted": false,
+      "businessGET503Cause": "UNKNOWN"
+    }
+  },
+  "getRoute": {
+    "scope": "CONDITIONAL_REVIEWED_APPLICATION_CONSTRUCTION",
+    "sourceSeamReview": "a279c2e6238927b0f7b1544c0f4d058852177651",
+    "priorMountConstructionReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c",
+    "miniflareDispatchApi": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
+    "source": [
+      "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "9ffce28ba28961937c4f24f1cc00eb8d899bc495"
+    ],
+    "origin": "https://delegated-canary.agentfriendlyweb.dev",
+    "path": "/connections/finite-prepare",
+    "worker": "canary-first-connection",
+    "outcomeCut": "S08:18:143",
+    "rootAcceptanceRequired": true,
+    "verifiedFull20Occurrence": false
+  },
+  "legacyDrop": {
+    "historicalRelease": "6be5c0b5b9bfd6a1b89ffb11cf32cba1f045712a",
+    "historicalSourceIndex": "fc5b71098da76696278765f43805f0f2a1953b22",
+    "qaClosed": false,
+    "mClosed": false
+  },
+  "stageB5": 5,
+  "Source5": 5,
+  "OWN5": 5,
+  "activationReleased": false,
+  "nativeReleased": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}

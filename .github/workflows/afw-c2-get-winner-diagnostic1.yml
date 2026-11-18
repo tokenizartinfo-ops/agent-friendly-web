@@ -1,0 +1,49 @@
+name: AFW C2 first finite GET diagnostic
+on:
+  push:
+    branches:
+      - lab/afw-c2-get-winner-20261117-diagnostic1
+permissions:
+  contents: read
+jobs:
+  c2-get-winner-diagnostic1:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-get-winner-20261117-diagnostic1' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Read the exact one-use lab head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use the fixed Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Check the business controller syntax
+        shell: bash
+        run: |
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt
+      - name: Install only the existing locked dependencies
+        shell: bash
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Observe first finite GET in full case order
+        id: source
+        shell: bash
+        run: node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs
+      - name: Preserve the bounded first finite GET diagnostic
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-get-winner-diagnostic1
+          path: output/c2-get-winner-diagnostic1.json
+          if-no-files-found: error
+          retention-days: 7
