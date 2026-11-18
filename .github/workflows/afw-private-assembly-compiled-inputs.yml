@@ -1,0 +1,58 @@
+name: AFW public-source compilation inputs for private assembly
+on:
+  push:
+    branches: [lab/afw-private-assembly-compiled-inputs-20261118]
+permissions:
+  contents: read
+jobs:
+  build:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-private-assembly-compiled-inputs-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-PRIVATE-ASSEMBLY-COMPILED-INPUTS-20261118' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build and verify the source candidate in staging
+        shell: bash
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
+          node <<'AFW_VERIFY'
+          const fs = require('node:fs');
+          const p = JSON.parse(fs.readFileSync('output/finite-native-staging/staging.json', 'utf8'));
+          if (p.purpose !== 'afw.finite-native-compiler-staging.v1' || p.sourceRevision !== process.env.GITHUB_SHA ||
+              p.completePackage !== false || p.operationalReadiness !== false ||
+              Object.keys(p.modules).sort().join(',') !== 'canaryLive,qaLive') process.exit(1);
+          const evidence = {sourceRevision:p.sourceRevision,sourceTree:p.sourceTree,completePackage:false,operationalReadiness:false,
+            modules:Object.fromEntries(Object.entries(p.modules).map(([role,value])=>[role,value.module]))};
+          console.log('AFW_FINAL_APPROVAL_STAGING ' + JSON.stringify(evidence));
+          AFW_VERIFY
+      - name: Produce the bounded source-only compile manifest
+        run: |
+          node <<'AFW_MANIFEST'
+          const fs=require('node:fs');
+          const p=JSON.parse(fs.readFileSync('output/finite-native-staging/staging.json','utf8'));
+          const allowed={purpose:p.purpose,sourceRevision:p.sourceRevision,sourceTree:p.sourceTree,
+            historicalInput:p.historicalInput,completePackage:p.completePackage,operationalReadiness:p.operationalReadiness,
+            modules:Object.fromEntries(Object.entries(p.modules).map(([role,value])=>[role,value.module]))};
+          if(p.completePackage || p.operationalReadiness || p.historicalInput.archiveReadByCompiler!==false) process.exit(1);
+          fs.writeFileSync('output/finite-native-staging/staging.json',JSON.stringify(allowed));
+          console.log('AFW_ASSEMBLY_COMPILED_INPUTS '+JSON.stringify(allowed));
+          AFW_MANIFEST
+      - name: Retain only the two public-source compiled modules and the manifest
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-compiled-inputs-${{ github.sha }}
+          path: |
+            output/finite-native-staging/qaLive/index.mjs
+            output/finite-native-staging/canaryLive/index.mjs
+            output/finite-native-staging/staging.json
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 9
