@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-11-18 16:57:34 UTC",
+  "project": "AFW",
+  "scope": "synthetic native lab and cloud staging compilation",
+  "priorFinalApproval": {
+    "evidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726",
+    "run": 44348580942,
+    "groupedReadsTrial": 44349595850,
+    "groupedReadsCandidate": "3b7663a6529da5440ade34ea502d837200fa8247",
+    "postHTTP": 503,
+    "closedBranch": "fef02eebe819063681d9c11793dbcad14bf6a2f7",
+    "observedPublishingBeforeDeadline": true,
+    "publishReceiptVerified": false,
+    "actualDeploymentReadback": {
+      "project": "AFW",
+      "scope": "control-plane deployment metadata",
+      "observedAt": "2026-11-18T16:34:42.900Z",
+      "observed": {
+        "qa": {
+          "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+          "versions": [
+            {
+              "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+              "percentage": 100
+            }
+          ]
+        },
+        "canary": {
+          "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+          "versions": [
+            {
+              "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+              "percentage": 100
+            }
+          ]
+        },
+        "operator": {
+          "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+          "versions": [
+            {
+              "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+              "percentage": 100
+            }
+          ]
+        }
+      }
+    }
+  },
+  "correction": {
+    "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+    "blob": "9cef3209403915adc7d3c280c2382f68875d6099",
+    "description": "Grouped related read-only preparation checks under the existing child lease. Full source and owner checks surround each group. Holder and lease checks surround each individual read. Authorization, publication, withdrawal and restoration semantics are preserved.",
+    "rootLeaseMs": 30000,
+    "childLeaseMs": 5000
+  },
+  "syntheticNativeTrial": {
+    "atUTC": "2026-11-18 16:51:27 UTC",
+    "run": 44351420062,
+    "job": 134967778676,
+    "head": "67bdd8ee27bd9dd3f4b1f7baf7bc4c3b6d41b90b",
+    "closed": "ff7d72116172d99f589da07e391d7ae6bdf164a2",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44351420062",
+    "candidate": "9cef3209403915adc7d3c280c2382f68875d6099",
+    "trace": [
+      "2026-11-18T16:49:54.3691047Z # AFW_PREP_TRACE FINAL_GET_START",
+      "2026-11-18T16:49:54.3779845Z # AFW_PREP_TRACE M_CALL",
+      "2026-11-18T16:49:54.3799417Z # AFW_PREP_TRACE QA_ENTRY",
+      "2026-11-18T16:49:54.3804423Z # AFW_PREP_TRACE QA_TIMELINE_START",
+      "2026-11-18T16:49:54.7529630Z # AFW_PREP_TRACE QA_TIMELINE_RETURN",
+      "2026-11-18T16:49:54.7530199Z # AFW_PREP_TRACE QA_CHOICE_START",
+      "2026-11-18T16:49:54.7531873Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_START",
+      "2026-11-18T16:49:57.8044226Z # AFW_PREP_TRACE QA_TICKET_CONTEXT_RETURN",
+      "2026-11-18T16:49:59.3480329Z # AFW_PREP_TRACE QA_APPROVAL_RETURN",
+      "2026-11-18T16:50:00.9029559Z # AFW_PREP_TRACE QA_STAGE_CONTEXT_RETURN",
+      "2026-11-18T16:50:01.6595249Z # AFW_PREP_TRACE QA_TICKET_WRITE_START",
+      "2026-11-18T16:50:03.1953622Z # AFW_PREP_TRACE QA_TICKET_WRITE_RETURN",
+      "2026-11-18T16:50:04.3516659Z # AFW_PREP_TRACE QA_CHOICE_RETURN",
+      "2026-11-18T16:50:04.3517374Z # AFW_PREP_TRACE QA_FORM",
+      "2026-11-18T16:50:04.3517871Z # AFW_PREP_TRACE M_HEADERS 200",
+      "2026-11-18T16:50:04.3518246Z # AFW_PREP_TRACE M_BODY_RETURN",
+      "2026-11-18T16:50:04.3533826Z # AFW_PREP_TRACE FINAL_HTTP 200 9985",
+      "2026-11-18T16:50:04.3613149Z # AFW_PREP_TRACE FINAL_GET_RETURN",
+      "2026-11-18T16:50:15.7655964Z # AFW_PREP_TRACE QA_APPROVAL_PUBLISH_START",
+      "2026-11-18T16:50:16.9840365Z # AFW_PREP_TRACE QA_PUBLISH_BASELINE_RETURN",
+      "2026-11-18T16:50:18.1323176Z # AFW_PREP_TRACE QA_PUBLISH_UPLOAD_RETURN",
+      "2026-11-18T16:50:19.9074935Z # AFW_PREP_TRACE QA_PUBLISH_ACTIVATION_RETURN",
+      "2026-11-18T16:50:21.6747633Z # AFW_PREP_TRACE QA_FINAL_FACTS_START",
+      "2026-11-18T16:50:29.4857748Z # AFW_PREP_TRACE QA_FINAL_FACTS_RETURN",
+      "2026-11-18T16:50:29.9227775Z # AFW_PREP_TRACE QA_APPROVAL_PUBLISH_RETURN",
+      "2026-11-18T16:50:29.9242261Z # AFW_PREP_TRACE FINAL_APPROVAL_HTTP 200",
+      "2026-11-18T16:50:30.5006383Z # AFW_PREP_TRACE FINAL_APPROVAL_RECEIPT_RETURN",
+      "2026-11-18T16:50:30.5244504Z # AFW_PREP_TRACE WORLD_CLOSED"
+    ],
+    "http": 200,
+    "finalApprovalMs": 25563,
+    "publicationMs": 14157,
+    "activeRuns": 0,
+    "liveDelivery": false,
+    "pcOff": false,
+    "getHttp": 200,
+    "getMs": 9985,
+    "approvalPostHttp": 200,
+    "elapsedFromFinalFormReturnToPostResponseMs": 25563,
+    "approvalPublicationMs": 14157,
+    "approvalReceipt": true,
+    "worldClosed": true
+  },
+  "cloudStagingBuild": {
+    "atUTC": "2026-11-18 16:54:45 UTC",
+    "run": 44352439402,
+    "job": 134971426076,
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44352439402",
+    "head": "c71df5630d866ed5ed800e20a8f6157506f8a869",
+    "publishedRuntime": false,
+    "closed": "869466a8cbdda54f087fc324b4faff742de89be8",
+    "activeRuns": 0,
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "manifest": {
+      "sourceRevision": "c71df5630d866ed5ed800e20a8f6157506f8a869",
+      "sourceTree": "9b3d4a5bf1c453c635f04306fe7a3962a660fc15",
+      "completePackage": false,
+      "operationalReadiness": false,
+      "modules": {
+        "canaryLive": {
+          "name": "index.mjs",
+          "sha256": "3a433b7649cdc992a319cbb2fa20ef591fad161e7dafbaf4954523c4b9763e4a",
+          "bytes": 1989585,
+          "exports": [
+            "AfwNodeControl",
+            "AfwOwnEventNode",
+            "default"
+          ]
+        },
+        "qaLive": {
+          "name": "index.mjs",
+          "sha256": "692d1a4dd722a92faa8586a69d36d63e04f1fdb934e0774e94da3fcd02df6ebf",
+          "bytes": 2695121,
+          "exports": [
+            "IndependentClosure",
+            "PrivateQaBootstrap",
+            "PrivateQaCatalog",
+            "PrivateQaNamedConfirmation",
+            "PrivateQaPreregistration",
+            "default",
+            "observePrivateQa"
+          ]
+        }
+      }
+    }
+  },
+  "liveReadiness": {
+    "completePackage": false,
+    "operationalReadiness": false,
+    "liveDelivery": false,
+    "liveReview": false,
+    "liveWithdrawal": false,
+    "pcOff": false,
+    "ownerActionNeededNow": false
+  },
+  "pending": "Qualify the release package and verify restoration before opening a new finite live occurrence. Verify the same event and subscription across real cloud reception, useful review and native withdrawal."
+}

@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e0860a4e9a5063e9ae62c15bd2bbe4e7ac2d304c",
-  "phase": "FORM_GET_FIXED_FINAL_APPROVAL_POST_DEADLINE_OPEN",
+  "previousCheckpoint": "0e802307ea7529482714bc31310e446e8ead8513",
+  "phase": "FINAL_APPROVAL_VERIFIED_LAB_RELEASE_PACKAGE_PENDING",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Use final approval timings to bound a minimal design for the long publication after valid authorization. Keep owner, expected revision, grant, lease, once-only effects and terminal restoration. No production activation while the final POST does not produce a qualified receipt.",
+  "next": "Qualify the release package and verify restoration, then use one finite live occurrence for cloud same-notice delivery, review and native withdrawal.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -559,7 +559,6 @@
     "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "bf9c961ad5438805b211909972f5986c2e33e83e",
   "getWinnerDependent": {
     "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
     "featureCodeReleased": true,
@@ -1822,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 141,
-  "updatedAtUTC": "2026-11-18 16:42:33 UTC",
+  "schemaVersion": 142,
+  "updatedAtUTC": "2026-11-18 16:57:34 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2031,7 +2030,6 @@
     "deployed": false
   },
   "finalApproval503": {
-    "evidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726",
     "run": 44348580942,
     "groupedReadsTrial": 44349595850,
     "groupedReadsCandidate": "3b7663a6529da5440ade34ea502d837200fa8247",
@@ -2072,6 +2070,24 @@
           ]
         }
       }
-    }
-  }
+    },
+    "nominalVerification": {
+      "run": 44351420062,
+      "head": "67bdd8ee27bd9dd3f4b1f7baf7bc4c3b6d41b90b",
+      "candidate": "9cef3209403915adc7d3c280c2382f68875d6099",
+      "postHTTP": 200,
+      "msFromFinalFormReturn": 25563,
+      "receiptVerified": true,
+      "closed": "ff7d72116172d99f589da07e391d7ae6bdf164a2"
+    },
+    "stagingBuild": {
+      "run": 44352439402,
+      "head": "c71df5630d866ed5ed800e20a8f6157506f8a869",
+      "closed": "869466a8cbdda54f087fc324b4faff742de89be8",
+      "completePackage": false
+    },
+    "evidence": "4c0a3097b402edfed5d0131ec348d25f98d9e641",
+    "priorEvidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726"
+  },
+  "readinessDocument": "b16fee83110224f9a632a4bf118f5d1e91b92333"
 }
