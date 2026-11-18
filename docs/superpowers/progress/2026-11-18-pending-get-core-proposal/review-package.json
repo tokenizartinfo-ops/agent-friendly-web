@@ -1,0 +1,110 @@
+{
+  "schema": "AFW.PENDING_GET.B1.STATIC_REVIEW_PACKAGE/1",
+  "atUTC": "2026-11-18 13:11:36 UTC",
+  "task": "B1 synchronous defensive core/codec plus134 sealed MODEL tests and finite runner proposal",
+  "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "contextAndBoundaries": "1cbd3ab0922616e859c4450daa7799a7b23dd0a1",
+  "Q32Ruling": "f08c0945cd7021376723870eeebedac9de158b7c",
+  "authorReport": "709bafefde2dc4b182163aefd7ba559a61694dd6",
+  "manifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
+  "graph": "936001297183dffab0e06da5011b2a1ca500a100",
+  "RootMeasurement": "6a9410c128786d7f659c29c9fb8d7b8b2b89452f",
+  "BASE": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "HEAD": "DETACHED_MODEL_PROPOSAL_ONLY",
+  "commits": 0,
+  "fullAuthoredDiffParts": [
+    {
+      "roles": [
+        "workflow",
+        "protocol",
+        "codec",
+        "factory",
+        "extension",
+        "host"
+      ],
+      "blob": "a6bbb820d77b0fa1d8020657cfcdc73b585673dd",
+      "chars": 22013
+    },
+    {
+      "roles": [
+        "hostTest",
+        "main",
+        "mTest"
+      ],
+      "blob": "ff703877ea5e19b052ff3d459050c3474f62afaa",
+      "chars": 21181
+    },
+    {
+      "roles": [
+        "manifest",
+        "hostInputs",
+        "child",
+        "qa"
+      ],
+      "blob": "fe82dd97a24c64541abc73514923ee42e9b2aebb",
+      "chars": 20862
+    },
+    {
+      "roles": [
+        "qaTest",
+        "runner"
+      ],
+      "blob": "dd920cabf983478e1c03efca886a32db02aface6",
+      "chars": 23148
+    }
+  ],
+  "reusedExactInputs": [
+    {
+      "role": "mVectors",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/M-vectors.json",
+      "blob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6"
+    },
+    {
+      "role": "qaVectors",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/QA-vectors.json",
+      "blob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e"
+    },
+    {
+      "role": "hostVectors",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-vectors.json",
+      "blob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+      "bytes": 14585,
+      "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4"
+    },
+    {
+      "role": "original",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/original-factory.txt",
+      "blob": "b1576130bd8c6510e92f1992e22476460f746e9a",
+      "bytes": 3927,
+      "sha256": "adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf"
+    },
+    {
+      "role": "sites",
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/sites-grammar.json",
+      "blob": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6",
+      "bytes": 10277,
+      "sha256": "c25900da63376d5e4e8b4101927548b1ba165b156326ca15d79c9d7c86e0f875"
+    }
+  ],
+  "globalConstraints": [
+    "Design4bc09a1df89e4fe5eef57d95e238a2718d01e62e D1-D4 and unknowns D5-D7; originalg1 behavior/defaultOFF, no new status/body/header getter/await/reaction/IO in M; exact originalP/L/error/localResponse validation.",
+    "Fixed64cells/255writes->one poison/NNattempt64; max2M candidate snapshots; one header/QA read/host handle/row; no case IDs or expected output enter core. Exactm1/q1/q0/p1 ASCII grammar and cross-tuples.",
+    "M30/Q35/H57/R12 cases must actually drive the real core against unchanged independent sealed DATA, not copy expected strings as produced output. M01 originalNativeRequest/Error/Response scenario and exact503/g1/header assertion retained through explicit private adapter.",
+    "Q32isolatedMODELseedC/3F/c/S0/writebudget0 separate from Q31/M27budget255; B2ordinarySource excludesallseams. M25duplicate does not erase or promote original physicalfield; M24preexistingg1preserved.",
+    "B1 invokes no owner/consent issuance, route, provider, native actor or Source13. No timing/exploit search. Only owned-app synchronous defensive unit code; B2/source wiring held.",
+    "Child bound10s/inner8s, job3min, stdout/stderr4096each, result6144B; exactNode22.23.4/actions/ref/message/push/attempt1,contentsread/no secrets/deps; current sharedfileUID is stated, never claim filesystem isolation/credentialinaccessibility. Boundedfailurecapture and orderly named-process/tempclosure needed later."
+  ],
+  "reviewInstructions": "Read brief/report and each full authored diff part once; exact DATA inputs by pin. Check both SPEC and QUALITY, scope to B1; outside checks only for named risks. No execution/import/eval/AST/syntax/tests/builds on any executor, no refs/trees/commits/runs or auth/live resources, no subagents. Literal/JSON DATA/hash and detached review persistence+full readback allowed. Persist <=24576B, return <=15lines both verdicts, findings, pin. Actual MODEL_GREEN/native Source/PCoff not observed or accepted by this static review.",
+  "nonclaims": {
+    "modelGreenObserved": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nativeQualified": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  }
+}

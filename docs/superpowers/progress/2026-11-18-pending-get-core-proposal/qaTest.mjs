@@ -1,0 +1,160 @@
+import assert from 'node:assert/strict';
+import {createPendingQa} from './qa-core.mjs';
+import {finishHost, hostInput} from './model-host-input.mjs';
+
+const aggregates = ['facts1', 'primary1', 'qualify1', 'primary2', 'facts2', 'qualify2'];
+
+export function checkQa(row, {epoch, uuid}, mainWire) {
+  const [id, , expectedQa, expectedRow, expectedQueries] = row;
+  const proof = {};
+  const request = {};
+  const initial = {};
+  const second = {};
+  const third = {};
+  const foreign = {};
+  let seeds;
+  const qa = createPendingQa({
+    enabled: true, epoch, directProof: proof,
+    registerModelSeeds(value) { seeds = value; },
+  });
+
+  function boundaries(options, through, from = 0) {
+    for (let index = from; index < through; index += 1) {
+      qa.aggregate(request, options, aggregates[Math.floor(index / 2)], index % 2 === 0 ? 'enter' : 'return');
+    }
+  }
+
+  function enterInitial() {
+    qa.phase(request, 'B');
+    qa.phase(request, 'I');
+    qa.enterPair(request, initial, 'initial');
+  }
+
+  function enterChoice() {
+    enterInitial();
+    boundaries(initial, 12);
+    qa.phase(request, 'J');
+    qa.phase(request, 'C');
+  }
+
+  if (id !== 'Q35') qa.arrive(request, uuid, proof);
+  const label = Number(id.slice(1));
+  if (label >= 4 && label <= 16) {
+    enterInitial();
+    boundaries(initial, label - 4);
+  } else switch (id) {
+    case 'Q01':
+    case 'Q35':
+      break;
+    case 'Q02':
+      qa.phase(request, 'B');
+      break;
+    case 'Q03':
+      qa.phase(request, 'B');
+      qa.phase(request, 'I');
+      break;
+    case 'Q17':
+      enterInitial();
+      boundaries(initial, 12);
+      qa.phase(request, 'J');
+      break;
+    case 'Q18':
+    case 'Q19':
+    case 'Q20':
+    case 'Q21':
+    case 'Q22':
+      enterChoice();
+      if (label >= 19) {
+        qa.enterPair(request, second, 'nested');
+        boundaries(second, label === 19 ? 3 : 12);
+      }
+      if (id === 'Q21') {
+        qa.enterPair(request, third, 'nested');
+        boundaries(third, 1);
+      }
+      if (id === 'Q22') qa.phase(request, 'D');
+      break;
+    case 'Q23':
+    case 'Q24':
+      enterChoice();
+      qa.phase(request, 'D');
+      qa.phase(request, 'F');
+      if (id === 'Q24') qa.reaction(request, 'F');
+      break;
+    case 'Q25':
+      enterInitial();
+      boundaries(initial, 3);
+      qa.reaction(request, 'F');
+      boundaries(initial, 12, 3);
+      qa.phase(request, 'J');
+      qa.phase(request, 'C');
+      break;
+    case 'Q26':
+      enterInitial();
+      boundaries(initial, 1);
+      qa.reaction(request, 'R');
+      boundaries(initial, 2, 1);
+      break;
+    case 'Q27': {
+      // The original synchronous fallback only forwards its value. It has no reaction hook.
+      const local = new Response(null);
+      const observed = value => value;
+      assert.equal(observed(local), local);
+      break;
+    }
+    case 'Q28':
+      enterInitial();
+      boundaries(initial, 1);
+      qa.aggregate(request, initial, 'primary1', 'return');
+      break;
+    case 'Q29':
+      enterInitial();
+      qa.enterPair(request, foreign, 'initial');
+      break;
+    case 'Q30':
+      enterInitial();
+      qa.aggregate(request, foreign, 'facts1', 'enter');
+      break;
+    case 'Q31':
+      enterInitial();
+      assert.equal(seeds.budget255(request), true);
+      boundaries(initial, 2);
+      break;
+    case 'Q32':
+      assert.equal(seeds.ordinal63(request), true);
+      qa.enterPair(request, second, 'nested');
+      break;
+    case 'Q33':
+      for (let index = 1; index <= 64; index += 1) {
+        qa.arrive({}, '11111111-1111-4111-8111-' + index.toString(16).padStart(12, '0'), proof);
+      }
+      qa.phase(request, 'B');
+      break;
+    case 'Q34':
+      enterInitial();
+      boundaries(initial, 1);
+      qa.reaction(request, 'F');
+      qa.arrive({}, uuid, proof);
+      break;
+    default:
+      assert.fail('Unexpected sealed QA label');
+  }
+
+  const state = hostInput(epoch);
+  const {host, handle, context, proof: journal, post} = state;
+  assert.equal(host.capture(handle), true);
+  assert.equal(host.take(context, journal, response => {
+    assert.equal(response, handle.response);
+    return mainWire;
+  }), true);
+  let attempted = 0;
+  const sampled = host.startRead((readEpoch, key) => {
+    attempted += 1;
+    return qa.sample(readEpoch, key, proof);
+  });
+  assert.equal(sampled, expectedQa, id + ' sampled QA');
+  host.completeRead('reply', sampled);
+  host.startRead(() => { attempted += 1; });
+  assert.equal(finishHost(host, post), expectedRow, id + ' joined row');
+  assert.equal(attempted, expectedQueries, id + ' read count');
+}

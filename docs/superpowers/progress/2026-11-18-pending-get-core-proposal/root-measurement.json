@@ -1,0 +1,161 @@
+{
+  "schema": "AFW.PENDING_GET.B1.ROOT_TEXT_MEASUREMENT/1",
+  "atUTC": "2026-11-18 13:11:36 UTC",
+  "manifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
+  "graph": "936001297183dffab0e06da5011b2a1ca500a100",
+  "report": "709bafefde2dc4b182163aefd7ba559a61694dd6",
+  "checks": {
+    "mounted": 20,
+    "bytes": 131744,
+    "allBodyHashesMatched": true,
+    "baseLeaves": 3203,
+    "expectedLeaves": 3223,
+    "baseWorkflows": 62,
+    "expectedWorkflows": 63,
+    "originalFactoryBytes": 3927,
+    "extendedBytes": 4368,
+    "insertions": 11,
+    "insertedBytes": 441,
+    "exactFactoryForwardAndInverse": true,
+    "exactTreeDeltaForwardAndInverse": true,
+    "newPathsAbsent": true,
+    "outputPathAbsent": true,
+    "noSourceExecution": true
+  },
+  "measured22": [
+    {
+      "role": "workflow",
+      "bytes": 1367,
+      "sha256": "38870c0097676fcdda1b0c5b3c24b2d9690df369739f1feecbdd09e8cabf57ba",
+      "blob": "f0e1578535fb5715769cb702405176b9b13c9094"
+    },
+    {
+      "role": "mVectors",
+      "bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+      "blob": "ab82327af902770b12995327658b007e3f0ffe02"
+    },
+    {
+      "role": "protocol",
+      "bytes": 5646,
+      "sha256": "888d805a587870dbd272afd674bf0b88742edaab5c86fb63839622fbda54f79a",
+      "blob": "57b86488b6cef15471eab6c65cc090b6ee2007a1"
+    },
+    {
+      "role": "qaVectors",
+      "bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "blob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d"
+    },
+    {
+      "role": "codec",
+      "bytes": 2815,
+      "sha256": "f79c487d50f034cad53752408bc2ac2c521ca3698a107ccc08dc7655344f57c0",
+      "blob": "18a40467a2900a3e1265f7b90cb115ac072b8858"
+    },
+    {
+      "role": "factory",
+      "bytes": 4368,
+      "sha256": "bcba65a442f95c997cc8929d248bb43edc32a14f39c66dc4250db62a6b21f348",
+      "blob": "676ce360268ae07c2af0d0b029d89bc7a9e7bbc3"
+    },
+    {
+      "role": "extension",
+      "bytes": 1118,
+      "sha256": "66a14827565c6d84f1ec956df36034433c44948609600172af4b91b481520735",
+      "blob": "c7c45196276adb9c203a2301d6edb3e5a2fa1aee"
+    },
+    {
+      "role": "host",
+      "bytes": 4214,
+      "sha256": "4161422ed4c4604ef87767df236da448a34f03f3c55cfb962eae469121d9374d",
+      "blob": "19ed665180b1ce6d3e22e9f4af32068eb30011da"
+    },
+    {
+      "role": "hostTest",
+      "bytes": 5080,
+      "sha256": "8a8cd0cc726ed21d3240448069eb6db8ba2c6ef1667f943d815788473dca5532",
+      "blob": "0e7f515b187291fea860eefd67e22a8c7357b507"
+    },
+    {
+      "role": "hostVectors",
+      "bytes": 14585,
+      "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4",
+      "blob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8"
+    },
+    {
+      "role": "main",
+      "bytes": 5238,
+      "sha256": "944b35ae4c5fd9d5adffc1613ad4e40dc17a7493dc512c8e2540833271ee3424",
+      "blob": "65bd3bb57f0ee0c52de2bfdda79bd64e91f3dc81"
+    },
+    {
+      "role": "mTest",
+      "bytes": 9225,
+      "sha256": "351707aa909a11640049d3ff946ce5f1c30cc41cd567c55dbcc288561ecfd03d",
+      "blob": "848c310d06e121b4a71511c5a9081dc491d420c0"
+    },
+    {
+      "role": "manifest",
+      "bytes": 6914,
+      "sha256": "4a8a7ddab2d1b9cecdaa3d3104e0ece2654b2f556b940e3e1e972618f4dc8cbe",
+      "blob": "1aa9f812a1041cf8717ee4de2686b04b745fb784"
+    },
+    {
+      "role": "hostInputs",
+      "bytes": 1326,
+      "sha256": "19a3d356bcb98d36e3d637ee3fd2c15ebdfd0f4c12046d324452ba8ba44c74a2",
+      "blob": "214bbcc0aa6883c85e131c0bd93e90e5e27e5119"
+    },
+    {
+      "role": "original",
+      "bytes": 3927,
+      "sha256": "adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf",
+      "blob": "b1576130bd8c6510e92f1992e22476460f746e9a"
+    },
+    {
+      "role": "child",
+      "bytes": 5112,
+      "sha256": "dcb03aa8208d95897783691fd184d509168e434cb95efe124c2700c3f6c66bf6",
+      "blob": "de58adcd1b6f048d9b7b11f52ef8188184a12ef6"
+    },
+    {
+      "role": "qa",
+      "bytes": 5519,
+      "sha256": "1c76f4897666e55e7bdee9ce556b70cdcc6ef62cf2d1f6c70200f0be6344c0c8",
+      "blob": "ee33f99fadcc0a40efbf64cecbd5a6209356814d"
+    },
+    {
+      "role": "qaTest",
+      "bytes": 4587,
+      "sha256": "51fdd661891cc67f241da3b408dc9551e941c0cf75ff8b5102bc82d2c97a54b5",
+      "blob": "2a76121cd77986b091687bfcf363439328a5a795"
+    },
+    {
+      "role": "runner",
+      "bytes": 17238,
+      "sha256": "997869406b37fc90b04fdd220b03e1f3f3b26aa7f5c55ea75e3520752a6450cd",
+      "blob": "6d505a78e000b800687b720404dfc2fc003f0af8"
+    },
+    {
+      "role": "sites",
+      "bytes": 10277,
+      "sha256": "c25900da63376d5e4e8b4101927548b1ba165b156326ca15d79c9d7c86e0f875",
+      "blob": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6"
+    },
+    {
+      "role": "graph",
+      "bytes": 15788,
+      "sha256": "97d90045de63e445302af98bc45b0d33d05536938f5f6fa92ebcaab4afab2cd5",
+      "blob": "936001297183dffab0e06da5011b2a1ca500a100"
+    },
+    {
+      "role": "report",
+      "bytes": 16484,
+      "sha256": "908910e944ab8159b9eed64da53f7a14bccbc5fae69449f2e03876e641dc143e",
+      "blob": "709bafefde2dc4b182163aefd7ba559a61694dd6"
+    }
+  ],
+  "method": "All20 mounted bodies plus graph/report fully read; bytes/SHA256/Git-SHA1 measured via bounded independent Node builtin RAM DATA hashing, no Source/core/harness parsed as code or executed. Exact11 insertion forward/reverse and20 path tuple inverse to original3203 leaf set checked.",
+  "executionReleased": false
+}

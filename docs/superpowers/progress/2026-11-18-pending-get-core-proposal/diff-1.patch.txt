@@ -1,0 +1,417 @@
+# Full authored addition-only patch, BASE6791ce1bab9372e206d3c7b42b3e1394dc6e0c68
+
+diff --git a/.github/workflows/afw-c2-pending-get-model-green1.yml b/.github/workflows/afw-c2-pending-get-model-green1.yml
+new file mode 100644
+index 0000000..f0e1578535fb5715769cb702405176b9b13c9094
+--- /dev/null
++++ b/.github/workflows/afw-c2-pending-get-model-green1.yml
+@@ -0,0 +1,39 @@
++name: AFW C2 Pending GET MODEL GREEN1
++
++on:
++  push:
++    branches:
++      - lab/afw-c2-pending-get-20261118-model-green1
++
++permissions:
++  contents: read
++
++jobs:
++  c2-pending-get-model-green1:
++    if: >-
++      ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
++      github.event_name == 'push' &&
++      github.ref == 'refs/heads/lab/afw-c2-pending-get-20261118-model-green1' &&
++      github.run_attempt == '1' &&
++      github.event.head_commit.message == 'AFW-C2-PENDING-GET-MODEL-GREEN1-ONEUSE-20261118' }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 3
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++        with:
++          persist-credentials: false
++          fetch-depth: 2
++      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
++        with:
++          node-version: '22.23.4'
++          package-manager-cache: false
++      - name: Run only the sealed MODEL
++        run: node docs/superpowers/source-lab/c2-pending-get-model-green1/run-pending-get-model-green1.mjs
++      - name: Preserve the bounded evidence frame
++        if: always()
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
++        with:
++          name: afw-c2-pending-get-model-green1
++          path: output/c2-pending-get-model-green1.json
++          if-no-files-found: error
++          retention-days: 7
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/PROTOCOL.md b/docs/superpowers/source-lab/c2-pending-get-model-green1/PROTOCOL.md
+new file mode 100644
+index 0000000..57b86488b6cef15471eab6c65cc090b6ee2007a1
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/PROTOCOL.md
+@@ -0,0 +1,25 @@
++# AFW private Pending GET observer, B1 MODEL proposal
++
++This directory is a detached proposal for one finite isolated GitHub Actions MODEL. The real factory slice from S09 is an immutable preimage. The ordered insertions in `extension.json` generate the new slice and their exact removal recovers the preimage. The sealed vectors are mounted by Git blob identity. `M01` uses the native Request, exact lease and Error, and the local Response from the RED assertion. The isolated child observes the original 503 and g1 and asserts the exact private field. The published frame carries its SHA-256 and omits the raw epoch and UUID.
++
++## Main observer
++
++`createGetWinnerObserver()` retains the existing public observer methods and their behavior. The private adapter may pass `{enabled: true, epoch, directProof}` with a presealed 16-digit lowercase hex epoch and a private identity object. The nominated fixture may call `enter(originalRequest, directProof)` only after independent bodyless/direct/native eligibility. Binding, race, catch and finish retain their original exact identities. The private proof is supplied by the fixture adapter and has no wire representation.
++
++Use `observer.pendingM.mark(lease, boundary, response?)` with named boundaries `requestBytesEnter`, `requestBytesReturn`, `stubEnter`, `stubReturn`, `responseBytesEnter`. Supply the exact stub response on its normal return and on response-byte entry. `captureUuid(lease, value)` captures the already-produced UUID once in cursor 2. `markRead(lease, originalResponse, edge)` takes `enter`, `return`, or `responseBytesReturn`. `invalidate(lease)` marks an exceptional source path before original check or cancellation. Existing `deadline(lease, originalError, origin, arity)` takes the private provenance label and original argument count, which B2 must qualify against the actual unchanged timer and listener callback found in the original fixture. The original g1 finish obtains and validates headers itself. The private write reuses those same validated headers and the original exact locally constructed Response. The construction proof must establish that this Response starts without the private header.
++
++## QA observer
++
++`createPendingQa({enabled: true, epoch, directProof})` provides `arrive(originalRequest, originalUuid, directProof)`, `phase(originalRequest, next)`, `enterPair(originalRequest, originalOptions, caller)`, `aggregate(originalRequest, originalOptions, name, edge)`, `reaction(originalRequest, edge)` and `sample(epoch, key, directProof)`. `caller` is `initial` or `nested`. `name` is one of `facts1`, `primary1`, `qualify1`, `primary2`, `facts2`, `qualify2`; `edge` is `enter` or a normal `return`. `reaction` uses `F` or `R` from the existing promise handlers. The synchronous fallback contributes no hook. Pair inputs are the exact original options objects. `sample` returns one private fixed wire string for the first positive exact read, with terminal error and absence codes bounded by the same grammar.
++
++## Host admission
++
++Construct with `{enabled: true, epoch, directProof, expectedLabel, testIdentity}`. `capture(handle)` retains the exact original response, main, label, test, token, actor, generation, direct proof, status and g1. `take(context, proof, readMain)` consumes the mailbox. Context supplies the corresponding independently observed identities and booleans `beforeCutoff` and `reserveAvailable`. Proof supplies four contiguous target marks, row and byte caps, typed journal custody, `recorderIntact`, `countQualified`, and the original opaque `countSnapshot`. Only an eligible take invokes `readMain(originalResponse)` once. After a keyed take, one `startRead(invoke)` invokes `invoke(epoch, key)` synchronously and returns the adapter's result. The trusted adapter reports `completeRead('reply', wire)`, `completeRead('timeout')` or a terminal failure outcome. `staged()` returns the candidate final row for one bounded private write. `admit(privateFile, proof)` consumes admission and preserves one parsed matching row only when the original public frame, recorder, close return and terminal child were verified. The core performs no journal read, clock, actor call or file write itself. The MODEL invokes local functions and explicitly supplies typed facts for those boundaries.
++
++## Review gates
++
++The B1 MODEL seeds one transition budget in M and QA through separately granted single-use private callbacks. The QA ordinal seed independently constructs C, ordinal 63, K=c, reaction 0 and accepted-write count 0 for Q32. B2 must exclude these registration paths from ordinary mounted code. Any approved native seed remains a separate explicit fixture-only capability.
++
++B2 must separately qualify the unchanged source boundaries, same-file afterEach ordering, native Request and Response identity, original count and journal custody, one real bounded actor read, continuation and cleanup. All rows leave QA at the M cutoff, outward settlement/delivery, QA catch and business result unknown. No positive q0.A delivery inference follows.
++
++The proposed runner reuses the prior RED PID/network namespace, empty credential environment, unprivileged identity, bounded process streams, named PID check and temporary copy/closure pattern. The child shares the runner's file identity. This is not filesystem isolation or proof that a process could not access credential files. The scope requires independently reviewed fixed code, sealed synthetic DATA and no credentials supplied to the child. The exact evidence carrier and confirmed upload describe different layers; raw artifact archive authentication requires independent archive bytes.
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/codec.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/codec.mjs
+new file mode 100644
+index 0000000..18a40467a2900a3e1265f7b90cb115ac072b8858
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/codec.mjs
+@@ -0,0 +1,65 @@
++// Pure parser for the fixed private observer wire formats. All inputs are data.
++export const isEpoch = value => typeof value === 'string' && value.length === 16 &&
++  /^[0-9a-f]{16}$/u.test(value);
++
++export const isUuid = value => typeof value === 'string' && value.length === 36 &&
++  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/u.test(value);
++
++const isCut = value => typeof value === 'string' && value.length === 2 && /^[TE][0-8]$/u.test(value);
++
++export function parseMain(value, epoch) {
++  if (!isEpoch(epoch) || typeof value !== 'string' || (value.length !== 24 && value.length !== 59)) return null;
++  const fields = value.split('.');
++  if (fields.length !== 4) return null;
++  const [version, observedEpoch, cut, key] = fields;
++  if (version !== 'm1' || observedEpoch !== epoch || !isCut(cut)) return null;
++  const cursor = Number(cut[1]);
++  if (key === '-') {
++    if (cursor > 2) return null;
++  } else if (cursor < 2 || !isUuid(key)) return null;
++  return {cut, key: key === '-' ? null : key};
++}
++
++export function isQaTuple(tuple) {
++  if (typeof tuple !== 'string' || tuple.length !== 5 ||
++      !/^[ABIJCDF][0-9A-F]{2}[0-9abc][0FR]$/u.test(tuple)) return false;
++  const pair = Number.parseInt(tuple.slice(1, 3), 16);
++  if (pair > 63) return false;
++  const completed = tuple[3] === 'c';
++  const empty = pair === 0 && tuple[3] === '0';
++  switch (tuple[0]) {
++    case 'A':
++    case 'B': return empty;
++    case 'I': return empty || pair === 1;
++    case 'J': return pair === 1 && completed;
++    case 'C': return pair === 1 && completed || pair >= 2;
++    case 'D':
++    case 'F': return pair >= 1 && completed;
++    default: return false;
++  }
++}
++
++export function parseQa(value, epoch, key) {
++  if (!isEpoch(epoch) || !isUuid(key) || typeof value !== 'string') return {code: 'V'};
++  if (value.length === 4 && /^q0\.[AOXV]$/u.test(value)) return {code: value[3]};
++  if (value.length !== 62) return {code: 'V'};
++  const fields = value.split('.');
++  if (fields.length !== 4 || fields[0] !== 'q1' || fields[1] !== epoch ||
++      fields[2] !== key || !isQaTuple(fields[3])) return {code: 'V'};
++  return {code: 'J', tuple: fields[3]};
++}
++
++export function parseRow(value) {
++  if (typeof value !== 'string') return null;
++  const row = value.length === 14 && value.endsWith('\n') ? value.slice(0, -1) : value;
++  if (row.length !== 13) return null;
++  const fields = row.split('.');
++  if (fields.length !== 4) return null;
++  const [version, code, cut, tuple] = fields;
++  if (version !== 'p1' || code.length !== 1 || !isCut(cut)) return null;
++  const cursor = Number(cut[1]);
++  if (code === 'K') return cursor <= 2 && tuple === '-----' ? row : null;
++  if (cursor < 2) return null;
++  if (code === 'J') return isQaTuple(tuple) ? row : null;
++  return 'AOXVT'.includes(code) && tuple === '-----' ? row : null;
++}
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/create-get-winner-observer.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/create-get-winner-observer.mjs
+new file mode 100644
+index 0000000..676ce360268ae07c2af0d0b029d89bc7a9e7bbc3
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/create-get-winner-observer.mjs
+@@ -0,0 +1,87 @@
++import {createPendingMain} from './m-core.mjs';
++
++export function createGetWinnerObserver(privateConfig = null) {
++  const cells=new WeakMap(), leases=new WeakMap(), facts=new WeakMap(), pending=new WeakMap();
++  const used=new WeakSet(), responsePrototype=Response.prototype, headersPrototype=Headers.prototype;
++  const header='x-afw-lab-get-winner';
++  let privateM=null;
++  try { privateM=createPendingMain(privateConfig); } catch { /* diagnostic configuration fails closed */ }
++  const responseStatus=Object.getOwnPropertyDescriptor(responsePrototype,'status').get;
++  const responseHeaders=Object.getOwnPropertyDescriptor(responsePrototype,'headers').get;
++  const headerHas=headersPrototype.has, headerSet=headersPrototype.set;
++  let validating=null;
++  const guard=fn=>(...args)=>{try{return fn(...args);}catch{return null;}};
++  const tuple=(w,s,h)=>Number.isInteger(h)&&Number.isInteger(s)&&
++    ((w==='L'||w==='V')?h===503&&s===0:w==='S'?
++      (s===0?h===503:s>=400&&s<=599&&h===([400,401,403,404,405,413,429].includes(s)?s:503)):false);
++  const cell=l=>{const c=leases.get(l);return c&&!c.bad&&c.lease===l?c:null;};
++  function enter(p,proof) {
++    if(cells.has(p)){cells.get(p).bad=true;return null;}
++    const c={p,lease:null,bad:false,sealed:false,w:'U',s:0,escaped:null,b:null,finished:false,forward:false};
++    cells.set(p,c);privateM?.enter(c,proof);return c;
++  }
++  function bind(p,l) {
++    const c=cells.get(p);if(!c)return;
++    if(c.lease||leases.has(l)){c.bad=true;return;}
++    c.lease=l;leases.set(l,c);privateM?.bind(c,l);
++  }
++  function record(l,e,w,s) {
++    const c=cell(l);if(!c||c.sealed)return;
++    if((typeof e!=='object'&&typeof e!=='function')||e===null||facts.has(e)){c.bad=true;return;}
++    facts.set(e,{c,w,s});
++  }
++  function deadline(l,e,origin,arity) {record(l,e,'L',0);privateM?.deadline(l,e,origin,arity);}
++  function denied(p,l,r,e,status) {
++    const c=cell(l);
++    if(!c||c.p!==p||!c.forward||Object.getPrototypeOf(r)!==responsePrototype)return;
++    record(l,e,'S',Number.isInteger(status)&&status>=400&&status<=599?status:0);
++  }
++  function validate(l,r) {
++    const c=cell(l);if(!c||!c.forward)return;
++    if(validating){validating.c.bad=true;c.bad=true;validating=null;return;}
++    if(Object.getPrototypeOf(r)!==responsePrototype)return;
++    validating={c,r};
++  }
++  function validationDenied(e) {
++    if(validating)record(validating.c.lease,e,'V',0);
++  }
++  function validationEnd(l,r) {
++    if(validating && (validating.c.lease!==l||validating.r!==r))validating.c.bad=true;
++    validating=null;
++  }
++  function race(l,e) {
++    const c=cell(l);if(!c)return;
++    if(c.sealed){c.bad=true;return;}
++    c.sealed=true;c.escaped=e;
++    const f=facts.get(e);
++    if(f?.c===c){c.w=f.w;c.s=f.s;}
++    privateM?.select(l,e,c.w);
++  }
++  function caught(p,l,e,b) {
++    const c=cell(l);
++    if(!c||c.p!==p||cells.get(p)!==c||!c.sealed||c.escaped!==e)return;
++    if(c.b||pending.has(b)||used.has(b)){c.bad=true;return;}
++    if(Object.getPrototypeOf(b)!==responsePrototype)return;
++    const h=Reflect.apply(responseStatus,b,[]);
++    if(!tuple(c.w,c.s,h))return;
++    const headers=Reflect.apply(responseHeaders,b,[]);
++    if(Object.getPrototypeOf(headers)!==headersPrototype||Reflect.apply(headerHas,headers,[header]))return;
++    c.b=b;pending.set(b,{c,p,l,h,headers});
++  }
++  function finish(c,p,l,b) {
++    if(!c||c.finished)return;
++    c.finished=true;
++    const entry=pending.get(b);
++    if(!entry||c.bad||cells.get(p)!==c||leases.get(l)!==c||entry.c!==c||entry.p!==p||entry.l!==l||c.b!==b||used.has(b))return;
++    used.add(b);
++    if(Object.getPrototypeOf(b)!==responsePrototype||Reflect.apply(responseStatus,b,[])!==entry.h||Reflect.apply(responseHeaders,b,[])!==entry.headers||
++      Object.getPrototypeOf(entry.headers)!==headersPrototype||Reflect.apply(headerHas,entry.headers,[header]))return;
++    Reflect.apply(headerSet,entry.headers,[header,'g1.'+entry.h+'.'+c.w+'.'+c.s]);
++    if(c.w==='L')privateM?.finish(c,l,entry.headers,headerSet);
++  }
++  return Object.freeze({enter:guard(enter),bind:guard(bind),forward:guard((p,l)=>{const c=cell(l);if(c&&c.p===p)c.forward=true;}),
++    deadline:guard(deadline),denied:guard(denied),validate:guard(validate),validationDenied:guard(validationDenied),
++    validationEnd:guard(validationEnd),race:guard(race),caught:guard(caught),finish:guard(finish),
++    ...(privateM?{pendingM:privateM.hooks}:{})});
++}
++
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/extension.json b/docs/superpowers/source-lab/c2-pending-get-model-green1/extension.json
+new file mode 100644
+index 0000000..c7c45196276adb9c203a2301d6edb3e5a2fa1aee
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/extension.json
+@@ -0,0 +1,50 @@
++{
++  "schema": "AFW.PENDING_GET.B1.FACTORY_INSERTIONS/1",
++  "original": "b1576130bd8c6510e92f1992e22476460f746e9a",
++  "insertions": [
++    {
++      "at": 0,
++      "added": "import {createPendingMain} from './m-core.mjs';\n\n"
++    },
++    {
++      "at": 40,
++      "added": "privateConfig = null"
++    },
++    {
++      "at": 280,
++      "added": "  let privateM=null;\n  try { privateM=createPendingMain(privateConfig); } catch { /* diagnostic configuration fails closed */ }\n"
++    },
++    {
++      "at": 940,
++      "added": ",proof"
++    },
++    {
++      "at": 1130,
++      "added": "privateM?.enter(c,proof);"
++    },
++    {
++      "at": 1287,
++      "added": "privateM?.bind(c,l);"
++    },
++    {
++      "at": 1515,
++      "added": ",origin,arity"
++    },
++    {
++      "at": 1536,
++      "added": "privateM?.deadline(l,e,origin,arity);"
++    },
++    {
++      "at": 2422,
++      "added": "    privateM?.select(l,e,c.w);\n"
++    },
++    {
++      "at": 3571,
++      "added": "    if(c.w==='L')privateM?.finish(c,l,entry.headers,headerSet);\n"
++    },
++    {
++      "at": 3920,
++      "added": ",\n    ...(privateM?{pendingM:privateM.hooks}:{})"
++    }
++  ]
++}
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs
+new file mode 100644
+index 0000000..19ed665180b1ce6d3e22e9f4af32068eb30011da
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs
+@@ -0,0 +1,108 @@
++import {isEpoch, parseMain, parseQa, parseRow} from './codec.mjs';
++
++const identityFields = ['response', 'main', 'label', 'test', 'token', 'actor', 'generation', 'directProof'];
++const identity = value => value !== null && (typeof value === 'object' || typeof value === 'function');
++const journalCustodyFields = ['regular', 'pathStable', 'ownerMatch', 'modeMatch', 'singleLink', 'trailingLf'];
++const postConditions = ['publicFrameConfirmed', 'recorderIntact', 'closeReturned', 'childTerminatedNormally'];
++
++function qualifiedJournal(proof, label) {
++  const {marks, bytes, rows, custody, recorderIntact, countQualified, countSnapshot} = proof ?? {};
++  if (recorderIntact !== true || countQualified !== true || !identity(countSnapshot) ||
++      !custody || !journalCustodyFields.every(field => custody[field] === true) ||
++      !Number.isSafeInteger(bytes) || bytes < 1 || bytes > 32768 ||
++      !Number.isSafeInteger(rows) || rows < 4 || rows > 128 ||
++      !Array.isArray(marks) || marks.length !== 4 || !marks.every(mark => mark?.label === label)) {
++    return false;
++  }
++  const [actionEnter, actionTerminal, countEnter, countTerminal] = marks;
++  return actionEnter.kind === 'actionEnter' &&
++    (actionTerminal.kind === 'actionReturn' || actionTerminal.kind === 'actionThrow') &&
++    countEnter.kind === 'countEnter' && countTerminal.kind === 'countReturn';
++}
++
++export function createPendingHost(config) {
++  const {enabled, epoch, directProof, expectedLabel, testIdentity} = config ?? {};
++  const on = enabled === true && isEpoch(epoch) && identity(directProof) &&
++    typeof expectedLabel === 'string' && expectedLabel.length > 0 && identity(testIdentity);
++  let state = 'empty';
++  let retained;
++  let main;
++  let stagedRow = null;
++
++  function capture(handle) {
++    if (!on || state === 'closed') return false;
++    if (state !== 'empty' || handle?.directProof !== directProof || handle.label !== expectedLabel ||
++        handle.test !== testIdentity || !identityFields.every(field => field === 'label' || identity(handle[field]))) {
++      state = 'closed';
++      retained = null;
++      return false;
++    }
++    retained = Object.freeze({
++      response: handle.response, main: handle.main, label: handle.label, test: handle.test,
++      token: handle.token, actor: handle.actor, generation: handle.generation, directProof,
++      status: handle.status, g1: handle.g1,
++    });
++    state = 'captured';
++    return true;
++  }
++
++  function stage(code, tuple = '-----') {
++    stagedRow = 'p1.' + code + '.' + main.cut + '.' + tuple;
++    state = 'staged';
++    return stagedRow;
++  }
++
++  function take(context, proof, readMain) {
++    if (state !== 'captured') return false;
++    const current = retained;
++    state = 'closed';
++    retained = null;
++    if (!context || !identityFields.every(field => context[field] === current[field]) ||
++        current.status !== 503 || current.g1 !== 'g1.503.L.0' ||
++        context.beforeCutoff !== true || context.reserveAvailable !== true ||
++        !qualifiedJournal(proof, current.label) || typeof readMain !== 'function') {
++      return false;
++    }
++    try {
++      main = parseMain(readMain(current.response), epoch);
++    } catch {
++      return false;
++    }
++    if (!main) return false;
++    if (main.key === null) stage('K');
++    else state = 'ready';
++    return true;
++  }
++
++  function startRead(invoke) {
++    if (state !== 'ready' || typeof invoke !== 'function') return undefined;
++    state = 'waiting';
++    try {
++      return invoke(epoch, main.key);
++    } catch {
++      stage('V');
++      return undefined;
++    }
++  }
++
++  function completeRead(kind, value) {
++    if (state !== 'waiting') return null;
++    if (kind === 'timeout') return stage('T');
++    if (kind !== 'reply') return stage('V');
++    const qa = parseQa(value, epoch, main.key);
++    return stage(qa.code, qa.tuple);
++  }
++
++  function staged() {
++    return state === 'staged' ? stagedRow : null;
++  }
++
++  function admit(privateFile, proof) {
++    if (state !== 'staged') return null;
++    state = 'closed';
++    return proof && postConditions.every(field => proof[field] === true) &&
++      parseRow(privateFile) === stagedRow ? stagedRow : null;
++  }
++
++  return Object.freeze({capture, take, startRead, completeRead, staged, admit});
++}

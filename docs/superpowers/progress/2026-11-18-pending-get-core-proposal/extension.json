@@ -1,0 +1,50 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FACTORY_INSERTIONS/1",
+  "original": "b1576130bd8c6510e92f1992e22476460f746e9a",
+  "insertions": [
+    {
+      "at": 0,
+      "added": "import {createPendingMain} from './m-core.mjs';\n\n"
+    },
+    {
+      "at": 40,
+      "added": "privateConfig = null"
+    },
+    {
+      "at": 280,
+      "added": "  let privateM=null;\n  try { privateM=createPendingMain(privateConfig); } catch { /* diagnostic configuration fails closed */ }\n"
+    },
+    {
+      "at": 940,
+      "added": ",proof"
+    },
+    {
+      "at": 1130,
+      "added": "privateM?.enter(c,proof);"
+    },
+    {
+      "at": 1287,
+      "added": "privateM?.bind(c,l);"
+    },
+    {
+      "at": 1515,
+      "added": ",origin,arity"
+    },
+    {
+      "at": 1536,
+      "added": "privateM?.deadline(l,e,origin,arity);"
+    },
+    {
+      "at": 2422,
+      "added": "    privateM?.select(l,e,c.w);\n"
+    },
+    {
+      "at": 3571,
+      "added": "    if(c.w==='L')privateM?.finish(c,l,entry.headers,headerSet);\n"
+    },
+    {
+      "at": 3920,
+      "added": ",\n    ...(privateM?{pendingM:privateM.hooks}:{})"
+    }
+  ]
+}

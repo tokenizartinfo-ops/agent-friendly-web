@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 12:54:59 UTC",
+  "timestampUTC": "2026-11-18 13:13:49 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "415fc4004b0a8e4e5bf22d4db7d8857769462c8e",
-  "phase": "PENDING_GET_CORE_MODEL_PROPOSAL_CONTINUATION",
+  "previousCheckpoint": "52710b2d18aa1b4531669fea244a3f4aa90150c0",
+  "phase": "PENDING_GET_CORE_MODEL_STATIC_REVIEW",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Fresh B1 implementer proposes core M/QA/host codecs and exact134 MODEL tests, then static review and Root finite GHA qualification. B2 native Source/hook integration waits for accepted core MODEL GREEN. Original Task1/full Source/coupled realPCoff/Max pending.",
+  "next": "Independent SPEC/QUALITY review of actual B1 core+134 model drivers and finite trusted-code runner. Only after approval may Root gate a new MODEL GREEN cloud run and closed restoration. B2/native Source integration remains held.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1411,7 +1411,7 @@
       "rootAcceptance": "c4a19b5b0755c5058abb1f3f20340892f5680531"
     },
     "pendingAwaitCoreModel": {
-      "status": "IMPLEMENTATION_PROPOSAL_RUNNING",
+      "status": "STATIC_REVIEW_RUNNING",
       "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
       "actor": "/root/pending_get_core_model_complete",
       "nomination": {
@@ -1455,11 +1455,26 @@
       "contextHandoff": "1cbd3ab0922616e859c4450daa7799a7b23dd0a1",
       "Q32FixtureRuling": "f08c0945cd7021376723870eeebedac9de158b7c",
       "fixRounds": 0,
-      "implementationExecutionReleased": false
+      "implementationExecutionReleased": false,
+      "manifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
+      "graph": "936001297183dffab0e06da5011b2a1ca500a100",
+      "report": "709bafefde2dc4b182163aefd7ba559a61694dd6",
+      "rootMeasurement": "6a9410c128786d7f659c29c9fb8d7b8b2b89452f",
+      "reviewPackage": "5fd9d6ffd7f0a6f889fc7d7b1301df13260fa944",
+      "reviewer": "/root/pending_get_red_review",
+      "mountedBodies": 20,
+      "mountedBytes": 131744,
+      "expectedLeaves": 3223,
+      "proposedWorkflowCount": 63,
+      "legacyFactoryRetained": {
+        "insertions": 11,
+        "addedBytes": 441,
+        "forwardInverseVerified": true
+      }
     }
   },
-  "schemaVersion": 124,
-  "updatedAtUTC": "2026-11-18 12:54:59 UTC",
+  "schemaVersion": 125,
+  "updatedAtUTC": "2026-11-18 13:13:49 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

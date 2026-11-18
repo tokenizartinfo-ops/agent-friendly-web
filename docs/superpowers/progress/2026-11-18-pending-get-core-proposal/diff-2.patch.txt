@@ -1,0 +1,602 @@
+# Full authored addition-only patch, same BASE
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs
+new file mode 100644
+index 0000000..0e7f515b187291fea860eefd67e22a8c7357b507
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs
+@@ -0,0 +1,125 @@
++import assert from 'node:assert/strict';
++import {parseRow} from './codec.mjs';
++import {finishHost, hostInput} from './model-host-input.mjs';
++
++export function checkHost(row, defaults, {epoch, uuid}) {
++  const [id, , suppliedM, suppliedQa, expectedRow, expectedQueries] = row;
++  const m = suppliedM === 'DEFAULT' ? defaults.M : suppliedM;
++  const q = suppliedQa === 'DEFAULT' ? defaults.QA : suppliedQa;
++  const variants = {
++    H16: ['duplicate', 'foreign-label'],
++    H18: ['token', 'main', 'directProof', 'test'],
++    H19: ['generation', 'actor'],
++    H22: ['no-hook', 'missing-terminal'],
++    H23: ['null-count', 'missing-count', 'substitute'],
++    H24: ['missing-terminal', 'duplicate-terminal'],
++    H25: ['duplicate-action', 'intervening'],
++    H26: ['recorder', 'truncated', 'bytes', 'rows'],
++    H27: ['regular', 'pathStable', 'ownerMatch', 'modeMatch', 'singleLink', 'trailingLf'],
++    H28: ['beforeCutoff', 'reserveAvailable'],
++    H51: ['torn', 'missing'],
++    H52: ['public-frame', 'recorder'],
++    H53: ['close-hung', 'close-throw', 'child-cutoff'],
++  };
++
++  for (const variant of variants[id] ?? ['default']) {
++    const {host, handle, context, proof, post} = hostInput(epoch, id !== 'H55');
++    let capture = true;
++    let take = true;
++    let attempted = 0;
++    let headerCopies = 0;
++
++    switch (id) {
++      case 'H15': handle.g1 = 'g1.503.V.0'; break;
++      case 'H16':
++        if (variant === 'foreign-label') context.label = 'other-case';
++        break;
++      case 'H17': context.response = {...handle.response}; break;
++      case 'H18':
++      case 'H19': context[variant] = {}; break;
++      case 'H20': proof.marks[3].kind = 'countThrow'; break;
++      case 'H21':
++        proof.marks[1].kind = 'actionReturn';
++        proof.marks[3].kind = 'countThrow';
++        break;
++      case 'H22':
++        if (variant === 'no-hook') take = false;
++        else proof.marks.pop();
++        break;
++      case 'H23':
++        if (variant === 'substitute') proof.countQualified = false;
++        else proof.countSnapshot = variant === 'null-count' ? null : undefined;
++        break;
++      case 'H24':
++        if (variant === 'missing-terminal') proof.marks.pop();
++        else proof.marks.push({...proof.marks[3]});
++        break;
++      case 'H25':
++        if (variant === 'duplicate-action') proof.marks.splice(2, 0, {...proof.marks[1]});
++        else proof.marks.splice(2, 0, {kind: 'countEnter', label: 'other-case'});
++        break;
++      case 'H26':
++        if (variant === 'recorder') proof.recorderIntact = false;
++        else if (variant === 'truncated') proof.marks[3].kind = 'countRet';
++        else if (variant === 'bytes') proof.bytes = 32769;
++        else proof.rows = 129;
++        break;
++      case 'H27': proof.custody[variant] = false; break;
++      case 'H28': context[variant] = false; break;
++      case 'H54': capture = false; break;
++      case 'H57':
++        handle.status = 200;
++        handle.g1 = null;
++        break;
++      default: break;
++    }
++
++    if (capture) assert.equal(host.capture(handle), id !== 'H55');
++    if (id === 'H16' && variant === 'duplicate') assert.equal(host.capture(handle), false);
++    if (take) host.take(context, proof, response => {
++      assert.equal(response, handle.response);
++      headerCopies += 1;
++      return m;
++    });
++
++    const response = host.startRead((readEpoch, key) => {
++      assert.equal(readEpoch, epoch);
++      assert.equal(key, uuid);
++      attempted += 1;
++      if (id === 'H56') throw new Error('MODEL synchronous read failure');
++      return q;
++    });
++
++    if (id === 'H49' || id === 'H50') {
++      // Explicit local wait outcome. No timer, unresolved Promise, or transport is started.
++      host.completeRead('timeout');
++      if (id === 'H50') assert.equal(host.completeRead('reply', defaults.QA), null);
++    } else if (id !== 'H56') host.completeRead('reply', response);
++
++    let file = host.staged();
++    if (id === 'H51') {
++      assert.notEqual(file, null);
++      file = variant === 'torn' ? file.slice(0, -1) : null;
++    }
++    if (id === 'H52') post[variant === 'public-frame' ? 'publicFrameConfirmed' : 'recorderIntact'] = false;
++    if (id === 'H53') post[variant === 'child-cutoff' ? 'childTerminatedNormally' : 'closeReturned'] = false;
++
++    host.startRead(() => { attempted += 1; });
++    let duplicateCopies = 0;
++    assert.equal(host.take(context, proof, () => { duplicateCopies += 1; return m; }), false);
++    assert.equal(duplicateCopies, 0);
++    assert.ok(headerCopies <= 1);
++    assert.equal(finishHost(host, post, file), expectedRow, id + ' admitted row (' + variant + ')');
++    assert.equal(attempted, expectedQueries, id + ' query count (' + variant + ')');
++  }
++}
++
++export function checkRow(row) {
++  const [id, body, qualification, queries] = row;
++  const accepted = qualification.startsWith('ACCEPT ');
++  const observed = parseRow(body);
++  const expected = accepted ? body.replace(/\n$/u, '') : null;
++  assert.equal(observed, expected, id + ' row file grammar');
++  if (accepted) assert.equal(Buffer.byteLength(body), Number(qualification.split(' ')[1]));
++  assert.equal(queries, 0);
++}
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/m-core.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/m-core.mjs
+new file mode 100644
+index 0000000..65bd3bb57f0ee0c52de2bfdda79bd64e91f3dc81
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/m-core.mjs
+@@ -0,0 +1,175 @@
++import {isEpoch, isUuid} from './codec.mjs';
++
++const header = 'x-afw-lab-pending1';
++const cellLimit = 64;
++const writeLimit = 255;
++const identity = value => value !== null && (typeof value === 'object' || typeof value === 'function');
++const transition = {
++  requestBytesEnter: [0, 1],
++  requestBytesReturn: [1, 2],
++  stubEnter: [2, 3],
++  stubReturn: [3, 4],
++  responseBytesEnter: [4, 5],
++};
++
++export function createPendingMain(config) {
++  const {enabled, epoch, directProof, registerModelBudgetSeed} = config ?? {};
++  if (enabled !== true || !isEpoch(epoch) || !identity(directProof)) return null;
++  const cells = new WeakMap();
++  const leases = new WeakMap();
++  let count = 0;
++  let overflow = false;
++
++  function poison(cell) {
++    cell.bad = true;
++    cell.candidates = null;
++    cell.selected = null;
++  }
++
++  function write(cell) {
++    if (cell.writes === writeLimit) {
++      poison(cell);
++      return false;
++    }
++    cell.writes += 1;
++    return true;
++  }
++
++  function active(lease) {
++    const cell = leases.get(lease);
++    return overflow || !cell || cell.bad || cell.selected ? null : cell;
++  }
++
++  function enter(original, proof) {
++    if (overflow || proof !== directProof) return;
++    if (count === cellLimit) {
++      overflow = true;
++      return;
++    }
++    count += 1;
++    cells.set(original, {
++      writes: 1, cursor: 0, key: null, response: null, inFirstRead: false,
++      bad: false, candidates: [], selected: null, published: false,
++    });
++  }
++
++  function bind(original, lease) {
++    const cell = cells.get(original);
++    if (overflow || !cell || cell.bad || !write(cell)) return;
++    leases.set(lease, cell);
++  }
++
++  function mark(lease, boundary, response) {
++    const cell = active(lease);
++    if (!cell) return;
++    if (typeof boundary !== 'string' || !Object.hasOwn(transition, boundary)) {
++      poison(cell);
++      return;
++    }
++    const [before, after] = transition[boundary];
++    if (cell.cursor !== before || (boundary === 'stubReturn' && !identity(response)) ||
++        (boundary === 'responseBytesEnter' && cell.response !== response)) {
++      poison(cell);
++      return;
++    }
++    if (!write(cell)) return;
++    cell.cursor = after;
++    if (boundary === 'stubReturn') cell.response = response;
++  }
++
++  function captureUuid(lease, key) {
++    const cell = active(lease);
++    if (!cell) return;
++    if (cell.cursor !== 2 || cell.key !== null || !isUuid(key)) {
++      poison(cell);
++      return;
++    }
++    if (write(cell)) cell.key = key;
++  }
++
++  function markRead(lease, response, point) {
++    const cell = active(lease);
++    if (!cell) return;
++    if (cell.response !== null && cell.response !== response) return;
++    const cursor = cell.cursor;
++    if (!cell.response) {
++      poison(cell);
++      return;
++    }
++    if (point === 'enter' && cursor === 5 && !cell.inFirstRead) {
++      if (write(cell)) cell.inFirstRead = true;
++      return;
++    }
++    if (point === 'enter' && cursor === 6) {
++      if (write(cell)) cell.cursor = 7;
++      return;
++    }
++    if (point === 'return' && ((cursor === 5 && cell.inFirstRead) || cursor === 7)) {
++      if (write(cell)) {
++        cell.cursor = 6;
++        cell.inFirstRead = false;
++      }
++      return;
++    }
++    if (point === 'responseBytesReturn' && ((cursor === 5 && !cell.inFirstRead) || cursor === 6)) {
++      if (write(cell)) cell.cursor = 8;
++      return;
++    }
++    poison(cell);
++  }
++
++  function invalidate(lease) {
++    const cell = active(lease);
++    if (cell) poison(cell);
++  }
++
++  function deadline(lease, error, origin, arity) {
++    const cell = active(lease);
++    if (!cell) return;
++    const validOrigin = (origin === 'T' && arity === 0) || (origin === 'E' && arity === 1);
++    if (!validOrigin || cell.candidates.length === 2 || cell.candidates.some(item => item.error === error)) {
++      poison(cell);
++      return;
++    }
++    if (write(cell)) {
++      cell.candidates.push(Object.freeze({error, origin, cursor: cell.cursor, key: cell.key}));
++    }
++  }
++
++  function select(lease, error, winner) {
++    const cell = active(lease);
++    if (!cell) return;
++    const exact = winner === 'L' && cell.candidates.find(item => item.error === error);
++    if (!exact) {
++      poison(cell);
++      return;
++    }
++    if (!write(cell)) return;
++    cell.selected = exact;
++    cell.candidates = null;
++  }
++
++  function finish(original, lease, headers, headerSet) {
++    const cell = leases.get(lease);
++    if (overflow || !cell || cells.get(original) !== cell || cell.bad || cell.published || !cell.selected) return;
++    const {origin, cursor, key} = cell.selected;
++    if ((cursor >= 3 && !key) || (cursor < 2 && key)) return;
++    cell.published = true;
++    Reflect.apply(headerSet, headers, [header, 'm1.' + epoch + '.' + origin + cursor + '.' + (key ?? '-')]);
++  }
++
++  // B1 fixture injection only. B2 must exclude this registration and mutation seam.
++  if (typeof registerModelBudgetSeed === 'function') {
++    let seedUsed = false;
++    registerModelBudgetSeed(lease => {
++      const cell = active(lease);
++      if (!cell || seedUsed) return false;
++      seedUsed = true;
++      cell.writes = writeLimit;
++      return true;
++    });
++  }
++
++  const hooks = Object.freeze({mark, captureUuid, markRead, invalidate});
++  return Object.freeze({enter, bind, deadline, select, finish, hooks});
++}
+
+diff --git a/docs/superpowers/source-lab/c2-pending-get-model-green1/m-model.mjs b/docs/superpowers/source-lab/c2-pending-get-model-green1/m-model.mjs
+new file mode 100644
+index 0000000..848c310d06e121b4a71511c5a9081dc491d420c0
+--- /dev/null
++++ b/docs/superpowers/source-lab/c2-pending-get-model-green1/m-model.mjs
+@@ -0,0 +1,280 @@
++import assert from 'node:assert/strict';
++import {createGetWinnerObserver} from './create-get-winner-observer.mjs';
++
++const winnerHeader = 'x-afw-lab-get-winner';
++const pendingHeader = 'x-afw-lab-pending1';
++
++function pendingResponse(status = 503, headers = new Headers({'Cache-Control': 'no-store'})) {
++  return Response.json(
++    {status: 'admin_pending', mayRetry: false, operationalReadiness: false},
++    {status, headers},
++  );
++}
++
++function context(observer, directProof, proof = directProof) {
++  const request = new Request('https://afw.invalid/connections/finite-prepare', {method: 'GET'});
++  const lease = {};
++  assert.equal(request.body, null);
++  const cell = observer.enter(request, proof);
++  observer.bind(request, lease);
++  return {observer, request, lease, cell, main: observer.pendingM, upstream: new Response(null)};
++}
++
++function error() {
++  return Object.assign(new Error('Finite native conduit unavailable'), {status: 503});
++}
++
++function cut(ctx, origin, arity = origin === 'T' ? 0 : 1) {
++  const thrown = error();
++  ctx.observer.deadline(ctx.lease, thrown, origin, arity);
++  return thrown;
++}
++
++function raceCatch(ctx, thrown, response) {
++  ctx.observer.race(ctx.lease, thrown);
++  ctx.observer.caught(ctx.request, ctx.lease, thrown, response);
++}
++
++function finish(ctx, response) {
++  ctx.observer.finish(ctx.cell, ctx.request, ctx.lease, response);
++}
++
++function through(ctx, last, key) {
++  const {main, lease, upstream} = ctx;
++  const points = [
++    'requestBytesEnter', 'requestBytesReturn', 'stubEnter', 'stubReturn', 'responseBytesEnter',
++  ];
++  for (let index = 0; index < last; index += 1) {
++    if (index === 2 && key !== null) main.captureUuid(lease, key);
++    main.mark(lease, points[index], upstream);
++  }
++}
++
++function readThrough(ctx, times) {
++  for (let index = 0; index < times; index += 1) {
++    ctx.main.markRead(ctx.lease, ctx.upstream, 'enter');
++    ctx.main.markRead(ctx.lease, ctx.upstream, 'return');
++  }
++}
++
++function verifyOriginal(response, label) {
++  const [status, qualifier] = label.split(/ |;/);
++  assert.equal(response.status, Number(status), 'original status');
++  if (qualifier.startsWith('g1.')) {
++    assert.equal(response.headers.get(winnerHeader), qualifier, 'original g1');
++  } else if (!label.includes('preexisting') && !label.includes('retained') && !label.includes('duplicate')) {
++    assert.equal(response.headers.get(winnerHeader), null, 'original g1');
++  }
++}
++
++export function checkM(row, vectors, {epoch, uuid, foreignUuid}) {
++  const [id, , baseline, expected, expectedQa, expectedRow, queries] = row;
++  const directProof = Object.freeze({});
++  let seed;
++  const observer = createGetWinnerObserver({
++    enabled: true, epoch, directProof,
++    registerModelBudgetSeed(fn) { seed = fn; },
++  });
++  const ctx = context(observer, directProof);
++  const {main, lease, upstream} = ctx;
++  let response = pendingResponse();
++  let chosen;
++
++  switch (id) {
++    case 'M01':
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M02':
++      through(ctx, 1, uuid);
++      chosen = cut(ctx, 'E');
++      break;
++    case 'M03':
++      through(ctx, 2, uuid);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M04':
++      through(ctx, 2, uuid);
++      main.captureUuid(lease, uuid);
++      chosen = cut(ctx, 'E');
++      break;
++    case 'M05':
++    case 'M06': {
++      through(ctx, 3, uuid);
++      const first = id === 'M05' ? 'T' : 'E';
++      chosen = cut(ctx, first);
++      raceCatch(ctx, chosen, response);
++      cut(ctx, first === 'T' ? 'E' : 'T');
++      if (id === 'M05') main.mark(lease, 'stubReturn', upstream);
++      chosen = undefined;
++      break;
++    }
++    case 'M07':
++      through(ctx, 4, uuid);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M08':
++      through(ctx, 5, uuid);
++      main.markRead(lease, upstream, 'enter');
++      chosen = cut(ctx, 'E');
++      break;
++    case 'M09':
++      through(ctx, 5, uuid);
++      readThrough(ctx, 1);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M10':
++      through(ctx, 5, uuid);
++      readThrough(ctx, 1);
++      main.markRead(lease, upstream, 'enter');
++      chosen = cut(ctx, 'E');
++      break;
++    case 'M11':
++      through(ctx, 5, uuid);
++      readThrough(ctx, 2);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M12':
++      through(ctx, 5, uuid);
++      readThrough(ctx, 1);
++      main.markRead(lease, upstream, 'responseBytesReturn');
++      chosen = cut(ctx, 'E');
++      break;
++    case 'M13':
++      through(ctx, 5, uuid);
++      main.markRead(lease, upstream, 'responseBytesReturn');
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M14':
++      through(ctx, 3, null);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M15': {
++      through(ctx, 5, uuid);
++      const foreign = context(observer, directProof);
++      through(foreign, 5, foreignUuid);
++      readThrough(foreign, 1);
++      main.markRead(lease, foreign.upstream, 'return');
++      chosen = cut(ctx, 'T');
++      break;
++    }
++    case 'M16':
++      through(ctx, 1, uuid);
++      main.markRead(lease, upstream, 'return');
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M17':
++      through(ctx, 5, uuid);
++      main.markRead(lease, upstream, 'enter');
++      main.invalidate(lease);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M18':
++      through(ctx, 3, uuid);
++      cut(ctx, 'T');
++      chosen = error();
++      break;
++    case 'M19': {
++      through(ctx, 3, uuid);
++      const foreign = context(observer, directProof);
++      chosen = cut(foreign, 'T');
++      break;
++    }
++    case 'M20':
++      chosen = cut(ctx, 'T', 2);
++      break;
++    case 'M21':
++      through(ctx, 3, uuid);
++      chosen = error();
++      observer.forward(ctx.request, lease);
++      observer.denied(ctx.request, lease, new Response(null, {status: 413}), chosen, 413);
++      cut(ctx, 'T');
++      response = pendingResponse(413);
++      break;
++    case 'M22':
++      through(ctx, 4, uuid);
++      chosen = error();
++      observer.forward(ctx.request, lease);
++      observer.validate(lease, upstream);
++      observer.validationDenied(chosen);
++      observer.validationEnd(lease, upstream);
++      cut(ctx, 'E');
++      break;
++    case 'M23':
++      through(ctx, 5, uuid);
++      main.markRead(lease, upstream, 'responseBytesReturn');
++      response = new Response(null, {status: 200});
++      break;
++    case 'M24':
++      through(ctx, 3, uuid);
++      response.headers.set(winnerHeader, 'preexisting-g1');
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M25': {
++      through(ctx, 3, uuid);
++      raceCatch(ctx, cut(ctx, 'T'), response);
++      finish(ctx, response);
++      const first = vectors.find(vector => vector[0] === 'M05')[3];
++      assert.equal(response.headers.get(pendingHeader), first);
++      const duplicate = context(observer, directProof);
++      through(duplicate, 3, uuid);
++      raceCatch(duplicate, cut(duplicate, 'E'), response);
++      finish(duplicate, response);
++      assert.equal(response.headers.get(pendingHeader), first, 'M25 first emission retained');
++      verifyOriginal(response, vectors.find(vector => vector[0] === 'M01')[2]);
++      assert.equal(expected, null, 'M25 duplicate expectation concerns new emission');
++      break;
++    }
++    case 'M26':
++      through(ctx, 3, uuid);
++      raceCatch(ctx, cut(ctx, 'T'), pendingResponse());
++      break;
++    case 'M27':
++      through(ctx, 3, uuid);
++      chosen = cut(ctx, 'T');
++      assert.equal(seed(lease), true);
++      main.mark(lease, 'stubReturn', upstream);
++      main.mark(lease, 'responseBytesEnter', upstream);
++      cut(ctx, 'E');
++      break;
++    case 'M28':
++      for (let index = 1; index < 64; index += 1) context(observer, directProof);
++      context(observer, directProof);
++      chosen = cut(ctx, 'T');
++      break;
++    case 'M29': {
++      const controls = [
++        context(createGetWinnerObserver(), directProof),
++        context(createGetWinnerObserver({enabled: true, epoch, directProof}), directProof, {}),
++        context(createGetWinnerObserver({enabled: true, epoch, directProof}), directProof, null),
++        context(createGetWinnerObserver({enabled: true, epoch: epoch.toUpperCase(), directProof}), directProof),
++      ];
++      const publicBaseline = vectors.find(vector => vector[0] === 'M01')[2];
++      for (const control of controls) {
++        if (control.main) through(control, 3, uuid);
++        const original = pendingResponse();
++        raceCatch(control, cut(control, 'T'), original);
++        finish(control, original);
++        verifyOriginal(original, publicBaseline);
++        assert.equal(original.headers.get(pendingHeader), expected);
++      }
++      break;
++    }
++    case 'M30':
++      chosen = cut(ctx, 'T');
++      cut(ctx, 'E');
++      cut(ctx, 'T');
++      break;
++    default:
++      assert.fail('Unexpected sealed M label');
++  }
++  if (chosen) raceCatch(ctx, chosen, response);
++  finish(ctx, response);
++  verifyOriginal(response, baseline);
++  if (id === 'M24') assert.equal(response.headers.get(winnerHeader), 'preexisting-g1');
++  if (id !== 'M25') {
++    assert.equal(response.headers.get(pendingHeader), expected, id + ' private header');
++  }
++  assert.deepEqual([expectedQa, expectedRow, queries], [null, null, 0]);
++  return id === 'M01' ? {status: response.status, g1: response.headers.get(winnerHeader),
++    privateHeader: response.headers.get(pendingHeader)} : null;
++}
