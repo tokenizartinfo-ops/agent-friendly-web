@@ -42,7 +42,7 @@ function checkStage(path, name) {
   const env = {PATH: process.env.PATH, LANG: 'C.UTF-8', TZ: 'UTC'};
   const child = spawn(process.execPath, [
     '--disable-warning=ExperimentalWarning',
-    '--test', '--test-isolation=none', '--test-concurrency=1',
+    '--test', '--experimental-test-isolation=none', '--test-concurrency=1',
     '--test-reporter=' + reporter, '--test-reporter-destination=stdout',
     '--test-name-pattern=^' + escaped + '$', join(root, path),
   ], {cwd: root, env, stdio: ['ignore', 'pipe', 'pipe']});
@@ -95,7 +95,7 @@ function checkStage(path, name) {
     child.once('close', (code, signal) => {
       const elapsedMs = Math.ceil(performance.now() - started);
       const workerClosed = spawned && exitResult?.code === code && exitResult?.signal === signal;
-      let status = fault ?? 'unverified_result';
+      let status = fault ?? (code !== 0 || signal !== null ? 'worker_failed' : stderrBytes ? 'unexpected_stderr' : 'unverified_result');
       if (!fault && elapsedMs > stepLimitMs) status = 'deadline';
       else if (!fault && code === 0 && signal === null && stderrBytes === 0) {
         try {
@@ -108,7 +108,7 @@ function checkStage(path, name) {
           // Malformed output remains unverified.
         }
       }
-      finish({status, workerClosed, elapsedMs});
+      finish({status, workerClosed, elapsedMs, exitCode: code, stderrBytes});
     });
   });
 }
