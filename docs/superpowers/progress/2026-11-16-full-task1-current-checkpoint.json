@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "f5feaaf87422f955b6562f13853b1f9c075e468b",
-  "phase": "STAGED_MODULES_AND_ROLLBACK_REFERENCES_VERIFIED_COMPLETE_PACKAGE_PENDING",
+  "previousCheckpoint": "56de98bbda4d9901cb2e4c6231e5a203fc1da0d1",
+  "phase": "HISTORICAL_ARCHIVE_VALIDATOR_VERIFIED_PRIVATE_CUSTODY_REQUIRED",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify historical input custody and exact artifact locator, complete source packaging and compose the compatible native restore path. With a qualified package and fresh provider/readiness evidence, execute one real cloud same-notice receive, review, and native withdrawal occurrence.",
+  "next": "After explicit private custody approval, preserve exactly the pinned closed Worker modules and required qualified metadata, authenticate and integrate the archive into the complete package, qualify actual restoration and the native route, then run one real cloud receive-review-withdraw occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 143,
-  "updatedAtUTC": "2026-11-18 17:17:43 UTC",
+  "schemaVersion": 144,
+  "updatedAtUTC": "2026-11-18 17:26:13 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1939,7 +1939,7 @@
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
   "noRuntimeMutationThisBlock": true,
-  "ownerActionNeededNow": false,
+  "ownerActionNeededNow": true,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
     "branch": "lab/afw-notice-journey-components-20261118",
@@ -2089,7 +2089,7 @@
     "evidence": "4c0a3097b402edfed5d0131ec348d25f98d9e641",
     "priorEvidence": "0e56f6aebf9c02b47ba703bcc221ab8d7ba74726"
   },
-  "readinessDocument": "773fce5478777c4ed882c78adcd3ba283aa1e955",
+  "readinessDocument": "0c3feeda634c94f2bb8e9ca03d25d9b7d3965d4b",
   "releaseRollbackValidation": {
     "evidence": "224140ecd301b21db93c387c605843591a5abb9b",
     "path": "docs/superpowers/progress/2026-11-18-afw-release-rollback-validation.json",
@@ -2099,5 +2099,15 @@
     "verifiedReferenceReadback": true,
     "completePackage": false,
     "realCloudOccurrenceStarted": false
+  },
+  "historicalArchiveAdmission": {
+    "record": "c3e62c6626bf7fa9a2ab04212f8e3a1b3b53afd3",
+    "path": "docs/superpowers/progress/2026-11-18-afw-historical-archive-admission.json",
+    "source": "07f1b0334e35197a0b635d8d7a16a2b38d9e99c4",
+    "closed": "149a97f0e900245556cf9551a8b3d858b743d58a",
+    "ci": 44358339019,
+    "verifiedSynthetic": true,
+    "exactPrivateBytesPreserved": false,
+    "qualifiedPrivateDestination": null
   }
 }

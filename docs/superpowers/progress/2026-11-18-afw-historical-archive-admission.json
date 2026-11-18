@@ -1,0 +1,93 @@
+{
+  "project": "AFW",
+  "recordedAtUTC": "2026-11-18 17:26:13 UTC",
+  "scope": "fixed historical version reads and source-only archive validation",
+  "repositoryVisibility": "public",
+  "providerVersionVerification": {
+    "scope": "in_memory_signal_scan_only",
+    "atUTC": "2026-11-18T17:20:52.461Z",
+    "summaries": {
+      "qaClosed": {
+        "verification": "source_pin_match",
+        "bytes": 395915,
+        "matchCounts": {
+          "privateKey": 0,
+          "platformTokenShape": 0,
+          "bearerLiteralShape": 0,
+          "cloudAccessClientIDShape": 0,
+          "embeddedArtifactBody": 0,
+          "credentialAssignmentShape": 0
+        },
+        "possiblyPrivateSlots": 0,
+        "nonRedactedSecretBindings": 0
+      },
+      "canary": {
+        "verification": "source_pin_match",
+        "bytes": 1830202,
+        "matchCounts": {
+          "privateKey": 0,
+          "platformTokenShape": 0,
+          "bearerLiteralShape": 0,
+          "cloudAccessClientIDShape": 0,
+          "embeddedArtifactBody": 0,
+          "credentialAssignmentShape": 0
+        },
+        "possiblyPrivateSlots": 5,
+        "nonRedactedSecretBindings": 0
+      },
+      "operator": {
+        "verification": "source_pin_match",
+        "bytes": 1971922,
+        "matchCounts": {
+          "privateKey": 0,
+          "platformTokenShape": 0,
+          "bearerLiteralShape": 0,
+          "cloudAccessClientIDShape": 0,
+          "embeddedArtifactBody": 0,
+          "credentialAssignmentShape": 0
+        },
+        "possiblyPrivateSlots": 0,
+        "nonRedactedSecretBindings": 0
+      }
+    },
+    "codeExported": false,
+    "privacyQualified": false
+  },
+  "archiveValidation": {
+    "branch": "lab/afw-historical-archive-validation-20261118",
+    "head": "07f1b0334e35197a0b635d8d7a16a2b38d9e99c4",
+    "closed": "149a97f0e900245556cf9551a8b3d858b743d58a",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "run": 44358339019,
+    "job": 134992459687,
+    "tests": 27,
+    "fail": 0,
+    "artifacts": 0,
+    "lines": [
+      "2026-11-18T17:24:46.1444780Z test_module_and_configuration_metadata_require_exact_hashes (finite_historical_archive_test.HistoricalArchiveTests.test_module_and_configuration_metadata_require_exact_hashes) ... ok",
+      "2026-11-18T17:24:46.1736087Z test_returns_only_bounded_receipt_and_fingerprints (finite_historical_archive_test.HistoricalArchiveTests.test_returns_only_bounded_receipt_and_fingerprints) ... ok",
+      "2026-11-18T17:24:46.1738979Z Ran 27 tests in 0.909s",
+      "2026-11-18T17:24:46.1739598Z OK"
+    ],
+    "verifiedAt": "2026-11-18 17:25:39 UTC",
+    "structure": "fixed paths, canonical receipt, bindings metadata and modules hashed, no module or metadata contents in stdout",
+    "syntheticFixturesOnly": true
+  },
+  "custody": {
+    "existingRepositorySearch": {
+      "privateCandidates": []
+    },
+    "r2Search": {
+      "success": true,
+      "buckets": [],
+      "more": false
+    },
+    "approvedPrivateDestination": null,
+    "privateLiteralDataPreserved": false
+  },
+  "completePackage": false,
+  "rollbackLive": false,
+  "cloudSameNoticeReview": false,
+  "nativeSubscriptionWithdrawn": false,
+  "ownerActionNeededNow": true
+}

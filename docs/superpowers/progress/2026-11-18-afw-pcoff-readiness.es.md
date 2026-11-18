@@ -6,4 +6,10 @@ La candidata compiló los dos módulos. Ambos pasaron el dry-run de Wrangler 4.1
 
 Pasaron 206 pruebas de código y 24 del formato del archivo en GitHub Actions. La lectura directa de Cloudflare confirmó que las tres versiones cerradas seguían desplegadas y que los hashes de código y configuración coincidían con sus referencias. La reversión se ensayó en CI con datos sintéticos. [Validación de reversión](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44354228813)
 
-Queda pendiente generar el paquete de publicación. El constructor todavía requiere el archivo verificado de versiones cerradas y la validación del recorrido nativo y la reversión con el paquete completo. El ensayo real debe comprobar, en una sola ejecución, que el asistente en la nube reciba y revise el mismo aviso y que se retire esa suscripción. El ensayo con receptor simulado queda como antecedente. [Ensayo sintético de avisos](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44344076711)
+## Integración de los respaldos
+
+Cloudflare confirmó en memoria que las tres versiones capturadas coinciden con sus huellas históricas. La revisión detectó cinco valores de configuración del canary que requieren custodia privada. El repositorio principal es público. Se guardaron únicamente las huellas, los conteos y la referencia de las versiones.
+
+El verificador del archivo de respaldo pasó 27 pruebas en GitHub Actions. Comprueba la estructura, el recibo y las huellas de cada módulo y archivo de configuración. Las pruebas usaron datos sintéticos. [Verificación del archivo](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44358339019)
+
+Hace falta una ubicación privada autorizada para conservar las versiones exactas. Después se debe completar la admisión de ese archivo en el empaquetador y validar la reversión con el paquete completo. El ensayo real de recepción, revisión del mismo aviso y retirada de la suscripción queda pendiente. [Ensayo sintético de avisos](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44344076711)
