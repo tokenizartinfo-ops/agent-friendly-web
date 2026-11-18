@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "e2471b2b8957e51d949ce8e6c3ac33c0b810b58f",
-  "phase": "BOUNDED_PENDING_AWAIT_OBSERVATION_DESIGN_REVIEW",
+  "phase": "BOUNDED_PENDING_AWAIT_DESIGN_FIX1",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Review concrete minimal design and finite plan for M progress/trigger and later invocation-bound QA facts; distinguish later observation from original race cut. Then decide bounded prerequisite implementation; no unchanged full20 replay.",
+  "next": "Original design author addresses I1–I4 in bounded design fix1; Root checks DATA report and sends scoped re-review before any fixture or implementation release.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1195,7 +1195,7 @@
       "noExistingQACutObservation": true
     },
     "pendingAwaitDesign": {
-      "status": "DESIGN_COMPLETE_INDEPENDENT_REVIEW_RUNNING",
+      "status": "DESIGN_FIX1_RUNNING",
       "brief": "f5461fc7334c01360008c3f8bea5eabbd197e5b9",
       "actor": "/root/m_pending_observation_design",
       "premiseChangeUnderEvaluation": "A bounded post-result synthetic fixture observation, explicitly later than M cutoff, may be designed if existing channel is insufficient. No current/public/business contract or implementation change released.",
@@ -1206,11 +1206,25 @@
       "plan": "2b7081d270c017e7e24190fdab3c1923d86a91cd",
       "reviewBrief": "45db6ef9e3f6d69114a9cb175eee77e45df22f89",
       "reviewer": "/root/get_winner_full20_carrier_review",
-      "designFixRound": 0
+      "designFixRound": 1,
+      "review": "7fb85a90e687c5d77cee3009b2378ac288a0e2e4",
+      "spec": "FAIL",
+      "quality": "FAIL",
+      "maxDesignFixRounds": 5,
+      "openFindings": [
+        "I1 observed promise/catch facts",
+        "I2 exact post-count integration",
+        "I3 scheduling/blocked-query closure",
+        "I4 minimal frozen grammar/cost"
+      ],
+      "deferredMinors": [
+        "M1 preimages vs future generated postimages"
+      ],
+      "fixBrief": "f2e92a4fd60bb2ea7c05a3719c0149d6b1ec4c56"
     }
   },
-  "schemaVersion": 110,
-  "updatedAtUTC": "2026-11-18 01:12:50 UTC",
+  "schemaVersion": 111,
+  "updatedAtUTC": "2026-11-18 01:18:30 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
