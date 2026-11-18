@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "264e8f1b1ec51b62f656372c6d468bfb99d1d672",
-  "phase": "TASK2_PUBLIC_CONTRADICTION_FIX1_RUNNING",
+  "previousCheckpoint": "c4c0888d09bb38d41f80ee88a147877acfed8fb8",
+  "phase": "TASK2_FIX1_SCOPED_REVIEW_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -945,7 +945,7 @@
       }
     },
     "task2": {
-      "status": "PUBLIC_CONTRADICTION_FIX1_RUNNING",
+      "status": "FIX1_CODE_MEASURED_SCOPED_REVIEW_READY",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -1000,9 +1000,9 @@
       "fixtureSeal": "c9aee1ee60ab92081e38a59abefca45c5db3e44a",
       "fixtureConstructionRecipe": "afcd7e0a82ff76d227a685549b58a1aaf740b642",
       "fixtureCounts": {
-        "fullPackets": 69,
-        "expectedAdmit": 13,
-        "expectedReject": 56,
+        "fullPackets": 73,
+        "expectedAdmit": 15,
+        "expectedReject": 58,
         "bindingCalls": 5,
         "sourceOrOwnExecution": false
       },
@@ -1045,11 +1045,29 @@
           "scope": "Positive GET winner with visible scope MARKER_UNAVAILABLE or MARKER_STREAM_INVALID contradicts qualified publisher; add gate and four append-only MODEL controls",
           "status": "FIX_RUNNING"
         }
-      ]
+      ],
+      "fix1": {
+        "report": "3fdf4a491b0b7171705294c4cbdde34e9ec96fe7",
+        "graph": "979f3c7a8c00c39ee530f167a6800caa22bea2df",
+        "map": "94a88d4b5973ab87ac9945fbd1c3afd251e7a24c",
+        "reversible": "4a54f8a31563980f5c6da84510533650ab0140d2",
+        "rootMeasurement": "0b3d8f526e5f546b18b7a855acad7e5b55a5a3e8",
+        "reviewPackage": "66bd4a06d9a5518b09ad25d0a7c32bc31ec9b329",
+        "supplementalSeal": "c93033a4034763ce9e2bd1235ecbea558ea81dee",
+        "supplementalPack": "134f17385ad1f72099d0914a8192fe4771a97e4d",
+        "bodyCount": 40,
+        "bodyBytes": 668768,
+        "expectedCandidateLeaves": 3243,
+        "declaredMapDigest": "151ed3569458b2ad4d5c6db9b1a163fdd6f8f1c7dae911e5e966386b16087933",
+        "baseDirectionsMatched": 80,
+        "priorDirectionsMatched": 12,
+        "guardLiteralMatched": true,
+        "original69Untouched": true
+      }
     }
   },
-  "schemaVersion": 97,
-  "updatedAtUTC": "2026-11-17 23:56:49 UTC",
+  "schemaVersion": 98,
+  "updatedAtUTC": "2026-11-18 00:04:28 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",

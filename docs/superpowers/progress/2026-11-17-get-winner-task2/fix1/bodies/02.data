@@ -1,0 +1,135 @@
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { lstatSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { performance } from 'node:perf_hooks';
+
+const PREFIX = 'docs/superpowers/root-own/c2-get-winner-dependent/';
+const OUTPUT = 'output/c2-own-get-winner-tools.json';
+const BASE = '6791ce1bab9372e206d3c7b42b3e1394dc6e0c68';
+const BASE_TREE = '62e78926635d6b74f288d6c0d69e0f2516306989';
+const BRANCH = 'lab/afw-c2-own-20261117-get-winner-tools';
+const WORKFLOW = '.github/workflows/afw-c2-own-get-winner-tools.yml';
+const MESSAGE = 'AFW-C2-OWN-GET-WINNER-TOOLS-ONEUSE-20261117';
+const REPOSITORY = 'tokenizartinfo-ops/agent-friendly-web';
+const SEAL = 'c9aee1ee60ab92081e38a59abefca45c5db3e44a';
+const SUPPLEMENTAL_SEAL = 'c93033a4034763ce9e2bd1235ecbea558ea81dee';
+const LEDGER = '89ae320ff0b3d1dbc4199fec14c12e8c17715a9f1e203a4e9ee24d73628771cd';
+const CLOSED_CAP = 330000;
+const deadline = performance.now() + CLOSED_CAP;
+
+const ensure = (ok, code) => { if (!ok) throw Error(code); };
+const hex40 = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
+const hex64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+const gitBlob = bytes => createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex');
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const text = bytes => new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+const outputCounts = { complete: 73, admit: 15, reject: 58, crossing: 5, crossingAdmit: 1, crossingReject: 4 };
+const env = process.env;
+const head = env.GITHUB_SHA;
+
+function run(command, args, cap, fix, childEnv = env) {
+  const remaining = Math.floor(deadline - performance.now());
+  ensure(remaining > 0, 'OWN_CONTROL_DEADLINE');
+  const result = spawnSync(command, args, { env: childEnv, maxBuffer: cap, timeout: remaining, killSignal: 'SIGKILL' });
+  ensure(result.status === 0 && result.signal === null && !result.error && result.stderr?.length <= cap &&
+    result.stdout?.length <= cap, fix);
+  return result.stdout;
+}
+
+const git = (...args) => run('git', args, 4194304, 'OWN_CONTROL_GIT');
+
+function leaves(revision) {
+  const wire = text(git('ls-tree', '-r', '--full-tree', '-z', revision));
+  ensure(wire.endsWith('\0'), 'OWN_CONTROL_TREE_FORMAT');
+  const entries = wire.slice(0, -1).split('\0');
+  const map = new Map();
+  for (const entry of entries) {
+    const headerEnd = entry.indexOf('\t'), path = entry.slice(headerEnd + 1);
+    ensure(headerEnd > 0 && path.length > 0 && !map.has(path), 'OWN_CONTROL_TREE_ENTRY');
+    map.set(path, entry.slice(0, headerEnd));
+  }
+  return map;
+}
+
+function verifyMount() {
+  const graphPath = PREFIX + 'graph.json';
+  const graphBytes = readFileSync(graphPath);
+  const graph = JSON.parse(graphBytes);
+  ensure(graph.schema === 'AFW.C2.GET_WINNER.OWN.CONTROL_GRAPH/1' &&
+    graph.base === BASE && graph.baseTree === BASE_TREE && graph.fixtureSeal.blob === SEAL &&
+    graph.supplementalFixtureSeal.blob === SUPPLEMENTAL_SEAL &&
+    graph.nomination.command === 'node ' + PREFIX + 'run-controls.mjs' &&
+    graph.nomination.workflow === WORKFLOW && graph.nomination.artifact.path === OUTPUT &&
+    graph.nomination.totalMs === CLOSED_CAP && graph.nomination.node === process.version &&
+    graph.producerEvaluation === false && graph.execution === 'NOT_RUN', 'OWN_CONTROL_GRAPH');
+  const baseline = leaves(BASE);
+  const mounted = leaves(head);
+  ensure(baseline.size === 3203 && graph.originalLeaves === baseline.size &&
+    Array.isArray(graph.files) && mounted.size === baseline.size + graph.files.length + 1 &&
+    mounted.get(graphPath) === '100644 blob ' + gitBlob(graphBytes) && !baseline.has(graphPath), 'OWN_CONTROL_GRAPH_MOUNT');
+  for (const [path, value] of baseline) ensure(mounted.get(path) === value, 'OWN_CONTROL_BASE_DRIFT');
+  const paths = new Set([graphPath]);
+  for (const row of graph.files) {
+    const { path, mode, type, blob, bytes, sha256: digest } = row;
+    ensure(typeof path === 'string' && !path.startsWith('/') && !path.includes('\\') &&
+      !path.split('/').some(p => !p || p === '.' || p === '..') && !paths.has(path) && !baseline.has(path) &&
+      mode === '100644' && type === 'blob' && hex40(blob) && hex64(digest) &&
+      Number.isSafeInteger(bytes) && bytes >= 1 && bytes <= 1048576 &&
+      mounted.get(path) === '100644 blob ' + blob && lstatSync(path).isFile(), 'OWN_CONTROL_GRAPH_LEAF');
+    const body = readFileSync(path);
+    ensure(body.length === bytes && gitBlob(body) === blob && sha256(body) === digest, 'OWN_CONTROL_BODY_DRIFT');
+    paths.add(path);
+  }
+  const checks = graph.files.filter(row => row.path.endsWith('.mjs'));
+  ensure(checks.length === graph.syntaxModules && checks.length >= 4, 'OWN_CONTROL_SYNTAX_GRAPH');
+  return { graph, sha256: sha256(graphBytes), gitBlob: gitBlob(graphBytes), mountLeaves: paths.size };
+}
+
+function main() {
+  ensure(process.platform === 'linux' && process.version === 'v22.23.4' && env.GITHUB_ACTIONS === 'true' &&
+    env.GITHUB_REPOSITORY === REPOSITORY && env.GITHUB_EVENT_NAME === 'push' &&
+    env.GITHUB_REF === 'refs/heads/' + BRANCH && env.GITHUB_RUN_ATTEMPT === '1' &&
+    env.GITHUB_JOB === 'c2-own-get-winner-tools' && hex40(head) &&
+    /^[1-9][0-9]{0,19}$/.test(env.GITHUB_RUN_ID ?? ''), 'OWN_CONTROL_ADMISSION');
+  ensure(text(git('rev-parse', 'HEAD')).trim() === head &&
+    text(git('rev-list', '--parents', '-n', '1', 'HEAD')).trim() === head + ' ' + BASE &&
+    text(git('rev-parse', BASE + '^{tree}')).trim() === BASE_TREE &&
+    text(git('show', '-s', '--format=%B', 'HEAD')).trimEnd() === MESSAGE, 'OWN_CONTROL_HEAD');
+  const mount = verifyMount();
+  const tree = text(git('rev-parse', 'HEAD^{tree}')).trim();
+  ensure(hex40(tree), 'OWN_CONTROL_TREE');
+  const childEnv = { LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8', NODE_OPTIONS: '' };
+  const resultText = text(run(process.execPath, [PREFIX + 'controls.mjs'], 32768, 'OWN_CONTROL_FAILED', childEnv));
+  ensure(resultText.endsWith('\n') && !resultText.slice(0, -1).includes('\n'), 'OWN_CONTROL_RESULT_FRAME');
+  const result = JSON.parse(resultText);
+  ensure(result.fixtureSeal === SEAL && result.supplementalFixtureSeal === SUPPLEMENTAL_SEAL &&
+    same(result.counts, outputCounts) &&
+    resultText === JSON.stringify(result) + '\n' && sha256(resultText.slice(0, -1)) === LEDGER &&
+    performance.now() < deadline, 'OWN_CONTROL_RESULT_DIGEST');
+  const nonclaims = { historicalCauseProven: false, receiptAuthenticated: false, operationalReadiness: false,
+    completePackage: false, PCoff: false, globalNativeDrainVerified: false, sdkNamespaceEmptyVerified: false };
+  const receipt = {
+    schema: 'AFW.C2.GET_WINNER.OWN.NATIVE_CONTROL_RESULT/1',
+    scope: 'GHA_NATIVE_EXECUTION_OF_SYNTHETIC_MODEL_CONTROLS',
+    context: { repository: REPOSITORY, branch: BRANCH, workflow: WORKFLOW, job: env.GITHUB_JOB,
+      runId: env.GITHUB_RUN_ID, attempt: 1, head, tree, parent: BASE, parentTree: BASE_TREE, node: process.version },
+    graph: { blob: mount.gitBlob, sha256: mount.sha256, mountLeaves: mount.mountLeaves, originalLeaves: 3203 },
+    fixtureSeal: SEAL, supplementalFixtureSeal: SUPPLEMENTAL_SEAL,
+    canonicalResultSha256: LEDGER, counts: result.counts, controlResults: result.results,
+    sourceEvaluation: false, actualFull20Admission: false, nativeQualification: false, SourceQualified: false,
+    Task1Pass: false, businessRepair: false, nonclaims
+  };
+  const wire = JSON.stringify(receipt);
+  ensure(Buffer.byteLength(wire) <= 24576 && performance.now() < deadline, 'OWN_CONTROL_PUBLICATION_CAP');
+  mkdirSync('output', { recursive: true });
+  writeFileSync(OUTPUT, wire + '\n', { flag: 'wx', mode: 0o600 });
+  console.log('AFW_C2_OWN_GET_WINNER_TOOLS ' + wire);
+}
+
+try { main(); }
+catch (error) {
+  const code = /^OWN_CONTROL_[A-Z_]+$/.test(error?.message) ? error.message : 'OWN_CONTROL_UNQUALIFIED';
+  console.error(code);
+  process.exitCode = 1;
+}

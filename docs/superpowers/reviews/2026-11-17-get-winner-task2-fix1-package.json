@@ -1,0 +1,1443 @@
+{
+  "schema": "AFW.C2.GET_WINNER.TASK2_FIX1_REVIEW_PACKAGE/1",
+  "timestampUTC": "2026-11-18 00:03:56 UTC",
+  "brief": "9719704de9811786ee651b163933d18fb7b56d25",
+  "apertureRuling": "875675d93ba35f662d517061b533dce44d099dc5",
+  "previousReview": "e4e460e381a8655e21618e40025fe3db04112cf0",
+  "finding": "Positive winner with scope MARKER_UNAVAILABLE or MARKER_STREAM_INVALID contradicts publisher, while SNAPSHOT_INVALID and coherent UNKNOWN HTTP must stay valid",
+  "fixBaseMap": "b7632878fd48188a9bf94305f8e45a61bbdbd902",
+  "fixedMap": "94a88d4b5973ab87ac9945fbd1c3afd251e7a24c",
+  "authorReport": "3fdf4a491b0b7171705294c4cbdde34e9ec96fe7",
+  "codeDiffs": [
+    {
+      "slot": "guard",
+      "beforeBlob": "7569fcffb883b4f6c713a93a15edd979a960e58b",
+      "afterBlob": "cdd6f2a40d379251999c6f80e9eb43228635ff84",
+      "fullBefore": "import { gBad, gInt, gKeys, gSame } from '../c2-t1-finite-get-diag3/legacy/shape.mjs';\nimport { finiteGet } from '../c2-t1-finite-get-diag3/finite-get.mjs';\n\nconst CASE = '15:firstFiniteGET';\nconst TARGET = 'C2T1_SCOPE_MISSING';\nconst HISTORICAL_SITE = { file: 'S08', line: 18, column: 118 };\nconst WINNERS = new Set(['DEADLINE_OR_ABORT', 'STUB_NON_OK', 'POST_STUB_VALIDATION', 'UNKNOWN']);\nconst PRESERVED_STUB_STATUS = new Set([400, 401, 403, 404, 405, 413, 429]);\n\nfunction isTargetAssertion(event) {\n  return event?.id === TARGET && event.operation === 'action' && event.edge === 'throw' &&\n    event.error?.name === 'AssertionError' && event.error.code === 'ERR_ASSERTION';\n}\n\nfunction isEvent(event, id, operation, edge) {\n  return event?.id === id && event.operation === operation && event.edge === edge && event.error === null;\n}\n\nfunction qualifiedCut(o, binding) {\n  const { witness, native, finiteGet: { http } } = o;\n  const { events } = witness;\n  const first = events.find(event => event.edge === 'throw');\n  if (o.unknownReason !== null || o.journal.recorderFaultObserved ||\n      !['prefix', 'complete'].includes(witness.integrity) || native.integrity !== 'prefix' ||\n      !isTargetAssertion(first) || !gSame(first.error.site, binding.site) ||\n      http.state !== 'KNOWN' || http.reason !== 'TARGET_GET_ASSERTION' || http.expected !== 200 ||\n      !gInt(http.actual, 100, 599) || http.actual === 200 ||\n      first.sequence !== http.throwSequence || first.sequence !== o.firstThrowSequence) return false;\n  for (let i = 0; i < 14; i++) {\n    const id = binding.selected[i], at = 4 * i;\n    if (native.cases[i]?.id !== id || native.cases[i].status !== 'pass' ||\n        !isEvent(events[at], id, 'action', 'enter') || !isEvent(events[at + 1], id, 'action', 'return') ||\n        !isEvent(events[at + 2], id, 'count', 'enter') || !isEvent(events[at + 3], id, 'count', 'return')) return false;\n  }\n  return binding.selected[14] === TARGET && native.cases[14]?.id === TARGET &&\n    native.cases[14].status === 'fail' && isEvent(events[56], TARGET, 'action', 'enter') &&\n    events[57] === first && isEvent(events[58], TARGET, 'count', 'enter') &&\n    isEvent(events[59], TARGET, 'count', 'return') && first.sequence === 58;\n}\n\n// Only raw current, schema-validated public evidence reaches this guard.\nexport function readGetWinner(observation, binding) {\n  const value = observation.getWinner;\n  if (!gKeys(value, ['case', 'winner', 'stubStatus', 'qaLastCompleted']) ||\n      Buffer.byteLength(JSON.stringify(value)) > 512 || value.case !== CASE ||\n      !WINNERS.has(value.winner) || value.qaLastCompleted !== 'UNKNOWN' ||\n      value.stubStatus !== 'UNKNOWN' && !gInt(value.stubStatus, 400, 599)) gBad();\n\n  if (value.winner === 'UNKNOWN') {\n    if (value.stubStatus !== 'UNKNOWN') gBad();\n    return { ...value };\n  }\n  if (!qualifiedCut(observation, binding)) gBad();\n\n  const status = observation.finiteGet.http.actual;\n  if (value.winner === 'STUB_NON_OK') {\n    const wanted = PRESERVED_STUB_STATUS.has(value.stubStatus) ? value.stubStatus : 503;\n    if (status !== wanted) gBad();\n  } else if (status !== 503 || value.stubStatus !== 'UNKNOWN') {\n    gBad();\n  }\n  return { ...value };\n}\n\n// Finite GET legacy validation has a fixed 118 sentinel. After raw validation, swap\n// only the earliest exact target assertion site in an ephemeral view. An actual\n// 143 is eligible, and an unsupported raw 118 cannot inherit historical eligibility.\nexport function readCurrentFiniteGet(o, binding) {\n  const first = o.witness.events.find(event => event.edge === 'throw');\n  let view = o;\n  if (isTargetAssertion(first)) {\n    const site = gSame(first.error.site, binding.site) ? HISTORICAL_SITE\n      : gSame(first.error.site, HISTORICAL_SITE) ? binding.site : null;\n    if (site) {\n      const events = o.witness.events.map(event => event === first\n        ? { ...event, error: { ...event.error, site } }\n        : event);\n      view = { ...o, witness: { ...o.witness, events } };\n    }\n  }\n  return finiteGet(view, binding.schema, binding.selected);\n}\n",
+      "fullAfter": "import { gBad, gInt, gKeys, gSame } from '../c2-t1-finite-get-diag3/legacy/shape.mjs';\nimport { finiteGet } from '../c2-t1-finite-get-diag3/finite-get.mjs';\n\nconst CASE = '15:firstFiniteGET';\nconst TARGET = 'C2T1_SCOPE_MISSING';\nconst HISTORICAL_SITE = { file: 'S08', line: 18, column: 118 };\nconst WINNERS = new Set(['DEADLINE_OR_ABORT', 'STUB_NON_OK', 'POST_STUB_VALIDATION', 'UNKNOWN']);\nconst PRESERVED_STUB_STATUS = new Set([400, 401, 403, 404, 405, 413, 429]);\n\nfunction isTargetAssertion(event) {\n  return event?.id === TARGET && event.operation === 'action' && event.edge === 'throw' &&\n    event.error?.name === 'AssertionError' && event.error.code === 'ERR_ASSERTION';\n}\n\nfunction isEvent(event, id, operation, edge) {\n  return event?.id === id && event.operation === operation && event.edge === edge && event.error === null;\n}\n\nfunction qualifiedCut(o, binding) {\n  const { witness, native, finiteGet: { http } } = o;\n  const { events } = witness;\n  const first = events.find(event => event.edge === 'throw');\n  if (o.unknownReason !== null || o.journal.recorderFaultObserved ||\n      !['prefix', 'complete'].includes(witness.integrity) || native.integrity !== 'prefix' ||\n      !isTargetAssertion(first) || !gSame(first.error.site, binding.site) ||\n      http.state !== 'KNOWN' || http.reason !== 'TARGET_GET_ASSERTION' || http.expected !== 200 ||\n      !gInt(http.actual, 100, 599) || http.actual === 200 ||\n      first.sequence !== http.throwSequence || first.sequence !== o.firstThrowSequence) return false;\n  for (let i = 0; i < 14; i++) {\n    const id = binding.selected[i], at = 4 * i;\n    if (native.cases[i]?.id !== id || native.cases[i].status !== 'pass' ||\n        !isEvent(events[at], id, 'action', 'enter') || !isEvent(events[at + 1], id, 'action', 'return') ||\n        !isEvent(events[at + 2], id, 'count', 'enter') || !isEvent(events[at + 3], id, 'count', 'return')) return false;\n  }\n  return binding.selected[14] === TARGET && native.cases[14]?.id === TARGET &&\n    native.cases[14].status === 'fail' && isEvent(events[56], TARGET, 'action', 'enter') &&\n    events[57] === first && isEvent(events[58], TARGET, 'count', 'enter') &&\n    isEvent(events[59], TARGET, 'count', 'return') && first.sequence === 58;\n}\n\n// Only raw current, schema-validated public evidence reaches this guard.\nexport function readGetWinner(observation, binding) {\n  const value = observation.getWinner;\n  if (!gKeys(value, ['case', 'winner', 'stubStatus', 'qaLastCompleted']) ||\n      Buffer.byteLength(JSON.stringify(value)) > 512 || value.case !== CASE ||\n      !WINNERS.has(value.winner) || value.qaLastCompleted !== 'UNKNOWN' ||\n      value.stubStatus !== 'UNKNOWN' && !gInt(value.stubStatus, 400, 599)) gBad();\n\n  if (value.winner === 'UNKNOWN') {\n    if (value.stubStatus !== 'UNKNOWN') gBad();\n    return { ...value };\n  }\n  const scopeReason = observation.finiteGet.afterScopeMissing.reason;\n  if ((scopeReason !== 'JOINED_SNAPSHOT' && scopeReason !== 'SNAPSHOT_INVALID') ||\n      !qualifiedCut(observation, binding)) gBad();\n\n  const status = observation.finiteGet.http.actual;\n  if (value.winner === 'STUB_NON_OK') {\n    const wanted = PRESERVED_STUB_STATUS.has(value.stubStatus) ? value.stubStatus : 503;\n    if (status !== wanted) gBad();\n  } else if (status !== 503 || value.stubStatus !== 'UNKNOWN') {\n    gBad();\n  }\n  return { ...value };\n}\n\n// Finite GET legacy validation has a fixed 118 sentinel. After raw validation, swap\n// only the earliest exact target assertion site in an ephemeral view. An actual\n// 143 is eligible, and an unsupported raw 118 cannot inherit historical eligibility.\nexport function readCurrentFiniteGet(o, binding) {\n  const first = o.witness.events.find(event => event.edge === 'throw');\n  let view = o;\n  if (isTargetAssertion(first)) {\n    const site = gSame(first.error.site, binding.site) ? HISTORICAL_SITE\n      : gSame(first.error.site, HISTORICAL_SITE) ? binding.site : null;\n    if (site) {\n      const events = o.witness.events.map(event => event === first\n        ? { ...event, error: { ...event.error, site } }\n        : event);\n      view = { ...o, witness: { ...o.witness, events } };\n    }\n  }\n  return finiteGet(view, binding.schema, binding.selected);\n}\n"
+    },
+    {
+      "slot": "controls",
+      "beforeBlob": "602e1b0d14c1ab851833b58503dbbcbc9d3f64b9",
+      "afterBlob": "e2854d85aeb3228445d32e7ba0a87eae5ce05da8",
+      "fullBefore": "import { readFileSync } from 'node:fs';\nimport { brotliDecompressSync } from 'node:zlib';\nimport { d4ModelRead } from '../c2-t1-drop-winner-diag4/reader.mjs';\nimport { gitBlob, sha256 } from './bindings.mjs';\nimport { readGetWinnerActual, readGetWinnerModel } from './reader.mjs';\n\nconst BASE = 'docs/superpowers/root-own/c2-get-winner-dependent/';\nconst SEAL = 'c9aee1ee60ab92081e38a59abefca45c5db3e44a';\nconst LEGACY = '55635df6cbff1e7bbf72a165c2db077371f9c710';\nconst FROZEN = '3b11a1b5224aa45a69f5cc8022bb49d5768583c6';\nconst readers = { MODEL: readGetWinnerModel, ACTUAL: readGetWinnerActual, OLD_MODEL: d4ModelRead };\nconst same = (a, b) => JSON.stringify(a) === JSON.stringify(b);\nconst check = (ok, code) => { if (!ok) throw Error(code); };\nconst stableId = id => typeof id === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(id);\nconst readPinned = (path, pin) => {\n  const bytes = readFileSync(path);\n  check(gitBlob(bytes) === pin, 'CONTROL_INPUT_PIN');\n  return JSON.parse(bytes);\n};\n\nfunction inflatePack(descriptor, i) {\n  const path = BASE + 'fixtures/complete-' + String(i + 1).padStart(2, '0') + '.json';\n  check(descriptor.path === path && Number.isSafeInteger(descriptor.plainBytes) &&\n    descriptor.plainBytes >= 1 && descriptor.plainBytes <= 600000, 'CONTROL_PACK_DESCRIPTOR');\n  const wire = readPinned(path, descriptor.blob);\n  const compressed = Buffer.from(wire.brotliBase64, 'base64');\n  check(compressed.toString('base64') === wire.brotliBase64, 'CONTROL_PACK_BASE64');\n  const plain = brotliDecompressSync(compressed, { maxOutputLength: descriptor.plainBytes });\n  check(plain.length === wire.bytes && plain.length === descriptor.plainBytes &&\n    sha256(plain) === wire.sha256 && wire.sha256 === descriptor.plainSha256, 'CONTROL_PACK_DIGEST');\n  const records = JSON.parse(plain);\n  check(Array.isArray(records) && records.length === descriptor.records.length, 'CONTROL_PACK_COUNT');\n  for (const [j, record] of records.entries()) {\n    const expected = descriptor.records[j], { id, reader, accept, retainedHttp, expectedWinner } = record;\n    check(stableId(id) && same({ id, reader, accept, retainedHttp, expectedWinner, compactSha256: sha256(JSON.stringify(record)) },\n      expected), 'CONTROL_PACKET_PIN');\n  }\n  return records;\n}\n\nfunction evaluate(id, reader, input, trusted, expected) {\n  const enter = readers[reader];\n  check(stableId(id) && typeof enter === 'function' && typeof expected === 'boolean', 'CONTROL_CASE_ID');\n  try {\n    const receipt = enter(input, trusted);\n    check(expected === true, 'CONTROL_UNEXPECTED_ADMISSION_' + id);\n    return receipt;\n  } catch (error) {\n    if (expected || !(error?.constructor === Error && error.message === 'G20_OWN_UNQUALIFIED')) {\n      throw Error('CONTROL_MISMATCH_' + id);\n    }\n    return null;\n  }\n}\n\nfunction checkModel(record, receipt) {\n  const out = JSON.parse(record.input.artifact.payloadText);\n  const o = out.observation;\n  const wantedColumn = record.id === 'X-historical-site-unsupported' ? 118 : 143;\n  check(receipt.diagnosticCollectionAccepted === true && receipt.bindingKind === 'MODELED_ONLY' &&\n    receipt.tree.matchedBodyEdges === 26 && receipt.commandStepNumber === record.trusted.commandStepNumber &&\n    receipt.artifact.id === record.trusted.artifactId, 'CONTROL_MODEL_RECEIPT_' + record.id);\n  check(receipt.SourceQualified === false && receipt.Task1Pass === false &&\n    receipt.finalSourceBinding === false && receipt.nativeQualification === false &&\n    Object.keys(receipt.nonclaims).length === 7 && Object.values(receipt.nonclaims).every(v => v === false),\n    'CONTROL_NONCLAIMS_' + record.id);\n  check(same(receipt.observation, o) && same(receipt.replay.witness, o.witness) &&\n    same(receipt.replay.native, o.native) && same(receipt.firstFailure, o.firstFailure) &&\n    same(receipt.finiteGet, o.finiteGet) && same(receipt.dropWinner, o.dropWinner) &&\n    receipt.replay.witness.events.find(event => event.edge === 'throw')?.error.site.column === wantedColumn &&\n    receipt.artifact.payloadSha256 === sha256(record.input.artifact.payloadText),\n    'CONTROL_ORIGINAL_EVIDENCE_' + record.id);\n  check(same(receipt.getWinner, record.expectedWinner) && receipt.finiteGet.http.actual === record.retainedHttp,\n    'CONTROL_PUBLIC_WINNER_' + record.id);\n}\n\nfunction checkFrozen(oracle, packets) {\n  check(oracle.rows.length === 32 && oracle.rows.filter(row => row.expect).length === 7, 'CONTROL_ORACLE_COUNT');\n  for (const [i, row] of oracle.rows.entries()) {\n    const packet = packets[i];\n    const outcomeMarker = ' AFW_C2_GET_WINNER_OBSERVATION1_OUTCOME ';\n    const wire = packet.input.artifact.payloadText ?? packet.input.transport.rawLog\n      .split('\\n').find(line => line.includes(outcomeMarker)).split(outcomeMarker)[1];\n    const o = JSON.parse(wire).observation;\n    const { events } = o.witness;\n    const oracleCount = row.input.count, first = events.find(event => event.edge === 'throw');\n    check(packet.id === row.id && packet.accept === row.expect &&\n      row.input.earliestThrow.site.column === 118 && first?.sequence === row.input.earliestThrow.sequence &&\n      first.error.site.column === 143 && events[56]?.sequence === row.input.targetActionEntered &&\n      events[58]?.sequence === oracleCount.enter && (events[59]?.sequence ?? null) === oracleCount.returned &&\n      o.native.cases[14]?.status === row.input.native15 &&\n      o.native.cases.slice(0, 14).filter(caseRow => caseRow.status === 'fail').length ===\n        Number(row.input.nativeFirst14 === 'one-failure') &&\n      same(o.getWinner, row.input.getWinner) &&\n      same(o.finiteGet.http, row.input.finiteGet), 'CONTROL_ORACLE_PROJECTION_' + row.id);\n  }\n}\n\nconst seal = readPinned(BASE + 'fixtures/seal.json', SEAL);\nconst oracle = readPinned(BASE + 'fixtures/frozen-visible-oracle32.json', FROZEN);\nconst old = readPinned(seal.oldCase.path, LEGACY);\ncheck(old.id === seal.oldCase.id && old.actualExpectedSourceContext === null &&\n  sha256(old.input.artifact.payloadText) === seal.oldCase.outputSha256, 'CONTROL_HISTORICAL_POINT');\nconst packets = seal.packs.flatMap(inflatePack);\ncheck(packets.length === seal.counts.fullPackets && new Set(packets.map(item => item.id)).size === packets.length,\n  'CONTROL_UNIQUE_PACKETS');\ncheckFrozen(oracle, packets);\nconst results = packets.map(record => {\n  const { id, reader, input, trusted, accept } = record;\n  const before = sha256(JSON.stringify({ input, trusted }));\n  const receipt = evaluate(id, reader, input, trusted, accept);\n  check(sha256(JSON.stringify({ input, trusted })) === before, 'CONTROL_RAW_INPUT_MUTATED_' + id);\n  if (receipt) checkModel(record, receipt);\n  return { id, reader, accepted: receipt !== null };\n});\nconst byId = new Map(packets.map(record => [record.id, record]));\nbyId.set(old.id, old);\nconst crossings = seal.oldCase.libraryCrossings.map(spec => {\n  const { id, reader, accept } = spec;\n  const { input } = byId.get(spec.input);\n  let { trusted } = byId.get(spec.trusted);\n  if (reader === 'MODEL' && spec.trusted === old.id) {\n    trusted = { ...trusted, commandStepNumber: 5, artifactId: old.input.artifact.artifactId };\n  }\n  const receipt = evaluate(id, reader, input, trusted, accept);\n  if (receipt) {\n    check(receipt.bindingKind === 'MODELED_ONLY' && same(receipt.dropWinner, seal.oldCase.expectedDropWinner),\n      'CONTROL_HISTORICAL_RECEIPT');\n  }\n  return { id, reader, accepted: receipt !== null };\n});\nconst countAccepted = entries => entries.filter(entry => entry.accepted).length;\nconst admit = countAccepted(results), crossingAdmit = countAccepted(crossings);\nconst counts = { complete: results.length, admit, reject: results.length - admit,\n  crossing: crossings.length, crossingAdmit, crossingReject: crossings.length - crossingAdmit };\ncheck(same(counts, { complete: seal.counts.fullPackets, admit: seal.counts.accepted, reject: seal.counts.rejected,\n  crossing: seal.counts.compatibilityCalls, crossingAdmit: seal.counts.compatibilityAdmitted,\n  crossingReject: seal.counts.compatibilityRejected }), 'CONTROL_EXPECTED_TOTALS');\nconsole.log(JSON.stringify({ schema: 'AFW.C2.GET_WINNER.OWN.SYNTHETIC_RESULTS/1',\n  fixtureSeal: SEAL, counts, results: [...results, ...crossings] }));\n",
+      "fullAfter": "import { readFileSync } from 'node:fs';\nimport { brotliDecompressSync } from 'node:zlib';\nimport { d4ModelRead } from '../c2-t1-drop-winner-diag4/reader.mjs';\nimport { gitBlob, sha256 } from './bindings.mjs';\nimport { readGetWinnerActual, readGetWinnerModel } from './reader.mjs';\n\nconst BASE = 'docs/superpowers/root-own/c2-get-winner-dependent/';\nconst SEAL = 'c9aee1ee60ab92081e38a59abefca45c5db3e44a';\nconst SUPPLEMENTAL_SEAL = 'c93033a4034763ce9e2bd1235ecbea558ea81dee';\nconst LEGACY = '55635df6cbff1e7bbf72a165c2db077371f9c710';\nconst FROZEN = '3b11a1b5224aa45a69f5cc8022bb49d5768583c6';\nconst readers = { MODEL: readGetWinnerModel, ACTUAL: readGetWinnerActual, OLD_MODEL: d4ModelRead };\nconst same = (a, b) => JSON.stringify(a) === JSON.stringify(b);\nconst check = (ok, code) => { if (!ok) throw Error(code); };\nconst stableId = id => typeof id === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(id);\nconst readPinned = (path, pin) => {\n  const bytes = readFileSync(path);\n  check(gitBlob(bytes) === pin, 'CONTROL_INPUT_PIN');\n  return JSON.parse(bytes);\n};\n\nfunction inflatePack(descriptor, i) {\n  const path = BASE + 'fixtures/complete-' + String(i + 1).padStart(2, '0') + '.json';\n  check(descriptor.path === path && Number.isSafeInteger(descriptor.plainBytes) &&\n    descriptor.plainBytes >= 1 && descriptor.plainBytes <= 600000, 'CONTROL_PACK_DESCRIPTOR');\n  const wire = readPinned(path, descriptor.blob);\n  const compressed = Buffer.from(wire.brotliBase64, 'base64');\n  check(compressed.toString('base64') === wire.brotliBase64, 'CONTROL_PACK_BASE64');\n  const plain = brotliDecompressSync(compressed, { maxOutputLength: descriptor.plainBytes });\n  check(plain.length === wire.bytes && plain.length === descriptor.plainBytes &&\n    sha256(plain) === wire.sha256 && wire.sha256 === descriptor.plainSha256, 'CONTROL_PACK_DIGEST');\n  const records = JSON.parse(plain);\n  check(Array.isArray(records) && records.length === descriptor.records.length, 'CONTROL_PACK_COUNT');\n  for (const [j, record] of records.entries()) {\n    const expected = descriptor.records[j], { id, reader, accept, retainedHttp, expectedWinner } = record;\n    check(stableId(id) && same({ id, reader, accept, retainedHttp, expectedWinner, compactSha256: sha256(JSON.stringify(record)) },\n      expected), 'CONTROL_PACKET_PIN');\n  }\n  return records;\n}\n\nfunction evaluate(id, reader, input, trusted, expected) {\n  const enter = readers[reader];\n  check(stableId(id) && typeof enter === 'function' && typeof expected === 'boolean', 'CONTROL_CASE_ID');\n  try {\n    const receipt = enter(input, trusted);\n    check(expected === true, 'CONTROL_UNEXPECTED_ADMISSION_' + id);\n    return receipt;\n  } catch (error) {\n    if (expected || !(error?.constructor === Error && error.message === 'G20_OWN_UNQUALIFIED')) {\n      throw Error('CONTROL_MISMATCH_' + id);\n    }\n    return null;\n  }\n}\n\nfunction checkModel(record, receipt) {\n  const out = JSON.parse(record.input.artifact.payloadText);\n  const o = out.observation;\n  const wantedColumn = record.id === 'X-historical-site-unsupported' ? 118 : 143;\n  check(receipt.diagnosticCollectionAccepted === true && receipt.bindingKind === 'MODELED_ONLY' &&\n    receipt.tree.matchedBodyEdges === 26 && receipt.commandStepNumber === record.trusted.commandStepNumber &&\n    receipt.artifact.id === record.trusted.artifactId, 'CONTROL_MODEL_RECEIPT_' + record.id);\n  check(receipt.SourceQualified === false && receipt.Task1Pass === false &&\n    receipt.finalSourceBinding === false && receipt.nativeQualification === false &&\n    Object.keys(receipt.nonclaims).length === 7 && Object.values(receipt.nonclaims).every(v => v === false),\n    'CONTROL_NONCLAIMS_' + record.id);\n  check(same(receipt.observation, o) && same(receipt.replay.witness, o.witness) &&\n    same(receipt.replay.native, o.native) && same(receipt.firstFailure, o.firstFailure) &&\n    same(receipt.finiteGet, o.finiteGet) && same(receipt.dropWinner, o.dropWinner) &&\n    receipt.replay.witness.events.find(event => event.edge === 'throw')?.error.site.column === wantedColumn &&\n    receipt.artifact.payloadSha256 === sha256(record.input.artifact.payloadText),\n    'CONTROL_ORIGINAL_EVIDENCE_' + record.id);\n  check(same(receipt.getWinner, record.expectedWinner) && receipt.finiteGet.http.actual === record.retainedHttp,\n    'CONTROL_PUBLIC_WINNER_' + record.id);\n}\n\nfunction checkFrozen(oracle, packets) {\n  check(oracle.rows.length === 32 && oracle.rows.filter(row => row.expect).length === 7, 'CONTROL_ORACLE_COUNT');\n  for (const [i, row] of oracle.rows.entries()) {\n    const packet = packets[i];\n    const outcomeMarker = ' AFW_C2_GET_WINNER_OBSERVATION1_OUTCOME ';\n    const wire = packet.input.artifact.payloadText ?? packet.input.transport.rawLog\n      .split('\\n').find(line => line.includes(outcomeMarker)).split(outcomeMarker)[1];\n    const o = JSON.parse(wire).observation;\n    const { events } = o.witness;\n    const oracleCount = row.input.count, first = events.find(event => event.edge === 'throw');\n    check(packet.id === row.id && packet.accept === row.expect &&\n      row.input.earliestThrow.site.column === 118 && first?.sequence === row.input.earliestThrow.sequence &&\n      first.error.site.column === 143 && events[56]?.sequence === row.input.targetActionEntered &&\n      events[58]?.sequence === oracleCount.enter && (events[59]?.sequence ?? null) === oracleCount.returned &&\n      o.native.cases[14]?.status === row.input.native15 &&\n      o.native.cases.slice(0, 14).filter(caseRow => caseRow.status === 'fail').length ===\n        Number(row.input.nativeFirst14 === 'one-failure') &&\n      same(o.getWinner, row.input.getWinner) &&\n      same(o.finiteGet.http, row.input.finiteGet), 'CONTROL_ORACLE_PROJECTION_' + row.id);\n  }\n}\n\nconst seal = readPinned(BASE + 'fixtures/seal.json', SEAL);\nconst supplemental = readPinned(BASE + 'fixtures/seal-fix1.json', SUPPLEMENTAL_SEAL);\ncheck(supplemental.originalFixtureSeal.blob === SEAL, 'CONTROL_SUPPLEMENTAL_PREIMAGE');\nconst oracle = readPinned(BASE + 'fixtures/frozen-visible-oracle32.json', FROZEN);\nconst old = readPinned(seal.oldCase.path, LEGACY);\ncheck(old.id === seal.oldCase.id && old.actualExpectedSourceContext === null &&\n  sha256(old.input.artifact.payloadText) === seal.oldCase.outputSha256, 'CONTROL_HISTORICAL_POINT');\nconst originalPackets = seal.packs.flatMap(inflatePack);\nconst addedPackets = inflatePack(supplemental.pack, seal.packs.length);\nconst packets = [...originalPackets, ...addedPackets];\ncheck(originalPackets.length === seal.counts.fullPackets && addedPackets.length === supplemental.counts.addedComplete &&\n  new Set(packets.map(item => item.id)).size === packets.length, 'CONTROL_UNIQUE_PACKETS');\ncheckFrozen(oracle, packets);\nconst results = packets.map(record => {\n  const { id, reader, input, trusted, accept } = record;\n  const before = sha256(JSON.stringify({ input, trusted }));\n  const receipt = evaluate(id, reader, input, trusted, accept);\n  check(sha256(JSON.stringify({ input, trusted })) === before, 'CONTROL_RAW_INPUT_MUTATED_' + id);\n  if (receipt) checkModel(record, receipt);\n  return { id, reader, accepted: receipt !== null };\n});\nconst byId = new Map(packets.map(record => [record.id, record]));\nbyId.set(old.id, old);\nconst crossings = seal.oldCase.libraryCrossings.map(spec => {\n  const { id, reader, accept } = spec;\n  const { input } = byId.get(spec.input);\n  let { trusted } = byId.get(spec.trusted);\n  if (reader === 'MODEL' && spec.trusted === old.id) {\n    trusted = { ...trusted, commandStepNumber: 5, artifactId: old.input.artifact.artifactId };\n  }\n  const receipt = evaluate(id, reader, input, trusted, accept);\n  if (receipt) {\n    check(receipt.bindingKind === 'MODELED_ONLY' && same(receipt.dropWinner, seal.oldCase.expectedDropWinner),\n      'CONTROL_HISTORICAL_RECEIPT');\n  }\n  return { id, reader, accepted: receipt !== null };\n});\nconst countAccepted = entries => entries.filter(entry => entry.accepted).length;\nconst admit = countAccepted(results), crossingAdmit = countAccepted(crossings);\nconst counts = { complete: results.length, admit, reject: results.length - admit,\n  crossing: crossings.length, crossingAdmit, crossingReject: crossings.length - crossingAdmit };\nconst addedAdmit = countAccepted(results.slice(originalPackets.length));\ncheck(addedAdmit === supplemental.counts.addedAdmit &&\n  addedPackets.length - addedAdmit === supplemental.counts.addedReject, 'CONTROL_SUPPLEMENTAL_TOTALS');\ncheck(same(counts, { complete: seal.counts.fullPackets + supplemental.counts.addedComplete,\n  admit: seal.counts.accepted + supplemental.counts.addedAdmit, reject: seal.counts.rejected + supplemental.counts.addedReject,\n  crossing: seal.counts.compatibilityCalls, crossingAdmit: seal.counts.compatibilityAdmitted,\n  crossingReject: seal.counts.compatibilityRejected }), 'CONTROL_EXPECTED_TOTALS');\nconsole.log(JSON.stringify({ schema: 'AFW.C2.GET_WINNER.OWN.SYNTHETIC_RESULTS/1',\n  fixtureSeal: SEAL, supplementalFixtureSeal: SUPPLEMENTAL_SEAL, counts, results: [...results, ...crossings] }));\n"
+    },
+    {
+      "slot": "controller",
+      "beforeBlob": "2d0360b9d43f4f0ef6236909e34cdd717b3007de",
+      "afterBlob": "b4d27b49a0f28791149921747c0e3d3498d0deba",
+      "fullBefore": "import { spawnSync } from 'node:child_process';\nimport { createHash } from 'node:crypto';\nimport { lstatSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';\nimport { performance } from 'node:perf_hooks';\n\nconst PREFIX = 'docs/superpowers/root-own/c2-get-winner-dependent/';\nconst OUTPUT = 'output/c2-own-get-winner-tools.json';\nconst BASE = '6791ce1bab9372e206d3c7b42b3e1394dc6e0c68';\nconst BASE_TREE = '62e78926635d6b74f288d6c0d69e0f2516306989';\nconst BRANCH = 'lab/afw-c2-own-20261117-get-winner-tools';\nconst WORKFLOW = '.github/workflows/afw-c2-own-get-winner-tools.yml';\nconst MESSAGE = 'AFW-C2-OWN-GET-WINNER-TOOLS-ONEUSE-20261117';\nconst REPOSITORY = 'tokenizartinfo-ops/agent-friendly-web';\nconst SEAL = 'c9aee1ee60ab92081e38a59abefca45c5db3e44a';\nconst LEDGER = '9a32f3bf14e827d93e3aec6b2b149a9932508eb28279d018a12cc633cdce54d4';\nconst CLOSED_CAP = 330000;\nconst deadline = performance.now() + CLOSED_CAP;\n\nconst ensure = (ok, code) => { if (!ok) throw Error(code); };\nconst hex40 = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);\nconst hex64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);\nconst sha256 = bytes => createHash('sha256').update(bytes).digest('hex');\nconst gitBlob = bytes => createHash('sha1').update('blob ' + bytes.length + '\\0').update(bytes).digest('hex');\nconst same = (a, b) => JSON.stringify(a) === JSON.stringify(b);\nconst text = bytes => new TextDecoder('utf-8', { fatal: true }).decode(bytes);\nconst outputCounts = { complete: 69, admit: 13, reject: 56, crossing: 5, crossingAdmit: 1, crossingReject: 4 };\nconst env = process.env;\nconst head = env.GITHUB_SHA;\n\nfunction run(command, args, cap, fix, childEnv = env) {\n  const remaining = Math.floor(deadline - performance.now());\n  ensure(remaining > 0, 'OWN_CONTROL_DEADLINE');\n  const result = spawnSync(command, args, { env: childEnv, maxBuffer: cap, timeout: remaining, killSignal: 'SIGKILL' });\n  ensure(result.status === 0 && result.signal === null && !result.error && result.stderr?.length <= cap &&\n    result.stdout?.length <= cap, fix);\n  return result.stdout;\n}\n\nconst git = (...args) => run('git', args, 4194304, 'OWN_CONTROL_GIT');\n\nfunction leaves(revision) {\n  const wire = text(git('ls-tree', '-r', '--full-tree', '-z', revision));\n  ensure(wire.endsWith('\\0'), 'OWN_CONTROL_TREE_FORMAT');\n  const entries = wire.slice(0, -1).split('\\0');\n  const map = new Map();\n  for (const entry of entries) {\n    const headerEnd = entry.indexOf('\\t'), path = entry.slice(headerEnd + 1);\n    ensure(headerEnd > 0 && path.length > 0 && !map.has(path), 'OWN_CONTROL_TREE_ENTRY');\n    map.set(path, entry.slice(0, headerEnd));\n  }\n  return map;\n}\n\nfunction verifyMount() {\n  const graphPath = PREFIX + 'graph.json';\n  const graphBytes = readFileSync(graphPath);\n  const graph = JSON.parse(graphBytes);\n  ensure(graph.schema === 'AFW.C2.GET_WINNER.OWN.CONTROL_GRAPH/1' &&\n    graph.base === BASE && graph.baseTree === BASE_TREE && graph.fixtureSeal.blob === SEAL &&\n    graph.nomination.command === 'node ' + PREFIX + 'run-controls.mjs' &&\n    graph.nomination.workflow === WORKFLOW && graph.nomination.artifact.path === OUTPUT &&\n    graph.nomination.totalMs === CLOSED_CAP && graph.nomination.node === process.version &&\n    graph.producerEvaluation === false && graph.execution === 'NOT_RUN', 'OWN_CONTROL_GRAPH');\n  const baseline = leaves(BASE);\n  const mounted = leaves(head);\n  ensure(baseline.size === 3203 && graph.originalLeaves === baseline.size &&\n    Array.isArray(graph.files) && mounted.size === baseline.size + graph.files.length + 1 &&\n    mounted.get(graphPath) === '100644 blob ' + gitBlob(graphBytes) && !baseline.has(graphPath), 'OWN_CONTROL_GRAPH_MOUNT');\n  for (const [path, value] of baseline) ensure(mounted.get(path) === value, 'OWN_CONTROL_BASE_DRIFT');\n  const paths = new Set([graphPath]);\n  for (const row of graph.files) {\n    const { path, mode, type, blob, bytes, sha256: digest } = row;\n    ensure(typeof path === 'string' && !path.startsWith('/') && !path.includes('\\\\') &&\n      !path.split('/').some(p => !p || p === '.' || p === '..') && !paths.has(path) && !baseline.has(path) &&\n      mode === '100644' && type === 'blob' && hex40(blob) && hex64(digest) &&\n      Number.isSafeInteger(bytes) && bytes >= 1 && bytes <= 1048576 &&\n      mounted.get(path) === '100644 blob ' + blob && lstatSync(path).isFile(), 'OWN_CONTROL_GRAPH_LEAF');\n    const body = readFileSync(path);\n    ensure(body.length === bytes && gitBlob(body) === blob && sha256(body) === digest, 'OWN_CONTROL_BODY_DRIFT');\n    paths.add(path);\n  }\n  const checks = graph.files.filter(row => row.path.endsWith('.mjs'));\n  ensure(checks.length === graph.syntaxModules && checks.length >= 4, 'OWN_CONTROL_SYNTAX_GRAPH');\n  return { graph, sha256: sha256(graphBytes), gitBlob: gitBlob(graphBytes), mountLeaves: paths.size };\n}\n\nfunction main() {\n  ensure(process.platform === 'linux' && process.version === 'v22.23.4' && env.GITHUB_ACTIONS === 'true' &&\n    env.GITHUB_REPOSITORY === REPOSITORY && env.GITHUB_EVENT_NAME === 'push' &&\n    env.GITHUB_REF === 'refs/heads/' + BRANCH && env.GITHUB_RUN_ATTEMPT === '1' &&\n    env.GITHUB_JOB === 'c2-own-get-winner-tools' && hex40(head) &&\n    /^[1-9][0-9]{0,19}$/.test(env.GITHUB_RUN_ID ?? ''), 'OWN_CONTROL_ADMISSION');\n  ensure(text(git('rev-parse', 'HEAD')).trim() === head &&\n    text(git('rev-list', '--parents', '-n', '1', 'HEAD')).trim() === head + ' ' + BASE &&\n    text(git('rev-parse', BASE + '^{tree}')).trim() === BASE_TREE &&\n    text(git('show', '-s', '--format=%B', 'HEAD')).trimEnd() === MESSAGE, 'OWN_CONTROL_HEAD');\n  const mount = verifyMount();\n  const tree = text(git('rev-parse', 'HEAD^{tree}')).trim();\n  ensure(hex40(tree), 'OWN_CONTROL_TREE');\n  const childEnv = { LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8', NODE_OPTIONS: '' };\n  const resultText = text(run(process.execPath, [PREFIX + 'controls.mjs'], 32768, 'OWN_CONTROL_FAILED', childEnv));\n  ensure(resultText.endsWith('\\n') && !resultText.slice(0, -1).includes('\\n'), 'OWN_CONTROL_RESULT_FRAME');\n  const result = JSON.parse(resultText);\n  ensure(result.fixtureSeal === SEAL && same(result.counts, outputCounts) &&\n    resultText === JSON.stringify(result) + '\\n' && sha256(resultText.slice(0, -1)) === LEDGER &&\n    performance.now() < deadline, 'OWN_CONTROL_RESULT_DIGEST');\n  const nonclaims = { historicalCauseProven: false, receiptAuthenticated: false, operationalReadiness: false,\n    completePackage: false, PCoff: false, globalNativeDrainVerified: false, sdkNamespaceEmptyVerified: false };\n  const receipt = {\n    schema: 'AFW.C2.GET_WINNER.OWN.NATIVE_CONTROL_RESULT/1',\n    scope: 'GHA_NATIVE_EXECUTION_OF_SYNTHETIC_MODEL_CONTROLS',\n    context: { repository: REPOSITORY, branch: BRANCH, workflow: WORKFLOW, job: env.GITHUB_JOB,\n      runId: env.GITHUB_RUN_ID, attempt: 1, head, tree, parent: BASE, parentTree: BASE_TREE, node: process.version },\n    graph: { blob: mount.gitBlob, sha256: mount.sha256, mountLeaves: mount.mountLeaves, originalLeaves: 3203 },\n    fixtureSeal: SEAL, canonicalResultSha256: LEDGER, counts: result.counts, controlResults: result.results,\n    sourceEvaluation: false, actualFull20Admission: false, nativeQualification: false, SourceQualified: false,\n    Task1Pass: false, businessRepair: false, nonclaims\n  };\n  const wire = JSON.stringify(receipt);\n  ensure(Buffer.byteLength(wire) <= 24576 && performance.now() < deadline, 'OWN_CONTROL_PUBLICATION_CAP');\n  mkdirSync('output', { recursive: true });\n  writeFileSync(OUTPUT, wire + '\\n', { flag: 'wx', mode: 0o600 });\n  console.log('AFW_C2_OWN_GET_WINNER_TOOLS ' + wire);\n}\n\ntry { main(); }\ncatch (error) {\n  const code = /^OWN_CONTROL_[A-Z_]+$/.test(error?.message) ? error.message : 'OWN_CONTROL_UNQUALIFIED';\n  console.error(code);\n  process.exitCode = 1;\n}\n",
+      "fullAfter": "import { spawnSync } from 'node:child_process';\nimport { createHash } from 'node:crypto';\nimport { lstatSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';\nimport { performance } from 'node:perf_hooks';\n\nconst PREFIX = 'docs/superpowers/root-own/c2-get-winner-dependent/';\nconst OUTPUT = 'output/c2-own-get-winner-tools.json';\nconst BASE = '6791ce1bab9372e206d3c7b42b3e1394dc6e0c68';\nconst BASE_TREE = '62e78926635d6b74f288d6c0d69e0f2516306989';\nconst BRANCH = 'lab/afw-c2-own-20261117-get-winner-tools';\nconst WORKFLOW = '.github/workflows/afw-c2-own-get-winner-tools.yml';\nconst MESSAGE = 'AFW-C2-OWN-GET-WINNER-TOOLS-ONEUSE-20261117';\nconst REPOSITORY = 'tokenizartinfo-ops/agent-friendly-web';\nconst SEAL = 'c9aee1ee60ab92081e38a59abefca45c5db3e44a';\nconst SUPPLEMENTAL_SEAL = 'c93033a4034763ce9e2bd1235ecbea558ea81dee';\nconst LEDGER = '89ae320ff0b3d1dbc4199fec14c12e8c17715a9f1e203a4e9ee24d73628771cd';\nconst CLOSED_CAP = 330000;\nconst deadline = performance.now() + CLOSED_CAP;\n\nconst ensure = (ok, code) => { if (!ok) throw Error(code); };\nconst hex40 = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);\nconst hex64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);\nconst sha256 = bytes => createHash('sha256').update(bytes).digest('hex');\nconst gitBlob = bytes => createHash('sha1').update('blob ' + bytes.length + '\\0').update(bytes).digest('hex');\nconst same = (a, b) => JSON.stringify(a) === JSON.stringify(b);\nconst text = bytes => new TextDecoder('utf-8', { fatal: true }).decode(bytes);\nconst outputCounts = { complete: 73, admit: 15, reject: 58, crossing: 5, crossingAdmit: 1, crossingReject: 4 };\nconst env = process.env;\nconst head = env.GITHUB_SHA;\n\nfunction run(command, args, cap, fix, childEnv = env) {\n  const remaining = Math.floor(deadline - performance.now());\n  ensure(remaining > 0, 'OWN_CONTROL_DEADLINE');\n  const result = spawnSync(command, args, { env: childEnv, maxBuffer: cap, timeout: remaining, killSignal: 'SIGKILL' });\n  ensure(result.status === 0 && result.signal === null && !result.error && result.stderr?.length <= cap &&\n    result.stdout?.length <= cap, fix);\n  return result.stdout;\n}\n\nconst git = (...args) => run('git', args, 4194304, 'OWN_CONTROL_GIT');\n\nfunction leaves(revision) {\n  const wire = text(git('ls-tree', '-r', '--full-tree', '-z', revision));\n  ensure(wire.endsWith('\\0'), 'OWN_CONTROL_TREE_FORMAT');\n  const entries = wire.slice(0, -1).split('\\0');\n  const map = new Map();\n  for (const entry of entries) {\n    const headerEnd = entry.indexOf('\\t'), path = entry.slice(headerEnd + 1);\n    ensure(headerEnd > 0 && path.length > 0 && !map.has(path), 'OWN_CONTROL_TREE_ENTRY');\n    map.set(path, entry.slice(0, headerEnd));\n  }\n  return map;\n}\n\nfunction verifyMount() {\n  const graphPath = PREFIX + 'graph.json';\n  const graphBytes = readFileSync(graphPath);\n  const graph = JSON.parse(graphBytes);\n  ensure(graph.schema === 'AFW.C2.GET_WINNER.OWN.CONTROL_GRAPH/1' &&\n    graph.base === BASE && graph.baseTree === BASE_TREE && graph.fixtureSeal.blob === SEAL &&\n    graph.supplementalFixtureSeal.blob === SUPPLEMENTAL_SEAL &&\n    graph.nomination.command === 'node ' + PREFIX + 'run-controls.mjs' &&\n    graph.nomination.workflow === WORKFLOW && graph.nomination.artifact.path === OUTPUT &&\n    graph.nomination.totalMs === CLOSED_CAP && graph.nomination.node === process.version &&\n    graph.producerEvaluation === false && graph.execution === 'NOT_RUN', 'OWN_CONTROL_GRAPH');\n  const baseline = leaves(BASE);\n  const mounted = leaves(head);\n  ensure(baseline.size === 3203 && graph.originalLeaves === baseline.size &&\n    Array.isArray(graph.files) && mounted.size === baseline.size + graph.files.length + 1 &&\n    mounted.get(graphPath) === '100644 blob ' + gitBlob(graphBytes) && !baseline.has(graphPath), 'OWN_CONTROL_GRAPH_MOUNT');\n  for (const [path, value] of baseline) ensure(mounted.get(path) === value, 'OWN_CONTROL_BASE_DRIFT');\n  const paths = new Set([graphPath]);\n  for (const row of graph.files) {\n    const { path, mode, type, blob, bytes, sha256: digest } = row;\n    ensure(typeof path === 'string' && !path.startsWith('/') && !path.includes('\\\\') &&\n      !path.split('/').some(p => !p || p === '.' || p === '..') && !paths.has(path) && !baseline.has(path) &&\n      mode === '100644' && type === 'blob' && hex40(blob) && hex64(digest) &&\n      Number.isSafeInteger(bytes) && bytes >= 1 && bytes <= 1048576 &&\n      mounted.get(path) === '100644 blob ' + blob && lstatSync(path).isFile(), 'OWN_CONTROL_GRAPH_LEAF');\n    const body = readFileSync(path);\n    ensure(body.length === bytes && gitBlob(body) === blob && sha256(body) === digest, 'OWN_CONTROL_BODY_DRIFT');\n    paths.add(path);\n  }\n  const checks = graph.files.filter(row => row.path.endsWith('.mjs'));\n  ensure(checks.length === graph.syntaxModules && checks.length >= 4, 'OWN_CONTROL_SYNTAX_GRAPH');\n  return { graph, sha256: sha256(graphBytes), gitBlob: gitBlob(graphBytes), mountLeaves: paths.size };\n}\n\nfunction main() {\n  ensure(process.platform === 'linux' && process.version === 'v22.23.4' && env.GITHUB_ACTIONS === 'true' &&\n    env.GITHUB_REPOSITORY === REPOSITORY && env.GITHUB_EVENT_NAME === 'push' &&\n    env.GITHUB_REF === 'refs/heads/' + BRANCH && env.GITHUB_RUN_ATTEMPT === '1' &&\n    env.GITHUB_JOB === 'c2-own-get-winner-tools' && hex40(head) &&\n    /^[1-9][0-9]{0,19}$/.test(env.GITHUB_RUN_ID ?? ''), 'OWN_CONTROL_ADMISSION');\n  ensure(text(git('rev-parse', 'HEAD')).trim() === head &&\n    text(git('rev-list', '--parents', '-n', '1', 'HEAD')).trim() === head + ' ' + BASE &&\n    text(git('rev-parse', BASE + '^{tree}')).trim() === BASE_TREE &&\n    text(git('show', '-s', '--format=%B', 'HEAD')).trimEnd() === MESSAGE, 'OWN_CONTROL_HEAD');\n  const mount = verifyMount();\n  const tree = text(git('rev-parse', 'HEAD^{tree}')).trim();\n  ensure(hex40(tree), 'OWN_CONTROL_TREE');\n  const childEnv = { LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8', NODE_OPTIONS: '' };\n  const resultText = text(run(process.execPath, [PREFIX + 'controls.mjs'], 32768, 'OWN_CONTROL_FAILED', childEnv));\n  ensure(resultText.endsWith('\\n') && !resultText.slice(0, -1).includes('\\n'), 'OWN_CONTROL_RESULT_FRAME');\n  const result = JSON.parse(resultText);\n  ensure(result.fixtureSeal === SEAL && result.supplementalFixtureSeal === SUPPLEMENTAL_SEAL &&\n    same(result.counts, outputCounts) &&\n    resultText === JSON.stringify(result) + '\\n' && sha256(resultText.slice(0, -1)) === LEDGER &&\n    performance.now() < deadline, 'OWN_CONTROL_RESULT_DIGEST');\n  const nonclaims = { historicalCauseProven: false, receiptAuthenticated: false, operationalReadiness: false,\n    completePackage: false, PCoff: false, globalNativeDrainVerified: false, sdkNamespaceEmptyVerified: false };\n  const receipt = {\n    schema: 'AFW.C2.GET_WINNER.OWN.NATIVE_CONTROL_RESULT/1',\n    scope: 'GHA_NATIVE_EXECUTION_OF_SYNTHETIC_MODEL_CONTROLS',\n    context: { repository: REPOSITORY, branch: BRANCH, workflow: WORKFLOW, job: env.GITHUB_JOB,\n      runId: env.GITHUB_RUN_ID, attempt: 1, head, tree, parent: BASE, parentTree: BASE_TREE, node: process.version },\n    graph: { blob: mount.gitBlob, sha256: mount.sha256, mountLeaves: mount.mountLeaves, originalLeaves: 3203 },\n    fixtureSeal: SEAL, supplementalFixtureSeal: SUPPLEMENTAL_SEAL,\n    canonicalResultSha256: LEDGER, counts: result.counts, controlResults: result.results,\n    sourceEvaluation: false, actualFull20Admission: false, nativeQualification: false, SourceQualified: false,\n    Task1Pass: false, businessRepair: false, nonclaims\n  };\n  const wire = JSON.stringify(receipt);\n  ensure(Buffer.byteLength(wire) <= 24576 && performance.now() < deadline, 'OWN_CONTROL_PUBLICATION_CAP');\n  mkdirSync('output', { recursive: true });\n  writeFileSync(OUTPUT, wire + '\\n', { flag: 'wx', mode: 0o600 });\n  console.log('AFW_C2_OWN_GET_WINNER_TOOLS ' + wire);\n}\n\ntry { main(); }\ncatch (error) {\n  const code = /^OWN_CONTROL_[A-Z_]+$/.test(error?.message) ? error.message : 'OWN_CONTROL_UNQUALIFIED';\n  console.error(code);\n  process.exitCode = 1;\n}\n"
+    }
+  ],
+  "soleGuardLiteralHunk": {
+    "path": "docs/superpowers/root-own/c2-get-winner-dependent/get-winner.mjs",
+    "before": "  if (!qualifiedCut(observation, binding)) gBad();\n",
+    "after": "  const scopeReason = observation.finiteGet.afterScopeMissing.reason;\n  if ((scopeReason !== 'JOINED_SNAPSHOT' && scopeReason !== 'SNAPSHOT_INVALID') ||\n      !qualifiedCut(observation, binding)) gBad();\n"
+  },
+  "graphDiff": [
+    {
+      "path": "/appendLeavesExcludingGraph",
+      "before": 37,
+      "after": 39
+    },
+    {
+      "path": "/totalMountedLeaves",
+      "before": 3241,
+      "after": 3243
+    },
+    {
+      "path": "/basePathAbsence/method",
+      "before": "GitHub contents API at immutable BASE, 404 NOT_FOUND for each prospective path; one existing fixture path read as positive control",
+      "after": "GitHub contents API 404 at immutable BASE for 38 original candidate paths plus 2 supplemental paths; existing fixture positive control preserved"
+    },
+    {
+      "path": "/basePathAbsence/checkedPaths",
+      "before": 38,
+      "after": 40
+    },
+    {
+      "path": "/files",
+      "before": [
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/bindings.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd4f2c1899f204be38dacf25e0559809ba870256",
+          "bytes": 10695,
+          "sha256": "b210a36fdf99c7c5618ec8f6b35154d921d5d89e53200412dfe0719999c5afeb"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/get-winner.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7569fcffb883b4f6c713a93a15edd979a960e58b",
+          "bytes": 4065,
+          "sha256": "cdca1d42ec30d9574284ed34ef70817a481206dc53b5c808e67b2ccdb53e33b4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/reader.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "44a8fd8dfb1e7869dde55967935d4e213c85ef5b",
+          "bytes": 6535,
+          "sha256": "e6fffeed29576f3a7ef61b9ca5f8c6de24b9c7f084c1ceeddb0a34c8fd4a7037"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "602e1b0d14c1ab851833b58503dbbcbc9d3f64b9",
+          "bytes": 8186,
+          "sha256": "345286b49c8a6042c66d8c4f162e48bebd14b9164d8aec1915dfb5a6589f572c"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/run-controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2d0360b9d43f4f0ef6236909e34cdd717b3007de",
+          "bytes": 7800,
+          "sha256": "8fcc0812474ce7c05ef5b68a57ba3328ed63f5140fcf795505b31b59ea57d71c"
+        },
+        {
+          "path": ".github/workflows/afw-c2-own-get-winner-tools.yml",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b22fa7d4c7fd0d6d17a86eb43c5d79df15397024",
+          "bytes": 3411,
+          "sha256": "f87d5304e476b1a695494fde29e4cd52696a3ea70e3dd5c7ed46fa6b9ae0e6c2"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-source-proposal.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5",
+          "bytes": 26775,
+          "sha256": "652c72ff3c54691c3135bb031c73ca5038621619d06d28b3cc4fc428efa43393"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-root26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd2899bb2c0883008ccb12dfb911f0d10aecb072",
+          "bytes": 14965,
+          "sha256": "3d10759d3f6ac2bc76d6dc5320fbc7f279f4893a509a5f336adacdffda56fb0a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+          "bytes": 35611,
+          "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+          "bytes": 4403,
+          "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/model26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "75154471e2ea014677fc5176ff2f734262a3c365",
+          "bytes": 7052,
+          "sha256": "dc70e49b84bb834a38d2306440d977eaf4d8f5a6d802da29b0ddea13b1fc4bfc"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/frozen-visible-oracle32.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3b11a1b5224aa45a69f5cc8022bb49d5768583c6",
+          "bytes": 32796,
+          "sha256": "6a5bd7bf5a2b47989f611f154f77a639aa618e9fe6fb58d636d3710996325fee"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c9aee1ee60ab92081e38a59abefca45c5db3e44a",
+          "bytes": 28159,
+          "sha256": "d55d4134d3c928e3344b7b3bd3d1aa2266250a238dcc564175691719bd6f61db"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-01.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+          "bytes": 27483,
+          "sha256": "ea03a26509c61770acc1b028c796376ca89ee0534af84527f42e5875743f1c3b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-02.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1a31f6cb8652be0b872f81601b97479f27473245",
+          "bytes": 40491,
+          "sha256": "9fd3748fb36a4f8d2e7cbfc73650f06d0813470963769f44a382f14a57c069f2"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-03.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c5506c80724a69ba195c743e84a3b599bb0954d",
+          "bytes": 30471,
+          "sha256": "0fe61103575224d11a18cdf7f20b2ff96fce296a6ed0a58a36e20861c4813331"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-04.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "78159c47e96c25076c717998db3b5ef7bfdf61a3",
+          "bytes": 49431,
+          "sha256": "0c9420af5c680b5e4e2db6d1c92911f5e598c7f596714540fd763efde42130cc"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-05.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "64c1783dda3c2c831667660473e3192b8f1e8c34",
+          "bytes": 20695,
+          "sha256": "3c215c470fb19d59826776cf86451afec4a06a0326e84047cfdea329715734a8"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-06.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8aaa719e5444c5115ccfb6285a45309835238326",
+          "bytes": 20135,
+          "sha256": "06c621c9006d0945922da9e237531ce60124dd14b7f60afaf72d3ff82c37c01e"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+          "bytes": 5365,
+          "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+          "bytes": 9733,
+          "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+          "bytes": 35339,
+          "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+          "bytes": 2440,
+          "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+          "bytes": 4511,
+          "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+          "bytes": 3355,
+          "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/root-actual26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1fea33135f8943707738d4f078ff3616e9b5132c",
+          "bytes": 17603,
+          "sha256": "53f327fcd0add7a32639c9cd172a26e91d27eafd5bfaeaa29b2acad9618c3705"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/source-final-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+          "bytes": 13613,
+          "sha256": "31c1d325c72c4253fdac1ca2680120d3590334244b78fbeff1fced8ef51f4041"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+          "bytes": 34193,
+          "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+          "bytes": 5173,
+          "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "53bfd6716ecb04153158e6653700648140528d27",
+          "bytes": 13909,
+          "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec",
+          "bytes": 34193,
+          "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "162c194073a87e2a3bc906b3b605df28b17ea17f",
+          "bytes": 733,
+          "sha256": "0ac2d8294c51e2f2b4735ce9d0bb995591d31bb70dc72ff01efee3d59af8de7b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_O01.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "55635df6cbff1e7bbf72a165c2db077371f9c710",
+          "bytes": 57179,
+          "sha256": "4bc1a689cbab532d692191da20aa5b601dfa5881b9ab1d175dce89b165a5220a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/bindings.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4d54d57322ea67c3a29278f75288c7c9b686105b",
+          "bytes": 3189,
+          "sha256": "df2215b4aaea2cf3428e08531c4ed74ba9a35dd8e710389e2c6f0f8c138b8a23"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8e794a8039575694aa53064eccc4ed397e8d19a4",
+          "bytes": 2726,
+          "sha256": "2d24ac7238028ce13eac83eaf20539d49710f011ba8914fcb5626f1fe592ec9a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/reader.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+          "bytes": 4983,
+          "sha256": "6a88e4d5844aa03b26b495046dbf3f5d42904416aefed800d1007ca1dd45b544"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1298c105fd934b0b8053596b8473aba947eb1854",
+          "bytes": 852,
+          "sha256": "b1fa2b21546d401801d17be7fe126ad6753bdce89de64f35089180eb1c07a5f4"
+        }
+      ],
+      "after": [
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/bindings.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd4f2c1899f204be38dacf25e0559809ba870256",
+          "bytes": 10695,
+          "sha256": "b210a36fdf99c7c5618ec8f6b35154d921d5d89e53200412dfe0719999c5afeb"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/get-winner.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cdd6f2a40d379251999c6f80e9eb43228635ff84",
+          "bytes": 4218,
+          "sha256": "a34e522816005114d725bd6b1b911421b740e075ba3bc6f686657172a7f2dab8"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/reader.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "44a8fd8dfb1e7869dde55967935d4e213c85ef5b",
+          "bytes": 6535,
+          "sha256": "e6fffeed29576f3a7ef61b9ca5f8c6de24b9c7f084c1ceeddb0a34c8fd4a7037"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e2854d85aeb3228445d32e7ba0a87eae5ce05da8",
+          "bytes": 9015,
+          "sha256": "2b172d9646d6fa081d4d492977f8ff2e9590977e8b86603e8f558f7bac179c42"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/run-controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b4d27b49a0f28791149921747c0e3d3498d0deba",
+          "bytes": 8042,
+          "sha256": "53cca57b250d9c00c8a9801133a15ec2a7c15e931d7cdd621659c9555566656f"
+        },
+        {
+          "path": ".github/workflows/afw-c2-own-get-winner-tools.yml",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b22fa7d4c7fd0d6d17a86eb43c5d79df15397024",
+          "bytes": 3411,
+          "sha256": "f87d5304e476b1a695494fde29e4cd52696a3ea70e3dd5c7ed46fa6b9ae0e6c2"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-source-proposal.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5",
+          "bytes": 26775,
+          "sha256": "652c72ff3c54691c3135bb031c73ca5038621619d06d28b3cc4fc428efa43393"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-root26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd2899bb2c0883008ccb12dfb911f0d10aecb072",
+          "bytes": 14965,
+          "sha256": "3d10759d3f6ac2bc76d6dc5320fbc7f279f4893a509a5f336adacdffda56fb0a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+          "bytes": 35611,
+          "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+          "bytes": 4403,
+          "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/model26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "75154471e2ea014677fc5176ff2f734262a3c365",
+          "bytes": 7052,
+          "sha256": "dc70e49b84bb834a38d2306440d977eaf4d8f5a6d802da29b0ddea13b1fc4bfc"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/frozen-visible-oracle32.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3b11a1b5224aa45a69f5cc8022bb49d5768583c6",
+          "bytes": 32796,
+          "sha256": "6a5bd7bf5a2b47989f611f154f77a639aa618e9fe6fb58d636d3710996325fee"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c9aee1ee60ab92081e38a59abefca45c5db3e44a",
+          "bytes": 28159,
+          "sha256": "d55d4134d3c928e3344b7b3bd3d1aa2266250a238dcc564175691719bd6f61db"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-01.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+          "bytes": 27483,
+          "sha256": "ea03a26509c61770acc1b028c796376ca89ee0534af84527f42e5875743f1c3b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-02.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1a31f6cb8652be0b872f81601b97479f27473245",
+          "bytes": 40491,
+          "sha256": "9fd3748fb36a4f8d2e7cbfc73650f06d0813470963769f44a382f14a57c069f2"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-03.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c5506c80724a69ba195c743e84a3b599bb0954d",
+          "bytes": 30471,
+          "sha256": "0fe61103575224d11a18cdf7f20b2ff96fce296a6ed0a58a36e20861c4813331"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-04.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "78159c47e96c25076c717998db3b5ef7bfdf61a3",
+          "bytes": 49431,
+          "sha256": "0c9420af5c680b5e4e2db6d1c92911f5e598c7f596714540fd763efde42130cc"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-05.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "64c1783dda3c2c831667660473e3192b8f1e8c34",
+          "bytes": 20695,
+          "sha256": "3c215c470fb19d59826776cf86451afec4a06a0326e84047cfdea329715734a8"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-06.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8aaa719e5444c5115ccfb6285a45309835238326",
+          "bytes": 20135,
+          "sha256": "06c621c9006d0945922da9e237531ce60124dd14b7f60afaf72d3ff82c37c01e"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+          "bytes": 5365,
+          "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+          "bytes": 9733,
+          "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+          "bytes": 35339,
+          "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+          "bytes": 2440,
+          "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+          "bytes": 4511,
+          "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+          "bytes": 3355,
+          "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/root-actual26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1fea33135f8943707738d4f078ff3616e9b5132c",
+          "bytes": 17603,
+          "sha256": "53f327fcd0add7a32639c9cd172a26e91d27eafd5bfaeaa29b2acad9618c3705"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/source-final-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+          "bytes": 13613,
+          "sha256": "31c1d325c72c4253fdac1ca2680120d3590334244b78fbeff1fced8ef51f4041"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+          "bytes": 34193,
+          "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+          "bytes": 5173,
+          "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "53bfd6716ecb04153158e6653700648140528d27",
+          "bytes": 13909,
+          "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec",
+          "bytes": 34193,
+          "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "162c194073a87e2a3bc906b3b605df28b17ea17f",
+          "bytes": 733,
+          "sha256": "0ac2d8294c51e2f2b4735ce9d0bb995591d31bb70dc72ff01efee3d59af8de7b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_O01.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "55635df6cbff1e7bbf72a165c2db077371f9c710",
+          "bytes": 57179,
+          "sha256": "4bc1a689cbab532d692191da20aa5b601dfa5881b9ab1d175dce89b165a5220a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/bindings.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4d54d57322ea67c3a29278f75288c7c9b686105b",
+          "bytes": 3189,
+          "sha256": "df2215b4aaea2cf3428e08531c4ed74ba9a35dd8e710389e2c6f0f8c138b8a23"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8e794a8039575694aa53064eccc4ed397e8d19a4",
+          "bytes": 2726,
+          "sha256": "2d24ac7238028ce13eac83eaf20539d49710f011ba8914fcb5626f1fe592ec9a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/reader.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+          "bytes": 4983,
+          "sha256": "6a88e4d5844aa03b26b495046dbf3f5d42904416aefed800d1007ca1dd45b544"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1298c105fd934b0b8053596b8473aba947eb1854",
+          "bytes": 852,
+          "sha256": "b1fa2b21546d401801d17be7fe126ad6753bdce89de64f35089180eb1c07a5f4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-07.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "134f17385ad1f72099d0914a8192fe4771a97e4d",
+          "bytes": 17815,
+          "sha256": "463672408d594fa5511d7a0f28d46aca87601437486e48dd8312ef3faa59a800"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal-fix1.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c93033a4034763ce9e2bd1235ecbea558ea81dee",
+          "bytes": 4030,
+          "sha256": "85c4aa4861cb5b3d74ed2b3b094cbfd0483dce04f0d1263890185f3885e658d5"
+        }
+      ]
+    },
+    {
+      "path": "/controlExpectation/ledgerCompactSha256",
+      "before": "9a32f3bf14e827d93e3aec6b2b149a9932508eb28279d018a12cc633cdce54d4",
+      "after": "89ae320ff0b3d1dbc4199fec14c12e8c17715a9f1e203a4e9ee24d73628771cd"
+    },
+    {
+      "path": "/controlExpectation/counts/complete",
+      "before": 69,
+      "after": 73
+    },
+    {
+      "path": "/controlExpectation/counts/admit",
+      "before": 13,
+      "after": 15
+    },
+    {
+      "path": "/controlExpectation/counts/reject",
+      "before": 56,
+      "after": 58
+    },
+    {
+      "path": "/supplementalFixtureSeal",
+      "after": {
+        "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal-fix1.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c93033a4034763ce9e2bd1235ecbea558ea81dee",
+        "bytes": 4030,
+        "sha256": "85c4aa4861cb5b3d74ed2b3b094cbfd0483dce04f0d1263890185f3885e658d5"
+      }
+    },
+    {
+      "path": "/fix",
+      "after": {
+        "round": 1,
+        "cap": 5,
+        "previousGraph": "7048d4135d3cfe5131a88c05ad2ddedc50ce6757",
+        "previousPackage": "f176f959ed3024ecdf4750ce8612932ca0296a34",
+        "previousAuthorReport": "17b423f9114ff9cf9d5e735d0272ba99cb8e0760",
+        "finding": "e4e460e381a8655e21618e40025fe3db04112cf0",
+        "rule": "Positive only with JOINED_SNAPSHOT or SNAPSHOT_INVALID; preserve UNKNOWN and independently known HTTP",
+        "unchangedFileRows": 34,
+        "originalPacksAndSealChanged": false,
+        "nativeGateReleased": false,
+        "execution": "NOT_RUN"
+      }
+    }
+  ],
+  "fixtureSupplement": {
+    "seal": "c93033a4034763ce9e2bd1235ecbea558ea81dee",
+    "value": {
+      "schema": "AFW.C2.GET_WINNER.OWN.SUPPLEMENTAL_FIXTURE_SEAL/1",
+      "round": 1,
+      "cap": 5,
+      "status": "SEALED_MODELED_ONLY_BEFORE_GUARD_CHANGE",
+      "review": "e4e460e381a8655e21618e40025fe3db04112cf0",
+      "originalFixtureSeal": {
+        "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal.json",
+        "bytes": 28159,
+        "sha256": "d55d4134d3c928e3344b7b3bd3d1aa2266250a238dcc564175691719bd6f61db",
+        "blob": "c9aee1ee60ab92081e38a59abefca45c5db3e44a"
+      },
+      "seed": {
+        "id": "O-S-418-503",
+        "pack": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+        "recordSha256": "e3f5a5a94c0fda9921f62a165caf0ed8f441e7276db87b8fa57a6f8405d0313b"
+      },
+      "deltaRule": "From the complete sealed seed, copy input and independently trusted values. Retain the current143 assertion, closed count, known HTTP503 and all transport/listing and custody coordinates. Change scope to the stated UNKNOWN reason. For invalid-stream rows, change both monitor and scope together; for unavailable rows leave monitor joined. For admitted UNKNOWN rows use winner and stubStatus UNKNOWN; positive contradiction rows retain STUB_NON_OK/418. Rebuild only the canonical outcome/log and deflate single-entry ZIP, descriptor/CRC, payload and matching ZIP size/hash.",
+      "cases": [
+        {
+          "id": "F1-positive-missing-scope-marker",
+          "reason": "MARKER_UNAVAILABLE",
+          "pairedMonitor": false,
+          "accept": false
+        },
+        {
+          "id": "F1-unknown-missing-scope-marker",
+          "reason": "MARKER_UNAVAILABLE",
+          "pairedMonitor": false,
+          "accept": true
+        },
+        {
+          "id": "F1-positive-invalid-marker-stream",
+          "reason": "MARKER_STREAM_INVALID",
+          "pairedMonitor": true,
+          "accept": false
+        },
+        {
+          "id": "F1-unknown-invalid-marker-stream",
+          "reason": "MARKER_STREAM_INVALID",
+          "pairedMonitor": true,
+          "accept": true
+        }
+      ],
+      "pack": {
+        "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-07.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "134f17385ad1f72099d0914a8192fe4771a97e4d",
+        "bytes": 17815,
+        "sha256": "463672408d594fa5511d7a0f28d46aca87601437486e48dd8312ef3faa59a800",
+        "plainBytes": 180305,
+        "plainSha256": "3471ac66b3a079c8c0b812cd2961f90f6831f03d7578f29e4822c1c82739cd5f",
+        "records": [
+          {
+            "id": "F1-positive-missing-scope-marker",
+            "reader": "MODEL",
+            "accept": false,
+            "retainedHttp": null,
+            "expectedWinner": null,
+            "compactSha256": "1a31e6dc05c1cb89648b38b701f99ea1c6f5a7d51a594b9ef299b3e95c04b1bd"
+          },
+          {
+            "id": "F1-unknown-missing-scope-marker",
+            "reader": "MODEL",
+            "accept": true,
+            "retainedHttp": 503,
+            "expectedWinner": {
+              "case": "15:firstFiniteGET",
+              "winner": "UNKNOWN",
+              "stubStatus": "UNKNOWN",
+              "qaLastCompleted": "UNKNOWN"
+            },
+            "compactSha256": "89f1d6e2561b11924d4925aa945fa1a84f155857e27f64580c78e7332733eb24"
+          },
+          {
+            "id": "F1-positive-invalid-marker-stream",
+            "reader": "MODEL",
+            "accept": false,
+            "retainedHttp": null,
+            "expectedWinner": null,
+            "compactSha256": "56e29e634327c4e8dfede1ca4e9c7833e304881ba8513bfbfdd9839b07f7a971"
+          },
+          {
+            "id": "F1-unknown-invalid-marker-stream",
+            "reader": "MODEL",
+            "accept": true,
+            "retainedHttp": 503,
+            "expectedWinner": {
+              "case": "15:firstFiniteGET",
+              "winner": "UNKNOWN",
+              "stubStatus": "UNKNOWN",
+              "qaLastCompleted": "UNKNOWN"
+            },
+            "compactSha256": "d0980e580b5d10f26db0c9f03c56fa709380baea1da87397552b99ff5d946993"
+          }
+        ]
+      },
+      "counts": {
+        "addedComplete": 4,
+        "addedAdmit": 2,
+        "addedReject": 2,
+        "complete": 73,
+        "admit": 15,
+        "reject": 58,
+        "crossing": 5,
+        "crossingAdmit": 1,
+        "crossingReject": 4
+      },
+      "historicalPacksEdited": 0,
+      "frozenOracleEdited": false,
+      "sourceExecuted": false,
+      "ownExecuted": false
+    },
+    "pack": "134f17385ad1f72099d0914a8192fe4771a97e4d",
+    "rawPack": "{\"bytes\":180305,\"sha256\":\"3471ac66b3a079c8c0b812cd2961f90f6831f03d7578f29e4822c1c82739cd5f\",\"brotliBase64\":\"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\"}\n",
+    "RootDATAmeasurement": {
+      "kind": "DATA_MEASUREMENT_NOT_READER_TEST",
+      "outer": {
+        "bytes": 17815,
+        "sha256": "463672408d594fa5511d7a0f28d46aca87601437486e48dd8312ef3faa59a800",
+        "blob": "134f17385ad1f72099d0914a8192fe4771a97e4d"
+      },
+      "plain": {
+        "bytes": 180305,
+        "sha256": "3471ac66b3a079c8c0b812cd2961f90f6831f03d7578f29e4822c1c82739cd5f",
+        "blob": "28f5175efc8984a5f1b893d63b541a70ce2b92d3"
+      },
+      "rows": [
+        {
+          "id": "F1-positive-missing-scope-marker",
+          "expectedAdmit": false,
+          "retainedHttp": null,
+          "actualHttp": 503,
+          "winner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 418,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "monitor": {
+            "value": "0",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 56
+          },
+          "scope": {
+            "value": "UNKNOWN",
+            "reason": "MARKER_UNAVAILABLE",
+            "countSequence": null
+          }
+        },
+        {
+          "id": "F1-unknown-missing-scope-marker",
+          "expectedAdmit": true,
+          "retainedHttp": 503,
+          "actualHttp": 503,
+          "winner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "monitor": {
+            "value": "0",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 56
+          },
+          "scope": {
+            "value": "UNKNOWN",
+            "reason": "MARKER_UNAVAILABLE",
+            "countSequence": null
+          }
+        },
+        {
+          "id": "F1-positive-invalid-marker-stream",
+          "expectedAdmit": false,
+          "retainedHttp": null,
+          "actualHttp": 503,
+          "winner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 418,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "monitor": {
+            "value": "UNKNOWN",
+            "reason": "MARKER_STREAM_INVALID",
+            "countSequence": null
+          },
+          "scope": {
+            "value": "UNKNOWN",
+            "reason": "MARKER_STREAM_INVALID",
+            "countSequence": null
+          }
+        },
+        {
+          "id": "F1-unknown-invalid-marker-stream",
+          "expectedAdmit": true,
+          "retainedHttp": 503,
+          "actualHttp": 503,
+          "winner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "monitor": {
+            "value": "UNKNOWN",
+            "reason": "MARKER_STREAM_INVALID",
+            "countSequence": null
+          },
+          "scope": {
+            "value": "UNKNOWN",
+            "reason": "MARKER_STREAM_INVALID",
+            "countSequence": null
+          }
+        }
+      ]
+    }
+  },
+  "rootMeasurement": {
+    "blob": "0b3d8f526e5f546b18b7a855acad7e5b55a5a3e8",
+    "value": {
+      "schema": "AFW.C2.GET_WINNER.OWN_FIX1_ROOT_MEASUREMENT/1",
+      "timestampUTC": "2026-11-18 00:03:25 UTC",
+      "project": "AFW",
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "graph": "979f3c7a8c00c39ee530f167a6800caa22bea2df",
+      "map": "94a88d4b5973ab87ac9945fbd1c3afd251e7a24c",
+      "report": "3fdf4a491b0b7171705294c4cbdde34e9ec96fe7",
+      "files": [
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/bindings.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd4f2c1899f204be38dacf25e0559809ba870256",
+          "bytes": 10695,
+          "sha256": "b210a36fdf99c7c5618ec8f6b35154d921d5d89e53200412dfe0719999c5afeb"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/get-winner.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cdd6f2a40d379251999c6f80e9eb43228635ff84",
+          "bytes": 4218,
+          "sha256": "a34e522816005114d725bd6b1b911421b740e075ba3bc6f686657172a7f2dab8"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/reader.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "44a8fd8dfb1e7869dde55967935d4e213c85ef5b",
+          "bytes": 6535,
+          "sha256": "e6fffeed29576f3a7ef61b9ca5f8c6de24b9c7f084c1ceeddb0a34c8fd4a7037"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e2854d85aeb3228445d32e7ba0a87eae5ce05da8",
+          "bytes": 9015,
+          "sha256": "2b172d9646d6fa081d4d492977f8ff2e9590977e8b86603e8f558f7bac179c42"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/run-controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b4d27b49a0f28791149921747c0e3d3498d0deba",
+          "bytes": 8042,
+          "sha256": "53cca57b250d9c00c8a9801133a15ec2a7c15e931d7cdd621659c9555566656f"
+        },
+        {
+          "path": ".github/workflows/afw-c2-own-get-winner-tools.yml",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b22fa7d4c7fd0d6d17a86eb43c5d79df15397024",
+          "bytes": 3411,
+          "sha256": "f87d5304e476b1a695494fde29e4cd52696a3ea70e3dd5c7ed46fa6b9ae0e6c2"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-source-proposal.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5",
+          "bytes": 26775,
+          "sha256": "652c72ff3c54691c3135bb031c73ca5038621619d06d28b3cc4fc428efa43393"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-root26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "dd2899bb2c0883008ccb12dfb911f0d10aecb072",
+          "bytes": 14965,
+          "sha256": "3d10759d3f6ac2bc76d6dc5320fbc7f279f4893a509a5f336adacdffda56fb0a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+          "bytes": 35611,
+          "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/actual-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+          "bytes": 4403,
+          "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/model26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "75154471e2ea014677fc5176ff2f734262a3c365",
+          "bytes": 7052,
+          "sha256": "dc70e49b84bb834a38d2306440d977eaf4d8f5a6d802da29b0ddea13b1fc4bfc"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/frozen-visible-oracle32.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3b11a1b5224aa45a69f5cc8022bb49d5768583c6",
+          "bytes": 32796,
+          "sha256": "6a5bd7bf5a2b47989f611f154f77a639aa618e9fe6fb58d636d3710996325fee"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c9aee1ee60ab92081e38a59abefca45c5db3e44a",
+          "bytes": 28159,
+          "sha256": "d55d4134d3c928e3344b7b3bd3d1aa2266250a238dcc564175691719bd6f61db"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-01.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+          "bytes": 27483,
+          "sha256": "ea03a26509c61770acc1b028c796376ca89ee0534af84527f42e5875743f1c3b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-02.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1a31f6cb8652be0b872f81601b97479f27473245",
+          "bytes": 40491,
+          "sha256": "9fd3748fb36a4f8d2e7cbfc73650f06d0813470963769f44a382f14a57c069f2"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-03.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "0c5506c80724a69ba195c743e84a3b599bb0954d",
+          "bytes": 30471,
+          "sha256": "0fe61103575224d11a18cdf7f20b2ff96fce296a6ed0a58a36e20861c4813331"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-04.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "78159c47e96c25076c717998db3b5ef7bfdf61a3",
+          "bytes": 49431,
+          "sha256": "0c9420af5c680b5e4e2db6d1c92911f5e598c7f596714540fd763efde42130cc"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-05.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "64c1783dda3c2c831667660473e3192b8f1e8c34",
+          "bytes": 20695,
+          "sha256": "3c215c470fb19d59826776cf86451afec4a06a0326e84047cfdea329715734a8"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-06.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8aaa719e5444c5115ccfb6285a45309835238326",
+          "bytes": 20135,
+          "sha256": "06c621c9006d0945922da9e237531ce60124dd14b7f60afaf72d3ff82c37c01e"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+          "bytes": 5365,
+          "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+          "bytes": 9733,
+          "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+          "bytes": 35339,
+          "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+          "bytes": 2440,
+          "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+          "bytes": 4511,
+          "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+          "bytes": 3355,
+          "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/root-actual26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1fea33135f8943707738d4f078ff3616e9b5132c",
+          "bytes": 17603,
+          "sha256": "53f327fcd0add7a32639c9cd172a26e91d27eafd5bfaeaa29b2acad9618c3705"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/source-final-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+          "bytes": 13613,
+          "sha256": "31c1d325c72c4253fdac1ca2680120d3590334244b78fbeff1fced8ef51f4041"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+          "bytes": 34193,
+          "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+          "bytes": 5173,
+          "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model26.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "53bfd6716ecb04153158e6653700648140528d27",
+          "bytes": 13909,
+          "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec",
+          "bytes": 34193,
+          "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "162c194073a87e2a3bc906b3b605df28b17ea17f",
+          "bytes": 733,
+          "sha256": "0ac2d8294c51e2f2b4735ce9d0bb995591d31bb70dc72ff01efee3d59af8de7b"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_O01.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "55635df6cbff1e7bbf72a165c2db077371f9c710",
+          "bytes": 57179,
+          "sha256": "4bc1a689cbab532d692191da20aa5b601dfa5881b9ab1d175dce89b165a5220a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/bindings.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4d54d57322ea67c3a29278f75288c7c9b686105b",
+          "bytes": 3189,
+          "sha256": "df2215b4aaea2cf3428e08531c4ed74ba9a35dd8e710389e2c6f0f8c138b8a23"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8e794a8039575694aa53064eccc4ed397e8d19a4",
+          "bytes": 2726,
+          "sha256": "2d24ac7238028ce13eac83eaf20539d49710f011ba8914fcb5626f1fe592ec9a"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/reader.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+          "bytes": 4983,
+          "sha256": "6a88e4d5844aa03b26b495046dbf3f5d42904416aefed800d1007ca1dd45b544"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "1298c105fd934b0b8053596b8473aba947eb1854",
+          "bytes": 852,
+          "sha256": "b1fa2b21546d401801d17be7fe126ad6753bdce89de64f35089180eb1c07a5f4"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-07.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "134f17385ad1f72099d0914a8192fe4771a97e4d",
+          "bytes": 17815,
+          "sha256": "463672408d594fa5511d7a0f28d46aca87601437486e48dd8312ef3faa59a800"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal-fix1.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "c93033a4034763ce9e2bd1235ecbea558ea81dee",
+          "bytes": 4030,
+          "sha256": "85c4aa4861cb5b3d74ed2b3b094cbfd0483dce04f0d1263890185f3885e658d5"
+        },
+        {
+          "path": "docs/superpowers/root-own/c2-get-winner-dependent/graph.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "979f3c7a8c00c39ee530f167a6800caa22bea2df",
+          "bytes": 17451,
+          "sha256": "3e7cd0a154cbcaba5b9bb10a72f9d81d6fe09469873a779f31e1859e8036654a"
+        }
+      ],
+      "bodies": 40,
+      "bytes": 668768,
+      "declaredWire": {
+        "bytes": 10050,
+        "sha256": "151ed3569458b2ad4d5c6db9b1a163fdd6f8f1c7dae911e5e966386b16087933",
+        "blob": "8dc5afaa48beb2f4c18a7b9e7f25cd9dac514d26"
+      },
+      "normalizedWire": {
+        "bytes": 10050,
+        "sha256": "151ed3569458b2ad4d5c6db9b1a163fdd6f8f1c7dae911e5e966386b16087933",
+        "blob": "8dc5afaa48beb2f4c18a7b9e7f25cd9dac514d26"
+      },
+      "originalLeaves": 3203,
+      "expectedCandidateLeaves": 3243,
+      "all40HashAndLengthsMatched": true,
+      "basePathCollisions": [],
+      "oldCandidateBodiesExact": 34,
+      "changedBodies": 4,
+      "addedBodies": 2,
+      "baseDirectionsMatched": 80,
+      "priorCandidateDirectionsMatched": 12,
+      "guardLiteralBothDirectionsMatched": true,
+      "fixtureData": {
+        "kind": "DATA_MEASUREMENT_NOT_READER_TEST",
+        "outer": {
+          "bytes": 17815,
+          "sha256": "463672408d594fa5511d7a0f28d46aca87601437486e48dd8312ef3faa59a800",
+          "blob": "134f17385ad1f72099d0914a8192fe4771a97e4d"
+        },
+        "plain": {
+          "bytes": 180305,
+          "sha256": "3471ac66b3a079c8c0b812cd2961f90f6831f03d7578f29e4822c1c82739cd5f",
+          "blob": "28f5175efc8984a5f1b893d63b541a70ce2b92d3"
+        },
+        "rows": [
+          {
+            "id": "F1-positive-missing-scope-marker",
+            "expectedAdmit": false,
+            "retainedHttp": null,
+            "actualHttp": 503,
+            "winner": {
+              "case": "15:firstFiniteGET",
+              "winner": "STUB_NON_OK",
+              "stubStatus": 418,
+              "qaLastCompleted": "UNKNOWN"
+            },
+            "monitor": {
+              "value": "0",
+              "reason": "JOINED_SNAPSHOT",
+              "countSequence": 56
+            },
+            "scope": {
+              "value": "UNKNOWN",
+              "reason": "MARKER_UNAVAILABLE",
+              "countSequence": null
+            }
+          },
+          {
+            "id": "F1-unknown-missing-scope-marker",
+            "expectedAdmit": true,
+            "retainedHttp": 503,
+            "actualHttp": 503,
+            "winner": {
+              "case": "15:firstFiniteGET",
+              "winner": "UNKNOWN",
+              "stubStatus": "UNKNOWN",
+              "qaLastCompleted": "UNKNOWN"
+            },
+            "monitor": {
+              "value": "0",
+              "reason": "JOINED_SNAPSHOT",
+              "countSequence": 56
+            },
+            "scope": {
+              "value": "UNKNOWN",
+              "reason": "MARKER_UNAVAILABLE",
+              "countSequence": null
+            }
+          },
+          {
+            "id": "F1-positive-invalid-marker-stream",
+            "expectedAdmit": false,
+            "retainedHttp": null,
+            "actualHttp": 503,
+            "winner": {
+              "case": "15:firstFiniteGET",
+              "winner": "STUB_NON_OK",
+              "stubStatus": 418,
+              "qaLastCompleted": "UNKNOWN"
+            },
+            "monitor": {
+              "value": "UNKNOWN",
+              "reason": "MARKER_STREAM_INVALID",
+              "countSequence": null
+            },
+            "scope": {
+              "value": "UNKNOWN",
+              "reason": "MARKER_STREAM_INVALID",
+              "countSequence": null
+            }
+          },
+          {
+            "id": "F1-unknown-invalid-marker-stream",
+            "expectedAdmit": true,
+            "retainedHttp": 503,
+            "actualHttp": 503,
+            "winner": {
+              "case": "15:firstFiniteGET",
+              "winner": "UNKNOWN",
+              "stubStatus": "UNKNOWN",
+              "qaLastCompleted": "UNKNOWN"
+            },
+            "monitor": {
+              "value": "UNKNOWN",
+              "reason": "MARKER_STREAM_INVALID",
+              "countSequence": null
+            },
+            "scope": {
+              "value": "UNKNOWN",
+              "reason": "MARKER_STREAM_INVALID",
+              "countSequence": null
+            }
+          }
+        ]
+      },
+      "historical69PacketsAndSealUntouched": true,
+      "frozen32Untouched": true,
+      "SourceOrOwnExecuted": false,
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "priorPacket": "f176f959ed3024ecdf4750ce8612932ca0296a34",
+  "unchanged": {
+    "SourceInputs4": true,
+    "source13": true,
+    "Source26": true,
+    "root26": true,
+    "readerAndBindings": true,
+    "sharedLegacyModules": true,
+    "workflow": true,
+    "original69": true,
+    "frozen32": true,
+    "transportAndCaps": true
+  },
+  "commands": {
+    "syntax15": "NOT_RUN",
+    "controls": "NOT_RUN",
+    "nativeOwn": "NOT_RUN",
+    "SourceOrActualAdmission": "NOT_RUN"
+  },
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
