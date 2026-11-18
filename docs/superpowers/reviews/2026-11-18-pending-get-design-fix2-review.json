@@ -1,0 +1,26 @@
+{
+  "schema": "AFW.PENDING_GET.DESIGN_SCOPED_REREVIEW/2",
+  "round": 2,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewPackage": "1937ec4a70927a8fdf85e5c8715ddf1f340db333",
+  "previousReview": "bb24fce18cc5f2093d03d5fd3b0241425f294d1d",
+  "design": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+  "plan": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+  "delta": "af8f25cb08b194c44f83539eed6d83c61bb48a61",
+  "rootMeasurement": "83d057bbf2734e3976a310e91e7883ca73072412",
+  "SPEC": "PASS",
+  "QUALITY": "PASS",
+  "disposition": {
+    "R1-I1": "ADDRESSED"
+  },
+  "evidence": "D7 now limits C/NN>=02/K=c to normal resumption of the sixth aggregate by the later QA sample. It explicitly retains the pair-wrapper, guard/finalizer, timeline and readChoice continuations, including failure, and leaves QA state at the M cutoff unknown. P0 binds the corrected design. Independently compared the complete old and new document bodies: unique replacements at the specified offsets reconstruct both new bodies exactly, and both inverse replacements reconstruct the full preimages. No new breakage in the two literals.",
+  "critical": [],
+  "important": [],
+  "minor": [],
+  "otherScope": "Previously resolved I1–I4/M1 remain closed. Design/data review only. All implementation, execution, private exposure, actual native behavior, cleanup and release gates remain separate. StageB, Source5 and OWN5 remain 5/5.",
+  "execution": "NOT_RUN_DESIGN_ONLY",
+  "activationReleased": false,
+  "SourceQualified": false,
+  "PCoff": false
+}

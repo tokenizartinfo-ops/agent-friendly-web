@@ -1,0 +1,38 @@
+{
+  "schema": "AFW.PENDING.GET.DESIGN.ROOT_ACCEPTANCE/1",
+  "atUTC": "2026-11-18 01:40:43 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "design": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+  "plan": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+  "reviews": [
+    "7fb85a90e687c5d77cee3009b2378ac288a0e2e4",
+    "bb24fce18cc5f2093d03d5fd3b0241425f294d1d",
+    "f9dd22e934f1d3cdd483076a887afd1a250088f9"
+  ],
+  "rootMeasurement": "83d057bbf2734e3976a310e91e7883ca73072412",
+  "acceptedScope": "DESIGN_ONLY; immutable M winning-callback fact plus bounded later QA sample. Fixed private 24/59 and4/62-byte wire, 13-byte row, original g1/C2FT4/OWN/clock/source behavior retained outside diagnostic-only fixture premise.",
+  "rulings": [
+    {
+      "decision": "Accept isolated synthetic private response field and one post-count actor query as explicit measurement-premise changes for future reviewed fixture implementation; no live/product surface permission.",
+      "why": "Current admitted g1 shows deadline/abort only, existing broader probe is unbound or effectful. Exact small channel can distinguish a later invocation cursor without inventing a M-cut QA fact.",
+      "costIfWrong": "Discard inert fixture/design artifacts; no product source/runtime/authority changes. Future static/native gate can reject."
+    },
+    {
+      "decision": "Release only independent fixture DATA seal now. Observer/decoder/runner/workflow code and native runs remain held.",
+      "why": "Freeze external expected rows and finite resource schedule before implementation.",
+      "costIfWrong": "Discard detached fixture DATA; no effect on current closed occurrences."
+    }
+  ],
+  "Source5": 5,
+  "OWN5": 5,
+  "StageB": 5,
+  "countersReset": false,
+  "fixtureDataReleased": true,
+  "codeReleased": false,
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

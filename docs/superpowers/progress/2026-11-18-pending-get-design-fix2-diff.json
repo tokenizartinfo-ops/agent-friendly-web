@@ -1,0 +1,24 @@
+{
+  "format": "AFW_LITERAL_TEXT_DELTA/1",
+  "round": 2,
+  "encoding": "UTF-8",
+  "instruction": "At the exact byte offset replace the unique remove text with insert; for inverse use the same offset and exchange insert/remove. Before and after are full Git blob pins. Input documents are entirely ASCII.",
+  "edits": [
+    {
+      "file": "design.md",
+      "pre": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+      "post": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+      "offsetUtf8": 14270,
+      "remove": "C with a completed nested pair points to the interval from that readChoice return to the next original choice checkpoint.",
+      "insert": "At C with NN>=02 and K=c, only the sixth aggregate await in the latest observed nested pair is known to have resumed normally by the later QA read. Return from the pair wrapper, timeline and readChoice remains unknown, as does QA state at M's cutoff. Until a later outer phase is directly observed, include snapshot construction/comparison, the guard and finally, the timeline await and readChoice checks/return (including possible failure) in the static review interval."
+    },
+    {
+      "file": "plan.md",
+      "pre": "411ba4fc5e6ff4cd2db2b2c05e2e5dde3610c6e4",
+      "post": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+      "offsetUtf8": 54,
+      "remove": "f3bfbe3c1a3a95cac94db58440d1f3fde7b75928",
+      "insert": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e"
+    }
+  ]
+}

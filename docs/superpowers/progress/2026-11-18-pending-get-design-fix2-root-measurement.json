@@ -1,0 +1,51 @@
+{
+  "schema": "AFW.PENDING.GET.DESIGN_FIX2.ROOT_MEASUREMENT/1",
+  "hashes": [
+    {
+      "expected": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+      "bytes": 15507,
+      "sha256": "a0daf0d3eaa66282dbcca796c3f1abeb62649c01ff5713ae24ce4894842cd334",
+      "blob": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+      "matched": true
+    },
+    {
+      "expected": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+      "bytes": 7560,
+      "sha256": "03819c953e0bf51d46565973eeeea059f39015bf60ad8340868da6b35ef3c993",
+      "blob": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+      "matched": true
+    },
+    {
+      "expected": "af8f25cb08b194c44f83539eed6d83c61bb48a61",
+      "bytes": 1432,
+      "sha256": "f6366cf5bada697b14fc358f2b0af215419ef5b1355d3da6822b2efaa6475617",
+      "blob": "af8f25cb08b194c44f83539eed6d83c61bb48a61",
+      "matched": true
+    },
+    {
+      "expected": "e4fe0b0d1a47530f06765931c82540d9a07669b3",
+      "bytes": 10716,
+      "sha256": "f1f53a5591a07a7a0c823b7d88cd25c6474899e8228cdbb24e7230c25c8a6de7",
+      "blob": "e4fe0b0d1a47530f06765931c82540d9a07669b3",
+      "matched": true
+    }
+  ],
+  "checks": [
+    {
+      "file": "design.md",
+      "offset": 14270,
+      "unique": true,
+      "forward": true,
+      "inverse": true
+    },
+    {
+      "file": "plan.md",
+      "offset": 54,
+      "unique": true,
+      "forward": true,
+      "inverse": true
+    }
+  ],
+  "oldReportPrefixExact": true,
+  "SourceExecuted": false
+}
