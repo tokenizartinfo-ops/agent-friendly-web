@@ -12,7 +12,7 @@
       "evidence": [
         {
           "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
-          "path": "/frames/custody",
+          "path": "/controls/custody",
           "quote": "Re-read actual probe files after every launch; fresh 1..8/launch, <=8/target and <=24 cross-target."
         },
         {
@@ -178,5 +178,7 @@
     "operationalReadiness": false,
     "PCoff": false,
     "originalSourceOwnStageBCounters": "5/5 unchanged"
-  }
+  },
+  "supersedes": "af5825bb2b2e9bacf845a9e38f0f60c4c7d1f691",
+  "citationCorrection": "Contract pointer /controls/custody, not /frames/custody. No semantic change."
 }

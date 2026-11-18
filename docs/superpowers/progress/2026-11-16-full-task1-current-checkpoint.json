@@ -1699,15 +1699,15 @@
         "StageB": 5,
         "reset": false
       },
-      "processOverlapSeedRuling": "af5825bb2b2e9bacf845a9e38f0f60c4c7d1f691",
+      "processOverlapSeedRuling": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
       "focusedCoreTestsProposed": 51,
       "executionReleased": false,
       "newOverlapAndNativeSeedProposalReleased": true,
       "processCapClarified": "24 cumulative guarded Node PID proofs; full OS/native lifecycle inventory separately required, no cap increase"
     }
   },
-  "schemaVersion": 130,
-  "updatedAtUTC": "2026-11-18 14:02:42 UTC",
+  "schemaVersion": 131,
+  "updatedAtUTC": "2026-11-18 14:04:42 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
