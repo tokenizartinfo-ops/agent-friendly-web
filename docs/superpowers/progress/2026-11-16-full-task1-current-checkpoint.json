@@ -3,10 +3,18 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "4121edf8045546a25eef16fd5b50fe1defc2eba9",
-  "phase": "TASK2_OWN_ACTIVATION_CAS_INTENT_SAVED",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "57cdee05d8773fb48a77d45839b68c072592140d",
+  "phase": "TASK2_OWN_NATIVE_RUNNING",
+  "activeNativeRuns": [
+    {
+      "run": 44205744978,
+      "attempt": 1,
+      "head": "3de3b7ce284911c4e8aa26569581a60987f33153",
+      "branch": "lab/afw-c2-own-20261117-get-winner-tools",
+      "kind": "OWN_PUBLIC_READER_SYNTHETIC_CONTROLS"
+    }
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44110921244,
     "job": 134135963389,
@@ -945,7 +953,7 @@
       }
     },
     "task2": {
-      "status": "OWN_NATIVE_EXACT_GATE_PREPARED",
+      "status": "OWN_NATIVE_RUNNING",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -1066,7 +1074,7 @@
         "preparing": false,
         "activationAttempted": true,
         "refCreated": true,
-        "unattached": true,
+        "unattached": false,
         "graph": "979f3c7a8c00c39ee530f167a6800caa22bea2df",
         "map": "94a88d4b5973ab87ac9945fbd1c3afd251e7a24c",
         "staticReviews": [
@@ -1083,12 +1091,16 @@
         "gate": "689bc2bc99a7135a6807c7ef25a4793dd75d7044",
         "refCreateAttempted": true,
         "baseRefMatched": true,
-        "activationIntentAtUTC": "2026-11-18 00:10:56 UTC"
+        "activationIntentAtUTC": "2026-11-18 00:10:56 UTC",
+        "activationUTC": "2026-11-18 00:11:16 UTC",
+        "activeRefMatched": true,
+        "run": 44205744978,
+        "runStatus": "in_progress"
       }
     }
   },
-  "schemaVersion": 100,
-  "updatedAtUTC": "2026-11-18 00:10:56 UTC",
+  "schemaVersion": 101,
+  "updatedAtUTC": "2026-11-18 00:11:55 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
