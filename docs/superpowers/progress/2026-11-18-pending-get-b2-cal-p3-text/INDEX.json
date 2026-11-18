@@ -1,0 +1,163 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.cal-p3-corrections.v1",
+  "state": "PROPOSAL_NOT_RUN",
+  "prior": "f9684031f24f17ec6cbe4ee13cbac58b9eb080f0",
+  "nodes": {
+    "m-link-conflict.mjs": {
+      "utf8Bytes": 2074,
+      "sha256": "0812a0b4a4d9db2cfb13d7cd8355c763d9f598fda71bcf637089ca115cf9d3a1",
+      "gitBlob": "bec88448705f042bd7286d3d9e4953d93c79f07e",
+      "fullReadback": true
+    },
+    "main-binding-delta.json": {
+      "utf8Bytes": 1012,
+      "sha256": "c2e45a3521935121cdff51e6236056a617a96b9fc8021b7a0961463c439c274e",
+      "gitBlob": "dd01771c09f0aa3f9716470fdbbf3b66cda4bf4e",
+      "fullReadback": true
+    },
+    "cal-model.mjs": {
+      "utf8Bytes": 6806,
+      "sha256": "07eb9048bde712321ec103589a194d4b4c7fa4aa1c84032b843e2198352b1eed",
+      "gitBlob": "fb55c3a25e240fc19cad03365608a48c007ae18c",
+      "fullReadback": true
+    },
+    "qa-regression.mjs": {
+      "utf8Bytes": 4593,
+      "sha256": "480aefe1d9a1265c54e28ec65bf692c1d0024442462363bca6022db78b31a3a8",
+      "gitBlob": "51bdc3fa2e935ee9dec8d997c7380836e5a2144e",
+      "fullReadback": true
+    },
+    "model-host-input.mjs": {
+      "utf8Bytes": 1326,
+      "sha256": "19a3d356bcb98d36e3d637ee3fd2c15ebdfd0f4c12046d324452ba8ba44c74a2",
+      "gitBlob": "214bbcc0aa6883c85e131c0bd93e90e5e27e5119",
+      "fullReadback": true
+    },
+    "QA-vectors.json": {
+      "utf8Bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "gitBlob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "fullReadback": true
+    },
+    "root-ruling.json": {
+      "utf8Bytes": 10476,
+      "sha256": "63219f658853bb5547ea9d54e8bf07f69d8d4ef4963f359b4fa3a63719b4c6f0",
+      "gitBlob": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
+      "fullReadback": true
+    },
+    "gate-ruling.json": {
+      "utf8Bytes": 6435,
+      "sha256": "171375277762421839e9904266e3f3050a6cc6db124eaa4a95f2019167667526",
+      "gitBlob": "2771057d706832993a155954adef67a2efb12be2",
+      "fullReadback": true
+    },
+    "host-negatives.mjs": {
+      "utf8Bytes": 3835,
+      "sha256": "dd57e98526b092775e3f650e87ec0bf2c5474efce8c6c8c4aba5183348595755",
+      "gitBlob": "5655e541a5d148c1236289eae24f4c9a0e9c8807",
+      "fullReadback": true
+    },
+    "p3-01.test.mjs": {
+      "utf8Bytes": 80,
+      "sha256": "71354f05adee14b76880cb7fb74cab3f2ca51eb69e4117b23da7723d212d9e39",
+      "gitBlob": "7274d823617d51422265b2e32c2751388de1346e",
+      "fullReadback": true
+    },
+    "p3-02.test.mjs": {
+      "utf8Bytes": 80,
+      "sha256": "6a0237732ca42f5f54716590107bfbd5e422ceb27d25c37094ae53426e0ff8b3",
+      "gitBlob": "c6ee74656e10c626d626cc6e794a3fc4954bf4ee",
+      "fullReadback": true
+    },
+    "p3-03.test.mjs": {
+      "utf8Bytes": 80,
+      "sha256": "71ee3b8c93418f3d6a8a09a1c68c7c2d052c05f2e71bfdb8f7adb7ef490a27a9",
+      "gitBlob": "845c3943dd7c73543d6507ddd44ae09828441231",
+      "fullReadback": true
+    },
+    "p3-04.test.mjs": {
+      "utf8Bytes": 80,
+      "sha256": "a67476cdfb8cd1fabb750cf44d1c6ecb6fb198887ea87bdfb0ee1352573c2783",
+      "gitBlob": "48ceac52ba145b13acf5828400e02f8405b86a56",
+      "fullReadback": true
+    },
+    "p3-05.test.mjs": {
+      "utf8Bytes": 80,
+      "sha256": "5f87c58adea0b885f9787c0ccbc5e6be52bbf3a49e14bfe1ca204188864a8463",
+      "gitBlob": "a7aa3459469cb6c004886f70834ec696897e7c48",
+      "fullReadback": true
+    },
+    "fixture-S08-final.txt": {
+      "utf8Bytes": 24313,
+      "sha256": "fbefc423755a66372f9e9eb1576ea44a0e977d4a873251590fcd6f6b8380c8dd",
+      "gitBlob": "129282b4265205dfa774f5c9d6a34efc5676a5ba",
+      "fullReadback": true
+    },
+    "fixture-S09-final.txt": {
+      "utf8Bytes": 84427,
+      "sha256": "a6b5e66cadcfd3d5899a62f17f23f4b0ee21aed962cd3adad5f4865720549a60",
+      "gitBlob": "d27116cbd39a393c1a887ffaba8b25d46390124f",
+      "fullReadback": true
+    },
+    "fixture-host-final.mjs": {
+      "utf8Bytes": 6567,
+      "sha256": "8152587e6c0b7b92030a0593540f08b0b5d847e533685caac5b4cb6405b212bc",
+      "gitBlob": "f0e239d47e7651e160ec932601d5df1038b37b35",
+      "fullReadback": true
+    },
+    "prepare-source-lazy.mjs": {
+      "utf8Bytes": 1373,
+      "sha256": "435f7631bd6f09282202b52a43fa6eb02f9ca39d920cc673898d32fc0232f74f",
+      "gitBlob": "5c6cf5756e8cc809572dda4a73bc21be1f4ee9fc",
+      "fullReadback": true
+    },
+    "reviewed-wiring-delta.json": {
+      "utf8Bytes": 6477,
+      "sha256": "dc16293ffea4a42283712c94e0ab92002b66e193b4f55843e2fb2b55e69e53b6",
+      "gitBlob": "4dfb08b6748125bc74393bd7794ea8b58f85cac8",
+      "fullReadback": true
+    },
+    "fixture-host-lineage.mjs": {
+      "utf8Bytes": 6658,
+      "sha256": "ac919c056c445e833f3a96d9aa4b242306bf3261c855625f7ee239ff41def569",
+      "gitBlob": "836632fcfec33d610a4a9ee870643cd184d357d4",
+      "fullReadback": true
+    },
+    "cal-model-55.mjs": {
+      "utf8Bytes": 7017,
+      "sha256": "e9a7215f8a0612438e5278afba17a3692577797f0d2a98e352c5730a2e2bdd0d",
+      "gitBlob": "045d0a29e2ae7d66443598cca530af1be26b2f05",
+      "fullReadback": true
+    },
+    "composed-lineage-model.mjs": {
+      "utf8Bytes": 2754,
+      "sha256": "595b306062a6f8a561430d5d713b62544e4dd3fec7db216d020162ebbd4320ec",
+      "gitBlob": "e12742cd664468d9e49dafbb0fbb0c162af481cf",
+      "fullReadback": true
+    },
+    "lineage-ruling.json": {
+      "utf8Bytes": 2265,
+      "sha256": "506355836bf93ad443b5492a88edc509620be8f11e58467986c3242642097e4c",
+      "gitBlob": "73c27264b5fd40867f46d854b07f6196dd3e333d",
+      "fullReadback": true
+    },
+    "lineage-delta.json": {
+      "utf8Bytes": 1336,
+      "sha256": "e5968c4d1b67368a8feb014bb93c039f916f0ca970a0d9bed4b12347e792e60b",
+      "gitBlob": "8be14284c4bb49492674f95eacee4757f1375b52",
+      "fullReadback": true
+    }
+  },
+  "activeSupersessions": {
+    "fixtureS08": "fixture-S08-final.txt",
+    "fixtureS09": "fixture-S09-final.txt",
+    "fixtureHost": "fixture-host-lineage.mjs",
+    "sourcePreparer": "prepare-source-lazy.mjs",
+    "mainLink": "m-link-conflict.mjs",
+    "calModel": "cal-model-55.mjs"
+  },
+  "execution": "NOT_RUN",
+  "nativeRunnerPending": true,
+  "refsCreated": false,
+  "activationReleased": false
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.host-wiring-delta.v1",
+  "state": "PROPOSED_NOT_RUN",
+  "pre": {
+    "s08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+    "s09": "fefbb77beb0e21357b1664c5c1a0d821aed39f3d",
+    "hostCore": "249033b347dbb9696f6fd872557b28385617cd90",
+    "mLink": "08653f933080413445777b27d8a9d782961fd6df"
+  },
+  "frozen": {
+    "d07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7"
+  },
+  "edits": {
+    "s08": [
+      {
+        "before": "import assert from 'node:assert/strict';",
+        "after": "import assert from 'node:assert/strict';\nimport {afterEach} from 'node:test';\nimport {createPendingHostBoundary,selectedId} from './pending-get/fixture-host.mjs';"
+      },
+      {
+        "before": "const O='https://delegated-canary.agentfriendlyweb.dev';",
+        "after": "const O='https://delegated-canary.agentfriendlyweb.dev';\nlet pendingBoundary=null,pendingConfigure=null,pendingToolFactory=null,configured=false;\n\nexport function installPendingFixture({boundary=null,openToolWorld=null,sourceEpoch=null}={}) {\n if(configured||(!boundary&&!openToolWorld))throw Error('pending fixture installation denied');\n configured=true;\n pendingConfigure=sourceEpoch;\n pendingToolFactory=openToolWorld;\n if(boundary) {\n  pendingBoundary=createPendingHostBoundary(boundary);\n  if(!pendingBoundary)throw Error('pending fixture boundary custody unavailable');\n  afterEach(async context=>{\n   if(context.name!==selectedId)return;\n   try{await pendingBoundary.afterOriginal(context.error?.cause);}catch{}\n  });\n }\n}"
+      },
+      {
+        "before": "coupledStages:true,dropWinner:enableDrop});",
+        "after": "coupledStages:true,dropWinner:enableDrop,pendingGetEpoch:enableDrop?pendingConfigure:null});"
+      },
+      {
+        "before": "get?.capture(f,r,status);assert.equal(status,200);",
+        "after": "get?.capture(f,r,status);\n try{assert.equal(status,200);}catch(error){pendingBoundary?.recordError(f,get,error);throw error;}"
+      },
+      {
+        "before": "if(observe)observe(rows);return counters;}",
+        "after": "if(observe)observe(rows);pendingBoundary?.recordCount(f,counters);return counters;}"
+      },
+      {
+        "before": "export async function createFiniteCoupledOwnerWorld(){",
+        "after": "export async function createFiniteCoupledOwnerWorld(){\n if(pendingToolFactory)return pendingToolFactory({choose,createFiniteSnapshotObserver,host:pendingBoundary});"
+      },
+      {
+        "before": "const get=createGetWinnerHost(main,()=>main.getWinnerDirect?.()===true,DispatchResponse);let getToken=null;",
+        "after": "const get=createGetWinnerHost(main,()=>main.getWinnerDirect?.()===true,DispatchResponse,pendingBoundary?.park);let getToken=null;"
+      }
+    ],
+    "s09": [
+      {
+        "before": "export function createGetWinnerHost(main,directRoute=()=>false,DispatchResponse) {",
+        "after": "export function createGetWinnerHost(main,directRoute=()=>false,DispatchResponse,parkPending) {"
+      },
+      {
+        "before": "entry.value={w:m[2],s:Number(m[3]),h:status};",
+        "after": "entry.value={w:m[2],s:Number(m[3]),h:status};\n      if(parkPending)parkPending({response:r,main:f,label,token,status,g1:raw});"
+      }
+    ],
+    "mLink": [
+      {
+        "before": "const leases = new WeakSet();",
+        "after": "const leases = new WeakSet();\nconst responseLeases = new WeakSet();\nlet admitted = 0;\nlet overflow = false;"
+      },
+      {
+        "before": "  if (cell && !requests.has(request)) requests.set(request, null);",
+        "after": "  if (cell && !overflow && !requests.has(request)) {\n    if (admitted === 64) overflow = true;\n    else { admitted += 1; requests.set(request, null); }\n  }"
+      },
+      {
+        "before": "  if (requests.get(request) === null) {",
+        "after": "  if (!overflow && requests.get(request) === null) {"
+      },
+      {
+        "before": "if (!leases.has(lease) || response === null || (typeof response !== 'object' && typeof response !== 'function')) return;",
+        "after": "if (overflow || !leases.has(lease) || responseLeases.has(lease) || response === null ||\n      (typeof response !== 'object' && typeof response !== 'function')) return;\n  responseLeases.add(lease);"
+      }
+    ]
+  },
+  "implication": "S09 two host-only additions supersede prior S09 fixture candidate. Reverse these then fixture wiring delta to recover original S09. S08 and M link inverse exact. M private attachment is capped at 64 requests and one original response enrollment per actual bound lease, without changing selected public g1. Host helper reads known regular journal only after target callback rethrow and original count return. Native ordering and response identity still unmeasured."
+}

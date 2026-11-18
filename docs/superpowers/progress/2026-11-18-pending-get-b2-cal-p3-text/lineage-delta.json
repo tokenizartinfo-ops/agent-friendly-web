@@ -1,0 +1,35 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.W04.delta.v1",
+  "pre": {
+    "host": "f0e239d47e7651e160ec932601d5df1038b37b35",
+    "cal": "fb55c3a25e240fc19cad03365608a48c007ae18c"
+  },
+  "edits": {
+    "host": [
+      {
+        "before": "  let poisoned=false;",
+        "after": "  let poisoned=false,lineageInvalid=false;"
+      },
+      {
+        "before": "  function invalidate() { poisoned=true; }",
+        "after": "  function invalidate() { lineageInvalid=true; }"
+      },
+      {
+        "before": "      if(poisoned||!sealed||!handle||!target",
+        "after": "      if(lineageInvalid){callWitness('REJECT_LINEAGE');return;}\n      if(poisoned||!sealed||!handle||!target"
+      }
+    ],
+    "cal": [
+      {
+        "before": "import {checkQa} from './qa-regression.mjs';",
+        "after": "import {checkQa} from './qa-regression.mjs';\nimport {checkComposedLineage} from './composed-lineage-model.mjs';"
+      },
+      {
+        "before": "  assert.equal(labels.length,54);\n  return {labels};",
+        "after": "  assert.equal(labels.length,54);\n  const {control}=fixture('lineage-ruling.json');assert.equal(control.id,'W04');\n  await checkComposedLineage(control);labels.push(control.id);\n  return {labels};"
+      }
+    ]
+  },
+  "authority": "73c27264b5fd40867f46d854b07f6196dd3e333d",
+  "state": "NOT_RUN"
+}

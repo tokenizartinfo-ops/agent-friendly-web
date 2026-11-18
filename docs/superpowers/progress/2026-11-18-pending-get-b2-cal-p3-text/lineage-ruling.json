@@ -1,0 +1,43 @@
+{
+  "schema": "afw.pending-get.b2-legacy-lineage-control.v1",
+  "atUTC": "2026-11-18 14:22:49 UTC",
+  "scope": "Independent fixed MODEL input DATA, not execution",
+  "prior": "2771057d706832993a155954adef67a2efb12be2",
+  "finding": "Private mailbox could keep first capture after legacy lineage became poisoned",
+  "control": {
+    "id": "W04",
+    "components": "Actual proposed S09 createGetWinnerHost/getWinnerTuple and actual proposed fixture-host/core (or exact literal relocation with pinned dependencies), not handwritten substitute classification. Native actor, original D07 lifecycle and actual Source GET not claimed by this MODEL.",
+    "input": "One nominated exact main/label/token/native modeled DispatchResponse with503,g1.503.L.0 and correctly shaped pending field. Park first capture. Call the same legacy token.capture a second time with the same exact otherwise-valid carrier. Complete original legacy finish and original take once, then normal count qualification and afterOriginal with exact saved action cause. Count journal/mode/custody/reserve/target generation otherwise valid.",
+    "expected": {
+      "legacyPoisoned": true,
+      "publicLegacyTake": {
+        "w": "U",
+        "s": 0,
+        "h": 0
+      },
+      "privateHeaderCopies": 0,
+      "diagnosticDispatchAttempts": 0,
+      "privateRow": null,
+      "hookEntered": true,
+      "rejection": "Actual legacy lineage invalidation/attestation must be reached; not generic carrier/journal or reserve failure"
+    },
+    "exclusions": "No second public take; no new observation or business effect; no preclassified poisoned private input. This one composed control covers newly identified adapter gap. N04 native positive remains necessary to defeat an all-reject path."
+  },
+  "CAL": {
+    "previous": 54,
+    "added": 1,
+    "total": 55,
+    "groupsAdded": 0,
+    "processesAdded": 0,
+    "timeIncreaseMs": 0,
+    "capMs": 8000,
+    "unchanged134NotReplayed": true
+  },
+  "prepareOff": "Move fixed delta DATA load to selected transformation. Static reachable call-graph review must confirm OFF imports do not load it; no new broad audit or native case.",
+  "hold": {
+    "executionReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false
+  }
+}

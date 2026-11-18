@@ -1,0 +1,20 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.main-binding-fix.v1",
+  "before": "128af37ff36a591d0b71aafd61b2caef14661767",
+  "edits": [
+    {
+      "before": "  if (overflow || !leases.has(lease) || responseLeases.has(lease) || response === null ||\n      (typeof response !== 'object' && typeof response !== 'function')) return;\n  responseLeases.add(lease);",
+      "after": "  if (overflow || !leases.has(lease)) return;\n  if (responseLeases.has(lease)) {\n    winner.pendingM?.invalidate(lease);\n    return;\n  }\n  if (response === null || (typeof response !== 'object' && typeof response !== 'function')) {\n    winner.pendingM?.invalidate(lease);\n    return;\n  }\n  responseLeases.add(lease);"
+    }
+  ],
+  "control": {
+    "ids": [
+      "W01",
+      "W02",
+      "W03"
+    ],
+    "gateRuling": "2771057d706832993a155954adef67a2efb12be2",
+    "expected": "Public g1 in every case. Private absent on repeated same/foreign response attachment; T5 on the clean case."
+  },
+  "execution": "NOT_RUN"
+}

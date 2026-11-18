@@ -1,0 +1,121 @@
+import {constants,closeSync,fstatSync,lstatSync,openSync,realpathSync,readSync,writeFileSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {createPendingHost} from './host-core.mjs';
+
+export const selectedId='C2T1_SCOPE_MISSING';
+const byteLimit=32768, rowLimit=128;
+const ordinaryCounts=['upload','activation','receipts'];
+
+function regular(s) {
+  return s.isFile()&&(s.mode&0o777)===0o600&&s.nlink===1&&s.uid===process.getuid()&&s.gid===process.getgid();
+}
+
+function checkedJournal(path, prior) {
+  if(realpathSync(path)!==path)return null;
+  const fd=openSync(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+  try {
+    const first=fstatSync(fd);
+    if(!regular(first)||first.dev!==prior.dev||first.ino!==prior.ino||first.size<1||first.size>byteLimit)return null;
+    const buf=Buffer.alloc(first.size);
+    if(readSync(fd,buf,0,buf.length,0)!==buf.length)return null;
+    const after=fstatSync(fd), byPath=lstatSync(path);
+    if(!regular(after)||!regular(byPath)||after.dev!==byPath.dev||after.ino!==byPath.ino||
+       after.dev!==first.dev||after.ino!==first.ino||after.ctimeMs!==first.ctimeMs||after.size!==first.size)return null;
+    const text=new TextDecoder('utf-8',{fatal:true}).decode(buf);
+    if(!text.endsWith('\n'))return null;
+    const lines=text.slice(0,-1).split('\n');
+    if(lines.length<4||lines.length>rowLimit)return null;
+    const rows=lines.map(line=>JSON.parse(line));
+    let elapsed=-1;
+    for(let i=0;i<rows.length;i++){
+      const {sequence,id,operation,edge,elapsedMs,error}=rows[i]??{};
+      if(sequence!==i+1||typeof id!=='string'||!['action','count','close'].includes(operation)||
+         !['enter','return','throw'].includes(edge)||!Number.isSafeInteger(elapsedMs)||elapsedMs<elapsed||
+         (edge==='throw'?(!error||typeof error!=='object'):error!==null))return null;
+      elapsed=elapsedMs;
+    }
+    const n=rows.findIndex(row=>row.id===selectedId);
+    if(n!==rows.length-4||!rows.slice(n).every(row=>row.id===selectedId))return null;
+    const [a,b,c,d]=rows.slice(n);
+    if(a.operation!=='action'||a.edge!=='enter'||b.operation!=='action'||b.edge!=='throw'||
+       c.operation!=='count'||c.edge!=='enter'||d.operation!=='count'||d.edge!=='return')return null;
+    const custody={regular:true,pathStable:true,ownerMatch:true,modeMatch:true,singleLink:true,trailingLf:true};
+    return {marks:[{label:selectedId,kind:'actionEnter'},{label:selectedId,kind:'actionThrow'},
+      {label:selectedId,kind:'countEnter'},{label:selectedId,kind:'countReturn'}],
+      bytes:buf.length,rows:rows.length,custody};
+  } finally {closeSync(fd);}
+}
+
+function countIsOrdinary(counts) {
+  return counts!==null&&typeof counts==='object'&&Object.keys(counts).join(',')===ordinaryCounts.join(',')&&
+    ordinaryCounts.every(name=>Number.isSafeInteger(counts[name])&&counts[name]>=0);
+}
+
+export function createPendingHostBoundary({epoch,root,reserve,targetFor,isDispatchResponse,witness=()=>{},invokeRead}) {
+  if(typeof root!=='string'||resolve(root)!==root||realpathSync(root)!==root)return null;
+  const journal=join(root,'green-progress.ndjson'), initial=lstatSync(journal);
+  if(!regular(initial)||initial.size!==0)return null;
+  const directProof=Object.freeze({}), test=Object.freeze({});
+  const core=createPendingHost({enabled:true,epoch,directProof,expectedLabel:selectedId,testIdentity:test});
+  let handle,target,actionError,counts,consumed=false,captured=false;
+  let poisoned=false;
+  const callWitness=value=>{try{witness(value);}catch{poisoned=true;}};
+
+  function park({response,main,label,token,status,g1}) {
+    try {
+      if(captured||consumed){poisoned=true;return;}
+      captured=true;
+      const nomination=targetFor(main);
+      handle={response,main,label:selectedId,test,token,actor:nomination?.actor,
+        generation:nomination?.generation,directProof,status,g1};
+      if(label?.id!==selectedId||!nomination||nomination.epoch!==epoch||nomination.validate()!==true||
+         !isDispatchResponse(response)||!core.capture(handle)){poisoned=true;return;}
+      target=nomination;
+    }catch{poisoned=true;}
+  }
+
+  function recordError(main,token,error) {
+    if(handle?.main===main&&handle.token===token)actionError=error;
+  }
+
+  function recordCount(main,value) {
+    if(handle?.main===main&&!consumed) {
+      if(counts!==undefined){poisoned=true;return;}
+      counts=value;
+    }
+  }
+
+  async function afterOriginal(cause) {
+    if(consumed)return;
+    consumed=true;callWitness('ENTER');
+    try {
+      if(poisoned||!handle||!target||target.validate()!==true||!isDispatchResponse(handle.response)){
+        callWitness('REJECT_CARRIER');return;
+      }
+      if(actionError===undefined||cause!==actionError){callWitness('REJECT_ERROR');return;}
+      let journalProof;
+      try{journalProof=checkedJournal(journal,initial);}catch{}
+      if(!journalProof||!countIsOrdinary(counts)){callWitness('REJECT_COUNT');return;}
+      if(reserve()!==true){callWitness('REJECT_RESERVE');return;}
+      const context={...handle,beforeCutoff:true,reserveAvailable:true};
+      if(!core.take(context,{...journalProof,countSnapshot:counts,countQualified:true,recorderIntact:true},
+        response=>response.headers.get('x-afw-lab-pending1'))){callWitness('REJECT_MAIN');return;}
+      let timer;
+      try {
+        const forcedTimeout=new Promise(resolve=>{timer=setTimeout(()=>resolve({kind:'timeout'}),1000);});
+        const actual=core.startRead((readEpoch,key)=>invokeRead(target.actor,readEpoch,key));
+        if(actual!==undefined) {
+          const settled=Promise.resolve(actual).then(value=>({kind:'reply',value}),()=>({kind:'failure'}));
+          const result=await Promise.race([settled,forcedTimeout]);
+          core.completeRead(result.kind,result.value);
+        }
+      } finally {clearTimeout(timer);}
+      if(target.validate()!==true){callWitness('REJECT_CARRIER');return;}
+      const row=core.staged();
+      if(row){writeFileSync(join(root,'pending-private.row'),row+'\n',{flag:'wx',mode:0o600});callWitness('STAGED');}
+    }catch{callWitness('CONTAINED');}
+    finally {handle=null;target=null;actionError=undefined;counts=undefined;}
+  }
+
+  return Object.freeze({park,recordError,recordCount,afterOriginal});
+}

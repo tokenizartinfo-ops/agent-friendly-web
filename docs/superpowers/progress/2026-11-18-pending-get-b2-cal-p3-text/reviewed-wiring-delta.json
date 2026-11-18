@@ -1,0 +1,61 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.interim-wiring-corrections.v1",
+  "pre": {
+    "S08": "06ce206c4d6ff69b39ae15aa61e5cd08ba27598f",
+    "S09": "875fd376df6fb195c3699e003099825353361a20",
+    "host": "5ae35efadb1ade1a4a5a782e9bd46b7e9e3cab56",
+    "prepare": "5e250c6d39393269bf51baea5d0b3d8409a3721e"
+  },
+  "edits": {
+    "s08": [
+      {
+        "before": "DispatchResponse,pendingBoundary?.park);let getToken",
+        "after": "DispatchResponse,pendingBoundary);let getToken"
+      }
+    ],
+    "s09": [
+      {
+        "before": "export function createGetWinnerHost(main,directRoute=()=>false,DispatchResponse,parkPending) {\n  const tokens=new WeakMap(),seen=new WeakSet(),empty=()=>({w:'U',s:0,h:0});\n  let current=null,poisoned=false;\n  const safe=fn=>(...args)=>{try{return fn(...args);}catch{poisoned=true;return null;}};\n  function begin(label) {\n    if(current||poisoned||!label||label.id!=='C2T1_SCOPE_MISSING'||tokens.has(label)){poisoned=true;return null;}\n    const entry={label,response:null,calls:0,done:false,value:empty()};\n    const token=Object.freeze({capture:safe((f,r,status)=>{\n      entry.calls++;\n      if(poisoned||entry!==current||entry.done||f!==main||entry.calls!==1||label.id!=='C2T1_SCOPE_MISSING'||seen.has(r)){poisoned=true;return;}\n      seen.add(r);entry.response=r;\n      if(directRoute()!==true || typeof DispatchResponse!=='function' || !(r instanceof DispatchResponse) || !Number.isInteger(status) || status===200)return;\n      const raw=r.headers.get('x-afw-lab-get-winner');\n      const m=/^g1\\.([45][0-9]{2})\\.([LSV])\\.([45][0-9]{2}|0)$/.exec(raw??'');\n      if(!m||Number(m[1])!==status||!getWinnerTuple(m[2],Number(m[3]),status))return;\n      entry.value={w:m[2],s:Number(m[3]),h:status};\n      if(parkPending)parkPending({response:r,main:f,label,token,status,g1:raw});\n    })});\n    tokens.set(label,{entry,token});current=entry;return token;\n  }\n  function finish(label) {\n    const item=tokens.get(label);\n    if(!item||item.entry!==current||poisoned){poisoned=true;return;}\n    item.entry.done=true;current=null;\n  }\n  function take(label,f) {\n    const item=tokens.get(label);\n    if(item)tokens.delete(label);\n    if(poisoned||current||!item||f!==main||label.id!=='C2T1_SCOPE_MISSING'||!item.entry.done||item.entry.calls!==1||!item.entry.response)return empty();\n    return item.entry.value;\n  }\n  return Object.freeze({begin:safe(begin),finish:safe(finish),take:safe(take),poison:safe(()=>{poisoned=true;})});\n}\n",
+        "after": "export function createGetWinnerHost(main,directRoute=()=>false,DispatchResponse,pendingBoundary) {\n  const tokens=new WeakMap(),seen=new WeakSet(),empty=()=>({w:'U',s:0,h:0});\n  let current=null,poisoned=false;\n  const poison=()=>{poisoned=true;pendingBoundary?.invalidate();};\n  const safe=fn=>(...args)=>{try{return fn(...args);}catch{poison();return null;}};\n  function begin(label) {\n    if(current||poisoned||!label||label.id!=='C2T1_SCOPE_MISSING'||tokens.has(label)){poison();return null;}\n    const entry={label,response:null,calls:0,done:false,value:empty()};\n    const token=Object.freeze({capture:safe((f,r,status)=>{\n      entry.calls++;\n      if(poisoned||entry!==current||entry.done||f!==main||entry.calls!==1||label.id!=='C2T1_SCOPE_MISSING'||seen.has(r)){poison();return;}\n      seen.add(r);entry.response=r;\n      if(directRoute()!==true || typeof DispatchResponse!=='function' || !(r instanceof DispatchResponse) || !Number.isInteger(status) || status===200)return;\n      const raw=r.headers.get('x-afw-lab-get-winner');\n      const m=/^g1\\.([45][0-9]{2})\\.([LSV])\\.([45][0-9]{2}|0)$/.exec(raw??'');\n      if(!m||Number(m[1])!==status||!getWinnerTuple(m[2],Number(m[3]),status))return;\n      entry.value={w:m[2],s:Number(m[3]),h:status};\n      pendingBoundary?.park({response:r,main:f,label,token,status,g1:raw});\n    })});\n    tokens.set(label,{entry,token});current=entry;return token;\n  }\n  function finish(label) {\n    const item=tokens.get(label);\n    if(!item||item.entry!==current||poisoned){poison();return;}\n    item.entry.done=true;current=null;\n    if(item.entry.calls===1&&item.entry.response)pendingBoundary?.seal(main,label,item.token);\n  }\n  function take(label,f) {\n    const item=tokens.get(label);\n    if(item)tokens.delete(label);\n    if(poisoned||current||!item||f!==main||label.id!=='C2T1_SCOPE_MISSING'||!item.entry.done||item.entry.calls!==1||!item.entry.response)return empty();\n    return item.entry.value;\n  }\n  return Object.freeze({begin:safe(begin),finish:safe(finish),take:safe(take),poison:safe(poison)});\n}\n"
+      }
+    ],
+    "host": [
+      {
+        "before": "let handle,target,actionError,counts,consumed=false,captured=false;",
+        "after": "let handle,target,originalLabel,actionError,counts,consumed=false,captured=false,sealed=false;"
+      },
+      {
+        "before": "      target=nomination;",
+        "after": "      target=nomination;originalLabel=label;"
+      },
+      {
+        "before": "  function recordError(main,token,error) {",
+        "after": "  function invalidate() { poisoned=true; }\n\n  function seal(main,label,token) {\n    if(!captured)return;\n    if(sealed||consumed||handle?.main!==main||originalLabel!==label||handle?.token!==token){invalidate();return;}\n    sealed=true;\n  }\n\n  function recordError(main,token,error) {"
+      },
+      {
+        "before": "if(poisoned||!handle||!target||target.validate()",
+        "after": "if(poisoned||!sealed||!handle||!target||target.validate()"
+      },
+      {
+        "before": "finally {handle=null;target=null;actionError=undefined;counts=undefined;}",
+        "after": "finally {handle=null;target=null;originalLabel=null;actionError=undefined;counts=undefined;}"
+      },
+      {
+        "before": "{park,recordError,recordCount,afterOriginal}",
+        "after": "{park,seal,invalidate,recordError,recordCount,afterOriginal}"
+      }
+    ],
+    "prep": [
+      {
+        "before": "const {patches} = JSON.parse(readFileSync(new URL('./source-site-delta.json',import.meta.url),'utf8'));",
+        "after": "let patches;"
+      },
+      {
+        "before": "  const edits=patches[unit];",
+        "after": "  patches??=JSON.parse(readFileSync(new URL('./source-site-delta.json',import.meta.url),'utf8')).patches;\n  const edits=patches[unit];"
+      }
+    ]
+  },
+  "inverse": "Reverse exact single matches in each unit in reverse order.",
+  "state": "NOT_RUN"
+}

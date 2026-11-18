@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "B2 author continues reversible Source binding and finite TOOL proposal under sealed process/overlap/seed ruling. Review and Root execution gate remain mandatory. Real Source GET503 remains unlocalized.",
+  "next": "Finish and review B2 exact native TOOL harness/controller/workflow, qualify changed CAL55 and native controls under original bounds, then assess one real Source observation. No new B2 execution released. No manual intervention currently required.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1700,7 +1700,7 @@
         "reset": false
       },
       "processOverlapSeedRuling": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
-      "focusedCoreTestsProposed": 51,
+      "focusedCoreTestsProposed": 55,
       "executionReleased": false,
       "newOverlapAndNativeSeedProposalReleased": true,
       "processCapClarified": "24 cumulative guarded Node PID proofs; full OS/native lifecycle inventory separately required, no cap increase",
@@ -1714,11 +1714,34 @@
         "fullToolPacket": "IN_PROGRESS",
         "semanticsReviewed": false,
         "nativeExecutionReleased": false
+      },
+      "gateBindingRuling": "2771057d706832993a155954adef67a2efb12be2",
+      "lineageControlRuling": "73c27264b5fd40867f46d854b07f6196dd3e333d",
+      "CALP3Partial": {
+        "index": "21e7c7058541d070cff4552e66933458bc135def",
+        "nodeCount": 24,
+        "rootMeasurement": "fe044193ba1bc7800bdd3a6a22ed97e8fc7be0ed",
+        "recoveryPrefix": "docs/superpowers/progress/2026-11-18-pending-get-b2-cal-p3-text/",
+        "execution": "NOT_RUN",
+        "fullNativeHarnessAndRunner": "IN_PROGRESS"
+      },
+      "staticFix": {
+        "round": 1,
+        "max": 5,
+        "priorReport": "dac59d8e298ec0d05468d436080e68fa2cc5774a",
+        "status": "AUTHOR_CORRECTIONS_DELIVERED_SCOPED_REREVIEW_PENDING",
+        "findings": [
+          "legacy private mailbox invalidation",
+          "duplicate M response binding",
+          "minor OFF eager DATA load"
+        ],
+        "coveringTests": "CAL55 W01-W04 plus changedQA35/O10/S6; P3 five real frozenD07 controls",
+        "testStatus": "NOT_RUN_ROOT_FINITE_GHA_GATE_REQUIRED"
       }
     }
   },
-  "schemaVersion": 132,
-  "updatedAtUTC": "2026-11-18 14:12:14 UTC",
+  "schemaVersion": 133,
+  "updatedAtUTC": "2026-11-18 14:32:55 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

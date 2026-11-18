@@ -1,0 +1,321 @@
+{
+  "schema": "afw.pending-get.b2-cal-p3-root-data-measurement.v1",
+  "atUTC": "2026-11-18 14:30:42 UTC",
+  "index": "21e7c7058541d070cff4552e66933458bc135def",
+  "nodeCount": 24,
+  "hashes": [
+    {
+      "path": "m-link-conflict.mjs",
+      "bytes": 2074,
+      "sha256": "0812a0b4a4d9db2cfb13d7cd8355c763d9f598fda71bcf637089ca115cf9d3a1",
+      "blob": "bec88448705f042bd7286d3d9e4953d93c79f07e",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "main-binding-delta.json",
+      "bytes": 1012,
+      "sha256": "c2e45a3521935121cdff51e6236056a617a96b9fc8021b7a0961463c439c274e",
+      "blob": "dd01771c09f0aa3f9716470fdbbf3b66cda4bf4e",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "cal-model.mjs",
+      "bytes": 6806,
+      "sha256": "07eb9048bde712321ec103589a194d4b4c7fa4aa1c84032b843e2198352b1eed",
+      "blob": "fb55c3a25e240fc19cad03365608a48c007ae18c",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "qa-regression.mjs",
+      "bytes": 4593,
+      "sha256": "480aefe1d9a1265c54e28ec65bf692c1d0024442462363bca6022db78b31a3a8",
+      "blob": "51bdc3fa2e935ee9dec8d997c7380836e5a2144e",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "model-host-input.mjs",
+      "bytes": 1326,
+      "sha256": "19a3d356bcb98d36e3d637ee3fd2c15ebdfd0f4c12046d324452ba8ba44c74a2",
+      "blob": "214bbcc0aa6883c85e131c0bd93e90e5e27e5119",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "QA-vectors.json",
+      "bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "blob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "root-ruling.json",
+      "bytes": 10476,
+      "sha256": "63219f658853bb5547ea9d54e8bf07f69d8d4ef4963f359b4fa3a63719b4c6f0",
+      "blob": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "gate-ruling.json",
+      "bytes": 6435,
+      "sha256": "171375277762421839e9904266e3f3050a6cc6db124eaa4a95f2019167667526",
+      "blob": "2771057d706832993a155954adef67a2efb12be2",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "host-negatives.mjs",
+      "bytes": 3835,
+      "sha256": "dd57e98526b092775e3f650e87ec0bf2c5474efce8c6c8c4aba5183348595755",
+      "blob": "5655e541a5d148c1236289eae24f4c9a0e9c8807",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "p3-01.test.mjs",
+      "bytes": 80,
+      "sha256": "71354f05adee14b76880cb7fb74cab3f2ca51eb69e4117b23da7723d212d9e39",
+      "blob": "7274d823617d51422265b2e32c2751388de1346e",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "p3-02.test.mjs",
+      "bytes": 80,
+      "sha256": "6a0237732ca42f5f54716590107bfbd5e422ceb27d25c37094ae53426e0ff8b3",
+      "blob": "c6ee74656e10c626d626cc6e794a3fc4954bf4ee",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "p3-03.test.mjs",
+      "bytes": 80,
+      "sha256": "71ee3b8c93418f3d6a8a09a1c68c7c2d052c05f2e71bfdb8f7adb7ef490a27a9",
+      "blob": "845c3943dd7c73543d6507ddd44ae09828441231",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "p3-04.test.mjs",
+      "bytes": 80,
+      "sha256": "a67476cdfb8cd1fabb750cf44d1c6ecb6fb198887ea87bdfb0ee1352573c2783",
+      "blob": "48ceac52ba145b13acf5828400e02f8405b86a56",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "p3-05.test.mjs",
+      "bytes": 80,
+      "sha256": "5f87c58adea0b885f9787c0ccbc5e6be52bbf3a49e14bfe1ca204188864a8463",
+      "blob": "a7aa3459469cb6c004886f70834ec696897e7c48",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "fixture-S08-final.txt",
+      "bytes": 24313,
+      "sha256": "fbefc423755a66372f9e9eb1576ea44a0e977d4a873251590fcd6f6b8380c8dd",
+      "blob": "129282b4265205dfa774f5c9d6a34efc5676a5ba",
+      "reusedIndependentMeasurement": true
+    },
+    {
+      "path": "fixture-S09-final.txt",
+      "bytes": 84427,
+      "sha256": "a6b5e66cadcfd3d5899a62f17f23f4b0ee21aed962cd3adad5f4865720549a60",
+      "blob": "d27116cbd39a393c1a887ffaba8b25d46390124f",
+      "reusedIndependentMeasurement": true
+    },
+    {
+      "path": "fixture-host-final.mjs",
+      "bytes": 6567,
+      "sha256": "8152587e6c0b7b92030a0593540f08b0b5d847e533685caac5b4cb6405b212bc",
+      "blob": "f0e239d47e7651e160ec932601d5df1038b37b35",
+      "reusedIndependentMeasurement": true
+    },
+    {
+      "path": "prepare-source-lazy.mjs",
+      "bytes": 1373,
+      "sha256": "435f7631bd6f09282202b52a43fa6eb02f9ca39d920cc673898d32fc0232f74f",
+      "blob": "5c6cf5756e8cc809572dda4a73bc21be1f4ee9fc",
+      "reusedIndependentMeasurement": true
+    },
+    {
+      "path": "reviewed-wiring-delta.json",
+      "bytes": 6477,
+      "sha256": "dc16293ffea4a42283712c94e0ab92002b66e193b4f55843e2fb2b55e69e53b6",
+      "blob": "4dfb08b6748125bc74393bd7794ea8b58f85cac8",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "fixture-host-lineage.mjs",
+      "bytes": 6658,
+      "sha256": "ac919c056c445e833f3a96d9aa4b242306bf3261c855625f7ee239ff41def569",
+      "blob": "836632fcfec33d610a4a9ee870643cd184d357d4",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "cal-model-55.mjs",
+      "bytes": 7017,
+      "sha256": "e9a7215f8a0612438e5278afba17a3692577797f0d2a98e352c5730a2e2bdd0d",
+      "blob": "045d0a29e2ae7d66443598cca530af1be26b2f05",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "composed-lineage-model.mjs",
+      "bytes": 2754,
+      "sha256": "595b306062a6f8a561430d5d713b62544e4dd3fec7db216d020162ebbd4320ec",
+      "blob": "e12742cd664468d9e49dafbb0fbb0c162af481cf",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "lineage-ruling.json",
+      "bytes": 2265,
+      "sha256": "506355836bf93ad443b5492a88edc509620be8f11e58467986c3242642097e4c",
+      "blob": "73c27264b5fd40867f46d854b07f6196dd3e333d",
+      "reusedIndependentMeasurement": false
+    },
+    {
+      "path": "lineage-delta.json",
+      "bytes": 1336,
+      "sha256": "e5968c4d1b67368a8feb014bb93c039f916f0ca970a0d9bed4b12347e792e60b",
+      "blob": "8be14284c4bb49492674f95eacee4757f1375b52",
+      "reusedIndependentMeasurement": false
+    }
+  ],
+  "earlierRootMeasurement": "d0e3afdf207a1e1dd70b5b3a4b5ba060959e807a",
+  "hostIntegrationRoundtrip": {
+    "at": "2026-11-18 14:20:48 UTC",
+    "rows": [
+      {
+        "unit": "s08",
+        "pre": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+        "post": "06ce206c4d6ff69b39ae15aa61e5cd08ba27598f",
+        "edits": 7,
+        "inverseExact": true
+      },
+      {
+        "unit": "s09",
+        "pre": "fefbb77beb0e21357b1664c5c1a0d821aed39f3d",
+        "post": "875fd376df6fb195c3699e003099825353361a20",
+        "edits": 2,
+        "inverseExact": true
+      },
+      {
+        "unit": "mLink",
+        "pre": "08653f933080413445777b27d8a9d782961fd6df",
+        "post": "128af37ff36a591d0b71aafd61b2caef14661767",
+        "edits": 4,
+        "inverseExact": true
+      }
+    ],
+    "semantics": "UNREVIEWED_PARTIAL",
+    "bindingDuplicateIssueOpen": true
+  },
+  "interimCorrectionRoundtrip": {
+    "atUTC": "2026-11-18 14:25:38 UTC",
+    "delta": "4dfb08b6748125bc74393bd7794ea8b58f85cac8",
+    "rows": [
+      {
+        "unit": "s08",
+        "pre": "06ce206c4d6ff69b39ae15aa61e5cd08ba27598f",
+        "bytes": 24313,
+        "sha256": "fbefc423755a66372f9e9eb1576ea44a0e977d4a873251590fcd6f6b8380c8dd",
+        "blob": "129282b4265205dfa774f5c9d6a34efc5676a5ba",
+        "edits": 1,
+        "inverseExact": true,
+        "fullAuthorReadback": true
+      },
+      {
+        "unit": "s09",
+        "pre": "875fd376df6fb195c3699e003099825353361a20",
+        "bytes": 84427,
+        "sha256": "a6b5e66cadcfd3d5899a62f17f23f4b0ee21aed962cd3adad5f4865720549a60",
+        "blob": "d27116cbd39a393c1a887ffaba8b25d46390124f",
+        "edits": 1,
+        "inverseExact": true,
+        "fullAuthorReadback": true
+      },
+      {
+        "unit": "host",
+        "pre": "5ae35efadb1ade1a4a5a782e9bd46b7e9e3cab56",
+        "bytes": 6567,
+        "sha256": "8152587e6c0b7b92030a0593540f08b0b5d847e533685caac5b4cb6405b212bc",
+        "blob": "f0e239d47e7651e160ec932601d5df1038b37b35",
+        "edits": 6,
+        "inverseExact": true,
+        "fullAuthorReadback": true
+      },
+      {
+        "unit": "prep",
+        "pre": "5e250c6d39393269bf51baea5d0b3d8409a3721e",
+        "bytes": 1373,
+        "sha256": "435f7631bd6f09282202b52a43fa6eb02f9ca39d920cc673898d32fc0232f74f",
+        "blob": "5c6cf5756e8cc809572dda4a73bc21be1f4ee9fc",
+        "edits": 2,
+        "inverseExact": true,
+        "fullAuthorReadback": true
+      }
+    ],
+    "execution": "NOT_RUN",
+    "scope": "Literal DATA only, semantic review still pending"
+  },
+  "additionalAssertions": [
+    {
+      "label": "M binding conflict",
+      "edits": 1,
+      "forwardAndInverse": true
+    },
+    {
+      "label": "W04 host",
+      "edits": 3,
+      "forwardAndInverse": true
+    },
+    {
+      "label": "W04 cal",
+      "edits": 2,
+      "forwardAndInverse": true
+    },
+    {
+      "label": "original35Q dependency only",
+      "edits": 1,
+      "forwardAndInverse": true
+    }
+  ],
+  "p3ExactWrappers": [
+    {
+      "path": "p3-01.test.mjs",
+      "index": 0,
+      "exactLiteral": true
+    },
+    {
+      "path": "p3-02.test.mjs",
+      "index": 1,
+      "exactLiteral": true
+    },
+    {
+      "path": "p3-03.test.mjs",
+      "index": 2,
+      "exactLiteral": true
+    },
+    {
+      "path": "p3-04.test.mjs",
+      "index": 3,
+      "exactLiteral": true
+    },
+    {
+      "path": "p3-05.test.mjs",
+      "index": 4,
+      "exactLiteral": true
+    }
+  ],
+  "mode": "Source treated strictly as UTF8 DATA, no import/eval/AST/syntax/build/test or native execution; hash with Node builtincrypto only.",
+  "actualQualification": "NONE_NEW_B2",
+  "currentReview": {
+    "prior": "dac59d8e298ec0d05468d436080e68fa2cc5774a",
+    "round": 1,
+    "maximum": 5,
+    "status": "SCOPED_STATIC_REREVIEW_AND_CAL_P3_REVIEW_PENDING",
+    "author": "/root/pending_get_native_tools_impl",
+    "reviewer": "/root/pending_get_red_review"
+  },
+  "holds": {
+    "nativeHarness": "IN_PROGRESS",
+    "controllerWorkflow": "IN_PROGRESS",
+    "executionReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  }
+}

@@ -1,0 +1,65 @@
+import {createGetWinnerObserver} from './create-get-winner-observer.mjs';
+import {isEpoch} from './codec.mjs';
+
+const epoch = globalThis.__AFW_PENDING_GET_EPOCH__;
+const directProof = Object.freeze({});
+const requests = new WeakMap();
+const responses = new WeakMap();
+const leases = new WeakSet();
+const responseLeases = new WeakSet();
+let admitted = 0;
+let overflow = false;
+const winner = createGetWinnerObserver(isEpoch(epoch) ? {enabled: true, epoch, directProof} : null);
+
+export const pendingWinner = winner;
+
+export function pendingMainEnter(request) {
+  const cell = winner.enter(request, directProof);
+  if (cell && !overflow && !requests.has(request)) {
+    if (admitted === 64) overflow = true;
+    else { admitted += 1; requests.set(request, null); }
+  }
+  return cell;
+}
+
+export function pendingMainBind(request, lease) {
+  winner.bind(request, lease);
+  if (!overflow && requests.get(request) === null) {
+    requests.set(request, lease);
+    leases.add(lease);
+  }
+}
+
+export function pendingBeginResponse(lease, response, check, first) {
+  if (overflow || !leases.has(lease)) return;
+  if (responseLeases.has(lease)) {
+    winner.pendingM?.invalidate(lease);
+    return;
+  }
+  if (response === null || (typeof response !== 'object' && typeof response !== 'function')) {
+    winner.pendingM?.invalidate(lease);
+    return;
+  }
+  responseLeases.add(lease);
+  winner.pendingM?.mark(lease, 'responseBytesEnter', response);
+  const prior = responses.get(response);
+  if (prior) {
+    winner.pendingM?.invalidate(prior.lease);
+    winner.pendingM?.invalidate(lease);
+    return;
+  }
+  responses.set(response, {lease, check, first, taken: false});
+}
+
+export function pendingWireCall(message, check, first) {
+  const entry = responses.get(message);
+  if (!entry || entry.taken || entry.check !== check || entry.first !== first) return null;
+  entry.taken = true;
+  return entry.lease;
+}
+
+export function pendingUnexpectedRequestReader(message, reader) {
+  if (!reader) return;
+  const lease = requests.get(message);
+  if (lease) winner.pendingM?.invalidate(lease);
+}

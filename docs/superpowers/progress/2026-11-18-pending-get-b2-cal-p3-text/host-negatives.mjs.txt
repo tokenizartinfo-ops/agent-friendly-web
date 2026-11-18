@@ -1,0 +1,70 @@
+import assert from 'node:assert/strict';
+import {appendFileSync,chmodSync,lstatSync,realpathSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {Response as DispatchResponse} from 'miniflare';
+import {installPendingFixture} from '../fixtures/finite-coupled-native.mjs';
+
+const ids=['DNEG_THROW','DNEG_MISSING_MARK','DNEG_DUPLICATE_MARK','DNEG_FOREIGN_CARRIER','DNEG_HELD_CUTOFF'];
+const target='C2T1_SCOPE_MISSING',epoch='af0000000000000e';
+const key='e3000000-0000-4000-8000-000000000009';
+const body='{"status":"admin_pending","mayRetry":false,"operationalReadiness":false}';
+
+export async function runHostNegative(index) {
+  const id=ids[index],group=process.env.AFW_C2_NEGATIVE_ROOT;
+  assert(id&&group&&resolve(group)===group&&realpathSync(group)===group);
+  const root=join(group,id),journal=join(root,'green-progress.ndjson');
+  const attempt=join(root,'read-attempts'),evidence=join(root,'negative-witness');
+  assert.equal(realpathSync(root),root);
+  assert.equal(lstatSync(attempt).size,0);
+  process.env.AFW_C2_DIAG_ROOT=root;
+  const {mark}=await import('../finite-green-progress-recorder.mjs');
+  const one=value=>appendFileSync(evidence,value+'\n',{flag:'a',mode:0o600});
+  const trip=()=>{appendFileSync(attempt,'1\n',{flag:'a',mode:0o600});throw Error('unexpected TOOL read attempt');};
+  const actor=Object.freeze({pendingGetSample:trip}),generation=Object.freeze({});
+  let current=null;
+  installPendingFixture({
+    boundary:{epoch,root,reserve:()=>true,
+      targetFor:main=>main===current?Object.freeze({actor,generation,epoch,validate:()=>main===current}):null,
+      isDispatchResponse:value=>value instanceof DispatchResponse,witness:one,
+      invokeRead:(stub,readEpoch,readKey)=>stub.pendingGetSample(readEpoch,readKey)},
+    openToolWorld:({choose,createFiniteSnapshotObserver})=>{
+      let countCalls=0,targetEntered=false;
+      const main={
+        uploads:[{},{}],activations:[{},{}],token:'fixture-synthetic',getWinnerDirect:()=>true,
+        async call(path,options){
+          assert.equal(path,'/connections/finite-prepare');assert.equal(options.method,undefined);
+          const headers={'content-type':'application/json','cache-control':'no-store','x-afw-lab-get-winner':'g1.503.L.0',
+            'x-afw-lab-pending1':'m1.'+epoch+'.T3.'+key};
+          const r=id==='DNEG_FOREIGN_CARRIER'?new Response(body,{status:503,headers}):new DispatchResponse(body,{status:503,headers});
+          assert.equal(r instanceof DispatchResponse,id!=='DNEG_FOREIGN_CARRIER');
+          one('RAW_ACTION '+id);return r;
+        },
+        stub:{async snapshot(){
+          countCalls+=1;
+          if(targetEntered){
+            assert.equal(countCalls,3);one('RAW_COUNT '+id);
+            if(id==='DNEG_THROW')throw Error('SYN designated count error');
+            if(id==='DNEG_MISSING_MARK')chmodSync(journal,0o400);
+            if(id==='DNEG_DUPLICATE_MARK')mark(target,'count','return');
+            if(id==='DNEG_HELD_CUTOFF'){
+              const keep=setTimeout(()=>{},120000);
+              try{await new Promise(()=>{});}finally{clearTimeout(keep);}
+            }
+          }else assert(countCalls<=2);
+          return [['afw.finite-policy-effect.v1:syn:receipt','{}']];
+        }},
+      };
+      current=main;
+      const observed=createFiniteSnapshotObserver(main,()=>main);
+      return {
+        async approve(stage){assert.equal(stage,'connection');},counts:observed.counts,
+        async noScope(){
+          targetEntered=true;const label=observed.enter(target);
+          try{await choose(main,observed.getToken(label));}finally{observed.finish(label);}
+        },
+        async close(){assert.equal(countCalls,3);one('NEUTRAL_CLOSE_RETURN');current=null;},
+      };
+    },
+  });
+  await import('../mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs');
+}

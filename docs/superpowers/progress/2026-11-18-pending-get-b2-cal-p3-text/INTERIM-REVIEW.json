@@ -1,0 +1,63 @@
+{
+  "schema": "afw.c2.pending-get-native-tools1.interim-static-review.v1",
+  "status": "PARTIAL_REVIEW_FINDINGS_OPEN",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Detached immutable Source and TOOL proposal text",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "B2 interim binding review",
+    "ALLOWED_ACTION": "Persist and fully read back the detached interim report. No Source or runtime release."
+  },
+  "pins": {
+    "brief": "5f7b70fc25bbc43814a7e05fa40552aaa544e9d3",
+    "rootRuling": "03dcd340a4161b37adc2d73f1899de6dc8a486a4",
+    "supplementalRulingForFinalReview": "2771057d706832993a155954adef67a2efb12be2",
+    "sourceIndex": "f9684031f24f17ec6cbe4ee13cbac58b9eb080f0",
+    "siteDelta": "568f5fde50c99d764f2162045b85c24a9b657ca1",
+    "fixtureWiringDelta": "47bdab4bda154d4efa115c6974d5d100fcdbea8e",
+    "hostWiringDelta": "ec5ef22cc6f69cfffe41d981839a6a4eb8051b54",
+    "latestS08": "06ce206c4d6ff69b39ae15aa61e5cd08ba27598f",
+    "earlyS09": "fefbb77beb0e21357b1664c5c1a0d821aed39f3d",
+    "latestS09": "875fd376df6fb195c3699e003099825353361a20",
+    "s10": "a8d261f8f4ee18e64e35b9dce1de077d50fdd2eb",
+    "prepareSource": "5e250c6d39393269bf51baea5d0b3d8409a3721e",
+    "mLink": "128af37ff36a591d0b71aafd61b2caef14661767",
+    "hostBoundary": "5ae35efadb1ade1a4a5a782e9bd46b7e9e3cab56",
+    "hostCore": "249033b347dbb9696f6fd872557b28385617cd90",
+    "rootDataMeasurement": "d0e3afdf207a1e1dd70b5b3a4b5ba060959e807a"
+  },
+  "findings": [
+    {
+      "severity": "IMPORTANT",
+      "path": "S09 createGetWinnerHost",
+      "line": 844,
+      "body": "The existing capture guard marks its own lineage poisoned for duplicate or foreign input before reaching parkPending. The new private mailbox receives only a successful first park. Its duplicate guard cannot observe the rejected second capture. It can preserve the initial handle through afterOriginal and reach the private header/read gates even though legacy lineage already became ineligible.",
+      "related": [
+        "S09:842–851",
+        "fixture-host.mjs:64–74",
+        "fixture-host.mjs:88–106"
+      ],
+      "fix": "Propagate exact legacy lineage invalidation into the one private mailbox, or require equivalent private one-way proof of original lineage success before take. Leave the original g1/token lifecycle and count action intact. A later public frame check alone cannot prevent the early copy/read."
+    },
+    {
+      "severity": "MINOR",
+      "path": "prepare-source.mjs",
+      "line": 4,
+      "body": "The Source preparation helper reads and parses the fixed delta at module initialization. S09 and S10 import it even for pending overlay OFF. This makes OFF fixture initialization perform a new synchronous read and depend on successful parsing of private DATA before any pending transform is selected.",
+      "fix": "Defer the fixed delta read and parse to the first selected pending transform. Preserve the exact named site and inverse checks."
+    },
+    {
+      "severity": "IMPORTANT",
+      "attribution": "Root finding independently traced in this review",
+      "path": "m-link.mjs",
+      "line": 31,
+      "body": "The bounded adapter now limits request enrollment and response enrollment per lease. The responseLeases guard silently returns on a second attachment and retains the first accepted metadata. The duplicate cannot invalidate the cell through the response duplicate branch because the guard runs first.",
+      "fix": "Preserve the one-enrollment cap and terminally invalidate ambiguous duplicate attachment. Exercise the exact binding absence of a private marker as required by the focused ruling. Preserve original g1 behavior."
+    }
+  ],
+  "inspected": "Literal changes around exact M Request/lease/response/reader lineage, original callback arguments and sole registrations; QA original Request with separate options/timeline identity, the existing reaction only, overlap/seed variant separation; S08/09/10 private mailbox and frozen recorder lineage. Root performed the body and inverse measurements. This reviewer did not redo them.",
+  "carriedForward": "Review actual added host/P3/native runner, evidence projection and composition on the final packet. The old B1 passing 134 applies to the old body. The changed QA core requires the ruled 35 QA regression plus 16 new focused controls and the added W01–W03 binding cases in CAL, without rerunning unchanged 134.",
+  "boundary": "Interim findings only. No full B2 SPEC or QUALITY acceptance. Native build, branch clocks, exact generated-linkage evidence, callback calibration, hook ordering, custody, SDK process closure and host admission remain unobserved. No Source or harness execution/import/eval/AST/syntax/tests/builds, resource or ref changes occurred."
+}
