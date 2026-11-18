@@ -1,0 +1,114 @@
+{
+  "schema": "AFW.C2.GET_WINNER.OWN.SUPPLEMENTAL_FIXTURE_SEAL/1",
+  "round": 1,
+  "cap": 5,
+  "status": "SEALED_MODELED_ONLY_BEFORE_GUARD_CHANGE",
+  "review": "e4e460e381a8655e21618e40025fe3db04112cf0",
+  "originalFixtureSeal": {
+    "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/seal.json",
+    "bytes": 28159,
+    "sha256": "d55d4134d3c928e3344b7b3bd3d1aa2266250a238dcc564175691719bd6f61db",
+    "blob": "c9aee1ee60ab92081e38a59abefca45c5db3e44a"
+  },
+  "seed": {
+    "id": "O-S-418-503",
+    "pack": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+    "recordSha256": "e3f5a5a94c0fda9921f62a165caf0ed8f441e7276db87b8fa57a6f8405d0313b"
+  },
+  "deltaRule": "From the complete sealed seed, copy input and independently trusted values. Retain the current143 assertion, closed count, known HTTP503 and all transport/listing and custody coordinates. Change scope to the stated UNKNOWN reason. For invalid-stream rows, change both monitor and scope together; for unavailable rows leave monitor joined. For admitted UNKNOWN rows use winner and stubStatus UNKNOWN; positive contradiction rows retain STUB_NON_OK/418. Rebuild only the canonical outcome/log and deflate single-entry ZIP, descriptor/CRC, payload and matching ZIP size/hash.",
+  "cases": [
+    {
+      "id": "F1-positive-missing-scope-marker",
+      "reason": "MARKER_UNAVAILABLE",
+      "pairedMonitor": false,
+      "accept": false
+    },
+    {
+      "id": "F1-unknown-missing-scope-marker",
+      "reason": "MARKER_UNAVAILABLE",
+      "pairedMonitor": false,
+      "accept": true
+    },
+    {
+      "id": "F1-positive-invalid-marker-stream",
+      "reason": "MARKER_STREAM_INVALID",
+      "pairedMonitor": true,
+      "accept": false
+    },
+    {
+      "id": "F1-unknown-invalid-marker-stream",
+      "reason": "MARKER_STREAM_INVALID",
+      "pairedMonitor": true,
+      "accept": true
+    }
+  ],
+  "pack": {
+    "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-07.json",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "134f17385ad1f72099d0914a8192fe4771a97e4d",
+    "bytes": 17815,
+    "sha256": "463672408d594fa5511d7a0f28d46aca87601437486e48dd8312ef3faa59a800",
+    "plainBytes": 180305,
+    "plainSha256": "3471ac66b3a079c8c0b812cd2961f90f6831f03d7578f29e4822c1c82739cd5f",
+    "records": [
+      {
+        "id": "F1-positive-missing-scope-marker",
+        "reader": "MODEL",
+        "accept": false,
+        "retainedHttp": null,
+        "expectedWinner": null,
+        "compactSha256": "1a31e6dc05c1cb89648b38b701f99ea1c6f5a7d51a594b9ef299b3e95c04b1bd"
+      },
+      {
+        "id": "F1-unknown-missing-scope-marker",
+        "reader": "MODEL",
+        "accept": true,
+        "retainedHttp": 503,
+        "expectedWinner": {
+          "case": "15:firstFiniteGET",
+          "winner": "UNKNOWN",
+          "stubStatus": "UNKNOWN",
+          "qaLastCompleted": "UNKNOWN"
+        },
+        "compactSha256": "89f1d6e2561b11924d4925aa945fa1a84f155857e27f64580c78e7332733eb24"
+      },
+      {
+        "id": "F1-positive-invalid-marker-stream",
+        "reader": "MODEL",
+        "accept": false,
+        "retainedHttp": null,
+        "expectedWinner": null,
+        "compactSha256": "56e29e634327c4e8dfede1ca4e9c7833e304881ba8513bfbfdd9839b07f7a971"
+      },
+      {
+        "id": "F1-unknown-invalid-marker-stream",
+        "reader": "MODEL",
+        "accept": true,
+        "retainedHttp": 503,
+        "expectedWinner": {
+          "case": "15:firstFiniteGET",
+          "winner": "UNKNOWN",
+          "stubStatus": "UNKNOWN",
+          "qaLastCompleted": "UNKNOWN"
+        },
+        "compactSha256": "d0980e580b5d10f26db0c9f03c56fa709380baea1da87397552b99ff5d946993"
+      }
+    ]
+  },
+  "counts": {
+    "addedComplete": 4,
+    "addedAdmit": 2,
+    "addedReject": 2,
+    "complete": 73,
+    "admit": 15,
+    "reject": 58,
+    "crossing": 5,
+    "crossingAdmit": 1,
+    "crossingReject": 4
+  },
+  "historicalPacksEdited": 0,
+  "frozenOracleEdited": false,
+  "sourceExecuted": false,
+  "ownExecuted": false
+}

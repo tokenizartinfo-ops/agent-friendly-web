@@ -1,0 +1,149 @@
+import { readFileSync } from 'node:fs';
+import { brotliDecompressSync } from 'node:zlib';
+import { d4ModelRead } from '../c2-t1-drop-winner-diag4/reader.mjs';
+import { gitBlob, sha256 } from './bindings.mjs';
+import { readGetWinnerActual, readGetWinnerModel } from './reader.mjs';
+
+const BASE = 'docs/superpowers/root-own/c2-get-winner-dependent/';
+const SEAL = 'c9aee1ee60ab92081e38a59abefca45c5db3e44a';
+const SUPPLEMENTAL_SEAL = 'c93033a4034763ce9e2bd1235ecbea558ea81dee';
+const LEGACY = '55635df6cbff1e7bbf72a165c2db077371f9c710';
+const FROZEN = '3b11a1b5224aa45a69f5cc8022bb49d5768583c6';
+const readers = { MODEL: readGetWinnerModel, ACTUAL: readGetWinnerActual, OLD_MODEL: d4ModelRead };
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const check = (ok, code) => { if (!ok) throw Error(code); };
+const stableId = id => typeof id === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(id);
+const readPinned = (path, pin) => {
+  const bytes = readFileSync(path);
+  check(gitBlob(bytes) === pin, 'CONTROL_INPUT_PIN');
+  return JSON.parse(bytes);
+};
+
+function inflatePack(descriptor, i) {
+  const path = BASE + 'fixtures/complete-' + String(i + 1).padStart(2, '0') + '.json';
+  check(descriptor.path === path && Number.isSafeInteger(descriptor.plainBytes) &&
+    descriptor.plainBytes >= 1 && descriptor.plainBytes <= 600000, 'CONTROL_PACK_DESCRIPTOR');
+  const wire = readPinned(path, descriptor.blob);
+  const compressed = Buffer.from(wire.brotliBase64, 'base64');
+  check(compressed.toString('base64') === wire.brotliBase64, 'CONTROL_PACK_BASE64');
+  const plain = brotliDecompressSync(compressed, { maxOutputLength: descriptor.plainBytes });
+  check(plain.length === wire.bytes && plain.length === descriptor.plainBytes &&
+    sha256(plain) === wire.sha256 && wire.sha256 === descriptor.plainSha256, 'CONTROL_PACK_DIGEST');
+  const records = JSON.parse(plain);
+  check(Array.isArray(records) && records.length === descriptor.records.length, 'CONTROL_PACK_COUNT');
+  for (const [j, record] of records.entries()) {
+    const expected = descriptor.records[j], { id, reader, accept, retainedHttp, expectedWinner } = record;
+    check(stableId(id) && same({ id, reader, accept, retainedHttp, expectedWinner, compactSha256: sha256(JSON.stringify(record)) },
+      expected), 'CONTROL_PACKET_PIN');
+  }
+  return records;
+}
+
+function evaluate(id, reader, input, trusted, expected) {
+  const enter = readers[reader];
+  check(stableId(id) && typeof enter === 'function' && typeof expected === 'boolean', 'CONTROL_CASE_ID');
+  try {
+    const receipt = enter(input, trusted);
+    check(expected === true, 'CONTROL_UNEXPECTED_ADMISSION_' + id);
+    return receipt;
+  } catch (error) {
+    if (expected || !(error?.constructor === Error && error.message === 'G20_OWN_UNQUALIFIED')) {
+      throw Error('CONTROL_MISMATCH_' + id);
+    }
+    return null;
+  }
+}
+
+function checkModel(record, receipt) {
+  const out = JSON.parse(record.input.artifact.payloadText);
+  const o = out.observation;
+  const wantedColumn = record.id === 'X-historical-site-unsupported' ? 118 : 143;
+  check(receipt.diagnosticCollectionAccepted === true && receipt.bindingKind === 'MODELED_ONLY' &&
+    receipt.tree.matchedBodyEdges === 26 && receipt.commandStepNumber === record.trusted.commandStepNumber &&
+    receipt.artifact.id === record.trusted.artifactId, 'CONTROL_MODEL_RECEIPT_' + record.id);
+  check(receipt.SourceQualified === false && receipt.Task1Pass === false &&
+    receipt.finalSourceBinding === false && receipt.nativeQualification === false &&
+    Object.keys(receipt.nonclaims).length === 7 && Object.values(receipt.nonclaims).every(v => v === false),
+    'CONTROL_NONCLAIMS_' + record.id);
+  check(same(receipt.observation, o) && same(receipt.replay.witness, o.witness) &&
+    same(receipt.replay.native, o.native) && same(receipt.firstFailure, o.firstFailure) &&
+    same(receipt.finiteGet, o.finiteGet) && same(receipt.dropWinner, o.dropWinner) &&
+    receipt.replay.witness.events.find(event => event.edge === 'throw')?.error.site.column === wantedColumn &&
+    receipt.artifact.payloadSha256 === sha256(record.input.artifact.payloadText),
+    'CONTROL_ORIGINAL_EVIDENCE_' + record.id);
+  check(same(receipt.getWinner, record.expectedWinner) && receipt.finiteGet.http.actual === record.retainedHttp,
+    'CONTROL_PUBLIC_WINNER_' + record.id);
+}
+
+function checkFrozen(oracle, packets) {
+  check(oracle.rows.length === 32 && oracle.rows.filter(row => row.expect).length === 7, 'CONTROL_ORACLE_COUNT');
+  for (const [i, row] of oracle.rows.entries()) {
+    const packet = packets[i];
+    const outcomeMarker = ' AFW_C2_GET_WINNER_OBSERVATION1_OUTCOME ';
+    const wire = packet.input.artifact.payloadText ?? packet.input.transport.rawLog
+      .split('\n').find(line => line.includes(outcomeMarker)).split(outcomeMarker)[1];
+    const o = JSON.parse(wire).observation;
+    const { events } = o.witness;
+    const oracleCount = row.input.count, first = events.find(event => event.edge === 'throw');
+    check(packet.id === row.id && packet.accept === row.expect &&
+      row.input.earliestThrow.site.column === 118 && first?.sequence === row.input.earliestThrow.sequence &&
+      first.error.site.column === 143 && events[56]?.sequence === row.input.targetActionEntered &&
+      events[58]?.sequence === oracleCount.enter && (events[59]?.sequence ?? null) === oracleCount.returned &&
+      o.native.cases[14]?.status === row.input.native15 &&
+      o.native.cases.slice(0, 14).filter(caseRow => caseRow.status === 'fail').length ===
+        Number(row.input.nativeFirst14 === 'one-failure') &&
+      same(o.getWinner, row.input.getWinner) &&
+      same(o.finiteGet.http, row.input.finiteGet), 'CONTROL_ORACLE_PROJECTION_' + row.id);
+  }
+}
+
+const seal = readPinned(BASE + 'fixtures/seal.json', SEAL);
+const supplemental = readPinned(BASE + 'fixtures/seal-fix1.json', SUPPLEMENTAL_SEAL);
+check(supplemental.originalFixtureSeal.blob === SEAL, 'CONTROL_SUPPLEMENTAL_PREIMAGE');
+const oracle = readPinned(BASE + 'fixtures/frozen-visible-oracle32.json', FROZEN);
+const old = readPinned(seal.oldCase.path, LEGACY);
+check(old.id === seal.oldCase.id && old.actualExpectedSourceContext === null &&
+  sha256(old.input.artifact.payloadText) === seal.oldCase.outputSha256, 'CONTROL_HISTORICAL_POINT');
+const originalPackets = seal.packs.flatMap(inflatePack);
+const addedPackets = inflatePack(supplemental.pack, seal.packs.length);
+const packets = [...originalPackets, ...addedPackets];
+check(originalPackets.length === seal.counts.fullPackets && addedPackets.length === supplemental.counts.addedComplete &&
+  new Set(packets.map(item => item.id)).size === packets.length, 'CONTROL_UNIQUE_PACKETS');
+checkFrozen(oracle, packets);
+const results = packets.map(record => {
+  const { id, reader, input, trusted, accept } = record;
+  const before = sha256(JSON.stringify({ input, trusted }));
+  const receipt = evaluate(id, reader, input, trusted, accept);
+  check(sha256(JSON.stringify({ input, trusted })) === before, 'CONTROL_RAW_INPUT_MUTATED_' + id);
+  if (receipt) checkModel(record, receipt);
+  return { id, reader, accepted: receipt !== null };
+});
+const byId = new Map(packets.map(record => [record.id, record]));
+byId.set(old.id, old);
+const crossings = seal.oldCase.libraryCrossings.map(spec => {
+  const { id, reader, accept } = spec;
+  const { input } = byId.get(spec.input);
+  let { trusted } = byId.get(spec.trusted);
+  if (reader === 'MODEL' && spec.trusted === old.id) {
+    trusted = { ...trusted, commandStepNumber: 5, artifactId: old.input.artifact.artifactId };
+  }
+  const receipt = evaluate(id, reader, input, trusted, accept);
+  if (receipt) {
+    check(receipt.bindingKind === 'MODELED_ONLY' && same(receipt.dropWinner, seal.oldCase.expectedDropWinner),
+      'CONTROL_HISTORICAL_RECEIPT');
+  }
+  return { id, reader, accepted: receipt !== null };
+});
+const countAccepted = entries => entries.filter(entry => entry.accepted).length;
+const admit = countAccepted(results), crossingAdmit = countAccepted(crossings);
+const counts = { complete: results.length, admit, reject: results.length - admit,
+  crossing: crossings.length, crossingAdmit, crossingReject: crossings.length - crossingAdmit };
+const addedAdmit = countAccepted(results.slice(originalPackets.length));
+check(addedAdmit === supplemental.counts.addedAdmit &&
+  addedPackets.length - addedAdmit === supplemental.counts.addedReject, 'CONTROL_SUPPLEMENTAL_TOTALS');
+check(same(counts, { complete: seal.counts.fullPackets + supplemental.counts.addedComplete,
+  admit: seal.counts.accepted + supplemental.counts.addedAdmit, reject: seal.counts.rejected + supplemental.counts.addedReject,
+  crossing: seal.counts.compatibilityCalls, crossingAdmit: seal.counts.compatibilityAdmitted,
+  crossingReject: seal.counts.compatibilityRejected }), 'CONTROL_EXPECTED_TOTALS');
+console.log(JSON.stringify({ schema: 'AFW.C2.GET_WINNER.OWN.SYNTHETIC_RESULTS/1',
+  fixtureSeal: SEAL, supplementalFixtureSeal: SUPPLEMENTAL_SEAL, counts, results: [...results, ...crossings] }));

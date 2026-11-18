@@ -1,0 +1,84 @@
+import { gBad, gInt, gKeys, gSame } from '../c2-t1-finite-get-diag3/legacy/shape.mjs';
+import { finiteGet } from '../c2-t1-finite-get-diag3/finite-get.mjs';
+
+const CASE = '15:firstFiniteGET';
+const TARGET = 'C2T1_SCOPE_MISSING';
+const HISTORICAL_SITE = { file: 'S08', line: 18, column: 118 };
+const WINNERS = new Set(['DEADLINE_OR_ABORT', 'STUB_NON_OK', 'POST_STUB_VALIDATION', 'UNKNOWN']);
+const PRESERVED_STUB_STATUS = new Set([400, 401, 403, 404, 405, 413, 429]);
+
+function isTargetAssertion(event) {
+  return event?.id === TARGET && event.operation === 'action' && event.edge === 'throw' &&
+    event.error?.name === 'AssertionError' && event.error.code === 'ERR_ASSERTION';
+}
+
+function isEvent(event, id, operation, edge) {
+  return event?.id === id && event.operation === operation && event.edge === edge && event.error === null;
+}
+
+function qualifiedCut(o, binding) {
+  const { witness, native, finiteGet: { http } } = o;
+  const { events } = witness;
+  const first = events.find(event => event.edge === 'throw');
+  if (o.unknownReason !== null || o.journal.recorderFaultObserved ||
+      !['prefix', 'complete'].includes(witness.integrity) || native.integrity !== 'prefix' ||
+      !isTargetAssertion(first) || !gSame(first.error.site, binding.site) ||
+      http.state !== 'KNOWN' || http.reason !== 'TARGET_GET_ASSERTION' || http.expected !== 200 ||
+      !gInt(http.actual, 100, 599) || http.actual === 200 ||
+      first.sequence !== http.throwSequence || first.sequence !== o.firstThrowSequence) return false;
+  for (let i = 0; i < 14; i++) {
+    const id = binding.selected[i], at = 4 * i;
+    if (native.cases[i]?.id !== id || native.cases[i].status !== 'pass' ||
+        !isEvent(events[at], id, 'action', 'enter') || !isEvent(events[at + 1], id, 'action', 'return') ||
+        !isEvent(events[at + 2], id, 'count', 'enter') || !isEvent(events[at + 3], id, 'count', 'return')) return false;
+  }
+  return binding.selected[14] === TARGET && native.cases[14]?.id === TARGET &&
+    native.cases[14].status === 'fail' && isEvent(events[56], TARGET, 'action', 'enter') &&
+    events[57] === first && isEvent(events[58], TARGET, 'count', 'enter') &&
+    isEvent(events[59], TARGET, 'count', 'return') && first.sequence === 58;
+}
+
+// Only raw current, schema-validated public evidence reaches this guard.
+export function readGetWinner(observation, binding) {
+  const value = observation.getWinner;
+  if (!gKeys(value, ['case', 'winner', 'stubStatus', 'qaLastCompleted']) ||
+      Buffer.byteLength(JSON.stringify(value)) > 512 || value.case !== CASE ||
+      !WINNERS.has(value.winner) || value.qaLastCompleted !== 'UNKNOWN' ||
+      value.stubStatus !== 'UNKNOWN' && !gInt(value.stubStatus, 400, 599)) gBad();
+
+  if (value.winner === 'UNKNOWN') {
+    if (value.stubStatus !== 'UNKNOWN') gBad();
+    return { ...value };
+  }
+  const scopeReason = observation.finiteGet.afterScopeMissing.reason;
+  if ((scopeReason !== 'JOINED_SNAPSHOT' && scopeReason !== 'SNAPSHOT_INVALID') ||
+      !qualifiedCut(observation, binding)) gBad();
+
+  const status = observation.finiteGet.http.actual;
+  if (value.winner === 'STUB_NON_OK') {
+    const wanted = PRESERVED_STUB_STATUS.has(value.stubStatus) ? value.stubStatus : 503;
+    if (status !== wanted) gBad();
+  } else if (status !== 503 || value.stubStatus !== 'UNKNOWN') {
+    gBad();
+  }
+  return { ...value };
+}
+
+// Finite GET legacy validation has a fixed 118 sentinel. After raw validation, swap
+// only the earliest exact target assertion site in an ephemeral view. An actual
+// 143 is eligible, and an unsupported raw 118 cannot inherit historical eligibility.
+export function readCurrentFiniteGet(o, binding) {
+  const first = o.witness.events.find(event => event.edge === 'throw');
+  let view = o;
+  if (isTargetAssertion(first)) {
+    const site = gSame(first.error.site, binding.site) ? HISTORICAL_SITE
+      : gSame(first.error.site, HISTORICAL_SITE) ? binding.site : null;
+    if (site) {
+      const events = o.witness.events.map(event => event === first
+        ? { ...event, error: { ...event.error, site } }
+        : event);
+      view = { ...o, witness: { ...o.witness, events } };
+    }
+  }
+  return finiteGet(view, binding.schema, binding.selected);
+}

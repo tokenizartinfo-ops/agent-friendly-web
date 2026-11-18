@@ -1,0 +1,823 @@
+{
+  "schema": "AFW.C2.GET_WINNER.OWN.FIXTURE_FIRST_SEAL/1",
+  "project": "AFW",
+  "status": "MODELED_ONLY_FIXTURE_FIRST_READBACK_COMPLETE",
+  "authority": {
+    "brief": "9719704de9811786ee651b163933d18fb7b56d25",
+    "aperture": "875675d93ba35f662d517061b533dce44d099dc5",
+    "frozenOracle": "3b11a1b5224aa45a69f5cc8022bb49d5768583c6",
+    "priorQualifiedReaderReview": "6a76d5a3a18303e69cbdf08ad7d1eee328f17746"
+  },
+  "frozenPrefix": {
+    "cases": [
+      "O-S-404-404",
+      "O-S-413-413",
+      "O-S-418-503",
+      "O-S-0-503",
+      "O-L-0-503",
+      "O-V-0-503",
+      "O-U-0-503",
+      "O-S-404-503",
+      "O-V-0-401",
+      "O-L-404-503",
+      "O-S-418-418",
+      "O-S-0-302",
+      "O-U-418-503",
+      "O-seq",
+      "O-case",
+      "O-count-open",
+      "O-earlier",
+      "O-qa-unknown",
+      "O-extra",
+      "O-order",
+      "O-mismatch-producer",
+      "O-mismatch-reader",
+      "O-mismatch-api",
+      "O-mismatch-head",
+      "O-mismatch-tree",
+      "O-mismatch-job",
+      "O-mismatch-attempt",
+      "O-mismatch-log",
+      "O-mismatch-archive",
+      "O-mismatch-payload",
+      "O-mismatch-receipt",
+      "O-mismatch-custody"
+    ],
+    "accept": 7,
+    "reject": 25,
+    "coordinate": "S08:18:118"
+  },
+  "conversion": {
+    "method": "TEST DATA only; adapt frozen case15 journal witness 118→143 at witness.events[57].error.site.column, then derive journal digest and both canonical wrappers. Original oracle remains exact. Explicit X-historical-site-* full MODEL packets keep 118. Never apply this constructor to ACTUAL input.",
+    "adapter": {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/review/model-data-construction.txt",
+      "bytes": 18311,
+      "sha256": "5cc868c8d9df3649ced3a87c0e65434e447fbd36ba0b7420ca195202f28d5695",
+      "blob": "afcd7e0a82ff76d227a685549b58a1aaf740b642"
+    },
+    "currentCoordinate": "S08:18:143",
+    "defects": {
+      "producer": "outcome.sourceReads.beforeSha256[0] null against pinned schema",
+      "reader": "trusted.bodyEdgesHash null against immutable model binding",
+      "api": "jobs.jobs[0].run_id null against pinned expected.runId",
+      "head": "run.head_sha null against expected.head",
+      "tree": "tree.sha null against expected.tree",
+      "job": "jobs.jobs[0].id null against expected.jobId",
+      "attempt": "run.run_attempt null against canonical attempt 1",
+      "log": "transport.rawLog null",
+      "archive": "artifact.archiveBase64 null",
+      "payload": "artifact.payloadText null",
+      "receipt": "outcome.context null with custody context intact",
+      "custody": "outcome.custody null with separate custody frame intact"
+    }
+  },
+  "modelBinding": {
+    "key": "modelWire",
+    "path": "docs/superpowers/root-own/c2-get-winner-dependent/data/model26.json",
+    "bytes": 7052,
+    "sha256": "dc70e49b84bb834a38d2306440d977eaf4d8f5a6d802da29b0ddea13b1fc4bfc",
+    "blob": "75154471e2ea014677fc5176ff2f734262a3c365"
+  },
+  "oldCase": {
+    "id": "DW4_O01",
+    "blob": "55635df6cbff1e7bbf72a165c2db077371f9c710",
+    "entry": "MODELED_ONLY",
+    "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_O01.json",
+    "outputSha256": "81198c47846bf86cecf112538eeb0a22c8737ce4f7b1effd7673e3b6b3c74310",
+    "expectedDropWinner": {
+      "case": "15:firstDROP",
+      "site": "S01:247",
+      "outer": "QA_MARKED_STUB_NON_OK",
+      "publicSite": "S01:247"
+    },
+    "fixtureExpectedBy": "a1291b71dd21b263d280f6feae8efc8d3fce0c24",
+    "libraryCrossings": [
+      {
+        "id": "U-old-model-old",
+        "reader": "OLD_MODEL",
+        "input": "DW4_O01",
+        "trusted": "DW4_O01",
+        "accept": true
+      },
+      {
+        "id": "U-new-model-old-binding",
+        "reader": "MODEL",
+        "input": "O-S-404-404",
+        "trusted": "DW4_O01",
+        "accept": false
+      },
+      {
+        "id": "U-new-model-old-packet",
+        "reader": "MODEL",
+        "input": "DW4_O01",
+        "trusted": "O-S-404-404",
+        "accept": false
+      },
+      {
+        "id": "U-old-model-new-packet",
+        "reader": "OLD_MODEL",
+        "input": "O-S-404-404",
+        "trusted": "DW4_O01",
+        "accept": false
+      },
+      {
+        "id": "U-actual-refuses-model",
+        "reader": "ACTUAL",
+        "input": "O-S-404-404",
+        "trusted": "O-S-404-404",
+        "accept": false
+      }
+    ]
+  },
+  "counts": {
+    "fullPackets": 69,
+    "accepted": 13,
+    "rejected": 56,
+    "compatibilityCalls": 5,
+    "compatibilityAdmitted": 1,
+    "compatibilityRejected": 4
+  },
+  "bundleEncoding": "Bounded brotliBase64 of UTF8 compact JSON full packet arrays; outer JSON frame is LF terminated. Verify complete inflated bytes and each record compact digest before invocation.",
+  "packs": [
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-01.json",
+      "bytes": 27483,
+      "sha256": "ea03a26509c61770acc1b028c796376ca89ee0534af84527f42e5875743f1c3b",
+      "blob": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+      "plainBytes": 540302,
+      "plainSha256": "3400d4b3d9e593b8d53f4d22a75a48b9bb77a5962c20431d9e1b03df312d39ff",
+      "records": [
+        {
+          "id": "O-S-404-404",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 404,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 404,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "fff401110aa97563ee18c7c6c53d4cccb1be8c1c2ebd0d02f05b89d94fd436fc"
+        },
+        {
+          "id": "O-S-413-413",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 413,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 413,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "24dfe06d35a3950b58e194459cd301a48cc0bbfead3ca5e633826df96faa55f5"
+        },
+        {
+          "id": "O-S-418-503",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 418,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "e3f5a5a94c0fda9921f62a165caf0ed8f441e7276db87b8fa57a6f8405d0313b"
+        },
+        {
+          "id": "O-S-0-503",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "1dc89fd61cac3737fa941e0e32716d0fdd06a2478683cc12df30bc704b604570"
+        },
+        {
+          "id": "O-L-0-503",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "DEADLINE_OR_ABORT",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "4b927237da5fde61669a446ddbc4396a75e14d2ee6c634d0fbf8014a248efb5f"
+        },
+        {
+          "id": "O-V-0-503",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "POST_STUB_VALIDATION",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "e3c65035d01e190570f7a1938917958843e4c93c95795c952f8f6527931b219f"
+        },
+        {
+          "id": "O-U-0-503",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "5c685e811e19a4d77b8bc4a7069f93475853953ae66cf9bbe5faea38b4e36ea8"
+        },
+        {
+          "id": "O-S-404-503",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "7338af01db0812d07994362580f37055761aefce094198cbcc7a69ac79c480ea"
+        },
+        {
+          "id": "O-V-0-401",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "234b23b3307bf7562ef93bc8ca3fa47a5879c9d002ba23db45398edb39a3f04d"
+        },
+        {
+          "id": "O-L-404-503",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "09df81350736d6403e9bfb4c91afe1677b5492c07926739d0f6b740dfb0485e1"
+        },
+        {
+          "id": "O-S-418-418",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "6bd670b85d65c76e085b3b193226ec728943a3129de4bda8a83fc428805eaf4d"
+        },
+        {
+          "id": "O-S-0-302",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "05c0d9f858f5da55e10076d9e362aa46cbeaa6b29c3d4584a74dffba602e7bee"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-02.json",
+      "bytes": 40491,
+      "sha256": "9fd3748fb36a4f8d2e7cbfc73650f06d0813470963769f44a382f14a57c069f2",
+      "blob": "1a31f6cb8652be0b872f81601b97479f27473245",
+      "plainBytes": 539191,
+      "plainSha256": "390bd1f9c70f8ac3e98fbe92b289d702e24e70d468ecde3769a3c6312ece524e",
+      "records": [
+        {
+          "id": "O-U-418-503",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "4cc22d48803bd909ff697bf61ae32877495eb0b866553820f9343d3558aa9cc4"
+        },
+        {
+          "id": "O-seq",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "2c47b4a6cfd2e2f53bc99a6ea0d870fbdf00fc3334840a9c7aeaab0699a662d6"
+        },
+        {
+          "id": "O-case",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "a811c70c9a2064773d0839016327bb263ae7a394ec69bf8b76405554d4647b4e"
+        },
+        {
+          "id": "O-count-open",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "5dd9f5e4292d3117ca4c93f55714bb2439164746c63bbf9ce969f348ed351e98"
+        },
+        {
+          "id": "O-earlier",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "7341ac8c9488cdfaf82a4b33d3b7fb496b946a7c92cdf05d2c4ae9977c60bc3d"
+        },
+        {
+          "id": "O-qa-unknown",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "bc167490fd376d1ea98d101f7ea01b92092a30d4d7fd0c6b766aab03f69ca8ee"
+        },
+        {
+          "id": "O-extra",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "a7d6a8f07cb50c0589ac255ef5e56bfcd31627f23e1bb15f7c3da5c10b4d6387"
+        },
+        {
+          "id": "O-order",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "c1634fd8526d2044ef5861c02ca51f719276fcf67a297f79808ff9f50ea557ff"
+        },
+        {
+          "id": "O-mismatch-producer",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "e511a6752ac57db0fb919501d1b66cf2cbd0fb136a1b64a5fe1bc1fbe477eff2"
+        },
+        {
+          "id": "O-mismatch-reader",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "9a03dd99c566f47be35d37ce667b98b3cf7eef49908f27989000d4de72ec3607"
+        },
+        {
+          "id": "O-mismatch-api",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "941a6c6f501153bf58c88e2f92b761053992b06c45939ff4b322e46f3595944a"
+        },
+        {
+          "id": "O-mismatch-head",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "dfd3d052ac969abb9c97618f623fca49e1a6f127b2f799dc4d3aecdff1503367"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-03.json",
+      "bytes": 30471,
+      "sha256": "0fe61103575224d11a18cdf7f20b2ff96fce296a6ed0a58a36e20861c4813331",
+      "blob": "0c5506c80724a69ba195c743e84a3b599bb0954d",
+      "plainBytes": 504652,
+      "plainSha256": "e60d23cddc5fdb6a73426ad518b4797fc8380c5afc3d5b595f7d0064d54bbbf3",
+      "records": [
+        {
+          "id": "O-mismatch-tree",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "8fd38127f235806d591604f9a57c90c234ef3e33845dc4eb85dd4e0367052aad"
+        },
+        {
+          "id": "O-mismatch-job",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "52dab410bd2204eb49c0672c132fa2b410c6c7d78b13386ab4991387727d97a8"
+        },
+        {
+          "id": "O-mismatch-attempt",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "44ae253fc33c33a3d6814f8c9c295db79a3e1bc900389ba5df9aae27966acef3"
+        },
+        {
+          "id": "O-mismatch-log",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "254bc749432ab42d2e4ae008a131687194b84eb16136b1dd336b64c19e22f41f"
+        },
+        {
+          "id": "O-mismatch-archive",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "abdb35e6fc94c02dd008d027a96d3eb2c3a472c41bdb4ebe651e38232d23bc5a"
+        },
+        {
+          "id": "O-mismatch-payload",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "6c2e9b338773d97b5777bff8a7fa98d6a55b31433821655cd3e9d0cb6585c6cb"
+        },
+        {
+          "id": "O-mismatch-receipt",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "273268dfceb7fd68220449bdfde5d1fe18551cc94064ba748a625e6d62495ff5"
+        },
+        {
+          "id": "O-mismatch-custody",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "33cc8032f102ceac95deb9a6b4ddd99c5e361a0ac8ceefdbf30c62ce88b9ac5f"
+        },
+        {
+          "id": "X-unknown-retains-401",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 401,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "36316374884416273cbdde67ad2c997419f8bc96ffb409914911be3e934f89d9"
+        },
+        {
+          "id": "X-unknown-retains-302",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 302,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "8402816126c4b9944caa41031df28ea38815bada59cd8ae5a87867a03744348e"
+        },
+        {
+          "id": "X-known-closed-later-open",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 418,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "ae53f08945bf14e618a0361b0b02e2245374181ffbae9338fb1c924412a39525"
+        },
+        {
+          "id": "X-known-snapshot-invalid",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": 503,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "STUB_NON_OK",
+            "stubStatus": 418,
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "0f628fd4154e6999354cdc203955a475417eadc349d7eac5e27ad85ed12b10a0"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-04.json",
+      "bytes": 49431,
+      "sha256": "0c9420af5c680b5e4e2db6d1c92911f5e598c7f596714540fd763efde42130cc",
+      "blob": "78159c47e96c25076c717998db3b5ef7bfdf61a3",
+      "plainBytes": 540089,
+      "plainSha256": "fdd3a19e2c056a97678489a580ddf0a76c542dd8fd34b811481434942458512a",
+      "records": [
+        {
+          "id": "X-historical-site-unsupported",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": null,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "b79f4eb30f6d0dd430a12167c50d6e59161e86f82d56c8efb88c88cbc28fb9af"
+        },
+        {
+          "id": "X-historical-site-known",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "207a111ed2b55a1dfa32f790c637cfe99eddaad0841e74bb48d6662cdab329c1"
+        },
+        {
+          "id": "X-wrong-line",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "759df3b4fe2655cfc1300d2fd908ac1e5733053513e6e015cc6d7eab184a9ff4"
+        },
+        {
+          "id": "X-wrong-coordinate",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "f320f8a9fa143d2e47165be256fa2a375ad31ce04dae5bb0fbeed3944ed93b50"
+        },
+        {
+          "id": "X-prior-journal-throw",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "88b5aa9004f108c2e373f2a0e1e877408b99d3c9a6a15989adbddcec7ecc0e5c"
+        },
+        {
+          "id": "X-native15-pass",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "529f96d7b9a903adf58bced5a3b2ead5642dfa2eb29b762b2a604e903841fa6d"
+        },
+        {
+          "id": "X-native15-absent",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "8d1d87c8e788b61bd548f3d127ff2c13a8bd1b11a489c1386b8b94588c2ed4aa"
+        },
+        {
+          "id": "X-torn-native",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "cc8dc23001e678c08fcdd502c632f9034a680d860b773ef557dc54475ad82b37"
+        },
+        {
+          "id": "X-torn-journal-closed-target",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "6157ce279d425e6be0a0f1e2dd8811aa3e49c76dc114f0055cc5b12ce2827e6b"
+        },
+        {
+          "id": "X-duplicate-count",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "93b5ac80ce79c77e76fa4e23ca4049bd0484540fb707df0ecbd349a95c5549f7"
+        },
+        {
+          "id": "X-count-snapshot-sequence",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "24dd2761d043ed24087e538e88968c356834d8243f64db7f45b5d231979a7ad3"
+        },
+        {
+          "id": "X-unsupported-http-known-winner",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "4629eca0a519afd7e2f358c1ca26726608053cf1352392449cbb6c61e8f79882"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-05.json",
+      "bytes": 20695,
+      "sha256": "3c215c470fb19d59826776cf86451afec4a06a0326e84047cfdea329715734a8",
+      "blob": "64c1783dda3c2c831667660473e3192b8f1e8c34",
+      "plainBytes": 539488,
+      "plainSha256": "c5c2f8f2046883becddd93bf142473edfd146700973f47f625f95dc994d68f29",
+      "records": [
+        {
+          "id": "X-unsupported-http-unknown-winner",
+          "reader": "MODEL",
+          "accept": true,
+          "retainedHttp": null,
+          "expectedWinner": {
+            "case": "15:firstFiniteGET",
+            "winner": "UNKNOWN",
+            "stubStatus": "UNKNOWN",
+            "qaLastCompleted": "UNKNOWN"
+          },
+          "compactSha256": "2cd83030c62b3a7a832bf8262611eca0c10311382dc8d2cd32e720fbc3d7d5b0"
+        },
+        {
+          "id": "X-type",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "0e76735caac811db4a68691704a5624ec0fedf052e613f4c80480bad3e61d5b4"
+        },
+        {
+          "id": "X-range",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "75cd1de22cd7fcb4c7533f343e89ec8c815a1ef94edb715582de408638d6a222"
+        },
+        {
+          "id": "X-missing",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "b419feefeba087d7cf50d46634b6dafd4c0f84ece364cf088325f154e6ad41ad"
+        },
+        {
+          "id": "X-noncanonical-frame",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "448f8fd8c555172f3c13945b06c2e28131b8be56e9a7e3420aa4a60646362c00"
+        },
+        {
+          "id": "X-fault-frame",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "d5af61e12a009255acc0be00e0d827ec321e43f44e1ea0ba086e9f17152675ed"
+        },
+        {
+          "id": "X-log-window",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "80679654c9a1da21a788d67f45e938c996a48027f6eeb00feed52e50977324d9"
+        },
+        {
+          "id": "X-custody-total",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "340d48c67a8a101c8ebf92c02a7a8d94595bcfa6edc56809e08b296f044ce617"
+        },
+        {
+          "id": "X-after-read",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "d0a2e9257b3cc4001b4c90954c0100eecc5cd70da25168661f9dd765e5efc3d8"
+        },
+        {
+          "id": "X-tree-leaf",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "461c3eae2ae02f88bff0e49bf5371fb2c529b44610725dc122727165db1ea6cc"
+        },
+        {
+          "id": "X-commit-parent",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "365b960cdb9d41d02b736b2b4fef2ae6807ee71000a3d58f502272203e4e941d"
+        },
+        {
+          "id": "X-independent-step",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "3468762de8d03c0a709676ad3ced96eb998a1da8ae536c3326764d5a5193b2a3"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-get-winner-dependent/fixtures/complete-06.json",
+      "bytes": 20135,
+      "sha256": "06c621c9006d0945922da9e237531ce60124dd14b7f60afaf72d3ff82c37c01e",
+      "blob": "8aaa719e5444c5115ccfb6285a45309835238326",
+      "plainBytes": 405415,
+      "plainSha256": "f356eb058518b13aee41b841404579632659989e27f28f72757aecea5b30beee",
+      "records": [
+        {
+          "id": "X-independent-artifact",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "55da2c843aa08583546052ea785b3c956d058632e1fa9f4ef28574ddafe77da0"
+        },
+        {
+          "id": "X-artifact-step-time",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "30e7c7a6277889f42df8fd215609e6632d13cb0df06995c805fb84c8bdf8ec55"
+        },
+        {
+          "id": "X-retention",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "f74f190cc988abe5e296d2ee03d90982fe4c8124a6eed97c5bf0796dbb278ad3"
+        },
+        {
+          "id": "X-filename",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "34df14b2a3924c7e1b06ed19469967921dfa6e71e0ad20a0a63a4ce7e515a950"
+        },
+        {
+          "id": "X-listing",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "99e82c0800efdfbe2383818f59c7ea18f3b5a8edaf75f2be0eb458e71e849af3"
+        },
+        {
+          "id": "X-crc",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "cb7275ccdab80d8c7204d6e17e8cd7469c5c9888ea450a1a9019566b18e22231"
+        },
+        {
+          "id": "X-dd",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "2fc9590107695667bfb9dccbabe1fa889657b2bc7b11aca643c57682a9102bf2"
+        },
+        {
+          "id": "X-deflate-tail",
+          "reader": "MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "43f13220264f48d054c4be064e1e203b8950235a96591095a0456266caaf07d5"
+        },
+        {
+          "id": "X-old-reader-added-field",
+          "reader": "OLD_MODEL",
+          "accept": false,
+          "retainedHttp": null,
+          "expectedWinner": null,
+          "compactSha256": "bd3e1df07cc4b202248349d6b65f98f6c0bcb3b84f4a472bd3b536c57415bccc"
+        }
+      ]
+    }
+  ],
+  "sourceRun": false,
+  "ownRun": false,
+  "actualFull20Admission": false
+}

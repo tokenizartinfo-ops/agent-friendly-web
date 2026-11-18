@@ -1,0 +1,29 @@
+{
+  "schema": "AFW.OWN5.MODEL.SELECTION/1",
+  "sourceIndexBlob": "4d931db1c79362472fd79dd0e52a3078d96fb264",
+  "sourceIndexSha256": "56d38218923404125a83720699ae4dc464d39d2b005d9149b7c9992d7c4ec6b6",
+  "node": "v22.23.4",
+  "selected": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "syntheticOnly": true
+}
