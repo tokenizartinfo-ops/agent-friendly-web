@@ -107,11 +107,11 @@ export class SetupFixture extends IndependentClosure{
   const scopeKey='afw.finite-preparation-cleanup-scope.v1:'+p.prepId;
   if(mode==='missing-scope')await storage.delete(scopeKey);
   if(mode==='enroll'){
-   const grant={purpose:'afw.finite-grant-link.v1',preconnectionId:p.prepId,authorizationHash:x.authorization.handle_hash,
+   const grant={preconnectionId:p.prepId,authorizationHash:x.authorization.handle_hash,
     grantId:connection.grantId,grantHash:connection.grantHash,acceptedAt:x.T0-300};
-   const notice={purpose:'afw.finite-notice-link.v1',preconnectionId:p.prepId,grantHash:connection.grantHash,
+   const notice={preconnectionId:p.prepId,grantHash:connection.grantHash,
     eventHash:connection.noticesHash,sequence:x.notice.sequence,acceptedAt:x.T0-200};
-   const link={purpose:'afw.finite-authorization-link.v1',preconnectionId:p.prepId,authorizationHash:grant.authorizationHash,
+   const link={preconnectionId:p.prepId,authorizationHash:grant.authorizationHash,
     sourceRevision:p.sourceRevision,clientId:connection.clientId,resource:connection.resource,projectRef:H,
     subjectHash:hashFiniteOwnerEvidence('subject',{accessRealmHash:owner.accessRealmHash,subject:owner.subject}),
     issuedAt:x.T0-700,expiresAt:Date.parse(x.authorization.expires_at)};
