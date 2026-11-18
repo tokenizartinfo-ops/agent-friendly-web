@@ -1,0 +1,51 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE_DATA_INDEPENDENT_REVIEW/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewPackage": "a6adea6a3b2f5f637b840ce24d08fa48bbf03951",
+  "fixtureIndex": "7115a056bed39c2d0a4d3de1f804bb7594dab382",
+  "authorReport": "7ec4ffd9de4da3ffc408006821a3f98df9d894cb",
+  "acceptedDesign": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+  "acceptedPlan": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+  "rootMeasurement": "bb6ee7096cdfb4f64a56c238c7a6645a7a8339cd",
+  "SPEC": "FAIL_SCHEDULE_COVERAGE",
+  "QUALITY": "FAIL_ORACLE_INDEPENDENCE",
+  "critical": [],
+  "important": [
+    {
+      "id": "F-I1",
+      "location": "native schedule 4e213927be1108cf9e55968cbb5defb42df5c669 /nativeExpected/N05_ON_NO_DELIVERY, /paths, /closure",
+      "finding": "The N05 receipt requires zero target fetch arrivals to be independently observed. The sole actor reply q0.A proves absence of a usable record. The fixed schedule specifies neither a separate benign oracle for zero target arrivals nor the closure point at which that count is final; the same actor must stay usable for count/read. A genuine dropped delivery and a broken observer that failed to record a delivered request can produce identical expected output. Stating that the scheduler knows zero does not specify an independent check. This affects the fixture's ability to qualify the channel, not the design's correct UNKNOWN interpretation for an actual missing record.",
+      "requiredBeforeQualification": "Identify the independent, bounded, control-only witness for the no-delivery ground truth and its observation window, or leave that native control unqualified. Keep the admitted user-facing meaning of q0.A unchanged. No additional production query or access is warranted."
+    },
+    {
+      "id": "F-I2",
+      "location": "accepted plan P3; native schedule /timing/processes, /timing/preflightNeutralIds, /closure/negativeControls, /d07",
+      "finding": "P3 calls for negative driver fixtures. H20–H28 supply model expectations for count failure/blockage and malformed records. The schedule names just two frozen-D07 processes (both genuine count-return), and explicitly describes H20–H28 as models. It does not assign a driver/hook-level check for these failure paths to any bounded process. A model receiving an already-classified blocked count cannot establish that the actual hook refrains from querying when count return is missing. The accepted co-witness ruling covers the positive post-count ordering, not this substitution.",
+      "requiredBeforeQualification": "State which neutral failures exercise the actual hook/recorder boundary, with independent zero-query observation, and where those checks fit in the existing envelope. If those are intentionally model-only, leave negative driver qualification open. No repeat of the 30-second protected application scenario is implied."
+    }
+  ],
+  "minor": [
+    {
+      "id": "F-M1",
+      "location": "site map ab73477e5f563af05e12fc1f41204b3f1973f963 /sites/H01",
+      "finding": "The S09 anchor range is listed as 830–868, beyond the current Git body's end. The actual host observer ends at line 860. This index-reference typo does not affect the 114 matched literal preimages.",
+      "requiredBeforeQualification": "End the H01 source range at the actual host boundary."
+    }
+  ],
+  "verifiedData": [
+    "Read the six indexed fixture objects, report, source preimages, accepted plan, Root co-witness ruling and Node feasibility note as DATA. Personally matched 114 supplied literal lines against ten pinned original bodies, and checked the counts, unique vector IDs, source objects' declared sizes, row grammar and slot sums. Root independently reports full Git/SHA256/byte matches for all eight objects.",
+    "30 M + 35 QA + 57 host + 12 row-file cases = 134 neutral; 8 selected native, 2 OFF and 6 ON, plus one unselected companion. Known HTTP persists on unqualified private diagnostics. Coverage distinguishes foreign error identity from equal copied text, enforces no key/zero query, treats S as the super.fetch reaction only, and preserves unknown QA-at-M, catch and return timing. No inference of a completed readChoice from C/02/c.",
+    "The arithmetic totals 152000 ms maximum child, 329000 ms producer, 418000 ms job. Six proposed post-count QA reads, two separate callback calibrations, and genuine case1 actor counts are accounted for on paper. N03/N04 preserve the expected failing test/exit1 separately from tooling MATCH. Native seed255 is explicitly a proposed isolated constructor premise, not authority or ordinary reachability. No approved seeding API and no fabricated q0.X count as branch evidence."
+  ],
+  "unverified": [
+    "No fixture was executed. Setup, companion overlap, native timing/closure, mount/privacy, original throw identity and afterEach order remain unverified. TestContext.error.cause is a possible future observation surface only. Schedule arithmetic cannot establish feasibility. The actual business prefix, production, and PC-off were not tested."
+  ],
+  "status": "CURRENT_BLOCK_REVIEW_ONLY; no repairs or subsequent tasks started",
+  "execution": "NOT_RUN",
+  "Source5": 5,
+  "OWN5": 5,
+  "StageB": 5,
+  "SourceQualified": false,
+  "PCoff": false
+}
