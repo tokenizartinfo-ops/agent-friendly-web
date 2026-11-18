@@ -53,9 +53,9 @@ async function fixture(){
  }};
  const issue=async kind=>{
   const claim={purpose:'afw.qa-finite-trial.v1:effect',intentId:p.intentId,controlHash:identity.controlHash,kind,phase:'issued',issuedAt:f.f.now(),deadline:p.C1,proofHash:null};
-  await f.f.storage.put('afw.qa-finite-trial.v1:'+p.intentId+':effect:'+kind,claim);return {claim,proofHash:null};
+  f.f.rows.set('afw.qa-finite-trial.v1:'+p.intentId+':effect:'+kind,claim);return {claim,proofHash:null};
  };
- return {...f,options,issue,calls,stub};
+ return {...f,options,issue,calls,stub,get posts(){return f.posts;}};
 }
 
 test('withdraw, close and seal use exact native actor; uncertain withdraw is reconciled by GET',async()=>{
