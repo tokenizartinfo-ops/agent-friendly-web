@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "45ded9af950a7ee69848f738cde617f0299beb2b",
-  "phase": "Source-verified Cloudflare origin connected to the private expediente adapter and retained rollback in isolated QA",
+  "previousCheckpoint": "68506c4f835da91fb441470c2e1539f8404e7c59",
+  "phase": "The fixed confirmation actor revalidates the exact native installation and original private expediente before returning material for the same notice.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement the canonical launch source using the installed policy and provider receipts. Connect the fixed observer and finalizer, qualify the complete release package and current scoped custody, then execute exactly one correlated cloud notice/review/withdrawal trial.",
+  "next": "Join observer setup receipt to original native preview, then finish canonical launcher/observer material, finalizer and complete publishable package. Qualify current scoped custody before one real cloud trial of the same notice, review and withdrawal.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 158,
-  "updatedAtUTC": "2026-11-18T22:06:52Z",
+  "schemaVersion": 159,
+  "updatedAtUTC": "2026-11-18T22:19:21Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2267,6 +2267,16 @@
     "verifiedRun": 44407238835,
     "tests": 178,
     "packageCredentialStatus": "expired",
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "installedNoticeOrigin": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-finite-installed-notice-origin.json",
+    "evidence": "35a8461ddb29594f9a0fce0a1ac133e335ea801c",
+    "head": "cc71b3697402c180e4ca0c3bb26f1ea1c4e5c944",
+    "closed": "11df894a19c12c8518c8141e9d72499d12b158e5",
+    "verifiedRun": 44410032508,
+    "tests": 137,
     "completePackage": false,
     "realCloudOccurrence": false
   }

@@ -1,0 +1,38 @@
+{
+  "schema": "afw.finite-installed-notice-origin.v1",
+  "observedAtUTC": "2026-11-18T22:19:21Z",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-installed-origin-20261118",
+  "verifiedHead": "cc71b3697402c180e4ca0c3bb26f1ea1c4e5c944",
+  "closedTip": "11df894a19c12c8518c8141e9d72499d12b158e5",
+  "regression": {
+    "run": 44409553637,
+    "head": "ebd3db36e1bbcd07208fd5a3c304eb5748993493",
+    "observed": "activation journal still returned a usable confirmation after the original upload acknowledgement had been removed"
+  },
+  "verification": {
+    "run": 44410032508,
+    "result": "success",
+    "tests": 137,
+    "fail": 0,
+    "skipped": 0,
+    "stagingCompletePackage": false
+  },
+  "verifiedCode": [
+    "one native storage transaction validates upload and activation records with their linked ACKs, the installation receipt and the retained confirmation",
+    "fixed QA reader joins installation with original selection, publication witness, policy and private expediente",
+    "actual confirmation actor compares the original notice/permission/policy hashes and re-observes that record after independent current provider reads"
+  ],
+  "evidenceScope": "Test-provider boundaries in source-verified GitHub Actions. No model inspection, real notice, subscription or deployment.",
+  "pending": [
+    "Mount the approved source-derived launcher and observer material providers and connect finalizer externally.",
+    "Complete package verification with fresh scoped custody after package generation preserves the original flow and reversal.",
+    "Execute one cloud trial and correlate original notice, assistant review and native unsubscribe."
+  ],
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "operationalReadiness": false,
+  "deployed": false,
+  "ownerActionNeededNow": false
+}
