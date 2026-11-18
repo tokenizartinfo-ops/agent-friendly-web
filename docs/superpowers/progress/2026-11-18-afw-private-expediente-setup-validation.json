@@ -1,0 +1,67 @@
+{
+  "schema": "afw.private-expediente-setup-validation.v1",
+  "observedAtUTC": "2026-11-18T22:06:52Z",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-private-expediente-setup-20261118",
+  "verifiedHead": "628a562aeee385a9895079fd27a36f6ef421f2a3",
+  "verifiedTree": "24d213b23800ce4f10e70526a72b53a1d4dddba2",
+  "closedTip": "c05f7b6bcc37cddfdb82f4a11130436bf3a342b8",
+  "closedTree": "6dc6e91d96d60dab83078898c3a716e6680af569",
+  "reproduction": {
+    "commit": "fd18acf17bafea67250a6653e9a69e360bcd9ec8",
+    "run": 44406345893,
+    "reason": "fixed private owner source absent from the setup actor"
+  },
+  "firstCandidate": {
+    "run": 44406933209,
+    "repair": "updated the existing workerd test substitute to represent the new fail-closed origin reader"
+  },
+  "verification": {
+    "run": 44407238835,
+    "status": "success",
+    "pass": 178,
+    "fail": 0,
+    "skipped": 0,
+    "staging": {
+      "completePackage": false,
+      "operationalReadiness": false
+    },
+    "redundantBoundedRun": 44408121598,
+    "redundantHead": "c8859d2a4f049ddc40ac50a59f5333f8da1cb8b0",
+    "redundantCancellationRequested": true
+  },
+  "validatedCode": [
+    "Reuse native Cloudflare origin and original setup deadline when consulting the fixed private QA actor.",
+    "Read the same original expediente, selected prearm state, current consent and notice permission under protected authority.",
+    "Match compiled canary bytes and reconstruct historical rollback from the retained manifests and hashed chunks.",
+    "Reread immutable anchors and live permission before provider writes. Reject changed notice, target, publication or rollback."
+  ],
+  "evidenceScope": "GitHub Actions tests, including workerd-based tests with simulated provider boundaries. No real AFW trial or deployment.",
+  "custody": {
+    "checkedAtUTC": "2026-11-18T22:00:31.302Z",
+    "fixedToken": {
+      "status": "expired",
+      "expiresAt": "2026-11-08T02:59:59Z"
+    },
+    "samePurposeActiveOnPage": 0,
+    "totalPages": 0,
+    "privateChannelOnly": true,
+    "replacementCreated": false
+  },
+  "pending": [
+    "Construct the fixed launch source from the verified installed policy and native step receipts.",
+    "Complete live observer and finalizer sources, then qualify the full private package with a valid scoped credential.",
+    "Perform one actual cloud run and correlate notice delivery, assistant review, and native withdrawal for that occurrence."
+  ],
+  "deploymentPerformed": false,
+  "cloudflareMutated": false,
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "deliveryVerified": false,
+  "reviewVerified": false,
+  "nativeWithdrawalVerified": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

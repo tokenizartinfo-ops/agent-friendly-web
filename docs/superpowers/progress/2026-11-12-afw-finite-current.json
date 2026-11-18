@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "c784229b3937a551aa1d77d842dd90d1861bfd21",
-  "phase": "The finite setup now has an independently readable native original-time proof, with both setup steps bound in adoption. Actual private owner/prearm sourcing, package custody and business trial remain pending.",
+  "previousCheckpoint": "45ded9af950a7ee69848f738cde617f0299beb2b",
+  "phase": "Source-verified Cloudflare origin connected to the private expediente adapter and retained rollback in isolated QA",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Use the exact confirmed actor-side Workflow origin to qualify the current private owner prearm and initial anchors under the original scope. Wire retained artifact and rollback bytes, then qualify fixed launch/finalizer providers and the complete package with current custody for one native same-notice trial.",
+  "next": "Implement the canonical launch source using the installed policy and provider receipts. Connect the fixed observer and finalizer, qualify the complete release package and current scoped custody, then execute exactly one correlated cloud notice/review/withdrawal trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 157,
-  "updatedAtUTC": "2026-11-18T21:48:46Z",
+  "schemaVersion": 158,
+  "updatedAtUTC": "2026-11-18T22:06:52Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1938,7 +1938,7 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": false,
+  "noRuntimeMutationThisBlock": true,
   "ownerActionNeededNow": false,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
@@ -2255,6 +2255,17 @@
     "closed": "bb55b9dda900145a16cb2949262967f31de2e105",
     "verifiedRun": 44404935126,
     "tests": 92,
+    "packageCredentialStatus": "expired",
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "privateExpedienteSetup": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-private-expediente-setup-validation.json",
+    "evidence": "90d97a1933df4357d8bbe65d3b7f3a364b42f439",
+    "head": "628a562aeee385a9895079fd27a36f6ef421f2a3",
+    "closed": "c05f7b6bcc37cddfdb82f4a11130436bf3a342b8",
+    "verifiedRun": 44407238835,
+    "tests": 178,
     "packageCredentialStatus": "expired",
     "completePackage": false,
     "realCloudOccurrence": false
