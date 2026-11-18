@@ -76,3 +76,27 @@ test('unavailable first finalizer leaves pending native cleanup, never nominal a
  const key='afw.qa-finite-guard.v1:'+x.f.plan.intentId+':effect:close',row=x.f.rows.get(key);x.f.rows.set(key,{...row,phase:'issued'});
  await assert.rejects(()=>x.store.completion());
 });
+
+test('native QA alarm resolves capabilities only for the retained control',async()=>{
+ const x=await setup(),headKey='afw.qa-finite-trial.v1:head',original=x.f.rows.get(headKey);
+ const guard=api.createPrivateQaFiniteTrialGuard(x.options());
+ assert.equal((await guard.arm()).status,'armed');
+ let loads=0;
+ api.installPrivateQaFiniteNativeGuardFactory(async({ctx,env,head})=>{
+  loads++;assert.equal(ctx,x.f.ctx);assert.equal(env,x.f.env);
+  assert.deepEqual(head,original);
+  return x.options();
+ });
+ x.f.setNow(x.f.plan.C0+3);
+ x.f.rows.set(headKey,{...original,controlHash:'b'.repeat(64)});
+ assert.equal((await api.runPrivateQaFiniteTrialAlarm({ctx:x.f.ctx,env:x.f.env})).status,'admin_pending');
+ assert.equal(loads,0);
+ assert.deepEqual(x.calls,[]);
+
+ x.f.rows.set(headKey,original);
+ const result=await api.runPrivateQaFiniteTrialAlarm({ctx:x.f.ctx,env:x.f.env});
+ assert.equal(result.status,'complete');
+ assert.equal(loads,1);
+ assert.deepEqual(x.calls,['withdraw','close','seal','canary_restore']);
+ assert.equal((await x.store.completion()).status,'complete');
+});
