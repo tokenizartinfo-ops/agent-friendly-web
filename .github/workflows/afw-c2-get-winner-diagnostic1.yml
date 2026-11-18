@@ -1,18 +1,11 @@
 name: AFW C2 first finite GET diagnostic
 on:
-  push:
-    branches:
-      - lab/afw-c2-get-winner-20261117-diagnostic1
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
   c2-get-winner-diagnostic1:
-    if: >-
-      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
-      github.event_name == 'push' &&
-      github.ref == 'refs/heads/lab/afw-c2-get-winner-20261117-diagnostic1' &&
-      github.run_attempt == 1 &&
-      github.event.head_commit.message == 'AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117'
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
