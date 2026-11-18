@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 12:17:14 UTC",
+  "timestampUTC": "2026-11-18 12:27:13 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "3a27494db7f7901b8b6fef47960620acefa3c8dd",
-  "phase": "PENDING_GET_MODEL_RED_PROPOSAL_STATIC_REVIEW",
+  "previousCheckpoint": "e880094b41f52371dc2ea59cbf5aaf2fe31f43ce",
+  "phase": "PENDING_GET_MODEL_RED_ONEUSE_ROOT_GATE_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independent review of minimal MODEL RED proposal; only on SPEC/QUALITY approval may Root prepare exact candidate/closed trees, make final one-use keyless GHA gate and observe one model failure. New observer feature/native actor/source/business remain held.",
+  "next": "Root create exact new one-use lab ref once, observe the bounded MODEL failure, acquire primary outcome and close to preprepared workflow-off commit. No native actor/business replay or new observer implementation until actual expected RED and closure reviewed.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1291,7 +1291,7 @@
       "fixRoundsCompleted": 1
     },
     "pendingAwaitRed": {
-      "status": "STATIC_REVIEW_RUNNING",
+      "status": "ROOT_GATE_READY",
       "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
       "actor": "/root/pending_get_red_proposal",
       "nomination": {
@@ -1321,11 +1321,78 @@
       "rootGatePlan": "b7374f5dd0934d993200410f33df822697a8a0dc",
       "closedWorkflow": "6807f8f0c01ccb11a504abb80cfa9de7504da5c0",
       "originalSourceBodyAlreadyDurablyPreserved": true,
-      "activationReleased": false
+      "activationReleased": true,
+      "review": "18946d537cffc622aeda07440136664bb75ab310",
+      "staticAcceptance": "c662e7cfad9fd84d04886d093fff0082b201a903",
+      "rootGate": "d2ccf0042b567c407d1caac37b93cefdc4d190dc",
+      "prepared": {
+        "stage": "CANDIDATE_AND_CLOSURE_FULLY_VERIFIED",
+        "branch": "lab/afw-c2-pending-get-20261118-red1",
+        "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+        "proposal": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+        "staticAcceptance": "c662e7cfad9fd84d04886d093fff0082b201a903",
+        "entries": [
+          {
+            "path": ".github/workflows/afw-c2-pending-get-red1.yml",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e2723a4aae5c4fcd0d17d50512d5aa898b944cdb"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-red1/create-get-winner-observer.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b1576130bd8c6510e92f1992e22476460f746e9a"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-red1/M-vectors.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "ab82327af902770b12995327658b007e3f0ffe02"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-red1/manifest.json",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "2a933d3e528b66bc75440adea61d5fbd7143e2e8"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-red1/pending-get-red1.test.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "14d42533de20ed55ecb294f265d79172944c7cc4"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "36b0f8f3e731693f27d9ddf22815c113a0b44ed7"
+          },
+          {
+            "path": "docs/superpowers/source-lab/c2-pending-get-red1/S09-original.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4"
+          }
+        ],
+        "activationAttempted": false,
+        "refCreated": false,
+        "tree": "1a4269cc1a0bea2c111fc715e3aefa83675db59a",
+        "leaves": 3210,
+        "original3203Preserved": true,
+        "fullTreeVerified": true,
+        "head": "f615bfa5d2183617355b4476c58b4a87d4d8f596",
+        "closedTree": "11e36fcd3a42ecf4c657456a072ea7ec3f47705c",
+        "closedHead": "0cd2f61f7afc31ca93864e9cf79f5d2206cdc5f0",
+        "closedTreeVerified": true,
+        "preparedAtUTC": "2026-11-18 12:26:42 UTC"
+      },
+      "MODELExecutionReleased": true
     }
   },
-  "schemaVersion": 119,
-  "updatedAtUTC": "2026-11-18 12:17:14 UTC",
+  "schemaVersion": 120,
+  "updatedAtUTC": "2026-11-18 12:27:13 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

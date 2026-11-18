@@ -1,0 +1,61 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.STATIC_SPEC_AND_QUALITY_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "detached Git DATA",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "static spec and quality review for package 493ce9dcdfd3e2a25d1263d3edc7d98ab41e4199",
+    "ALLOWED_ACTION": "Create and fully read back this detached review blob only. No mount required.",
+    "ROLLBACK": "Leave this review unreferenced. Apply no tree or ref changes."
+  },
+  "reviewPackage": "493ce9dcdfd3e2a25d1263d3edc7d98ab41e4199",
+  "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
+  "rootClarification": "964cfe0661f11d4e6b84624d02bf750d6c517b50",
+  "index": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+  "rootMeasurement": "d5ca2e3dadc71d05ee153867647e7f47eeed71aa",
+  "BASE": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "verdicts": {
+    "SPEC": {
+      "verdict": "PASS",
+      "scope": "Static MODEL RED proposal. No blocking divergence from the brief or clarification."
+    },
+    "QUALITY": {
+      "verdict": "PASS",
+      "scope": "Ready for separate Root admission review. One minor evidence documentation finding."
+    }
+  },
+  "independentlyChecked": [
+    "The five authored patch bodies match full Git blob readbacks byte for byte. The seven mount paths and their tuples match the inverse-capable delta. Six mounted-file pins in the manifest match the external index. The manifest itself is pinned by the external index.",
+    "The two exact immutable DATA inputs are ASCII and 11,189 and 83,571 bytes. In S09 both literal extraction boundaries occur once. Byte interval [72871,76798) is at source lines 692 through 771 with two trailing LF bytes and equals the full 3,927-byte Source slice blob b1576130bd8c6510e92f1992e22476460f746e9a. SHA256 adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf is bound by Root measurement and the nested pins. No Source was parsed as code.",
+    "Frozen M01 row from ab82327af902770b12995327658b007e3f0ffe02 specifies 503 g1.503.L.0 and m1.1133557799bbddff.T0.-. The test reads those values from the sealed row. Its Error text and status and pending Response shape agree with the original wire helper text at blob 38285fa0149a38924c431b4d5a705bec1384216d lines 11-12.",
+    "pending-get-red1.test.mjs lines 61-87 pass one P/L/Error/Response identity chain and the returned enter cell into finish. Text inspection of create-get-winner-observer.mjs lines 10-28 and 48-75 traces deadline registration of L/0, matching race/catch, the allowed 503 tuple and the legacy header write by finish. The response starts with Cache-Control from the test. The exact factory has no private header writer. The test asserts observed baseline status and legacy header before the strict private-header equality, so the proposal targets the runtime mismatch of null versus the frozen value if its prerequisites pass.",
+    "run-pending-get-red1.mjs lines 195-240 gate admission on a normally returned child exit 1, one bounded valid frame and empty stderr, the clause for distinct PID/network namespaces and named host-PID absence, staged-copy readback, and the exact private-stage ERR_ASSERTION operands following a matching baseline. Cleanup failures demote disposition to UNEXPECTED_FAILURE at lines 244-259. The RED-only runner preserves the job's failure, emits a carrier for the verified regular-file bytes and the workflow uploads the fixed evidence path with always().",
+    "The exact nominated push branch, trigger and message guard, repository, ref, attempt, actions, Node version, permission, fixed job and artifact support are present. The 3-minute job and 8-second inner timeout, with the 10-second outer spawn bound, fit scope on paper. The planned process inventory is two Node processes, one Source import, zero guard-probe files and at most fourteen process/image slots. The existing checkedLaunch/guard references were consulted only to compare the scoped launcher custody checks. There is no implemented new observer behavior or native operation in the proposed paths."
+  ],
+  "findings": [
+    {
+      "severity": "MINOR",
+      "path": "docs/superpowers/source-lab/c2-pending-get-red1/manifest.json",
+      "line": 96,
+      "endLine": 118,
+      "finding": "The expectedFailure block flattens fields from the outer result, child outcome and child assertion frame. Its stage is private-assertion, while an accepted candidate's outer stage is classify.",
+      "impact": "An independent evidence reader following the manifest alone could check the wrong stage or misread the recorded child exit. The runner uses the correct field paths.",
+      "fix": "Document result.disposition, result.child.{status,signal,spawnError,stderrBytes}, result.frame.{stage,status,g1,privateHeader,errorCode,assertion} and result.checks explicitly, and require result.failure === null in the independent readback. Root can apply this mapping at admission without changing the tested scenario."
+    }
+  ],
+  "cannotVerify": [
+    "No Source or harness execution, import, evaluation, AST or syntax checking, test or build occurred. Actual setup-node, runner permissions, namespace behavior, window and process closure, returned Node Headers values, RED result, failed job and evidence upload/carrier remain unmeasured.",
+    "The addition-only comparison of all 3,203 original leaves, seven absent mount paths, fixed output absence, inherited workflow audit and byte digests rely on the pinned Root measurement where they were not independently remeasured here. The review opened no tree, ref, commit or run.",
+    "T0 is symbolic. The original API records deadline and has no T/E registration or cursor. The isolated MODEL cannot establish native scheduling/custody/drain, QA or business outcomes, Source qualification, Task1 completion, activation or PC-off operation."
+  ],
+  "rootGate": "If admitted separately, bind GHA metadata and exact head/tree to the Root-approved objects, then cross-check the failed command step and exact artifact/carrier bytes. Require normal child exit 1, clean/single frame, matching legacy output, private-assertion stage with ERR_ASSERTION and exact null versus sealed header, null outer failure, and all true custody/closure checks. Treat any cutoff, cleanup or unrelated failure as unaccepted.",
+  "runtime": "NOT_RUN_BY_DESIGN",
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  }
+}

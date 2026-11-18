@@ -1,0 +1,48 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.ROOT_STATIC_ACCEPTANCE/1",
+  "atUTC": "2026-11-18 12:26:07 UTC",
+  "review": "18946d537cffc622aeda07440136664bb75ab310",
+  "index": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+  "rootMeasurement": "d5ca2e3dadc71d05ee153867647e7f47eeed71aa",
+  "SPEC": "PASS_PROPOSAL_ONLY",
+  "QUALITY": "PASS_PROPOSAL_ONLY",
+  "minorDisposition": {
+    "id": "manifest.json:96 evidence projection",
+    "ruling": "Resolve at independent Root admission with explicit nested field paths; preserve all tested code/fixtures unchanged.",
+    "mapping": {
+      "outer": [
+        "result.disposition",
+        "result.failure===null",
+        "result.stage===classify",
+        "result.checks"
+      ],
+      "child": [
+        "result.child.status",
+        "result.child.signal",
+        "result.child.spawnError",
+        "result.child.stderrBytes"
+      ],
+      "frame": [
+        "result.frame.stage",
+        "result.frame.status",
+        "result.frame.g1",
+        "result.frame.privateHeader",
+        "result.frame.errorCode",
+        "result.frame.assertion"
+      ]
+    },
+    "bindingPlan": "b7374f5dd0934d993200410f33df822697a8a0dc",
+    "why": "The runner checks correct fields; Root gate already binds exact nested schema. A documentation projection does not need a new test/runner revision.",
+    "costIfWrong": "No MODEL RED admission; preserve unexpected outcome without proceeding."
+  },
+  "RootPreGate": {
+    "protectedRefCount": 24,
+    "unusedNomination": true,
+    "fullTreeAndRollbackPending": true
+  },
+  "nativeReleased": false,
+  "observerImplementationReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
