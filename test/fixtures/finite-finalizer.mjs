@@ -6,14 +6,17 @@ import {finiteHash as hash} from '../../lib/mcp-finite-evidence.mjs';
 import {projectPrivateQaFiniteReferences} from '../../lib/mcp-qa-finite-trial-control.mjs';
 import {projectFiniteExternalPlan,validateFiniteObserverOutput} from '../../lib/mcp-qa-finite-external-contract.mjs';
 import {finiteObserverInstanceId} from '../../lib/mcp-qa-finite-observer.mjs';
-export async function finiteFinalizerFixture({configure=()=>{},at,authenticatedIntent=false}={}){
+export async function finiteFinalizerFixture({configure=()=>{},at,authenticatedIntent=false,withNotice=false}={}){
  const base=await finiteRestorationFixture({at,configure:(p,f)=>{const actor={id:290715446,login:'tokenizartinfo-ops',type:'User'};p.intentId=authenticatedIntent?validateQaFiniteConfirmationCommand({event:{action:'created',repository:{id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'},issue:{number:497},sender:actor,comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+p.source.revision,created_at:new Date(p.T0).toISOString(),author_association:'OWNER',user:actor}},context:{repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:p.source.revision},now:()=>p.T0}).intentId:'a'.repeat(64);p.workflows.launcher=finiteLauncherInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});configure(p,f);}});
  const {f,identity,store,ctl}=base,p=f.plan,v=projectPrivateQaFiniteReferences(identity),retained=base.retained.record;
  const policy=[{effect:'allow',resources:{'com.cloudflare.api.account.85d0d5dadac3341a564f22ce885e9eec':'*'},permission_groups:[{id:'1'.repeat(32)},{id:'2'.repeat(32)}]}];
  const custody=finiteGhaCustody();
  for(const kind of ['withdraw','close','seal','canary_restore']){
   const claim=kind==='canary_restore'?base.input.claim:(await ctl.claimEffect(kind)).claim;
-  const receipt=kind==='canary_restore'?{purpose:'afw.finite-canary-restored.v1',intentId:p.intentId,controlHash:v.controlHash,proofHash:retained.proofHash,versionId:p.deployments.canaryClosed.versionId,deploymentId:p.deployments.canaryClosed.deploymentId,readbackHash:'b'.repeat(64),observedAt:f.now()}:{synthetic:true};
+  const receipt=kind==='canary_restore'?{purpose:'afw.finite-canary-restored.v1',intentId:p.intentId,controlHash:v.controlHash,proofHash:retained.proofHash,versionId:p.deployments.canaryClosed.versionId,deploymentId:p.deployments.canaryClosed.deploymentId,readbackHash:'b'.repeat(64),observedAt:f.now()}:kind==='close'&&withNotice?{
+   closed:true,runtimeStopRequested:true,notice:{purpose:'afw.finite-native-subscription-closure.v1',subscriptionHash:'b'.repeat(64),
+    eventId:'e'.repeat(64),httpReceipt:{status:202,httpReceivedAt:p.C0-1},withdrawn:true,cloudReviewConfirmed:false}
+  }:{synthetic:true};
   f.rows.set('afw.qa-finite-guard.v1:'+p.intentId+':effect:'+kind,{purpose:'afw.finite-guard-effect.v1',controlHash:v.controlHash,kind,claimHash:hash(claim),phase:'complete',receipt,completedAt:f.now()});
  }
  const completed=await store.retainCompletion();if(completed.status!=='complete')throw Error('fixture completion '+completed.status);

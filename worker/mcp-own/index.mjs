@@ -21,9 +21,15 @@ const program=globalThis.__AFW_NODE_PROGRAM__??'',sourceRevision=globalThis.__AF
 
 export class AfwOwnEventNode extends DurableObject{
  #finite(){
-  const nativeCleanup=Object.freeze({program,programSourceRevision:sourceRevision,close:async boundary=>{
+  const nativeCleanup=Object.freeze({program,programSourceRevision:sourceRevision,close:async (boundary,savedEvent)=>{
    const c=this.#host(true),assertCurrent=()=>{boundary.assertCurrent();c.current();if(boundary.signal.aborted)fail();};
-   assertCurrent();const result=await c.host.close({...boundary,assertCurrent});assertCurrent();return result;
+   const input={...boundary,assertCurrent};
+   // Receipt lookup cannot stop the existing physical close attempt.
+   let notice=null;
+   assertCurrent();
+   try{notice=await c.host.withdrawFiniteSubscription(input,savedEvent);}catch{}
+   assertCurrent();const result=await c.host.close(input);assertCurrent();
+   return notice===null?result:{...result,notice};
   }});
   return resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env,nativeCleanup});
  }
