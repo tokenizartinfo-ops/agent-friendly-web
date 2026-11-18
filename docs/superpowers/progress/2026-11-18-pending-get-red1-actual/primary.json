@@ -1,0 +1,130 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.PRIMARY_RECEIPT/1",
+  "acquiredAtUTC": "2026-11-18 12:31:24 UTC",
+  "sources": {
+    "run": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/44304106803",
+    "jobs": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/44304106803/jobs?filter=latest&per_page=100",
+    "logs": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/jobs/134801079258/logs",
+    "artifacts": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/44304106803/artifacts"
+  },
+  "method": "One completed-job log acquisition and one expected-artifact metadata acquisition through GitHub connector. Exact fixed-label stdout line retained; other job log content excluded. No archive download or source execution by reader.",
+  "run": {
+    "id": 44304106803,
+    "run_attempt": 1,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "failure",
+    "head_sha": "f615bfa5d2183617355b4476c58b4a87d4d8f596",
+    "head_branch": "lab/afw-c2-pending-get-20261118-red1",
+    "path": ".github/workflows/afw-c2-pending-get-red1.yml",
+    "workflow_id": 422573895,
+    "created_at": "2026-11-18T12:27:36Z",
+    "updated_at": "2026-11-18T12:27:45Z",
+    "run_started_at": "2026-11-18T12:27:36Z",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44304106803"
+  },
+  "job": {
+    "id": 134801079258,
+    "run_id": 44304106803,
+    "run_attempt": 1,
+    "name": "c2-pending-get-red1",
+    "status": "completed",
+    "conclusion": "failure",
+    "head_sha": "f615bfa5d2183617355b4476c58b4a87d4d8f596",
+    "started_at": "2026-11-18T12:27:38Z",
+    "completed_at": "2026-11-18T12:27:44Z",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/44304106803/job/134801079258",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-11-18T12:27:39Z",
+        "completed_at": "2026-11-18T12:27:39Z"
+      },
+      {
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-11-18T12:27:39Z",
+        "completed_at": "2026-11-18T12:27:41Z"
+      },
+      {
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-11-18T12:27:41Z",
+        "completed_at": "2026-11-18T12:27:42Z"
+      },
+      {
+        "name": "Run only the sealed MODEL RED",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 4,
+        "started_at": "2026-11-18T12:27:42Z",
+        "completed_at": "2026-11-18T12:27:42Z"
+      },
+      {
+        "name": "Preserve the bounded evidence frame",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-11-18T12:27:42Z",
+        "completed_at": "2026-11-18T12:27:43Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 9,
+        "started_at": "2026-11-18T12:27:43Z",
+        "completed_at": "2026-11-18T12:27:43Z"
+      },
+      {
+        "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-11-18T12:27:43Z",
+        "completed_at": "2026-11-18T12:27:43Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-11-18T12:27:43Z",
+        "completed_at": "2026-11-18T12:27:43Z"
+      }
+    ]
+  },
+  "artifact": {
+    "id": 14427705406,
+    "name": "afw-c2-pending-get-red1",
+    "size_in_bytes": 889,
+    "expired": false,
+    "digest": "sha256:5b606998f51aa2364636fb5bb4e88b00cefb2218ff764445c9b5e68b9c1ca462",
+    "created_at": "2026-11-18T12:27:43Z",
+    "expires_at": "2026-11-25T12:27:42Z",
+    "workflow_run": {
+      "id": 44304106803,
+      "repository_id": 1347578006,
+      "head_repository_id": 1347578006,
+      "head_branch": "lab/afw-c2-pending-get-20261118-red1",
+      "head_sha": "f615bfa5d2183617355b4476c58b4a87d4d8f596"
+    }
+  },
+  "exactCarrierLine": "2026-11-18T12:27:42.3558708Z AFW_C2_PENDING_GET_RED1_JSON_BASE64 eyJzY2hlbWEiOiJhZncuYzIucGVuZGluZy1nZXQtcmVkMS5yZXN1bHQvMSIsImRpc3Bvc2l0aW9uIjoiRkVBVFVSRV9NSVNTSU5HX1JFRCIsInN0YWdlIjoiY2xhc3NpZnkiLCJmYWlsdXJlIjpudWxsLCJub21pbmF0aW9uIjp7InJlcG9zaXRvcnkiOiJ0b2tlbml6YXJ0aW5mby1vcHMvYWdlbnQtZnJpZW5kbHktd2ViIiwiYnJhbmNoIjoibGFiL2Fmdy1jMi1wZW5kaW5nLWdldC0yMDI2MTExOC1yZWQxIiwiam9iIjoiYzItcGVuZGluZy1nZXQtcmVkMSIsImJhc2UiOiI2NzkxY2UxYmFiOTM3MmUyMDZkM2M3YjQyYjNlMTM5NGRjNmUwYzY4IiwiYmFzZVRyZWUiOiI2MmU3ODkyNjYzNWQ2Yjc0ZjI4OGQ2YzBkNjllMGYyNTE2MzA2OTg5IiwiaGVhZCI6ImY2MTViZmE1ZDIxODM2MTczNTViNDQ3NmM1OGI0YTg3ZDRkOGY1OTYiLCJ0cmVlIjoiMWE0MjY5Y2MxYTBiZWEyYzExMWZjNzE1ZTNhZWZhODM2NzVkYjU5YSIsInJ1biI6IjQ0MzA0MTA2ODAzIiwiYXR0ZW1wdCI6MX0sImNoZWNrcyI6eyJtb3VudHMiOnRydWUsImV4dHJhY3Rpb24iOnRydWUsImZyZXNoTmFtZXNwYWNlcyI6dHJ1ZSwiY2hpbGRQaWRBYnNlbnQiOnRydWUsInN0YWdpbmdSZWFkYmFjayI6dHJ1ZSwidGVtcEFic2VudCI6dHJ1ZX0sImNoaWxkIjp7InN0YXR1cyI6MSwic2lnbmFsIjpudWxsLCJzcGF3bkVycm9yIjpudWxsLCJzdGRvdXRCeXRlcyI6Mzg0LCJzdGRvdXRTaGEyNTYiOiI4YzUzZDFjOTA4NjZiYmE4ZDA1OWE2OGRkZjJkODk0MzExODIyNzQyNWU1Njc5ZjY1OGVhNWMxOTM2MjE2MzI5Iiwic3RkZXJyQnl0ZXMiOjB9LCJuYW1lc3BhY2VQYXJlbnQiOnsicGlkTmFtZXNwYWNlIjoicGlkOls0MDI2NTMxODM2XSIsIm5ldE5hbWVzcGFjZSI6Im5ldDpbNDAyNjUzMTgzM10ifSwiZnJhbWUiOnsic2NoZW1hIjoiYWZ3LmMyLnBlbmRpbmctZ2V0LXJlZDEuY2hpbGQvMSIsInN0YWdlIjoicHJpdmF0ZS1hc3NlcnRpb24iLCJjdXN0b2R5Ijp7Imhvc3RQaWQiOjI0NzQsInBpZE5hbWVzcGFjZSI6InBpZDpbNDAyNjUzMjI3MF0iLCJuZXROYW1lc3BhY2UiOiJuZXQ6WzQwMjY1MzIyNzFdIiwidWlkIjoxMDAxLCJnaWQiOjEwMDF9LCJzdGF0dXMiOjUwMywiZzEiOiJnMS41MDMuTC4wIiwicHJpdmF0ZUhlYWRlciI6bnVsbCwiZXJyb3JDb2RlIjoiRVJSX0FTU0VSVElPTiIsImFzc2VydGlvbiI6eyJjb2RlIjoiRVJSX0FTU0VSVElPTiIsIm9wZXJhdG9yIjoic3RyaWN0RXF1YWwiLCJhY3R1YWwiOm51bGwsImV4cGVjdGVkIjoibTEuMTEzMzU1Nzc5OWJiZGRmZi5UMC4tIn19fQo=",
+  "resultBlob": "760a54796b8c63b2babe8c22b38dc7253c829c72",
+  "resultFingerprint": {
+    "bytes": 1274,
+    "sha256": "a2b07fb5e168002ba8cd22a9048833a7266a8a1038c0b5cc36d18ab09d1d02ec",
+    "blob": "760a54796b8c63b2babe8c22b38dc7253c829c72"
+  },
+  "jobOutcomeLine": "2026-11-18T12:27:42.3607146Z ##[error]Process completed with exit code 1.",
+  "uploadLine": "2026-11-18T12:27:43.2039221Z Artifact afw-c2-pending-get-red1 has been successfully uploaded! Final size is 889 bytes. Artifact ID is 14427705406",
+  "uploadDigestPresentInOriginalLog": true
+}

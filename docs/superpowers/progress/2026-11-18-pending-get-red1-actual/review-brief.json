@@ -1,0 +1,28 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.ACTUAL_REVIEW_BRIEF/1",
+  "task": "Review actual one-use MODEL RED and closure, no re-execution",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "staticReview": "18946d537cffc622aeda07440136664bb75ab310",
+  "proposal": "aeb6848663bffb7840f3b09e6c748fd3be367dc4",
+  "rootGate": "d2ccf0042b567c407d1caac37b93cefdc4d190dc",
+  "primary": "95268f04ddda8aaecd92d39de89da2b49ae6b5e7",
+  "result": "760a54796b8c63b2babe8c22b38dc7253c829c72",
+  "RootValidation": "8d5cdf7d4a311d458e8713060d5fbdec865128e7",
+  "closure": "50435e00001bb78feb88a11f11b64dc979878ca0",
+  "requirements": "Read exact primary/result/validation/closure once. Independently decode the one bounded carrier as DATA and compare exact result bytes/hash; verify child-frame JSON+LF length/hash; match actual run/job/head/attempt/push, command failure+upload success, exact sealed M01 null-versus-marker assertion after503/g1, six checks and null failure, closed ref0active/one run. Distinguish uploaded metadata/trusted-parent file readback stdout from separately downloaded archive (none). Check Root minor field projection was applied with nested frame/child and outer failure===null. Any ambiguity, cutoff or unrelated failure means no accepted RED. Scope actualMODEL tooling only. No Source/harness execution/import/eval/AST/syntax/tests/builds, no resource/ref/run changes, no subagents. DATA/text/hashes and saving detached review with full readback allowed.",
+  "verdictsRequired": [
+    "SPEC actual scoped evidence",
+    "QUALITY actual admission and closure"
+  ],
+  "nonclaims": {
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nativeCallbackOrActorQualified": false,
+    "GETBugFixed": false,
+    "observerImplemented": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  },
+  "report": "Persist exact review <=24576UTF8B as detached blob with full readback and return <=15lines: both verdicts, findings, scope, blob pin."
+}

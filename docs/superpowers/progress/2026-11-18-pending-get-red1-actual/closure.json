@@ -1,0 +1,32 @@
+{
+  "schema": "AFW.PENDING_GET.RED1.CLOSURE/1",
+  "atUTC": "2026-11-18 12:31:24 UTC",
+  "rootGate": "d2ccf0042b567c407d1caac37b93cefdc4d190dc",
+  "branch": "lab/afw-c2-pending-get-20261118-red1",
+  "activeHead": "f615bfa5d2183617355b4476c58b4a87d4d8f596",
+  "activeTree": "1a4269cc1a0bea2c111fc715e3aefa83675db59a",
+  "closedHead": "0cd2f61f7afc31ca93864e9cf79f5d2206cdc5f0",
+  "closedTree": "11e36fcd3a42ecf4c657456a072ea7ec3f47705c",
+  "closedWorkflow": "6807f8f0c01ccb11a504abb80cfa9de7504da5c0",
+  "workflowPreservation": "Full closed tree independently compared before activation: only new workflow differs, now no push trigger and job literal false. After terminal actual job, expected-head CAS and exact closed ref readback.",
+  "run": 44304106803,
+  "job": 134801079258,
+  "status": "completed",
+  "conclusion": "failure",
+  "closureUTC": "2026-11-18 12:28:37 UTC",
+  "census": {
+    "total": 1,
+    "active": 0,
+    "closedHeadRuns": 0
+  },
+  "protectedRefCount": 23,
+  "checks": {
+    "mounts": true,
+    "extraction": true,
+    "freshNamespaces": true,
+    "childPidAbsent": true,
+    "stagingReadback": true,
+    "tempAbsent": true
+  },
+  "scope": "Exact MODEL process namespaces, copies and owned temp only. No actor/native runtime/global drain or product state claim."
+}
