@@ -5,6 +5,9 @@ import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../lib/m
 import {finiteFixture,HEAD} from './fixtures/qa-finite-trial.mjs';
 import {stageAlarmFixture,useNativeAlarmIntent} from './fixtures/finite-alarm-handoff.mjs';
 
+import {readPrivateQaFiniteControlIdentity} from '../lib/mcp-qa-finite-trial-control.mjs';
+import {stagePrivateQaFiniteOriginalAlarmHandoff} from '../lib/mcp-qa-finite-alarm-handoff.mjs';
+
 async function prepared(f=finiteFixture()){
  useNativeAlarmIntent(f);
  const options=f.options(api),handoff=await stageAlarmFixture(f,options),control=api.createPrivateQaFiniteTrialControl({...options,alarmHandoff:handoff.token});
@@ -50,4 +53,14 @@ test('an alarm carried by a different actor cannot take over original recovery',
  f.setNow(f.plan.C0+4);
  await assert.rejects(protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:'9'.repeat(64),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now}));
  assert.equal(f.alarm,f.plan.C0);
+});
+
+test('handoff refuses a different closed target before the original alarm can move',async()=>{
+ const {f,handoff}=await prepared();
+ const target=f.plan.deployments.canaryClosed;
+ f.plan.deployments.canaryClosed={...target,configurationHash:'8'.repeat(64)};
+ const options=f.options(api),foreign=readPrivateQaFiniteControlIdentity({nativePin:options.nativePin,raw:options.plan});
+ await assert.rejects(stagePrivateQaFiniteOriginalAlarmHandoff({storage:f.storage,control:foreign,source:handoff.source,check:f.now}));
+ assert.equal(f.alarm,handoff.initialC0);
+ assert.equal(f.rows.has(HEAD),false);
 });
