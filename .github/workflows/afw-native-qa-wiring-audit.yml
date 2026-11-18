@@ -1,0 +1,37 @@
+name: AFW exact native QA wiring audit
+on:
+  push:
+    branches: [lab/afw-native-qa-wiring-audit-20261118]
+permissions:
+  contents: read
+jobs:
+  build:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-native-qa-wiring-audit-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-NATIVE-QA-WIRING-AUDIT-20261118' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Inspect native factory registrations in the actual source revision
+        run: |
+          python3 <<'AFW_AUDIT'
+          import json, os, re, subprocess
+          symbols=["installPrivateQaFiniteMaterialFactory","installPrivateQaFiniteNativeGuardFactory"]
+          options=dict(text=True,capture_output=True,check=False)
+          def git(*args):
+              child=subprocess.run(["git",*args],**options)
+              if child.returncode not in (0,1):
+                  raise SystemExit(1)
+              return child.stdout.splitlines()
+          counts={}
+          for name in symbols:
+              lines=git("grep","-n","-w",name,"--","lib","worker")
+              declarations=[line for line in lines if re.search(r"export function "+name+r"\(",line)]
+              counts[name]={"declarations":len(declarations),"otherSourceReferences":len(lines)-len(declarations)}
+          closure=git("grep","-n","runPrivateQaFiniteTrialAlarm","--","worker/independent-closure/index.mjs")
+          print("AFW_NATIVE_QA_WIRING "+json.dumps({"head":os.environ["GITHUB_SHA"],"symbols":counts,
+               "existingAlarmForwarding":any("async alarm" in line for line in closure),
+               "packageOrLiveOperation":False},sort_keys=True))
+          AFW_AUDIT
