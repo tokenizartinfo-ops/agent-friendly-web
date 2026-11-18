@@ -1,9 +1,68 @@
-name: AFW release candidate dry run closed
-on: workflow_dispatch
-permissions: {}
+name: AFW release candidate dry run diagnostic
+on:
+  push:
+    branches: [lab/afw-release-dryrun-diagnostic-20261118]
+permissions:
+  contents: read
 jobs:
-  closed:
-    if: ${{ false }}
+  build:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/lab/afw-release-dryrun-diagnostic-20261118' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-RELEASE-DRYRUN-DIAGNOSTIC-20261118' }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 7
     steps:
-      - run: exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build and verify the source candidate in staging
+        shell: bash
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
+          node <<'AFW_VERIFY'
+          const fs = require('node:fs');
+          const p = JSON.parse(fs.readFileSync('output/finite-native-staging/staging.json', 'utf8'));
+          if (p.purpose !== 'afw.finite-native-compiler-staging.v1' || p.sourceRevision !== process.env.GITHUB_SHA ||
+              p.completePackage !== false || p.operationalReadiness !== false ||
+              Object.keys(p.modules).sort().join(',') !== 'canaryLive,qaLive') process.exit(1);
+          const evidence = {sourceRevision:p.sourceRevision,sourceTree:p.sourceTree,completePackage:false,operationalReadiness:false,
+            modules:Object.fromEntries(Object.entries(p.modules).map(([role,value])=>[role,value.module]))};
+          console.log('AFW_FINAL_APPROVAL_STAGING ' + JSON.stringify(evidence));
+          AFW_VERIFY
+      - name: Validate both staged modules with Wrangler
+        shell: bash
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+        run: |
+          canary=output/finite-native-staging/canaryLive/index.mjs
+          qa=output/finite-native-staging/qaLive/index.mjs
+          snapshot=$(sha256sum "$canary" "$qa")
+          explain_wrangler() {
+            node --input-type=module - "$1" <<'AFW_DIAG'
+          import {readFileSync} from 'node:fs';
+          const msg=readFileSync(process.argv[2], 'utf8').replace(/\x1b\[[\d;]*m/g, '');
+          for(const raw of msg.split('\n').filter(line=>/\[ERROR\]|Error:|TypeError:/.test(line)).slice(0,4)){
+            const line=raw.replace(/https?:\/\/[^\s]+/g,'[url]').replace(/\b[a-f0-9]{20,}\b/ig,'[id]').replace(/\b[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\b/ig,'[id]').replace(/[^\t\x20-\x7e]/g,'');
+            console.log('AFW_WRANGLER_ERROR '+line.trim().slice(0,220));
+          }
+          AFW_DIAG
+          }
+          if ! ./node_modules/.bin/wrangler deploy "$canary" --config wrangler.mcp-own.finite.jsonc --dry-run --no-bundle --outdir output/afw-verify-canary > "$RUNNER_TEMP/afw-canary-check.log" 2>&1; then
+            explain_wrangler "$RUNNER_TEMP/afw-canary-check.log"
+            echo AFW_CANARY_DRY_RUN_FAILED
+            exit 1
+          fi
+          if ! ./node_modules/.bin/wrangler deploy "$qa" --config wrangler.independent-closure-qa.finite.jsonc --dry-run --no-bundle --outdir output/afw-verify-qa > "$RUNNER_TEMP/afw-qa-check.log" 2>&1; then
+            explain_wrangler "$RUNNER_TEMP/afw-qa-check.log"
+            echo AFW_QA_DRY_RUN_FAILED
+            exit 1
+          fi
+          test "$snapshot" = "$(sha256sum "$canary" "$qa")"
+          cmp --silent "$canary" output/afw-verify-canary/index.mjs
+          cmp --silent "$qa" output/afw-verify-qa/index.mjs
+          echo AFW_EXACT_STAGE_DRY_RUNS_PASS
+
