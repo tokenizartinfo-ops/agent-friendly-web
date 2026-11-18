@@ -44,3 +44,29 @@ for(const mode of ['wrong-source','wrong-instance','extra-selector','claim-lost'
  if(mode==='primary-writer')f.actor.readFiniteTrialFinalPrimary=async()=>{throw Error('held D1 writer');};
  const r=await runPrivateQaFiniteObserver(f);assert.equal(r.status,'admin_pending');
 });
+
+test('finite-only observer records the setup receipt from its fixed QA actor',async()=>{
+ const f=await fixture(),receipt='7'.repeat(64);let observed;
+ f.actor.previewFiniteTrialMaterial=async()=>{assert.fail('legacy preview used');};
+ f.actor.fetch=async request=>{
+  assert.equal(request.url,'https://afw-private.invalid/_finite-native/observer-preview');
+  assert.equal(request.method,'GET');assert.equal(request.body,null);
+  return Response.json({material:f.v,setupReceiptHash:receipt});
+ };
+ const step={...f.step,do:async(name,opts,fn)=>{
+  const value=await f.step.do(name,opts,fn);
+  if(name===FINITE_PREVIEW_STEP)observed=value;
+  return value;
+ }};
+ const result=await runPrivateQaFiniteObserver({...f,step,requireSetupReceipt:true});
+ assert.equal(result.purpose,'afw.finite-observer-output.v1');
+ assert.equal(observed.purpose,'afw.finite-observer-preview.v2');
+ assert.equal(observed.setupReceiptHash,receipt);
+ assert.equal(f.claims,1);
+});
+test('finite-only observer refuses a preview without the setup receipt before any restoration claim',async()=>{
+ const f=await fixture();
+ f.actor.fetch=async()=>Response.json({material:f.v});
+ const result=await runPrivateQaFiniteObserver({...f,requireSetupReceipt:true});
+ assert.equal(result.status,'admin_pending');assert.equal(f.samples,0);assert.equal(f.claims,0);
+});
