@@ -29,7 +29,7 @@ export async function resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent})
    const record=await ctx.storage.get('afw.qa-finite-child-create.v1:'+f.plan.intentId+':prepared');
    const iso=x=>new Date(x).toISOString();
    const prepared={purpose:'afw.finite-launcher-prepared.v1',prepared:record,preparedHash:hashFiniteLaunchRecord(record),acknowledgedAt:record.preparedAt+1};
-   const stage={name:'finite-launch-prepare-1',type:'step',start:iso(record.preparedAt-10),end:iso(record.preparedAt+2),success:true,attempts:[{success:true}],output:JSON.stringify(prepared)};
+   const stage={name:'finite-launch-prepare-1',type:'step',start:iso(Math.max(f.plan.T0,record.preparedAt-10)),end:iso(record.preparedAt+2),success:true,attempts:[{success:true}],output:JSON.stringify(prepared)};
    if(f.launchProvider==='failed')stage.attempts[0].success=false;
    if(f.launchProvider==='wrong-envelope')stage.output=JSON.stringify({...prepared,preparedHash:'0'.repeat(64)});
    if(f.launchProvider==='replayed')stage.name='finite-launch-prepare-2';
