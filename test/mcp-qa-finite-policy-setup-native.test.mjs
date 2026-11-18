@@ -142,3 +142,11 @@ test('the finite QA actor passes its fixed private expediente source',async t=>{
  assert.equal((await f.hydration()).qaSourceMounted,true);
  assert.equal(f.posts(),0);
 });
+
+test('native confirmation reads only a fully retained installation of the same notice',async t=>{
+ const f=await policyFixture(t),result=await f.run();
+ assert.equal(result.status,'installed');
+ assert.deepEqual(await f.installedJournal('unchanged'),{status:'observed',receiptHash:result.receipt.receiptHash});
+ assert.deepEqual(await f.installedJournal('lost-upload-ack'),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});

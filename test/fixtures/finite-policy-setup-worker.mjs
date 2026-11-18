@@ -1,4 +1,6 @@
 import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
+import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
+import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {createHash} from 'node:crypto';
 import {PrivateQaBootstrap,IndependentClosure} from '../../worker/independent-closure/finite.mjs';
 import {narrowFinitePolicySetupClock} from '../../lib/mcp-qa-finite-policy-setup.mjs';
@@ -68,6 +70,16 @@ export class SetupFixture extends IndependentClosure{
   if(mode==='head_touched')await this.ctx.storage.put('afw.qa-finite-trial.v1:head',{SYNTHETIC:true});
   return {T0,baseline:x.baseline,rollback:x.rollback,script:x.originalContext.artifact.script,notice:x.notice,authorization:x.authorization};
  }
+ async observeInstalledJournal(mode){
+  const scenario=await this.ctx.storage.get('fixture:scenario'),storage=this.ctx.storage;
+  const identity={kind:'policy',...refs,setupInstanceId:native(scenario.T0).setupInstanceId,effect:'activation'};
+  const uploadPrefix='afw.finite-policy-effect.v1:'+hashFinitePolicyEffectIdentity({...identity,effect:'upload'})+':';
+  if(mode==='lost-upload-ack')await storage.delete(uploadPrefix+'ack');
+  const journal=createFinitePolicyEffectJournal({storage,identity,now:Date.now});
+  const lease={signal:new AbortController().signal,assertCurrent(){}};
+  try{const record=await journal.readConfirmation(lease);return {status:'observed',receiptHash:record.receiptHash};}
+  catch{return {status:'unavailable'};}
+ }
  async testMode(){return (await this.ctx.storage.get('fixture:scenario')).mode;}
  async hydrationState(){return hydrations.get(this.ctx)??{reads:0,lateDenied:0};}
  async rows(){return [...await this.ctx.storage.list()].filter(([k])=>k!=='fixture:scenario');}
@@ -76,6 +88,7 @@ const worker={async fetch(request,env,ctx){
  const path=new URL(request.url).pathname,actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
  if(path==='/init')return Response.json(await actor.initialize((await request.json()).mode));
  if(path==='/hydration')return Response.json(await actor.hydrationState());
+ if(path==='/installed-journal')return Response.json(await actor.observeInstalledJournal((await request.json()).mode));
  if(path==='/rows')return Response.json(await actor.rows());
  const {T0,direct}=await request.json();if(direct)return Response.json(await actor.setupFinitePrivatePolicy(refs));
  const event={timestamp:new Date(T0+200),instanceId:native(T0).setupInstanceId,workflowName:'afw-own-qa-private-bootstrap',payload:{operation:'finite_private_policy_setup',...refs}};

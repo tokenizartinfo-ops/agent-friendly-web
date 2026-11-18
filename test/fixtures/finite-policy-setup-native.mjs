@@ -68,5 +68,5 @@ export async function policyFixture(t,mode='normal'){
  ]);
  if(mode==='permission-notice-withdrawn')await withdrawNotice();
  pointer={id:state.baseline.deploymentId,strategy:'percentage',versions:[{version_id:state.baseline.versionId,percentage:100}]};
- return {run:(direct=false)=>json('/run',{T0:state.T0,direct}),rows:()=>json('/rows'),hydration:()=>json('/hydration'),posts:()=>posts,requests,reads,state,actual:()=>({versionId,deploymentId})};
+ return {run:(direct=false)=>json('/run',{T0:state.T0,direct}),rows:()=>json('/rows'),hydration:()=>json('/hydration'),installedJournal:mode=>json('/installed-journal',{mode}),posts:()=>posts,requests,reads,state,actual:()=>({versionId,deploymentId})};
 }
