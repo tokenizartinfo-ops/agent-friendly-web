@@ -1,0 +1,441 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.NATIVE_SCHEDULE/1",
+  "status": "PROPOSED_CONDITIONAL_DATA_ONLY_NATIVE_UNQUALIFIED",
+  "execution": "NOT_RUN_DATA_ONLY",
+  "authority": {
+    "acceptedDesign": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+    "plan": "5e994ded218a93ad9656d9d4fff428bf31fac3f1",
+    "rootAcceptance": "c6118aff825467b6f10a21b7ead22fa5f4891eb2",
+    "sharedD07Ruling": "45bec1fff9fd89fc8cafa0930987f0da14d18bf7",
+    "GB1": "08b75777bb39efaad0a439082cd430044c0b07d6",
+    "frozenD07": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7"
+  },
+  "nativeExpectedColumns": [
+    "id",
+    "scenario",
+    "overlay",
+    "original selected HTTP/g1",
+    "private M wire pattern or null",
+    "actual sampled QA reply or null",
+    "allowed 13-byte final rows or null",
+    "post-count queries",
+    "explicit actor progression"
+  ],
+  "nativeExpected": [
+    [
+      "N01_OFF_PENDING",
+      "DELIVERED_PENDING",
+      "OFF",
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "Same independent one-arrival, ordinary super promise and I/initial pair/facts(1) normal return/primary(1) enter path as N02. Count genuinely returns while same inert promise held; release latch before genuine close. Existing benign count also supplies the independent c1 raw-entry calibration witness specified by fixRound1; no new post-count query."
+    ],
+    [
+      "N02_ON_PENDING",
+      "DELIVERED_PENDING",
+      "ON",
+      "503 g1.503.L.0",
+      "m1.af00000000000002.T3.<native UUID> OR m1.af00000000000002.E3.<native UUID>",
+      "q1.af00000000000002.<same native UUID>.I0130",
+      [
+        "p1.J.T3.I0130",
+        "p1.J.E3.I0130"
+      ],
+      1,
+      "One arrival A before constructing held ordinary native promise; receiver check and I, initial pair, facts(1) returns, primary(1) enters. Hold promise through sample, then release benign latch and close. Existing benign count must produce the identical independent c1 raw-entry calibration witness path to N01; no new post-count query."
+    ],
+    [
+      "N03_OFF_LATE",
+      "COMPLETED_LATE",
+      "OFF",
+      "503 g1.503.L.0",
+      null,
+      null,
+      null,
+      0,
+      "Same independently observed actual same-file D07, original count, and benign latch/witness on own original promise as N04. No private field, read or row."
+    ],
+    [
+      "N04_ON_LATE_FROZEN_D07",
+      "COMPLETED_LATE",
+      "ON",
+      "503 g1.503.L.0",
+      "m1.af00000000000004.T3.<native UUID> OR m1.af00000000000004.E3.<native UUID>",
+      "q1.af00000000000004.<same native UUID>.F01cF",
+      [
+        "p1.J.T3.F01cF",
+        "p1.J.E3.F01cF"
+      ],
+      1,
+      "One arrival before creating original ordinary native promise; original reaction registered first. After M terminal, same actor’s real benign count registers independent witness on exact still-pending promise, releases benign latch, advances all six aggregates then pair/choice/form boundaries, waits for its FIFO witness, returns original count. One private read before close."
+    ],
+    [
+      "N05_ON_NO_DELIVERY",
+      "NO_DELIVERY",
+      "ON",
+      "503 g1.503.L.0",
+      "m1.af00000000000005.T3.<native UUID> OR m1.af00000000000005.E3.<native UUID>",
+      "q0.A",
+      [
+        "p1.A.T3.-----",
+        "p1.A.E3.-----"
+      ],
+      1,
+      "Exact fixRound1 bounded witness: inert M reaches held gate once; independent outgoing raw actor fetch delegate attempts=0 with no queued sends at irreversible gate seal after M terminal and before ordinary count. Same actor benign count independently witnesses raw fetch entries=0, then one q0.A read. Gate remains sealed through genuine native closure. q0.A alone leaves delivery UNKNOWN."
+    ],
+    [
+      "N06_ON_FOREIGN",
+      "FOREIGN",
+      "ON",
+      "503 g1.503.L.0",
+      "m1.af00000000000006.T3.<native UUID> OR m1.af00000000000006.E3.<native UUID>",
+      "q1.af00000000000006.e3000000-0000-4000-8000-000000000006.I0130",
+      [
+        "p1.V.T3.-----",
+        "p1.V.E3.-----"
+      ],
+      1,
+      "Explicit benign wrong-key returned-string control. Original M and ordinary count remain valid. Separate from observer foreign error/request lineage tests."
+    ],
+    [
+      "N07_ON_OVERLAP",
+      "OVERLAP",
+      "ON",
+      "503 g1.503.L.0",
+      "m1.af00000000000007.T3.<native UUID> OR m1.af00000000000007.E3.<native UUID>",
+      "q0.O",
+      [
+        "p1.O.T3.-----",
+        "p1.O.E3.-----"
+      ],
+      1,
+      "N07C_COMPANION arrives before selected capture on same live actor, poisoning both cells. Companion stays outside selected mailbox; no additional read or row. Require its terminal evidence."
+    ],
+    [
+      "N08_ON_TRUNCATED",
+      "TRUNCATED",
+      "ON",
+      "503 g1.503.L.0",
+      "m1.af00000000000008.T3.<native UUID> OR m1.af00000000000008.E3.<native UUID>",
+      "q0.X",
+      [
+        "p1.X.T3.-----",
+        "p1.X.E3.-----"
+      ],
+      1,
+      "At normal arrival and before next legal hook, proposed TOOL-only initialization of actual observer cell’s accepted-write count to 255. Actual observer's legal attempt 256 emits one terminal overflow poison, ordinary read returns q0.X. Later hooks inert. Requires separate implementation approval of access/exclusion and exact branch. No seed API authorized; unseeded paths and malformed decoder strings are distinct. Fabricated q0.X cannot qualify."
+    ]
+  ],
+  "counts": {
+    "scenarios": 6,
+    "p2Selected": 8,
+    "p2Off": 2,
+    "p2On": 6,
+    "overlapCompanions": 1,
+    "p2OriginalTargetInvocations": 9,
+    "p2MaxQAQueries": 6,
+    "p2MaxPrivateRows": 6,
+    "p3SeparateTargetInvocation": 0,
+    "p3CoWitness": "N04_ON_LATE_FROZEN_D07",
+    "p3MatchingOff": "N03_OFF_LATE",
+    "d07AdditionalSelectedCase1Tests": 2,
+    "d07AdditionalActorCountCalls": 4,
+    "p2OrdinaryTargetCountCalls": 8,
+    "maxSimultaneousOriginalTargetInvocations": 2,
+    "additionalTimedBusinessReplays": 0,
+    "totalOriginalInertActorCounts": 12,
+    "neutralControls": 134,
+    "calibrationControls": 2
+  },
+  "unknown": "All custody-approved rows concern the later per-control sample only. QA at M, outward settlement/return to M, catch outcome, historical runtime cause and business result are UNKNOWN.",
+  "epoch": {
+    "condition": "Proposed disposable TOOL-only adoption pin. P4 actual candidate uses its own separately reviewed epoch; these literals do not describe a current or actual Source occurrence.",
+    "mounts": [
+      [
+        "N01_OFF_PENDING",
+        "af00000000000001"
+      ],
+      [
+        "N02_ON_PENDING",
+        "af00000000000002"
+      ],
+      [
+        "N03_OFF_LATE",
+        "af00000000000003"
+      ],
+      [
+        "N04_ON_LATE_FROZEN_D07",
+        "af00000000000004"
+      ],
+      [
+        "N05_ON_NO_DELIVERY",
+        "af00000000000005"
+      ],
+      [
+        "N06_ON_FOREIGN",
+        "af00000000000006"
+      ],
+      [
+        "N07_ON_OVERLAP",
+        "af00000000000007"
+      ],
+      [
+        "N08_ON_TRUNCATED",
+        "af00000000000008"
+      ]
+    ],
+    "companion": "Shares N07 mount epoch, distinct original identity/generated UUID, no selected query. No epoch/UUID survives final admitted row.",
+    "foreignReplyKey": {
+      "purpose": "N06 fixture-only deliberately wrong echo; require different from exact actual original UUID or fail",
+      "literal": "e3000000-0000-4000-8000-000000000006"
+    }
+  },
+  "provenance": {
+    "ids": [
+      "CAL_T_ZERO_ARGS",
+      "CAL_E_ONE_EVENT"
+    ],
+    "process": "CAL_PREFLIGHT independently checks neutral registration witnesses under pinned native runtime. Fixture-only short calibration outside measured P2 original operations. Distinct original timer registration and actual lease event delivery evoke same callback function identity and show zero args / one event without event getters. Prove identity/provenance mechanically or stop.",
+    "tie": "T3/E3 both explicitly allowed anywhere applicable. No elapsed-time classifier, no upstream signal source claim."
+  },
+  "paths": {
+    "M": "Fixed original direct fixture GET /connections/finite-prepare; no redirect/relay",
+    "QA": "Same nominated actor receives original https://afw-private.invalid/_finite-owner/choice transport POST and originalMethod GET. One fixed in-memory diagnostic read after ordinary count and before disposal. N05 holds at the exclusive selected gate before raw actor fetch delegation. Existing count and one post-count read still reach the same inert actor."
+  },
+  "d07": {
+    "driver": "Each of N03/N04 runs a separately initialized copy of byte-identical frozen D07 and recorder in its own Node test-file realm. Register actual private S08 root afterEach in N04 before D07 declares tests. In N03 use same inert world/driver with private overlay OFF. Select exact C2T1_CONNECTION and C2T1_SCOPE_MISSING externally, prove actual root AFTER. Inert named TOOL world constructor only. No monkeypatch of D07/recorder/Promise/console/w.counts/w.close.",
+    "order": [
+      "Original case1 action enters and constructs inert world; executes benign fixture approve.",
+      "Original D07:33 assert obtains actual same-actor count 1/1/1 in action.",
+      "Case1 action returns and D07 outer count calls same actor again. Original case1 C2SOURCE pass; no case1 private dispatch.",
+      "Case15 original target GET via existing direct S08 call, exact retained DispatchResponse at 17-19 in ON; ordinary HTTP503 and original action assert throw.",
+      "Original case15 count calls same native actor, registers witness on original pending super promise after original reaction, releases benign latch, waits for witness and returns.",
+      "Original C2SOURCE fail scope/TEST_FAILED and D07 rethrows exact original assertion value at 27.",
+      "ON root afterEach takes handle after callback rethrows, verifies exact journal case15 cut, issues one same-actor read and persists one row; OFF emits no private effects.",
+      "Actual D07 AFTER close enter and return, genuine native disposal and terminal child status. Independently reconcile exact public frame and recorder faults after normal output persistence."
+    ],
+    "expectedD07": {
+      "case1": "C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}",
+      "case15": "C2SOURCE {\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"fail\",\"phase\":\"scope\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}",
+      "childExit": 1,
+      "toolReceipt": "Expected event/bytes/closure MATCH only on independent custody. Original action and test remain failed and native child exit stays 1."
+    },
+    "identity": "Require independent same-realm proof of original action error and exact preserved rethrow, plus pinned native hook ordering. Do not assume the runner error/cause path preserves identity; if no admissible evidence surface without monkeypatch, report the gap and stop.",
+    "businessParity": "Inert fixture constructor, counts/frame and actor timing concern TOOL only. P4 requires original full prerequisites through case15 with exact business fixture state/dispatch, frozen D07 and original count/throw/AFTER. Skip only remaining cases by separately verified external runner selection; no inference from inert P3."
+  },
+  "timing": {
+    "basis": "Serial named process plan. Durations are admission caps in milliseconds; not measured evidence. Protect original clocks and conditions. Each occurrence has its own mount and declared setup, original clock, outer scheduling/count, QA read and closure/terminal evidence caps. The 30s is nominal and bounded scheduling allowance is separate. Block if actual setup/count/teardown cannot fit. No splitting, repetition or added measured await permitted.",
+    "budgetColumns": [
+      "id",
+      "setupMs",
+      "originalNominalClockMs",
+      "outsideSchedulingAndCountMs",
+      "outsideQAWaitMs",
+      "genuineCloseAndTerminalEvidenceMs",
+      "capMs"
+    ],
+    "slotCaps": [
+      [
+        "N01_OFF_PENDING",
+        2000,
+        30000,
+        2000,
+        0,
+        2000,
+        36000
+      ],
+      [
+        "N02_ON_PENDING",
+        2000,
+        30000,
+        2000,
+        1000,
+        2000,
+        37000
+      ],
+      [
+        "N03_OFF_LATE",
+        5500,
+        30000,
+        4000,
+        0,
+        4500,
+        44000
+      ],
+      [
+        "N04_ON_LATE_FROZEN_D07",
+        5500,
+        30000,
+        4000,
+        1000,
+        4500,
+        45000
+      ],
+      [
+        "N05_ON_NO_DELIVERY",
+        2000,
+        30000,
+        2000,
+        1000,
+        2000,
+        37000
+      ],
+      [
+        "N06_ON_FOREIGN",
+        2000,
+        30000,
+        2000,
+        1000,
+        2000,
+        37000
+      ],
+      [
+        "N07_ON_OVERLAP",
+        2000,
+        30000,
+        2000,
+        1000,
+        2000,
+        37000
+      ],
+      [
+        "N08_ON_TRUNCATED",
+        2000,
+        30000,
+        2000,
+        1000,
+        2000,
+        37000
+      ]
+    ],
+    "processes": [
+      [
+        "CAL_PREFLIGHT",
+        null,
+        [
+          "CAL_T_ZERO_ARGS",
+          "CAL_E_ONE_EVENT",
+          "neutral DATA-model and admission controls"
+        ],
+        8000
+      ],
+      [
+        "P3_NEGATIVE_HOST_GROUP",
+        "P3_HOST_ONLY",
+        [
+          "DNEG_THROW",
+          "DNEG_MISSING_MARK",
+          "DNEG_DUPLICATE_MARK",
+          "DNEG_FOREIGN_CARRIER",
+          "DNEG_HELD_CUTOFF"
+        ],
+        8000
+      ],
+      [
+        "TOOL_PENDING",
+        "P2_GROUP_A",
+        [
+          "N01_OFF_PENDING",
+          "N02_ON_PENDING"
+        ],
+        73000
+      ],
+      [
+        "P3_FROZEN_D07_OFF",
+        "P2_GROUP_A",
+        [
+          "N03_OFF_LATE"
+        ],
+        44000
+      ],
+      [
+        "P3_FROZEN_D07_ON",
+        "P2_GROUP_A",
+        [
+          "N04_ON_LATE_FROZEN_D07"
+        ],
+        45000
+      ],
+      [
+        "TOOL_REMAINING",
+        "P2_GROUP_B",
+        [
+          "N05_ON_NO_DELIVERY",
+          "N06_ON_FOREIGN",
+          "N07_ON_OVERLAP+N07C_COMPANION",
+          "N08_ON_TRUNCATED"
+        ],
+        148000
+      ]
+    ],
+    "groupTotalsMs": {
+      "P2_GROUP_A": 162000,
+      "P2_GROUP_B": 148000,
+      "orderedProcessWindows": 326000,
+      "producerFinalAggregateChecks": 3000,
+      "producerTotal": 329000,
+      "producerCap": 330000,
+      "producerSlack": 1000,
+      "jobBeforeProducerSetup": 65000,
+      "jobAfterProducerEvidence": 24000,
+      "jobTotal": 418000,
+      "jobCap": 420000,
+      "jobSlack": 2000,
+      "longestChild": 148000,
+      "childCap": 180000,
+      "originalPerInvocation": 30000,
+      "originalD07PerCaseTimeout": 120000,
+      "selectedClockReservations": 240000,
+      "selectedOuterQAReadReservations": 6000,
+      "P3_NEGATIVE_HOST_GROUP": 8000
+    },
+    "companion": "N07C_COMPANION has unchanged original nominal clock. Independently observe that both starts share the same 30s interval plus existing outside scheduling allowance and real cleanup budget; no second serial clock. No selected read/query/capture for companion. If overlap/order/terminal envelope cannot be shown, fail selected group.",
+    "preflightAllocMs": {
+      "pinnedNodeAndGuardStartup": 1200,
+      "sourcePreimageToolCustodyAndInputCheck": 1600,
+      "all134NeutralControls": 2600,
+      "nativeTimerLeaseCalibrationAndCleanup": 2600,
+      "total": 8000
+    },
+    "preflightNeutralIds": "M01–M30, Q01–Q35, H01–H57, R01–R12. Exactly 134 controls; no historical GB1 replay.",
+    "setupSlots": "Job setup 65000ms reserves pinned dependencies/input acquisition and custody before producer; each slot's setup reserves actual worker assembly/verified OFF or ON scripts and disposable process or mount startup. D07 setup reserves both case1 genuine actor counts, original frame and journal setup. Direct and actor custody verified again at selected read. Fix1 reallocates exactly 1000ms from each of the eight selected startup envelopes to five serial 1600ms host-only negative workers; all native disposal, original and external read/count reserves stay unchanged. Named per-child startup prerequisites must fit the resulting 2000ms or 5500ms admission cap before release.",
+    "outsideSlots": "Outside scheduling/count allowance covers 30s deadline scheduling jitter, original count and benign late witness, recorder/frame/hook eligibility and journal read. The separate 1000ms is only the local wait on the one QA read. Closure allowance includes released benign latches, original genuine disposal or D07 AFTER, and terminal native process evidence. N01/N02 benign raw-entry calibration and N05 gate sealing plus count census use the existing selected 2000ms scheduling/count allowance, after original M terminal. N05 verifies final gate custody in its existing 2000ms closure allowance. No extra qa read or timed dispatch.",
+    "finalSlots": "Producer final 3000ms reserves terminal evidence, normalized comparison/aggregate/custody checks and bounded private artifact serialization. Job after-producer reserve 24000ms includes final job evidence publication/readback and terminal receipt, subject to future gated workflow.",
+    "stopGate": "Check absolute child/producer/job deadlines and remaining per-phase reserves before starting any named process and before each new current mount/occurrence. If full upcoming phases and final real cleanup/readback cannot fit, do not start. A phase exhausting its own cap fails safely; no slot borrows original clocks or subsequent job reserve. Verify inherited per-process, total launches and owned custody against fixRound1 explicit runner and workers before admitting any new group. The 8000ms group includes the one grouped Node launcher, five serial worker lifetimes, worker cutoff, owned termination, and per-worker evidence; no launch-cap increase is assumed.",
+    "noGuarantee": "418000ms is the hard proposed all-phases envelope, not a measured runtime guarantee. Future review must verify feasibility of tight setup/cleanup/serialize caps on exact official pinned runtime before release; no live assertion here."
+  },
+  "closure": {
+    "pairedComparisons": [
+      "N01/N02 and N03/N04 compare unchanged original status/body/ordinary headers/g1, call/effect order, count, original assertion/action throw, and actual normal termination. Retain both genuine late witnesses with same frozen D07 driver. OFF produces no private field/read/row.",
+      "GB1 accepted as baseline, no replay of ordinary native success/inert pass."
+    ],
+    "cutoff": "For selected native positives, stop on count throw/block/missing (zero read), custody ambiguity or unverified closure before advancing. Post-count read at most once, at most1000ms outside original M/QA operation. Late return ignored without retry. Hard kill, throwing/hung/missing close or incomplete custody remains failure/closure UNVERIFIED. Host timeout never proves native RPC cancellation, settlement, disposal or global drain. Intentional host-only negative children have their own expected terminal custody and yield no native closure proof.",
+    "negativeControls": "H20-H28 are preserved model vectors. Separately, the five named P3_NEGATIVE_HOST_GROUP process-isolated file workers exercise the actual S08 hook plus real frozen D07/recorder boundaries with modeled M operands and independent outermost read-attempt tripwire. Host-only cutoff proves no native closure. Missing mark/throw must also be observed with hook entry; a never-entered cutoff does not qualify the guard. H49 fake exercises host wait alone. No native replay or new QA query.",
+    "gate": "Future implementation/static gate and then separate Root native gate. Conditions to stop include unqualified native callback shapes, unable to prove hook/identity, inability to run bounded original actor count and to verify closure, or setup/cleanup/evidence overflow. Do not start another occurrence or extend caps."
+  },
+  "ordinaryBaseline": {
+    "status": 503,
+    "marker": "g1.503.L.0",
+    "expectedOriginalBody": "{\"status\":\"admin_pending\",\"mayRetry\":false,\"operationalReadiness\":false}",
+    "overlayMeaning": "OFF disables only the new pending overlay, leaving existing original g1 available."
+  },
+  "fixRound1": {
+    "supplement": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+    "findings": [
+      "F-I1",
+      "F-I2"
+    ],
+    "nodeNegativeCLI": 1,
+    "nodeNegativeWorkers": 5,
+    "serializedMaxGroupNodeProcesses": 2,
+    "totalProposedCoreNodeLaunchesBeforeNativeSubprocessInventory": 13,
+    "unchangedP2Selected": 8,
+    "addedNativeInvocations": 0,
+    "addedDiagnosticQueries": 0,
+    "qualificationState": "DATA_PREMISE_AND_RESERVE_ONLY_NOT_RUN; actual inherited launch/custody gate remains held. Exact bounded package is separately reviewable before implementation/runtime release."
+  }
+}

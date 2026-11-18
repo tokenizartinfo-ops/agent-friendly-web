@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 11:25:02 UTC",
+  "timestampUTC": "2026-11-18 11:58:36 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "8aa9d18613b878b4b78d4cc554242fea5a076faa",
-  "phase": "PENDING_GET_FIXTURE_DATA_FIX1_RUNNING",
+  "previousCheckpoint": "b693af082884bc04abb102b6499e7a9d7e05a8e3",
+  "phase": "PENDING_GET_FIXTURE_ACCEPTED_MODEL_RED_PROPOSAL_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Original fixture DATA author fixes F-I1 independent no-delivery witness and F-I2 actual hook/recorder negatives in bounded schedule; scoped re-review before any observer code/native gate.",
+  "next": "Stage A author prepares actual old M factory + sealed M01 test/runner proposal only. Independent static review and Root one-use finite keyless MODEL GHA gate precede observed RED. New observer implementation remains held.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1255,7 +1255,7 @@
       "rootAcceptance": "c6118aff825467b6f10a21b7ead22fa5f4891eb2"
     },
     "pendingAwaitFixtures": {
-      "status": "INDEPENDENT_REVIEW_FAIL_FIXTURE_DATA_FIX1_RUNNING",
+      "status": "ACCEPTED_FIXTURE_DATA_ONLY",
       "brief": "0d01d4dee99918fe7a68d6953a98a3714d66c5cb",
       "actor": "/root/pending_get_fixture_seal",
       "implementationReleased": false,
@@ -1273,24 +1273,49 @@
         "companions": 1,
         "calibrations": 2
       },
-      "independentReviewVerdict": "FAIL_SCHEDULE_COVERAGE_AND_ORACLE_INDEPENDENCE",
+      "independentReviewVerdict": "PASS_SCOPED_FIXTURE_DATA",
       "reviewerStatus": "REVIEW_COMPLETE",
       "resumeReviewBrief": "a6adea6a3b2f5f637b840ce24d08fa48bbf03951",
       "independentReview": "dbc45288628aae4e670cae968d677e3da913a16c",
       "fixRound": 1,
       "maxFixRounds": 5,
       "fixBrief": "04e278c5561b1f9cc421b24481e4a9d9e2a40156",
-      "openFindings": [
-        "F-I1",
-        "F-I2"
-      ],
-      "minorFindings": [
-        "F-M1"
-      ]
+      "openFindings": [],
+      "minorFindings": [],
+      "currentIndex": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+      "fix1Report": "a261b46be149983a281413aa39a303fb9ba22fe3",
+      "fix1Delta": "55767b2c79c19995f21542d75d224d68154def4b",
+      "fix1RootMeasurement": "d000003588912cd4a696826654a03a56b6c60ff0",
+      "fix1IndependentReview": "2b68bdf95611d9ba6e8c360c37b842625a866b9a",
+      "rootAcceptance": "f260677ba825dd6cb06fc2ce048cbb8eddf37368",
+      "fixRoundsCompleted": 1
+    },
+    "pendingAwaitRed": {
+      "status": "PROPOSAL_ONLY_RUNNING",
+      "brief": "f7d3f462021c42514b4c852a20a5521469404a31",
+      "actor": "/root/pending_get_red_proposal",
+      "nomination": {
+        "branch": "lab/afw-c2-pending-get-20261118-red1",
+        "message": "AFW-C2-PENDING-GET-RED1-ONEUSE-20261118",
+        "workflow": ".github/workflows/afw-c2-pending-get-red1.yml",
+        "job": "c2-pending-get-red1",
+        "prefix": "docs/superpowers/source-lab/c2-pending-get-red1/",
+        "runner": "docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+        "command": "node docs/superpowers/source-lab/c2-pending-get-red1/run-pending-get-red1.mjs",
+        "artifact": "afw-c2-pending-get-red1",
+        "output": "output/c2-pending-get-red1.json",
+        "checkedUnusedAtUTC": "2026-11-18 11:53:09 UTC",
+        "refCreated": false,
+        "activationReleased": false
+      },
+      "actualREDObserved": false,
+      "newObserverImplementationReleased": false,
+      "nativeReleased": false,
+      "MODELOnly": true
     }
   },
-  "schemaVersion": 117,
-  "updatedAtUTC": "2026-11-18 11:25:02 UTC",
+  "schemaVersion": 118,
+  "updatedAtUTC": "2026-11-18 11:58:36 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

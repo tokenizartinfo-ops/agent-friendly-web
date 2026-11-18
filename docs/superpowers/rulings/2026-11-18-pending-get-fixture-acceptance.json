@@ -1,0 +1,32 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE_DATA.ROOT_ACCEPTANCE/1",
+  "atUTC": "2026-11-18 11:53:09 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "index": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+  "review": "2b68bdf95611d9ba6e8c360c37b842625a866b9a",
+  "rootMeasurement": "d000003588912cd4a696826654a03a56b6c60ff0",
+  "accepted": "FIXTURE DATA ONLY",
+  "unknowns": [
+    "native timing/custody/closure",
+    "independent zero delivery witness execution",
+    "actual hook/recorder negative execution",
+    "private exposure and source noninterference"
+  ],
+  "codeRelease": "TEST-FIRST PROPOSAL ONLY; observer implementation held until actual feature-missing RED is observed by a separate Root finite cloud gate",
+  "nativeReleased": false,
+  "ScopeRuling": {
+    "decision": "Prepare a tiny baseline MODEL RED against the actual existing M observer and sealed new marker expectation before writing new observer implementation.",
+    "why": "Independent134fixtures are sealed, but the new diagnostic functionality has no observed failing test yet. Test-first preparation can demonstrate absence with existing actual code without a30s business replay or any live resource.",
+    "limit": "Source execution remains forbidden on every author/controller executor; only a later Root-admitted isolated keyless GHA may run the proposed RED. No native target or business Source qualification is added.",
+    "costIfWrong": "Discard detached test/runner proposal; Main/Base and runtime unchanged."
+  },
+  "Source5": 5,
+  "OWN5": 5,
+  "StageB": 5,
+  "countersReset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

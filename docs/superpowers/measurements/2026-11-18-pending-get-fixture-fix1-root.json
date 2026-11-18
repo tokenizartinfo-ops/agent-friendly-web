@@ -1,0 +1,129 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE_FIX1.ROOT_DATA_MEASUREMENT/1",
+  "index": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+  "bodies": [
+    {
+      "role": "index",
+      "bytes": 7161,
+      "sha256": "ff44960f1361e7769fbe113c8881b1d1ef1ca641fd2b4ce0547429330f65f969",
+      "blob": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "sites-enums-grammar",
+      "bytes": 10277,
+      "sha256": "c25900da63376d5e4e8b4101927548b1ba165b156326ca15d79c9d7c86e0f875",
+      "blob": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "exact-literal-preimages",
+      "bytes": 16513,
+      "sha256": "ea886eafed6d4697d75d136f3ef7fd674974cf0401807e43e220a041ca8c7c7e",
+      "blob": "7500c3a94d730735f8680a8a1832d5de0c316469",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "m-callback-cursor-expectations",
+      "bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+      "blob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "qa-phase-pair-expectations",
+      "bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "blob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "host-and-row-admission-expectations",
+      "bytes": 14585,
+      "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4",
+      "blob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "native-topology-schedule-expectations",
+      "bytes": 20982,
+      "sha256": "883a0545aee6d9eb16e1513ac92747032f00ebfa0f41ed5cfe1adf0474b9dfeb",
+      "blob": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "fixture-data-verification-report",
+      "bytes": 6838,
+      "sha256": "0c1badb3ca758e02702188d62cfbaddb6968e926ac66a5255ef56b287c5e707f",
+      "blob": "7ec4ffd9de4da3ffc408006821a3f98df9d894cb",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "f-i1-and-f-i2-witness-supplement",
+      "bytes": 16345,
+      "sha256": "779ddad548444f664d29d1951874713b44cb875a0c78e5390e24f81f20abce1d",
+      "blob": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "fix1-reversible-delta",
+      "bytes": 21346,
+      "sha256": "b211e81081927e94f3359a4c5ad3496c654665337041d265b094c21d7c496a19",
+      "blob": "55767b2c79c19995f21542d75d224d68154def4b",
+      "match": true,
+      "withinCap": true
+    },
+    {
+      "role": "fix1-author-appendix",
+      "bytes": 7300,
+      "sha256": "c4c5b09d00855e6a09f795bbf7af3d1bc8ccc0b8e389034a0e48cbcfc338f0a4",
+      "blob": "a261b46be149983a281413aa39a303fb9ba22fe3",
+      "match": true,
+      "withinCap": true
+    }
+  ],
+  "reconstruction": [
+    {
+      "role": "sites-enums-grammar",
+      "edits": 1,
+      "forward": true,
+      "inverse": true
+    },
+    {
+      "role": "native-topology-schedule-expectations",
+      "edits": 14,
+      "forward": true,
+      "inverse": true
+    }
+  ],
+  "preserved": [
+    "7500c3a94d730735f8680a8a1832d5de0c316469",
+    "ab82327af902770b12995327658b007e3f0ffe02",
+    "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+    "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+    "7ec4ffd9de4da3ffc408006821a3f98df9d894cb"
+  ],
+  "original134PinsRetained": true,
+  "arithmetic": {
+    "slotSums": true,
+    "processWindows": 326000,
+    "producer": 329000,
+    "job": 418000,
+    "queries": 6,
+    "originalClockSlots": 240000
+  },
+  "execution": "NOT_RUN_DATA_ONLY",
+  "runtimeFeasibility": "UNMEASURED",
+  "SourceExecuted": false,
+  "OWNExecuted": false,
+  "PCoff": false
+}

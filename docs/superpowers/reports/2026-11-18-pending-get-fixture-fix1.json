@@ -1,0 +1,154 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.FIX1.AUTHOR_APPENDIX/1",
+  "status": "REVISED_DATA_READY_FOR_INDEPENDENT_REVIEW_RUNTIME_UNQUALIFIED",
+  "execution": "NOT_RUN_DATA_ONLY",
+  "review": "dbc45288628aae4e670cae968d677e3da913a16c",
+  "fixBrief": "04e278c5561b1f9cc421b24481e4a9d9e2a40156",
+  "priorIndex": "7115a056bed39c2d0a4d3de1f804bb7594dab382",
+  "priorAuthorReport": "7ec4ffd9de4da3ffc408006821a3f98df9d894cb",
+  "revisedObjects": {
+    "table": {
+      "utf8Bytes": 10277,
+      "sha256": "c25900da63376d5e4e8b4101927548b1ba165b156326ca15d79c9d7c86e0f875",
+      "gitBlob": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6",
+      "fullReadback": true
+    },
+    "schedule": {
+      "utf8Bytes": 20982,
+      "sha256": "883a0545aee6d9eb16e1513ac92747032f00ebfa0f41ed5cfe1adf0474b9dfeb",
+      "gitBlob": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+      "fullReadback": true
+    },
+    "supplement": {
+      "utf8Bytes": 16345,
+      "sha256": "779ddad548444f664d29d1951874713b44cb875a0c78e5390e24f81f20abce1d",
+      "gitBlob": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+      "fullReadback": true
+    },
+    "reversibleDelta": {
+      "utf8Bytes": 21346,
+      "sha256": "b211e81081927e94f3359a4c5ad3496c654665337041d265b094c21d7c496a19",
+      "gitBlob": "55767b2c79c19995f21542d75d224d68154def4b",
+      "fullReadback": true
+    }
+  },
+  "dispositions": [
+    {
+      "id": "F-I1",
+      "state": "ADDRESSED_IN_DATA_PREMISE; NATIVE_UNQUALIFIED",
+      "evidence": "Supplement FI1 separates the M hold-gate receipt and outgoing delegate-attempt census from the raw QA actor fetch entry census. Same actor existing benign count samples raw entries after exclusive gate is irrevocably sealed. Gate evidence spans mount readiness through bounded genuine disposal. Sole-path proof prevents any selected-path post-sample delegate; no extra census RPC. N01/N02 known delivered reads produce positive c1 witness using same raw counter. q0.A alone proves absence only."
+    },
+    {
+      "id": "F-I2",
+      "state": "ADDRESSED_IN_PROPOSED_HOST_BOUNDARY_SLOTS; EXECUTION_UNQUALIFIED",
+      "evidence": "Supplement FI2 names five process-isolated same-realm frozen-D07/real-recorder/S08-hook workers with modeled M inputs and independent continuously armed zero-read-attempt trap. Throw, missing mark, duplicate mark and foreign carrier require actual hook entry and targeted guard rejection. Held cutoff has separate hook-entry fact and cannot prove missing-return guard alone. No additional timed native target, actor invocation, actor query or native-close claim."
+    },
+    {
+      "id": "F-M1",
+      "state": "CORRECTED",
+      "evidence": "Table H01 now cites S09:830-860, ending at the line returning the observer object. The following line is its closing brace. The 114 exact old anchor lines and all original fixture vectors remain byte-identical."
+    }
+  ],
+  "dataOnlyVerification": {
+    "earlierObjects": {
+      "readback": [
+        {
+          "role": "exact-literal-preimages",
+          "utf8Bytes": 16513,
+          "sha256": "ea886eafed6d4697d75d136f3ef7fd674974cf0401807e43e220a041ca8c7c7e",
+          "gitBlob": "7500c3a94d730735f8680a8a1832d5de0c316469",
+          "fullReadback": true
+        },
+        {
+          "role": "m-callback-cursor-expectations",
+          "utf8Bytes": 11189,
+          "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+          "gitBlob": "ab82327af902770b12995327658b007e3f0ffe02",
+          "fullReadback": true
+        },
+        {
+          "role": "qa-phase-pair-expectations",
+          "utf8Bytes": 11999,
+          "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+          "gitBlob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+          "fullReadback": true
+        },
+        {
+          "role": "host-and-row-admission-expectations",
+          "utf8Bytes": 14585,
+          "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4",
+          "gitBlob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+          "fullReadback": true
+        },
+        {
+          "role": "fixture-data-verification-report",
+          "utf8Bytes": 6838,
+          "sha256": "0c1badb3ca758e02702188d62cfbaddb6968e926ac66a5255ef56b287c5e707f",
+          "gitBlob": "7ec4ffd9de4da3ffc408006821a3f98df9d894cb",
+          "fullReadback": true
+        }
+      ],
+      "counts": {
+        "m": 30,
+        "qa": 35,
+        "host": 57,
+        "rows": 12,
+        "anchors": 114
+      }
+    },
+    "typedReversibleReconstruction": {
+      "table": [
+        true,
+        true
+      ],
+      "schedule": [
+        true,
+        true
+      ]
+    },
+    "slotMath": {
+      "oldSelectedSlotsMs": 318000,
+      "revisedSelectedSlotsMs": 310000,
+      "priorPreflightMs": 8000,
+      "hostNegativeAllocatedMs": 8000,
+      "count": 5,
+      "eachWorkerMs": 1600,
+      "orderedProcessWindowsMs": 326000,
+      "finalProducerMs": 3000,
+      "producerMs": 329000,
+      "producerLimitMs": 330000,
+      "jobSetupMs": 65000,
+      "jobFinalizeMs": 24000,
+      "jobMs": 418000,
+      "jobLimitMs": 420000,
+      "largestGroupMs": 148000,
+      "childLimitMs": 180000,
+      "unchangedOriginalPerTargetMs": 30000,
+      "unchangedD07TimeoutMs": 120000,
+      "unchangedReadCapMs": 1000
+    },
+    "readback": "Compared full UTF-8 response bodies to originally hashed bytes or pinned digest/length as applicable. Independently recalculated Git blob SHA and SHA-256. Both full old/new table and schedule bodies reconstruct exactly in forward and reverse manifest directions. N01–N08 literal response/row outcomes and max six post-count native reads are unchanged."
+  },
+  "remainingProofs": [
+    "Actual Node same-file hook, targeted guard/throw identity, independent tripwire, owned worker cutout and per-child attribution remain unverified. Node primary documentation only supports process/isolation accounting; it does not establish future execution.",
+    "One new grouped CLI/runner plus five serial workers are six explicit added Node launches (total corpus proposed 13, outside unchanged native subprocess inventory). Actual inherited process/launch admission and custody must be verified and accepted before implementation/execution. Max one active neutral file worker and two group Node processes including its CLI. If limit disallows, proposed smallest approval is exactly that extra host-only grouped launch set; otherwise F-I2 execution stays open. No process-cap increase, alternate job or concurrency inferred.",
+    "Per-target setup reserves tightened by exactly 1000ms each. Original operation timeout/count/read and genuine native disposal reserves stay intact. Arithmetic only. N05 real actor wiring, raw census, gate/exclusive path and clean disposal remain unverified. P4 parity and stage/counter claims unchanged."
+  ],
+  "nonclaims": {
+    "Source5": 5,
+    "OWN5": 5,
+    "StageB": 5,
+    "sourceExecuted": false,
+    "ownExecuted": false,
+    "nativeExecuted": false,
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false,
+    "codeReleased": false,
+    "nativeReleased": false
+  }
+}

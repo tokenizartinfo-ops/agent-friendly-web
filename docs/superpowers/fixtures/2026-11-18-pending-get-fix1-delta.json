@@ -1,0 +1,547 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE.FIX1.REVERSIBLE_DELTA/1",
+  "execution": "NOT_RUN_DATA_ONLY",
+  "brief": "04e278c5561b1f9cc421b24481e4a9d9e2a40156",
+  "review": "dbc45288628aae4e670cae968d677e3da913a16c",
+  "priorIndex": "7115a056bed39c2d0a4d3de1f804bb7594dab382",
+  "newSupplement": {
+    "utf8Bytes": 16345,
+    "sha256": "779ddad548444f664d29d1951874713b44cb875a0c78e5390e24f81f20abce1d",
+    "gitBlob": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+    "fullReadback": true
+  },
+  "semantics": "Each path is a typed JSON property/index array. Against its pinned old object accept only exact before or stipulated absence, apply in declaration order, stringify JSON with two spaces and append one LF. To reconstruct exact old bytes perform reverse operations in reverse declaration order, require exact after and remove the keys that were originally absent. Verify both content hashes. Added property is appended to original object order. New supplement is a detached addition; inverse discards the new pin. No old blob is changed or deleted.",
+  "exactReconstruction": {
+    "table": [
+      true,
+      true
+    ],
+    "schedule": [
+      true,
+      true
+    ]
+  },
+  "changed": [
+    {
+      "role": "sites-enums-grammar",
+      "old": {
+        "role": "sites-enums-grammar",
+        "utf8Bytes": 10277,
+        "sha256": "14da33c689da0310de7f0cfe434e19b970be38f4edf25c366a50dc344464cfd8",
+        "gitBlob": "ab73477e5f563af05e12fc1f41204b3f1973f963",
+        "fullReadback": true
+      },
+      "revised": {
+        "utf8Bytes": 10277,
+        "sha256": "c25900da63376d5e4e8b4101927548b1ba165b156326ca15d79c9d7c86e0f875",
+        "gitBlob": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6",
+        "fullReadback": true
+      },
+      "edits": [
+        {
+          "path": [
+            "sites",
+            10,
+            1
+          ],
+          "beforePresent": true,
+          "before": "S08:2,17-22,110-116,202-232; S09:830-868",
+          "after": "S08:2,17-22,110-116,202-232; S09:830-860"
+        }
+      ]
+    },
+    {
+      "role": "native-topology-schedule-expectations",
+      "old": {
+        "role": "native-topology-schedule-expectations",
+        "utf8Bytes": 18199,
+        "sha256": "1c35f9df9cf587993de6e7da3dc5457f57ac8abd1ea61e88d4ad1ca80e304347",
+        "gitBlob": "4e213927be1108cf9e55968cbb5defb42df5c669",
+        "fullReadback": true
+      },
+      "revised": {
+        "utf8Bytes": 20982,
+        "sha256": "883a0545aee6d9eb16e1513ac92747032f00ebfa0f41ed5cfe1adf0474b9dfeb",
+        "gitBlob": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+        "fullReadback": true
+      },
+      "edits": [
+        {
+          "path": [
+            "execution"
+          ],
+          "beforePresent": true,
+          "before": "NOT_RUN",
+          "after": "NOT_RUN_DATA_ONLY"
+        },
+        {
+          "path": [
+            "nativeExpected",
+            0,
+            8
+          ],
+          "beforePresent": true,
+          "before": "Same independent one-arrival, ordinary super promise and I/initial pair/facts(1) normal return/primary(1) enter path as N02. Count genuinely returns while same inert promise held; release latch before genuine close.",
+          "after": "Same independent one-arrival, ordinary super promise and I/initial pair/facts(1) normal return/primary(1) enter path as N02. Count genuinely returns while same inert promise held; release latch before genuine close. Existing benign count also supplies the independent c1 raw-entry calibration witness specified by fixRound1; no new post-count query."
+        },
+        {
+          "path": [
+            "nativeExpected",
+            1,
+            8
+          ],
+          "beforePresent": true,
+          "before": "One arrival A before constructing held ordinary native promise; receiver check and I, initial pair, facts(1) returns, primary(1) enters. Hold promise through sample, then release benign latch and close.",
+          "after": "One arrival A before constructing held ordinary native promise; receiver check and I, initial pair, facts(1) returns, primary(1) enters. Hold promise through sample, then release benign latch and close. Existing benign count must produce the identical independent c1 raw-entry calibration witness path to N01; no new post-count query."
+        },
+        {
+          "path": [
+            "nativeExpected",
+            4,
+            8
+          ],
+          "beforePresent": true,
+          "before": "Nominated held M stub-await path never invokes QA (zero arrivals independently observed); fixed actor serves genuine benign count and read. Outside this control no-record cannot establish non-delivery.",
+          "after": "Exact fixRound1 bounded witness: inert M reaches held gate once; independent outgoing raw actor fetch delegate attempts=0 with no queued sends at irreversible gate seal after M terminal and before ordinary count. Same actor benign count independently witnesses raw fetch entries=0, then one q0.A read. Gate remains sealed through genuine native closure. q0.A alone leaves delivery UNKNOWN."
+        },
+        {
+          "path": [
+            "paths",
+            "QA"
+          ],
+          "beforePresent": true,
+          "before": "Same nominated actor receives original https://afw-private.invalid/_finite-owner/choice transport POST and originalMethod GET. One fixed in-memory diagnostic read after ordinary count and before disposal.",
+          "after": "Same nominated actor receives original https://afw-private.invalid/_finite-owner/choice transport POST and originalMethod GET. One fixed in-memory diagnostic read after ordinary count and before disposal. N05 holds at the exclusive selected gate before raw actor fetch delegation. Existing count and one post-count read still reach the same inert actor."
+        },
+        {
+          "path": [
+            "timing",
+            "slotCaps"
+          ],
+          "beforePresent": true,
+          "before": [
+            [
+              "N01_OFF_PENDING",
+              3000,
+              30000,
+              2000,
+              0,
+              2000,
+              37000
+            ],
+            [
+              "N02_ON_PENDING",
+              3000,
+              30000,
+              2000,
+              1000,
+              2000,
+              38000
+            ],
+            [
+              "N03_OFF_LATE",
+              6500,
+              30000,
+              4000,
+              0,
+              4500,
+              45000
+            ],
+            [
+              "N04_ON_LATE_FROZEN_D07",
+              6500,
+              30000,
+              4000,
+              1000,
+              4500,
+              46000
+            ],
+            [
+              "N05_ON_NO_DELIVERY",
+              3000,
+              30000,
+              2000,
+              1000,
+              2000,
+              38000
+            ],
+            [
+              "N06_ON_FOREIGN",
+              3000,
+              30000,
+              2000,
+              1000,
+              2000,
+              38000
+            ],
+            [
+              "N07_ON_OVERLAP",
+              3000,
+              30000,
+              2000,
+              1000,
+              2000,
+              38000
+            ],
+            [
+              "N08_ON_TRUNCATED",
+              3000,
+              30000,
+              2000,
+              1000,
+              2000,
+              38000
+            ]
+          ],
+          "after": [
+            [
+              "N01_OFF_PENDING",
+              2000,
+              30000,
+              2000,
+              0,
+              2000,
+              36000
+            ],
+            [
+              "N02_ON_PENDING",
+              2000,
+              30000,
+              2000,
+              1000,
+              2000,
+              37000
+            ],
+            [
+              "N03_OFF_LATE",
+              5500,
+              30000,
+              4000,
+              0,
+              4500,
+              44000
+            ],
+            [
+              "N04_ON_LATE_FROZEN_D07",
+              5500,
+              30000,
+              4000,
+              1000,
+              4500,
+              45000
+            ],
+            [
+              "N05_ON_NO_DELIVERY",
+              2000,
+              30000,
+              2000,
+              1000,
+              2000,
+              37000
+            ],
+            [
+              "N06_ON_FOREIGN",
+              2000,
+              30000,
+              2000,
+              1000,
+              2000,
+              37000
+            ],
+            [
+              "N07_ON_OVERLAP",
+              2000,
+              30000,
+              2000,
+              1000,
+              2000,
+              37000
+            ],
+            [
+              "N08_ON_TRUNCATED",
+              2000,
+              30000,
+              2000,
+              1000,
+              2000,
+              37000
+            ]
+          ]
+        },
+        {
+          "path": [
+            "timing",
+            "processes"
+          ],
+          "beforePresent": true,
+          "before": [
+            [
+              "CAL_PREFLIGHT",
+              null,
+              [
+                "CAL_T_ZERO_ARGS",
+                "CAL_E_ONE_EVENT",
+                "neutral DATA-model and admission controls"
+              ],
+              8000
+            ],
+            [
+              "TOOL_PENDING",
+              "P2_GROUP_A",
+              [
+                "N01_OFF_PENDING",
+                "N02_ON_PENDING"
+              ],
+              75000
+            ],
+            [
+              "P3_FROZEN_D07_OFF",
+              "P2_GROUP_A",
+              [
+                "N03_OFF_LATE"
+              ],
+              45000
+            ],
+            [
+              "P3_FROZEN_D07_ON",
+              "P2_GROUP_A",
+              [
+                "N04_ON_LATE_FROZEN_D07"
+              ],
+              46000
+            ],
+            [
+              "TOOL_REMAINING",
+              "P2_GROUP_B",
+              [
+                "N05_ON_NO_DELIVERY",
+                "N06_ON_FOREIGN",
+                "N07_ON_OVERLAP+N07C_COMPANION",
+                "N08_ON_TRUNCATED"
+              ],
+              152000
+            ]
+          ],
+          "after": [
+            [
+              "CAL_PREFLIGHT",
+              null,
+              [
+                "CAL_T_ZERO_ARGS",
+                "CAL_E_ONE_EVENT",
+                "neutral DATA-model and admission controls"
+              ],
+              8000
+            ],
+            [
+              "P3_NEGATIVE_HOST_GROUP",
+              "P3_HOST_ONLY",
+              [
+                "DNEG_THROW",
+                "DNEG_MISSING_MARK",
+                "DNEG_DUPLICATE_MARK",
+                "DNEG_FOREIGN_CARRIER",
+                "DNEG_HELD_CUTOFF"
+              ],
+              8000
+            ],
+            [
+              "TOOL_PENDING",
+              "P2_GROUP_A",
+              [
+                "N01_OFF_PENDING",
+                "N02_ON_PENDING"
+              ],
+              73000
+            ],
+            [
+              "P3_FROZEN_D07_OFF",
+              "P2_GROUP_A",
+              [
+                "N03_OFF_LATE"
+              ],
+              44000
+            ],
+            [
+              "P3_FROZEN_D07_ON",
+              "P2_GROUP_A",
+              [
+                "N04_ON_LATE_FROZEN_D07"
+              ],
+              45000
+            ],
+            [
+              "TOOL_REMAINING",
+              "P2_GROUP_B",
+              [
+                "N05_ON_NO_DELIVERY",
+                "N06_ON_FOREIGN",
+                "N07_ON_OVERLAP+N07C_COMPANION",
+                "N08_ON_TRUNCATED"
+              ],
+              148000
+            ]
+          ]
+        },
+        {
+          "path": [
+            "timing",
+            "groupTotalsMs"
+          ],
+          "beforePresent": true,
+          "before": {
+            "P2_GROUP_A": 166000,
+            "P2_GROUP_B": 152000,
+            "orderedProcessWindows": 326000,
+            "producerFinalAggregateChecks": 3000,
+            "producerTotal": 329000,
+            "producerCap": 330000,
+            "producerSlack": 1000,
+            "jobBeforeProducerSetup": 65000,
+            "jobAfterProducerEvidence": 24000,
+            "jobTotal": 418000,
+            "jobCap": 420000,
+            "jobSlack": 2000,
+            "longestChild": 152000,
+            "childCap": 180000,
+            "originalPerInvocation": 30000,
+            "originalD07PerCaseTimeout": 120000,
+            "selectedClockReservations": 240000,
+            "selectedOuterQAReadReservations": 6000
+          },
+          "after": {
+            "P2_GROUP_A": 162000,
+            "P2_GROUP_B": 148000,
+            "orderedProcessWindows": 326000,
+            "producerFinalAggregateChecks": 3000,
+            "producerTotal": 329000,
+            "producerCap": 330000,
+            "producerSlack": 1000,
+            "jobBeforeProducerSetup": 65000,
+            "jobAfterProducerEvidence": 24000,
+            "jobTotal": 418000,
+            "jobCap": 420000,
+            "jobSlack": 2000,
+            "longestChild": 148000,
+            "childCap": 180000,
+            "originalPerInvocation": 30000,
+            "originalD07PerCaseTimeout": 120000,
+            "selectedClockReservations": 240000,
+            "selectedOuterQAReadReservations": 6000,
+            "P3_NEGATIVE_HOST_GROUP": 8000
+          }
+        },
+        {
+          "path": [
+            "timing",
+            "setupSlots"
+          ],
+          "beforePresent": true,
+          "before": "Job setup 65000ms reserves pinned dependencies/input acquisition and custody before producer; each slot's setup reserves actual worker assembly/verified OFF or ON scripts and disposable process or mount startup. D07 setup reserves both case1 genuine actor counts, original frame and journal setup. Direct and actor custody verified again at selected read.",
+          "after": "Job setup 65000ms reserves pinned dependencies/input acquisition and custody before producer; each slot's setup reserves actual worker assembly/verified OFF or ON scripts and disposable process or mount startup. D07 setup reserves both case1 genuine actor counts, original frame and journal setup. Direct and actor custody verified again at selected read. Fix1 reallocates exactly 1000ms from each of the eight selected startup envelopes to five serial 1600ms host-only negative workers; all native disposal, original and external read/count reserves stay unchanged. Named per-child startup prerequisites must fit the resulting 2000ms or 5500ms admission cap before release."
+        },
+        {
+          "path": [
+            "timing",
+            "outsideSlots"
+          ],
+          "beforePresent": true,
+          "before": "Outside scheduling/count allowance covers 30s deadline scheduling jitter, original count and benign late witness, recorder/frame/hook eligibility and journal read. The separate 1000ms is only the local wait on the one QA read. Closure allowance includes released benign latches, original genuine disposal or D07 AFTER, and terminal native process evidence.",
+          "after": "Outside scheduling/count allowance covers 30s deadline scheduling jitter, original count and benign late witness, recorder/frame/hook eligibility and journal read. The separate 1000ms is only the local wait on the one QA read. Closure allowance includes released benign latches, original genuine disposal or D07 AFTER, and terminal native process evidence. N01/N02 benign raw-entry calibration and N05 gate sealing plus count census use the existing selected 2000ms scheduling/count allowance, after original M terminal. N05 verifies final gate custody in its existing 2000ms closure allowance. No extra qa read or timed dispatch."
+        },
+        {
+          "path": [
+            "timing",
+            "stopGate"
+          ],
+          "beforePresent": true,
+          "before": "Check absolute child/producer/job deadlines and remaining per-phase reserves before starting any named process and before each new current mount/occurrence. If full upcoming phases and final real cleanup/readback cannot fit, do not start. A phase exhausting its own cap fails safely; no slot borrows original clocks or subsequent job reserve.",
+          "after": "Check absolute child/producer/job deadlines and remaining per-phase reserves before starting any named process and before each new current mount/occurrence. If full upcoming phases and final real cleanup/readback cannot fit, do not start. A phase exhausting its own cap fails safely; no slot borrows original clocks or subsequent job reserve. Verify inherited per-process, total launches and owned custody against fixRound1 explicit runner and workers before admitting any new group. The 8000ms group includes the one grouped Node launcher, five serial worker lifetimes, worker cutoff, owned termination, and per-worker evidence; no launch-cap increase is assumed."
+        },
+        {
+          "path": [
+            "closure",
+            "cutoff"
+          ],
+          "beforePresent": true,
+          "before": "Immediately stop on count throw/block/missing (zero read), custody ambiguity or unverified closure before advancing. Post-count read at most once, at most1000ms outside original M/QA operation. Late return ignored without retry. Hard kill, throwing/hung/missing close or incomplete actuator custody remains failure/closure UNVERIFIED. Host timeout never proves native RPC cancellation, settlement, disposal or global drain.",
+          "after": "For selected native positives, stop on count throw/block/missing (zero read), custody ambiguity or unverified closure before advancing. Post-count read at most once, at most1000ms outside original M/QA operation. Late return ignored without retry. Hard kill, throwing/hung/missing close or incomplete custody remains failure/closure UNVERIFIED. Host timeout never proves native RPC cancellation, settlement, disposal or global drain. Intentional host-only negative children have their own expected terminal custody and yield no native closure proof."
+        },
+        {
+          "path": [
+            "closure",
+            "negativeControls"
+          ],
+          "beforePresent": true,
+          "before": "H20-H28 independently model count throw/blocked/missing/duplicate/foreign/cutoff. H49 never-resolving host read fake exercises only 1000ms wait. Separate actual native per-mount closure and terminal child are mandatory. No fake can replace native disposal.",
+          "after": "H20-H28 are preserved model vectors. Separately, the five named P3_NEGATIVE_HOST_GROUP process-isolated file workers exercise the actual S08 hook plus real frozen D07/recorder boundaries with modeled M operands and independent outermost read-attempt tripwire. Host-only cutoff proves no native closure. Missing mark/throw must also be observed with hook entry; a never-entered cutoff does not qualify the guard. H49 fake exercises host wait alone. No native replay or new QA query."
+        },
+        {
+          "path": [
+            "fixRound1"
+          ],
+          "beforePresent": false,
+          "after": {
+            "supplement": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+            "findings": [
+              "F-I1",
+              "F-I2"
+            ],
+            "nodeNegativeCLI": 1,
+            "nodeNegativeWorkers": 5,
+            "serializedMaxGroupNodeProcesses": 2,
+            "totalProposedCoreNodeLaunchesBeforeNativeSubprocessInventory": 13,
+            "unchangedP2Selected": 8,
+            "addedNativeInvocations": 0,
+            "addedDiagnosticQueries": 0,
+            "qualificationState": "DATA_PREMISE_AND_RESERVE_ONLY_NOT_RUN; actual inherited launch/custody gate remains held. Exact bounded package is separately reviewable before implementation/runtime release."
+          }
+        }
+      ]
+    }
+  ],
+  "preserved": [
+    {
+      "role": "exact-literal-preimages",
+      "utf8Bytes": 16513,
+      "sha256": "ea886eafed6d4697d75d136f3ef7fd674974cf0401807e43e220a041ca8c7c7e",
+      "gitBlob": "7500c3a94d730735f8680a8a1832d5de0c316469",
+      "fullReadback": true
+    },
+    {
+      "role": "m-callback-cursor-expectations",
+      "utf8Bytes": 11189,
+      "sha256": "10db1dc8d2ca4b5fa58e1e66fe56d2a2abd5c359a66e7488b6276d64101d05b6",
+      "gitBlob": "ab82327af902770b12995327658b007e3f0ffe02",
+      "fullReadback": true
+    },
+    {
+      "role": "qa-phase-pair-expectations",
+      "utf8Bytes": 11999,
+      "sha256": "971ef5ea8ff7a4c7873c05736045be6bfb3b772826b1ec4545b66ba9f248449e",
+      "gitBlob": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+      "fullReadback": true
+    },
+    {
+      "role": "host-and-row-admission-expectations",
+      "utf8Bytes": 14585,
+      "sha256": "14c061ba523767bf0a80c1b686a5e26ec3ab4f27990977705e45b4c5e2eae5b4",
+      "gitBlob": "2ebaf56a4bf962fe6f37377fc4e38ffa856e8cc8",
+      "fullReadback": true
+    },
+    {
+      "role": "fixture-data-verification-report",
+      "utf8Bytes": 6838,
+      "sha256": "0c1badb3ca758e02702188d62cfbaddb6968e926ac66a5255ef56b287c5e707f",
+      "gitBlob": "7ec4ffd9de4da3ffc408006821a3f98df9d894cb",
+      "fullReadback": true
+    }
+  ],
+  "nonclaims": {
+    "release": false,
+    "nativeExecuted": false,
+    "sourceExecuted": false,
+    "ownExecuted": false,
+    "PCoff": false
+  }
+}

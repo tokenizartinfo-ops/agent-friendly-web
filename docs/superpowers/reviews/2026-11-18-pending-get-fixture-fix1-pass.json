@@ -1,0 +1,44 @@
+{
+  "schema": "AFW.PENDING_GET.FIXTURE_DATA_SCOPED_REREVIEW/1",
+  "scope": "Fixture DATA fix1 only; no execution or runtime qualification",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewPackage": "7ef6ca8e664c33f80db20eef9b8b5303225c5f9c",
+  "priorReview": "dbc45288628aae4e670cae968d677e3da913a16c",
+  "index": "41376717eae5ec5d9d2850bb323f23c4cd43bd40",
+  "supplement": "3c2bb077ddbf6521e80ee73f1580da61224afa2c",
+  "schedule": "266994c0ad63792dbf9dbe4e527e804b2a736134",
+  "siteMap": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6",
+  "typedDelta": "55767b2c79c19995f21542d75d224d68154def4b",
+  "rootMeasurement": "d000003588912cd4a696826654a03a56b6c60ff0",
+  "SPEC": "PASS_SCOPED_FIXTURE_DATA",
+  "QUALITY": "PASS_SCOPED_FIXTURE_DATA",
+  "dispositions": [
+    {
+      "id": "F-I1",
+      "status": "ADDRESSED",
+      "evidence": "FI1 W0–W4 specifies two independently scoped facts: a selected hold-gate entry with no delegated/queued send, and a raw actor fetch-entry census sampled by the existing genuine actor count. N01/N02 calibrate that census positively. The irreversible gate seal precedes the census and persists through verified normal native disposal. No claim beyond the selected path, actor, generation and bounded window; a missing witness, unverified sole path or incomplete closure fails this control. q0.A itself continues to mean only no usable record."
+    },
+    {
+      "id": "F-I2",
+      "status": "ADDRESSED",
+      "evidence": "FI2 names five serial host-only controls with actual frozen D07/recorder and the nominated S08 hook, modeled M operands, a targeted hook-entry/rejection witness and a separate supervisor-owned read-attempt tripwire. Four controls require actual entry and rejection for the designated fault. The intentional held-count cutoff may precede hook entry and then credits no guard behavior. Host cutoff cannot qualify native disposal. The original 134 models and native co-witness retain their distinct evidence levels."
+    },
+    {
+      "id": "F-M1",
+      "status": "ADDRESSED",
+      "evidence": "Site map H01 now identifies the S09 observer through line 860."
+    }
+  ],
+  "newCritical": [],
+  "newImportant": [],
+  "newMinor": [],
+  "dataChecks": "Recomputed all eight native slot sums, 326000 ms of ordered process windows, 329000 ms total producer and 418000 ms total job. Five 1600 ms negative slots share the 8000 ms host group. The schedule retains eight selected native targets and at most six QA reads, with 240000 ms reserved for their original clocks. The proposed extra CLI plus five serial workers are explicitly accounted for and conditional on inherited launch/custody admission. Root's independent measurement verifies the byte identities and the typed forward/inverse changes.",
+  "cannotVerify": "Implementation, exclusive-gate proof, raw census and positive calibrations, hook ordering, durable tripwire observability over forced termination, actual custody, original throw identity, timing and native closure all remain unverified. A missing or lost witness cannot count as zero. Native seed255 and the six additional Node launches have no execution approval here. Startup and clean teardown under tightened slot reserves are prerequisites, not measured results.",
+  "execution": "NOT_RUN_DATA_ONLY",
+  "source5": 5,
+  "own5": 5,
+  "stageB": 5,
+  "activationReleased": false,
+  "SourceQualified": false,
+  "PCoff": false
+}
