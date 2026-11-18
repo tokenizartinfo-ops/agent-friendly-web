@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "fce92ad9488e170279d6d7819b8248a962221dd3",
-  "phase": "Observer admission now requires the original setup receipt and matched private notice selectors; isolated source validation complete.",
+  "previousCheckpoint": "32184e07382d32edfba07b021adf2def14f02574",
+  "phase": "Native QA observer and GET-only launch now reconstruct the same canonical plan from original installed private expediente, GitHub seed and provider role pins.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Build the fixed observer/launcher canonical control material from completion, seed, verified provider role pins, and the original QA durable source. Install fixed finalizer and prepare the complete package plus valid scoped custody. Then perform one cloud trial correlating the notice, assistant review, and native withdrawal.",
+  "next": "Pass the actual observer-supplied external plan into GitHub finalizer adoption, wire the fixed effect producers and cleanup, then validate and publish the complete package with a valid scoped credential for one real same-notice trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 160,
-  "updatedAtUTC": "2026-11-18T22:28:27Z",
+  "schemaVersion": 161,
+  "updatedAtUTC": "2026-11-18T22:49:31Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2287,6 +2287,16 @@
     "closed": "ab9526a7ae33161b92298fed11cb8bbf8d5b6f1a",
     "verifiedRun": 44411584280,
     "tests": 112,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "sharedObserverLaunchPlan": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-finite-shared-plan-validation.json",
+    "evidence": "e5b9941693cf4b48021a5efe9c10c377bc4b37f4",
+    "head": "934cdb4904cb318e76e7f1466dc2c8ec706ee2c2",
+    "closed": "2f5f9220ff27f38b344f654d05a023e7c62f26d1",
+    "verifiedRun": 44414900785,
+    "tests": 68,
     "completePackage": false,
     "realCloudOccurrence": false
   }

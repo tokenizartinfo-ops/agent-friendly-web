@@ -1,0 +1,41 @@
+{
+  "schema": "afw.finite-shared-plan-validation.v1",
+  "observedAtUTC": "2026-11-18T22:49:31Z",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-shared-plan-20261118",
+  "head": "934cdb4904cb318e76e7f1466dc2c8ec706ee2c2",
+  "tree": "65a466a3b8731fb8a26133309ffe92bf73916805",
+  "closed": "2f5f9220ff27f38b344f654d05a023e7c62f26d1",
+  "closedTree": "928f476d3c922557f6743a590fb706f34634b895",
+  "verification": {
+    "run": 44414900785,
+    "tests": 68,
+    "pass": 68,
+    "fail": 0,
+    "skipped": 0,
+    "staging": {
+      "completePackage": false,
+      "operationalReadiness": false
+    },
+    "red": {
+      "head": "4acb63c691cdc0017b88fda810d1cecfb6e8e299",
+      "run": 44413864924,
+      "missing": "shared native plan builder and deployment predecessor validator"
+    }
+  },
+  "source": [
+    "QA observer and launcher use one source constructor which brackets exact installed private context and independent setup Workflow receipt, qualified original GitHub seed, current historical Cloudflare role versions and the retained rollback.",
+    "Canonical plan and durable control identity use existing serialized control validator. Original command, deadlines, notice selectors and named launch carry the same hashes.",
+    "Five Worker role provenance uses qualified modules, bounded current deployment observations, exact known historical rollback and QA's immediate sole-version predecessor. Retained canary raw metadata checksum compared separately from the normalized closed pin.",
+    "Default shared worker has no installed launch source. Mounted QA launch provider is only GET; actual effect capabilities stay unavailable."
+  ],
+  "limitations": [
+    "Read boundaries and deterministic plan are verified in CI and an isolated staging build with provider fixtures. No real Cloudflare construction for a current owner case was executed.",
+    "Cloud-side adoption still needs to carry the external plan from this source instead of constructing it before observer read; launch mutation controls and finalizer still require qualified fixed providers and complete package.",
+    "The earlier scoped custody has expired. No credential changes or runtime operations during this block."
+  ],
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
