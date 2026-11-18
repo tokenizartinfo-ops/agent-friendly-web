@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "bfb3bc61ead028e182aa17e6695c35bde5102aa5",
-  "phase": "Original launch permission and exact native reduction are source-verified. D1 rechecks the original notice even after the active event window.",
+  "previousCheckpoint": "a4aafa5f053da02776a068847939e64cef291d4e",
+  "phase": "Source verification passed for atomic transfer of the Cloudflare alarm and retention of the previous recovery deadline through business closure.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement validated handoff and independent fallback of the one Cloudflare alarm across original and business closure. Mount the actual control and guard effects with the original source. Complete the publishable bundle and valid custody, then test one live correlated receipt, review, and native withdrawal.",
+  "next": "Implement original due dispatcher with separately qualified prior restoration or bounded original fallback under original custody and enrollment. Then mount native launch/guard and qualify full closure and release.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 164,
-  "updatedAtUTC": "2026-11-18T23:24:48Z",
+  "schemaVersion": 165,
+  "updatedAtUTC": "2026-11-18T23:49:46Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2330,5 +2330,15 @@
     "operationalReadiness": false,
     "completePackage": false,
     "realCloudOccurrence": false
+  },
+  "originalAlarmHandoff": {
+    "path": "docs/superpowers/progress/2026-11-18-afw-finite-alarm-handoff-validation.json",
+    "evidence": "3c7b62e4693c83dc6662826c9c19f2b8f60bd5a8",
+    "head": "3e607eecc39715eca9196f06fd623a58f944af31",
+    "closed": "1470d71e62b2a17c80b071699aa55a8cfc8ca6f7",
+    "verifiedRun": 44423800679,
+    "tests": 146,
+    "completePackage": false,
+    "originalFallbackExecution": false
   }
 }

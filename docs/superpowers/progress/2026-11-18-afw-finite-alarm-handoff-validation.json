@@ -1,0 +1,36 @@
+{
+  "purpose": "afw.finite-alarm-handoff-source-validation.v1",
+  "updatedAtUTC": "2026-11-18T23:49:46Z",
+  "workingBranch": "lab/afw-finite-alarm-handoff-20261118",
+  "sourceRevision": "3e607eecc39715eca9196f06fd623a58f944af31",
+  "sourceTree": "f1b39b6fc4f9d12ddc3f94c3c8c8f5788ba87267",
+  "closedWorkflowRevision": "1470d71e62b2a17c80b071699aa55a8cfc8ca6f7",
+  "red": {
+    "run": 44422736465,
+    "observed": "Unqualified business prepare overwrote an occupied original alarm; expected blocked, observed armed."
+  },
+  "verification": {
+    "run": 44423800679,
+    "tests": 146,
+    "passed": 146,
+    "failed": 0,
+    "skipped": 0,
+    "completePackage": false,
+    "operationalReadiness": false
+  },
+  "verifiedAtSource": [
+    "Commit handoff, control, and first business alarm atomically under the exact original enrollment, cleanup scope, selection and activation receipt.",
+    "Preserve original wakeup before invoking business alarm handling; reject unknown physical readback and wrong actor.",
+    "Keep original fallback through final business reservation, completion and exhaustion."
+  ],
+  "limits": {
+    "originalFallbackExecution": false,
+    "nativeGuardProviderMounted": false,
+    "remoteCloudflareEffects": false,
+    "activeQualifiedReleaseCredentialKnown": false,
+    "actualNoticeReviewed": false,
+    "nativeWithdrawalObserved": false,
+    "pcOffTrial": false
+  },
+  "next": "Implement original due dispatcher with separately qualified prior restoration or bounded original fallback under original custody and enrollment. Then mount native launch/guard and qualify full closure and release."
+}
