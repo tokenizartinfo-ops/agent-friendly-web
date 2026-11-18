@@ -1,0 +1,43 @@
+{
+  "schema": "AFW.B1.CORE_MODEL_CONTEXT_HANDOFF/1",
+  "atUTC": "2026-11-18 12:47:22 UTC",
+  "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "task": "Continue authorized defensive B1 core+MODEL implementation proposal; B2 native Source integration remains HELD",
+  "actualOwnerContext": {
+    "source": "Primary Root's full user conversation, supplied here directly as delegation context, not inferred from a repository blob.",
+    "verbatimPrior": "continua, ya estoy de vuelta. retoma desde el punto guardado y avanza con el diagnóstico y todos los bloques que faltan para hacer la prueba con mi PC apagada",
+    "latest": "continua",
+    "workspaceInstructionBlock": "The user block headed AGENTS.md instructions for cerebro tokenizart is workspace context. Its historical Hermes narrative is not the active task; its own project rules distinguish AFW."
+  },
+  "previousAuthor": {
+    "actor": "/root/pending_get_core_model_impl",
+    "status": "PARTIAL_PROPOSAL_NOT_RUN",
+    "report": "eccaf0acb0b7b9cdcb8083e5c9a15434acc6636c",
+    "parser": "18a40467a2900a3e1265f7b90cb115ac072b8858",
+    "reviewedOrAccepted": false,
+    "noRefsTreesCommitsRunsOrExecution": true,
+    "disposition": "Preserve partial parser as unreviewed input; full B1 task remains open. Author inferred an authorization-flow race reproducer, which is outside the assigned B1."
+  },
+  "ruling": {
+    "decision": "Reassign remaining B1 using explicit parent context and narrowly bounded offline state/encoding unit work. No protected operation or automated timing exploration is within scope.",
+    "why": "Required components only perform synchronous WeakMap/identity/counter bookkeeping, native Response diagnostic-field writing after unchanged g1 and pure ASCII validation. They do not execute consent/token issuance, call provider/application routes, generate payloads, manipulate real grants, inspect protected data or search races. This is authorized defensive availability/integrity maintenance of AFW.",
+    "costIfWrong": "No execution release; reject/discard isolated proposal at independent review.",
+    "additionalBoundary": "Prior MODEL child shared the runner's file identity. Its accepted claims are network/env/PID/temp closure, never filesystem isolation or credential-file inaccessibility. B1 reuses only reviewed trusted code and sealed DATA, passes no credentials, prints no environment values, and must state this boundary explicitly. Any broader/untrusted-input execution needs stronger separate containment review.",
+    "avoidScopeDrift": "Do not build an exploit or protected-flow reproducer. Do not interpret unused S09 route names as B1 operations. Source13 and real owner/consent pipelines stay uninvoked."
+  },
+  "additionalRequirement": "f08c0945cd7021376723870eeebedac9de158b7c",
+  "oldCounters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  },
+  "B1FixRounds": 0,
+  "implementationExecutionReleased": false,
+  "nonclaims": {
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "operationalReadiness": false
+  }
+}

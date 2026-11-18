@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 12:39:56 UTC",
+  "timestampUTC": "2026-11-18 12:50:09 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "1e1a28a6a82ba24473170a56936fcd6330bd836a",
-  "phase": "PENDING_GET_CORE_MODEL_IMPLEMENTATION_PROPOSAL_RUNNING",
+  "previousCheckpoint": "fcf9c994aa8dc18a66afaf5d9e0693bb9f635c8c",
+  "phase": "PENDING_GET_CORE_MODEL_PROPOSAL_CONTINUATION",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -252,7 +252,7 @@
       "replyComment": 6957793271,
       "action": "RECORDED_ONLY_NO_ACTIVATION_OR_CONSUMPTION"
     },
-    "lastRead": "2026-11-18 11:25:02 UTC",
+    "lastRead": "2026-11-18 12:41:17 UTC",
     "newRequests": 0
   },
   "rulings": [
@@ -1413,7 +1413,7 @@
     "pendingAwaitCoreModel": {
       "status": "IMPLEMENTATION_PROPOSAL_RUNNING",
       "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
-      "actor": "/root/pending_get_core_model_impl",
+      "actor": "/root/pending_get_core_model_complete",
       "nomination": {
         "branch": "lab/afw-c2-pending-get-20261118-model-green1",
         "message": "AFW-C2-PENDING-GET-MODEL-GREEN1-ONEUSE-20261118",
@@ -1447,11 +1447,19 @@
         "OWN": 5,
         "StageB": 5,
         "reset": false
-      }
+      },
+      "priorPartialAuthor": "/root/pending_get_core_model_impl",
+      "partialReport": "eccaf0acb0b7b9cdcb8083e5c9a15434acc6636c",
+      "partialParser": "18a40467a2900a3e1265f7b90cb115ac072b8858",
+      "partialNotAccepted": true,
+      "contextHandoff": "1cbd3ab0922616e859c4450daa7799a7b23dd0a1",
+      "Q32FixtureRuling": "f08c0945cd7021376723870eeebedac9de158b7c",
+      "fixRounds": 0,
+      "implementationExecutionReleased": false
     }
   },
-  "schemaVersion": 122,
-  "updatedAtUTC": "2026-11-18 12:39:56 UTC",
+  "schemaVersion": 123,
+  "updatedAtUTC": "2026-11-18 12:50:09 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",

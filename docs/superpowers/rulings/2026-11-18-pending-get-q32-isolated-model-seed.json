@@ -1,0 +1,23 @@
+{
+  "schema": "AFW.PENDING_GET.B1.Q32_FIXTURE_SEED_RULING/1",
+  "atUTC": "2026-11-18 12:42:52 UTC",
+  "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "sealedVector": "3c23f66ffe23c0aed62933bdfd7be635bb4e550d",
+  "case": "Q32",
+  "decision": "Permit a separate isolated MODEL fixture seed for C/NN3F/Kc/S0 with accepted-write budget0, then actual next pair-ordinal64 operation exercises actual terminal X poison branch.",
+  "why": "The unchanged sealed Q32 explicitly requires synthetic C3Fc plus budget in allowed range. Ordinary 63 full pairs need at least819 transitions and cannot precede budget poison255. This is an artificial ordinal boundary test, not a realizable ordinary progress history.",
+  "costIfWrong": "Reject/discard isolated proposal without Source/native activation; keep original fixture unchanged.",
+  "limitations": [
+    "Separate from Q31/M27 accepted-write255 seed.",
+    "This input is a private TOOL test capability only, absent by default and inaccessible from ordinary Source/route/request/header/options.",
+    "Exercise the actual observer ordinal guard; never synthesize q0.X or final row from case ID or expected DATA.",
+    "No new transition budget, pair cap, timer, public contract, Source wiring or native replay permitted.",
+    "B2 must prove seam exclusion/removal from ordinary mounted code; only separately nominated native inert counter seed255 is allowed by current native schedule."
+  ],
+  "expectedQA": "q0.X",
+  "expectedRow": "p1.X.T3.-----",
+  "expectationsChanged": false,
+  "Source5": 5,
+  "OWN5": 5,
+  "StageB": 5
+}

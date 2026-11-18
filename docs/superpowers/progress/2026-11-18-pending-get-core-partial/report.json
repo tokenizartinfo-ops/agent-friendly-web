@@ -1,0 +1,29 @@
+{
+  "schema": "AFW.B1.DEFENSIVE_CODEC.REVIEW/1",
+  "status": "PARTIAL_PROPOSAL_NOT_RUN",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "design": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+  "grammar": "46d561bfa65f1dd402163fa25e7d6e946b61c2d6",
+  "q32Ruling": "f08c0945cd7021376723870eeebedac9de158b7c",
+  "proposedAdditions": [
+    {
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/private-wire-parser.mjs",
+      "mode": "100644",
+      "size": 2815,
+      "git": "18a40467a2900a3e1265f7b90cb115ac072b8858",
+      "sha256": "f79c487d50f034cad53752408bc2ac2c521ca3698a107ccc08dc7655344f57c0",
+      "fullReadback": true
+    }
+  ],
+  "interface": "parseMain, parseQa, parseRow and isQaTuple validate supplied strings. isEpoch and isUuid validate correlation syntax. No I/O, mutation of supplied arguments, capture, query, observer hooks, routes, jobs, scheduling or status inference.",
+  "staticReview": [
+    "Fixed field lengths precede parsing. Character sets and phase/ordinal/stage combinations are closed. An LF is permitted only as the final byte of a complete persisted row.",
+    "A caller must establish provenance, freshness, one-shot identity and custody independently. Equal strings alone cannot authenticate any field.",
+    "The earlier runner verifies environment and namespaces. Its child shares the runner filesystem identity, so those checks are insufficient on their own to prove absence of credential-file access."
+  ],
+  "scope": "Syntax and tuple validation only. No targeted race instrumentation or replay supplied for the protected owner authorization flow. No native claim, MODEL pass, or authorization to run. No refs, commits, trees, runs or local files created.",
+  "inverse": "No base mutation. Omit this single proposed addition to restore the base path set."
+}
