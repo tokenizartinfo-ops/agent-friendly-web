@@ -1,0 +1,80 @@
+{
+  "schema": "AFW.PENDING_GET.B1.FIX1_BRIEF/1",
+  "atUTC": "2026-11-18 13:21:38 UTC",
+  "taskBrief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+  "review": "44db4b8fa86ebbd0e37649e9f4639d4e47a06e22",
+  "fixBase": {
+    "manifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
+    "graph": "936001297183dffab0e06da5011b2a1ca500a100",
+    "report": "709bafefde2dc4b182163aefd7ba559a61694dd6",
+    "reviewPackage": "5fd9d6ffd7f0a6f889fc7d7b1301df13260fa944"
+  },
+  "round": 1,
+  "maxRounds": 5,
+  "openFindingsVerbatim": [
+    {
+      "severity": "IMPORTANT",
+      "tracks": [
+        "SPEC",
+        "QUALITY"
+      ],
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs",
+      "line": 77,
+      "endLine": 94,
+      "title": "The synchronous read exception can replace a terminal host row",
+      "evidence": "startRead sets waiting and invokes an adapter. That adapter can synchronously report completeRead('timeout') or a reply, which stages the first terminal row. If the adapter then throws, the catch unconditionally calls stage('V'), bypassing the waiting guard in completeRead. A staged timeout can become V and a row already admitted by reentrant adapter code can be staged again after admit closed the mailbox.",
+      "impact": "A subsequent adapter outcome changes the one-shot result and can break the at-most-one admitted row invariant. The sealed H50 path exercises a late completeRead call and H56 exercises an initial throw. Neither covers a completion followed by the exception path in the same local callback.",
+      "fix": "Route the caught invocation failure through the same waiting-only completion transition, or add the equivalent state check before staging V. Add a local regression subcheck for first completion followed by throw, including the closed-state guard if called reentrantly. Keep the sealed H50 and H56 rows and their meanings unchanged."
+    },
+    {
+      "severity": "IMPORTANT",
+      "tracks": [
+        "SPEC",
+        "QUALITY"
+      ],
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "line": 77,
+      "endLine": 113,
+      "title": "Host rejection vectors do not enforce zero premature header reads",
+      "evidence": "The first readMain callback asserts the Response identity inside the host's exception handler and then increments headerCopies. Its final assertion only checks headerCopies <= 1. A regression that copies the header before a failed identity, count, journal or cutoff gate can still yield the sealed null row and zero queries. It would pass these checks. A wrong Response identity can also be swallowed before the counter is incremented.",
+      "impact": "The model can report the negative gate vectors as completed while violating their promised fail-closed copy ordering. H15 through H28 and H54, H55 and H57 include relevant controls. Validly qualified missing or malformed M still requires one copy to classify it.",
+      "fix": "Track the exact response identity and invocation count before any callback assertions can be swallowed. Assert exact zero or one copy for each model variant based on its independent admission facts. Keep the sealed expected row and query values. Count every startRead callback entry before validating its captured arguments outside the called function."
+    },
+    {
+      "severity": "MINOR",
+      "tracks": [
+        "QUALITY"
+      ],
+      "path": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+      "line": 29,
+      "title": "The setup-node input does not exist on the pinned action",
+      "evidence": "The pinned action.yml recognizes cache and cache-dependency-path. It has no package-manager-cache input. The existing omission of cache already keeps the pinned action's caching opt-in.",
+      "impact": "The extra option can cause an unexpected-input warning and gives the workflow a misleading cache setting.",
+      "fix": "Remove the unsupported package-manager-cache line. Preserve the pinned action and omit cache.",
+      "source": "https://github.com/actions/setup-node/blob/49933ea5288caeca8642d1e84afbd3f7d6820020/action.yml"
+    }
+  ],
+  "scope": "Fix the two Important findings in host-core.mjs and host-model.mjs; remove the unsupported setup-node input as same small fix wave. Keep M/QA/factory/codecs, sealed134 DATA, their labels/oracles, original Source13, defaults, clocks and proposed branch/message unchanged. Metadata manifest/graph/report update as needed; no refs/runs or new Source wiring.",
+  "coveringTests": [
+    "host-model.mjs H50/H56 completion-then-throw internal alternatives, including reentrant admit/closed state",
+    "host-model.mjs exact readMain and startRead invocation/argument assertions outside callbacks for all relevant fixed model variants"
+  ],
+  "testFirstAndEvidence": {
+    "instruction": "Write the covering local regression subchecks before editing host logic. The B1 feature remains in its observed RED implementation phase: no prototype GREEN has run. Author must not execute anything; report exact future command, code paths and NOT_RUN. Root alone later qualifies actual finite MODEL results. Do not claim a new regression RED was already observed.",
+    "optionalMeaningfulCounterexample": "If practical within the same134 labels and bounds, retain the exact pre-fix host as fixed DATA/module input solely to check that the new completion-then-throw assertion rejects its overwritten result before checking the corrected host in the eventual Root GHA. No native replay or timer needed. Do not add unchecked broad test infrastructure or change oracle to fit code."
+  },
+  "requirements": [
+    "First terminal outcome is immutable even when synchronous invoke completes and subsequently throws, including already admitted/closed state; first throw while waiting still stages V as sealed H56.",
+    "Record every readMain/startRead callback entry and actual arguments before any assertion; assert actual response/key identities outside any Core exception-swallow boundary. Exact0copies for failed preconditions, exact1whenM must be read to classify missing/malformed/keyed metadata, all from independent sealed case facts.",
+    "Original expected row/query outputs preserved. Add internal alternative subchecks, not new sealed labels or case-dependent production logic.",
+    "Preserve full old report; append bounded fix report or separate append-only supplement linked to original if size would exceed24576. Include covering tests, future exact command, NOT_RUN output/status, old/new source tuples and exact reversible fix delta against reviewed base, plus full updated20+ body graph and hashes/readback.",
+    "No Source/core/harness execution/import/eval/AST/syntax/tests/builds on ANY executor; literal text/JSON DATA/RAM hashes only. No refs/trees/commits/runs/auth/otherprojects/subagents. Root controller does not write fixes."
+  ],
+  "oldCounters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  },
+  "B1ExecutionReleased": false
+}

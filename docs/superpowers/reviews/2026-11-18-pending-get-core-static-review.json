@@ -1,0 +1,92 @@
+{
+  "schema": "AFW.PENDING_GET.B1.STATIC_SPEC_AND_QUALITY_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "Detached Git DATA for B1 synchronous observer and MODEL harness",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "Git blob",
+    "RESOURCE_ID": "review of package 5fd9d6ffd7f0a6f889fc7d7b1301df13260fa944",
+    "ALLOWED_ACTION": "Persist and fully read back this detached review only",
+    "ROLLBACK": "Leave this review detached. Apply no tree or ref changes."
+  },
+  "pins": {
+    "package": "5fd9d6ffd7f0a6f889fc7d7b1301df13260fa944",
+    "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
+    "authorReport": "709bafefde2dc4b182163aefd7ba559a61694dd6",
+    "manifest": "1aa9f812a1041cf8717ee4de2686b04b745fb784",
+    "graph": "936001297183dffab0e06da5011b2a1ca500a100",
+    "rootMeasurement": "6a9410c128786d7f659c29c9fb8d7b8b2b89452f",
+    "design": "4bc09a1df89e4fe5eef57d95e238a2718d01e62e",
+    "q32": "f08c0945cd7021376723870eeebedac9de158b7c",
+    "acceptedActualRedReview": "e1d37b68e3524607b200913f5514b252fe5118ca"
+  },
+  "verdicts": {
+    "SPEC": {
+      "verdict": "FAIL",
+      "why": "The host exception path can override a terminal read outcome and can reopen row admission. This violates the one-shot contract. The sealed negative host drivers also fail to enforce the exact zero-copy side-effect condition."
+    },
+    "QUALITY": {
+      "verdict": "FAIL",
+      "why": "The host transition and the corresponding regression assertions require a fix before the one-use admission. One workflow input also needs a small correction."
+    }
+  },
+  "findings": [
+    {
+      "severity": "IMPORTANT",
+      "tracks": [
+        "SPEC",
+        "QUALITY"
+      ],
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-core.mjs",
+      "line": 77,
+      "endLine": 94,
+      "title": "The synchronous read exception can replace a terminal host row",
+      "evidence": "startRead sets waiting and invokes an adapter. That adapter can synchronously report completeRead('timeout') or a reply, which stages the first terminal row. If the adapter then throws, the catch unconditionally calls stage('V'), bypassing the waiting guard in completeRead. A staged timeout can become V and a row already admitted by reentrant adapter code can be staged again after admit closed the mailbox.",
+      "impact": "A subsequent adapter outcome changes the one-shot result and can break the at-most-one admitted row invariant. The sealed H50 path exercises a late completeRead call and H56 exercises an initial throw. Neither covers a completion followed by the exception path in the same local callback.",
+      "fix": "Route the caught invocation failure through the same waiting-only completion transition, or add the equivalent state check before staging V. Add a local regression subcheck for first completion followed by throw, including the closed-state guard if called reentrantly. Keep the sealed H50 and H56 rows and their meanings unchanged."
+    },
+    {
+      "severity": "IMPORTANT",
+      "tracks": [
+        "SPEC",
+        "QUALITY"
+      ],
+      "path": "docs/superpowers/source-lab/c2-pending-get-model-green1/host-model.mjs",
+      "line": 77,
+      "endLine": 113,
+      "title": "Host rejection vectors do not enforce zero premature header reads",
+      "evidence": "The first readMain callback asserts the Response identity inside the host's exception handler and then increments headerCopies. Its final assertion only checks headerCopies <= 1. A regression that copies the header before a failed identity, count, journal or cutoff gate can still yield the sealed null row and zero queries. It would pass these checks. A wrong Response identity can also be swallowed before the counter is incremented.",
+      "impact": "The model can report the negative gate vectors as completed while violating their promised fail-closed copy ordering. H15 through H28 and H54, H55 and H57 include relevant controls. Validly qualified missing or malformed M still requires one copy to classify it.",
+      "fix": "Track the exact response identity and invocation count before any callback assertions can be swallowed. Assert exact zero or one copy for each model variant based on its independent admission facts. Keep the sealed expected row and query values. Count every startRead callback entry before validating its captured arguments outside the called function."
+    },
+    {
+      "severity": "MINOR",
+      "tracks": [
+        "QUALITY"
+      ],
+      "path": ".github/workflows/afw-c2-pending-get-model-green1.yml",
+      "line": 29,
+      "title": "The setup-node input does not exist on the pinned action",
+      "evidence": "The pinned action.yml recognizes cache and cache-dependency-path. It has no package-manager-cache input. The existing omission of cache already keeps the pinned action's caching opt-in.",
+      "impact": "The extra option can cause an unexpected-input warning and gives the workflow a misleading cache setting.",
+      "fix": "Remove the unsupported package-manager-cache line. Preserve the pinned action and omit cache.",
+      "source": "https://github.com/actions/setup-node/blob/49933ea5288caeca8642d1e84afbd3f7d6820020/action.yml"
+    }
+  ],
+  "staticChecks": [
+    "All four diff parts were inspected. The fifteen authored additions match their full blob readbacks, including the manifest, and the five reused input blobs were read by exact pin. The independently reconstructed eleven ASCII insertions transform the 3,927-byte original factory into the 4,368-byte proposed factory and the inverse reconstructs the original byte for byte. All 20 configured file sizes match. The 22-object digest graph and the BASE tree and path census use the supplied Root measurement.",
+    "The B1 factory runs its original getter/identity/admission logic and writes g1 on the original Headers before the optional private write. Default-off leaves the original observer object methods in place and allocates no private M state. The M path uses at most two fixed candidate snapshots selected by exact legacy race error. It keeps the normal read ladder, original g1 collision and duplicate-response guards. The M25 test distinguishes retention of the first physical header from the prohibited duplicate emission. The private header relies on the documented original local Response construction premise, which B2 must establish.",
+    "QA models the exact options identity, ordinal and aggregate phase edges, bounded overflow and terminal invalidation. The isolated Q32 seed places C/3F/c/S0 at budget zero before invoking the actual ordinal guard. Q31 and M27 separately exercise attempted write 256 at seed 255. The code has no business effect, clock, route or protected-data operation.",
+    "The child loops through the sealed 30 M, 35 QA, 57 host and 12 row-file labels against the real core. M01 uses native Request/Error/Response and the original identity chain, asserts the sealed 503/g1/private-header sequence, and exposes the observed private-header digest after strict comparison. The other vectors use symbolic boundaries and hand supplied model facts. Q27's absence of a reaction remains a symbolic adapter condition with native fallback provenance held for B2.",
+    "The runner text nominates a bounded Node 22.23.4 attempt-1 push, pins inputs and fixed additions, reuses scoped PID/network/UID custody, projects sanitized failure fields, verifies named child and temp closure, and gates zero exit on complete case/M01 evidence, regular-file readback and a fixed exact carrier. Shared file identity is explicit. Any cutoff or unsuccessful closure fails CI. Actual availability, checks, output and artifact delivery need an independent execution gate."
+  ],
+  "release": "Hold this immutable B1 candidate. Close both Important findings through a new detached candidate and re-review the exact changes before considering the one-use GHA gate. No execution was released by this check.",
+  "boundaries": "Read-only text and JSON DATA review. No Source, proposed core, harness or test execution, import, evaluation, AST or syntax parsing or builds occurred. No refs, trees, commits or runs were touched. MODEL GREEN remains unobserved. B2 wiring, native actor/source callbacks, Source qualification, Task1, product behavior and PC-off evidence remain outside this review.",
+  "counters": {
+    "Source": 5,
+    "OWN": 5,
+    "StageB": 5,
+    "reset": false
+  }
+}

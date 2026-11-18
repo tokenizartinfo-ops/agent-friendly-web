@@ -1,10 +1,10 @@
 {
   "schema": 60,
-  "timestampUTC": "2026-11-18 13:13:49 UTC",
+  "timestampUTC": "2026-11-18 13:22:48 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "52710b2d18aa1b4531669fea244a3f4aa90150c0",
-  "phase": "PENDING_GET_CORE_MODEL_STATIC_REVIEW",
+  "previousCheckpoint": "2ffb563d8dff6b8839b5d7313f89efa427246836",
+  "phase": "PENDING_GET_CORE_MODEL_FIX1",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independent SPEC/QUALITY review of actual B1 core+134 model drivers and finite trusted-code runner. Only after approval may Root gate a new MODEL GREEN cloud run and closed restoration. B2/native Source integration remains held.",
+  "next": "Original B1 implementer fixes host terminal-state guard and exact side-effect regression assertions plus small workflow input. Scoped fix1 re-review before any MODEL GREEN activation. No business/native run active.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -1411,7 +1411,7 @@
       "rootAcceptance": "c4a19b5b0755c5058abb1f3f20340892f5680531"
     },
     "pendingAwaitCoreModel": {
-      "status": "STATIC_REVIEW_RUNNING",
+      "status": "FIX1_RUNNING_EXECUTION_HELD",
       "brief": "206df8e200cc5a820fc5675b5f1bfe869c5463dd",
       "actor": "/root/pending_get_core_model_complete",
       "nomination": {
@@ -1470,11 +1470,34 @@
         "insertions": 11,
         "addedBytes": 441,
         "forwardInverseVerified": true
-      }
+      },
+      "review": "44db4b8fa86ebbd0e37649e9f4639d4e47a06e22",
+      "SPEC": "FAIL_STATIC",
+      "QUALITY": "FAIL_STATIC",
+      "fixRound": 1,
+      "maxFixRounds": 5,
+      "fixBrief": "94b5aa6194889e66a6ced472ada5d7d58d762e69",
+      "openFindings": [
+        {
+          "id": "B1-HOST-TERMINAL",
+          "severity": "IMPORTANT",
+          "summary": "Synchronous invocation throw can overwrite/reopen a completed host row"
+        },
+        {
+          "id": "B1-HOST-COPY-TEST",
+          "severity": "IMPORTANT",
+          "summary": "Negative model assertions must enforce exact0 copies and capture actual callback args outside catch"
+        },
+        {
+          "id": "B1-WORKFLOW-INPUT",
+          "severity": "MINOR",
+          "summary": "Remove unsupported package-manager-cache"
+        }
+      ]
     }
   },
-  "schemaVersion": 125,
-  "updatedAtUTC": "2026-11-18 13:13:49 UTC",
+  "schemaVersion": 126,
+  "updatedAtUTC": "2026-11-18 13:22:48 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
