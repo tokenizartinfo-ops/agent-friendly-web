@@ -1,27 +1,9 @@
-name: AFW private expediente setup validation
-on:
-  push:
-    branches: [lab/afw-private-expediente-setup-20261118]
-permissions:
-  contents: read
+name: AFW private expediente setup verification closed
+on: workflow_dispatch
+permissions: {}
 jobs:
-  verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-PRIVATE-EXPEDIENTE-SETUP-BOUNDED-VERIFY-20261118' }}
+  closed:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify native closure and protected recovery
-        run: node --test --test-concurrency=2 --test-timeout=75000 test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-policy-entry-source.test.mjs test/mcp-qa-finite-adoption-source.test.mjs test/mcp-qa-finite-policy-prearm-material.test.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs test/mcp-qa-finite-owner-phase-context.test.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs test/build-finite-native-package.test.mjs
-      - name: Verify staging remains non-publishable
-        if: github.event.head_commit.message == 'AFW-PRIVATE-EXPEDIENTE-SETUP-BOUNDED-VERIFY-20261118'
-        run: |
-          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
-          node --input-type=module -e 'import {readFileSync} from "node:fs"; const x=JSON.parse(readFileSync("output/finite-native-staging/staging.json")); if(x.sourceRevision!==process.env.GITHUB_SHA||x.completePackage!==false||x.operationalReadiness!==false)process.exit(1); console.log(JSON.stringify({revision:x.sourceRevision,completePackage:x.completePackage,operationalReadiness:x.operationalReadiness}));'
+      - run: exit 1
