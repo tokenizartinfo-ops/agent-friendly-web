@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "437fb365aeb38c513c7655052391cc1b8ab9e630",
-  "phase": "TASK3_FULL20_EXACT_GATE_PREPARED",
+  "previousCheckpoint": "3b2325386a7272ed9e3c7d98afa1f4acf3003c75",
+  "phase": "TASK3_FULL20_CAS_INTENT_SAVED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -1127,15 +1127,18 @@
         "carrierRootAcceptance": "7e15271751901b0debbb5ce7b0a76c25d7c25140",
         "actualOwnReviewPending": false,
         "activationReleased": true,
-        "activationAttempted": false,
-        "refCreated": false,
+        "activationAttempted": true,
+        "refCreated": true,
         "unattached": true,
         "tree": "d29ae038341bd7e3243e0d7cd056793019646540",
         "fullTreeVerified": true,
         "original3203Preserved": true,
         "leaves": 3229,
         "head": "070de7b2165b9e401b893e5efa8d656c003b0f9a",
-        "gate": "9330cbbf6e2acc1c657cd6769bb34c8d970d2943"
+        "gate": "9330cbbf6e2acc1c657cd6769bb34c8d970d2943",
+        "refCreateAttempted": true,
+        "baseRefMatched": true,
+        "activationIntentAtUTC": "2026-11-18 00:31:53 UTC"
       },
       "nativeGate": "9330cbbf6e2acc1c657cd6769bb34c8d970d2943",
       "qualifiedOwnMemoryScope": "cfe56b0636e689f599a515969c9a619c7ba4ebf2",
@@ -1144,8 +1147,8 @@
       "PCoff": false
     }
   },
-  "schemaVersion": 103,
-  "updatedAtUTC": "2026-11-18 00:31:15 UTC",
+  "schemaVersion": 104,
+  "updatedAtUTC": "2026-11-18 00:31:53 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
