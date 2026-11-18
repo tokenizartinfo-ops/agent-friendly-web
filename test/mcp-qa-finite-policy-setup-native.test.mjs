@@ -150,3 +150,17 @@ test('native confirmation reads only a fully retained installation of the same n
  assert.deepEqual(await f.installedJournal('lost-upload-ack'),{status:'unavailable'});
  assert.equal(f.posts(),2);
 });
+
+for(const change of ['wrong-context','lost-selection-witness'])test('native installed source rejects '+change+' for the originally selected expediente',async t=>{
+ const f=await policyFixture(t),result=await f.run();
+ assert.equal(result.status,'installed');
+ const rows=await f.rows();
+ const initial=await f.installedSource('unchanged');
+ assert.equal(initial.status,'observed');
+ assert.equal(initial.receiptHash,result.receipt.receiptHash);
+ assert.equal(initial.original.T0,f.state.T0);
+ assert.equal(initial.original.monitorHash,(await import('../lib/mcp-qa-finite-preparation-records.mjs')).hashFiniteOwnerEvidence('event',f.state.notice));
+ assert.deepEqual(await f.rows(),rows);
+ assert.deepEqual(await f.installedSource(change),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});

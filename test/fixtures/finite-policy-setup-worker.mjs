@@ -1,4 +1,5 @@
 import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
+import {readPrivateQaFiniteInstalledPolicy} from '../../lib/mcp-qa-finite-installed-policy.mjs';
 import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
 import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {createHash} from 'node:crypto';
@@ -80,6 +81,22 @@ export class SetupFixture extends IndependentClosure{
   try{const record=await journal.readConfirmation(lease);return {status:'observed',receiptHash:record.receiptHash};}
   catch{return {status:'unavailable'};}
  }
+ async observeInstalledSource(mode){
+  const storage=this.ctx.storage,key='afw.qa-finite-policy-setup.v1:'+refs.intentId+':context';
+  if(mode==='wrong-context'){
+   const original=JSON.parse(await storage.get(key));
+   await storage.put(key,canonical({...original,seedHash:'9'.repeat(64)}));
+  }
+  if(mode==='lost-selection-witness'){
+   const {selection}=await storage.get('fixture:scenario');
+   await storage.delete('source-selection:'+refs.sourceRevision+':publication:'+selection.selectionHash);
+  }
+  const parent={signal:new AbortController().signal,check:Date.now,deadline:Date.now()+5000};
+  try{
+   const {receipt,original}=await readPrivateQaFiniteInstalledPolicy({ctx:this.ctx,env:this.env,refs,parent});
+   return {status:'observed',receiptHash:receipt.receiptHash,original};
+  }catch{return {status:'unavailable'};}
+ }
  async testMode(){return (await this.ctx.storage.get('fixture:scenario')).mode;}
  async hydrationState(){return hydrations.get(this.ctx)??{reads:0,lateDenied:0};}
  async rows(){return [...await this.ctx.storage.list()].filter(([k])=>k!=='fixture:scenario');}
@@ -88,6 +105,7 @@ const worker={async fetch(request,env,ctx){
  const path=new URL(request.url).pathname,actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
  if(path==='/init')return Response.json(await actor.initialize((await request.json()).mode));
  if(path==='/hydration')return Response.json(await actor.hydrationState());
+ if(path==='/installed-source')return Response.json(await actor.observeInstalledSource((await request.json()).mode));
  if(path==='/installed-journal')return Response.json(await actor.observeInstalledJournal((await request.json()).mode));
  if(path==='/rows')return Response.json(await actor.rows());
  const {T0,direct}=await request.json();if(direct)return Response.json(await actor.setupFinitePrivatePolicy(refs));

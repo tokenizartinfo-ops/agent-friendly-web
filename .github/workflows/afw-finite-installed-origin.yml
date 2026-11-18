@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-FINITE-INSTALLED-ORIGIN-RED-20261118' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-FINITE-INSTALLED-ORIGIN-VERIFY-20261118' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
@@ -19,9 +19,9 @@ jobs:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify native closure and protected recovery
-        run: node --test --test-concurrency=2 --test-timeout=75000 --test-name-pattern='native confirmation reads only' test/mcp-qa-finite-policy-setup-native.test.mjs
+        run: node --test --test-concurrency=2 --test-timeout=75000 test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-adoption-source.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/build-finite-native-package.test.mjs
       - name: Verify staging remains non-publishable
-        if: github.event.head_commit.message == 'AFW-FINITE-INSTALLED-ORIGIN-RED-20261118'
+        if: github.event.head_commit.message == 'AFW-FINITE-INSTALLED-ORIGIN-VERIFY-20261118'
         run: |
           node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
           node --input-type=module -e 'import {readFileSync} from "node:fs"; const x=JSON.parse(readFileSync("output/finite-native-staging/staging.json")); if(x.sourceRevision!==process.env.GITHUB_SHA||x.completePackage!==false||x.operationalReadiness!==false)process.exit(1); console.log(JSON.stringify({revision:x.sourceRevision,completePackage:x.completePackage,operationalReadiness:x.operationalReadiness}));'
