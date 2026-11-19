@@ -1,19 +1,23 @@
 {
   "schema": "afw.finite-progress.bootstrap-renewal-and-signed-callback.v1",
-  "atUTC": "2026-11-19T22:34:32.159Z",
+  "atUTC": "2026-11-19T22:50:08.510Z",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "priorCheckpoint": "docs/superpowers/progress/2026-11-19-afw-final-primary-and-r2-draft.json",
   "source": {
     "branch": "lab/afw-finite-alarm-handoff-20261118",
-    "revision": "4a4ce68fd30eacc3f01735796c94d79c58d63161",
-    "diagnosticTip": "eeddf3dbf7b0c9a9d73f5b6a199fb0e3d68ebf71",
+    "revision": "34851ffe792d34d5791d5c628f3a481c13b66dc7",
     "mainUnchanged": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
     "conditions": [
       "Choose the source-approved credential pair from the original occurrence date; legacy entries are decoded under their original window.",
       "The protected bootstrap workflow checks both exact identities and scoped GETs before the original command.",
       "The canary inherits its callback secret only from the exact private closed donor, after checking the same baseline bytes and remaining configuration.",
       "Closed archive validation uses the R2 configuration fingerprint and preserves the original restoration fingerprint in retained records."
+    ],
+    "closedLabHead": "b9d70d95bc2811dc5b8beb95bb670238bba8783d",
+    "exactCodeVerificationRevision": "75849b06f9aa1427c851170e7802f8f8468d32b3",
+    "verificationDifferenceFromDraft": [
+      ".github/workflows/afw-finite-alarm-handoff.yml"
     ]
   },
   "credentialCustody": {
@@ -73,8 +77,8 @@
     },
     "freshExactSourceDraft": {
       "completePackage": false,
-      "draftBytes": 2021071,
-      "draftSha256": "1f8b331ce8d9ac21764032c6cbae14eaed2817763115f6fe57f7231223d28015",
+      "draftBytes": 2021079,
+      "draftSha256": "076a9c5ad1dcd3a43f45032d4761b49fd11e6c657438ceec592a36224ac21a2d",
       "files": {
         "canaryClosed/index.mjs": {
           "bytes": 1830202,
@@ -82,7 +86,7 @@
         },
         "canaryLive/index.mjs": {
           "bytes": 1674967,
-          "sha256": "e8ff573580d18ef2ddbffa8e221fd6a41739d331e9c34a775e4c9290918e4774"
+          "sha256": "fabb63019818403bbf1e7b6fb1a8b178ba67ce9000ef550469f0bfd3b59d959b"
         },
         "operatorClosed/index.mjs": {
           "bytes": 1971922,
@@ -93,16 +97,16 @@
           "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
         },
         "qaLive/index.mjs": {
-          "bytes": 2554803,
-          "sha256": "f62193b30ba8dd13e9c4a7a591d93fc9c77612f18861bdc97404336fbb3d1538"
+          "bytes": 2554846,
+          "sha256": "e18a4657f53014e43fa98cb34c27b7037a0a84ab204ce170ab85ac376031b90e"
         }
       },
       "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
       "moduleCount": 5,
       "operationalReadiness": false,
       "purpose": "afw.finite-native-private-draft.v1",
-      "sourceRevision": "4a4ce68fd30eacc3f01735796c94d79c58d63161",
-      "sourceTree": "4ab0dbc01fb75751e4004913023bd5feb0577486"
+      "sourceRevision": "34851ffe792d34d5791d5c628f3a481c13b66dc7",
+      "sourceTree": "30358648c969a4cb32bef1d943e99808fff4b9be"
     },
     "closedConfigurationDigests": {
       "atUTC": "2026-11-19T22:25:21.948Z",
@@ -149,19 +153,36 @@
       "pass": 2,
       "fail": 0
     },
-    "lastFull": {
-      "runId": 44628636600,
-      "passed": 832,
-      "failed": 12,
-      "cancelled": 5,
-      "result": "failure"
+    "criticalOriginalAlarmAndRollback": {
+      "runId": 44630137676,
+      "jobId": 135934257524,
+      "passed": 6,
+      "failures": 0
     },
-    "nextSyntheticCleanupDiagnosticRunId": 44629774002,
-    "priorDiagnostics": [
-      44625881290,
-      44628143078
+    "lastFull": {
+      "runId": 44631458265,
+      "jsPassed": 941,
+      "pythonPassed": 5,
+      "failed": 0,
+      "cancelled": 0,
+      "completedJobs": 8,
+      "result": "success",
+      "stagingVerified": true,
+      "completePackageAttemptRejected": true
+    },
+    "interimRegressionRuns": [
+      44623490888,
+      44624477532,
+      44626975648,
+      44627735016,
+      44628636600
     ],
-    "lastBlocker": "Original native alarm and rollback returned admin_pending in full CI, so end-to-end native approval is still blocked."
+    "diagnosticRuns": [
+      44625881290,
+      44628143078,
+      44629774002
+    ],
+    "intermediates": "The remaining seven cancellations were test-file runner deadlines. Each file ran in a separate bounded job at the same source, without changing any runtime deadline."
   },
   "protectedRuntimeReadback": {
     "atUTC": "2026-11-19T22:30:57.481Z",
@@ -183,11 +204,12 @@
       }
     ]
   },
-  "next": "Find the first failing guard in the original synthetic alarm, correct the matching source or fixture, validate the complete archive-backed package and run one closed protected preflight before a new synthetic occurrence.",
+  "next": "Qualify and enable the private full-package output, then verify the exact protected GitHub secret identities from the authorized cloud executor, mount the closed QA candidate and prove the signed receiver and one original cloud occurrence.",
   "completePackage": false,
   "realCloudTrial": false,
   "sameNoticeReviewedInRealTrial": false,
   "subscriptionWithdrawnInNewTrial": false,
   "PCoff": false,
-  "operationalReadiness": false
+  "operationalReadiness": false,
+  "remainingReleaseGate": "The full compiler and native source profile still refuse an eligible release artifact. The byte-verified R2 draft and native synthetic rollback evidence do not authorize deploying the open QA package or starting a real trial."
 }

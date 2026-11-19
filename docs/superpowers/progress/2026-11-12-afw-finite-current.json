@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-final-primary-and-r2-draft.json",
-  "phase": "Scoped QA bootstrap reader and publisher are active in Cloudflare and stored in the protected GitHub environment. The original occurrence window is wired, exact R2-backed source draft verified; native alarm and deployment package remain gated.",
+  "phase": "QA credential pair renewed in protected GitHub and pinned in source. Archive-backed exact draft verified, all source and native rollback tests passed, complete-package emission and real cloud acceptance remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Find the first failing guard in the original synthetic alarm, correct the matching source or fixture, validate the complete archive-backed package and run one closed protected preflight before a new synthetic occurrence.",
+  "next": "Qualify and enable the private full-package output, then verify the exact protected GitHub secret identities from the authorized cloud executor, mount the closed QA candidate and prove the signed receiver and one original cloud occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1822,7 +1822,7 @@
     }
   },
   "schemaVersion": 186,
-  "updatedAtUTC": "2026-11-19T22:34:32.159Z",
+  "updatedAtUTC": "2026-11-19T22:50:08.510Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2704,10 +2704,10 @@
   },
   "bootstrapRenewalAndSignedCallback": {
     "path": "docs/superpowers/progress/2026-11-19-afw-bootstrap-renewal-and-signed-callback.json",
-    "revision": "4a4ce68fd30eacc3f01735796c94d79c58d63161",
-    "verificationRun": 44628636600,
-    "diagnosticRun": 44629774002,
-    "privateR2DraftSha256": "1f8b331ce8d9ac21764032c6cbae14eaed2817763115f6fe57f7231223d28015",
+    "revision": "34851ffe792d34d5791d5c628f3a481c13b66dc7",
+    "closedLabHead": "b9d70d95bc2811dc5b8beb95bb670238bba8783d",
+    "verificationRun": 44631458265,
+    "privateR2DraftSha256": "076a9c5ad1dcd3a43f45032d4761b49fd11e6c657438ceec592a36224ac21a2d",
     "completePackage": false,
     "realCloudTrial": false
   }
