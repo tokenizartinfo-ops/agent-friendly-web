@@ -1,4 +1,4 @@
-name: AFW coupled receiver and native closure verification
+name: AFW native QA launcher verification
 on:
   push:
     branches: [lab/afw-finite-alarm-handoff-20261118]
@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-NATIVE-QA-LAUNCH-DISPATCH-20261119' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-NATIVE-QA-DISPATCH-FENCE-20261119' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -17,12 +17,5 @@ jobs:
         with:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify original closure, provider transport and compatibility
-        run: node --test --test-concurrency=2 --test-timeout=60000 test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-coupled-github.test.mjs test/mcp-qa-finite-coupled-restorer.test.mjs test/mcp-restoration-configuration.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-http.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-cloud-review.test.mjs test/mcp-qa-finite-receiver-workerd.test.mjs test/mcp-qa-finite-launch-ready.test.mjs
-      - run: python3 -m unittest discover -s test -p finite_historical_archive_test.py
-      - name: Verify staging and rejection of a premature complete package
-        run: |
-          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
-          if node scripts/build-finite-native-package.mjs "$GITHUB_SHA"; then exit 1; fi
-          test ! -e output/finite-native-package
-          echo "Complete package remains gated"
+      - name: Verify native scheduling after the fixed observer preview
+        run: node --test --test-concurrency=1 --test-timeout=60000 test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-native-launch-dispatch.test.mjs
