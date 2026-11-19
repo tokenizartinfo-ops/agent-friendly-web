@@ -208,6 +208,7 @@ test('the original alarm qualifies only the retained restoration with its own ex
  const key='afw.finite-original-alarm-handoff.v1:prior-restoration';
  const exact={id:result.deploymentId,strategy:'percentage',versions:[{version_id:result.versionId,percentage:100}],
   annotations:{'workers/message':result.annotation}};
+ f.storage.sync=async()=>{};
  const retain=readCurrentDeployment=>evidence.retainPrivateQaFinitePriorRestoration({ctx:f.ctx,env:f.env,check,readCurrentDeployment});
  await assert.rejects(()=>retain(async()=>({...exact,id:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'})));
  assert.equal(f.rows.has(key),false);
@@ -234,9 +235,10 @@ test('an issued business SEND without retained completion leaves original recove
  assert.equal(typeof evidence.readPrivateQaFiniteBusinessRestoreEvidence,'function');
  const x=await setup({coupled:true,missing:'withdraw'}),{f}=x;
  f.setNow(x.handoff.initialC0);
+ const scheduled=f.alarm;
  const snapshot=()=>evidence.readPrivateQaFiniteBusinessRestoreEvidence({ctx:f.ctx,env:f.env,check:f.now});
  assert.equal((await snapshot()).kind,'no_restore');
  f.rows.set('afw.qa-finite-canary.v1:'+f.plan.intentId+':send',{purpose:'afw.finite-canary-send.v1'});
  assert.equal((await snapshot()).kind,'ambiguous');
- assert.equal(f.alarm,x.handoff.initialC0);
+ assert.equal(f.alarm,scheduled);
 });

@@ -20,6 +20,8 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify native closure and protected recovery
         run: node --test --test-concurrency=2 --test-timeout=75000 test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-canary-restorer.test.mjs test/build-finite-native-package.test.mjs
+      - name: Verify original cleanup regressions
+        run: node --test --test-timeout=240000 test/mcp-qa-finite-initial-cleanup-native.test.mjs
       - name: Verify staging remains non-publishable
         if: github.event.head_commit.message == 'AFW-FINITE-NATIVE-ALARM-HANDOFF-VERIFY-20261118'
         run: |

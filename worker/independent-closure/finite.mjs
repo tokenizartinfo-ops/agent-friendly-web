@@ -52,7 +52,12 @@ export class IndependentClosure extends ClosedIndependentClosure{
    // No business callback may consume the only physical alarm while original
    // recovery is still owed. The due original route needs its own handler.
    const delivery=await protectPrivateQaFiniteBusinessAlarm({storage:this.ctx.storage,actorId:this.ctx.id.toString(),qaVersionId:this.env.AFW_QA_VERSION?.id});
-   if(!delivery||delivery.kind==='original_due')throw Error('Finite original recovery requires reconciliation');
+   if(!delivery)throw Error('Finite original recovery requires reconciliation');
+   if(delivery.kind==='original_due'){
+    await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});
+    // An independent observation alone cannot acknowledge native recovery.
+    throw Error('Finite original recovery requires reconciliation');
+   }
    if(delivery.kind==='business')return super.alarm();
    return {status:'admin_pending',operationalReadiness:false};
   }
