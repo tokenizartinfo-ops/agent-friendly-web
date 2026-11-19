@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 17:18:07 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "1ba08c14c628726b4af51da9498ca3bb19320df8",
+  "closed": "24dd5144eec4ed5e400579c026294666e00ac088",
+  "authorization": {
+    "providerReadyReusedWithinOriginalInvocation": true,
+    "originalPermissionChecksPreserved": true,
+    "writeRequiresFixedLaunchOperationProducer": true,
+    "writeRequiresNativeQaGuardMount": true,
+    "blockedBeforeDispatchJournal": true
+  },
+  "verification": {
+    "run": 44574936527,
+    "job": 135739752975,
+    "nodePassed": 340,
+    "pythonPassed": 5,
+    "regressionRun": 44574175946,
+    "regressionFailures": 2,
+    "stagingBuilt": true,
+    "prematureCompletePackageRejected": true
+  },
+  "rollback": {
+    "archiveReadback": {
+      "verified": true,
+      "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "bytes": 4209422,
+      "readbackConfirmedAtUTC": "2026-11-19 17:16:53 UTC"
+    },
+    "protectedR2ReadUrlPresent": false,
+    "packageReadR2": false
+  },
+  "custody": {
+    "qaCredentialLastProviderState": "expired",
+    "qaCredentialLastGitHubSecretUpdate": "2026-10-31T15:54:32Z",
+    "revalidatedEnvironmentMetadata": true
+  },
+  "remaining": [
+    "Mount real admission, nominal and effect composition and native canary proof/QA guard using retained actual evidence.",
+    "Activate the exact private receiver policy only inside the qualified finite trial.",
+    "Validate credential and protected R2 link through the complete package and prove the closed restoration.",
+    "In a single real cloud trial correlate receive and review for the same notice, then verify native subscription withdrawal."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

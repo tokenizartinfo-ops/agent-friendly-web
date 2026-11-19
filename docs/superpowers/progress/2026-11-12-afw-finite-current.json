@@ -1,10 +1,10 @@
 {
-  "schema": 70,
-  "timestampUTC": "2026-11-19 17:05:03 UTC",
+  "schema": 71,
+  "timestampUTC": "2026-11-19 17:18:07 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d5c05158c556af082eb4bf7e1355aa03a0aea6f9",
-  "phase": "The fixed QA launch source supplies primary read-only evidence of the original subscription, immutable process generation and exact saved event. Full native admission, cleanup proof and credentialed package remain gated.",
+  "previousCheckpoint": "1621fc91000cc7aaf432a71f59ac792856b0ee88",
+  "phase": "QA reuses the original verified READY receipt for launch authorization and refuses nominal dispatch before writing an intent when either the source operation producer or the native QA guard is absent. The exact preserved R2 object was independently read and hashed again.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Wire the real admission/finalizer/effect source with the native guard, and authority for the canary closure proof, before replacing scoped QA credentials and R2 access for one complete cloud trial.",
+  "next": "Mount qualified native launch/guard/proof adapters and align receiver policy, then validate the complete package and restoration from current protected credentials before the real one-notice trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2545,6 +2545,16 @@
     "run": 44572908653,
     "tests": 335,
     "sourceConnected": true,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeLaunchAuthorization": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-launch-authorization.json",
+    "source": "1ba08c14c628726b4af51da9498ca3bb19320df8",
+    "closed": "24dd5144eec4ed5e400579c026294666e00ac088",
+    "run": 44574936527,
+    "tests": 345,
+    "r2ArchiveReadback": true,
     "completePackage": false,
     "realCloudTrial": false
   }
