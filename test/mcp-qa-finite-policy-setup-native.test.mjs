@@ -196,3 +196,13 @@ test('coupled original cleanup cannot borrow a fabricated owner snapshot in the 
  assert.deepEqual(await f.installedSource('lineage-fabricated-owner'),{denied:true,preserved:true});
  assert.equal(f.posts(),before);
 });
+
+for(const mode of ['original-restore-acknowledged','original-restore-lost-ack'])test('compiled original restore owns one durable SEND: '+mode,async t=>{
+ const f=await policyFixture(t,mode);
+ assert.equal((await f.run()).status,'installed');
+ const before=f.posts(),acknowledged=mode==='original-restore-acknowledged';
+ assert.deepEqual(await f.installedSource('lineage-owned-restore'),{acknowledged,retainedSend:true,retainedAck:acknowledged});
+ assert.equal(f.posts(),before+1);
+ assert.deepEqual(await f.installedSource('lineage-owned-restore'),{acknowledged:false,retainedSend:true,retainedAck:acknowledged});
+ assert.equal(f.posts(),before+1);
+});

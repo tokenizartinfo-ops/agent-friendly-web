@@ -27,6 +27,13 @@ export async function policyFixture(t,mode='normal'){
     return envelope({id:versionId});
    }
    assert.equal(url.pathname,root+'scripts/agent-friendly-web-delegated-canary/deployments');
+   if(body.annotations){
+    assert.deepEqual(body,{strategy:'percentage',versions:[{version_id:state.rollback.versionId,percentage:100}],
+     annotations:{'workers/message':'afw-finite-initial-restore-'+'6'.repeat(64)}});
+    pointer={id:randomUUID(),...body};
+    if(mode==='original-restore-lost-ack')return Response.json({success:false},{status:503});
+    return envelope(pointer);
+   }
    assert.deepEqual(body,{strategy:'percentage',versions:[{version_id:versionId,percentage:100}]});
    deploymentId=randomUUID();pointer={id:deploymentId,strategy:'percentage',versions:[{version_id:versionId,percentage:100}]};
    if(mode==='lost_activation')throw Error('SYNTHETIC activation ACK lost');

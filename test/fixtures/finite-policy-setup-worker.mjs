@@ -1,3 +1,4 @@
+import {executeFiniteCoupledOriginalRestore} from '../../lib/mcp-qa-finite-coupled-restore.mjs';
 import {reducePrivateQaFiniteCoupledOwnerCleanup} from '../../lib/mcp-qa-finite-owner-cleanup.mjs';
 import {sealFiniteOwnerCleanupScope,finiteOwnerCleanupScopeTextHash} from '../../lib/mcp-qa-finite-owner-cleanup-scope.mjs';
 import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
@@ -87,6 +88,34 @@ export class SetupFixture extends IndependentClosure{
   catch{return {status:'unavailable'};}
  }
  async observeInstalledSource(mode){
+  if(mode==='lineage-owned-restore'){
+   const storage=this.ctx.storage,now=Date.now(),deadline=now+5000,
+    parent={signal:new AbortController().signal,check:Date.now,deadline};
+   const check=()=>{const at=Date.now();if(at>=deadline)throw Error('SYN original restore expired');return at;};
+   const {receipt,original}=await readPrivateQaFiniteInstalledPolicy({ctx:this.ctx,env:this.env,refs,parent});
+   const plan={recordHash:'6'.repeat(64),C0:now,C1:deadline,baselineVersionId:original.rollback.versionId,
+    baselineDeploymentId:original.rollback.deploymentId};
+   // Scope and clock are modelled only in this fixture. Storage, request
+   // execution and the response/readback use the compiled native runtime.
+   const authority={planHash:plan.recordHash,check,transact:work=>storage.transaction(work)};
+   const path='https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/deployments';
+   const primary=async(method,body)=>{
+    const token=method==='GET'?this.env.AFW_MCP_CLOSURE_READ_TOKEN:this.env.AFW_MCP_CLOSURE_PUBLISH_TOKEN;
+    const response=await fetch(path+(method==='GET'?'?per_page=1':''),{method,
+     headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body?{body}:{})});
+    if(!response.ok)throw Error('SYN acknowledgement unavailable');
+    const result=await response.json();
+    if(result.success!==true)throw Error('SYN provider rejected the action');
+    return result.result;
+   };
+   let result;
+   try{result=await executeFiniteCoupledOriginalRestore({authority,storage,plan,activationCompletionHash:'5'.repeat(64),
+     originalDeploymentId:receipt.baselineDeploymentId,from:{versionId:receipt.versionId,deploymentId:receipt.deploymentId},deadline,check,
+     readDeployment:()=>primary('GET'),restoreDeployment:body=>primary('POST',body)});}
+   catch{/* The fixture exposes only the durable result. */}
+   return {acknowledged:!!result,retainedSend:await storage.get('afw.finite-initial-cleanup.v1:restore-send')!==undefined,
+    retainedAck:await storage.get('afw.finite-initial-cleanup.v1:restore-ack')!==undefined};
+  }
   if(mode==='lineage-fabricated-owner'){
    const lease={signal:new AbortController().signal,assertCurrent(){}};
    const before=JSON.stringify([...await this.ctx.storage.list()]);
