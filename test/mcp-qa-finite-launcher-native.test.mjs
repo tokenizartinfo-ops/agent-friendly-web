@@ -79,9 +79,12 @@ test('a REST launcher JSON string with an extra field cannot prepare or create',
  assert.equal(r.report.create,0);
 });
 
-test('the original GitHub launcher step exports its bash process ID and execs the same process',async()=>{
+test('the GitHub finalizer waits for the native QA launcher and has no launch write step',async()=>{
  const body=await readFile(new URL('../.github/workflows/afw-finite-finalizer.yml',import.meta.url),'utf8');
- const start=body.indexOf('        id: finite_nominal_launch_once\n'),next=body.indexOf('\n      - name:',start);
- assert.ok(start>=0&&next>start);
- assert.match(body.slice(start,next),/export AFW_FINITE_LAUNCH_ORIGINAL_PID=\$\$\n          exec node scripts\/run-qa-finite-trial-finalizer\.mjs launch$/);
+ const entry=await readFile(new URL('../worker/independent-closure/finite.mjs',import.meta.url),'utf8');
+ const ready=body.indexOf('- name: admit-and-ready'),observe=body.indexOf('- name: Wait for exact observer terminal output');
+ assert.ok(ready>=0&&observe>ready);
+ assert.doesNotMatch(body,/finite_nominal_launch_once|AFW_FINITE_LAUNCH_ORIGINAL_PID/);
+ assert.match(entry,/requireSetupReceipt:true,useNativeLauncher:true/);
+ assert.match(entry,/return schedulePrivateQaFiniteNominalLauncher\(\{ctx:this\.ctx,env:this\.env,refs:args\[0\]\}\)/);
 });
