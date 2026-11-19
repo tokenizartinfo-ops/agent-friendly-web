@@ -17,6 +17,8 @@ const qualified={
 };
 
 const stubs={
+ 'mcp-qa-finite-launch-source':'export const assertPrivateQaFiniteLaunchDispatchWired = () => globalThis.afwDispatchFixture.checkOperations();',
+ 'mcp-qa-finite-trial-guard':'export const assertPrivateQaFiniteNativeGuardMounted = () => globalThis.afwDispatchFixture.checkGuard();',
  'mcp-qa-finite-shared-origin':'export const readPrivateQaFiniteSharedOrigin = () => globalThis.afwDispatchFixture.origin();',
  'mcp-qa-finite-launch-ready':'export const readPrivateQaFiniteLaunchReady = () => globalThis.afwDispatchFixture.ready();',
  'mcp-qa-finite-launch-permission':'export const createPrivateQaFiniteLaunchPermission = () => globalThis.afwDispatchFixture.permit;',
@@ -25,7 +27,7 @@ const result=await build({entryPoints:['lib/mcp-qa-finite-launch-origin.mjs'],bu
  banner:{js:"import {createRequire} from 'node:module';const require=createRequire(process.cwd()+'/package.json');"},
  define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision)},plugins:[{name:'native-source-evidence-test-only',
  setup(bundler){
-  bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission)\.mjs$/},
+  bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission|launch-source|trial-guard)\.mjs$/},
    ({path})=>({path:path.slice(2,-4),namespace:'synthetic-primary'}));
   bundler.onLoad({filter:/.*/,namespace:'synthetic-primary'},({path})=>({contents:stubs[path]}));
  }}]});
@@ -40,6 +42,8 @@ async function use(t,mode){
    script_name:definition.script,class_name:definition.className,schedules:[]}},{headers:{date:new Date(now()).toUTCString()}});
  };
  globalThis.afwDispatchFixture={
+  checkOperations(){if(mode==='missing-operations')throw Error('native launch operations unavailable');},
+  checkGuard(){if(mode==='missing-guard')throw Error('native cleanup guard unavailable');},
   origin:async()=>qualified,
   ready:async()=>{if(mode==='not-ready')throw Error('synthetic READY absent');return {planHash:qualified.control.planHash,evidenceHash:'2'.repeat(64)};},
   permit:async()=>{permits++;if(permits===2&&mode==='late-alarm')alarm++;
@@ -84,4 +88,11 @@ test('late alarm change and missing acknowledgement do not grant a second send',
   const f=await use(sub,'lost-ack');assert.equal((await f.run()).status,'uncertain');
   assert.equal((await f.run()).status,'recorded');assert.equal(f.sends.length,1);
  });
+});
+
+for(const mode of ['missing-operations','missing-guard'])test('READY does not dispatch when '+mode,async t=>{
+ const f=await use(t,mode);
+ assert.equal((await f.run()).status,'pending');
+ assert.equal(f.rows.size,0);
+ assert.equal(f.sends.length,0);
 });
