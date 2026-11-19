@@ -1,6 +1,6 @@
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
 import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
-import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
+import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation,publishPrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
 import {privateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-origin.mjs';
 import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
@@ -55,7 +55,13 @@ export class IndependentClosure extends ClosedIndependentClosure{
    // recovery is still owed. The due original route needs its own handler.
    const delivery=await protectPrivateQaFiniteBusinessAlarm({storage:this.ctx.storage,actorId:this.ctx.id.toString(),qaVersionId:this.env.AFW_QA_VERSION?.id});
    if(!delivery)throw Error('Finite original recovery requires reconciliation');
-   const closedResult=delivery=>Object.freeze({status:'owner_cleanup_closed',receiptHash:delivery.receiptHash,operationalReadiness:false});
+   const closedResult=async delivery=>{
+    const receiptHash=delivery.receiptHash;
+    try{
+     const observation=await publishPrivateQaCoupledRestorePreparation({ctx:this.ctx,env:this.env,receiptHash});
+     return Object.freeze({status:'owner_cleanup_closed',receiptHash,observation,operationalReadiness:false});
+    }catch{return Object.freeze({status:'owner_cleanup_closed',receiptHash,operationalReadiness:false});}
+   };
    if(delivery.kind==='original_closed')return closedResult(delivery);
    if(delivery.kind==='original_due'){
     const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});
