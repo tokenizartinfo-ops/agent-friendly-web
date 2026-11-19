@@ -1,0 +1,105 @@
+{
+  "purpose": "afw.native-qa-launch-and-rollback-verification.v1",
+  "observedAtUTC": "2026-11-19 15:16:20 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "source": {
+    "verification": "fdef2653a10ce89cd4972a81c9a9a200a55d6ef6",
+    "closedBranch": "8849ff4b64f40c77f37b6e4348ab9807daccf0e7",
+    "workflowSuccess": 44552478265,
+    "observerRegression": 44551101972,
+    "fenceRegression": 44552174190,
+    "passedNode": 314,
+    "passedArchive": 5,
+    "compilerStagingPassed": true,
+    "completePackageEmitted": false
+  },
+  "launch": {
+    "nativeBinding": "AFW_QA_BOOTSTRAP",
+    "readyEvidence": "Original admitted GitHub job with successful READY step, immutable admission tag, and pinned bootstrap definition",
+    "writesOnce": true,
+    "durableJournalBeforeCreate": true,
+    "originalRecoveryAlarmMustRemainArmed": true,
+    "lateAlarmChangeDenied": true,
+    "ambiguousAcknowledgmentNeverResent": true,
+    "automaticRestLauncherRemovedFromGitHubWorkflow": true,
+    "deployed": false
+  },
+  "rollback": {
+    "versionReadback": {
+      "at": "2026-11-19T15:13:01.220Z",
+      "pins": [
+        {
+          "role": "qaClosed",
+          "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+          "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+          "activePinned": true,
+          "moduleMatches": true,
+          "disabledFlags": 14,
+          "totalFlags": 14
+        },
+        {
+          "role": "canaryClosed",
+          "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+          "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+          "activePinned": true,
+          "moduleMatches": true,
+          "disabledFlags": 8,
+          "totalFlags": 8
+        },
+        {
+          "role": "operatorClosed",
+          "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+          "deployment": "979026f8-9be0-439e-86d5-8bc493217f41",
+          "activePinned": true,
+          "moduleMatches": true,
+          "disabledFlags": 3,
+          "totalFlags": 3
+        }
+      ]
+    },
+    "archiveReadback": {
+      "at": "2026-11-19T15:13:00.205Z",
+      "bytes": 4209422,
+      "archiveHashMatches": true
+    },
+    "workloadReadback": {
+      "at": "2026-11-19T15:15:15.230Z",
+      "workflows": [
+        {
+          "name": "afw-release-administrative",
+          "observed": 0,
+          "nonTerminal": 0,
+          "further": false
+        },
+        {
+          "name": "afw-own-qa-private-confirmation",
+          "observed": 0,
+          "nonTerminal": 0,
+          "further": false
+        },
+        {
+          "name": "afw-own-qa-private-bootstrap",
+          "observed": 7,
+          "nonTerminal": 0,
+          "further": false
+        }
+      ],
+      "containerActive": 0,
+      "containerFurther": false
+    },
+    "trialRollbackPerformed": false
+  },
+  "pending": [
+    "Install the real native first-primary/QA guard and candidate cleanup factories without manufacturing provider authority.",
+    "Bind the dedicated private receiver and exact finite review policy to the actual independent QA release. Assemble the full eligible package with rollback proof and currently valid QA and R2 credentials.",
+    "Connect the original coupled close receipt to the independent executor for the same attempt, then verify cloud delivery, review, withdrawal, and closed readback."
+  ],
+  "remoteRuntimeWrites": 0,
+  "operationalReadiness": false,
+  "realCloudTrial": false,
+  "realSameNoticeReviewed": false,
+  "realWithdrawal": false,
+  "ownerActionNeededNow": false,
+  "PCoff": false
+}

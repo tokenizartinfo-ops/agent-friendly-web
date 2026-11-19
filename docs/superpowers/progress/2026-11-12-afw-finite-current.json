@@ -1,10 +1,10 @@
 {
-  "schema": 64,
-  "timestampUTC": "2026-11-19 14:56:04 UTC",
+  "schema": 65,
+  "timestampUTC": "2026-11-19 15:16:20 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "1512c6873fc704db5cd518397edf2525df23237c",
-  "phase": "Corrected native QA receiver RPC and qualified the positive path with two workerd Workers and D1. The isolated receiver is now deployed closed, with one verified private Cloudflare read-only probe. The active independent-closure QA binding and effect authorities still need integration before full packaging or a live occurrence.",
+  "previousCheckpoint": "2f87a3d8fd815aca262eabe32ef1ff4f558d135a",
+  "phase": "Native QA launch source now uses the qualified private Workflow binding. The original recovery alarm must survive the last awaited permission check, with an acknowledged durable launch journal before creation. Three archived closed module pins and the R2 archive matched fresh readbacks. Complete assembly and live execution remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete source-bound QA and canary effect mounts and connect the exact dedicated receiver in the actual independent QA candidate. Validate both rollback and the original finite reviewer policy with current named QA/R2 custody, then run one actual same-notice cloud review and withdrawal.",
+  "next": "Complete the concrete native effect mounts and original coupled closure executor, link the closed private receiver in the actual QA candidate, and validate the full package with current scoped QA and R2 custody before any live run.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1938,7 +1938,7 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": false,
+  "noRuntimeMutationThisBlock": true,
   "ownerActionNeededNow": false,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
@@ -2485,6 +2485,16 @@
     "receiverDeployment": "6e9cc39a-b9fc-4a66-b6d8-aee5933b6fe5",
     "terminalClosedProbe": "afw-private-review-link-object-20261119-vbd0cf7d0",
     "trueNativeRpcTest": true,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeQaLaunchRollbackVerification": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-qa-launch-and-rollback-verification.json",
+    "head": "fdef2653a10ce89cd4972a81c9a9a200a55d6ef6",
+    "closed": "8849ff4b64f40c77f37b6e4348ab9807daccf0e7",
+    "run": 44552478265,
+    "tests": 319,
+    "rollbackModulesMatched": 3,
     "completePackage": false,
     "realCloudTrial": false
   }
