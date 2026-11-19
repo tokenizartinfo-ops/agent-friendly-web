@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "baf55f9191cdbfb2b7bcdea645d1e02814cff81c",
-  "phase": "Original alarm has a source-qualified independent observation of an already performed business restoration. Expired original delivery remains administrative; full original recovery remains incomplete.",
+  "previousCheckpoint": "1f9843010c27025a95401b1719d9d0855728c655",
+  "phase": "Original recovery source verifies the exact owner-bound setup, both publication requests and the activation writer lineage before qualifying already-restored evidence.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify the original owner cleanup for the bound selection and exact two setup policy journals, their shared writer-head, and the actual selected policy publication. Preserve the original window and fence/SQL/SDK proof requirements. Join those into a separate final outcome for the already verified restoration or perform the pending original recovery only when the single original restore is demonstrably safe. Then mount native launch/guard and qualify the full package with current custody.",
+  "next": "Use the verified activation and upload lineage in the original owner issuer/SDK cleanup reader. Partition the six policy rows from the strict connection history; tie the policy baseline to stage three and require the selected binding/current publication. Separate an already verified restore from the bounded original restore case. Keep trial HEAD and original consent checks, prove legal transition from the immutable zero alarm state before reserving recovery, and cover both cases in one native fixture. Only then settle issuer fence, D1 withdrawal, original SDK grant and final QA rollback.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 167,
-  "updatedAtUTC": "2026-11-19T00:21:47Z",
+  "schemaVersion": 168,
+  "updatedAtUTC": "2026-11-19T01:07:15Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2350,6 +2350,15 @@
     "tests": 227,
     "connectedObservation": true,
     "originalRecoveryExecution": false,
+    "completePackage": false
+  },
+  "originalPolicyLineage": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-original-policy-lineage-validation.json",
+    "evidence": "3135a886f2759c6a444dbdf1ffb92414f4666f77",
+    "head": "7d13b415a911bfef5b8fff978b89bdd0e59e02df",
+    "closed": "0c7bc887cf5dd2e880a868655ba2dd3cca92b916",
+    "run": 44433895158,
+    "tests": 298,
     "completePackage": false
   }
 }

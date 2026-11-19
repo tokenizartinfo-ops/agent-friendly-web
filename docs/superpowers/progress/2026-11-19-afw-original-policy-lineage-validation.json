@@ -1,0 +1,39 @@
+{
+  "purpose": "afw.finite-original-policy-lineage-validation.v1",
+  "updatedAtUTC": "2026-11-19T01:07:15Z",
+  "workingBranch": "lab/afw-finite-alarm-handoff-20261118",
+  "sourceRevision": "7d13b415a911bfef5b8fff978b89bdd0e59e02df",
+  "sourceTree": "23a099fd8651b0f983ada2a931912b8b29214153",
+  "closedWorkflowRevision": "0c7bc887cf5dd2e880a868655ba2dd3cca92b916",
+  "previousEvidence": "8fa412edbb82602fa93e6365bcd4ef0d075cf987",
+  "verification": {
+    "run": 44433895158,
+    "focused": 243,
+    "originalCleanupRegressions": 55,
+    "total": 298,
+    "passed": 298,
+    "failed": 0,
+    "skipped": 0,
+    "completePackage": false,
+    "operationalReadiness": false
+  },
+  "negativeTests": {
+    "missingLineageReader": 44433190982,
+    "wrongActivationBodyUnderRebuiltJournal": 44433666862
+  },
+  "qualifiedAtSource": [
+    "The original alarm's linked policy history requires the exact bound owner selection, selected prep, activation receipt, original rollback target and canonical plan.",
+    "Upload and activation history require exactly the six expected rows and the activation writer-head under one storage transaction. Stale heads, unknown suffixes, missing confirmation, and a foreign activation body with internally consistent hashes are denied.",
+    "The source-mounted original previous-restoration observer independently checks the retained upload request against provider-returned canary bytes and the exact stored configuration, then rechecks the lineage. This is only observation."
+  ],
+  "limits": {
+    "issuerFenceInCoupledOriginalMode": false,
+    "originalSdkRevocationInCoupledMode": false,
+    "terminalOriginalRecoveryOutcome": false,
+    "liveCloudflareMutations": false,
+    "runtimeCredentialRequalified": false,
+    "actualNoticeTrial": false,
+    "pcOffTrial": false
+  },
+  "next": "Use the verified activation and upload lineage in the original owner issuer/SDK cleanup reader. Partition the six policy rows from the strict connection history; tie the policy baseline to stage three and require the selected binding/current publication. Separate an already verified restore from the bounded original restore case. Keep trial HEAD and original consent checks, prove legal transition from the immutable zero alarm state before reserving recovery, and cover both cases in one native fixture. Only then settle issuer fence, D1 withdrawal, original SDK grant and final QA rollback."
+}
