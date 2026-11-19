@@ -1,10 +1,10 @@
 {
-  "schema": 74,
-  "timestampUTC": "2026-11-19 17:58:43 UTC",
+  "schema": 75,
+  "timestampUTC": "2026-11-19 18:08:01 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "2c0334fd32b5901ebb1ac45a516621e9c57b7854",
-  "phase": "Native QA now serves an acknowledged named-child context and the matching canary can issue one reservation under its original manifest before withdrawal. Verified in CI; prelaunch material and package remain gated.",
+  "previousCheckpoint": "52908f989e0e4c3a6f2c52773691d77992a7acff",
+  "phase": "Native prelaunch checks now verify fixed provider deployments, empty cron/tails, stopped Container inventory and absence of candidate first-primary writes before new dispatch. CI verified denial and expected gates. Final launch authority, R2 access and real trial remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete authoritative prelaunch operations and the candidate admission/start path, then validate credentialed package and run the same-notice trial.",
+  "next": "Complete native launch operation authorization and canary business path, then qualify and validate QA with current protected credential and exact R2 object link before the one-notice cloud test.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2582,6 +2582,15 @@
     "closed": "07629ae5f4c6568f0568b352e443719b1594d8df",
     "run": 44582583568,
     "tests": 354,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeQaPrelaunch": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-qa-native-prelaunch.json",
+    "source": "1e46b639d3e65e00abd82cff7d3d4a5abc96cc93",
+    "closed": "ebe48ae490f0e6ef01c0a8c47f2e3898bfb6693c",
+    "run": 44584124345,
+    "tests": 360,
     "completePackage": false,
     "realCloudTrial": false
   }

@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 18:08:01 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "1e46b639d3e65e00abd82cff7d3d4a5abc96cc93",
+  "closed": "ebe48ae490f0e6ef01c0a8c47f2e3898bfb6693c",
+  "prelaunch": {
+    "wiredBeforeLauncherAndChildWrites": true,
+    "exactProviderPointersRechecked": true,
+    "firstPrimaryCandidateRowsInspectedTwice": true,
+    "candidateNotPresentInCompleteStoppedInventory": true,
+    "fixedRoleCronAndTailsMustBeEmpty": true,
+    "noNewWriteAuthority": true
+  },
+  "verification": {
+    "run": 44584124345,
+    "job": 135772329827,
+    "nodePassed": 355,
+    "pythonPassed": 5,
+    "negativeRun": 44583431471,
+    "stagingBuilt": true,
+    "syntheticProviderAndD1": true,
+    "prematureCompletePackageRejected": true
+  },
+  "custody": {
+    "qaProviderState": "expired",
+    "qaProviderExpiresAt": "2026-11-08T02:59:59Z",
+    "qaSecretLastUpdatedAt": "2026-10-31T15:54:32Z",
+    "protectedR2ReadUrlPresent": false,
+    "priorR2ArchiveVerification": {
+      "verified": true,
+      "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "bytes": 4209422,
+      "readbackConfirmedAtUTC": "2026-11-19 17:16:53 UTC"
+    }
+  },
+  "remaining": [
+    "Finish and mount the original launch operation authorizer and configure the exact candidate activation route.",
+    "Run a complete credentialed QA package and archive rollback verification.",
+    "Prove the linked real cloud occurrence including the same receipt, assistant review and AFW withdrawal."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}
