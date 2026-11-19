@@ -143,7 +143,8 @@ async function noticeFixture(){
  });
  assert.equal(typeof api.runFiniteOwnTrialNotice,'function');
  const result={eventId:'d'.repeat(64),status:202,httpReceivedAt:f.now(),cloudReviewConfirmed:false};
- const compose=async({notice:expected,assertCurrent,recheck})=>{
+ const compose=async({notice:expected,assertCurrent,recheck,deliveryDeadline})=>{
+  assert.equal(deliveryDeadline,Math.min(proof.expiresAt,f.now()+4800));
   assert.deepEqual(expected,proof.notice);assertCurrent();await recheck();assertCurrent();sends++;return result;
  };
  const run=(select=refs,deliver=compose)=>api.runFiniteOwnTrialNotice({ctx,env,program,sourceRevision:s.sourceRevision,refs:select,deliver,now:f.now});

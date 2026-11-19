@@ -44,7 +44,7 @@ async function finiteDeliveryFixture(){
 
 test('finite delivery uses the exact primary event and original subscription through the signed Node loop',async()=>{
  const {f,h,notice}=await finiteDeliveryFixture();let checks=0;
- const input={notice,assertCurrent:()=>{},recheck:async()=>{assert.equal(f.sends(),1);checks++;}};
+ const input={notice,deliveryDeadline:Date.now()+4000,assertCurrent:()=>{},recheck:async()=>{assert.equal(f.sends(),1);checks++;}};
  try{
   await assert.rejects(h.deliverFiniteOwnSaved({...input,notice:{...notice,subscriptionReceiptHash:'0'.repeat(64)}}));
   await assert.rejects(h.deliverFiniteOwnSaved({...input,notice:{...notice,fingerprint:'0'.repeat(64)}}));
@@ -53,6 +53,8 @@ test('finite delivery uses the exact primary event and original subscription thr
   const {readSavedDossierMcpEvent}=await load();
   const projected=await readSavedDossierMcpEvent(f.options,notice.eventId);
   assert.deepEqual(result,{eventId:projected.eventId,status:200,httpReceivedAt:result.httpReceivedAt,cloudReviewConfirmed:false});
+  const issued=f.rows().map(row=>JSON.parse(row.v)).find(row=>row.phase==='delivery'&&row.preparedAt!==undefined);
+  assert.equal(issued.expiresAt,input.deliveryDeadline);
   assert.equal(checks,1);assert.equal(f.boots(),1);assert.equal(f.sends(),2);
   await assert.rejects(h.deliverFiniteOwnSaved(input));
   assert.equal(checks,1);assert.equal(f.sends(),2);
@@ -62,7 +64,7 @@ test('finite delivery uses the exact primary event and original subscription thr
 
 test('loss of QA authority at dispatch forbids transport and does not reset the send budget',async()=>{
  const {f,h,notice}=await finiteDeliveryFixture();let checks=0;
- const input={notice,assertCurrent:()=>{},recheck:async()=>{checks++;throw Error('QA authority has ended');}};
+ const input={notice,deliveryDeadline:Date.now()+4000,assertCurrent:()=>{},recheck:async()=>{checks++;throw Error('QA authority has ended');}};
  try{
   await assert.rejects(h.deliverFiniteOwnSaved(input));
   await assert.rejects(h.deliverFiniteOwnSaved({...input,recheck:async()=>{checks++;}}));
