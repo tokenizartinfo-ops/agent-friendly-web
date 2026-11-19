@@ -210,14 +210,25 @@ test('coupled restore claims one SEND before the original provider write and ret
 });
 test('coupled restore with lost acknowledgement cannot replay even if the provider later appears closed',async()=>{
  assert.equal(typeof ownRestore.executeFiniteCoupledOriginalRestore,'function');
- const {f,request,current}=await restorationOptions();
+ const {f,request,current,options,handoff}=await restorationOptions();
  let effects=0;
  const attempt=()=>ownRestore.executeFiniteCoupledOriginalRestore({...request,readDeployment:async()=>current,restoreDeployment:async()=>{effects++;throw Error('SYN lost ACK');}});
  await assert.rejects(attempt);
- await assert.rejects(attempt);
+ f.setNow(handoff.initialC0+60001);
+ await f.storage.transaction(tx=>tx.setAlarm(null));
+ const recoveryScope=new AbortController(),next={...options(),originalLease:{signal:recoveryScope.signal,assertCurrent(){}}};
+ const token=await originalRecovery.reservePrivateQaFiniteOriginalRecovery(next);
+ const later=await originalRecovery.takePrivateQaFiniteOriginalRecovery(token,next);
+ let primaryReads=0;
+ await assert.rejects(()=>ownRestore.executeFiniteCoupledOriginalRestore({...request,authority:later,deadline:f.now()+4000,
+  readDeployment:async()=>{primaryReads++;return [{...current[0],versions:[{version_id:request.plan.baselineVersionId,percentage:100}]}];},
+  restoreDeployment:async()=>{effects++;},
+ }));
+ assert.equal(primaryReads,0);
  assert.equal(effects,1);
- assert.ok(f.rows.has('afw.finite-initial-cleanup.v1:restore-send'));
+ const send=decode('RestoreSend',f.rows.get('afw.finite-initial-cleanup.v1:restore-send'));
  assert.equal(f.rows.has('afw.finite-initial-cleanup.v1:restore-ack'),false);
+ assert.throws(()=>ownRestore.readFiniteCoupledOriginalRestore({...request,send,ack:null,at:f.now()}));
 });
 test('coupled restore rejects foreign or drifting publication before the provider write',async()=>{
  assert.equal(typeof ownRestore.executeFiniteCoupledOriginalRestore,'function');
