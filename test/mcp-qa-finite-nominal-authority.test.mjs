@@ -107,6 +107,7 @@ async function noticeFixture(){
   plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
   plan.selectors.programHash=hash(program);plan.selectors.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';
   const s=plan.selectors;
+  s.projectId='oauth-canary-owner';
   plan.eventPlanHash=hash(JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,
    clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}));
   plan.closePolicyHash=finiteCleanupPolicyHash(plan);
@@ -198,7 +199,7 @@ test('the exact authorized QA save writes the pinned goal first and dispatches t
   assert.equal(options.window.expiresAt,n.f.now()+4800);
   assert.deepEqual(value,{expectedRevision:s.expectedProjectRevision,idempotencyKey:s.saveIdempotencyKey,goal:s.goal});
   assert.equal(await options.beforeCommit(),true);
-  assert.equal(await options.afterCommit(),true);
+  assert.equal(await options.assertCurrent(),true);
   saved=true;
   return {status:200,eventId:admission.target.eventId,revision:s.expectedProjectRevision+1,replayed:attempts>1};
  });

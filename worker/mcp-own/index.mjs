@@ -1,4 +1,4 @@
-import {runFiniteOwnTrialNotice} from '../../lib/mcp-own-finite-notice-delivery.mjs';
+import {runFiniteOwnTrialDossier,runFiniteOwnTrialNotice} from '../../lib/mcp-own-finite-notice-delivery.mjs';
 import {runFiniteOwnNominalReservation} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
 import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
 import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
@@ -71,14 +71,21 @@ export class AfwOwnEventNode extends DurableObject{
  async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'withdraw');const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
  async closeFiniteTrial(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'close');const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
  async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'observe');const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
- async deliverFiniteTrialNotice(...args){
-  if(!finiteEntrypoint||args.length!==1)fail();
+ async #runFiniteNotice(run,refs){
   try{
-   return await runFiniteOwnTrialNotice({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],deliver:async input=>{
+   return await run({ctx:this.ctx,env:this.env,program,sourceRevision,refs,deliver:async input=>{
     const c=this.#host(false,undefined,input.assertCurrent);
     c.current();const result=await c.host.deliverFiniteOwnSaved(input);c.current();return result;
    }});
   }catch{fail();}
+ }
+ async deliverFiniteTrialNotice(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  return this.#runFiniteNotice(runFiniteOwnTrialNotice,args[0]);
+ }
+ async saveAndDeliverFiniteTrialNotice(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  return this.#runFiniteNotice(runFiniteOwnTrialDossier,args[0]);
  }
  async readFiniteTrialAdmissionJournal(...args){
   if(args.length!==1)fail();

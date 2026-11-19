@@ -47,10 +47,11 @@ function receiptDigest(f){
 
 test('finite save pins the original subscription and separates pre-write permission from post-write readback',async()=>{
  const f=await setup();let after=0;
+ f.config.db.withSession=mode=>{assert.equal(mode,'first-primary');return f.config.db;};
  try{
   const options={...f.options,expectedSubscriptionReceiptHash:receiptDigest(f),
    beforeCommit:async()=>f.db.prepare('SELECT revision FROM site_projects').get().revision===1,
-   afterCommit:async()=>{after++;return f.db.prepare('SELECT revision FROM site_projects').get().revision===2;}};
+   assertCurrent:async()=>{if(f.db.prepare('SELECT revision FROM site_projects').get().revision===2)after++;return true;}};
   assert.equal((await api.saveOwnSyntheticGoal({...options,expectedSubscriptionReceiptHash:'0'.repeat(64)},input)).status,503);
   assert.equal(f.db.prepare('SELECT count(*) n FROM project_events').get().n,0);
   assert.equal((await api.saveOwnSyntheticGoal(options,input)).status,200);
