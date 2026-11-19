@@ -1,9 +1,21 @@
-name: AFW coupled receiver verification closed
-on: workflow_dispatch
-permissions: {}
+name: AFW native private receiver verification
+on:
+  push:
+    branches: [lab/afw-finite-alarm-handoff-20261118]
+permissions:
+  contents: read
 jobs:
-  closed:
-    if: ${{ false }}
+  verify:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-NATIVE-RECEIVER-RPC-20261119' }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 7
     steps:
-      - run: exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify the exact native RPC and first-primary D1 read
+        run: node --test --test-concurrency=1 --test-timeout=60000 test/mcp-qa-finite-receiver-workerd.test.mjs
