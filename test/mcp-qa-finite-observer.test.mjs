@@ -80,3 +80,19 @@ test('adoption only accepts a preview with the independently read setup receipt'
  assert.throws(()=>validateFiniteObserverPreviewEnvelope(legacy,{setupReceiptHash:expected}));
  assert.deepEqual(validateFiniteObserverPreviewEnvelope(legacy),legacy);
 });
+
+test('the finite observer schedules only its bound launcher after the native preview and stops on an uncertain send',async()=>{
+ const f=await fixture();const calls=[];
+ f.actor.fetch=async()=>Response.json({material:f.v,setupReceiptHash:'7'.repeat(64),plan:f.f.plan});
+ f.actor.scheduleFiniteNominalLauncher=async refs=>{
+  calls.push({refs,at:f.now()});
+  if(calls.length===1)return {status:'pending',operationalReadiness:false};
+  return {status:'uncertain',operationalReadiness:false};
+ };
+ const result=await runPrivateQaFiniteObserver({...f,requireSetupReceipt:true,useNativeLauncher:true});
+ assert.equal(result.purpose,'afw.finite-observer-output.v1');
+ assert.deepEqual(calls.map(row=>row.refs),Array(2).fill({intentId:f.v.intentId,sourceRevision:f.v.sourceRevision,controlHash:f.v.controlHash}));
+ assert(calls[0].at>=f.v.T0&&calls[1].at<f.v.T0+90000);
+ assert.equal(f.names[0],FINITE_PREVIEW_STEP);
+ assert.equal(f.claims,1);
+});
