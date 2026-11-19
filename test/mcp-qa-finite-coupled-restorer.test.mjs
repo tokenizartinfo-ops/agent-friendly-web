@@ -92,3 +92,52 @@ for(const [name,change] of Object.entries({
   assert.equal(f.writes,0);
  });
 }
+
+import * as http from '../lib/mcp-qa-finite-http.mjs';
+
+const bootstrapName='afw-own-qa-private-bootstrap';
+const bootstrapId='06b6c3eb-ce59-4594-8b9e-2636977d56da';
+const workflowVersion='44444444-4444-4444-8444-444444444444';
+const cfAccountPath='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec';
+const observedStep='observe-original-qa-restore-preparation';
+
+async function httpFixture({foreignInstance=false,wrongStep=false,unstableResult=false}={}){
+ const f=fixture(),{intent}=f;
+ const observed=await f.deps.readObservation(),instanceId=observed.instanceId;
+ const base='/workflows/'+bootstrapName;
+ const at=f.deps.now(),stamp=new Date(at).toISOString();
+ const payload={operation:FINITE_COUPLED_QA_OPERATION,intentId:intent.intentId,controlHash:intent.controlHash,sourceRevision:intent.sourceRevision};
+ const calls=[];
+ const json=result=>Response.json({success:true,errors:[],messages:[],result},{headers:{date:stamp}});
+ const reads=new Map([
+  [base,{id:bootstrapId,name:bootstrapName,script_name:pins.qaClosed.name,class_name:'PrivateQaBootstrap'}],
+  [base+'/instances/'+instanceId,{status:'complete',success:true,versionId:workflowVersion,params:payload,queued:stamp,end:stamp,
+   step_count:1,steps:[{name:wrongStep?'foreign-closure':observedStep,type:'step',start:stamp,end:stamp,success:true,
+    attempts:[{success:true}],output:JSON.stringify(observed.preparation)}],
+   output:JSON.stringify({...observed,...foreignInstance?{instanceId:'foreign'}:{},...unstableResult?{preparation:{...observed.preparation,ownerReceiptHash:'a'.repeat(64)}}:{}})}],
+  [base+'/versions/'+workflowVersion,{id:workflowVersion,workflow_id:bootstrapId,class_name:'PrivateQaBootstrap',language:'javascript'}],
+ ]);
+ const fetchImpl=async(url,init)=>{
+  const u=new URL(url);calls.push({host:u.hostname,path:u.pathname,method:init.method});
+  assert.equal(u.hostname,'api.cloudflare.com');assert.equal(init.headers.Authorization,'Bearer SYNTHETIC');
+  assert.equal(init.method,'GET');
+  const v=reads.get(u.pathname.slice(cfAccountPath.length));assert.ok(v,u.pathname);
+  return json(v);
+ };
+ const params={intent,liveVersionId:live,credential:'SYNTHETIC',fetchImpl,now:f.deps.now,signal:f.deps.signal};
+ return {f,observed,calls,params};
+}
+test('the independent executor reads the real fixed Cloudflare Workflow wire before accepting original closure',async()=>{
+ assert.equal(typeof http.createPrivateQaFiniteCoupledObservationHttp,'function');
+ const {params,calls,observed}=await httpFixture();
+ const read=http.createPrivateQaFiniteCoupledObservationHttp(params);
+ assert.deepEqual(await read(),observed);
+ assert.equal(calls.length,3);assert.ok(calls.every(x=>x.method==='GET'));
+ assert.ok(calls.every(x=>x.path.startsWith(cfAccountPath+'/workflows/'+bootstrapName)));
+});
+for(const fault of ['foreignInstance','wrongStep','unstableResult'])test(fault+' cannot become a trusted Cloudflare owner-closure observation',async()=>{
+ assert.equal(typeof http.createPrivateQaFiniteCoupledObservationHttp,'function');
+ const {params,calls}=await httpFixture({[fault]:true});
+ await assert.rejects(()=>http.createPrivateQaFiniteCoupledObservationHttp(params)());
+ assert.ok(calls.every(x=>x.method==='GET'));
+});
