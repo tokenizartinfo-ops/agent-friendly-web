@@ -10,7 +10,7 @@ const native = await import('../lib/mcp-qa-finite-business-primary.mjs').catch(e
  return {};
 });
 
-function setup(t) {
+function setup(t,{generation='generation-1'}={}) {
  assert.equal(typeof native.createPrivateQaFiniteBusinessPrimary,'function');
  const f=finiteFixture({at:Date.now()-20000}),p=f.plan,s=p.selectors;
  f.setNow(p.T0+18000);
@@ -21,7 +21,7 @@ function setup(t) {
  }
  const insert=(table,values)=>sql.prepare('INSERT INTO '+table+' ('+Object.keys(values).join(',')+') VALUES ('+Object.keys(values).map(()=>'?').join(',')+')').run(...Object.values(values));
  const scope={grant_id:s.grantId,project_id:s.projectId,user_id:s.subject,client_id:s.clientId,resource:s.resource};
- const expiry=p.N1-1,generation='generation-1',subscription='subscription-1',image='cloudflare/debian-trixie',manifestHash='e'.repeat(64);
+ const expiry=p.N1-1,subscription='subscription-1',image='cloudflare/debian-trixie',manifestHash='e'.repeat(64);
  const binding={container_id:p.resources.containerId,program_hash:s.programHash,source_revision:s.sourceRevision};
  insert('site_projects',{id:s.projectId,user_id:s.subject,revision:s.expectedProjectRevision+1});
  insert('delegated_access_grants',{id:s.grantId,project_id:s.projectId,user_id:s.subject,client_id:s.clientId,resource:s.resource,revoked_at:'',expires_at:new Date(expiry).toISOString(),scopes_json:'["afw:project:read"]'});
@@ -38,7 +38,7 @@ function setup(t) {
  const nativePin=createPrivateQaFiniteTrialNativePin({ctx:f.ctx,env:f.env,sourceRevision:p.source.revision});
  const identity=readPrivateQaFiniteControlIdentity({nativePin,raw:JSON.stringify(p)});
  const facts=native.createPrivateQaFiniteBusinessPrimary({ctx:f.ctx,env:f.env,control:{plan:identity.plan,planHash:identity.planHash,controlHash:identity.controlHash},now:f.now});
- return {f,sql,facts,event,id,generation,subscription,manifestHash,fingerprint,sessions};
+ return {f,sql,facts,event,id,generation,subscription,manifestHash,fingerprint,sessions,identity:{plan:identity.plan,planHash:identity.planHash,controlHash:identity.controlHash},insert,binding,image};
 }
 test('QA reads the original subscription, process and saved event with the same immutable receipt hashes',async t=>{
  const x=setup(t);
@@ -86,4 +86,23 @@ test('QA grants a save target only while the exact plan revision is current and 
  x.sql.exec('UPDATE site_projects SET revision=2');
  const saved=await x.facts.notice();
  assert.deepEqual(saved.notice,target.target);
+});
+
+test('final QA primary rechecks actual closed rows twice and rejects post-closure drift',async t=>{
+ assert.equal(typeof native.readPrivateQaFiniteFinalPrimary,'function');
+ const x=setup(t,{generation:'a'.repeat(64)}),{f,identity}=x,p=identity.plan;
+ x.insert('dossier_node_process_closures',{grant_id:p.selectors.grantId,process_generation:x.generation,
+  ...x.binding,image:x.image,closed_at:p.C0+7});
+ f.setNow(p.C0+9);
+ const {createFiniteNativePrimaryReader}=await import('../lib/mcp-own-finite-primary.mjs');
+ const retainedPrimary=await createFiniteNativePrimaryReader({db:f.env.RELEASE_DB,control:identity,now:f.now}).read();
+ f.setNow(p.C1+18);
+ const before=x.sessions.length;
+ const ready=await native.readPrivateQaFiniteFinalPrimary({ctx:f.ctx,env:f.env,control:identity,retainedPrimary,check:f.now});
+ const {observedAt,...stable}=retainedPrimary;void observedAt;
+ const {finiteHash}=await import('../lib/mcp-finite-evidence.mjs');
+ assert.deepEqual(ready,{primaryHash:finiteHash(stable),observedAt:f.now()});
+ assert.deepEqual(x.sessions.slice(before),['first-primary','first-primary']);
+ x.sql.exec('DROP TRIGGER dossier_node_process_close_no_update; UPDATE dossier_node_process_closures SET closed_at=closed_at+1;');
+ await assert.rejects(()=>native.readPrivateQaFiniteFinalPrimary({ctx:f.ctx,env:f.env,control:identity,retainedPrimary,check:f.now}));
 });
