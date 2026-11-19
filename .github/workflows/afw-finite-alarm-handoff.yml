@@ -1,78 +1,9 @@
 name: AFW coupled receiver and native closure verification
-on:
-  push:
-    branches: [lab/afw-finite-alarm-handoff-20261118]
-permissions:
-  contents: read
+on: workflow_dispatch
+permissions: {}
 jobs:
-  verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-QA-BOOTSTRAP-NATIVE-SUITE-SHARDS-VERIFIED-20261119' }}
+  closed:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify original closure, provider transport and compatibility
-        shell: bash
-        run: |
-          files=()
-          for file in test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-coupled-github.test.mjs test/mcp-qa-finite-coupled-restorer.test.mjs test/mcp-restoration-configuration.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-http.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-qa-finite-initial-*.test.mjs test/mcp-qa-finite-preparation-cleanup-*.test.mjs test/mcp-qa-finite-bootstrap-*.test.mjs test/mcp-qa-finite-custody.test.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-cloud-review.test.mjs test/mcp-qa-finite-receiver-workerd.test.mjs test/mcp-qa-finite-native-launch-dispatch.test.mjs test/mcp-qa-finite-r2-object.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-qa-finite-notice-closure.test.mjs test/mcp-qa-finite-reduction-control.test.mjs test/mcp-own-finite-cleanup-native.test.mjs test/mcp-qa-finite-closure-capabilities.test.mjs test/mcp-qa-finite-business-primary.test.mjs test/mcp-qa-finite-launch-ready.test.mjs test/mcp-qa-finite-recovery-executor.test.mjs test/mcp-qa-finite-nominal-authority.test.mjs test/mcp-qa-finite-prelaunch-check.test.mjs test/mcp-qa-finite-final-launch-authorization.test.mjs test/mcp-qa-finite-admission-primary.test.mjs test/mcp-own-durable-host.test.mjs test/mcp-saved-dossier-event.test.mjs test/mcp-saved-dossier-event-native.test.mjs test/mcp-own-synthetic-save.test.mjs test/mcp-own-synthetic-save-native.test.mjs test/mcp-own-synthetic-save-host.test.mjs test/mcp-own-synthetic-save-http.test.mjs test/mcp-own-synthetic-save-http-native.test.mjs test/mcp-own-finite-admission-gate.test.mjs test/mcp-own-finite-premature-admission-native.test.mjs test/mcp-finite-named-activation.test.mjs test/mcp-subscription-lifecycle.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-launch-admission.test.mjs; do
-            case "$file" in
-              test/mcp-qa-finite-initial-capsule-native.test.mjs|test/mcp-qa-finite-initial-cleanup-native.test.mjs|test/mcp-qa-finite-initial-entry-native.test.mjs|test/mcp-qa-finite-initial-gates-native.test.mjs|test/mcp-qa-finite-initial-owner-source-native.test.mjs|test/mcp-qa-finite-initial-upload-native.test.mjs|test/mcp-qa-finite-preparation-cleanup-native.test.mjs) continue ;;
-            esac
-            files+=("$file")
-          done
-          node --test --test-concurrency=2 --test-timeout=90000 "${files[@]}"
-      - run: python3 -m unittest discover -s test -p finite_historical_archive_test.py
-      - name: Verify staging and rejection of a premature complete package
-        run: |
-          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
-          if node scripts/build-finite-native-package.mjs "$GITHUB_SHA"; then exit 1; fi
-          test ! -e output/finite-native-package
-          echo "Complete package remains gated"
-  critical:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-QA-BOOTSTRAP-ROLLBACK-DOMAINS-20261119' }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 12
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify original alarm and restoration before broad verification
-        run: node --test --test-name-pattern='persisted native restart owns initial alarm|complete future SYN activation evidence|actual native alarm rejects active-workflow|capsule binds actual M|native throw-enrollment|actual finite actor durable entry' test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-capsule-native.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-initial-entry-native.test.mjs
-  native:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-QA-BOOTSTRAP-NATIVE-SUITE-SHARDS-VERIFIED-20261119' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        file:
-          - test/mcp-qa-finite-initial-capsule-native.test.mjs
-          - test/mcp-qa-finite-initial-cleanup-native.test.mjs
-          - test/mcp-qa-finite-initial-entry-native.test.mjs
-          - test/mcp-qa-finite-initial-gates-native.test.mjs
-          - test/mcp-qa-finite-initial-owner-source-native.test.mjs
-          - test/mcp-qa-finite-initial-upload-native.test.mjs
-          - test/mcp-qa-finite-preparation-cleanup-native.test.mjs
-    runs-on: ubuntu-24.04
-    timeout-minutes: 8
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Complete one native test file with bounded runner time
-        env:
-          AFW_TEST_FILE: ${{ matrix.file }}
-        run: node --test --test-timeout=240000 "$AFW_TEST_FILE"
+      - run: exit 1
