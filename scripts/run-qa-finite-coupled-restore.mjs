@@ -84,11 +84,10 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
    process.exitCode=1;
   }
  }else{
+  const recording=mode==='--record-result';
+  if(recording?(!resultPath||process.argv.length!==3):mode!==undefined)fail();
   const result=await runFiniteCoupledRestoreJob(),output=JSON.stringify(result)+'\n';
-  if(mode==='--record-result'){
-   if(!resultPath||process.argv.length!==3)fail();
-   await writeFile(resultPath,output,{flag:'wx',mode:0o600});
-  }else if(mode!==undefined)fail();
+  if(recording)await writeFile(resultPath,output,{flag:'wx',mode:0o600});
   process.stdout.write(output);
   if(!['restored_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
  }
