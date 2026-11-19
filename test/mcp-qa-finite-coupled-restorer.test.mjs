@@ -236,3 +236,30 @@ test('authenticated exact 404 is pending, other 404s and foreign pending inputs 
  await assert.rejects(read());
  assert(f.calls.every(x=>x.method==='GET'));
 });
+
+test('final QA acceptance requires a verified review and withdrawal of the restored run notice',async()=>{
+ const {verifyFiniteCoupledQaTrialResult:verify}=await import('../scripts/run-qa-finite-coupled-restore.mjs');
+ assert.equal(typeof verify,'function');
+ const f=fixture();addNoticeEvidence(f);
+ const result=await requireController()(f.deps).run(),scope={controlHash:f.intent.controlHash,restoreFrom:f.intent.restoreFrom};
+ const record=verify(result,scope);
+ assert.equal(record.qaRestored,true);
+ assert.equal(record.sameNoticeReviewed,true);
+ assert.equal(record.subscriptionWithdrawn,true);
+ assert.equal(record.operationalReadiness,false);
+ assert.equal(f.writes,1);
+ for(const change of [
+  r=>{delete r.noticeEvidence;},
+  r=>{r.noticeEvidence.review.eventId='f'.repeat(64);},
+  r=>{r.noticeEvidence.notice.withdrawn=false;},
+  r=>{r.qaVersionId=live;},
+  r=>{r.status='closed_observed_uncertain';}
+ ]){
+  const invalid=structuredClone(result);change(invalid);
+  assert.throws(()=>verify(invalid,scope),/Finite QA trial verification unavailable/);
+ }
+ const empty=fixture(),protectedResult=await requireController()(empty.deps).run();
+ assert.equal(protectedResult.status,'restored_observed');
+ assert.equal(empty.writes,1);
+ assert.throws(()=>verify(protectedResult,{controlHash:empty.intent.controlHash,restoreFrom:empty.intent.restoreFrom}));
+});
