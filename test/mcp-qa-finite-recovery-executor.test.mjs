@@ -7,8 +7,8 @@ const api=await import('../lib/mcp-qa-finite-recovery-executor.mjs').catch(error
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-qa-finite-recovery-executor.mjs'))throw error;
  return {};
 });
-async function prepare(){
- const f=finiteFixture(),p=f.plan;
+async function prepare(configure=()=>{}){
+ const f=finiteFixture(),p=f.plan;configure(f);
  f.env.RELEASE_DB={prepare(){throw Error('primary session required');},withSession(pin){
   assert.equal(pin,'first-primary');
   return {prepare(sql){assert.match(sql,/^SELECT /);return {bind:()=>({all:async()=>({success:true,results:[]})})};}};
@@ -50,4 +50,47 @@ test('restart rejects a substituted or missing authorization and the expired cle
  f.rows.delete(key);await assert.rejects(reopen);
  f.rows.set(key,row);f.setNow(p.C1);await assert.rejects(reopen);
  assert.equal(f.puts,before);
+});
+
+test('native alarm uses the recovered executor for the original withdraw and close RPCs',async()=>{
+ const {installPrivateQaFiniteRecoveryFactory,runPrivateQaFiniteTrialAlarm}=await import('../lib/mcp-qa-finite-trial-guard.mjs');
+ const calls=[];
+ const {f,p,head}=await prepare(f=>{
+  const own={toString:()=>f.plan.resources.containerId};
+  f.env.AFW_RELEASE_EVENTS_NODE={idFromName:()=>own,get:id=>{
+   assert.equal(id,own);
+   const verify=(action,refs)=>{
+    assert.equal(refs.intentId,f.plan.intentId);
+    const head=f.rows.get(HEAD);assert.equal(refs.controlHash,head.controlHash);
+    calls.push(action);
+   };
+   return {
+    async withdrawFiniteTrialPermissions(refs){verify('withdraw',refs);},
+    async closeFiniteTrial(refs){verify('close',refs);},
+    async readFiniteTrialReductionReceipts(refs){
+     assert.equal(refs.intentId,f.plan.intentId);
+     return {
+      withdraw:{purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,
+       permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false},
+      close:{closed:true,runtimeStopRequested:true},
+     };
+    },
+    async sealFiniteTrialAdmission(){calls.push('seal');},
+    async readFiniteTrialSealedAdmissionJournal(){throw Error('fixture waits for sealed proof');},
+   };
+  }};
+ });
+ installPrivateQaFiniteRecoveryFactory(args=>api.createPrivateQaFiniteRecoveryExecutor({...args,compiledRevision:p.source.revision,now:f.now}));
+ const run=()=>runPrivateQaFiniteTrialAlarm({ctx:f.ctx,env:f.env});
+ const result=await run();
+ assert.deepEqual(calls,['withdraw','close','seal']);
+ assert.equal(result.status,'admin_pending');
+ for(const kind of ['withdraw','close']){
+  const key='afw.qa-finite-guard.v1:'+p.intentId+':effect:'+kind,row=f.rows.get(key);
+  assert.equal(row.phase,'complete');assert.equal(row.controlHash,head.controlHash);
+ }
+ assert.equal(f.alarm,p.C0+60000);
+ f.setNow(p.C0+60001);
+ assert.equal((await run()).status,'admin_pending');
+ assert.deepEqual(calls,['withdraw','close','seal']);
 });
