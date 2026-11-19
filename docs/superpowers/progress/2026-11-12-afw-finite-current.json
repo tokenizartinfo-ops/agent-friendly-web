@@ -1,10 +1,10 @@
 {
-  "schema": 63,
-  "timestampUTC": "2026-11-19 14:40:14 UTC",
+  "schema": 64,
+  "timestampUTC": "2026-11-19 14:56:04 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "f5abba36ad113acabdb5264f91e703db88747b95",
-  "phase": "Private QA receiver staged at 0% after fixing the isolated D1 schema dependency. Bounded source verification binds the exact notice review and withdrawal to QA restoration. Full assembly and live delivery, review and withdrawal remain pending.",
+  "previousCheckpoint": "1512c6873fc704db5cd518397edf2525df23237c",
+  "phase": "Corrected native QA receiver RPC and qualified the positive path with two workerd Workers and D1. The isolated receiver is now deployed closed, with one verified private Cloudflare read-only probe. The active independent-closure QA binding and effect authorities still need integration before full packaging or a live occurrence.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount the concrete fixed native QA launch authority and original-guard/cleanup factories. Bind the private staged receiver to QA with an exact finite policy and validate current scoped preparation and R2/QA custody before the complete package and real trial.",
+  "next": "Complete source-bound QA and canary effect mounts and connect the exact dedicated receiver in the actual independent QA candidate. Validate both rollback and the original finite reviewer policy with current named QA/R2 custody, then run one actual same-notice cloud review and withdrawal.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2474,5 +2474,18 @@
     "receiverTrafficPercent": 0,
     "completePackage": false,
     "realCloudOccurrence": false
+  },
+  "nativeReceiverLinkReadback": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-receiver-link-readback.json",
+    "source": "7507d3141efaabd39f24ae613385834032b1e2cd",
+    "closed": "2330395619b34b9b659dbc17df5079cadd6b5cec",
+    "verificationRun": 44547714367,
+    "tests": 305,
+    "receiverVersion": "bd0cf7d0-68d3-4506-911d-7cd7eb7563e3",
+    "receiverDeployment": "6e9cc39a-b9fc-4a66-b6d8-aee5933b6fe5",
+    "terminalClosedProbe": "afw-private-review-link-object-20261119-vbd0cf7d0",
+    "trueNativeRpcTest": true,
+    "completePackage": false,
+    "realCloudTrial": false
   }
 }

@@ -1,0 +1,77 @@
+{
+  "purpose": "afw.native-receiver-link-readback.v1",
+  "timestampUTC": "2026-11-19 14:56:04 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "source": {
+    "revision": "7507d3141efaabd39f24ae613385834032b1e2cd",
+    "closedRevision": "2330395619b34b9b659dbc17df5079cadd6b5cec",
+    "regressionRun": 44547493898,
+    "verificationRun": 44547714367,
+    "nodeTests": 300,
+    "pythonTests": 5,
+    "compilerStagingPassed": true,
+    "completePackageEmitted": false
+  },
+  "receiver": {
+    "readback": {
+      "at": "2026-11-19T14:52:35.185Z",
+      "closed": true,
+      "isolated": true,
+      "policyPresent": false,
+      "publicExposure": false,
+      "schedules": 0,
+      "tails": 0,
+      "existingPrivateProbeLinked": true,
+      "mainQaBindingPresent": false,
+      "mainQaDeployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1"
+    },
+    "version": "bd0cf7d0-68d3-4506-911d-7cd7eb7563e3",
+    "deployment": "6e9cc39a-b9fc-4a66-b6d8-aee5933b6fe5",
+    "rollbackVersion": "47e8e866-8656-4e6a-b922-3abe33d9c68d",
+    "priorDeployment": "57891230-01ab-4ae4-a38d-9465bcebe544",
+    "trafficPercent": 100,
+    "allOperationFlagsOff": true,
+    "policyInstalled": false,
+    "privateExposure": true,
+    "noClientTrafficEnabled": true
+  },
+  "proof": {
+    "workerdNativeRpcMatchedSameSyntheticReceipt": true,
+    "workerdNativeRpcForeignReceiptDenied": true,
+    "closedProviderProbe": {
+      "at": "2026-11-19T14:55:24.213Z",
+      "id": "afw-private-review-link-object-20261119-vbd0cf7d0",
+      "status": "complete",
+      "version": "c9e04c6f-f9f4-41c8-abc5-202b79beffb1",
+      "steps": 1,
+      "attempts": 1,
+      "closedReceiptVerified": true,
+      "receiverDeployment": "6e9cc39a-b9fc-4a66-b6d8-aee5933b6fe5",
+      "cloudReviewConfirmed": false,
+      "operationalReadiness": false
+    },
+    "rejectedProbe": {
+      "id": "afw-private-review-link-closed-20261119-vbd0cf7d0",
+      "status": "errored",
+      "beforeAnyStep": true,
+      "cause": "REST stored the JSON-encoded diagnostic input as a string, while the existing diagnostic requires a native object."
+    }
+  },
+  "pending": {
+    "independentQaBindingAbsentFromActiveVersion": true,
+    "nativeLaunchOperationsMount": true,
+    "qaAndCanaryFiniteGuardMounts": true,
+    "scopedReceiverPolicy": true,
+    "completePackage": true,
+    "protectedQaCredential": "existing GitHub secret not renewed; dated provider expiry remains 2026-11-08T02:59:59.000Z",
+    "privateR2ReaderSecret": "absent in the intended GitHub repository and environment",
+    "endToEndCloudReviewAndWithdrawal": true
+  },
+  "realCloudTrial": false,
+  "reviewedRealSameNotice": false,
+  "subscriptionWithdrawalObserved": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}
