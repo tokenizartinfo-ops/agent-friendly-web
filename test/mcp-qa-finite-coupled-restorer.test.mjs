@@ -57,6 +57,7 @@ function fixture(){
   }
  };
  f.expire=()=>{at=intent.restoreBefore;};
+ f.advance=ms=>{at+=ms;};
  return f;
 }
 const requireController=()=>{assert.equal(typeof api.createPrivateQaFiniteCoupledRestorer,'function');return api.createPrivateQaFiniteCoupledRestorer;};
@@ -152,10 +153,10 @@ async function httpFixture({foreignInstance=false,wrongStep=false,unstableResult
   assert.equal(u.hostname,'api.cloudflare.com');assert.equal(init.headers.Authorization,'Bearer SYNTHETIC');
   assert.equal(init.method,'GET');
   const v=reads.get(u.pathname.slice(cfAccountPath.length));assert.ok(v,u.pathname);
-  return json(v);
+  return v instanceof Response?v:json(v);
  };
  const params={intent,liveVersionId:live,credential:'SYNTHETIC',fetchImpl,now:f.deps.now,signal:f.deps.signal};
- return {f,observed,calls,params};
+ return {f,observed,calls,params,reads,instancePath:base+'/instances/'+instanceId,stamp};
 }
 test('the independent executor reads the real fixed Cloudflare Workflow wire before accepting original closure',async()=>{
  assert.equal(typeof http.createPrivateQaFiniteCoupledObservationHttp,'function');
@@ -187,4 +188,47 @@ test('Cloudflare credential failure blocks R2 access, the external claim and any
  assert.equal((await runner.run()).status,'admin_pending');
  assert.ok(calls.some(call=>call.path==='/tokens/verify'));
  assert.ok(calls.every(call=>call.method==='GET'));
+});
+
+test('original recovery waits read-only through a missing receipt, then restores once with the same notice',async()=>{
+ const f=fixture(),evidence=addNoticeEvidence(f),original=f.deps.readObservation;
+ let attempts=0;
+ f.deps.readObservation=async(...args)=>{
+  if(++attempts<=2){assert.equal(f.claims,0);assert.equal(f.reads,0);return {status:'not_yet_observed'};}
+  return original(...args);
+ };
+ f.deps.sleep=async ms=>{assert(ms>0&&ms<=5000);f.advance(ms);};
+ const result=await requireController()(f.deps).run();
+ assert.equal(result.status,'restored_observed');assert.equal(f.writes,1);assert.equal(f.claims,1);
+ assert.deepEqual(result.noticeEvidence,evidence);
+});
+test('a receipt that never arrives leaves time for recovery and never claims a write',async()=>{
+ const f=fixture();
+ let observations=0;
+ f.deps.readObservation=async()=>{observations++;return {status:'not_yet_observed'};};
+ f.deps.sleep=async ms=>f.advance(ms);
+ const result=await requireController()(f.deps).run();
+ assert.equal(result.status,'admin_pending');assert.equal(f.claims,0);assert.equal(f.writes,0);assert.equal(f.reads,0);
+ assert(observations>1&&observations<=29);assert(f.deps.now()<=f.intent.restoreBefore-35000);
+});
+test('a late wakeup cannot read or start the restore at the expired polling cutoff',async()=>{
+ const f=fixture();let observations=0;
+ f.deps.readObservation=async()=>{observations++;return {status:'not_yet_observed'};};
+ f.deps.sleep=async()=>f.advance(150000);
+ assert.equal((await requireController()(f.deps).run()).status,'admin_pending');
+ assert.equal(observations,1);assert.equal(f.writes,0);assert.equal(f.claims,0);
+});
+test('authenticated exact 404 is pending, other 404s and foreign pending inputs stop the observation',async()=>{
+ const f=await httpFixture();
+ const read=http.createPrivateQaFiniteCoupledObservationHttp(f.params),complete=f.reads.get(f.instancePath);
+ const missing=message=>Response.json({success:false,messages:[],errors:[{code:10400,message}],result:null},{status:404,headers:{date:f.stamp}});
+ f.reads.set(f.instancePath,missing('workflows.api.error.instance.not_found'));
+ assert.deepEqual(await read(),{status:'not_yet_observed'});
+ f.reads.set(f.instancePath,missing('wrong.Resource'));
+ await assert.rejects(read());
+ f.reads.set(f.instancePath,{...complete,status:'queued',end:null,output:null,step_count:0,steps:[]});
+ assert.deepEqual(await read(),{status:'not_yet_observed'});
+ f.reads.set(f.instancePath,{...complete,status:'queued',params:{...complete.params,controlHash:'f'.repeat(64)},end:null,output:null,step_count:0,steps:[]});
+ await assert.rejects(read());
+ assert(f.calls.every(x=>x.method==='GET'));
 });
