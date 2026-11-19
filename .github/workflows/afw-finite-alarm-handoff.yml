@@ -26,3 +26,28 @@ jobs:
           if node scripts/build-finite-native-package.mjs "$GITHUB_SHA"; then exit 1; fi
           test ! -e output/finite-native-package
           echo "Complete package remains gated"
+      - name: Build the dedicated private QA receiver
+        run: |
+          npx --no-install wrangler deploy --dry-run --config wrangler.operations-manager.jsonc --outdir "$RUNNER_TEMP/afw-receiver-build"
+          mkdir "$RUNNER_TEMP/afw-receiver-transfer"
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          import json, os
+          temp = Path(os.environ['RUNNER_TEMP'])
+          files = list((temp / 'afw-receiver-build').glob('*.js'))
+          assert len(files) == 1
+          source = files[0].read_bytes()
+          assert 0 < len(source) < 262144 and b'FiniteDossierReviews' in source
+          target = temp / 'afw-receiver-transfer'
+          (target / 'index.mjs').write_bytes(source)
+          manifest = {'purpose':'afw.private-qa-receiver-staging.v1','sourceRevision':os.environ['GITHUB_SHA'],'bytes':len(source),'sha256':sha256(source).hexdigest(),'deploymentPerformed':False}
+          (target / 'receipt.json').write_text(json.dumps(manifest))
+          print(json.dumps(manifest))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-private-receiver-source-build
+          path: ${{ runner.temp }}/afw-receiver-transfer
+          if-no-files-found: error
+          retention-days: 1
