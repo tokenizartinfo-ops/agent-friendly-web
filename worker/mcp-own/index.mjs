@@ -1,6 +1,6 @@
 import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
 import {createFiniteOwnReductionActions} from '../../lib/mcp-own-finite-reduction.mjs';
-import {resolveFiniteOwnNativeCleanupHost} from '../../lib/mcp-own-finite-cleanup-host.mjs';
+import {resolveFiniteOwnNativeCleanupHost,createFiniteOwnCleanupAdmissionJournal} from '../../lib/mcp-own-finite-cleanup-host.mjs';
 import {withdrawOwnPermissions} from '../../lib/mcp-own-permission-withdrawal-host.mjs';
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
@@ -35,6 +35,11 @@ export class AfwOwnEventNode extends DurableObject{
   }});
  }
  #finite(){return resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env,nativeCleanup:this.#finiteCleanupBindings()});}
+ async #finiteCleanupJournal(refs,operation){
+  const control=await readFiniteCanaryReductionControl({ctx:this.ctx,env:this.env,sourceRevision,refs,operation});
+  const journal=createFiniteOwnCleanupAdmissionJournal({ctx:this.ctx,env:this.env,control,sourceRevision});
+  return operation==='seal'?journal.seal():journal.read();
+ }
  async #finiteReduction(refs,operation){
   const control=await readFiniteCanaryReductionControl({ctx:this.ctx,env:this.env,sourceRevision,refs,operation});
   const actions=createFiniteOwnReductionActions({ctx:this.ctx,env:this.env,control,...this.#finiteCleanupBindings()});
@@ -66,7 +71,11 @@ export class AfwOwnEventNode extends DurableObject{
  async readFiniteTrialAdmissionJournal(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialAdmissionJournal(args[0]);}
  async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.beginFiniteTrialReservation(args[0]);}
  async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.settleFiniteTrialReservation(args[0]);}
- async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();const h=await this.#finite();return h.sealFiniteTrialAdmission(args[0]);}
+ async readFiniteTrialSealedAdmissionJournal(...args){
+  if(args.length!==1||!finiteEntrypoint)fail();
+  return this.#finiteCleanupJournal(args[0],'observeSeal');
+ }
+ async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteCleanupJournal(args[0],'seal');const h=await this.#finite();return h.sealFiniteTrialAdmission(args[0]);}
  async readFiniteTrialCleanupReadiness(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialCleanupReadiness(args[0]);}
  async observeFiniteTrialCleanup(...args){if(args.length!==1)fail();const h=await this.#finite();return h.observeFiniteTrialCleanup(args[0]);}
  // Private original-custody observation; no caller selectors or live runtime.

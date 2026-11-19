@@ -36,7 +36,7 @@ async function fixture(){
    assert.deepEqual(x,planned);calls.push('seal');seal={purpose:purpose+':seal',identityHash,sealedAt:f.f.now()};
    return {status:'sealed'};
   },
-  async readFiniteTrialAdmissionJournal(x){
+  async readFiniteTrialSealedAdmissionJournal(x){
    assert.deepEqual(x,refs);calls.push('read_seal');
    return {status:'observed',identity:journalIdentity,identityHash,sealed:seal!==null,seal,sealHash:seal?finiteHash(seal):null,writers:{},unresolvedWriters:0,launchNeverIssued:true,authorizesEffects:false,operationalReadiness:false};
   },

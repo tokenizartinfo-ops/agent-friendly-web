@@ -95,3 +95,21 @@ test('the finite canary can seal only the issued QA seal for the exact committed
  assert.equal((await readSeal()).control.controlHash,c.controlHash);
  assert.equal(f.puts,0);
 });
+
+test('the candidate cleanup journal can seal and read the original record without exposing launch writes',async()=>{
+ const {createFiniteOwnCleanupAdmissionJournal}=await import('../lib/mcp-own-finite-cleanup-host.mjs');
+ const {f,p,c}=fixture(),s=p.selectors,own={toString:()=>p.resources.containerId};
+ const ctx={storage:f.storage,id:own},db={prepare(){throw Error('cleanup seal must not invoke D1');},withSession(){throw Error('cleanup seal must not invoke D1');}};
+ const env={DB:db,AFW_FINITE_TRIAL_VERSION:{id:p.canaryContainment.runtimeVersionId},AFW_DOSSIER_EVENTS_ENABLED:'false',
+  AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',AFW_DOSSIER_EVENTS_NODE:{idFromName:()=>own,idFromString:()=>own,get:()=>null},
+  AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),
+  AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://fixed.invalid',
+  AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_OAUTH_RESOURCE:s.resource};
+ const journal=createFiniteOwnCleanupAdmissionJournal({ctx,env,control:{plan:p,planHash:c.planHash,controlHash:c.controlHash},sourceRevision:p.canaryContainment.sourceRevision,now:f.now});
+ assert.deepEqual(Object.keys(journal),['seal','read']);
+ assert.equal((await journal.read()).sealed,false);
+ const result=await journal.seal();assert.equal(result.status,'sealed');
+ assert.equal((await journal.read()).sealHash,result.sealHash);
+ assert.equal((await journal.seal()).status,'reconcile_only');assert.equal(f.puts,1);
+ f.setNow(p.C1);await assert.rejects(journal.read());assert.equal(f.puts,1);
+});
