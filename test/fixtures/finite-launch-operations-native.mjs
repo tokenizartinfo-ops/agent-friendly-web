@@ -5,6 +5,10 @@ import {finiteAdmissionIdentity} from '../../lib/mcp-own-finite-cleanup-proof.mj
 import {finiteHash} from '../../lib/mcp-finite-evidence.mjs';
 import {createPrivateQaFiniteTrialNativePin,readPrivateQaFiniteControlSnapshotUnderCoordinator} from '../../lib/mcp-qa-finite-trial-control.mjs';
 export {fixture,readPrivateQaFiniteLaunchMaterial};
+/** Bundle substitution replaces only external evidence for native tests. */
+export function installPrivateQaFiniteLaunchSource(value){
+ if(typeof value?.resolve!=='function'||typeof value?.read!=='function')throw Error('Missing native source installation');
+}
 export async function resolvePrivateQaFiniteLaunchContext(options){
  const {ctx,env,refs,parent}=options,f=await fixture(ctx,env);parent.check();
  if(f.sourceUnavailable||f.setup!=='completed'||f.seed!=='original'||f.prepareSuccess===false&&Object.hasOwn(refs,'controlHash'))throw Error('SYNTHETIC provenance unavailable');
