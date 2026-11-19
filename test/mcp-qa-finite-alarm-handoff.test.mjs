@@ -76,3 +76,15 @@ test('handoff refuses an original plan pinned to a different closed deployment',
  assert.equal(f.alarm,handoff.initialC0);
  assert.equal(f.rows.has(HEAD),false);
 });
+
+test('an expired original alarm keeps the obligation for administration without scheduling another delivery',async()=>{
+ const {f,handoff,control}=await prepared();
+ assert.equal((await control.prepare()).status,'armed');
+ f.setNow(handoff.initialC1);
+ await f.storage.transaction(tx=>tx.setAlarm(null));
+ const keys=[...f.rows.keys()];
+ const result=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
+ assert.equal(result.kind,'original_expired');
+ assert.equal(f.alarm,null);
+ assert.deepEqual([...f.rows.keys()],keys);
+});
