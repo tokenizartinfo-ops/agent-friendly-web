@@ -1,4 +1,5 @@
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
+import {readPrivateQaFiniteProofInventory} from '../../lib/mcp-qa-finite-proof-inventory.mjs';
 import {readPrivateQaFiniteReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
 import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
 import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation,publishPrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
@@ -85,6 +86,10 @@ export class IndependentClosure extends ClosedIndependentClosure{
  readFiniteCanaryReductionControl(...args){
   if(args.length!==1)throw Error('Finite native reduction control unavailable');
   return readPrivateQaFiniteReductionControl({ctx:this.ctx,env:this.env,compiledRevision:globalThis.__AFW_QA_SOURCE_REVISION__,refs:args[0]});
+ }
+ readFiniteCanaryProofInventory(...args){
+  if(args.length!==1)throw Error('Finite proof inventory unavailable');
+  return readPrivateQaFiniteProofInventory({ctx:this.ctx,env:this.env,compiledRevision:globalThis.__AFW_QA_SOURCE_REVISION__,refs:args[0]});
  }
  readFiniteCoupledQaFinalization(...args){
   if(args.length!==1)throw Error('Finite coupled QA finalization unavailable');

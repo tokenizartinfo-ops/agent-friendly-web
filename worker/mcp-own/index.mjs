@@ -1,3 +1,4 @@
+import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
 import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
 import {createFiniteOwnReductionActions} from '../../lib/mcp-own-finite-reduction.mjs';
 import {resolveFiniteOwnNativeCleanupHost,createFiniteOwnCleanupAdmissionJournal} from '../../lib/mcp-own-finite-cleanup-host.mjs';
@@ -76,8 +77,16 @@ export class AfwOwnEventNode extends DurableObject{
   return this.#finiteCleanupJournal(args[0],'observeSeal');
  }
  async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteCleanupJournal(args[0],'seal');const h=await this.#finite();return h.sealFiniteTrialAdmission(args[0]);}
- async readFiniteTrialCleanupReadiness(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialCleanupReadiness(args[0]);}
- async observeFiniteTrialCleanup(...args){if(args.length!==1)fail();const h=await this.#finite();return h.observeFiniteTrialCleanup(args[0]);}
+ async readFiniteTrialCleanupReadiness(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnCleanupProof({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],capture:false});
+  const h=await this.#finite();return h.readFiniteTrialCleanupReadiness(args[0]);
+ }
+ async observeFiniteTrialCleanup(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnCleanupProof({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],capture:true});
+  const h=await this.#finite();return h.observeFiniteTrialCleanup(args[0]);
+ }
  // Private original-custody observation; no caller selectors or live runtime.
  async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
  // Fixed read-only challenged wrappers. No selectors, fallback or new authority.

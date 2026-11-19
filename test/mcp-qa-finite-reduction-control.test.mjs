@@ -134,3 +134,31 @@ test('native QA proof reads require completed reduction and the original outstan
  f.rows.set(prefix+'proof',{});
  await assert.rejects(capture());assert.equal(f.puts,0);
 });
+
+test('native QA reads only the authorized application inventory with the private reader',async t=>{
+ const {readPrivateQaFiniteProofInventory}=await import('../lib/mcp-qa-finite-proof-inventory.mjs');
+ const {f,p,c,guardPrefix,allow}=fixture();
+ f.env.AFW_MCP_CLOSURE_READ_TOKEN='fixture-read-only-token';
+ const fetch=globalThis.fetch,requests=[];
+ t.after(()=>{globalThis.fetch=fetch;});
+ globalThis.fetch=async(url,options)=>{
+  requests.push({url,method:options.method});
+  assert.equal(options.headers.Authorization,'Bearer fixture-read-only-token');
+  assert.equal(options.redirect,'manual');
+  return Response.json({success:true,errors:[],result:[],result_info:{per_page:100}});
+ };
+ const refs={intentId:p.intentId,planHash:c.planHash,operation:'proofReadiness'};
+ const call=(request=refs)=>readPrivateQaFiniteProofInventory({ctx:f.ctx,env:f.env,compiledRevision:p.source.revision,now:f.now,refs:request});
+ await assert.rejects(call());assert.equal(requests.length,0);
+ for(const kind of ['withdraw','close','seal']){
+  allow(kind);const key=guardPrefix+kind;
+  f.rows.set(key,{...f.rows.get(key),phase:'complete',receipt:{completed:true},completedAt:f.now()});
+ }
+ const value=await call();
+ assert.deepEqual(value,{purpose:'afw.finite-provider-inventory.v1',applicationId:p.resources.applicationId,observedAt:f.now(),instances:[],totalCount:0});
+ assert.equal(requests.length,1);assert.equal(requests[0].method,'GET');
+ assert.equal(new URL(requests[0].url).pathname.endsWith('/containers/applications/'+p.resources.applicationId+'/instances-v2'),true);
+ await assert.rejects(call({...refs,operation:'seal'}));
+ await assert.rejects(call({...refs,applicationId:'other'}));
+ assert.equal(requests.length,1);assert.equal(f.puts,0);
+});
