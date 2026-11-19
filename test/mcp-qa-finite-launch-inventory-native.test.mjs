@@ -183,8 +183,12 @@ test('queued transition and provider work consume the original parent deadline',
 test('source hydration cannot refresh the original parent lifetime',async()=>{
  const r=await native('hydrate-expired');assert.equal(r.expired,true);assert.deepEqual(r.paths,[]);
 });
-test('default source has no registration or positive authority escape',async()=>{
- const source=await readFile(new URL('../lib/mcp-qa-finite-launch-source.mjs',import.meta.url),'utf8');assert.doesNotMatch(source,/export (?:function|const) (?:install|register)/);
+test('the ordinary worker does not install private launch sources and an unmounted source grants nothing',async()=>{
+ const ordinary=await readFile(new URL('../worker/independent-closure/index.mjs',import.meta.url),'utf8');
+ assert.doesNotMatch(ordinary,/installPrivateQaFiniteLaunchSource\(/);
+ const source=await import('../lib/mcp-qa-finite-launch-source.mjs');
+ assert.throws(()=>source.resolvePrivateQaFiniteLaunchContext({}),/source unavailable/);
+ assert.throws(()=>source.readPrivateQaFiniteLaunchOperations({}),/source unavailable/);
 });
 
 test('copied actual snapshot and fabricated provider DTO cannot mint an absence result',async()=>{
