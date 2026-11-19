@@ -59,6 +59,6 @@ test('native prelaunch sees the exact provider pointers twice and first-primary 
 });
 for(const mode of ['drift','tails','container','D1-unavailable'])test('prelaunch denies '+mode,async t=>{
  assert.equal(typeof api.readPrivateQaFinitePrelaunch,'function');
- const x=fixture(t),before=x.f.puts;
+ const x=fixture(t,mode),before=x.f.puts;
  await assert.rejects(x.verify());assert.equal(x.f.puts,before);
 });

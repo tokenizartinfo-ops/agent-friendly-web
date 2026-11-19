@@ -46,7 +46,7 @@ async function use(t,mode){
    script_name:definition.script,class_name:definition.className,schedules:[]}},{headers:{date:new Date(now()).toUTCString()}});
  };
  globalThis.afwDispatchFixture={
-  preflight(){if(mode==='preflight-drift')throw Error('synthetic preflight drift');return {status:'verified'};},
+  async preflight(){if(mode==='preflight-drift')throw Error('synthetic preflight drift');return {status:'verified'};},
   checkOperations(){if(mode==='missing-operations')throw Error('native launch operations unavailable');},
   checkGuard(){if(mode==='missing-guard')throw Error('native cleanup guard unavailable');},
   origin:async()=>qualified,
