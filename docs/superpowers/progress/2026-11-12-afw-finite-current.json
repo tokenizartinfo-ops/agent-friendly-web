@@ -1,10 +1,10 @@
 {
-  "schema": 61,
-  "timestampUTC": "2026-11-19 13:13:01 UTC",
+  "schema": 62,
+  "timestampUTC": "2026-11-19 14:00:49 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "0ccf34943790a0b75bffd1273503aa67a3b14aa9",
-  "phase": "GitHub launcher and original Cloudflare alarm handoff are qualified in candidate source using synthetic cloud tests. The eligible release package and one real same-notice occurrence remain pending.",
+  "previousCheckpoint": "63a66c9eed25ad44a51ad354c545c647b373c9fd",
+  "phase": "Native Workflow wire compatibility and durable same-notice review/withdrawal correlation are verified in bounded source tests. The private historical R2 archive and its three closed module pins matched dated provider reads. The complete package and real trial remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement and qualify the native launch primary operations, retained QA guard and canary cleanup mounts. Then qualify the receiver and private R2 rollbacks, assemble the complete artifact, and verify scoped QA and R2 custody before the single real cloud occurrence.",
+  "next": "Qualify the fixed native launch primary producer and QA/canary guard factories. Route launch through the fixed native QA binding without broadening shared-account writer permissions. Bind the receiver and actual runner to a new scoped QA/R2 custody window after package validation.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2443,5 +2443,6 @@
     "completePackage": false,
     "actualTrial": false
   },
-  "coupledNominalLaunch": {"path":"docs/superpowers/progress/2026-11-19-afw-coupled-nominal-launch-validation.json","evidence":"7dc0b15f465df9d232c50a855629a8af13e07adb","head":"500078e27724524fb3b78ff21d9623186c5fa5e6","closed":"0bc68f1cf620fa9553be9943aa3d1876f3861566","verifiedRun":44530364116,"tests":277,"completePackage":false,"realCloudOccurrence":false}
+  "coupledNominalLaunch": {"path":"docs/superpowers/progress/2026-11-19-afw-coupled-nominal-launch-validation.json","evidence":"7dc0b15f465df9d232c50a855629a8af13e07adb","head":"500078e27724524fb3b78ff21d9623186c5fa5e6","closed":"0bc68f1cf620fa9553be9943aa3d1876f3861566","verifiedRun":44530364116,"tests":277,"completePackage":false,"realCloudOccurrence":false},
+  "nativeGuardReviewValidation": {"path":"docs/superpowers/progress/2026-11-19-afw-native-launch-and-review-validation.json","evidence":"de263fe268395339a387fbbf2ac755034b92e9a0","head":"e73060beefef0a0c2f698c4fb9d082474b978469","closed":"3f6854d5d5a6134deb2a97bb1271bfda19284458","verifiedRun":44536967414,"tests":297,"fullSuiteTimedOut":true,"completePackage":false,"realCloudOccurrence":false}
 }

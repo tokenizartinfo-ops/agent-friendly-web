@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "parent": "0bc68f1cf620fa9553be9943aa3d1876f3861566",
+  "verifiedRevision": "e73060beefef0a0c2f698c4fb9d082474b978469",
+  "closedRevision": "3f6854d5d5a6134deb2a97bb1271bfda19284458",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "verification": {
+    "run": 44536967414,
+    "job": 135604839723,
+    "passedJavaScript": 292,
+    "passedPython": 5,
+    "failed": 0,
+    "artifacts": 0,
+    "staging": true,
+    "completePackage": false,
+    "redRuns": [
+      44532726331,
+      44533928179,
+      44534225509,
+      44535130782,
+      44536584207
+    ],
+    "broaderSuite": {
+      "run": 44535995634,
+      "job": 135601438565,
+      "revision": "864b43a6ef7d65574d690d269eb8a93ea39cfda0",
+      "timeoutMinutes": 14,
+      "conclusion": "timed_out",
+      "hadTestFailures": true,
+      "overallTotalsUnavailable": true,
+      "comparisonRun": 44538586472
+    }
+  },
+  "sourceResults": {
+    "launch": "The named GitHub step now exports its own shell PID before exec. The finite workflow and the exact provider GET use the same canonical encoded-or-object payload decoder; a different source cannot create a nominal child.",
+    "retainedControl": "PREPARED stays tied to the original arm record after native guard delivery. Guard progression before C0 is denied and progressed state cannot acquire a new launch.",
+    "notice": "The QA guard retains the receiver's bounded, exact correlated review alongside the native subscription withdrawal and cleanup completion. A different notice cannot be attested. Absence of a review leaves the independent rollback path available."
+  },
+  "primaryReadOnly": {
+    "workflowWire": {
+      "observedAt": "2026-11-19T13:43:41.293Z",
+      "historical": true,
+      "verified": true,
+      "status": "complete",
+      "parameterRepresentation": "string",
+      "timestampsHaveFractionalSeconds": true
+    },
+    "r2Privacy": {
+      "observedAt": "2026-11-19T13:22:36.542Z",
+      "managedDisabled": true,
+      "customEmpty": true,
+      "managedShape": [
+        "enabled",
+        "bucketId",
+        "domain"
+      ],
+      "customShape": [
+        "domains"
+      ]
+    },
+    "r2Archive": {
+      "observedAt": "2026-11-19T13:22:47.542Z",
+      "bytes": 4209422,
+      "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "verified": true
+    },
+    "qaCredential": {
+      "observedAt": "2026-11-19T13:40:18.754Z",
+      "found": true,
+      "providerStatus": "expired",
+      "expiresAt": "2026-11-08T02:59:59Z",
+      "expiryElapsed": true
+    },
+    "existingTokenScope": {
+      "observedAt": "2026-11-19T13:46:29.639Z",
+      "found": true,
+      "relevantGroups": [
+        "Individual Workers Content Read-Only",
+        "Individual Workers Editor",
+        "Workers Metadata Read-Only",
+        "Workers Containers Read"
+      ],
+      "hasAccountWorkersScriptsWrite": false
+    },
+    "reviewReceiver": {
+      "observedAt": "2026-11-19T13:37:20.099Z",
+      "verified": true,
+      "namedExportInSource": true,
+      "reviewEnabled": false,
+      "policyPresent": false,
+      "httpExposureCount": 0
+    },
+    "deploymentPointers": {
+      "observedAt": "2026-11-19T13:30:04.437Z",
+      "roles": [
+        {
+          "role": "qa",
+          "verified": true
+        },
+        {
+          "role": "canary",
+          "verified": true
+        },
+        {
+          "role": "operator",
+          "verified": true
+        },
+        {
+          "role": "receiver",
+          "verified": true
+        }
+      ]
+    },
+    "backupModules": {
+      "observedAt": "2026-11-19T13:52:51.885Z",
+      "result": [
+        {
+          "role": "qaClosed",
+          "verified": true,
+          "nativeOff": true,
+          "persistedFlags": 14,
+          "httpExposureCount": 0
+        },
+        {
+          "role": "canaryClosed",
+          "verified": true,
+          "nativeOff": true,
+          "persistedFlags": 8,
+          "httpExposureCount": 0
+        },
+        {
+          "role": "operatorClosed",
+          "verified": true,
+          "nativeOff": true,
+          "persistedFlags": 3,
+          "httpExposureCount": 0
+        }
+      ]
+    }
+  },
+  "qualification": {
+    "currentQaCredential": false,
+    "privateR2SecretConfigured": false,
+    "currentReceiverPolicy": false,
+    "sourceQualificationIncomplete": [
+      "Fixed native launch operations producer",
+      "Retained QA guard source factory",
+      "Canary cleanup source factory",
+      "Private release bundle and live receipts"
+    ],
+    "providerRestCreateScope": "The official REST create schema names Workers Scripts Write. The old QA token was individual-Worker scoped and did not have that group. An expired credential cannot prove authorization behavior; preserve narrow custody and qualify native Workflow binding as the delivery path.",
+    "privateR2BackupRolesVerified": true,
+    "datedPreparationAuthorityExpired": true,
+    "remaining": [
+      "Qualify the fixed primary launch/closure sources and use the private QA Workflow binding for an exact READY launch without an account-wide writer.",
+      "Bind a fresh owner-scoped preparation window and the same-notice receiver policy. Preserve independent rollback even with no receipt.",
+      "With a qualified package, verify active protected QA credentials and the private R2 reader in the actual runner. Then run the single synthetic cloud occurrence and verify receipt, completed review, withdrawal and both independent restorations."
+    ]
+  },
+  "completePackage": false,
+  "actualTrial": false,
+  "actualNoticeReceived": false,
+  "actualNoticeReviewed": false,
+  "actualSubscriptionWithdrawn": false,
+  "pcOffVerified": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false,
+  "timestampUTC": "2026-11-19 14:00:49 UTC"
+}
