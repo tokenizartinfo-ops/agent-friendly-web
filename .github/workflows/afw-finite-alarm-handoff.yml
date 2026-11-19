@@ -1,28 +1,9 @@
-name: AFW coupled QA restoration verification
-on:
-  push:
-    branches: [lab/afw-finite-alarm-handoff-20261118]
-permissions:
-  contents: read
+name: AFW coupled QA restoration verification closed
+on: workflow_dispatch
+permissions: {}
 jobs:
-  verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-COUPLED-QA-RESTORE-VERIFY-20261119' }}
+  closed:
+    if: ${{ false }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '22.23.4'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify coupled QA restoration and legacy compatibility
-        run: node --test --test-concurrency=2 --test-timeout=60000 test/mcp-restoration-configuration.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/build-finite-native-package.test.mjs
-      - run: python3 -m unittest discover -s test -p finite_historical_archive_test.py
-      - name: Verify staging and preserve complete package gate
-        run: |
-          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
-          if node scripts/build-finite-native-package.mjs "$GITHUB_SHA"; then exit 1; fi
-          test ! -e output/finite-native-package
-          echo 'Complete package remains blocked before publication'
+      - run: exit 1
