@@ -1,0 +1,58 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T12:51:49Z",
+  "scope": "GitHub candidate source and synthetic cloud execution only; no use of runtime credentials.",
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "head": "fad231a7dd71f9dbe2f7e83b0bdb55cc8efead67",
+    "closedHead": "e43931faa5b57d21929a879c2c22a43a25e23e69",
+    "run": 44527535149,
+    "attempt": 1,
+    "verifiedAtUTC": "2026-11-19T12:50:48Z",
+    "passed": 226,
+    "failed": 0,
+    "artifactCount": 0,
+    "gitHubClaimRed": 44526073903,
+    "ownerProofRed": 44527191737,
+    "mainBaseline": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+  },
+  "executor": {
+    "fixedGitHubJobWired": true,
+    "firstAttemptExactSourceMainBound": true,
+    "uniqueExternalAppendOnlySend": true,
+    "independentReadbackAfterDurableAcknowledgment": true,
+    "duplicateAndLostAcknowledgmentFailClosed": true,
+    "originalAdmitReadyProvenEvenIfLateLegacyPollFailed": true,
+    "doesNotReuseOriginalR1AsRestoreDeadline": true,
+    "nativeAlarmPublisherWired": true,
+    "nativePrivateWorkflowEscapesNoOriginalAuthority": true,
+    "cloudLiveExecutorDispatchPerformed": false
+  },
+  "package": {
+    "protectedReadOnlyR2InputJobWired": true,
+    "realCompilerStagingSucceeded": true,
+    "fullBuilderHasNoEligibleArtifact": true,
+    "actualPrivateR2DraftRun": false,
+    "nativeLaunchAndGuardNotMounted": true,
+    "completePackage": false
+  },
+  "credentials": {
+    "qaPublisherConfiguredCredentialExpiresAtUTC": "2026-11-08T02:59:59Z",
+    "qaPublisherSecretUpdatedAtUTC": "2026-10-31T15:54:32Z",
+    "r2NamedSecretAbsentInTargetEnvironment": true,
+    "r2NamedRepositorySecretNotFound": true,
+    "currentCredentialReplacementAloneUnblocksTrial": false
+  },
+  "acceptance": {
+    "actualSameNoticeReceived": false,
+    "actualCloudReview": false,
+    "actualNativeWithdrawal": false,
+    "pcOffTrial": false,
+    "operationalReadiness": false
+  },
+  "noRuntimeMutationThisBlock": true,
+  "noLocalSourceExecution": true,
+  "ownerActionNeededNow": false,
+  "next": "Finish source-qualified native material and launch effect/guard factories, then assemble and independently qualify an eligible package. In the protected GitHub environment, establish scoped QA writer and R2-only reader before running the real private draft and exact late executor. Run one cloud occurrence and verify that the original notice is received, reviewed and its own subscription withdrawn."
+}
