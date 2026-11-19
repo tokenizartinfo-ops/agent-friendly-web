@@ -1,10 +1,10 @@
 {
-  "schema": 82,
-  "timestampUTC": "2026-11-19 20:20:39 UTC",
+  "schema": 83,
+  "timestampUTC": "2026-11-19 20:53:09 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "c2d41e9a64e410611f962588b655a48c3e7ab19a",
-  "phase": "Shared signing key staged in two inactive closed versions. The exact historical R2 object was verified with a protected temporary link. The scoped QA credential and complete package remain unqualified.",
+  "previousCheckpoint": "4279250d316d2563ec2106cb2ef0fb0c722b43a7",
+  "phase": "Replaced protected QA credential passed GitHub read-only closed verification. The three exact R2 backup modules and metadata checked out. The canary staging profile requires both prelaunch secret bindings. The release package, signed challenge and real trial are pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Renew and qualify the protected QA token with Editor on the existing QA Worker only, code read on the canary and release operator only, and the existing account-level metadata and Containers read permissions.",
+  "next": "Qualify the full candidate and its receiver in closed QA against the exact R2 archive and recovery pins. Open a single finite trial only after the eligible package and rollback are both qualified.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 181,
-  "updatedAtUTC": "2026-11-19T20:20:39.914Z",
+  "schemaVersion": 182,
+  "updatedAtUTC": "2026-11-19T20:53:09.998Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1938,8 +1938,8 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": false,
-  "ownerActionNeededNow": true,
+  "noRuntimeMutationThisBlock": true,
+  "ownerActionNeededNow": false,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
     "branch": "lab/afw-notice-journey-components-20261118",
@@ -2656,6 +2656,18 @@
     "r2SignedReadVerified": true,
     "r2ExpiresUTC": "2026-11-19T21:13:59Z",
     "qaCredentialQualified": false,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "qaCredentialR2CanaryProfile": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-qa-credential-r2-and-canary-profile.json",
+    "protectedCredentialVerified": true,
+    "qaInspectionRun": 44611677834,
+    "r2Verified": true,
+    "source": "07625922e57702538c1cff649766ffc7090ed217",
+    "closedSource": "9a9bca6b2fcaa23666f4083e598ab07ad355d1d1",
+    "run": 44612754343,
+    "passed": 553,
     "completePackage": false,
     "realCloudTrial": false
   }
