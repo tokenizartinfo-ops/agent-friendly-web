@@ -35,6 +35,7 @@ export async function stageAlarmFixture(f,options){
  for(const [key,data] of Object.entries(stable))f.rows.set(key,JSON.stringify(data));
  f.rows.set(prefix+'state',encode('State',originalState));
  f.rows.set(select+'head',source.selectionHash);
+ if(typeof f.storage.put==='function')for(const [key,value] of f.rows)await f.storage.put(key,value);
  await f.storage.transaction(tx=>tx.setAlarm(initialC0));
  const token=await stagePrivateQaFiniteOriginalAlarmHandoff({storage:f.storage,control,source,check:f.now});
  return {initialC0,initialC1,token,control,source};

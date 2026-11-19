@@ -10,6 +10,8 @@ import {fixture,resolvePrivateQaFiniteLaunchContext} from './test/fixtures/finit
 import {createPrivateQaFiniteLaunchParent,withPrivateQaFiniteLaunchCoordinator} from './lib/mcp-qa-finite-launch-inventory.mjs';
 import {runPrivateQaFiniteLaunchOperation} from './lib/mcp-qa-finite-launch.mjs';
 import {hashFiniteLaunchRecord} from './lib/mcp-qa-finite-launch-records.mjs';
+import {stageAlarmFixture,useNativeAlarmIntent} from './test/fixtures/finite-alarm-handoff.mjs';
+import {createPrivateQaFiniteTrialNativePin} from './lib/mcp-qa-finite-trial-control.mjs';
 import {readPrivateQaFiniteNominalExecution} from './lib/mcp-qa-finite-confirmation-provenance.mjs';
 export {PrivateQaNamedConfirmation};
 export class Native extends IndependentClosure{
@@ -18,6 +20,12 @@ export class Native extends IndependentClosure{
   if(methods.some(k=>typeof this[k]!=='function'))return {missingMount:true};
   const f=await fixture(this.ctx,this.env);f.setup='completed';f.seed='original';f.launcher=true;
   Date.now=f.now;
+  if(mode==='original-alarm' || mode==='changed-original-alarm'){
+   useNativeAlarmIntent(f);
+   const nativePin=createPrivateQaFiniteTrialNativePin({ctx:this.ctx,env:this.env,sourceRevision:f.plan.source.revision});
+   f.handoff=await stageAlarmFixture(f,{nativePin,plan:JSON.stringify(f.plan)});
+   if(mode==='changed-original-alarm')await this.ctx.storage.setAlarm(f.handoff.initialC0+1);
+  }
   const prepareRefs={intentId:f.plan.intentId,sourceRevision:f.plan.source.revision};
   const prefix='afw.qa-finite-child-create.v1:'+f.plan.intentId+':',controlPrefix='afw.qa-finite-trial.v1:'+f.plan.intentId+':';
   const originalTx=this.ctx.storage.transaction,originalGet=this.ctx.storage.get,originalCreate=this.env.AFW_QA_NAMED_CONFIRMATION.create;
@@ -62,6 +70,7 @@ export class Native extends IndependentClosure{
   this.ctx.storage.transaction=originalTx;
   const journal=async()=>({prepared:await this.ctx.storage.get(prefix+'prepared')??null,send:await this.ctx.storage.get(prefix+'send')??null,ack:await this.ctx.storage.get(prefix+'ack')??null,claim:await this.ctx.storage.get(controlPrefix+'effect:nominal')??null,guard:await this.ctx.storage.get('afw.qa-finite-guard.v1:'+f.plan.intentId+':state')??null,alarm:await this.ctx.storage.getAlarm()});
   if(mode==='lost-prepared-reconstruction'){const s=await journal();f.prepareSuccess=false;f.setNow(f.plan.launchPolicy.launchAt);const created=await this.createFiniteNominalChild({intentId:f.plan.intentId,controlHash:s.prepared.controlHash});return {prepared,created,journal:await journal(),calls};}
+  if(f.handoff)return {prepared,journal:await journal(),calls,handoff:await this.ctx.storage.get('afw.finite-original-alarm-handoff.v1')??null,originalAt:f.handoff.initialC0};
   if(prepared.status!=='prepared'||mode==='prepare')return {prepared,journal:await journal(),calls};
   armedAt=f.now();f.prepareSuccess=true;
   const refs={intentId:f.plan.intentId,controlHash:prepared.prepared.controlHash};
@@ -221,4 +230,18 @@ test('native create reads the original provider launcher and version before send
  assert.equal(r.calls,1);
  assert(r.paths.includes('/workflows/afw-own-qa-private-bootstrap/instances/'+r.plan.workflows.launcher));
  assert(r.paths.includes('/workflows/afw-own-qa-private-bootstrap/versions/70000000-0000-4000-8000-000000000007'));
+});
+
+test('the native launcher transfers the exact initial alarm to guarded business preparation',async()=>{
+ const r=await native('original-alarm');
+ assert.equal(r.prepared.status,'prepared');
+ assert.equal(r.handoff.initialC0,r.originalAt);
+ assert.equal(r.handoff.controlHash,r.prepared.prepared.controlHash);
+ assert.equal(r.journal.alarm,r.journal.guard.nextAt);
+ assert.equal(r.calls,0);
+});
+test('a changed original alarm cannot be consumed during native preparation',async()=>{
+ const r=await native('changed-original-alarm');
+ assert.equal(r.prepared.status,'admin_pending');assert.equal(r.handoff,null);
+ assert.equal(r.journal.alarm,r.originalAt+1);assert.equal(r.journal.guard,null);assert.equal(r.calls,0);
 });

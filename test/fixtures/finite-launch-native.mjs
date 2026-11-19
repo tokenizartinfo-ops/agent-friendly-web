@@ -50,7 +50,9 @@ export async function resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent})
   }
   return {status:200,success:true,errors:[],result,result_info};
  };
- const context=Object.freeze({});contexts.set(context,{ctx,env,plan:JSON.stringify(f.plan),request,execution});return context;
+ const context=Object.freeze({});
+ contexts.set(context,{ctx,env,plan:JSON.stringify(f.plan),request,execution,...f.handoff?{alarmHandoff:f.handoff.token}:{}});
+ return context;
 }
 export function readPrivateQaFiniteLaunchMaterial({ctx,env,context,parent}){
  parent.check();const m=contexts.get(context);if(!m||m.ctx!==ctx||m.env!==env)throw Error('synthetic context unavailable');return m;

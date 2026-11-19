@@ -265,3 +265,25 @@ test('finite restoration inventory requires actual terminal launcher AND nominal
  for(const phase of ['canary_restore','qa_restore'])for(const [nominal,launcher]of [['complete','running'],['complete','queued'],['complete',null],[null,'complete'],['queued','complete'],['unknown','complete']])await assert.rejects(run(phase,nominal,launcher,'complete'));
  await assert.rejects(run('qa_restore','complete','complete','running'));
 });
+
+const {readFiniteAfwWorkflowInventory,AFW_FIXED_WORKFLOWS:fixedRegistry}=await import('../lib/mcp-fixed-terminal-workflows.mjs');
+test('launch registry follows all account pages and reads only AFW workflow instances',async()=>{
+ const calls=[],foreign=Array.from({length:99},(_,i)=>({id:'11111111-1111-4111-8111-'+String(i).padStart(12,'0'),name:'other-'+i,script_name:'another-worker',class_name:'Other'}));
+ const owned=fixedRegistry.map(x=>({id:x.id,name:x.name,script_name:x.script,class_name:x.className}));
+ const read=async(path,query)=>{
+  calls.push({path,query});
+  if(path==='/workflows'){
+   const value=query.page===1?[...foreign,owned[0]]:owned.slice(1);
+   return {value,info:{page:query.page,per_page:100,count:value.length,total_count:102,total_pages:2}};
+  }
+  const own=owned.find(r=>path==='/workflows/'+r.name||path==='/workflows/'+r.name+'/instances');assert.ok(own);
+  return path.endsWith('/instances')?{value:[],info:{per_page:100,count:0,total_count:0}}:{value:own};
+ };
+ const r=await readFiniteAfwWorkflowInventory({read,assertCurrent:()=>{}});
+ assert.equal(r.workflowCount,3);assert.equal(r.instanceCount,0);assert.equal(calls.length,8);
+});
+test('launch registry rejects an unregistered workflow attached to the AFW canary',async()=>{
+ const own=fixedRegistry.map(x=>({id:x.id,name:x.name,script_name:x.script,class_name:x.className}));
+ const extra={id:'19999999-1111-4111-8111-111111111111',name:'unknown',script_name:'agent-friendly-web-delegated-canary',class_name:'Other'};
+ await assert.rejects(()=>readFiniteAfwWorkflowInventory({assertCurrent:()=>{},read:async()=>({value:[...own,extra],info:{page:1,per_page:100,count:4,total_count:4,total_pages:1}})}));
+});
