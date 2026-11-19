@@ -179,3 +179,49 @@ test('historical completion refuses a deployment or readback that differs from t
   await assert.rejects(()=>x.store.completion());
  }
 });
+
+test('the original alarm qualifies only the retained restoration with its own exact SEND',async()=>{
+ const evidence=await import('../lib/mcp-qa-finite-original-restoration.mjs').catch(()=>({}));
+ assert.equal(typeof evidence.readPrivateQaFiniteBusinessRestoreEvidence,'function');
+ const x=await setup({coupled:true}),guard=api.createPrivateQaFiniteTrialGuard(x.options());
+ assert.equal((await guard.arm()).status,'armed');
+ x.f.setNow(x.f.plan.C0+3);
+ assert.equal((await guard.alarm()).status,'complete');
+ x.f.setNow(x.handoff.initialC0);
+ const {f}=x,control=x.capabilities.identity;
+ const check=()=>f.now();
+ const snapshot=()=>evidence.readPrivateQaFiniteBusinessRestoreEvidence({ctx:f.ctx,env:f.env,check});
+ const sendKey='afw.qa-finite-canary.v1:'+f.plan.intentId+':send';
+ const claim=f.rows.get('afw.qa-finite-trial.v1:'+f.plan.intentId+':effect:canary_restore');
+ const completion=(await x.store.completion()).receipt;
+ assert.equal((await snapshot()).kind,'ambiguous');
+ const {finiteCanaryRestorationBody}=await import('../lib/mcp-qa-finite-canary-restorer.mjs');
+ const send={purpose:'afw.finite-canary-send.v1',controlHash:control.controlHash,proofHash:completion.proofHash,
+  claimHash:finiteHash(claim),bodyHash:finiteHash(finiteCanaryRestorationBody(f.plan)),issuedAt:claim.issuedAt};
+ f.rows.set(sendKey,send);
+ const result=await snapshot();
+ assert.equal(result.kind,'retained');
+ assert.equal(result.deploymentId,completion.canaryDeploymentId);
+ assert.equal(result.completionHash,completion.receiptHash);
+ assert.equal(result.sendHash,finiteHash(send));
+ assert.equal(f.alarm,x.handoff.initialC0);
+ for(const edit of [{bodyHash:'1'.repeat(64)},{issuedAt:f.plan.C1},{claimHash:'1'.repeat(64)}]){
+  f.rows.set(sendKey,{...send,...edit});
+  await assert.rejects(snapshot);
+ }
+ x.f.env.AFW_QA_VERSION={...x.f.env.AFW_QA_VERSION,id:f.plan.deployments.qaClosed.versionId};
+ f.rows.set(sendKey,send);
+ await assert.rejects(snapshot);
+});
+
+test('an issued business SEND without retained completion leaves original recovery uncertain',async()=>{
+ const evidence=await import('../lib/mcp-qa-finite-original-restoration.mjs').catch(()=>({}));
+ assert.equal(typeof evidence.readPrivateQaFiniteBusinessRestoreEvidence,'function');
+ const x=await setup({coupled:true,missing:'withdraw'}),{f}=x;
+ f.setNow(x.handoff.initialC0);
+ const snapshot=()=>evidence.readPrivateQaFiniteBusinessRestoreEvidence({ctx:f.ctx,env:f.env,check:f.now});
+ assert.equal((await snapshot()).kind,'no_restore');
+ f.rows.set('afw.qa-finite-canary.v1:'+f.plan.intentId+':send',{purpose:'afw.finite-canary-send.v1'});
+ assert.equal((await snapshot()).kind,'ambiguous');
+ assert.equal(f.alarm,x.handoff.initialC0);
+});
