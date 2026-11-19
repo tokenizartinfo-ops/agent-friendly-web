@@ -4,6 +4,8 @@ import locator from '../scripts/mcp-finite-r2-historical-inputs.json' with {type
 import {QA_CLOUD_CLOSED_PINS as pins} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 import {finiteHash as hash} from '../lib/mcp-finite-evidence.mjs';
 
+import {observePrivateQaCoupledRestorePreparation,finiteCoupledQaPreparationInstanceId,FINITE_COUPLED_QA_OPERATION} from '../lib/mcp-qa-finite-coupled-restore-observer.mjs';
+
 const api=await import('../lib/mcp-qa-finite-coupled-restorer.mjs').catch(()=>({}));
 const purpose='afw.finite-coupled-qa-finalization.v1';
 const live='11111111-1111-4111-8111-111111111111',active='22222222-2222-4222-8222-222222222222';
@@ -16,10 +18,26 @@ function fixture(){
   ownerReceiptHash:'5'.repeat(64),ownerClosedAt:at-1000,restoreBefore:intent.restoreBefore,liveQa:{versionId:live,deploymentId:active},closedQa:{versionId:id,configurationHash,module},
   backup:{archiveSha256:locator.archiveSha256,archiveBytes:locator.archiveBytes,receiptSha256:locator.receiptSha256,qaClosed:locator.inputs.qaClosed},authorizesEffects:false,operationalReadiness:false};
  const preparation={...basis,preparationHash:hash(basis)};
+ const refs={intentId:intent.intentId,controlHash:intent.controlHash,sourceRevision:intent.sourceRevision};
+ const event={instanceId:finiteCoupledQaPreparationInstanceId(refs),workflowName:'afw-own-qa-private-bootstrap',
+   payload:{operation:FINITE_COUPLED_QA_OPERATION,...refs}};
+ let observed;
+ const observe=()=>observePrivateQaCoupledRestorePreparation({event,sourceRevision:refs.sourceRevision,
+  step:{do:async(name,options,task)=>{assert.equal(name,'observe-original-qa-restore-preparation');return task();}},
+  env:{AFW_QA_VERSION:{id:live},AFW_INDEPENDENT_CLOSURE:{
+   idFromName(name){assert.equal(name,'afw-own-successor-closure-v1');return 'exact-original-slot';},
+   get(slot){assert.equal(slot,'exact-original-slot');return {async readFiniteCoupledQaFinalization(x){
+    assert.deepEqual(x,{intentId:intent.intentId,controlHash:intent.controlHash});return f.preparation;
+   }};}
+  }}
+ });
  const f={intent,preparation,reads:0,claims:0,writes:0,readback:0,loseAck:false,scopeDrift:false,missingArchive:false,claimMode:'issued',tamperSend:false,driftAfterClaim:false};
  const marker='afw-coupled-qa-restore-'+hash({purpose:'afw.finite-coupled-qa-restore-key.v1',intentId:intent.intentId,controlHash:intent.controlHash,handoffHash:intent.handoffHash});
  f.deps={intent,signal:new AbortController().signal,now:()=>at,
-  readPreparation:async()=>f.preparation,
+  readObservation:async()=>{
+   observed??=await observe();
+   return f.foreignObservation?{...observed,instanceId:'foreign-workflow'}:observed;
+  },
   readProvider:async()=>{
    f.reads++;if(phase===1)f.readback++;
    return {purpose:'afw.finite-coupled-qa-provider.v1',observedAt:at,archiveSha256:f.missingArchive?'a'.repeat(64):locator.archiveSha256,
@@ -30,6 +48,8 @@ function fixture(){
   readSend:async()=>f.tamperSend?{...record,ownerReceiptHash:'a'.repeat(64)}:record,
   deployClosed:async request=>{
    f.writes++;assert.equal(request.recordHash,hash(record));assert.equal(request.record.annotation,marker);
+   assert.deepEqual(request.body,{strategy:'percentage',versions:[{version_id:id,percentage:100}],annotations:{'workers/message':marker}});
+   assert.equal(request.record.requestHash,hash(request.body));
    pointer={versionId:id,deploymentId:restored,annotation:marker};phase=1;
    if(f.loseAck)throw Error('synthetic lost Cloudflare acknowledgment');
    return {deploymentId:restored};
@@ -58,6 +78,7 @@ test('a lost provider acknowledgment is observed independently without replay or
 });
 for(const [name,change] of Object.entries({
  'wrong original owner receipt hash':f=>{f.preparation={...f.preparation,ownerReceiptHash:'b'.repeat(64)};},
+ 'foreign native Workflow':f=>{f.foreignObservation=true;},
  'foreign R2 archive':f=>{f.missingArchive=true;},
  'expired custody':f=>{f.scopeDrift=true;},
  'expired original window':f=>f.expire(),
