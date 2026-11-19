@@ -15,9 +15,9 @@ const api=await import('../lib/dossier-supervision-finite-review.mjs').catch(err
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('dossier-supervision-finite-review.mjs'))throw error;
  return {};
 });
-async function setup({reserve=true}={}){
+async function setup({reserve=true,isolated=false}={}){
  const f=operationsDb();
- for(const schema of ['consumer-state','notice-reservations','dossier-supervision'])f.sqlite.exec(readFileSync('worker/operations/'+schema+'.sql','utf8'));
+ for(const schema of isolated?['dossier-supervision']:['consumer-state','notice-reservations','dossier-supervision'])f.sqlite.exec(readFileSync('worker/operations/'+schema+'.sql','utf8'));
  if(typeof api.readFiniteDossierReviewReceipt==='function')f.sqlite.exec(readFileSync('worker/operations/dossier-supervision-finite-reviews.sql','utf8'));
  f.db.withSession=name=>{assert.equal(name,'first-primary');return f.db;};
  const now=Date.now(),signal={version:'afw-dossier-event-v1',eventId:'1'.repeat(64),projectRef:'2'.repeat(64),revision:2,kind:'project_updated',observedAt:new Date(now-30).toISOString()};
@@ -28,7 +28,8 @@ async function setup({reserve=true}={}){
   startAt:now-30000,reviewBefore:now+30000,readBefore:now+90000};
  const env={OPERATIONS_DB:f.db,AFW_DOSSIER_SUPERVISION_ENABLED:'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(now+30000).toISOString(),
   AFW_DOSSIER_PROJECT_REFS:JSON.stringify([signal.projectRef]),
-  AFW_DOSSIER_FINITE_REVIEW_ENABLED:'true',AFW_DOSSIER_FINITE_REVIEW_POLICY:JSON.stringify(policy)};
+  AFW_DOSSIER_FINITE_REVIEW_ENABLED:'true',AFW_DOSSIER_FINITE_REVIEW_POLICY:JSON.stringify(policy),
+  ...(isolated?{AFW_DOSSIER_FINITE_REVIEW_ISOLATED:'true'}:{})};
  const token=await new SignJWT({type:'app',common_name:config.clientId}).setProtectedHeader({alg:'RS256'}).setIssuer('https://'+config.teamDomain).setAudience(config.audience).setSubject('').setExpirationTime('5m').sign(keys.privateKey);
  const handle=createOperationsServiceControls({db:f.db,config,keySet:keys.publicKey,now:()=>now,limiter:{limit:async()=>({success:true})},noticeEnv:env});
  const post=(path,body,jwt=token)=>handle(new Request(config.origin+path,{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt,'content-type':'application/json'},body:JSON.stringify(body)}));
@@ -87,6 +88,20 @@ test('the finite receiver lists, claims and finishes only the policy-bound notic
  const finish=await f.post(route,{runId:reservation.runId,outcome:'reviewed'});
  assert.equal(finish.status,409);
  assert.equal(f.sqlite.prepare('SELECT outcome FROM dossier_supervision_runs WHERE run_id=?').get(reservation.runId).outcome,null);
+});
+
+test('dedicated private reader claims without unrelated Operations tables and finishes the same event',async()=>{
+ const f=await setup({reserve:false,isolated:true}),requestId=crypto.randomUUID();
+ const data={eventId:f.signal.eventId,requestId};
+ const first=await f.post('/dossiers/claim',data);assert.equal(first.status,200);
+ const {reservation}=await first.json();assert.equal(reservation.expiresAt,f.policy.reviewBefore);
+ assert.deepEqual((await (await f.post('/dossiers/claim',data)).json()).reservation,reservation);
+ const same=await f.post(route,{runId:reservation.runId,outcome:'reviewed',review:{eventId:f.signal.eventId,executionHash:f.policy.executionHash,resultHash:'5'.repeat(64)}});
+ assert.equal(same.status,200);
+ assert.equal((await same.json()).receipt.eventId,f.signal.eventId);
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_runs').get().n,1);
+ f.env.AFW_DOSSIER_FINITE_REVIEW_ENABLED='false';
+ assert.equal((await f.get('/dossiers')).status,404);
 });
 
 test('an expired review window never falls through to ordinary claim or listing',async()=>{
