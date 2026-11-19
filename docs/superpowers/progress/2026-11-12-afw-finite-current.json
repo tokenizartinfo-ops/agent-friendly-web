@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "faa8c459c306c0debdb5b2737ceeb89640f076bb",
-  "phase": "Original recovery uses the bound owner cleanup read, with exact setup/connection partition, separate prior-versus-pending restoration, and validated original alarm-state evolution.",
+  "previousCheckpoint": "70edd3db1cc5c9ed5b8b7f5f1cf0767a76fce4f7",
+  "phase": "Original recovery atomically reserves and independently reads back the actual original slot before the scoped coupled D1 issuer and monitoring reduction. Native restoration and SDK closure remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount the original recovery reservation under the same physical alarm and verify the committed counters/state before effects. Consume the coupled owner reader under the original lease for the exact issuer fence, D1 grant and monitoring withdrawal. Honor prior restoration using its independent observation or issue the original fixed restore only if there is no ambiguous SEND. Join final SDK grant withdrawal, bounded terminal owner receipt and QA restoration, then qualify the full release with a current scoped credential.",
+  "next": "Wire the original bounded restore after the scoped D1 reduction for the pending-original disposition. Claim its sole fixed original restore SEND/ACK under the same borrowed reservation, preserve unknown outcome on missing ACK, and never re-send for an independently verified prior restore. For both dispositions qualify the actual closed version, revoke only the original SDK grant, and retain a distinct truthful final owner receipt before QA restoration and full package qualification.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 169,
-  "updatedAtUTC": "2026-11-19T01:40:38Z",
+  "schemaVersion": 170,
+  "updatedAtUTC": "2026-11-19T01:57:26Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2370,5 +2370,14 @@
     "tests": 438,
     "completePackage": false,
     "atomicReservationMounted": false
+  },
+  "originalRecoveryReservation": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-original-recovery-reservation-validation.json",
+    "evidence": "739b396b1a838be8e5f0d2006fe74bd6fb9990c6",
+    "head": "301d11310b727f4afc9e2def7582a39c6fce30aa",
+    "closed": "a90e04f5569b0cca286c4e6258704d6c2e777c88",
+    "verifiedRun": 44440024227,
+    "tests": 481,
+    "completePackage": false
   }
 }

@@ -1,0 +1,48 @@
+{
+  "purpose": "afw.finite-original-recovery-reservation-validation.v1",
+  "updatedAtUTC": "2026-11-19T01:57:26Z",
+  "workingBranch": "lab/afw-finite-alarm-handoff-20261118",
+  "sourceRevision": "301d11310b727f4afc9e2def7582a39c6fce30aa",
+  "sourceTree": "f051cbfe487f69de3ea7dd7017ad8dca4238f55f",
+  "closedWorkflowRevision": "a90e04f5569b0cca286c4e6258704d6c2e777c88",
+  "previousEvidence": "d23d75e9d9abb4f56862379dc7f68156c86a779d",
+  "verification": {
+    "run": 44440024227,
+    "counts": {
+      "core": 266,
+      "owner-context-a": 35,
+      "initial-cleanup": 55,
+      "owner-context-b": 87,
+      "owner-effects": 38
+    },
+    "total": 481,
+    "passed": 481,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "completePackage": false,
+    "operationalReadiness": false
+  },
+  "negativeEvidence": {
+    "missingOriginalReservation": 44439080698,
+    "exhaustionReenteredDispatcher": 44439538870
+  },
+  "qualifiedAtSource": [
+    "The coupled original alarm atomically consumes the exact due reservation and preserves the next physical slot before any provider or issuer work. Independent sync and factual readback must succeed before a one-use recovery capability exists.",
+    "A raced, foreign, expired or exhausted delivery yields no further capability. Lost ACK leaves the attempt spent and the next authorized slot intact. The reservation is fenced at its next original slot or original C1.",
+    "The coupled source lends its one-use reservation only to the exact fresh native owner snapshot under the same root. The existing issuer fence, original grant revocation and original notice removal use their persisted SEND/ACK journals and scoped D1 operation. The coupled token cannot call the legacy finalizer."
+  ],
+  "limits": {
+    "atomicOriginalReservationMounted": true,
+    "coupledD1ReductionMounted": true,
+    "syntheticComponentVerification": true,
+    "integratedLiveCoupledOriginalD1Readback": false,
+    "nativeOriginalRestoreSendMounted": false,
+    "coupledOriginalSdkRevocationMounted": false,
+    "coupledFinalReceiptMounted": false,
+    "liveCloudflareMutations": false,
+    "actualSameNoticeTrial": false,
+    "pcOffTrial": false
+  },
+  "next": "Wire the original bounded restore after the scoped D1 reduction for the pending-original disposition. Claim its sole fixed original restore SEND/ACK under the same borrowed reservation, preserve unknown outcome on missing ACK, and never re-send for an independently verified prior restore. For both dispositions qualify the actual closed version, revoke only the original SDK grant, and retain a distinct truthful final owner receipt before QA restoration and full package qualification."
+}
