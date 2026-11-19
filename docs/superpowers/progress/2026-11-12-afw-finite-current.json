@@ -1,10 +1,10 @@
 {
-  "schema": 72,
-  "timestampUTC": "2026-11-19 17:28:13 UTC",
+  "schema": 73,
+  "timestampUTC": "2026-11-19 17:43:27 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "158b97eb1400dc8fb947e2310c0686514b248868",
-  "phase": "The canary's native closure-proof route now binds the exact retained QA cleanup and reads a fixed provider inventory through QA. Tested linked no-admission proof and challenge refusal. Real guard assembly, live receiver and credentialed package remain pending.",
+  "previousCheckpoint": "d737fc53763a5220ec320d55b5ea16bfdc86cf1b",
+  "phase": "The compiled QA alarm connects a restart-safe closure executor for new prepared trials. It reads the retained original arming authorization and the fixed D1 primary, and exercised exact withdraw/close and no-resend in CI.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount the QA guard with actual restart-safe admission/nominal/effect and closure readers. Validate the complete private package and restoration before the same-notice cloud trial.",
+  "next": "Finish the native launch/nominal primary service and receiver/package gates. Validate with current protected QA/R2 custody before the same-notice cloud trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2564,6 +2564,15 @@
     "closed": "f35f4bdecf19340857fd80bafaac87a6d0eb13e6",
     "run": 44577119225,
     "tests": 348,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "qaRecoveryExecutor": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-qa-recovery-executor.json",
+    "source": "efd576c4d2adec8b06c042c03bcea0792f03f0c7",
+    "closed": "df451c4d0527a7df77fd8be5f3cbf5840e9837b9",
+    "run": 44579871374,
+    "tests": 351,
     "completePackage": false,
     "realCloudTrial": false
   }

@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 17:43:27 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "efd576c4d2adec8b06c042c03bcea0792f03f0c7",
+  "closed": "df451c4d0527a7df77fd8be5f3cbf5840e9837b9",
+  "recovery": {
+    "compiledQaAlarmFactoryMounted": true,
+    "sameTransactionWithReadyAndArmed": true,
+    "immutablePreviousAuthorization": true,
+    "freshExactD1Read": true,
+    "recoveryCannotLaunch": true,
+    "restartDispatchOfWithdrawCloseVerifiedInFixture": true,
+    "duplicateDispatchRefused": true,
+    "onlyNewPreparedTrials": true
+  },
+  "verification": {
+    "run": 44579871374,
+    "job": 135757299161,
+    "nodePassed": 346,
+    "pythonPassed": 5,
+    "negativeRun": 44578386044,
+    "isolatedDiagnosticRun": 44579673723,
+    "stagingBuilt": true,
+    "prematureCompletePackageRejected": true
+  },
+  "custody": {
+    "qaProviderState": "expired",
+    "qaProviderExpiresAt": "2026-11-08T02:59:59Z",
+    "qaSecretLastUpdatedAt": "2026-10-31T15:54:32Z",
+    "protectedR2ReadUrlPresent": false,
+    "priorR2ArchiveVerification": {
+      "verified": true,
+      "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "bytes": 4209422,
+      "readbackConfirmedAtUTC": "2026-11-19 17:16:53 UTC"
+    }
+  },
+  "remaining": [
+    "Implement the fixed native nominal/admission operation producer and nominal child control.",
+    "Qualify composed package, live receiver and exact rollback with current provider credential and protected R2 input.",
+    "Run a new cloud occurrence and prove the same linked receipt and assistant review followed by AFW native subscription withdrawal."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
