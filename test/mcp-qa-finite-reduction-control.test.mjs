@@ -80,3 +80,18 @@ test('the candidate uses the existing private QA namespace and rejects changed e
  env.AFW_FINITE_TRIAL_VERSION={id:'99999999-9999-4999-8999-999999999999'};
  await assert.rejects(call());assert.equal(calls,3);
 });
+
+test('the finite canary can seal only the issued QA seal for the exact committed plan',async()=>{
+ const {f,p,c,refs,allow}=fixture(),get=read();
+ const seal=(planHash=c.planHash)=>get({ctx:f.ctx,env:f.env,compiledRevision:p.source.revision,now:f.now,
+  refs:{intentId:p.intentId,planHash,operation:'seal'}});
+ const readSeal=()=>get({ctx:f.ctx,env:f.env,compiledRevision:p.source.revision,now:f.now,
+  refs:{...refs,operation:'observeSeal'}});
+ allow('withdraw');await assert.rejects(seal());await assert.rejects(readSeal());
+ allow('seal',false);await assert.rejects(seal());
+ allow('seal');const result=await seal();
+ assert.equal(result.control.planHash,c.planHash);assert.equal(result.operation,'seal');
+ await assert.rejects(seal('f'.repeat(64)));
+ assert.equal((await readSeal()).control.controlHash,c.controlHash);
+ assert.equal(f.puts,0);
+});
