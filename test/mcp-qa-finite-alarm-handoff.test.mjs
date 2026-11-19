@@ -112,3 +112,57 @@ test('the original recovery accepts only a due reservation descended from the se
  await assert.rejects(observe);
  assert.equal(f.alarm,null);
 });
+
+const originalRecovery=await import('../lib/mcp-qa-finite-alarm-handoff.mjs');
+async function recoveryOptions(){
+ const {f,handoff,control}=await prepared();
+ assert.equal((await control.prepare()).status,'armed');
+ const base=f.storage.transaction;
+ f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
+ f.storage.sync=async()=>{};
+ await f.storage.transaction(tx=>tx.setAlarm(null));
+ f.setNow(handoff.initialC0+5);
+ const scope=new AbortController(),lease={signal:scope.signal,assertCurrent(){if(scope.signal.aborted)throw Error('SYN expired lease');}};
+ const options=()=>({ctx:f.ctx,env:f.env,originalLease:lease,now:f.now,expectedPlanHash:handoff.source.initialPlanHash,
+  expectedStateHash:decode('State',f.rows.get('afw.finite-initial-cleanup.v1:state')).recordHash});
+ return {f,handoff,lease,scope,options};
+}
+test('original recovery reservation is exclusive, preserves the next slot and lends one scoped reduction',async()=>{
+ const reserve=originalRecovery.reservePrivateQaFiniteOriginalRecovery,take=originalRecovery.takePrivateQaFiniteOriginalRecovery;
+ assert.equal(typeof reserve,'function');assert.equal(typeof take,'function');
+ const {f,handoff,options}=await recoveryOptions(),expected=options();
+ const outcomes=await Promise.allSettled([reserve(expected),reserve(expected)]);
+ assert.equal(outcomes.filter(r=>r.status==='fulfilled').length,1);
+ const token=outcomes.find(r=>r.status==='fulfilled').value,slot=handoff.initialC0+60000;
+ assert.equal(f.alarm,slot);
+ const authority=await take(token,expected);
+ assert.equal(authority.delivery,1);assert.equal(authority.stateHash,options().expectedStateHash);
+ await assert.rejects(()=>take(token,expected));
+ await authority.read();
+ f.setNow(slot);
+ assert.throws(authority.check);
+});
+test('original recovery reservation lost acknowledgement spends the attempt without lending a reduction',async()=>{
+ const reserve=originalRecovery.reservePrivateQaFiniteOriginalRecovery;
+ assert.equal(typeof reserve,'function');
+ const {f,handoff,options}=await recoveryOptions();
+ f.lost.add(f.transactions+1);
+ await assert.rejects(()=>reserve(options()));
+ const state=decode('State',f.rows.get('afw.finite-initial-cleanup.v1:state'));
+ assert.equal(state.deliveries,1);
+ assert.equal(f.alarm,handoff.initialC0+60000);
+ await assert.rejects(()=>reserve(options()));
+ assert.equal(decode('State',f.rows.get('afw.finite-initial-cleanup.v1:state')).deliveries,1);
+});
+test('original recovery reservation rejects a wrong physical alarm and a lost independent readback',async()=>{
+ const reserve=originalRecovery.reservePrivateQaFiniteOriginalRecovery;
+ assert.equal(typeof reserve,'function');
+ const wrong=await recoveryOptions();
+ await wrong.f.storage.transaction(tx=>tx.setAlarm(wrong.handoff.initialC0+100));
+ await assert.rejects(()=>reserve(wrong.options()));
+ assert.equal(decode('State',wrong.f.rows.get('afw.finite-initial-cleanup.v1:state')).deliveries,0);
+ const lost=await recoveryOptions();lost.f.storage.sync=async()=>{throw Error('SYN sync lost');};
+ await assert.rejects(()=>reserve(lost.options()));
+ assert.equal(decode('State',lost.f.rows.get('afw.finite-initial-cleanup.v1:state')).deliveries,1);
+ assert.equal(lost.f.alarm,lost.handoff.initialC0+60000);
+});
