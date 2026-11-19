@@ -1,0 +1,62 @@
+{
+  "purpose": "afw.signed-notice-receiver-staging.v1",
+  "observedAtUTC": "2026-11-19 15:53:19 UTC",
+  "project": "AFW",
+  "source": {
+    "verified": "91db5197c208b4624fbce4c67b91e71b64ec1f1a",
+    "closedLab": "4f9566be7ae7c6aa4b5ba7efe8b09115e99155c3",
+    "verificationRun": 44559064480,
+    "projectionRegression": 44557329128,
+    "signedIngressRegression": 44557952261,
+    "artifactId": 14548645228,
+    "passedNode": 340,
+    "passedArchive": 5
+  },
+  "evidence": {
+    "rootCause": "The native close receipt contains the HMAC-projected delivered notice ID. The existing reduction compared it to the original D1 record ID and denied the correct close receipt.",
+    "nativeReductionVerifiesProjectedId": true,
+    "nativeReductionRetainsWithdrawalAndExactDeliveryAfterRestart": true,
+    "rawIdAndForeignNoticeDenied": true,
+    "callbackUsesOriginalSignedEnvelope": true,
+    "callbackChallengeCannotCreateEvent": true,
+    "callbackRequiresOneIsolatedPolicyBoundNotice": true,
+    "scopeFencedAtD1": true,
+    "actualWorkerdBindingAndD1PositiveFixture": true,
+    "authenticatedReviewerListClaimFinishFixture": true
+  },
+  "cloudflare": {
+    "at": "2026-11-19T15:52:28.486Z",
+    "status": "verified_inactive",
+    "stagedVersion": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+    "activeVersion": "bd0cf7d0-68d3-4506-911d-7cd7eb7563e3",
+    "activeDeployment": "6e9cc39a-b9fc-4a66-b6d8-aee5933b6fe5",
+    "trafficPercent": 0,
+    "bytes": 105010,
+    "sha256": "9feca9c1979e1be218832ed8b7c12a35c2b0f2c216df88abf26d1d0a738103f7",
+    "closedFlagsQualified": true,
+    "callbackEnabled": false,
+    "publicRouteCreated": false,
+    "privateD1Preserved": true,
+    "qaBusinessRuntimeChanged": false
+  },
+  "package": {
+    "sourceStagingPassed": true,
+    "completePackageEmitted": false,
+    "credentialsAvailable": false
+  },
+  "pending": {
+    "mountConcreteNativeLaunchOperationsAndQaGuard": true,
+    "mountCanaryNativeCleanupFactory": true,
+    "qualifyLiveQaServiceBindingAndFiniteCallbackPolicy": true,
+    "qaCredential": "The source-pinned prior token expired, per direct Cloudflare read 2026-11-19T15:26:28.520Z.",
+    "r2Credential": "Signed exact object GET secret still needs to be provided in the protected release environment.",
+    "realCloudTrial": true
+  },
+  "runtimeFlagChanges": 0,
+  "realCloudTrial": false,
+  "realNoticeReviewed": false,
+  "realWithdrawal": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}

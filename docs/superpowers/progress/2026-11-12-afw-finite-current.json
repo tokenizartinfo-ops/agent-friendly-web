@@ -1,10 +1,10 @@
 {
-  "schema": 66,
-  "timestampUTC": "2026-11-19 15:34:23 UTC",
+  "schema": 67,
+  "timestampUTC": "2026-11-19 15:53:19 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "114f49ee53a16bba138538baea1f9c78722b8dea",
-  "phase": "The independent close executor now waits read-only on the exact original native receipt, protects the fixed restore margin, and assembly and rollback use only an exact signed R2 object GET. Current pinned QA credential is confirmed expired and the protected R2 URL secret is absent. No complete package or real trial yet.",
+  "previousCheckpoint": "2568ccd715e2490253abf1e98854286d4b249945",
+  "phase": "Corrected exact original vs delivered event correlation in native closure. Added single-scope authenticated MCP callback ingestion and connected D1-backed review in Workerd. The new receiver build is uploaded inactive, with closed runtime and public routing unchanged.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount the concrete QA first-primary/guard and canary cleanup authority, bind the dedicated receiver in the actual QA candidate and prove original launch/closure authority. Only then arrange the scoped QA token and signed single-object GET for a fresh package and the one-cloud-incident trial.",
+  "next": "Complete the native launch-primary and QA/canary cleanup factory authority, then publish the reviewed dedicated receiver/QA bindings with exact window and replacement QA/R2 custody for one real cloud trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1938,7 +1938,7 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": true,
+  "noRuntimeMutationThisBlock": false,
   "ownerActionNeededNow": false,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
@@ -2505,6 +2505,17 @@
     "run": 44555913457,
     "tests": 326,
     "qaCredentialExpired": true,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "signedNoticeReceiverStaging": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-signed-notice-receiver-staging.json",
+    "source": "91db5197c208b4624fbce4c67b91e71b64ec1f1a",
+    "closed": "4f9566be7ae7c6aa4b5ba7efe8b09115e99155c3",
+    "run": 44559064480,
+    "tests": 345,
+    "stagedReceiver": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+    "trafficPercent": 0,
     "completePackage": false,
     "realCloudTrial": false
   }
