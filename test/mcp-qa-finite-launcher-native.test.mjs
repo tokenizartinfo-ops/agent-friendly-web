@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
+import {readFile} from 'node:fs/promises';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 // SYNTHETIC source/primary and accelerated wall clock. Actual exported finite
@@ -76,4 +77,11 @@ test('a REST launcher JSON string with an extra field cannot prepare or create',
  const r=await native('rest-params-extra');
  assert.equal(r.report.prepare,0);
  assert.equal(r.report.create,0);
+});
+
+test('the original GitHub launcher step exports its bash process ID and execs the same process',async()=>{
+ const body=await readFile(new URL('../.github/workflows/afw-finite-finalizer.yml',import.meta.url),'utf8');
+ const start=body.indexOf('        id: finite_nominal_launch_once\n'),next=body.indexOf('\n      - name:',start);
+ assert.ok(start>=0&&next>start);
+ assert.match(body.slice(start,next),/export AFW_FINITE_LAUNCH_ORIGINAL_PID=\$\$\n          exec node scripts\/run-qa-finite-trial-finalizer\.mjs launch$/);
 });
