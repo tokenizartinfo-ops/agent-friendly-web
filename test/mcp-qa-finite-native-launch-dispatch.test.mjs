@@ -17,6 +17,7 @@ const qualified={
 };
 
 const stubs={
+ 'mcp-qa-finite-admission-primary':'export const readPrivateQaFiniteAdmissionPrimary = input => globalThis.afwDispatchFixture.admission(input);',
  'mcp-qa-finite-prelaunch-check':'export const readPrivateQaFinitePrelaunch = () => globalThis.afwDispatchFixture.preflight();',
  'mcp-qa-finite-launch-source':'export const assertPrivateQaFiniteLaunchDispatchWired = () => globalThis.afwDispatchFixture.checkOperations();',
  'mcp-qa-finite-trial-guard':'export const assertPrivateQaFiniteNativeGuardMounted = () => globalThis.afwDispatchFixture.checkGuard();',
@@ -28,7 +29,7 @@ const result=await build({entryPoints:['lib/mcp-qa-finite-launch-origin.mjs'],bu
  banner:{js:"import {createRequire} from 'node:module';const require=createRequire(process.cwd()+'/package.json');"},
  define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision)},plugins:[{name:'native-source-evidence-test-only',
  setup(bundler){
-  bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission|launch-source|trial-guard|prelaunch-check)\.mjs$/},
+  bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission|launch-source|trial-guard|prelaunch-check|admission-primary)\.mjs$/},
    ({path,importer})=>{
     if(/(launch-source|trial-guard)\.mjs$/.test(path)&&!importer.endsWith('mcp-qa-finite-launch-origin.mjs'))return;
     return {path:path.slice(2,-4),namespace:'synthetic-primary'};
@@ -46,6 +47,10 @@ async function use(t,mode){
    script_name:definition.script,class_name:definition.className,schedules:[]}},{headers:{date:new Date(now()).toUTCString()}});
  };
  globalThis.afwDispatchFixture={
+  async admission(input){
+   if(mode==='admission-refused')throw Error('synthetic owner scope unavailable');
+   return {permission:await input.readPermission()};
+  },
   async preflight(){if(mode==='preflight-drift')throw Error('synthetic preflight drift');return {status:'verified'};},
   checkOperations(){if(mode==='missing-operations')throw Error('native launch operations unavailable');},
   checkGuard(){if(mode==='missing-guard')throw Error('native cleanup guard unavailable');},
@@ -104,6 +109,12 @@ for(const mode of ['missing-operations','missing-guard'])test('READY does not di
 
 test('candidate preflight refusal stops dispatch before the journal',async t=>{
  const f=await use(t,'preflight-drift');
+ assert.equal((await f.run()).status,'pending');
+ assert.equal(f.rows.size,0);assert.equal(f.sends.length,0);
+});
+
+test('first-primary admission refusal stops the QA launch before any dispatch write',async t=>{
+ const f=await use(t,'admission-refused');
  assert.equal((await f.run()).status,'pending');
  assert.equal(f.rows.size,0);assert.equal(f.sends.length,0);
 });

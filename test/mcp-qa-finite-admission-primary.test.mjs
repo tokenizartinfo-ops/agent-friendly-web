@@ -23,7 +23,7 @@ function fixture(t,mode){
  addConsent.run(s.grantId,...args,mode==='current-revoked'?'revoke':'grant','afw.dossier-monitoring.v1','current',now-10,mode==='current-revoked'?now-10:p.N1);
  addConsent.run('past-grant',...args,'grant','afw.dossier-monitoring.v1','past-grant',now-20,now+1000);
  if(mode!=='old-monitor')addConsent.run('past-grant',...args,'revoke','afw.dossier-monitoring.v1','past-revoke',now-5,now-5);
- if(mode==='old-writer')db.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').run('past-grant',...args,2,now-20,now+1000,
+ if(mode==='old-writer')db.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').run('past-grant',...args,2,now-20,now+1000,
   '3'.repeat(64),'4'.repeat(64),'5'.repeat(64),'6'.repeat(40),'cloudflare/debian-trixie',now-19,now+1000);
  let sessions=0,permissionReads=0;
  f.env.RELEASE_DB={withSession(pin){assert.equal(pin,'first-primary');sessions++;
