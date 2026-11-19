@@ -2444,5 +2444,5 @@
     "actualTrial": false
   },
   "coupledNominalLaunch": {"path":"docs/superpowers/progress/2026-11-19-afw-coupled-nominal-launch-validation.json","evidence":"7dc0b15f465df9d232c50a855629a8af13e07adb","head":"500078e27724524fb3b78ff21d9623186c5fa5e6","closed":"0bc68f1cf620fa9553be9943aa3d1876f3861566","verifiedRun":44530364116,"tests":277,"completePackage":false,"realCloudOccurrence":false},
-  "nativeGuardReviewValidation": {"path":"docs/superpowers/progress/2026-11-19-afw-native-launch-and-review-validation.json","evidence":"de263fe268395339a387fbbf2ac755034b92e9a0","head":"e73060beefef0a0c2f698c4fb9d082474b978469","closed":"3f6854d5d5a6134deb2a97bb1271bfda19284458","verifiedRun":44536967414,"tests":297,"fullSuiteTimedOut":true,"completePackage":false,"realCloudOccurrence":false}
+  "nativeGuardReviewValidation": {"path":"docs/superpowers/progress/2026-11-19-afw-native-launch-and-review-validation.json","evidence":"fb01ce0c8641fe944213e70c944c49fdedc5787b","head":"e73060beefef0a0c2f698c4fb9d082474b978469","closed":"3f6854d5d5a6134deb2a97bb1271bfda19284458","verifiedRun":44536967414,"tests":297,"fullSuiteTimedOut":true,"completePackage":false,"realCloudOccurrence":false}
 }

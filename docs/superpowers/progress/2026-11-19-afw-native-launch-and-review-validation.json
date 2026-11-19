@@ -31,7 +31,30 @@
       "conclusion": "timed_out",
       "hadTestFailures": true,
       "overallTotalsUnavailable": true,
-      "comparisonRun": 44538586472
+      "comparison": {
+        "run": 44538586472,
+        "baselineJob": 135610534723,
+        "candidateJob": 135610534315,
+        "status": "both_jobs_cancelled_on_timeout",
+        "confirmedSameFailingTestNames": [
+          "native authenticated help review recovers a lost claim, finishes once and denies withdrawal",
+          "Q2 one native entry and duplicate settlement retain consistent denominators",
+          "Q5 observing preserves actual promise identity, resolution, rejection and no authority",
+          "R3S12 actual generated fixture derives four phase leaves and unchanged signal native reads",
+          "R3S13 actual fixture pointer mismatch restore accessors and malformed metric stay unknown",
+          "R3S14 actual POST finally records method while rejection remains a rejection",
+          "R3S15 actual completion and lookup instrumentation produce the phase markers",
+          "R3S16 signal keeps the original terminal grant-get call and request arguments",
+          "compiled finite receiver denies legacy delivery before every host capability",
+          "finite scheduled legacy event route stops before policy, storage or transport",
+          "real native CLI validates source-correlated metadata and writes only fixed private result",
+          "real native CLI retains correlation but rejects lateWall settlement",
+          "real native CLI retains correlation but rejects lateMono settlement",
+          "real native CLI safely blocks controllerThrows at controller",
+          "real native CLI safely blocks wrongResultSource at settlement"
+        ],
+        "allBroaderFailuresAttributed": false
+      }
     }
   },
   "sourceResults": {
