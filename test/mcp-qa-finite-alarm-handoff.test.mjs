@@ -166,3 +166,16 @@ test('original recovery reservation rejects a wrong physical alarm and a lost in
  assert.equal(decode('State',lost.f.rows.get('afw.finite-initial-cleanup.v1:state')).deliveries,1);
  assert.equal(lost.f.alarm,lost.handoff.initialC0+60000);
 });
+
+test('an exhausted original recovery reservation never reopens the delivery',async()=>{
+ const {f,handoff,options}=await recoveryOptions();
+ f.setNow(handoff.initialC0+120001);
+ const token=await originalRecovery.reservePrivateQaFiniteOriginalRecovery(options());
+ const held=await originalRecovery.takePrivateQaFiniteOriginalRecovery(token,options());
+ assert.equal(held.delivery,3);
+ assert.equal(f.alarm,null);
+ await assert.rejects(()=>originalRecovery.reservePrivateQaFiniteOriginalRecovery(options()));
+ const result=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
+ assert.equal(result.kind,'original_budget_spent');
+ assert.equal(f.alarm,null);
+});
