@@ -32,3 +32,6 @@ export async function readPrivateQaFiniteLaunchOperations(options){
  const effects=Object.fromEntries(['withdraw','close','seal','canary_restore'].map(k=>[k,{execute:async()=>{throw Error('unused synthetic cleanup');},reconcile:async()=>null}]));
  return {controlPrimary:{...f.primary,nominal},guardActions:{readPrimary:original,...effects,proof:{read:async()=>{throw Error('unused synthetic proof');}}}};
 }
+
+// This fixture exercises an already delivered launcher. It cannot schedule one.
+export function assertPrivateQaFiniteLaunchDispatchWired(){throw Error('Synthetic fixture has no dispatch producer');}
