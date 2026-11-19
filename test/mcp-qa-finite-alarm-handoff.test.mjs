@@ -258,9 +258,9 @@ async function terminalFixture(kind='original'){
   createdAt:Math.floor((closure.initialC0-5000)/1000),expiresAt:null,observedAt:closure.initialC0-2000});
  const addEffect=(operation,outcome,key)=>{
   const send=ownerSeal('Send',{purpose:'afw.finite-owner-cleanup-send.v1',identityHash:id.recordHash,operation,
-   requestId:'11111111-1111-4111-8111-111111111111',requestHash:key.repeat(64),issuedAt:now-3,deadline:now+2000});
+   requestId:'11111111-1111-4111-8111-111111111111',requestHash:key.repeat(64),issuedAt:operation==='sdk_revoke'?now+20:now-3,deadline:now+2000});
   const observed=ownerSeal('Observed',{purpose:'afw.finite-owner-cleanup-observed.v1',sendHash:send.recordHash,resultHash:key.repeat(64),
-   outcome,observedAt:now-1});
+   outcome,observedAt:operation==='sdk_revoke'?now+21:now-1});
   f.rows.set(prefix+operation+':send',ownerEncode('Send',send));
   f.rows.set(prefix+operation+':observed',ownerEncode('Observed',observed));
   return {send,observed};
@@ -284,7 +284,8 @@ async function terminalFixture(kind='original'){
  const input={handoffHash:closure.handoffHash,planHash:closure.initialPlanHash,processingStateHash:request.authority.stateHash,
   ownerIdentityHash:id.recordHash,preconnectionId:closure.prepId,sdkReferenceHash:sdk.recordHash,sdkSendHash:sdkOp.send.recordHash,
   sdkObservedHash:sdkOp.observed.recordHash,monitoringObservedHash:monitor.observed.recordHash,
-  restoration:proof,closedFactsHash:'c'.repeat(64),observedAt:now,operationalReadiness:false};
+  restoration:proof,closedFactsHash:'c'.repeat(64),observedAt:now+30,operationalReadiness:false};
+ f.setNow(now+30);
  return {...x,closure,request,input,prefix,now};
 }
 for(const kind of ['original','prior'])test('coupled terminal receipt binds OAuth, monitoring and exact '+kind+' restoration',async()=>{
