@@ -302,6 +302,7 @@ test('the pristine candidate signs its projected event without starting a subscr
  Object.assign(n.env,{AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'false',AFW_DOSSIER_OWN_SAVE_ENABLED:'false',
   AFW_DOSSIER_FINITE_CALLBACK_SECRET:secret,AFW_DOSSIER_PROVIDER_READ_TOKEN:'synthetic-reader-only'});
  n.ctx.container={running:false};
+ n.ctx.storage.list=async({prefix,limit})=>new Map([...n.f.rows].filter(([key])=>key.startsWith(prefix)).slice(0,limit));
  const challenge=Buffer.alloc(32,8).toString('base64url');
  const run=()=>observeFiniteOwnPrelaunch({ctx:n.ctx,env:n.env,program:n.program,sourceRevision:n.p.selectors.sourceRevision,
   refs:{control:n.proof.control,challenge},now:n.f.now});
