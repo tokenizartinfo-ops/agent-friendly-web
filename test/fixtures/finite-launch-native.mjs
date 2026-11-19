@@ -4,6 +4,7 @@ import {finiteFixture} from './qa-finite-trial.mjs';
 import {createPrivateQaFiniteTrialNativePin,readPrivateQaFiniteControlSnapshot} from '../../lib/mcp-qa-finite-trial-control.mjs';
 import {hashFiniteLaunchRecord} from '../../lib/mcp-qa-finite-launch-records.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../../lib/mcp-fixed-terminal-workflows.mjs';
+import {createPrivateQaFiniteFinalLaunchAuthorization} from '../../lib/mcp-qa-finite-final-launch-authorization.mjs';
 const fixtures=new WeakMap(),contexts=new WeakMap();
 export async function fixture(ctx,env){
  if(fixtures.has(ctx))return fixtures.get(ctx);
@@ -51,7 +52,14 @@ export async function resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent})
   return {status:200,success:true,errors:[],result,result_info};
  };
  const context=Object.freeze({});
- contexts.set(context,{ctx,env,plan:JSON.stringify(f.plan),request,execution,...f.handoff?{alarmHandoff:f.handoff.token}:{}});
+ const authorization=f.finalAuthorizationMode?createPrivateQaFiniteFinalLaunchAuthorization({control:s.control,parent,
+  readPermission:async()=>{
+   const {grantHash,monitorHash,expiresAt}= (await f.primary.admission()).consent;
+   return {grantHash,monitorHash,expiresAt,valid:f.finalAuthorizationMode==='valid'};
+  },readFinalizer:f.primary.finalizer,
+ }):null;
+ contexts.set(context,{ctx,env,plan:JSON.stringify(f.plan),request,execution,
+  ...(authorization?{authorizeFinalSend:authorization}:{}),...f.handoff?{alarmHandoff:f.handoff.token}:{}});
  return context;
 }
 export function readPrivateQaFiniteLaunchMaterial({ctx,env,context,parent}){

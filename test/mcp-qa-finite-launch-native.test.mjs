@@ -20,6 +20,7 @@ export class Native extends IndependentClosure{
   if(methods.some(k=>typeof this[k]!=='function'))return {missingMount:true};
   const f=await fixture(this.ctx,this.env);f.setup='completed';f.seed='original';f.launcher=true;
   Date.now=f.now;
+  if(mode==='final-permission-withdrawn'||mode==='final-permission-valid')f.finalAuthorizationMode=mode==='final-permission-valid'?'valid':'withdrawn';
   if(mode==='original-alarm' || mode==='changed-original-alarm'){
    useNativeAlarmIntent(f);
    const nativePin=createPrivateQaFiniteTrialNativePin({ctx:this.ctx,env:this.env,sourceRevision:f.plan.source.revision});
@@ -255,4 +256,12 @@ test('a changed original alarm cannot be consumed during native preparation',asy
  const r=await native('changed-original-alarm');
  assert.equal(r.prepared.status,'admin_pending');assert.equal(r.handoff,null);
  assert.equal(r.journal.alarm,r.originalAt+1);assert.equal(r.journal.guard,null);assert.equal(r.calls,0);
+});
+
+test('final original consent authorizes the same committed native SEND once',async()=>{
+ const valid=await native('final-permission-valid');assert.equal(valid.created.status,'acknowledged');assert.equal(valid.calls,1);
+ const withdrawn=await native('final-permission-withdrawn');
+ assert.equal(withdrawn.created.status,'admin_pending');assert.equal(withdrawn.calls,0);
+ assert.ok(withdrawn.journal.send);assert.equal(withdrawn.journal.ack,null);
+ assert.equal(withdrawn.again.status,'issued');
 });
