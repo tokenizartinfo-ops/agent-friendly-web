@@ -310,11 +310,20 @@ test('coupled terminal receipt cannot clear the alarm without the exact SDK ackn
 
 const qaFinalization=await import('../lib/mcp-qa-finite-coupled-finalization.mjs').catch(()=>({}));
 test('the earlier business window cannot claim QA restore for the later original owner closure',async()=>{
- const {f,control}=await prepared();
+ const fixture=finiteFixture();
+ let eligibleReads=0;
+ fixture.primary.effect=async kind=>{
+  eligibleReads++;
+  const head=fixture.rows.get(HEAD);
+  return {purpose:'afw.qa-finite-effect-eligibility.v1',kind,intentId:fixture.plan.intentId,controlHash:head.controlHash,
+   proofHash:'a'.repeat(64),observedAt:fixture.now(),eligible:true,evidenceHash:'b'.repeat(64)};
+ };
+ const {f,control}=await prepared(fixture);
  assert.equal((await control.prepare()).status,'armed');
  f.setNow(f.plan.C0+10);
  const claim=await control.claimEffect('qa_restore');
  assert.equal(claim.status,'blocked');
+ assert.equal(eligibleReads,0);
  assert.equal(f.rows.has('afw.qa-finite-trial.v1:'+f.plan.intentId+':effect:qa_restore'),false);
 });
 async function qaClosureFixture({foreignTarget=false}={}){

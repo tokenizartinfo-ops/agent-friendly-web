@@ -1,4 +1,5 @@
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
+import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
 import {privateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-origin.mjs';
 import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
@@ -68,6 +69,11 @@ export class IndependentClosure extends ClosedIndependentClosure{
   }
   const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});
   return result===null?super.alarm():result;
+ }
+ readFiniteCoupledQaFinalization(...args){
+  if(args.length!==1)throw Error('Finite coupled QA finalization unavailable');
+  const refs=args[0];
+  return readPrivateQaFiniteCoupledFinalization({ctx:this.ctx,env:this.env,refs});
  }
  prepareFiniteInitialMaterial(...args){if(args.length!==1)return Promise.resolve({status:'admin_pending',mayRetry:false,operationalReadiness:false});return createPrivateQaFiniteInitialEntry({ctx:this.ctx,env:this.env}).run(args[0]);}
  readFiniteNominalConfirmation(...args){
