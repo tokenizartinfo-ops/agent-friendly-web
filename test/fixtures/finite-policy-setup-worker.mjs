@@ -103,6 +103,14 @@ export class SetupFixture extends IndependentClosure{
     const send=JSON.parse(await storage.get(key+'send'));
     await storage.put(stem+'writer-head',JSON.stringify({identityHash:uploadHash,sendHash:hash('PolicySend',send)}));
    }
+   if(mode==='lineage-wrong-activation-request'){
+    const actHash=hashFinitePolicyEffectIdentity({...identity,effect:'activation'}),act=stem+actHash+':';
+    const send={...JSON.parse(await storage.get(act+'send')),requestHash:'9'.repeat(64)};
+    const sendHash=hash('PolicySend',send);
+    await storage.put(act+'send',encodeFinitePreparationRecord('PolicySend',send));
+    await storage.put(act+'ack',encodeFinitePreparationRecord('PolicyAck',{...JSON.parse(await storage.get(act+'ack')),sendHash}));
+    await storage.put(stem+'writer-head',JSON.stringify({identityHash:actHash,sendHash}));
+   }
    if(mode==='lineage-extra-row')await storage.put(key+'other','{}');
    if(mode==='lineage-missing-confirmation'){
     const activationHash=hashFinitePolicyEffectIdentity({...identity,effect:'activation'});

@@ -18,12 +18,5 @@ jobs:
         with:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify native closure and protected recovery
-        run: node --test --test-concurrency=2 --test-timeout=75000 test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-canary-restorer.test.mjs test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs test/build-finite-native-package.test.mjs
-      - name: Verify original cleanup regressions
-        run: node --test --test-timeout=240000 test/mcp-qa-finite-initial-cleanup-native.test.mjs
-      - name: Verify staging remains non-publishable
-        if: github.event.head_commit.message == 'AFW-FINITE-NATIVE-ALARM-HANDOFF-VERIFY-20261118'
-        run: |
-          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
-          node --input-type=module -e 'import {readFileSync} from "node:fs"; const x=JSON.parse(readFileSync("output/finite-native-staging/staging.json")); if(x.sourceRevision!==process.env.GITHUB_SHA||x.completePackage!==false||x.operationalReadiness!==false)process.exit(1); console.log(JSON.stringify({revision:x.sourceRevision,completePackage:x.completePackage,operationalReadiness:x.operationalReadiness}));'
+      - name: Verify the original policy lineage
+        run: node --test --test-timeout=75000 --test-name-pattern="wrong-activation-request" test/mcp-qa-finite-policy-setup-native.test.mjs

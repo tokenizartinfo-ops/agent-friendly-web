@@ -182,7 +182,7 @@ test('launch cannot proceed without the original approval to withdraw this subsc
  assert.equal(f.posts(),2);
 });
 
-for(const obstruction of ['stale-writer','extra-row','missing-confirmation'])test('original cleanup requires complete policy lineage and rejects '+obstruction,async t=>{
+for(const obstruction of ['stale-writer','extra-row','missing-confirmation','wrong-activation-request'])test('original cleanup requires complete policy lineage and rejects '+obstruction,async t=>{
  const f=await policyFixture(t),run=await f.run();
  assert.equal(run.status,'installed');
  assert.deepEqual(await f.installedSource('lineage-unchanged'),{status:'observed',receiptHash:run.receipt.receiptHash,policyRows:6});
