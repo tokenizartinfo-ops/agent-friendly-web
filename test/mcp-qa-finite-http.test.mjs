@@ -99,3 +99,64 @@ test('fixed export-and-exec launcher retains actual PID and admits one original 
  const child=spawnSync('bash',['-c','export AFW_FINITE_RESTORE_ORIGINAL_PID=$$; exec "$@"','finite-fixture',process.execPath,'--input-type=module','-e',code],{encoding:'utf8',timeout:20000,env:{...process.env,GITHUB_JOB:'restore',GITHUB_ACTION:'finite_restore_once',GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'b'.repeat(40)}});
  assert.equal(child.status,0,child.stderr);assert.deepEqual(JSON.parse(child.stdout),{admitted:true,send:'issued',tagPosts:1,refPosts:1,pidMatches:true});
 });
+
+import custodyRecord from '../scripts/mcp-qa-finite-custody-receipt.json' with {type:'json'};
+import {finiteHash as hash} from '../lib/mcp-finite-evidence.mjs';
+import {finiteFinalizerFixture} from './fixtures/finite-finalizer.mjs';
+import * as transport from '../lib/mcp-qa-finite-http.mjs';
+
+async function fixedLauncherFixture({lost=false}={}){
+ const deadline=Date.parse(custodyRecord.expiresAt),sample=await finiteFinalizerFixture({authenticatedIntent:true,at:deadline-1200000});
+ const x=await fixture(sample,{origin:'recovery'}),{f,state}=x,{preview:v,plan}=f,calls=[],cf=[];
+ f.f.setNow(v.T0+30000);
+ state.admitStatus='in_progress';state.admitConclusion=null;
+ const response=(result,status=200)=>Response.json(result,{status,headers:{date:new Date(f.f.now()).toUTCString()}});
+ const event={GITHUB_EVENT_NAME:'issue_comment',GITHUB_REPOSITORY:plan.finalizer.repository,GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/main',
+  GITHUB_SHA:v.sourceRevision,GITHUB_RUN_ID:String(plan.finalizer.runId),GITHUB_RUN_ATTEMPT:'1',GITHUB_ACTOR:'tokenizartinfo-ops',
+  GITHUB_JOB:'admit',GITHUB_ACTION:'finite_nominal_launch_once',AFW_FINITE_LAUNCH_ORIGINAL_PID:String(process.pid)};
+ const readyRef='refs/tags/afw-finite-ready/'+v.intentId+'/'+v.controlHash,sha='6'.repeat(40);
+ const meta={commandId:plan.commandId,controlPlanHash:v.planHash,R1:v.R1,resourceHash:v.resourceHash,
+   custodyHash:hash({id:plan.custody.id,expiresAt:plan.custody.expiresAt,policyHash:plan.custody.policyHash}),validatedAt:v.T0+1};
+ x.rows.set(readyRef,{ref:readyRef,object:{type:'tag',sha}});
+ x.tags.set(sha,{object:{type:'commit',sha:v.sourceRevision},message:JSON.stringify(meta)});
+ const get=async(url,init)=>{
+  const u=new URL(url);calls.push({url,method:init.method});
+  if(u.hostname==='api.github.com'){
+   const result=await x.fetchImpl(url,init);
+   if(!u.pathname.endsWith('/attempts/1/jobs'))return result;
+   const job=await result.json();
+   job.jobs[0].steps.push({name:'Create the exact AFW nominal launcher once',number:5,status:'in_progress',conclusion:null,started_at:new Date(v.T0+2000).toISOString()});
+   return response(job);
+  }
+  assert.equal(u.hostname,'api.cloudflare.com');cf.push({path:u.pathname,method:init.method});
+  const base='/client/v4/accounts/'+custodyRecord.accountId;
+  if(u.pathname===base+'/tokens/verify')return response({success:true,errors:[],messages:[],result:{id:custodyRecord.tokenId,status:'active',expires_on:custodyRecord.expiresAt,...custodyRecord.notBefore===null?{}:{not_before:custodyRecord.notBefore}}});
+  if(u.pathname===base+'/workflows/afw-own-qa-private-bootstrap')return response({success:true,errors:[],result:{id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',
+   name:'afw-own-qa-private-bootstrap',script_name:'agent-friendly-web-independent-closure-qa',class_name:'PrivateQaBootstrap'}});
+  assert.equal(u.pathname,base+'/workflows/afw-own-qa-private-bootstrap/instances');assert.equal(init.method,'POST');
+  assert.equal(x.refPosts,1);
+  const body=JSON.parse(init.body);
+  assert.deepEqual(body,{instance_id:plan.workflows.launcher,params:{operation:'finite_nominal_launcher',intentId:v.intentId,sourceRevision:v.sourceRevision}});
+  if(lost)throw Error('synthetic unavailable acknowledgement');
+  return response({success:true,errors:[],result:{id:plan.workflows.launcher}});
+ };
+ return {x,cf,calls,event,options:{plan,runtime:event,admission:x.admission,credential:'SYNTHETIC-PROVIDER',githubToken:'SYNTHETIC-GITHUB',fetchImpl:get,now:f.f.now,signal:new AbortController().signal}};
+}
+
+for(const lost of [false,true])test('original READY launches exactly the named Cloudflare Workflow, lost ACK='+lost,async()=>{
+ const run=transport.issuePrivateQaFiniteLauncher;
+ assert.equal(typeof run,'function');
+ const f=await fixedLauncherFixture({lost});
+ assert.equal((await run(f.options)).status,lost?'uncertain':'launcher_created');
+ assert.equal(f.cf.filter(c=>c.method==='POST').length,1);
+ assert.equal((await run(f.options)).status,'admin_pending');
+ assert.equal(f.cf.filter(c=>c.method==='POST').length,1);
+});
+test('the fixed launcher step does not dispatch before the actual owner READY gate',async()=>{
+ const run=transport.issuePrivateQaFiniteLauncher;
+ assert.equal(typeof run,'function');
+ const f=await fixedLauncherFixture();
+ f.x.state.admitStatus='completed';
+ assert.equal((await run(f.options)).status,'admin_pending');
+ assert.equal(f.x.refPosts,0);assert.equal(f.cf.filter(c=>c.method==='POST').length,0);
+});
