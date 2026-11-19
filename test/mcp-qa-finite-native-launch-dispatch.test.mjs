@@ -11,16 +11,16 @@ const prefix='afw.qa-finite-native-launcher-dispatch.v1:',now=Date.now,T0=now()-
 const definition=AFW_FIXED_WORKFLOWS.find(w=>w.className==='PrivateQaBootstrap');
 const qualified={
  external:{},setupReceiptHash:'c'.repeat(64),
- initialAnchors:{plan:{recordHash:'d'.repeat(64),C0:originalAt},alarm:originalAt},
+ initialAnchors:{plan:{recordHash:'d'.repeat(64),C0:originalAt},alarm:originalAt,material:{originalContext:{original:{}}}},
  control:{controlHash,planHash:'1'.repeat(64),plan:{T0,intentId,source:{revision:sourceRevision},deployments:{qaLive:{versionId}},
   workflows:{launcher:instanceId},launchPolicy:{armAckBy:T0+90000}}},
 };
 
 const stubs={
  'mcp-qa-finite-admission-primary':'export const readPrivateQaFiniteAdmissionPrimary = input => globalThis.afwDispatchFixture.admission(input);',
- 'mcp-qa-finite-prelaunch-check':'export const readPrivateQaFinitePrelaunch = () => globalThis.afwDispatchFixture.preflight();',
+ 'mcp-qa-finite-launch-admission':`export async function readFiniteQaLaunchEvidence(input){const f=globalThis.afwDispatchFixture;await f.preflight();return {admission:await f.admission(input)};} export function projectFiniteLaunchAdmission(){throw Error('unexpected projection');}`,
  'mcp-qa-finite-launch-source':'export const assertPrivateQaFiniteLaunchDispatchWired = () => globalThis.afwDispatchFixture.checkOperations();',
- 'mcp-qa-finite-trial-guard':'export const assertPrivateQaFiniteNativeGuardMounted = () => globalThis.afwDispatchFixture.checkGuard();',
+ 'mcp-qa-finite-trial-guard':'export const assertPrivateQaFiniteNativeGuardMounted = () => globalThis.afwDispatchFixture.checkGuard(); export function createPrivateQaFiniteTrialGuard(){throw Error("unexpected arm");}',
  'mcp-qa-finite-shared-origin':'export const readPrivateQaFiniteSharedOrigin = () => globalThis.afwDispatchFixture.origin();',
  'mcp-qa-finite-launch-ready':'export const readPrivateQaFiniteLaunchReady = () => globalThis.afwDispatchFixture.ready();',
  'mcp-qa-finite-launch-permission':'export const createPrivateQaFiniteLaunchPermission = () => globalThis.afwDispatchFixture.permit;',
@@ -29,7 +29,7 @@ const result=await build({entryPoints:['lib/mcp-qa-finite-launch-origin.mjs'],bu
  banner:{js:"import {createRequire} from 'node:module';const require=createRequire(process.cwd()+'/package.json');"},
  define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision)},plugins:[{name:'native-source-evidence-test-only',
  setup(bundler){
-  bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission|launch-source|trial-guard|prelaunch-check|admission-primary)\.mjs$/},
+  bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission|launch-source|trial-guard|launch-admission|admission-primary)\.mjs$/},
    ({path,importer})=>{
     if(/(launch-source|trial-guard)\.mjs$/.test(path)&&!importer.endsWith('mcp-qa-finite-launch-origin.mjs'))return;
     return {path:path.slice(2,-4),namespace:'synthetic-primary'};
@@ -51,7 +51,7 @@ async function use(t,mode){
    if(mode==='admission-refused')throw Error('synthetic owner scope unavailable');
    return {permission:await input.readPermission()};
   },
-  async preflight(){if(mode==='preflight-drift')throw Error('synthetic preflight drift');return {status:'verified'};},
+  async preflight(){if(['preflight-drift','bad-channel'].includes(mode))throw Error('synthetic launch evidence unavailable');return {status:'verified'};},
   checkOperations(){if(mode==='missing-operations')throw Error('native launch operations unavailable');},
   checkGuard(){if(mode==='missing-guard')throw Error('native cleanup guard unavailable');},
   origin:async()=>qualified,
@@ -117,4 +117,9 @@ test('first-primary admission refusal stops the QA launch before any dispatch wr
  const f=await use(t,'admission-refused');
  assert.equal((await f.run()).status,'pending');
  assert.equal(f.rows.size,0);assert.equal(f.sends.length,0);
+});
+
+test('a failed signed channel stops the QA launcher before any write',async t=>{
+ const f=await use(t,'bad-channel');
+ assert.equal((await f.run()).status,'pending');assert.equal(f.rows.size,0);assert.equal(f.sends.length,0);
 });

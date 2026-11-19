@@ -1,4 +1,5 @@
 import {WorkerEntrypoint} from 'cloudflare:workers';
+import {verifyPrivateFiniteDossierChannel} from '../../lib/mcp-qa-finite-dossier-channel.mjs';
 import {FINITE_DOSSIER_CALLBACK_PATH,receiveFiniteDossierCallback} from '../../lib/mcp-qa-finite-dossier-callback.mjs';
 import {readFiniteDossierReviewReceipt,FINITE_DOSSIER_QA_ORIGIN} from '../../lib/dossier-supervision-finite-review.mjs';
 import { createOperationsServiceControls, OPERATIONS_MANAGER_ORIGIN } from '../../lib/operations-service-controls.mjs';
@@ -19,6 +20,10 @@ const operationsManager = {
 };
 // Private service-binding RPC. The existing public fetch has no receipt read route.
 export class FiniteDossierReviews extends WorkerEntrypoint {
+  verifyChannel(...args) {
+    if(args.length!==1)return {verified:false};
+    return verifyPrivateFiniteDossierChannel({env:this.env,value:args[0]});
+  }
   readReview(...args) {
     if(args.length!==1)throw Error('Finite review unavailable');
     return readFiniteDossierReviewReceipt({env:this.env,refs:args[0]});

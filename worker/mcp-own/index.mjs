@@ -1,3 +1,4 @@
+import {observeFiniteOwnPrelaunch} from '../../lib/mcp-own-finite-prelaunch.mjs';
 import {runFiniteOwnTrialDossier,runFiniteOwnTrialNotice} from '../../lib/mcp-own-finite-notice-delivery.mjs';
 import {runFiniteOwnNominalReservation,runFiniteOwnTrialSubscription} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
 import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
@@ -82,6 +83,10 @@ export class AfwOwnEventNode extends DurableObject{
  async deliverFiniteTrialNotice(...args){
   if(!finiteEntrypoint||args.length!==1)fail();
   return this.#runFiniteNotice(runFiniteOwnTrialNotice,args[0]);
+ }
+ async readFiniteTrialPrelaunch(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  return observeFiniteOwnPrelaunch({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0]});
  }
  async startFiniteTrialSubscription(...args){
   if(!finiteEntrypoint||args.length!==1)fail();
