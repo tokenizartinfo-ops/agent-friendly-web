@@ -53,12 +53,13 @@ export class IndependentClosure extends ClosedIndependentClosure{
    // recovery is still owed. The due original route needs its own handler.
    const delivery=await protectPrivateQaFiniteBusinessAlarm({storage:this.ctx.storage,actorId:this.ctx.id.toString(),qaVersionId:this.env.AFW_QA_VERSION?.id});
    if(!delivery)throw Error('Finite original recovery requires reconciliation');
-   if(delivery.kind==='original_closed')return {status:'owner_cleanup_closed',operationalReadiness:false};
+   const closedResult=delivery=>Object.freeze({status:'owner_cleanup_closed',receiptHash:delivery.receiptHash,operationalReadiness:false});
+   if(delivery.kind==='original_closed')return closedResult(delivery);
    if(delivery.kind==='original_due'){
     const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});
     if(result?.status==='owner_cleanup_closed'){
      const closed=await protectPrivateQaFiniteBusinessAlarm({storage:this.ctx.storage,actorId:this.ctx.id.toString(),qaVersionId:this.env.AFW_QA_VERSION?.id});
-     if(closed?.kind==='original_closed')return result;
+     if(closed?.kind==='original_closed')return closedResult(closed);
     }
     throw Error('Finite original recovery requires reconciliation');
    }

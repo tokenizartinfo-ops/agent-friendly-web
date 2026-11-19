@@ -295,7 +295,9 @@ for(const kind of ['original','prior'])test('coupled terminal receipt binds OAut
  await terminalClose.retainFiniteCoupledTerminalReceipt({storage:f.storage,authority:request.authority,receipt});
  assert.deepEqual(f.rows.get(key),receipt);
  const closed=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
- assert.equal(closed.kind,'original_closed');assert.equal(f.alarm,null);
+ assert.equal(closed.kind,'original_closed');assert.equal(closed.receiptHash,receipt.receiptHash);assert.equal(f.alarm,null);
+ const replay=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:()=>x.handoff.initialC1+1});
+ assert.equal(replay.kind,'original_closed');assert.equal(replay.receiptHash,receipt.receiptHash);assert.equal(f.alarm,null);
 });
 test('coupled terminal receipt cannot clear the alarm without the exact SDK acknowledgement',async()=>{
  assert.equal(typeof terminalClose.sealFiniteCoupledTerminalReceipt,'function');
