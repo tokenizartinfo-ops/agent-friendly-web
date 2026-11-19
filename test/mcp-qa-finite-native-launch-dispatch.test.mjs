@@ -22,6 +22,7 @@ const stubs={
  'mcp-qa-finite-launch-permission':'export const createPrivateQaFiniteLaunchPermission = () => globalThis.afwDispatchFixture.permit;',
 };
 const result=await build({entryPoints:['lib/mcp-qa-finite-launch-origin.mjs'],bundle:true,write:false,format:'esm',platform:'node',
+ banner:{js:"import {createRequire} from 'node:module';const require=createRequire(process.cwd()+'/package.json');"},
  define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision)},plugins:[{name:'native-source-evidence-test-only',
  setup(bundler){
   bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission)\.mjs$/},
