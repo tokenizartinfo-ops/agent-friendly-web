@@ -48,12 +48,16 @@ test('QA reads the original subscription, process and saved event with the same 
  assert.equal(process.processGeneration,x.generation);
  assert.equal(process.manifestHash,x.manifestHash);
  assert.equal(await x.facts.savedEvent(),null);
+ assert.equal(await x.facts.notice(),null);
  x.event();
  const event=await x.facts.savedEvent();
  assert.equal(event.eventId,x.id);
  assert.equal(event.fingerprint,x.fingerprint);
  assert.equal(event.subscriptionReceiptHash,subscription.receiptHash);
  assert.equal(event.processReceiptHash,process.receiptHash);
+ const notice=await x.facts.notice();
+ assert.deepEqual(notice,{notice:{eventId:event.eventId,revision:event.revision,fingerprint:event.fingerprint,
+  subscriptionReceiptHash:subscription.receiptHash,processReceiptHash:process.receiptHash},expiresAt:subscription.expiresAt});
  assert.ok(x.sessions.length>=4&&x.sessions.every(pin=>pin==='first-primary'));
 });
 test('QA rejects a same-ID event with the wrong provenance or project revision',async t=>{
@@ -68,6 +72,7 @@ test('QA never projects a revoked subscription, unrelated process claim or swapp
  const x=setup(t);x.event();
  x.sql.exec("UPDATE delegated_access_grants SET revoked_at='revoked'");
  assert.equal(await x.facts.savedEvent(),null);
+ assert.equal(await x.facts.notice(),null);
  x.sql.exec("UPDATE delegated_access_grants SET revoked_at=''; DROP TRIGGER dossier_successor_launch_no_update; UPDATE dossier_successor_launch_claims SET scope_hash='foreign'");
  await assert.rejects(()=>x.facts.process(),/Finite business primary unavailable/);
  x.f.env.RELEASE_DB={};
