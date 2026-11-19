@@ -43,7 +43,7 @@ test('the mounted QA receiver ingests the signed notice and returns its exact re
   const handler=await runtime.getWorker('receiver'),endpoint='https://finite-review-qa.agentfriendlyweb.dev/mcp/finite-dossier-callback';
   const message=signDossierMcpEvent({version:'afw-dossier-event-v1',eventId:policy.eventId,projectRef:policy.projectRef,
    revision:policy.revision,kind:'project_updated',observedAt:new Date(observedAt).toISOString()},policy.projectRef,'sub_'+'8'.repeat(64),callbackKey,Date.now());
-  const first=await handler.fetch(new Request(endpoint,{method:'POST',headers:message.headers,body:message.body}));
+  const first=await handler.fetch(endpoint,{method:'POST',headers:message.headers,body:message.body});
   assert.equal(first.status,202);assert.deepEqual(await first.json(),{eventId:policy.eventId,duplicate:false});
   const row=await db.prepare('SELECT received_at FROM dossier_supervision_events WHERE event_id=?').bind(policy.eventId).first();
   const receivedAt=row.received_at,reviewedAt=Date.now();
