@@ -71,6 +71,35 @@ test('the independent writer restores the exact private R2 target once and repor
  assert.equal((await create(f.deps).run()).status,'closed_observed_uncertain');
  assert.equal(f.writes,1);
 });
+function addNoticeEvidence(f,{foreign=false}={}){
+ const eventId='a'.repeat(64),startAt=f.intent.restoreFrom-700000,closeAt=startAt+240000;
+ const notice={purpose:'afw.finite-native-subscription-closure.v1',subscriptionHash:'b'.repeat(64),eventId,
+  httpReceipt:{status:200,httpReceivedAt:startAt+1000},withdrawn:true,cloudReviewConfirmed:false};
+ const review={purpose:'afw.finite-dossier-review.v1',eventId:foreign?'f'.repeat(64):eventId,controlHash:f.intent.controlHash,
+  actorHash:'c'.repeat(64),executionHash:'d'.repeat(64),resultHash:'e'.repeat(64),
+  runId:'44444444-4444-4444-8444-444444444444',revision:2,receivedAt:startAt+900,reviewedAt:closeAt-1};
+ const noticeEvidence={purpose:'afw.finite-coupled-notice-evidence.v1',completionHash:'6'.repeat(64),startAt,closeAt,notice,review};
+ const {preparationHash,...body}=f.preparation;void preparationHash;
+ const prepared={...body,noticeEvidence};
+ f.preparation={...prepared,preparationHash:hash(prepared)};
+ return noticeEvidence;
+}
+test('independent restoration reports the exact retained delivery, review and withdrawal together',async()=>{
+ const f=fixture(),evidence=addNoticeEvidence(f);
+ const result=await requireController()(f.deps).run();
+ assert.equal(result.status,'restored_observed');
+ assert.deepEqual(result.noticeEvidence,evidence);
+ assert.equal(result.noticeEvidence.notice.eventId,result.noticeEvidence.review.eventId);
+ assert.equal(result.noticeEvidence.notice.withdrawn,true);
+ assert.equal(f.writes,1);
+});
+test('a foreign review proof cannot credit the notice or obstruct independent restoration',async()=>{
+ const f=fixture();addNoticeEvidence(f,{foreign:true});
+ const result=await requireController()(f.deps).run();
+ assert.equal(result.status,'restored_observed');
+ assert.equal(Object.hasOwn(result,'noticeEvidence'),false);
+ assert.equal(f.writes,1);
+});
 test('a lost provider acknowledgment is observed independently without replay or successful attribution',async()=>{
  const create=requireController(),f=fixture();f.loseAck=true;
  const first=await create(f.deps).run();
