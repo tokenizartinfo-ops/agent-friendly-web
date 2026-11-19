@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "atUTC": "2026-11-19T19:06:07.570Z",
+  "previousCheckpoint": "4c05fce0a0f61251e82ee9a632a0cc6106957bc6",
+  "source": {
+    "previous": "2e0a90ee917436e039c3cb4eb147bc4ee985850b",
+    "verified": "ffb3466b016775f56ded2701e2031361c3e5eb44",
+    "labClosed": "e7f9528ca5570ea15d9742d201305ddc603ed4fc"
+  },
+  "verification": {
+    "redRun": 44593199838,
+    "compilerDiagnosticRun": 44594024866,
+    "run": 44594267282,
+    "passedJavascript": 413,
+    "passedPython": 5,
+    "stagingCompiled": true,
+    "canaryBudgetBytes": 2097152,
+    "previousCanaryBytes": 2099286,
+    "fix": "Whitespace compression of generated bundles only",
+    "completePackageRejected": true
+  },
+  "behavior": {
+    "privateQaCanarySaveAndDeliver": true,
+    "usesOriginalOwnerSelectedGoal": true,
+    "requiresOriginalSubscriptionAndCurrentRevision": true,
+    "commitBeforeDelivery": true,
+    "canonicalSavedEventAndSignedDeliveryCorrelated": true,
+    "sameSubscriptionWithdrawnInSyntheticIntegration": true,
+    "replayOrMissingTransportAckDoesNotResend": true,
+    "cloudReviewProvenBySyntheticTransport": false
+  },
+  "authorization": {
+    "protectedEnvironment": "afw-qa-cloud-closed-rollback",
+    "existingQaSecretUpdatedUTC": "2026-10-31T15:54:32Z",
+    "knownQaCredentialExpiresUTC": "2026-11-08T02:59:59Z",
+    "vigentCredentialVerified": false,
+    "exactPrivateR2LinkConfiguredInEnvironment": false,
+    "exactPrivateR2LinkConfiguredAtRepository": false
+  },
+  "r2": {
+    "verified": true,
+    "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "bytes": 4209422,
+    "readbackConfirmedAtUTC": "2026-11-19 17:16:53 UTC",
+    "archiveReadViaConfiguredPackageLink": false
+  },
+  "pending": [
+    "Connect the native launch and subscription admission to the private save-and-deliver action for the same approved trial.",
+    "Qualify the complete package and rollback through the protected runner using current scoped QA custody and an exact private R2 read.",
+    "Run one real cloud trial and correlate assistant review of the same notice, withdrawal of the original subscription and restored closure."
+  ],
+  "runtimeMutation": false,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "liveAssistantReview": false,
+  "liveWithdrawal": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

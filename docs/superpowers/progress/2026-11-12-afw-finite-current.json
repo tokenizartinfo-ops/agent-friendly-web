@@ -1,9 +1,9 @@
 {
-  "schema": 78,
-  "timestampUTC": "2026-11-19 18:51:57 UTC",
+  "schema": 79,
+  "timestampUTC": "2026-11-19 19:06:07 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "501b0f62789a4bbd63c5dd1b41632027ed300d5e",
+  "previousCheckpoint": "4c05fce0a0f61251e82ee9a632a0cc6106957bc6",
   "phase": "Initial QA admission now reads the selected permission, prior revocations and process closure directly twice in first-primary D1 and independently compares the retained current owner permission. Scheduled dispatch and native executor preflight require it. The remaining native effect source, private credential and package gates remain closed.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Connect the finite launch and post-save controller to the private QA delivery action and the exact native subscription admission.",
+  "next": "Connect the native launch and subscription admission to the private save-and-deliver action for the same approved trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 177,
-  "updatedAtUTC": "2026-11-19T18:51:57.930Z",
+  "schemaVersion": 178,
+  "updatedAtUTC": "2026-11-19T19:06:07.570Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2618,6 +2618,15 @@
     "closed": "2e0a90ee917436e039c3cb4eb147bc4ee985850b",
     "run": 44591973508,
     "tests": 391,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeFiniteDossierSaveNotice": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-finite-dossier-save-and-notice.json",
+    "source": "ffb3466b016775f56ded2701e2031361c3e5eb44",
+    "closed": "e7f9528ca5570ea15d9742d201305ddc603ed4fc",
+    "run": 44594267282,
+    "tests": 418,
     "completePackage": false,
     "realCloudTrial": false
   }
