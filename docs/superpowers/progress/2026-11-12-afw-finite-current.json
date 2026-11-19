@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "a4aafa5f053da02776a068847939e64cef291d4e",
-  "phase": "Source verification passed for atomic transfer of the Cloudflare alarm and retention of the previous recovery deadline through business closure.",
+  "previousCheckpoint": "99f758907b426771d71fcf85671860d01d91678e",
+  "phase": "Source verification passed for atomic transfer and retention of the Cloudflare alarm, the shared restore target, and independent readback of historical restoration evidence.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Implement original due dispatcher with separately qualified prior restoration or bounded original fallback under original custody and enrollment. Then mount native launch/guard and qualify full closure and release.",
+  "next": "Connect the original due alarm to its bounded recovery. The fixed initial handler currently rejects any business HEAD and original close requires its own RESTORE SEND and ACK. Reuse historical completion only with a new distinct original outcome, fresh exact provider pointer and module, and verified issuer and SDK closure. For an unfulfilled recovery use only the original authorized window and recipient, without repeating an ambiguous SEND. Then mount native launch and guard and qualify the complete package.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 165,
-  "updatedAtUTC": "2026-11-18T23:49:46Z",
+  "schemaVersion": 166,
+  "updatedAtUTC": "2026-11-19T00:01:18Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2333,11 +2333,11 @@
   },
   "originalAlarmHandoff": {
     "path": "docs/superpowers/progress/2026-11-18-afw-finite-alarm-handoff-validation.json",
-    "evidence": "3c7b62e4693c83dc6662826c9c19f2b8f60bd5a8",
-    "head": "3e607eecc39715eca9196f06fd623a58f944af31",
-    "closed": "1470d71e62b2a17c80b071699aa55a8cfc8ca6f7",
-    "verifiedRun": 44423800679,
-    "tests": 146,
+    "evidence": "3b4536c11a8bacf09e1c85bc7637ac1e2ead3a71",
+    "head": "ed51ce5f865882a0b4c701ae0574798ba988ebc8",
+    "closed": "bb3300bc6ca7ec58ce90b37fecaec1815dba5774",
+    "verifiedRun": 44425074645,
+    "tests": 224,
     "completePackage": false,
     "originalFallbackExecution": false
   }
