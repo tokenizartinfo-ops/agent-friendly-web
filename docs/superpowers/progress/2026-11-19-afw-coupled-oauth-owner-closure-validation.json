@@ -1,0 +1,83 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T11:38:09Z",
+  "scope": "Isolated source and synthetic cloud qualification, plus read-only provider checks for the pinned private R2 backup.",
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "parent": "581f791a26ed1cc48ea2856f401ad77bdd3c1f35",
+    "validationHead": "937c9a250d1b387d3d3e279c4290e41c409ac412",
+    "closedHead": "f21e99748f189bc3fd33253619393d04e65bad54",
+    "mainBaseline": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "redRun": 44514471279,
+    "redExpectedFailures": 3,
+    "intermediateRun": 44515008454,
+    "intermediateFailure": "Existing synthetic C0 queue setup could miss its short window; the fixture now delays the SQL operation beyond the original native deadline after allowing setup time. Production limits are unchanged.",
+    "validationRun": 44515762922,
+    "runAttempt": 1,
+    "finishedAtUTC": "2026-11-19T11:37:19Z",
+    "passed": 489,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "core": 274,
+    "ownerContextA": 35,
+    "ownerContextB": 87,
+    "initialCleanup": 55,
+    "issuerAndEffects": 38
+  },
+  "closure": {
+    "exactOriginalSdkGrant": true,
+    "exactScopedSdkGrantAndTokenAbsenceBeforeAndAfterFreshRestoreProof": true,
+    "monitoringWithdrawalObserved": true,
+    "closedCanaryReadbackQualified": true,
+    "distinctPriorAndOriginalRestoration": true,
+    "storedReceiptRequalifiedBeforeAlarmClosure": true,
+    "repeatReadReturnsSameReceiptHash": true,
+    "syntheticOnly": true,
+    "actualOAuthRevocationPerformed": false,
+    "actualQaRestorationPerformed": false
+  },
+  "privateR2": {
+    "bucket": "afw-release-backups",
+    "archiveBytes": 4209422,
+    "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "observedAtUTC": "2026-11-19 11:34:58 UTC",
+    "pinnedBytesAndHashMatched": true,
+    "exposureObservedAtUTC": "2026-11-19 11:35:28 UTC",
+    "managedDomainEnabled": false,
+    "customDomains": 0,
+    "referenceValidation": "0d03c0b77e46798ad708ad0a4ba188b1fc0a39fb",
+    "rawArchiveReturned": false,
+    "actualArchiveReadByCompleteBuilder": false
+  },
+  "package": {
+    "stagingCompiled": true,
+    "specifiedFullCommandRejected": true,
+    "completeOutputAbsent": true,
+    "githubArtifactCount": 0,
+    "completePackage": false
+  },
+  "blockers": [
+    {
+      "component": "Final QA restoration",
+      "detail": "Qualify the closed QA version through the scoped finalizer after the verified owner closure and before acceptance."
+    },
+    {
+      "component": "Native operation composition",
+      "detail": "The actual material and Guard factories and launch operations still need mounted, exact primary dispatch. The fixed launch source currently denies mutation."
+    },
+    {
+      "component": "Complete build",
+      "detail": "Feed the held private R2 artifact into the credential-qualified builder, complete receiver and rollback qualification, and recheck live scope and a new eligible window before activation."
+    }
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "noLocalSourceExecution": true,
+  "operationalReadiness": false,
+  "actualSameNoticeTrial": false,
+  "actualCloudReview": false,
+  "actualNativeWithdrawal": false,
+  "pcOffTrial": false,
+  "ownerActionNeededNow": false
+}
