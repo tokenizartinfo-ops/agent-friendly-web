@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 17:58:43 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "8058c02acb6cb6b7bfeda0224ed6bff50305faaf",
+  "closed": "07629ae5f4c6568f0568b352e443719b1594d8df",
+  "native": {
+    "qaNominalReaderMountedInSource": true,
+    "candidateReservationJournalMountedInSource": true,
+    "originalAckAndBindingRequired": true,
+    "originalManifestRequired": true,
+    "duplicateReservationReconcileOnly": true,
+    "afterWithdrawalOnlyExactSettlementAllowed": true,
+    "currentOwnerPermissionAndPrimaryJournalReadRequiredByRuntime": true,
+    "initialLaunchProducerReady": false
+  },
+  "verification": {
+    "run": 44582583568,
+    "job": 135766877411,
+    "nodePassed": 349,
+    "pythonPassed": 5,
+    "negativeRun": 44581255625,
+    "stagingBuilt": true,
+    "verifiedWithFixture": true,
+    "prematureCompletePackageRejected": true
+  },
+  "custody": {
+    "qaProviderLastState": "expired",
+    "qaSecretLastUpdatedAt": "2026-10-31T15:54:32Z",
+    "protectedR2ReadUrlPresent": false,
+    "priorArchiveVerified": true,
+    "packageReadR2": false
+  },
+  "remaining": [
+    "Complete and mount authoritative prelaunch admission and operation material in the original QA launch source.",
+    "Connect the remaining candidate admission and start phases to the same authorized native journal and the exact live receiver policy.",
+    "Qualify package and rollback with current protected credential and R2 input, then prove linked real cloud receipt, review and withdrawal."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}

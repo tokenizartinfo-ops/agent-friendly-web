@@ -1,10 +1,10 @@
 {
-  "schema": 73,
-  "timestampUTC": "2026-11-19 17:43:27 UTC",
+  "schema": 74,
+  "timestampUTC": "2026-11-19 17:58:43 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d737fc53763a5220ec320d55b5ea16bfdc86cf1b",
-  "phase": "The compiled QA alarm connects a restart-safe closure executor for new prepared trials. It reads the retained original arming authorization and the fixed D1 primary, and exercised exact withdraw/close and no-resend in CI.",
+  "previousCheckpoint": "2c0334fd32b5901ebb1ac45a516621e9c57b7854",
+  "phase": "Native QA now serves an acknowledged named-child context and the matching canary can issue one reservation under its original manifest before withdrawal. Verified in CI; prelaunch material and package remain gated.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish the native launch/nominal primary service and receiver/package gates. Validate with current protected QA/R2 custody before the same-notice cloud trial.",
+  "next": "Complete authoritative prelaunch operations and the candidate admission/start path, then validate credentialed package and run the same-notice trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2573,6 +2573,15 @@
     "closed": "df451c4d0527a7df77fd8be5f3cbf5840e9837b9",
     "run": 44579871374,
     "tests": 351,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeNominalReservation": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-nominal-reservation.json",
+    "source": "8058c02acb6cb6b7bfeda0224ed6bff50305faaf",
+    "closed": "07629ae5f4c6568f0568b352e443719b1594d8df",
+    "run": 44582583568,
+    "tests": 354,
     "completePackage": false,
     "realCloudTrial": false
   }
