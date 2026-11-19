@@ -317,6 +317,9 @@ export function createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,crea
     if(mode==='held-body'){
      f.held='body';return new Response(new ReadableStream({start(controller){f.release=()=>{controller.enqueue(new TextEncoder().encode(JSON.stringify({success:true,errors:[],messages:[],result})));controller.close();};}}),{headers:{date:new Date().toUTCString(),'content-type':'application/json'}});
     }
+   }else if(req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/7d4ec845-c1d0-4006-824d-d69e98c84221?include=modules'){
+    result=structuredClone(x.metadata);result.id='7d4ec845-c1d0-4006-824d-d69e98c84221';
+    if(mode!=='missing-callback-donor-binding')result.bindings.push({name:'AFW_DOSSIER_FINITE_CALLBACK_SECRET',type:'secret_text'});
    }else if(req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/55555555-5555-4555-8555-555555555555?include=modules'){assert.ok(f.uploaded);result=structuredClone(f.uploaded);
     if(f.ownerFault==='module')result.modules[0].content_base64='AAAA';
     if(f.ownerFault==='configuration')result.bindings.find(b=>b.name==='ACCESS_AUD').text='SYN drift';if(f.ownerFault==='original-open')result.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';

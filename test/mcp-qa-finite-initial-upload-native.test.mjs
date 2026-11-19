@@ -11,7 +11,8 @@ test('B2a actual native winner uploads actual M once with exact JSON deploy=fals
  const bytes=Buffer.from(data.modules[0].content_base64,'base64');assert.equal(sha(bytes),f.resident.module.sha256);assert.notEqual(sha(bytes),f.x.pin.module.sha256);
  assert.deepEqual(data.containers,[{class_name:'AfwOwnEventNode'}]);assert.deepEqual(Object.keys(data.exports).sort(),['AfwNodeControl','AfwOwnEventNode','default']);
  assert.equal(data.exports.AfwOwnEventNode.storage,'sqlite');assert.equal(data.exports.AfwOwnEventNode.container,'agent-friendly-web-delegated-canary-afwowneventnode');
- for(const b of data.bindings){assert.notEqual(b.type,'secret_text');if(b.type==='inherit')assert.deepEqual(b,{name:b.name,type:'inherit',version_id:'2607abae-cec3-4e35-89eb-8b8572262b54'});if(b.name.endsWith('_ENABLED'))assert.equal(b.text,'false');}
+ for(const b of data.bindings){assert.notEqual(b.type,'secret_text');if(b.type==='inherit')assert.deepEqual(b,{name:b.name,type:'inherit',version_id:b.name==='AFW_DOSSIER_FINITE_CALLBACK_SECRET'?'7d4ec845-c1d0-4006-824d-d69e98c84221':'2607abae-cec3-4e35-89eb-8b8572262b54'});if(b.name.endsWith('_ENABLED'))assert.equal(b.text,'false');}
+ assert.equal(data.bindings.filter(b=>b.name==='AFW_DOSSIER_FINITE_CALLBACK_SECRET'&&b.type==='inherit').length,1);
  const rows=await f.stub.snapshot();assert.ok(rows.some(([k])=>k.startsWith('afw.finite-initial-upload.v1:')&&k.endsWith(':receipt')));
  assert.equal(JSON.stringify(r).includes('content_base64'),false);assert.equal(JSON.stringify(r).includes('55555555'),false);assert.equal(JSON.stringify(r).includes('synthetic-native'),false);
  assert.equal((await f.workflow(f.refs)).result.status,'admin_pending');assert.equal(f.uploads.length,1);
@@ -84,4 +85,11 @@ for(const mode of ['baseline-secret','baseline-new-resource','baseline-unknown',
 }));
 test('B2a upload-config-tamper invalidates actual private baseline preservation before SEND',()=>using('normal',async f=>{
  await f.stub.configure('upload-config-tamper');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.uploads.length,0);assert.equal(has(await f.stub.snapshot(),'send'),false);
+}));
+
+test('B2a a closed signing donor without the exact callback binding cannot authorize an upload',()=>using('missing-callback-donor-binding',async f=>{
+ await f.stub.configure('normal');
+ assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');
+ assert.equal(f.uploads.length,0);
+ assert.equal(has(await f.stub.snapshot(),'send'),false);
 }));
