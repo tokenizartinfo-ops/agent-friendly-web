@@ -18,7 +18,7 @@ jobs:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify coupled QA restoration and legacy compatibility
-        run: node --test --test-concurrency=2 --test-timeout=60000 test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/build-finite-native-package.test.mjs
+        run: node --test --test-concurrency=2 --test-timeout=60000 test/mcp-restoration-configuration.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/build-finite-native-package.test.mjs
       - run: python3 -m unittest discover -s test -p finite_historical_archive_test.py
       - name: Verify staging and preserve complete package gate
         run: |
