@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "atUTC": "2026-11-19T19:39:28.908Z",
+  "previousCheckpoint": "e3bcd4c1061934754d2e518a4e101f1697816122",
+  "source": {
+    "previous": "be1f1ac1321dff3e2ba323a2e8c56a4dd5d9799c",
+    "verified": "de650f59fd344d1a83c5157d88f5584908febb4a",
+    "labClosed": "83436e15e3013fc3a202c9928f9674f72fff1a98"
+  },
+  "testEvidence": {
+    "redRun": 44598612373,
+    "projectionFixtureRun": 44599265270,
+    "nativeStorageFixtureRun": 44599826211,
+    "run": 44600167364,
+    "passedJS": 527,
+    "passedPython": 5,
+    "originalQaLaunchSourceMounted": true,
+    "refusesFailedSignatureBeforeLaunch": true,
+    "readOnlyChallengeBoundToExactEvent": true,
+    "wrongSignedScopeAndWrongKeyRejected": true,
+    "workerdReceiverAcknowledgesExactFixtureNotice": true,
+    "runnerCompiledStaging": true,
+    "runnerRejectsIncompletePackage": true
+  },
+  "cloud": {
+    "atUTC": "2026-11-19T19:35:48.818Z",
+    "workers": [
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "verified": true,
+        "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "signingSlotPresent": false,
+        "enabled": [
+          [
+            "AFW_DOSSIER_EVENTS_ENABLED",
+            false
+          ]
+        ]
+      },
+      {
+        "name": "agent-friendly-web-finite-review-qa",
+        "verified": true,
+        "version": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+        "deployment": "3a2dad24-2f32-488c-a480-52633118adac",
+        "signingSlotPresent": false,
+        "enabled": [
+          [
+            "AFW_DOSSIER_FINITE_CALLBACK_ENABLED",
+            false
+          ],
+          [
+            "AFW_DOSSIER_FINITE_REVIEW_ENABLED",
+            false
+          ]
+        ]
+      }
+    ],
+    "written": false
+  },
+  "qualification": {
+    "currentQaCredentialQualified": false,
+    "protectedEnvironment": "afw-qa-cloud-closed-rollback",
+    "qaCredentialSecretLastUpdatedUTC": "2026-10-31T15:54:32Z",
+    "lastKnownExpirationUTC": "2026-11-08T02:59:59Z",
+    "exactProtectedR2UrlConfigured": false,
+    "r2ArchiveVerifiedSeparately": true,
+    "nativeSigningCredentialSharedAndQualified": false,
+    "privateCompleteAssemblyQualified": false
+  },
+  "pending": [
+    "Qualify the candidate and receiver versions with scoped signing custody and closed rollback.",
+    "Qualify the complete release build using a current QA credential and the exact protected R2 read link.",
+    "Run one real cloud trial and read the assistant review for that same event, native withdrawal of the original subscription and restored closure."
+  ],
+  "completePackage": false,
+  "realCloudTrial": false,
+  "liveSignedChannel": false,
+  "liveAssistantReview": false,
+  "liveWithdrawal": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

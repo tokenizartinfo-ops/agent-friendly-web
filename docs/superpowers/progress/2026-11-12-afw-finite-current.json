@@ -1,9 +1,9 @@
 {
-  "schema": 80,
-  "timestampUTC": "2026-11-19 19:20:13 UTC",
+  "schema": 81,
+  "timestampUTC": "2026-11-19 19:39:28 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "8b8b39a2611843c10a307a6fe5ce651844ecebcc",
+  "previousCheckpoint": "e3bcd4c1061934754d2e518a4e101f1697816122",
   "phase": "Initial QA admission now reads the selected permission, prior revocations and process closure directly twice in first-primary D1 and independently compares the retained current owner permission. Scheduled dispatch and native executor preflight require it. The remaining native effect source, private credential and package gates remain closed.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Connect the original protected QA launch source operations to independently verified admission and guard controls.",
+  "next": "Qualify the candidate and receiver versions with scoped signing custody and closed rollback.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 179,
-  "updatedAtUTC": "2026-11-19T19:20:13.711Z",
+  "schemaVersion": 180,
+  "updatedAtUTC": "2026-11-19T19:39:28.908Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2636,6 +2636,15 @@
     "closed": "be1f1ac1321dff3e2ba323a2e8c56a4dd5d9799c",
     "run": 44596870612,
     "tests": 528,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeInitialQaLaunchSignedChannel": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-initial-launch-signed-channel.json",
+    "source": "de650f59fd344d1a83c5157d88f5584908febb4a",
+    "closed": "83436e15e3013fc3a202c9928f9674f72fff1a98",
+    "run": 44600167364,
+    "tests": 532,
     "completePackage": false,
     "realCloudTrial": false
   }
