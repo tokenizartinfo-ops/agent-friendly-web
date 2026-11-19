@@ -28,7 +28,10 @@ const result=await build({entryPoints:['lib/mcp-qa-finite-launch-origin.mjs'],bu
  define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision)},plugins:[{name:'native-source-evidence-test-only',
  setup(bundler){
   bundler.onResolve({filter:/^\.\/mcp-qa-finite-(shared-origin|launch-ready|launch-permission|launch-source|trial-guard)\.mjs$/},
-   ({path})=>({path:path.slice(2,-4),namespace:'synthetic-primary'}));
+   ({path,importer})=>{
+    if(/(launch-source|trial-guard)\.mjs$/.test(path)&&!importer.endsWith('mcp-qa-finite-launch-origin.mjs'))return;
+    return {path:path.slice(2,-4),namespace:'synthetic-primary'};
+   });
   bundler.onLoad({filter:/.*/,namespace:'synthetic-primary'},({path})=>({contents:stubs[path]}));
  }}]});
 const {schedulePrivateQaFiniteNominalLauncher:schedule}=await import('data:text/javascript;base64,'+Buffer.from(result.outputFiles[0].text).toString('base64'));
