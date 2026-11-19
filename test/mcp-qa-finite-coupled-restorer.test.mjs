@@ -79,8 +79,8 @@ function addNoticeEvidence(f,{foreign=false}={}){
   actorHash:'c'.repeat(64),executionHash:'d'.repeat(64),resultHash:'e'.repeat(64),
   runId:'44444444-4444-4444-8444-444444444444',revision:2,receivedAt:startAt+900,reviewedAt:closeAt-1};
  const noticeEvidence={purpose:'afw.finite-coupled-notice-evidence.v1',completionHash:'6'.repeat(64),startAt,closeAt,notice,review};
- const {preparationHash,...body}=f.preparation;void preparationHash;
- const prepared={...body,noticeEvidence};
+ const {preparationHash,authorizesEffects,operationalReadiness,...body}=f.preparation;void preparationHash;
+ const prepared={...body,noticeEvidence,authorizesEffects,operationalReadiness};
  f.preparation={...prepared,preparationHash:hash(prepared)};
  return noticeEvidence;
 }
