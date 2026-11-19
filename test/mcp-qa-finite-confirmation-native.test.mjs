@@ -10,6 +10,7 @@ import {finiteFixture,digest,hash} from './test/fixtures/qa-finite-trial.mjs';
 import {inertNamedConfirmationPolicy} from './test/fixtures/inert-named-confirmation-policy.mjs';
 import {finiteActivationConfigurationHash} from './lib/mcp-activation-observer.mjs';
 import {finiteCleanupPolicyHash} from './lib/mcp-finite-cleanup-policy.mjs';
+import {readFiniteReleaseGate} from './lib/mcp-own-finite-admission-gate.mjs';
 export const state={};
 export function material({env,event,step,parent}){
  parent.check();state.reads++;
@@ -22,9 +23,21 @@ export function material({env,event,step,parent}){
  if(state.mode==='wrong-plan')value.plan=value.plan.replace('"N1":','"extra":0,"N1":');
  return value;
 }
-export async function known(input){state.calls++;state.same=input.env===state.env&&input.event===state.event&&input.step===state.step;state.keys=Object.keys(input).sort();if(state.mode==='known-throws')throw Error('synthetic Known throw');state.result={status:'blocked',mayRetry:false,operationalReadiness:false};return state.result;}
+
+export async function known(input){
+ state.calls++;state.same=input.env===state.env&&input.event===state.event&&input.step===state.step;state.keys=Object.keys(input).sort();
+ if(state.mode==='known-throws')throw Error('synthetic Known throw');
+ const gate=readFiniteReleaseGate(input.env);state.hasGate=!!gate;
+ if(['reserved','foreign-reservation','lost-subscribe-ack'].includes(state.mode)){
+  await gate.beginReservation();
+  await gate.settleReservation();
+  state.result={status:'confirmed',mayRetry:false,operationalReadiness:false,
+   reservation:{purpose:'afw.successor-reservation.v1',trialId:state.mode==='foreign-reservation'?'0'.repeat(64):state.trialId,state:'prepared',mayBoot:false}};
+ }else state.result={status:'blocked',mayRetry:false,operationalReadiness:false};
+ return state.result;
+}
 export default {async fetch(request,env,ctx){
- const {mode}=await request.json();state.mode=mode;state.calls=0;state.reads=0;
+ const {mode}=await request.json();state.mode=mode;state.calls=0;state.reads=0;state.effects=[];state.steps=[];state.trialId=null;
  const real=Date.now(),f=finiteFixture({at:real+600000}),p=f.plan;state.at=p.T0+150000;Date.now=()=>state.at;
  const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:hash(script),sourceCheck:'git-inputs-before-after-v1'},policy=inertNamedConfirmationPolicy(artifact);
  policy.observation.configuration.compatibility_flags=['nodejs_compat','global_fetch_strictly_public','enable_request_signal'];
@@ -46,9 +59,37 @@ export default {async fetch(request,env,ctx){
  if(mode==='wrong-name')event.workflowName='foreign';
  if(mode==='timestamp-not-date')event.timestamp=state.at;
  if(mode==='at-last-create'){state.at=p.T0+160000;event.timestamp=new Date(state.at);execution.createdAt=state.at;}
- state.env={AFW_QA_VERSION:{id:p.deployments.qaLive.versionId},AFW_INDEPENDENT_CLOSURE:{idFromName:()=>({toString:()=>p.resources.actorId})}};state.event=event;state.step={do(){throw Error('no added business stage');}};
+ state.trialId=p.trialId;
+ const actor={toString:()=>p.resources.containerId};
+ const refs={intentId:execution.intentId,controlHash:execution.controlHash};
+ const record=(kind,value)=>{
+  if(JSON.stringify(value)!==JSON.stringify(refs))throw Error('candidate selectors changed');
+  state.effects.push(kind);
+ };
+ const node={idFromName(name){if(name!=='afw-own-event-first-successor-v1')throw Error('wrong candidate slot');return actor;},
+  get(id){
+   if(id!==actor)throw Error('wrong candidate');
+   return {
+    beginFiniteTrialReservation(value){record('reserve',value);return {status:'issued'};},
+    settleFiniteTrialReservation(value){record('settle',value);return {status:'settled'};},
+    startFiniteTrialSubscription(value){
+     record('subscribe',value);
+     if(mode==='lost-subscribe-ack')throw Error('synthetic lost receipt');
+     return {saved:true,revision:p.selectors.expectedProjectRevision+1,
+      delivery:{eventId:'b'.repeat(64),status:202,httpReceivedAt:state.at,cloudReviewConfirmed:false}};
+    },
+   };
+  },
+ };
+ state.env={AFW_QA_VERSION:{id:p.deployments.qaLive.versionId},AFW_RELEASE_EVENTS_NODE:node,
+  AFW_INDEPENDENT_CLOSURE:{idFromName:()=>({toString:()=>p.resources.actorId})}};
+ state.event=event;
+ state.step={do(name,options,operation){
+  if(name!=='finite-subscribe-and-deliver'||options.retries.limit!==0)throw Error('unexpected step');
+  state.steps.push(name);return operation();
+ }};
  const workflow=new PrivateQaNamedConfirmation(ctx,state.env),result=await workflow.run(event,state.step);
- return Response.json({result,calls:state.calls,reads:state.reads,same:state.same,keys:state.keys,preserved:result?.result===state.result});
+ return Response.json({result,calls:state.calls,reads:state.reads,same:state.same,keys:state.keys,preserved:result?.result===state.result,gate:state.hasGate,effects:state.effects,steps:state.steps});
 }};
 `;
 const bundles={};
@@ -62,7 +103,7 @@ async function run(mode,source=true){
  try{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(r.status,200,await r.clone().text());return r.json();}finally{await mf.dispose();}
 }
 for(const mode of ['success','at-last-create'])test('finite_confirmation_handoff_fixed_entry '+mode,async()=>{
- const r=await run(mode);assert.equal(r.calls,1);assert.equal(r.same,true);assert.deepEqual(r.keys,['bundle','env','event','step']);assert.equal(r.result.purpose,'afw.finite-confirmation-result.v1');assert.equal(r.preserved,true);
+ const r=await run(mode);assert.equal(r.calls,1);assert.equal(r.same,true);assert.deepEqual(r.keys,['bundle','env','event','step']);assert.equal(r.result.purpose,'afw.finite-confirmation-result.v1');assert.equal(r.preserved,true);assert.equal(r.gate,true);assert.deepEqual(r.effects,[]);assert.deepEqual(r.steps,[]);
 });
 for(const mode of ['early','late','future','queued-expired','wrong-payload','wrong-id','schedule','wrong-name','timestamp-not-date','missing-source','hydration-expired','mutated-event','wrong-source','wrong-plan'])test('finite nominal rejects '+mode+' before Known',async()=>{const r=await run(mode);assert.equal(r.calls,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});
 test('Known throw cannot fabricate finite result envelope',async()=>{const r=await run('known-throws');assert.equal(r.calls,1);assert.equal(r.result.purpose,undefined);});
@@ -78,3 +119,16 @@ test('finite technical result reader is strict, bounded and preserves actual Kno
 });
 
 test('actual uninstalled confirmation source stays closed before Known',async()=>{const r=await run('success',false);assert.equal(r.calls,0);assert.equal(r.reads,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});
+
+test('the confirmed reservation invokes its own candidate once under a bounded zero-retry Workflow step',async()=>{
+ const r=await run('reserved');assert.equal(r.gate,true);
+ assert.deepEqual(r.effects,['reserve','settle','subscribe']);assert.deepEqual(r.steps,['finite-subscribe-and-deliver']);
+ assert.equal(r.result.result.noticeJourney.status,'transport_acknowledged');
+ assert.equal(r.result.result.noticeJourney.delivery.cloudReviewConfirmed,false);
+});
+test('foreign reservations and uncertain subscription acknowledgements cannot trigger another send',async()=>{
+ const foreign=await run('foreign-reservation');assert.deepEqual(foreign.effects,['reserve','settle']);assert.deepEqual(foreign.steps,[]);
+ const lost=await run('lost-subscribe-ack');
+ assert.deepEqual(lost.effects,['reserve','settle','subscribe']);assert.deepEqual(lost.steps,['finite-subscribe-and-deliver']);
+ assert.deepEqual(lost.result.result.noticeJourney,{status:'uncertain'});
+});
