@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "timestampUTC": "2026-11-19 13:13:01 UTC",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "500078e27724524fb3b78ff21d9623186c5fa5e6",
+  "closed": "0bc68f1cf620fa9553be9943aa3d1876f3861566",
+  "verification": {
+    "run": 44530364116,
+    "job": 135581730819,
+    "passedJavaScript": 272,
+    "passedPython": 5,
+    "failed": 0,
+    "runArtifacts": 0
+  },
+  "sourceChecks": {
+    "originalAlarm": "Verified handoff preserves the enrolled original recovery obligation, checks the physical alarm and commits before the nominal alarm becomes eligible.",
+    "registry": "Bounded complete enumeration pins the three AFW definitions and leaves unrelated definitions untouched.",
+    "launcher": "Protected GitHub READY provenance, same-process admission, immutable one-send fence and exact private Cloudflare launcher route. Tests cover refusal before READY and transport uncertainty without replay."
+  },
+  "cloudflareReadOnly": {
+    "atUTC": "2026-11-19 13:07:57 UTC",
+    "ownWorkflowDefinitions": 3,
+    "unrelatedDefinitions": 4,
+    "pages": 1
+  },
+  "credentialState": {
+    "checkedAtUTC": "2026-11-19 13:13:01 UTC",
+    "qaSecretMetadataUpdatedAt": "2026-10-31T15:54:32Z",
+    "qaCredentialProviderExpiry": "2026-11-08T02:59:59Z",
+    "freshQaCredentialVerified": false,
+    "r2ReaderSecretPresent": false
+  },
+  "remaining": [
+    "Qualify the production implementation of finite launch primary operations and mount both the retained QA guard and own-canary cleanup factory on the finite graph.",
+    "Independently qualify receiver and rollback compatibility with the private R2 inputs and build the eligible artifact.",
+    "Verify current protected QA write and bucket-only read custody before attempting one authorized cloud occurrence."
+  ],
+  "staging": true,
+  "completePackage": false,
+  "actualTrial": false,
+  "sameNoticeReceived": false,
+  "sameNoticeReviewed": false,
+  "originalSubscriptionWithdrawn": false,
+  "pcOffVerified": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

@@ -1,10 +1,10 @@
 {
-  "schema": 60,
-  "timestampUTC": "2026-11-18 13:52:47 UTC",
+  "schema": 61,
+  "timestampUTC": "2026-11-19 13:13:01 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d48b603bc8833a1bacfe6747767f82d6efc50285",
-  "phase": "Independent GitHub executor, durable repository send fence, native alarm publication and private R2 verification job are wired in candidate source and qualified by synthetic cloud fixtures. Release package still has no eligible artifact and live scoped credentials are unavailable.",
+  "previousCheckpoint": "0ccf34943790a0b75bffd1273503aa67a3b14aa9",
+  "phase": "GitHub launcher and original Cloudflare alarm handoff are qualified in candidate source using synthetic cloud tests. The eligible release package and one real same-notice occurrence remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish source-qualified native material and launch effect/guard factories, then assemble and independently qualify an eligible package. In the protected GitHub environment, establish scoped QA writer and R2-only reader before running the real private draft and exact late executor. Run one cloud occurrence and verify that the original notice is received, reviewed and its own subscription withdrawn.",
+  "next": "Implement and qualify the native launch primary operations, retained QA guard and canary cleanup mounts. Then qualify the receiver and private R2 rollbacks, assemble the complete artifact, and verify scoped QA and R2 custody before the single real cloud occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2442,5 +2442,6 @@
     "tests": 226,
     "completePackage": false,
     "actualTrial": false
-  }
+  },
+  "coupledNominalLaunch": {"path":"docs/superpowers/progress/2026-11-19-afw-coupled-nominal-launch-validation.json","evidence":"7dc0b15f465df9d232c50a855629a8af13e07adb","head":"500078e27724524fb3b78ff21d9623186c5fa5e6","closed":"0bc68f1cf620fa9553be9943aa3d1876f3861566","verifiedRun":44530364116,"tests":277,"completePackage":false,"realCloudOccurrence":false}
 }
