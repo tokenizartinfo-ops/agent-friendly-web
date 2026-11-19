@@ -1,0 +1,123 @@
+{
+  "purpose": "afw.finite-private-rollback-compiler-continuation.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "timestampUTC": "2026-11-19T23:38:45Z",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-bootstrap-renewal-and-signed-callback.json",
+  "source": {
+    "base": "59e7c49ad0b6d127101034f198c81e97760818c2",
+    "labHead": "066002451376f130657c43a41791efe7a7fd5db0",
+    "sourceTree": "85f88277028e2c6f39b3f96f01505b2eded9f107",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+  },
+  "ci": {
+    "runId": 44638609301,
+    "head": "8d85af889e8b5c135b622498418b503e794b8cba",
+    "javascriptPass": 156,
+    "pythonPass": 29,
+    "failures": 0,
+    "temporaryWorkflowClosed": true,
+    "privateArchiveShared": false
+  },
+  "privateR2": {
+    "verifiedCompilerReceipt": true,
+    "historicalZipSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "draftSha256": "ca89e3d7e4547721d604b0b79014e72020430aaf7fbae53e881397ebc91bbf5b",
+    "modules": 5,
+    "closedRoles": {
+      "qaClosed": {
+        "versionId": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "moduleHash": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+        "configurationHash": "a8c8895f8375f4d09f01960e88bec8c3cac0a89f999e500f74fccf01733f7838",
+        "bindingCount": 31,
+        "closedFlagCount": 14
+      },
+      "canaryClosed": {
+        "versionId": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "moduleHash": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+        "configurationHash": "4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0",
+        "bindingCount": 29,
+        "closedFlagCount": 8
+      },
+      "operatorClosed": {
+        "versionId": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+        "moduleHash": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51",
+        "configurationHash": "8c37301871c7fc3cc0f7471fddfdeb039f418a078b065fdde44ba5cbe8b24b4c",
+        "bindingCount": 7,
+        "closedFlagCount": 3
+      }
+    },
+    "historicalCanaryContainsPrivatePolicies": true,
+    "publicArchivePublicationAdmissible": false,
+    "issuerScope": "bucket item read only, short-lived. The issued action consumed a GET for the fixed archive only."
+  },
+  "workerdIsolated": {
+    "status": "verified",
+    "roles": {
+      "qaClosed": {
+        "matchedModule": true,
+        "disabledRoutes": {
+          "/": 404,
+          "/mcp": 404,
+          "/_finite-owner/monitoring": 404
+        },
+        "outboundRequests": 0
+      },
+      "canaryClosed": {
+        "matchedModule": true,
+        "disabledRoutes": {
+          "/mcp": 404,
+          "/authorize": 404,
+          "/monitoring": 404,
+          "/qa/expediente": 404
+        },
+        "outboundRequests": 0
+      },
+      "operatorClosed": {
+        "matchedModule": true,
+        "disabledRoutes": {
+          "/": 404,
+          "/mcp": 404,
+          "/_finite-owner/monitoring": 404
+        },
+        "outboundRequests": 0
+      }
+    },
+    "operationalReadiness": false
+  },
+  "cloudReadback": {
+    "atUTC": "2026-11-19T23:35:44.189Z",
+    "roles": {
+      "qa": {
+        "closedPin": true,
+        "cronCount": 0,
+        "tailCount": 0
+      },
+      "canary": {
+        "closedPin": true,
+        "cronCount": 0,
+        "tailCount": 0
+      },
+      "operator": {
+        "closedPin": true,
+        "cronCount": 0,
+        "tailCount": 0
+      }
+    },
+    "namespacePinsMatch": true,
+    "activeInstances": 0
+  },
+  "remaining": [
+    "Complete production package output is deliberately gated. The historical canary archive contains retained private policy values, so raw inputs and candidate/rollback bundle must stay in approved private custody.",
+    "The finite Workflow takes the native launcher route, but the shared observer tail still uses the legacy claimFiniteTrialQaRestore and readFiniteTrialFinalPrimary RPCs, whose material producer is not mounted. The business restore claim in trial-control rejects an existing original-alarm handoff. Source-qualify the coupled observer path against the original alarm and independent QA restorer instead of enabling the legacy writer.",
+    "After the source integration and private package eligibility, perform the protected secret readback, signed receiver check, and one real cloud occurrence. Close only if identical notice review and native unsubscription are verified and rollback is independently read back."
+  ],
+  "completePackage": false,
+  "actualRollbackDeploymentRun": false,
+  "realCloudTrial": false,
+  "reviewReceiptObserved": false,
+  "nativeWithdrawalObserved": false,
+  "runtimeMutated": false,
+  "ownerActionNeededNow": false,
+  "operationalReadiness": false
+}

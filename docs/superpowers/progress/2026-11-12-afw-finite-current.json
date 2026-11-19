@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-final-primary-and-r2-draft.json",
-  "phase": "QA credential pair renewed in protected GitHub and pinned in source. Archive-backed exact draft verified, all source and native rollback tests passed, complete-package emission and real cloud acceptance remain pending.",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-bootstrap-renewal-and-signed-callback.json",
+  "phase": "Compiler validates the literal private R2 rollback modules and archived configuration. Isolated Workerd closed-path verification and targeted CI passed. Eligible full deployment package and real cloud trial remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify and enable the private full-package output, then verify the exact protected GitHub secret identities from the authorized cloud executor, mount the closed QA candidate and prove the signed receiver and one original cloud occurrence.",
+  "next": "The finite Workflow takes the native launcher route, but the shared observer tail still uses the legacy claimFiniteTrialQaRestore and readFiniteTrialFinalPrimary RPCs, whose material producer is not mounted. The business restore claim in trial-control rejects an existing original-alarm handoff. Source-qualify the coupled observer path against the original alarm and independent QA restorer instead of enabling the legacy writer. After the source integration and private package eligibility, perform the protected secret readback, signed receiver check, and one real cloud occurrence. Close only if identical notice review and native unsubscription are verified and rollback is independently read back.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 186,
-  "updatedAtUTC": "2026-11-19T22:50:08.510Z",
+  "schemaVersion": 187,
+  "updatedAtUTC": "2026-11-19T23:38:45Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2708,6 +2708,16 @@
     "closedLabHead": "b9d70d95bc2811dc5b8beb95bb670238bba8783d",
     "verificationRun": 44631458265,
     "privateR2DraftSha256": "076a9c5ad1dcd3a43f45032d4761b49fd11e6c657438ceec592a36224ac21a2d",
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "verifiedPrivateR2RollbackCompiler": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-verified-private-r2-rollback-compiler.json",
+    "revision": "59e7c49ad0b6d127101034f198c81e97760818c2",
+    "closedLabHead": "066002451376f130657c43a41791efe7a7fd5db0",
+    "validationRun": 44638609301,
+    "r2DraftSha256": "ca89e3d7e4547721d604b0b79014e72020430aaf7fbae53e881397ebc91bbf5b",
+    "isolatedRollbackRoutes": 10,
     "completePackage": false,
     "realCloudTrial": false
   }
