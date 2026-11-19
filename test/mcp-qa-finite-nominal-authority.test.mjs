@@ -172,7 +172,7 @@ async function noticeFixture(sql){
   assert.equal(typeof m.runFiniteOwnTrialSubscription,'function');
   return m.runFiniteOwnTrialSubscription({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,subscribe,runDossier,now:f.now});
  };
- return {f,p,refs,proof,run,runSave,runSubscribe,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
+ return {f,p,refs,proof,run,runSave,runSubscribe,ctx,program,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
 }
 test('finite canary delivers only the event and original subscription confirmed by QA',async()=>{
  const n=await noticeFixture();
@@ -290,4 +290,30 @@ test('finite subscription rejects selector substitution, missing custody and los
  assert.equal(calls,0);
  await assert.rejects(n.runSubscribe(subscribe,never));
  assert.equal(calls,1);
+});
+
+test('the pristine candidate signs its projected event without starting a subscription',async()=>{
+ const n=await noticeFixture();
+ const {observeFiniteOwnPrelaunch}=await import('../lib/mcp-own-finite-prelaunch.mjs');
+ const {verifyMcpSignedEnvelope}=await import('../lib/mcp-signed-envelope.mjs');
+ const {finiteDossierChannelTag}=await import('../lib/mcp-qa-finite-dossier-channel.mjs');
+ const {projectDossierEventId}=await import('../lib/dossier-supervision.mjs');
+ const secret='whsec_'+Buffer.alloc(32,9).toString('base64');
+ Object.assign(n.env,{AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'false',AFW_DOSSIER_OWN_SAVE_ENABLED:'false',
+  AFW_DOSSIER_FINITE_CALLBACK_SECRET:secret,AFW_DOSSIER_PROVIDER_READ_TOKEN:'synthetic-reader-only'});
+ n.ctx.container={running:false};
+ const challenge=Buffer.alloc(32,8).toString('base64url');
+ const run=()=>observeFiniteOwnPrelaunch({ctx:n.ctx,env:n.env,program:n.program,sourceRevision:n.p.selectors.sourceRevision,
+  refs:{control:n.proof.control,challenge},now:n.f.now});
+ const {isolation,signed}=await run(),{body,headers}=signed.envelope;
+ assert.equal(isolation.pristine,true);
+ const eventId=await projectDossierEventId({id:n.proof.notice.eventId,projectId:n.p.selectors.projectId},
+  n.env.AFW_DOSSIER_EVENTS_PROJECTION_SECRET);
+ assert.equal(signed.eventId,eventId);
+ assert.equal(headers['webhook-id'],'verify_'+finiteDossierChannelTag(signed));
+ assert.equal(verifyMcpSignedEnvelope({body,id:headers['webhook-id'],subscriptionId:headers['X-MCP-Subscription-Id'],
+  timestamp:headers['webhook-timestamp'],signature:headers['webhook-signature'],secret}),true);
+ assert.equal(n.counts().sends,0);
+ n.f.rows.set('afw.own-finite-admission.v1:head',{synthetic:'already used'});
+ await assert.rejects(run);
 });

@@ -12,7 +12,7 @@ function setup(){
  const control={plan,planHash,controlHash},observedAt=f.now(),checkEvidence='a'.repeat(64);
  const state={observedAt,controlHash,intentId:p.intentId,status:'verified',evidenceHash:checkEvidence,expiresAt:p.C0,
   authorizesEffects:false,operationalReadiness:false};
- const isolation={observedAt,containerId:p.resources.containerId,sourceRevision:p.selectors.sourceRevision,
+ const isolation={observedAt,containerId:p.resources.containerId,sourceRevision:p.canaryContainment.sourceRevision,
   runtimeVersionId:p.deployments.canaryLive.versionId,eventPlanHash:p.eventPlanHash,pristine:true};
  const inventory={kind:'never_issued',intentId:p.intentId,controlHash,finitePlanHash:planHash,sourceRevision:p.source.revision,
   qaVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,launcherId:p.workflows.launcher,nominalId:p.workflows.confirmation,

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {finiteDossierChannelTag} from '../lib/mcp-qa-finite-dossier-channel.mjs';
 import {signDossierMcpEvent,signMcpVerification} from '../lib/mcp-signed-envelope.mjs';
 import {readFileSync} from 'node:fs';
 import {build} from 'esbuild';
@@ -47,16 +48,19 @@ test('the mounted QA receiver ingests the signed notice and returns its exact re
   await db.prepare(receiptSchema.slice(0,-1)).run();
   const handler=await runtime.getWorker('receiver'),endpoint='https://finite-review-qa.agentfriendlyweb.dev/mcp/finite-dossier-callback';
 
-  const nonce=Buffer.alloc(32,9).toString('base64url'),id='verify_'+'7'.repeat(64),sub='sub_'+'8'.repeat(64);
-  const channel=async (key,eventId=policy.eventId)=>{
-   const envelope=signMcpVerification(nonce,id,sub,key,Date.now());
+  const nonce=Buffer.alloc(32,9).toString('base64url');
+  const channel=async (key,eventId=policy.eventId,wrongTag=false)=>{
+   const refs={challenge:nonce,projectRef:policy.projectRef,eventId,controlHash:policy.controlHash,revision:policy.revision};
+   const tag=wrongTag?'7'.repeat(64):finiteDossierChannelTag(refs);
+   const envelope=signMcpVerification(nonce,'verify_'+tag,'sub_'+tag,key,Date.now());
    const response=await runtime.dispatchFetch('https://qa-receiver.invalid/channel',{method:'POST',
-    body:JSON.stringify({challenge:nonce,projectRef:policy.projectRef,eventId,controlHash:policy.controlHash,revision:policy.revision,envelope})});
+    body:JSON.stringify({...refs,envelope})});
    assert.equal(response.status,200);return response.json();
   };
   assert.deepEqual(await channel(callbackKey),{verified:true,challenge:nonce});
   assert.deepEqual(await channel('whsec_'+Buffer.alloc(32,8).toString('base64')),{verified:false});
   assert.deepEqual(await channel(callbackKey,'f'.repeat(64)),{verified:false});
+  assert.deepEqual(await channel(callbackKey,policy.eventId,true),{verified:false});
   const before=await db.prepare('SELECT count(*) AS n FROM dossier_supervision_events').first();
   assert.equal(before.n,0);
   const message=signDossierMcpEvent({version:'afw-dossier-event-v1',eventId:policy.eventId,projectRef:policy.projectRef,
