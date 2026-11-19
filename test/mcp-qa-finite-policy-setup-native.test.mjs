@@ -190,3 +190,9 @@ for(const obstruction of ['stale-writer','extra-row','missing-confirmation','wro
  assert.deepEqual(await f.installedSource('lineage-'+obstruction),{status:'unavailable'});
  assert.equal(f.posts(),count);
 });
+
+test('coupled original cleanup cannot borrow a fabricated owner snapshot in the native actor',async t=>{
+ const f=await policyFixture(t),before=f.posts();
+ assert.deepEqual(await f.installedSource('lineage-fabricated-owner'),{denied:true,preserved:true});
+ assert.equal(f.posts(),before);
+});

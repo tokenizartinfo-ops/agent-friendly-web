@@ -81,9 +81,3 @@ test('coupled original cleanup distinguishes exact pending and prior restoration
  }
 });
 
-test('coupled original cleanup cannot borrow a fabricated owner snapshot',async()=>{
- const {reducePrivateQaFiniteCoupledOwnerCleanup}=await import('../lib/mcp-qa-finite-owner-cleanup.mjs');
- const f=component(),options={ctx:f.ctx,env:f.env};
- await assert.rejects(()=>reducePrivateQaFiniteCoupledOwnerCleanup(options,f.lease,Object.freeze({}),Object.freeze({})));
- assert.equal(f.state.transactions,0);assert.equal(f.data.size,0);
-});

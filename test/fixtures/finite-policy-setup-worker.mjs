@@ -1,3 +1,4 @@
+import {reducePrivateQaFiniteCoupledOwnerCleanup} from '../../lib/mcp-qa-finite-owner-cleanup.mjs';
 import {sealFiniteOwnerCleanupScope,finiteOwnerCleanupScopeTextHash} from '../../lib/mcp-qa-finite-owner-cleanup-scope.mjs';
 import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
 import * as installedPolicy from '../../lib/mcp-qa-finite-installed-policy.mjs';
@@ -86,6 +87,14 @@ export class SetupFixture extends IndependentClosure{
   catch{return {status:'unavailable'};}
  }
  async observeInstalledSource(mode){
+  if(mode==='lineage-fabricated-owner'){
+   const lease={signal:new AbortController().signal,assertCurrent(){}};
+   const before=JSON.stringify([...await this.ctx.storage.list()]);
+   let denied=false;
+   try{await reducePrivateQaFiniteCoupledOwnerCleanup({ctx:this.ctx,env:this.env},lease,Object.freeze({}),Object.freeze({}));}
+   catch{denied=true;}
+   return {denied,preserved:before===JSON.stringify([...await this.ctx.storage.list()])};
+  }
   const storage=this.ctx.storage,key='afw.qa-finite-policy-setup.v1:'+refs.intentId+':context';
   if(mode==='wrong-context'){
    const original=JSON.parse(await storage.get(key));
