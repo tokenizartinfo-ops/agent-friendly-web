@@ -8,7 +8,7 @@ import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-co
 import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation,publishPrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
 import {privateQaFiniteLaunchSource,schedulePrivateQaFiniteNominalLauncher} from '../../lib/mcp-qa-finite-launch-origin.mjs';
-import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
+import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,installPrivateQaFiniteObserverSource,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
 import {readPrivateQaFiniteObserverInstallation} from '../../lib/mcp-qa-finite-observer-installation.mjs';
 import {readPrivateQaFiniteSetupOwnerSource} from '../../lib/mcp-qa-finite-policy-prearm-source.mjs';
 import {readPrivateQaFiniteConfirmationFromActor} from '../../lib/mcp-qa-finite-confirmation-actor.mjs';
@@ -26,6 +26,8 @@ import {PrivateQaBootstrap as ClosedBootstrap,PrivateQaNamedConfirmation as Clos
 import {isPrivateQaFiniteLauncherPayload,runPrivateQaFiniteLauncher} from '../../lib/mcp-qa-finite-launcher.mjs';
 import {runPrivateQaFiniteConfirmation} from '../../lib/mcp-qa-finite-confirmation.mjs';
 installPrivateQaFiniteLaunchSource(privateQaFiniteLaunchSource);
+const compiledRevision=globalThis.__AFW_QA_SOURCE_REVISION__;
+if(compiledRevision!==undefined)installPrivateQaFiniteObserverSource(compiledRevision);
 installPrivateQaFiniteNativeGuardFactory(input=>createPrivateQaFiniteNominalAuthority({
  ...input,compiledRevision:globalThis.__AFW_QA_SOURCE_REVISION__,
 }));
