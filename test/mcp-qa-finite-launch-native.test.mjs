@@ -87,7 +87,10 @@ export class Native extends IndependentClosure{
    };
   }
   if(mode==='prepare-step-failed')f.prepareSuccess=false;
-  if(mode.startsWith('provider-'))f.launchProvider=mode.slice('provider-'.length);
+  if(mode==='rest-get-launcher'||mode==='rest-get-launcher-foreign'){
+   f.launcherParamsWire=JSON.stringify({operation:'finite_nominal_launcher',intentId:f.plan.intentId,
+    sourceRevision:mode==='rest-get-launcher'?f.plan.source.revision:'0'.repeat(40)});
+  }else if(mode.startsWith('provider-'))f.launchProvider=mode.slice('provider-'.length);
   if(mode==='sealed')f.sealed=true;
   if(mode==='withdrawn'){const c=await this.ctx.storage.get(controlPrefix+'control');await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});}
   if(mode==='pin-changed')this.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};
@@ -224,6 +227,14 @@ for(const mode of ['provider-failed','provider-wrong-envelope','provider-replaye
  assert.equal(r.created.status,'admin_pending');
  assert.equal(r.journal.send,null);
  assert.equal(r.calls,0);
+});
+test('native create reads the exact REST-encoded launcher parameters returned by Cloudflare',async()=>{
+ const r=await native('rest-get-launcher');assert.equal(r.created.status,'acknowledged');assert.equal(r.calls,1);
+ assert.ok(r.journal.send);assert.ok(r.journal.ack);
+});
+test('a REST-encoded provider launcher for another source cannot issue a child',async()=>{
+ const r=await native('rest-get-launcher-foreign');assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);
+ assert.equal(r.journal.send,null);
 });
 test('native create reads the original provider launcher and version before sending',async()=>{
  const r=await native('create');

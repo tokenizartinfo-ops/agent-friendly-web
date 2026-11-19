@@ -35,7 +35,7 @@ export async function resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent})
    if(f.launchProvider==='replayed')stage.name='finite-launch-prepare-2';
    const steps=f.launchProvider==='duplicate'?[stage,{...stage,name:'finite-launch-prepare-2'}]:[stage];
    result={versionId:'70000000-0000-4000-8000-000000000007',status:'running',queued:iso(f.plan.T0),start:iso(f.plan.T0),
-    params:{operation:'finite_nominal_launcher',intentId:f.plan.intentId,sourceRevision:f.plan.source.revision},
+    params:f.launcherParamsWire??{operation:'finite_nominal_launcher',intentId:f.plan.intentId,sourceRevision:f.plan.source.revision},
     steps,step_count:steps.length};
   }else if(path==='/workflows/afw-own-qa-private-bootstrap/versions/70000000-0000-4000-8000-000000000007'){
    const spec=AFW_FIXED_WORKFLOWS.find(x=>x.className==='PrivateQaBootstrap');
