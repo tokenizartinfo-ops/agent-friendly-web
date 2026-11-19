@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 17:05:03 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "7f056a50e34520c13b9709b54ee7a7affe19f02c",
+  "closed": "591e177006dba61c0e22eeebc97c075db299d481",
+  "verification": {
+    "run": 44572908653,
+    "job": 135732548276,
+    "nodePassed": 330,
+    "pythonPassed": 5,
+    "negativeControlRun": 44572147187,
+    "stagingBuilt": true,
+    "prematureCompletePackageRejected": true
+  },
+  "connected": {
+    "fixedQaLaunchSource": true,
+    "releaseDbNativeBinding": "RELEASE_DB",
+    "session": "first-primary",
+    "source": "same-snapshot read of immutable subscription, exact process generation and saved event",
+    "publicOrMutationEntry": false
+  },
+  "custody": {
+    "qaCredentialStatus": "expired",
+    "qaCredentialExpiresAt": "2026-11-08T02:59:59Z",
+    "githubQaSecretUpdatedAt": "2026-10-31T15:54:32Z",
+    "existingPrivateBackupBucketConfirmed": true,
+    "protectedR2ReadUrlPresent": false,
+    "completePackageReadR2": false
+  },
+  "deploymentReadback": [
+    {
+      "role": "qa",
+      "deployment": "4c78c652",
+      "version": "c570b60b"
+    },
+    {
+      "role": "canary",
+      "deployment": "7b5a3683",
+      "version": "2607abae"
+    },
+    {
+      "role": "receiver",
+      "deployment": "3a2dad24",
+      "version": "c4d897ad"
+    }
+  ],
+  "remaining": [
+    "Mount real admission, finalizer and effect providers and the native QA guard.",
+    "Connect independent canary cleanup proof and the exact live QA receiver configuration.",
+    "Load current scoped QA credential and the read-only R2 link, qualify the complete package and restoration.",
+    "In one real cloud occurrence correlate reception and review of the same notice followed by native subscription withdrawal and independent closure."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}

@@ -1,10 +1,10 @@
 {
-  "schema": 69,
-  "timestampUTC": "2026-11-19 16:23:52 UTC",
+  "schema": 70,
+  "timestampUTC": "2026-11-19 17:05:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "1cb0cf12601bbc577e4daa4fbe03bd0f911f90b5",
-  "phase": "Native closing guard can seal and reconcile the original canary admission journal through the fixed QA route. Verified in GitHub CI. The full launch and closure composition, credentials and live trial remain pending.",
+  "previousCheckpoint": "d5c05158c556af082eb4bf7e1355aa03a0aea6f9",
+  "phase": "The fixed QA launch source supplies primary read-only evidence of the original subscription, immutable process generation and exact saved event. Full native admission, cleanup proof and credentialed package remain gated.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount native launch primary and guard, canary closure proof and active QA receiver policy. Qualify current provider custody and the exact private R2 input before issuing a single cloud trial.",
+  "next": "Wire the real admission/finalizer/effect source with the native guard, and authority for the canary closure proof, before replacing scoped QA credentials and R2 access for one complete cloud trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2535,6 +2535,16 @@
     "closed": "813ffb07c60615f07b271b783f8d14b0788dc37e",
     "run": 44565219998,
     "tests": 332,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "qaBusinessPrimary": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-qa-business-primary.json",
+    "source": "7f056a50e34520c13b9709b54ee7a7affe19f02c",
+    "closed": "591e177006dba61c0e22eeebc97c075db299d481",
+    "run": 44572908653,
+    "tests": 335,
+    "sourceConnected": true,
     "completePackage": false,
     "realCloudTrial": false
   }
