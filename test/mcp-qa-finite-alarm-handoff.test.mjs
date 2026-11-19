@@ -100,7 +100,11 @@ test('the original recovery accepts only a due reservation descended from the se
  const observe=()=>protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
  f.setNow(handoff.initialC0-1);
  await assert.rejects(observe);
+ f.setNow(handoff.initialC0+10);
+ assert.equal((await observe()).kind,'waiting');
+ assert.equal(f.alarm,handoff.initialC0+60000);
  f.setNow(handoff.initialC0+60001);
+ await f.storage.transaction(tx=>tx.setAlarm(null));
  assert.equal((await observe()).kind,'original_due');
  const {recordHash,...state}=one;
  const foreign=seal('State',{...state,previousHash:'0'.repeat(64)});
