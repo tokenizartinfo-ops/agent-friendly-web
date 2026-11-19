@@ -1,0 +1,64 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T12:33:50Z",
+  "scope": "Candidate source and cloud verification with synthetic primary/transport fixtures, plus read-only API custody verification.",
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "head": "c35641893cede1fbdfa29f27cf8da89669792a0a",
+    "closedHead": "c6353c1653b98218bd6b9130bcd08ee9c50c738c",
+    "run": 44524790726,
+    "attempt": 1,
+    "verifiedAtUTC": "2026-11-19T12:33:02Z",
+    "jsPassed": 181,
+    "pythonPassed": 5,
+    "failures": 0,
+    "redObservationRun": 44523594646,
+    "redExpectedFailures": 4,
+    "workflowReadbackRun": 44523861042,
+    "connectedProviderRun": 44524222115,
+    "artifactCount": 0,
+    "mainBaseline": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+  },
+  "cloudflare": {
+    "originalPrivateWorkflowReaderWired": true,
+    "comparesExactProviderOutputWithSuccessfulStep": true,
+    "restoredCanaryPointerBoundToNativeOwnerReceipt": true,
+    "readOnlyR2StreamDigestAndProviderPinChecksWired": true,
+    "exactSingleQaRestorePostWiredInSource": true,
+    "independentProviderReadbackWired": true,
+    "configuredHostedExecutionWired": false,
+    "externalDurableSendMustBeSuppliedByAdmittedJob": true,
+    "credentialFailureFixturePreventsCloudflareMutation": true,
+    "liveRestorePerformed": false
+  },
+  "package": {
+    "realCompilerStagingSucceeded": true,
+    "privateDraftStdinAssemblyWired": true,
+    "archiveAndAllFiveModuleIdentitiesCheckedByVerifier": true,
+    "privateDraftTestUsesSyntheticArchive": true,
+    "actualR2BytesPassedToDraftCompiler": false,
+    "fullBuilderRejected": true,
+    "completePackage": false,
+    "launchAndNativeGuardNotMounted": true
+  },
+  "custody": {
+    "primaryCheckedAtUTC": "2026-11-19 12:26:26 UTC",
+    "expiresAtUTC": "2026-11-08T02:59:59Z",
+    "status": "expired",
+    "ghaEnvironment": "afw-qa-cloud-closed-rollback",
+    "storedSecretMetadataUpdatedAtUTC": "2026-10-31T15:54:32Z",
+    "alternateQualifiedForThisExecutor": false
+  },
+  "acceptance": {
+    "actualSameNoticeReceived": false,
+    "actualCloudAssistantReview": false,
+    "actualNativeSubscriptionWithdrawal": false,
+    "pcOffTrial": false,
+    "operationalReadiness": false
+  },
+  "noRuntimeMutationThisBlock": true,
+  "noLocalSourceExecution": true,
+  "ownerActionNeededNow": false,
+  "next": "Mount the independent GitHub job and durable original one-send record over the fixed Cloudflare controller. Wire native launch/effect and guard factories. Connect authorized R2 stream to the private compiler draft and qualify a complete artifact, then establish current scoped custody before the one real same-notice occurrence."
+}
