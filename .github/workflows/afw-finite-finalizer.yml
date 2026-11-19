@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - id: command
         run: node scripts/run-qa-finite-trial-finalizer.mjs admission
   admit:
@@ -45,6 +46,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: seed-material
         id: finite_seed_once
         env:
@@ -85,6 +87,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Restore exact QA candidate once under original R1
         id: finite_restore_once
         env:

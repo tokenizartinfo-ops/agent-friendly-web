@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-http.mjs';
+import {readFiniteMaterialSeed,readFiniteMaterialSeedForCoupledRestore} from '../lib/mcp-qa-finite-seed-http.mjs';
 import {seedPrimaryFixture,SEED_GH} from './fixtures/finite-seed-primary.mjs';
 test('real anonymous native primary path authenticates immutable seed, finished step and package lineage',async()=>{
  const f=await seedPrimaryFixture(),r=await readFiniteMaterialSeed(f.options);
@@ -42,4 +42,22 @@ for(const mode of ['missing','malformed','nonstring-array'])test('public primary
  else job.started_at=mode==='malformed'?'not-a-date':[job.started_at];
  await assert.rejects(readFiniteMaterialSeed(f.options));
  assert(f.calls.every(x=>x.init.method==='GET'));
+});
+
+test('late restore accepts only the already successful ready step when the original legacy poll failed',async()=>{
+ const f=await seedPrimaryFixture(),run=f.map.get('/actions/runs/11'),job=f.map.get('/actions/runs/11/attempts/1/jobs?per_page=100').jobs[0];
+ const stamp=n=>new Date(f.T0+n).toISOString();
+ f.setNow(f.T0+550000);
+ Object.assign(run,{status:'completed',conclusion:'failure'});
+ Object.assign(job,{status:'completed',conclusion:'failure'});
+ const ready={name:'admit-and-ready',number:4,status:'completed',conclusion:'success',started_at:stamp(2100),completed_at:stamp(4000)};
+ const poll={name:'Wait for exact observer terminal output',number:5,status:'completed',conclusion:'failure',started_at:stamp(4100),completed_at:stamp(470000)};
+ job.steps.push(ready,poll);
+ const restored=await readFiniteMaterialSeedForCoupledRestore(f.options);
+ assert.equal(restored.seed.intentId,f.seed.intentId);
+ await assert.rejects(()=>readFiniteMaterialSeed(f.options));
+ for(const [key,newValue] of [['conclusion','failure'],['started_at','bad-date'],['completed_at',stamp(480000)]]){
+  const old=ready[key];ready[key]=newValue;
+  await assert.rejects(()=>readFiniteMaterialSeedForCoupledRestore(f.options));ready[key]=old;
+ }
 });

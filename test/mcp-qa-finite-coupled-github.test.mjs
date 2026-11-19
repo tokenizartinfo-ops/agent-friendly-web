@@ -84,3 +84,14 @@ for(const bad of ['terminalStep','branchDrift','childProcess'])test(bad+' cannot
  assert.equal(await make(f.options).claimSend(f.record,f.options.signal,()=>{}),'uncertain');
  assert.ok(f.events.every(x=>x.method==='GET'));
 });
+
+test('the GitHub restore entry rejects expired custody before its first remote operation',async()=>{
+ const {runFiniteCoupledRestoreJob}=await import('../scripts/run-qa-finite-coupled-restore.mjs');
+ const f=fixture(),{scope}=f.source;
+ const e={ref:'main',repository,sender:owner,inputs:{intent_id:scope.intentId,control_hash:scope.controlHash,handoff_hash:scope.handoffHash,restore_before:String(scope.restoreBefore)}};
+ const runtime={...f.env,AFW_QA_CLOSED_TOKEN:'SYNTHETIC',AFW_R2_BACKUPS_READ_TOKEN:'SYNTHETIC',GITHUB_TOKEN:'SYNTHETIC',GITHUB_EVENT_PATH:'fixture-event.json'};
+ let fetches=0,reads=0;
+ const result=await runFiniteCoupledRestoreJob({runtime,now:f.options.now,read:async path=>{reads++;assert.equal(path,'fixture-event.json');return Buffer.from(JSON.stringify(e));},
+  fetchImpl:async()=>{fetches++;throw Error('unexpected live request');}});
+ assert.equal(result.status,'admin_pending');assert.equal(reads,1);assert.equal(fetches,0);
+});

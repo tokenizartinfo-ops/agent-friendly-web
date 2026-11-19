@@ -21,7 +21,7 @@ export async function runFiniteCoupledRestoreJob({runtime=process.env,read=readF
   const sourceRevision=runtime.GITHUB_SHA,runId=Number(runtime.GITHUB_RUN_ID),raw=await read(runtime.GITHUB_EVENT_PATH);
   if(!hex(sourceRevision,40)||!Number.isSafeInteger(runId)||runId<1||String(runId)!==runtime.GITHUB_RUN_ID||!raw||Buffer.byteLength(raw)>262144)fail();
   const event=JSON.parse(raw.toString());
-  if(event.ref!=='refs/heads/main'||event.repository?.id!==1347578006||event.repository?.full_name!==repo||
+  if(!['main','refs/heads/main'].includes(event.ref)||event.repository?.id!==1347578006||event.repository?.full_name!==repo||
      event.sender?.id!==290715446||event.sender?.login!=='tokenizartinfo-ops'||event.sender?.type!=='User')fail();
   const input=fields(event.inputs,['intent_id','control_hash','handoff_hash','restore_before']);
   if([input.intent_id,input.control_hash,input.handoff_hash].some(v=>!hex(v))||typeof input.restore_before!=='string'||
