@@ -1,5 +1,5 @@
 import {createPrivateQaFiniteRecoveryExecutor} from '../../lib/mcp-qa-finite-recovery-executor.mjs';
-import {createPrivateQaFiniteNominalAuthority,readPrivateQaFiniteCanaryNominalContext} from '../../lib/mcp-qa-finite-nominal-authority.mjs';
+import {createPrivateQaFiniteNominalAuthority,readPrivateQaFiniteCanaryNominalContext,readPrivateQaFiniteCanaryNoticeContext,deliverPrivateQaFiniteCanaryNotice} from '../../lib/mcp-qa-finite-nominal-authority.mjs';
 import {installPrivateQaFiniteNativeGuardFactory,installPrivateQaFiniteRecoveryFactory} from '../../lib/mcp-qa-finite-trial-guard.mjs';
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
 import {readPrivateQaFiniteProofInventory} from '../../lib/mcp-qa-finite-proof-inventory.mjs';
@@ -99,6 +99,14 @@ export class IndependentClosure extends ClosedIndependentClosure{
  readFiniteCanaryNominalContext(...args){
   if(args.length!==1)throw Error('Finite nominal context unavailable');
   return readPrivateQaFiniteCanaryNominalContext({ctx:this.ctx,env:this.env,compiledRevision:globalThis.__AFW_QA_SOURCE_REVISION__,refs:args[0]});
+ }
+ readFiniteCanaryNoticeContext(...args){
+  if(args.length!==1)throw Error('Finite canary notice unavailable');
+  return readPrivateQaFiniteCanaryNoticeContext({ctx:this.ctx,env:this.env,compiledRevision:globalThis.__AFW_QA_SOURCE_REVISION__,refs:args[0]});
+ }
+ deliverFiniteCanaryNotice(...args){
+  if(args.length!==1)throw Error('Finite canary notice unavailable');
+  return deliverPrivateQaFiniteCanaryNotice({ctx:this.ctx,env:this.env,compiledRevision:globalThis.__AFW_QA_SOURCE_REVISION__,refs:args[0]});
  }
  readFiniteCanaryProofInventory(...args){
   if(args.length!==1)throw Error('Finite proof inventory unavailable');

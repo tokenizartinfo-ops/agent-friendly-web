@@ -106,6 +106,9 @@ async function noticeFixture(){
  const {f,p,prefix,ack,refs,read}=await setup(plan=>{
   plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
   plan.selectors.programHash=hash(program);plan.selectors.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';
+  const s=plan.selectors;
+  plan.eventPlanHash=hash(JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,
+   clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}));
   plan.closePolicyHash=finiteCleanupPolicyHash(plan);
  });
  f.rows.set(prefix+'ack',ack);

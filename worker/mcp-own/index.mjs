@@ -1,3 +1,4 @@
+import {runFiniteOwnTrialNotice} from '../../lib/mcp-own-finite-notice-delivery.mjs';
 import {runFiniteOwnNominalReservation} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
 import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
 import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
@@ -47,16 +48,16 @@ export class AfwOwnEventNode extends DurableObject{
   const actions=createFiniteOwnReductionActions({ctx:this.ctx,env:this.env,control,...this.#finiteCleanupBindings()});
   return actions[operation==='observe'?'read':operation](refs);
  }
- #host(historical=false,diagnostic){
+ #host(historical=false,diagnostic,now=Date.now){
   const trace=stage=>{try{diagnostic?.record(stage);}catch{}};
-  const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical}),p=config.policy;
+  const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical,now}),p=config.policy;
   trace('native_policy_ready');
-  const successor=historical?null:readOwnSuccessorHost({env:this.env,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt}});
+  const successor=historical?null:readOwnSuccessorHost({env:this.env,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},now});
   trace('native_successor_ready');
   if(this.ctx.id.toString()!==p.containerId)fail();const secret=this.env.AFW_DOSSIER_EVENTS_CUSTODY_KEY;
   if(typeof secret!=='string'||secret.length!==44)fail();const key=Buffer.from(secret,'base64');if(key.length!==32||key.toString('base64')!==secret){key.fill(0);fail();}
   trace('native_custody_ready');
-  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now:Date.now},trace);}finally{key.fill(0);}
+  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now},trace);}finally{key.fill(0);}
   return{host,current:()=>{config.current();successor?.current();}};
  }
  async #call(method,...args){
@@ -70,6 +71,15 @@ export class AfwOwnEventNode extends DurableObject{
  async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'withdraw');const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
  async closeFiniteTrial(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'close');const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
  async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'observe');const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
+ async deliverFiniteTrialNotice(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  try{
+   return await runFiniteOwnTrialNotice({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],deliver:async input=>{
+    const c=this.#host(false,undefined,input.assertCurrent);
+    c.current();const result=await c.host.deliverFiniteOwnSaved(input);c.current();return result;
+   }});
+  }catch{fail();}
+ }
  async readFiniteTrialAdmissionJournal(...args){
   if(args.length!==1)fail();
   if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'journal'});
