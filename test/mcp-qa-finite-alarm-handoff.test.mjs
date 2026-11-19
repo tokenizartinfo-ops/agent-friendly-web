@@ -240,3 +240,67 @@ test('coupled restore rejects foreign or drifting publication before the provide
  assert.ok(f.rows.has('afw.finite-initial-cleanup.v1:restore-send'));
  assert.equal(f.rows.has('afw.finite-initial-cleanup.v1:restore-ack'),false);
 });
+
+const terminalClose=await import('../lib/mcp-qa-finite-coupled-terminal.mjs').catch(()=>({}));
+async function terminalFixture(kind='original'){
+ const x=await restorationOptions(),{f,handoff,request}=x,closure=(await f.storage.get('afw.finite-original-alarm-handoff.v1'));
+ const {sealFiniteOwnerCleanupRecord:ownerSeal,encodeFiniteOwnerCleanupRecord:ownerEncode}=await import('../lib/mcp-qa-finite-owner-cleanup-records.mjs');
+ const {sealFiniteOwnerIssuerProvenanceRecord:sdkSeal,encodeFiniteOwnerIssuerProvenanceRecord:sdkEncode}=await import('../lib/mcp-qa-finite-owner-issuer-provenance-records.mjs');
+ const {finiteHash}=await import('../lib/mcp-finite-evidence.mjs');
+ const {QA_CLOUD_CLOSED_PINS}=await import('../lib/mcp-qa-cloud-closed-pins.mjs');
+ const {id:versionId,deploymentId:originalDep}=QA_CLOUD_CLOSED_PINS.canary;
+ const now=f.now(),prefix='afw.finite-owner-cleanup.v1:'+closure.prepId+':',sdkPrefix='afw.finite-owner-issuer-provenance.v1:'+closure.prepId+':';
+ const id=ownerSeal('Identity',{purpose:'afw.finite-owner-cleanup-identity.v1',planHash:closure.initialPlanHash,capsuleHash:closure.capsuleHash,
+  enrollmentHash:closure.enrollmentHash,preconnectionId:closure.prepId,sourceRevision:closure.sourceRevision,
+  qaVersionId:closure.qaVersionId,actorId:closure.actorId,I0:closure.initialC0-900000,C0:closure.initialC0,C1:closure.initialC1});
+ const sdk=sdkSeal('SdkGrantReference',{purpose:'afw.finite-owner-sdk-reference.v1',rootHash:'1'.repeat(64),expectedGrantHash:'2'.repeat(64),
+  completeSendHash:'3'.repeat(64),completeObservedHash:'4'.repeat(64),correlationHash:'5'.repeat(64),sdkGrantId:'SyntheticGrant01',
+  createdAt:Math.floor((closure.initialC0-5000)/1000),expiresAt:null,observedAt:closure.initialC0-2000});
+ const addEffect=(operation,outcome,key)=>{
+  const send=ownerSeal('Send',{purpose:'afw.finite-owner-cleanup-send.v1',identityHash:id.recordHash,operation,
+   requestId:'11111111-1111-4111-8111-111111111111',requestHash:key.repeat(64),issuedAt:now-3,deadline:now+2000});
+  const observed=ownerSeal('Observed',{purpose:'afw.finite-owner-cleanup-observed.v1',sendHash:send.recordHash,resultHash:key.repeat(64),
+   outcome,observedAt:now-1});
+  f.rows.set(prefix+operation+':send',ownerEncode('Send',send));
+  f.rows.set(prefix+operation+':observed',ownerEncode('Observed',observed));
+  return {send,observed};
+ };
+ f.rows.set(prefix+'identity',ownerEncode('Identity',id));
+ f.rows.set(sdkPrefix+'reference',sdkEncode('SdkGrantReference',sdk));
+ const sdkOp=addEffect('sdk_revoke','returned','6'),monitor=addEffect('monitoring_revoke','applied','7');
+ let proof;
+ if(kind==='original'){
+  const plan={...request.plan,baselineVersionId:versionId,baselineDeploymentId:originalDep};
+  const result=await ownRestore.executeFiniteCoupledOriginalRestore({...request,plan,readDeployment:async()=>x.current,restoreDeployment:async body=>({id:x.deployment,...JSON.parse(body)})});
+  const anchored='afw.finite-initial-cleanup.v1:',send=decode('RestoreSend',f.rows.get(anchored+'restore-send')),ack=decode('RestoreAck',f.rows.get(anchored+'restore-ack'));
+  proof={kind,versionId,deploymentId:result.deploymentId,proofHash:finiteHash({send,ack})};
+ }else{
+  const prior={purpose:'afw.finite-original-alarm-handoff.v1:prior-restoration',handoffHash:closure.handoffHash,versionId,deploymentId:x.deployment,
+   completionHash:'a'.repeat(64),sendHash:'b'.repeat(64),operationalReadiness:false,observedAt:now};
+  f.rows.set(prior.purpose,prior);
+  f.rows.set('afw.qa-finite-cleanup.v1:'+closure.intentId+':completion',{receiptHash:prior.completionHash,canaryVersionId:versionId,canaryDeploymentId:x.deployment});
+  proof={kind,versionId,deploymentId:x.deployment,proofHash:finiteHash(prior)};
+ }
+ const input={handoffHash:closure.handoffHash,planHash:closure.initialPlanHash,processingStateHash:request.authority.stateHash,
+  ownerIdentityHash:id.recordHash,preconnectionId:closure.prepId,sdkReferenceHash:sdk.recordHash,sdkSendHash:sdkOp.send.recordHash,
+  sdkObservedHash:sdkOp.observed.recordHash,monitoringObservedHash:monitor.observed.recordHash,
+  restoration:proof,closedFactsHash:'c'.repeat(64),observedAt:now,operationalReadiness:false};
+ return {...x,closure,request,input,prefix,now};
+}
+for(const kind of ['original','prior'])test('coupled terminal receipt binds OAuth, monitoring and exact '+kind+' restoration',async()=>{
+ assert.equal(typeof terminalClose.sealFiniteCoupledTerminalReceipt,'function');
+ const x=await terminalFixture(kind),receipt=terminalClose.sealFiniteCoupledTerminalReceipt(x.input),{f,request}=x;
+ const key=terminalClose.FINITE_COUPLED_OWNER_CLOSURE;
+ await terminalClose.retainFiniteCoupledTerminalReceipt({storage:f.storage,authority:request.authority,receipt});
+ assert.deepEqual(f.rows.get(key),receipt);
+ const closed=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
+ assert.equal(closed.kind,'original_closed');assert.equal(f.alarm,null);
+});
+test('coupled terminal receipt cannot clear the alarm without the exact SDK acknowledgement',async()=>{
+ assert.equal(typeof terminalClose.sealFiniteCoupledTerminalReceipt,'function');
+ const x=await terminalFixture(),receipt=terminalClose.sealFiniteCoupledTerminalReceipt(x.input),{f,request,prefix}=x;
+ f.rows.delete(prefix+'sdk_revoke:observed');
+ await assert.rejects(()=>terminalClose.retainFiniteCoupledTerminalReceipt({storage:f.storage,authority:request.authority,receipt}));
+ assert.equal(f.rows.has(terminalClose.FINITE_COUPLED_OWNER_CLOSURE),false);
+ assert.equal(f.alarm,x.handoff.initialC0+60000);
+});
