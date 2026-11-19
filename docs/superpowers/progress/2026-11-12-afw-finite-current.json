@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "f4fba3b7db220337aa2638d3240025d015d0cf4f",
-  "phase": "Independent QA restore controller and fixed owner-closure observer are qualified in synthetic cloud tests. Live writer and launch/Guard integration remain unavailable and the complete builder produced no package. Cloudflare primary confirmed the pinned credential expired.",
+  "previousCheckpoint": "f08c87561eeab7df67df1a9f81d506d734d07c0f",
+  "phase": "Cloudflare private Workflow proof retrieval, fixed independent restore HTTP source and R2 draft compilation are wired in the candidate and verified with cloud fixtures. The final hosted job and complete native package are pending. The approved executor token remains expired.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Bind the restorer to the fixed Cloudflare Workflow output and primary provider readback using the independent GitHub job, with an append-only authoritative send record under the original recovery window. Complete the native launch and Guard adapters and connect the exact R2 bytes to the complete builder. Requalify scoped custody only for the eligible exact bundle, then run one live synthetic occurrence and verify same-notice delivery, review and native withdrawal.",
+  "next": "Mount the independent GitHub job and durable original one-send record over the fixed Cloudflare controller. Wire native launch/effect and guard factories. Connect authorized R2 stream to the private compiler draft and qualify a complete artifact, then establish current scoped custody before the one real same-notice occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 174,
-  "updatedAtUTC": "2026-11-19T12:08:53Z",
+  "schemaVersion": 175,
+  "updatedAtUTC": "2026-11-19T12:33:50Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2418,6 +2418,17 @@
     "closed": "9a6d71055e72ab27df5eb712cf7ec97e43459862",
     "verifiedRun": 44520851337,
     "tests": 167,
+    "liveCredentialExpired": true,
+    "completePackage": false,
+    "actualTrial": false
+  },
+  "independentCloudflareTransport": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-independent-cloudflare-transport-validation.json",
+    "evidence": "d33ff897bdc6be52378e0ba5560a6e86708cc73b",
+    "head": "c35641893cede1fbdfa29f27cf8da89669792a0a",
+    "closed": "c6353c1653b98218bd6b9130bcd08ee9c50c738c",
+    "verifiedRun": 44524790726,
+    "tests": 186,
     "liveCredentialExpired": true,
     "completePackage": false,
     "actualTrial": false
