@@ -141,7 +141,7 @@ test('native QA alarm derives fixed effects only for the retained control',async
       observed={status:'observed',identity,identityHash,sealed:true,seal,sealHash:finiteHash(seal),
        writers:{},unresolvedWriters:0,launchNeverIssued:true,authorizesEffects:false,operationalReadiness:false};
      },
-     async readFiniteTrialAdmissionJournal(){return observed;},
+     async readFiniteTrialSealedAdmissionJournal(){return observed;},
      async readFiniteTrialCleanupReadiness(){rpcCalls.push('ready');return {status:'not_yet_observed'};}
     };
    }
