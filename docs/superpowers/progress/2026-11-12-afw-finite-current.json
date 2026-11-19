@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "1f9843010c27025a95401b1719d9d0855728c655",
-  "phase": "Original recovery source verifies the exact owner-bound setup, both publication requests and the activation writer lineage before qualifying already-restored evidence.",
+  "previousCheckpoint": "faa8c459c306c0debdb5b2737ceeb89640f076bb",
+  "phase": "Original recovery uses the bound owner cleanup read, with exact setup/connection partition, separate prior-versus-pending restoration, and validated original alarm-state evolution.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Use the verified activation and upload lineage in the original owner issuer/SDK cleanup reader. Partition the six policy rows from the strict connection history; tie the policy baseline to stage three and require the selected binding/current publication. Separate an already verified restore from the bounded original restore case. Keep trial HEAD and original consent checks, prove legal transition from the immutable zero alarm state before reserving recovery, and cover both cases in one native fixture. Only then settle issuer fence, D1 withdrawal, original SDK grant and final QA rollback.",
+  "next": "Mount the original recovery reservation under the same physical alarm and verify the committed counters/state before effects. Consume the coupled owner reader under the original lease for the exact issuer fence, D1 grant and monitoring withdrawal. Honor prior restoration using its independent observation or issue the original fixed restore only if there is no ambiguous SEND. Join final SDK grant withdrawal, bounded terminal owner receipt and QA restoration, then qualify the full release with a current scoped credential.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 168,
-  "updatedAtUTC": "2026-11-19T01:07:15Z",
+  "schemaVersion": 169,
+  "updatedAtUTC": "2026-11-19T01:40:38Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2360,5 +2360,15 @@
     "run": 44433895158,
     "tests": 298,
     "completePackage": false
+  },
+  "coupledOriginalOwnerCleanupContext": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-coupled-owner-cleanup-context-validation.json",
+    "evidence": "d23d75e9d9abb4f56862379dc7f68156c86a779d",
+    "head": "13f192cc5567e6e59dfb8c168406df109d3067cd",
+    "closed": "a0f80e5efb3f805adc46f7a565d2eebfa736c4dd",
+    "verifiedRun": 44437941461,
+    "tests": 438,
+    "completePackage": false,
+    "atomicReservationMounted": false
   }
 }
