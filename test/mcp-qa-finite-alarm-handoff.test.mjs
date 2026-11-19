@@ -179,3 +179,53 @@ test('an exhausted original recovery reservation never reopens the delivery',asy
  assert.equal(result.kind,'original_budget_spent');
  assert.equal(f.alarm,null);
 });
+
+const ownRestore=await import('../lib/mcp-qa-finite-coupled-restore.mjs').catch(()=>({}));
+async function restorationOptions(){
+ const x=await recoveryOptions(),options=x.options();
+ const cap=await originalRecovery.reservePrivateQaFiniteOriginalRecovery(options);
+ const authority=await originalRecovery.takePrivateQaFiniteOriginalRecovery(cap,options);
+ const plan={recordHash:options.expectedPlanHash,C0:x.handoff.initialC0,C1:x.handoff.initialC1,
+  baselineVersionId:'11111111-1111-4111-8111-111111111111',baselineDeploymentId:'22222222-2222-4222-8222-222222222222'};
+ const from={versionId:'33333333-3333-4333-8333-333333333333',deploymentId:'44444444-4444-4444-8444-444444444444'};
+ const deployment='55555555-5555-4555-8555-555555555555',originalDeploymentId='66666666-6666-4666-8666-666666666666';
+ const current=[{id:from.deploymentId,strategy:'percentage',versions:[{version_id:from.versionId,percentage:100}]}];
+ const request={authority,storage:x.f.storage,plan,from,activationCompletionHash:'3'.repeat(64),originalDeploymentId,deadline:x.f.now()+4000,check:x.f.now};
+ return {...x,request,current,deployment};
+}
+test('coupled restore claims one SEND before the original provider write and retains the exact ACK',async()=>{
+ assert.equal(typeof ownRestore.executeFiniteCoupledOriginalRestore,'function');
+ const {f,request,current,deployment}=await restorationOptions(),calls=[];
+ const restored=await ownRestore.executeFiniteCoupledOriginalRestore({...request,readDeployment:async()=>current,restoreDeployment:async body=>{
+  assert.ok(f.rows.has('afw.finite-initial-cleanup.v1:restore-send'));
+  assert.equal(f.rows.has('afw.finite-initial-cleanup.v1:restore-ack'),false);
+  calls.push(body);
+  const desired=JSON.parse(body);
+  return {id:deployment,...desired};
+ }});
+ assert.equal(restored.deploymentId,deployment);
+ assert.equal(f.rows.has('afw.finite-initial-cleanup.v1:restore-ack'),true);
+ await assert.rejects(()=>ownRestore.executeFiniteCoupledOriginalRestore({...request,readDeployment:async()=>current,restoreDeployment:async()=>{throw Error('duplicate');}}));
+ assert.equal(calls.length,1);
+});
+test('coupled restore with lost acknowledgement cannot replay even if the provider later appears closed',async()=>{
+ assert.equal(typeof ownRestore.executeFiniteCoupledOriginalRestore,'function');
+ const {f,request,current}=await restorationOptions();
+ let effects=0;
+ const attempt=()=>ownRestore.executeFiniteCoupledOriginalRestore({...request,readDeployment:async()=>current,restoreDeployment:async()=>{effects++;throw Error('SYN lost ACK');}});
+ await assert.rejects(attempt);
+ await assert.rejects(attempt);
+ assert.equal(effects,1);
+ assert.ok(f.rows.has('afw.finite-initial-cleanup.v1:restore-send'));
+ assert.equal(f.rows.has('afw.finite-initial-cleanup.v1:restore-ack'),false);
+});
+test('coupled restore rejects foreign or drifting publication before the provider write',async()=>{
+ assert.equal(typeof ownRestore.executeFiniteCoupledOriginalRestore,'function');
+ const {f,request,current}=await restorationOptions();
+ let reads=0,effects=0;
+ const changed=[{...current[0],id:'99999999-9999-4999-8999-999999999999'}];
+ await assert.rejects(()=>ownRestore.executeFiniteCoupledOriginalRestore({...request,readDeployment:async()=>reads++===0?current:changed,restoreDeployment:async()=>{effects++;}}));
+ assert.equal(effects,0);
+ assert.ok(f.rows.has('afw.finite-initial-cleanup.v1:restore-send'));
+ assert.equal(f.rows.has('afw.finite-initial-cleanup.v1:restore-ack'),false);
+});
