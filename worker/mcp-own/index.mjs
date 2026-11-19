@@ -1,5 +1,5 @@
 import {runFiniteOwnTrialDossier,runFiniteOwnTrialNotice} from '../../lib/mcp-own-finite-notice-delivery.mjs';
-import {runFiniteOwnNominalReservation} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
+import {runFiniteOwnNominalReservation,runFiniteOwnTrialSubscription} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
 import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
 import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
 import {createFiniteOwnReductionActions} from '../../lib/mcp-own-finite-reduction.mjs';
@@ -48,7 +48,7 @@ export class AfwOwnEventNode extends DurableObject{
   const actions=createFiniteOwnReductionActions({ctx:this.ctx,env:this.env,control,...this.#finiteCleanupBindings()});
   return actions[operation==='observe'?'read':operation](refs);
  }
- #host(historical=false,diagnostic,now=Date.now){
+ #host(historical=false,diagnostic,now=Date.now,finiteGate){
   const trace=stage=>{try{diagnostic?.record(stage);}catch{}};
   const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical,now}),p=config.policy;
   trace('native_policy_ready');
@@ -57,7 +57,7 @@ export class AfwOwnEventNode extends DurableObject{
   if(this.ctx.id.toString()!==p.containerId)fail();const secret=this.env.AFW_DOSSIER_EVENTS_CUSTODY_KEY;
   if(typeof secret!=='string'||secret.length!==44)fail();const key=Buffer.from(secret,'base64');if(key.length!==32||key.toString('base64')!==secret){key.fill(0);fail();}
   trace('native_custody_ready');
-  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now},trace);}finally{key.fill(0);}
+  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),...(finiteGate?{finiteGate}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now},trace);}finally{key.fill(0);}
   return{host,current:()=>{config.current();successor?.current();}};
  }
  async #call(method,...args){
@@ -71,9 +71,9 @@ export class AfwOwnEventNode extends DurableObject{
  async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'withdraw');const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
  async closeFiniteTrial(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'close');const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
  async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'observe');const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
- async #runFiniteNotice(run,refs){
+ async #runFiniteNotice(run,refs,now=Date.now){
   try{
-   return await run({ctx:this.ctx,env:this.env,program,sourceRevision,refs,deliver:async input=>{
+   return await run({ctx:this.ctx,env:this.env,program,sourceRevision,refs,now,deliver:async input=>{
     const c=this.#host(false,undefined,input.assertCurrent);
     c.current();const result=await c.host.deliverFiniteOwnSaved(input);c.current();return result;
    }});
@@ -82,6 +82,19 @@ export class AfwOwnEventNode extends DurableObject{
  async deliverFiniteTrialNotice(...args){
   if(!finiteEntrypoint||args.length!==1)fail();
   return this.#runFiniteNotice(runFiniteOwnTrialNotice,args[0]);
+ }
+ async startFiniteTrialSubscription(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  const refs=args[0];
+  try{
+   return await runFiniteOwnTrialSubscription({ctx:this.ctx,env:this.env,program,sourceRevision,refs,
+    subscribe:async ({gate,request,assertCurrent,deadline})=>{
+     const c=this.#host(false,undefined,assertCurrent,gate);
+     c.current();const result=await c.host.subscribe(request,deadline);c.current();return result;
+    },
+    runDossier:assertCurrent=>this.#runFiniteNotice(runFiniteOwnTrialDossier,refs,assertCurrent),
+   });
+  }catch{fail();}
  }
  async saveAndDeliverFiniteTrialNotice(...args){
   if(!finiteEntrypoint||args.length!==1)fail();
@@ -122,7 +135,7 @@ export class AfwOwnEventNode extends DurableObject{
  // Separate successor readback; preserves original observeRetired policy.
  async observeSuccessorRetired(...args){try{if(args.length)fail();return await observeOwnSuccessorRetiredCustody({env:this.env,ctx:this.ctx,program,sourceRevision});}catch{fail();}}
  list(){return this.#call('list');}
- subscribe(value){return this.#call('subscribe',value);}
+ subscribe(value){if(finiteEntrypoint)fail();return this.#call('subscribe',value);}
  unsubscribe(value){return this.#call('unsubscribe',value);}
  // Trusted server observation only; never boots or refreshes the original.
  readReadiness(){return this.#call('readReadiness');}
