@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 18:22:25 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "498eec2a48fdd5a88ae4eec251dbbe211660aceb",
+  "closed": "ce29608540b40ad724a047d209058e13dc220f1f",
+  "finalAuthorization": {
+    "nativeSourceConnectedInCode": true,
+    "sharedCoordinatorSchemaCorrected": true,
+    "originalOwnerPermissionRecheckedAfterDurableSend": true,
+    "originalGithubReadyCorrelated": true,
+    "finalExactSendReadbackBeforeNativeCreate": true,
+    "oneUseOriginalClock": true,
+    "withdrawalLeavesSendWithoutAckAndNoReplay": true
+  },
+  "verification": {
+    "run": 44586712232,
+    "job": 135781512657,
+    "nodePassed": 360,
+    "pythonPassed": 5,
+    "negativeRun": 44585906155,
+    "stagingBuilt": true,
+    "realNativeWorkflowBindingInFixture": true,
+    "prematureCompletePackageRejected": true
+  },
+  "custody": {
+    "qaProviderLastState": "expired",
+    "qaSecretLastUpdatedAt": "2026-10-31T15:54:32Z",
+    "protectedR2ReadUrlPresent": false,
+    "priorR2ArchiveVerified": true,
+    "completePackageReadR2": false
+  },
+  "remaining": [
+    "Mount the initial qualified admission/operations provider and candidate event start.",
+    "Qualify live receiver, complete package and restoration with current protected QA and R2 access.",
+    "Run one real occurrence proving linked receipt, useful human-authorized review and native subscription withdrawal."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}

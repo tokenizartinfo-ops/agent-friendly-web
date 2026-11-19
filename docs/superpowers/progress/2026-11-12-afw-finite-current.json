@@ -1,10 +1,10 @@
 {
-  "schema": 75,
-  "timestampUTC": "2026-11-19 18:08:01 UTC",
+  "schema": 76,
+  "timestampUTC": "2026-11-19 18:22:25 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "52908f989e0e4c3a6f2c52773691d77992a7acff",
-  "phase": "Native prelaunch checks now verify fixed provider deployments, empty cron/tails, stopped Container inventory and absence of candidate first-primary writes before new dispatch. CI verified denial and expected gates. Final launch authority, R2 access and real trial remain pending.",
+  "previousCheckpoint": "eb83a0f6de45cde973bc82689fce63003cd61aff",
+  "phase": "Native QA now uses original READY and fresh owner consent after durable SEND, checks the same stored record and spends one final authorization. A shared parser preserves new private capabilities through coordinator reads. Native integration verified with synthetic external primary.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete native launch operation authorization and canary business path, then qualify and validate QA with current protected credential and exact R2 object link before the one-notice cloud test.",
+  "next": "Mount actual initial admission and operation source and the finite candidate event start. Validate protected QA/R2 custody and complete package before the real same-notice trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2591,6 +2591,15 @@
     "closed": "ebe48ae490f0e6ef01c0a8c47f2e3898bfb6693c",
     "run": 44584124345,
     "tests": 360,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeFinalLaunchAuthorization": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-final-native-launch-authorization.json",
+    "source": "498eec2a48fdd5a88ae4eec251dbbe211660aceb",
+    "closed": "ce29608540b40ad724a047d209058e13dc220f1f",
+    "run": 44586712232,
+    "tests": 365,
     "completePackage": false,
     "realCloudTrial": false
   }
