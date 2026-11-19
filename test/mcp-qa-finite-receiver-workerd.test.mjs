@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {signDossierMcpEvent} from '../lib/mcp-signed-envelope.mjs';
 import {readFileSync} from 'node:fs';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
-test('QA reads the exact finite receipt over the named native receiver binding',async()=>{
- const startAt=Date.now()-2000,receivedAt=startAt+100,reviewedAt=startAt+200;
+test('the mounted QA receiver ingests the signed notice and returns its exact review over the private binding',async()=>{
+ const startAt=Date.now()-2000,observedAt=startAt+100;
+ const callbackKey='whsec_'+Buffer.alloc(32,7).toString('base64');
  const policy={purpose:'afw.finite-dossier-review-policy.v1',projectRef:'1'.repeat(64),eventId:'2'.repeat(64),
   controlHash:'3'.repeat(64),actorHash:'4'.repeat(64),executionHash:'5'.repeat(64),revision:2,startAt,
   reviewBefore:startAt+90000,readBefore:startAt+120000};
@@ -18,7 +20,7 @@ test('QA reads the exact finite receipt over the named native receiver binding',
     const matched=new URL(request.url).pathname==='/match';
     const eventId=matched?${JSON.stringify(policy.eventId)}:'e'.repeat(64);
     const control={controlHash:${JSON.stringify(policy.controlHash)},plan:{T0:${startAt},C0:${policy.reviewBefore},selectors:{expectedProjectRevision:1}}};
-    const completion={notice:{eventId,withdrawn:true,httpReceipt:{httpReceivedAt:${receivedAt}}}};
+    const completion={notice:{eventId,withdrawn:true,httpReceipt:{httpReceivedAt:Date.now()}}};
     return Response.json({receipt:await observePrivateQaFiniteDossierReview({env,control,completion,check:Date.now})});
    }};`}}),
   build({...buildOptions,mainFields:['module','main'],entryPoints:['worker/operations-manager/index.mjs']}),
@@ -27,7 +29,10 @@ test('QA reads the exact finite receipt over the named native receiver binding',
  const runtime=new Miniflare(convertV4MiniflareOptions({workers:[
   {...opts,name:'qa',script:qa.outputFiles[0].text,serviceBindings:{AFW_FINITE_DOSSIER_REVIEW_RECEIVER:{name:'receiver',entrypoint:'FiniteDossierReviews'}}},
   {...opts,name:'receiver',script:receiver.outputFiles[0].text,d1Databases:{OPERATIONS_DB:'finite-review-ledger'},
-   bindings:{AFW_DOSSIER_FINITE_REVIEW_ENABLED:'true',AFW_DOSSIER_FINITE_REVIEW_POLICY:JSON.stringify(policy)}},
+   bindings:{AFW_DOSSIER_FINITE_REVIEW_ENABLED:'true',AFW_DOSSIER_FINITE_REVIEW_ISOLATED:'true',AFW_DOSSIER_SUPERVISION_ENABLED:'true',
+    AFW_DOSSIER_FINITE_CALLBACK_ENABLED:'true',AFW_DOSSIER_FINITE_CALLBACK_SECRET:callbackKey,
+    AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(policy.reviewBefore).toISOString(),AFW_DOSSIER_PROJECT_REFS:JSON.stringify([policy.projectRef]),
+    AFW_DOSSIER_FINITE_REVIEW_POLICY:JSON.stringify(policy)}},
  ]}));
  try{
   const db=await runtime.getD1Database('OPERATIONS_DB','receiver');
@@ -35,8 +40,13 @@ test('QA reads the exact finite receipt over the named native receiver binding',
   for(const sql of schema.split(';').map(x=>x.trim()).filter(Boolean))await db.prepare(sql).run();
   const receiptSchema=readFileSync('worker/operations/dossier-supervision-finite-reviews.sql','utf8').replace(/--[^\n]*/g,'').split('CREATE TRIGGER')[0].trim();
   await db.prepare(receiptSchema.slice(0,-1)).run();
-  await db.prepare('INSERT INTO dossier_supervision_events VALUES(?,?,?,?,?,?)')
-   .bind(policy.eventId,policy.projectRef,policy.revision,'project_updated',new Date(receivedAt).toISOString(),receivedAt).run();
+  const handler=await runtime.getWorker('receiver'),endpoint='https://finite-review-qa.agentfriendlyweb.dev/mcp/finite-dossier-callback';
+  const message=signDossierMcpEvent({version:'afw-dossier-event-v1',eventId:policy.eventId,projectRef:policy.projectRef,
+   revision:policy.revision,kind:'project_updated',observedAt:new Date(observedAt).toISOString()},policy.projectRef,'sub_'+'8'.repeat(64),callbackKey,Date.now());
+  const first=await handler.fetch(new Request(endpoint,{method:'POST',headers:message.headers,body:message.body}));
+  assert.equal(first.status,202);assert.deepEqual(await first.json(),{eventId:policy.eventId,duplicate:false});
+  const row=await db.prepare('SELECT received_at FROM dossier_supervision_events WHERE event_id=?').bind(policy.eventId).first();
+  const receivedAt=row.received_at,reviewedAt=Date.now();
   await db.prepare('INSERT INTO dossier_supervision_runs VALUES(?,?,?,?,?,?,?)')
    .bind(runId,'synthetic-receiver-request',policy.eventId,receivedAt,policy.reviewBefore,'reviewed',reviewedAt).run();
   await db.prepare('INSERT INTO dossier_supervision_finite_reviews VALUES(?,?,?,?,?,?,?,?,?)')
