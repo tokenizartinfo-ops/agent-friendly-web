@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
+import {signDossierMcpEvent,signMcpVerification} from '../lib/mcp-signed-envelope.mjs';
 import {generateKeyPair,SignJWT} from 'jose';
 import {operationsDb} from './fixtures/operations-db.mjs';
 import {recordDossierEvent} from '../lib/dossier-supervision.mjs';
@@ -15,13 +16,13 @@ const api=await import('../lib/dossier-supervision-finite-review.mjs').catch(err
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('dossier-supervision-finite-review.mjs'))throw error;
  return {};
 });
-async function setup({reserve=true,isolated=false}={}){
+async function setup({reserve=true,isolated=false,seed=true}={}){
  const f=operationsDb();
  for(const schema of isolated?['dossier-supervision']:['consumer-state','notice-reservations','dossier-supervision'])f.sqlite.exec(readFileSync('worker/operations/'+schema+'.sql','utf8'));
  if(typeof api.readFiniteDossierReviewReceipt==='function')f.sqlite.exec(readFileSync('worker/operations/dossier-supervision-finite-reviews.sql','utf8'));
  f.db.withSession=name=>{assert.equal(name,'first-primary');return f.db;};
  const now=Date.now(),signal={version:'afw-dossier-event-v1',eventId:'1'.repeat(64),projectRef:'2'.repeat(64),revision:2,kind:'project_updated',observedAt:new Date(now-30).toISOString()};
- await recordDossierEvent(f.db,signal,now-20);
+ if(seed)await recordDossierEvent(f.db,signal,now-20);
  const policy={purpose:'afw.finite-dossier-review-policy.v1',eventId:signal.eventId,projectRef:signal.projectRef,revision:2,
   controlHash:'3'.repeat(64),executionHash:'4'.repeat(64),
   actorHash:digest(['afw.finite-dossier-review-actor.v1',config.teamDomain,config.audience,config.clientId]),
@@ -145,4 +146,48 @@ test('QA reads the bound reviewer for its own notice and retains the review thro
  assert.deepEqual(result.review,receipt);
  assert.equal(result.notice.eventId,receipt.eventId);
  assert.equal(f.posts,1);
+});
+
+test('the dedicated callback accepts only the signed original notice and makes that same notice reviewable',async()=>{
+ const endpoint='https://finite-review-qa.agentfriendlyweb.dev/mcp/finite-dossier-callback';
+ const receiver=await import('../lib/mcp-qa-finite-dossier-callback.mjs').catch(e=>{
+  if(e.code!=='ERR_MODULE_NOT_FOUND'||!e.message.includes('mcp-qa-finite-dossier-callback.mjs'))throw e;
+  return {};
+ });
+ assert.equal(typeof receiver.receiveFiniteDossierCallback,'function');
+ const f=await setup({reserve:false,isolated:true,seed:false}),sub='sub_'+'6'.repeat(64);
+ const secret='whsec_'+Buffer.alloc(32,7).toString('base64');
+ Object.assign(f.env,{AFW_DOSSIER_FINITE_CALLBACK_ENABLED:'true',AFW_DOSSIER_FINITE_CALLBACK_SECRET:secret});
+ const send=(envelope,options={})=>receiver.receiveFiniteDossierCallback({
+  request:new Request(options.url??endpoint,{method:'POST',headers:{...envelope.headers,...options.headers},body:options.body??envelope.body}),
+  env:f.env,now:()=>options.at??f.now
+ });
+ const proof=Buffer.alloc(32,8).toString('base64url');
+ const handshake=signMcpVerification(proof,'verify_'+'4'.repeat(64),sub,secret,f.now);
+ assert.deepEqual(await (await send(handshake)).json(),{challenge:proof});
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_events').get().n,0);
+ const signed=signDossierMcpEvent(f.signal,f.policy.projectRef,sub,secret,f.now);
+ assert.equal((await send(signed,{body:signed.body+' '})).status,401);
+ const foreign=signDossierMcpEvent({...f.signal,eventId:'f'.repeat(64)},f.policy.projectRef,sub,secret,f.now);
+ assert.equal((await send(foreign)).status,409);
+ assert.equal((await send(signed,{at:f.policy.reviewBefore})).status,404);
+ assert.equal((await send(signed,{url:'https://operations-manager.agentfriendlyweb.dev/mcp/finite-dossier-callback'})).status,404);
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_events').get().n,0);
+ const accepted=await send(signed);assert.equal(accepted.status,202);
+ assert.deepEqual(await accepted.json(),{eventId:f.signal.eventId,duplicate:false});
+ assert.equal((await (await send(signed)).json()).duplicate,true);
+ const list=await f.get('/dossiers');assert.equal(list.status,200);
+ assert.deepEqual((await list.json()).signals.map(row=>row.eventId),[f.signal.eventId]);
+ const claim=await f.post('/dossiers/claim',{eventId:f.signal.eventId,requestId:crypto.randomUUID()});
+ assert.equal(claim.status,200);
+ const {reservation}=await claim.json();
+ const finish=await f.post('/dossiers/finish',{runId:reservation.runId,outcome:'reviewed',review:{
+  eventId:f.signal.eventId,executionHash:f.policy.executionHash,resultHash:'5'.repeat(64)
+ }});
+ assert.equal(finish.status,200);
+ const {receipt}=await finish.json();
+ assert.equal(receipt.eventId,f.signal.eventId);
+ assert.equal((await api.readFiniteDossierReviewReceipt({env:f.env,refs:{eventId:receipt.eventId,controlHash:receipt.controlHash},now:()=>f.now})).runId,reservation.runId);
+ f.env.AFW_DOSSIER_FINITE_CALLBACK_ENABLED='false';
+ assert.equal((await send(signed)).status,404);
 });
