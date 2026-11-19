@@ -53,16 +53,24 @@ test('candidate journal records one reservation under the acknowledged QA child 
  const program='synthetic nominal candidate';
  const {f,p,prefix,ack,refs,read}=await setup(plan=>{
   plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
-  plan.selectors.programHash=hash(program);plan.closePolicyHash=finiteCleanupPolicyHash(plan);
+  plan.selectors.programHash=hash(program);plan.selectors.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';
+  plan.closePolicyHash=finiteCleanupPolicyHash(plan);
  });
  const candidate=finiteFixture(),s=p.selectors,own={toString:()=>p.resources.containerId},qa={toString:()=>p.resources.actorId};
  const ctx={id:own,storage:candidate.storage};
  const db={prepare(){throw Error('writer claim must not mutate D1');},withSession(){throw Error('writer claim does not invent first-primary receipt');}};
  const env={DB:db,AFW_FINITE_TRIAL_VERSION:{id:p.canaryContainment.runtimeVersionId},
-  AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',
+  AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_SUCCESSOR_ENABLED:'true',
+  AFW_DOSSIER_SUCCESSOR_POLICY:JSON.stringify({
+   scope:{accountId:'a'.repeat(32),workerName:'agent-friendly-web-delegated-canary',namespaceId:p.resources.namespaceId,
+    applicationId:p.resources.applicationId,ownerRef:'f'.repeat(64),projectRef:'e'.repeat(64),resource:s.resource},
+   original:{containerId:'d'.repeat(64),applicationId:p.resources.applicationId,programHash:'b'.repeat(64),sourceRevision:'a'.repeat(40)},
+   candidate:{trialId:p.trialId,programHash:s.programHash,sourceRevision:s.sourceRevision,startAt:s.startAt,expiresAt:s.expiresAt,budget:1},
+   publication:{artifactKey:'6'.repeat(64),workerHash:'7'.repeat(64),activationKey:'8'.repeat(64)},
+  }),AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',
   AFW_DOSSIER_EVENTS_NODE:{idFromName:()=>own,idFromString:()=>own,get:()=>null},
   AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),
-  AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://fixed.invalid',
+  AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',
   AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_OAUTH_RESOURCE:s.resource,
   AFW_FINITE_TRIAL_CONTROL:{idFromName:()=>qa,get:()=>({
    readFiniteCanaryNominalContext:({operation,...selected})=>read(operation,selected),
@@ -80,6 +88,10 @@ test('candidate journal records one reservation under the acknowledged QA child 
  const run=operation=>runFiniteOwnNominalReservation({ctx,env,program,sourceRevision:s.sourceRevision,refs,operation,now:f.now});
  await assert.rejects(run('reserve'));assert.equal(candidate.puts,0);
  f.rows.set(prefix+'ack',ack);
+ const policy=env.AFW_DOSSIER_SUCCESSOR_POLICY,foreign=JSON.parse(policy);foreign.candidate.trialId='9'.repeat(64);
+ env.AFW_DOSSIER_SUCCESSOR_POLICY=JSON.stringify(foreign);
+ await assert.rejects(run('reserve'));assert.equal(candidate.puts,0);
+ env.AFW_DOSSIER_SUCCESSOR_POLICY=policy;
  assert.equal((await run('journal')).writers.reservation,null);
  assert.equal((await run('reserve')).status,'issued');
  assert.equal((await run('reserve')).status,'reconcile_only');
