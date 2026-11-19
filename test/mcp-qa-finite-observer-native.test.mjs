@@ -99,3 +99,39 @@ test('actual held D1 writer after claim blocks terminal evidence while later wri
   await assert.rejects(f.actor.claimFiniteTrialQaRestore(refs));
  }finally{await f.mf.dispose();}
 });
+
+test('finite QA Worker binds the observer to its compiled revision',{timeout:30000},async()=>{
+ const probe=`
+import {PrivateQaBootstrap} from './worker/independent-closure/finite.mjs';
+import {FINITE_OBSERVER_OPERATION,finiteObserverInstanceId} from './lib/mcp-qa-finite-observer.mjs';
+export default {async fetch(request){
+ const sourceRevision=new URL(request.url).pathname==='/match'?'b'.repeat(40):'c'.repeat(40);
+ const refs={intentId:'a'.repeat(64),sourceRevision},requests=[];
+ const env={
+  AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'},
+  AFW_INDEPENDENT_CLOSURE:{idFromName:name=>name,get:()=>({fetch:async request=>{
+   requests.push({method:request.method,url:request.url});return new Response(null,{status:503});
+  }})}
+ };
+ const step={do:(_name,_options,fn)=>fn(),sleepUntil:()=>{throw Error('unexpected timer');}};
+ const result=await PrivateQaBootstrap.prototype.run.call({env},{payload:{operation:FINITE_OBSERVER_OPERATION,...refs},instanceId:finiteObserverInstanceId(refs)},step);
+ return Response.json({requests,result});
+}};
+`;
+ const built=await build({
+  stdin:{contents:probe,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',
+  mainFields:['module','main'],external:['node:*','cloudflare:*'],
+  define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify('b'.repeat(40))}
+ });
+ const mf=new Miniflare(convertV4MiniflareOptions({
+  modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat','enable_request_signal']
+ }));
+ try{
+  const match=await (await mf.dispatchFetch('https://fixture.invalid/match')).json();
+  assert.deepEqual(match.requests,[{method:'GET',url:'https://afw-private.invalid/_finite-native/observer-preview'}]);
+  assert.equal(match.result.status,'admin_pending');
+  const wrong=await (await mf.dispatchFetch('https://fixture.invalid/wrong')).json();
+  assert.deepEqual(wrong.requests,[]);
+  assert.equal(wrong.result.status,'admin_pending');
+ }finally{await mf.dispose();}
+});
