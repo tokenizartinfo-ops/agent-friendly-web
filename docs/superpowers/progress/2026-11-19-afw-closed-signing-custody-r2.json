@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T20:20:39.914Z",
+  "previousDocsCommit": "c2d41e9a64e410611f962588b655a48c3e7ab19a",
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "closedHead": "83436e15e3013fc3a202c9928f9674f72fff1a98",
+    "compiledStagingEvidence": {
+      "revision": "de650f59fd344d1a83c5157d88f5584908febb4a",
+      "run": 44600167364
+    }
+  },
+  "signing": {
+    "secretBinding": "AFW_DOSSIER_FINITE_CALLBACK_SECRET",
+    "sharedKeyInstalledFromOneGeneration": true,
+    "flagsRemainClosed": true,
+    "installedOnInactiveCopiesOfClosedBaselines": true,
+    "liveSignedChallengeVerified": false,
+    "activeDeploymentsUnchanged": true,
+    "verificationUTC": "2026-11-19T20:06:39.741Z",
+    "workers": [
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "candidateId": "7d4ec845-c1d0-4006-824d-d69e98c84221",
+        "baselineVersion": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "closedReadback": true,
+        "activeDeployment": "7b5a3683-eb21-4f6c-95d4-639570595362"
+      },
+      {
+        "name": "agent-friendly-web-finite-review-qa",
+        "candidateId": "bb5fc6cc-db92-411f-b95f-28928c068169",
+        "baselineVersion": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+        "closedReadback": true,
+        "activeDeployment": "3a2dad24-2f32-488c-a480-52633118adac"
+      }
+    ],
+    "existingQaActiveVersion": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+    "existingQaDeployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1"
+  },
+  "r2": {
+    "bucket": "afw-release-backups",
+    "historicalObjectSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "bytes": 4209422,
+    "http": 200,
+    "readbackUTC": "2026-11-19T20:14:08.350Z",
+    "secretEntryUpdatedUTC": "2026-11-19T20:14:09Z",
+    "protectedEnvironment": "afw-qa-cloud-closed-rollback",
+    "secretName": "AFW_R2_BACKUPS_READ_URL",
+    "ttlSeconds": 3600,
+    "conservativeLinkExpiresUTC": "2026-11-19T21:13:59Z",
+    "issuerExpiresUTC": "2026-11-19T22:13:59Z",
+    "parentScope": "Object Read on afw-release-backups only",
+    "signedRequestScope": "GET for the exact historical object",
+    "temporaryChildCredentialRequestHTTP": 401,
+    "publicBucket": false,
+    "readByPackageCompiler": false
+  },
+  "qaCredential": {
+    "secretName": "AFW_QA_CLOSED_TOKEN",
+    "lastUpdatedUTC": "2026-10-31T15:54:32Z",
+    "lastKnownExpiryUTC": "2026-11-08T02:59:59Z",
+    "qualifiedCurrent": false,
+    "scopedIssuerAttempt": {
+      "http": 400,
+      "code": 1001,
+      "reason": "OAuth tokens cannot create account tokens with granular resource scopes"
+    },
+    "dashboard": "remained on loading after a refresh"
+  },
+  "package": {
+    "complete": false,
+    "blockedAt": "complete-package compiler boundary",
+    "privateDraftAssembledFromThisLink": false
+  },
+  "pending": [
+    "Renew and qualify the protected QA token with Editor on the existing QA Worker only, code read on the canary and release operator only, and the existing account-level metadata and Containers read permissions.",
+    "Wire and qualify the compiled candidate and receiver, prove the signed challenge, and verify the complete package and exact rollback with a fresh R2 URL.",
+    "Execute a one-use finite cloud trial and retain the same-event assistant review, native subscription withdrawal and closed restoration readback."
+  ],
+  "realCloudTrial": false,
+  "liveAssistantReview": false,
+  "liveWithdrawal": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

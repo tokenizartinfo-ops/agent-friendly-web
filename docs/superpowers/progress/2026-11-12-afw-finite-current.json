@@ -1,10 +1,10 @@
 {
-  "schema": 81,
-  "timestampUTC": "2026-11-19 19:39:28 UTC",
+  "schema": 82,
+  "timestampUTC": "2026-11-19 20:20:39 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e3bcd4c1061934754d2e518a4e101f1697816122",
-  "phase": "Initial QA admission now reads the selected permission, prior revocations and process closure directly twice in first-primary D1 and independently compares the retained current owner permission. Scheduled dispatch and native executor preflight require it. The remaining native effect source, private credential and package gates remain closed.",
+  "previousCheckpoint": "c2d41e9a64e410611f962588b655a48c3e7ab19a",
+  "phase": "Shared signing key staged in two inactive closed versions. The exact historical R2 object was verified with a protected temporary link. The scoped QA credential and complete package remain unqualified.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify the candidate and receiver versions with scoped signing custody and closed rollback.",
+  "next": "Renew and qualify the protected QA token with Editor on the existing QA Worker only, code read on the canary and release operator only, and the existing account-level metadata and Containers read permissions.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 180,
-  "updatedAtUTC": "2026-11-19T19:39:28.908Z",
+  "schemaVersion": 181,
+  "updatedAtUTC": "2026-11-19T20:20:39.914Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -1938,8 +1938,8 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": true,
-  "ownerActionNeededNow": false,
+  "noRuntimeMutationThisBlock": false,
+  "ownerActionNeededNow": true,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
     "branch": "lab/afw-notice-journey-components-20261118",
@@ -2645,6 +2645,17 @@
     "closed": "83436e15e3013fc3a202c9928f9674f72fff1a98",
     "run": 44600167364,
     "tests": 532,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "closedSigningCustodyAndR2": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-closed-signing-custody-r2.json",
+    "source": "83436e15e3013fc3a202c9928f9674f72fff1a98",
+    "signingStaged": true,
+    "liveSignedChallengeVerified": false,
+    "r2SignedReadVerified": true,
+    "r2ExpiresUTC": "2026-11-19T21:13:59Z",
+    "qaCredentialQualified": false,
     "completePackage": false,
     "realCloudTrial": false
   }
