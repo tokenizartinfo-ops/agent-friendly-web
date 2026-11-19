@@ -160,3 +160,18 @@ test('finite QA requires the named private Operations review receiver verified i
  const missing=structuredClone(nominal);missing.bindings=missing.bindings.filter(b=>b.name!==expected.name);
  assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:missing}));
 });
+
+test('finite canary prelaunch credential bindings are exact opaque descriptors',()=>{
+ const role='canaryLive';
+ for(const name of ['AFW_DOSSIER_FINITE_CALLBACK_SECRET','AFW_DOSSIER_PROVIDER_READ_TOKEN']){
+  const project=metadata=>api.projectFinitePublicConfiguration({role,metadata});
+  const actual=fixture(),descriptor={name,type:'secret_text'};
+  assert.deepEqual(project(actual).bindings.filter(binding=>binding.name===name),[descriptor]);
+  const missing=structuredClone(actual);
+  missing.bindings=missing.bindings.filter(binding=>binding.name!==name);
+  assert.throws(()=>project(missing),/Finite source authority unavailable/);
+  const unsafe=structuredClone(actual);
+  unsafe.bindings=unsafe.bindings.map(binding=>binding.name===name?{...binding,value:'discard-me'}:binding);
+  assert.throws(()=>project(unsafe),/Finite source authority unavailable/);
+ }
+});
