@@ -5,15 +5,15 @@ import {readFile} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 let api;try{api=await import('../lib/mcp-qa-finite-bootstrap-native.mjs');}catch{/* absent-product RED */}
-const REAL_CEILING=Date.parse('2026-11-03T02:59:00Z'),DECLARATION="CEILING=Date.parse('2026-11-03T02:59:00Z')";
+const REAL_CEILING=Date.parse('2026-11-03T02:59:00Z'),DECLARATION="Date.parse('2026-11-03T02:59:00Z')";
 async function fixture({productionExpiry=false}={}){
  assert.equal(typeof api?.readPrivateQaFiniteBootstrap,'function');
  const {bootstrapWorld,UUID,GH,CF}=await import('./fixtures/finite-bootstrap-world.mjs'),w=await bootstrapWorld();
  let source=await readFile('lib/mcp-qa-finite-bootstrap-native.mjs','utf8');
- assert.equal(source.split(DECLARATION).length,2);
+ const custody=await readFile('lib/mcp-qa-finite-initial-custody-profile.mjs','utf8');
+ assert.equal(custody.split(DECLARATION).length,2);
  const approval=Date.now()+86400000;
- if(productionExpiry){source=source.replaceAll('Date.now()',String(REAL_CEILING));assert.equal(source.split(DECLARATION).length,2);}
- else source=source.replace(DECLARATION,'CEILING='+approval);
+ if(productionExpiry)source=source.replaceAll('Date.now()',String(REAL_CEILING));
  const entry=`
  import{DurableObject}from'cloudflare:workers';
  import{readPrivateQaFiniteBootstrap}from'./lib/mcp-qa-finite-bootstrap-native.mjs';
@@ -31,7 +31,7 @@ ${retentionMethods("readPrivateQaFiniteBootstrap({ctx:this.ctx,env:this.env},par
   }
  }export default{fetch(){return new Response(null,{status:404});}};
  `;
- const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':JSON.stringify(w.expected)},plugins:[{name:'explicit-SYN-custody-boundary',setup(b){b.onLoad({filter:/mcp-qa-finite-bootstrap-native\.mjs$/},()=>({contents:source,loader:'js'}));}}]});
+ const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':JSON.stringify(w.expected)},plugins:[{name:'explicit-SYN-custody-boundary',setup(b){b.onLoad({filter:/mcp-qa-finite-bootstrap-native\.mjs$/},()=>({contents:source,loader:'js'}));b.onLoad({filter:/mcp-qa-finite-initial-custody-profile\.mjs$/},()=>({contents:productionExpiry?custody:custody.replace(DECLARATION,String(approval)),loader:'js'}));}}]});
  await captureRetentionBuild('bootstrap',built);
  const f={w,mode:'normal',requests:[],pointerReads:0,held:null,approval};
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:UUID},AFW_MCP_CLOSURE_READ_TOKEN:'SYN-native-token'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Check',useSQLite:true,uniqueKey:'bootstrap-c1'}},script:built.outputFiles[0].text,outboundService:async req=>{

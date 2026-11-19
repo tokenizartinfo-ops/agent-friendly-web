@@ -115,16 +115,14 @@ ${retentionMethods("createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.
  }export default{fetch(){return new Response(null,{status:404})}};
  `;
  let product;try{product=await readFile('lib/mcp-qa-finite-initial-material.mjs','utf8');}catch{product='export function createPrivateQaFiniteInitialMaterial(){return{collect:async()=>({status:"admin_pending"}),assertCurrent(){throw Error("missing original factual producer");}};}';}
- const approvalDecl="CEILING=Date.parse('2026-11-03T02:59:00Z')";
- if(product.includes(approvalDecl)){assert.equal(product.split(approvalDecl).length,2);product=product.replace(approvalDecl,'CEILING='+approval);}
- const sources=new Map();
- for(const p of ['mcp-qa-finite-historical-source.mjs','mcp-qa-finite-bootstrap-native.mjs']){
-  const s=await readFile('lib/'+p,'utf8');assert.equal(s.split(approvalDecl).length,2);sources.set(p,s.replace(approvalDecl,'CEILING='+approval));
- }
+ const approvalDecl="Date.parse('2026-11-03T02:59:00Z')";
+ const custody=await readFile('lib/mcp-qa-finite-initial-custody-profile.mjs','utf8');
+ assert.equal(custody.split(approvalDecl).length,2);
+ const syntheticCustody=custody.replace(approvalDecl,String(approval));
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
   b.onLoad({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({contents:product,loader:'js'}));
   b.onResolve({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({path:process.cwd()+'/lib/mcp-qa-finite-initial-material.mjs'}));
-  b.onLoad({filter:/mcp-qa-finite-(historical-source|bootstrap-native)\.mjs$/},args=>({contents:sources.get(args.path.split('/').at(-1)),loader:'js'}));
+  b.onLoad({filter:/mcp-qa-finite-initial-custody-profile\.mjs$/},()=>({contents:syntheticCustody,loader:'js'}));
   b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));
   b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));
   b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...realPins,canary:x.pin})+';',loader:'js'}));
