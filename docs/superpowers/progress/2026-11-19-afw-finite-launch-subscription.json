@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "atUTC": "2026-11-19T19:20:13.711Z",
+  "previousCheckpoint": "8b8b39a2611843c10a307a6fe5ce651844ecebcc",
+  "source": {
+    "previous": "e7f9528ca5570ea15d9742d201305ddc603ed4fc",
+    "verified": "aff3b264faae4f91be948b03ae739e3b135637c2",
+    "labClosed": "be1f1ac1321dff3e2ba323a2e8c56a4dd5d9799c"
+  },
+  "verification": {
+    "redRun": 44596183079,
+    "initialGreenRun": 44596603935,
+    "run": 44596870612,
+    "passedJavascript": 523,
+    "passedPython": 5,
+    "stagingCompiled": true,
+    "completePackageRejected": true
+  },
+  "behavior": {
+    "namedConfirmationOwnReservationGate": true,
+    "requestScopedGate": true,
+    "ambiguousEffectsNotRetried": true,
+    "candidateOwnNativeAdmissionAndLaunch": true,
+    "fixedReceiverScope": true,
+    "subscriptionDeadlineBounded": true,
+    "followOnDossierSaveOnlyAfterSubscriptionVerified": true,
+    "liveAssistantReview": false
+  },
+  "cloud": {
+    "read": [
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "qualified": true,
+        "scopeBindings": [
+          {
+            "name": "AFW_DOSSIER_PROVIDER_READ_TOKEN",
+            "present": true
+          },
+          {
+            "name": "AFW_RELEASE_READ_TOKEN",
+            "present": false
+          },
+          {
+            "name": "AFW_DOSSIER_FINITE_CALLBACK_SECRET",
+            "present": false
+          }
+        ],
+        "eventFlags": [
+          {
+            "name": "AFW_DOSSIER_EVENTS_ENABLED",
+            "enabled": false
+          }
+        ]
+      },
+      {
+        "name": "agent-friendly-web-independent-closure-qa",
+        "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+        "qualified": true,
+        "scopeBindings": [
+          {
+            "name": "AFW_DOSSIER_PROVIDER_READ_TOKEN",
+            "present": false
+          },
+          {
+            "name": "AFW_RELEASE_READ_TOKEN",
+            "present": false
+          },
+          {
+            "name": "AFW_DOSSIER_FINITE_CALLBACK_SECRET",
+            "present": false
+          }
+        ],
+        "eventFlags": []
+      },
+      {
+        "name": "agent-friendly-web-finite-review-qa",
+        "version": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+        "deployment": "3a2dad24-2f32-488c-a480-52633118adac",
+        "qualified": true,
+        "scopeBindings": [
+          {
+            "name": "AFW_DOSSIER_PROVIDER_READ_TOKEN",
+            "present": false
+          },
+          {
+            "name": "AFW_RELEASE_READ_TOKEN",
+            "present": false
+          },
+          {
+            "name": "AFW_DOSSIER_FINITE_CALLBACK_SECRET",
+            "present": false
+          }
+        ],
+        "eventFlags": [
+          {
+            "name": "AFW_DOSSIER_FINITE_CALLBACK_ENABLED",
+            "enabled": false
+          },
+          {
+            "name": "AFW_DOSSIER_FINITE_REVIEW_ENABLED",
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "observedAt": "2026-11-19T19:18:23.004Z",
+    "runtimeMutation": false
+  },
+  "qualification": {
+    "nativeInitialLaunchSourceOperationProducerInstalled": false,
+    "protectedEnvironment": "afw-qa-cloud-closed-rollback",
+    "existingQaCredentialSecretUpdatedUTC": "2026-10-31T15:54:32Z",
+    "lastKnownQaCredentialExpiryUTC": "2026-11-08T02:59:59Z",
+    "currentProtectedCredentialQualified": false,
+    "privateR2LinkConfigured": false,
+    "nativeReceiverCallbackCustodyVerified": false
+  },
+  "r2": {
+    "verified": true,
+    "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "bytes": 4209422,
+    "readbackConfirmedAtUTC": "2026-11-19 17:16:53 UTC",
+    "archiveReadViaConfiguredPackageLink": false
+  },
+  "pending": [
+    "Connect the original protected QA launch source operations to independently verified admission and guard controls.",
+    "Qualify exact producer and receiver callback custody, the current protected QA credential and the exact private R2 object link as part of the complete package.",
+    "Run one cloud occurrence and correlate the saved event, assistant review receipt, original subscription withdrawal and closed restoration."
+  ],
+  "completePackage": false,
+  "realCloudTrial": false,
+  "liveWithdrawal": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}
