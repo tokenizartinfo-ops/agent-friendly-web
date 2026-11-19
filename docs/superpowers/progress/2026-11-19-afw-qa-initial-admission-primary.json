@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 18:31:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "ce6d2c1a227d253340f9073776e47bff25245ae5",
+  "closed": "2b1a234b5f0bc7755f9dd392cf0c44ab357a608c",
+  "admission": {
+    "wiredIntoDispatchAndNativeExecutorPreflight": true,
+    "exactFirstPrimaryScopedD1Reads": 2,
+    "ownerRetainedPermissionReadTwice": true,
+    "revokedOrActiveConflictingScopesRejected": true,
+    "immutableMatchingProcessClosuresRequired": true,
+    "refusalBeforeDispatchWrite": true,
+    "authorizesEffects": false
+  },
+  "verification": {
+    "run": 44588339806,
+    "job": 135787275064,
+    "nodePassed": 367,
+    "pythonPassed": 5,
+    "negativeRun": 44587912183,
+    "fixtureSqliteWithActualSchema": true,
+    "syntheticOwnerPermit": true,
+    "stagingBuilt": true,
+    "prematureCompletePackageRejected": true
+  },
+  "custody": {
+    "qaProviderLastState": "expired",
+    "qaSecretLastUpdatedAt": "2026-10-31T15:54:32Z",
+    "protectedR2ReadUrlPresent": false,
+    "packageReadR2": false
+  },
+  "remaining": [
+    "Finish source-owned finite launch operations and the candidate event path, including native legacy-writer isolation.",
+    "Validate the complete package and rollback with current private QA credential and the exact R2 read link.",
+    "Run one real cloud notice and verify the same receipt, assistant review and AFW native subscription withdrawal."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

@@ -1,10 +1,10 @@
 {
-  "schema": 76,
-  "timestampUTC": "2026-11-19 18:22:25 UTC",
+  "schema": 77,
+  "timestampUTC": "2026-11-19 18:31:13 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "eb83a0f6de45cde973bc82689fce63003cd61aff",
-  "phase": "Native QA now uses original READY and fresh owner consent after durable SEND, checks the same stored record and spends one final authorization. A shared parser preserves new private capabilities through coordinator reads. Native integration verified with synthetic external primary.",
+  "previousCheckpoint": "18a79c0334c2104877e4253810a48f8331ee7bb7",
+  "phase": "Initial QA admission now reads the selected permission, prior revocations and process closure directly twice in first-primary D1 and independently compares the retained current owner permission. Scheduled dispatch and native executor preflight require it. The remaining native effect source, private credential and package gates remain closed.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount actual initial admission and operation source and the finite candidate event start. Validate protected QA/R2 custody and complete package before the real same-notice trial.",
+  "next": "Connect fixed native launch operations and candidate route under actual legacy containment, then qualify complete private QA/R2 package before the same-notice trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2600,6 +2600,15 @@
     "closed": "ce29608540b40ad724a047d209058e13dc220f1f",
     "run": 44586712232,
     "tests": 365,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeInitialQaAdmission": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-qa-initial-admission-primary.json",
+    "source": "ce6d2c1a227d253340f9073776e47bff25245ae5",
+    "closed": "2b1a234b5f0bc7755f9dd392cf0c44ab357a608c",
+    "run": 44588339806,
+    "tests": 372,
     "completePackage": false,
     "realCloudTrial": false
   }
