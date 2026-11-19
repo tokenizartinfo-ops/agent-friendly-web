@@ -204,6 +204,21 @@ test('the original alarm qualifies only the retained restoration with its own ex
  assert.equal(result.deploymentId,completion.canaryDeploymentId);
  assert.equal(result.completionHash,completion.receiptHash);
  assert.equal(result.sendHash,finiteHash(send));
+ assert.equal(typeof evidence.retainPrivateQaFinitePriorRestoration,'function');
+ const key='afw.finite-original-alarm-handoff.v1:prior-restoration';
+ const exact={id:result.deploymentId,strategy:'percentage',versions:[{version_id:result.versionId,percentage:100}],
+  annotations:{'workers/message':result.annotation}};
+ const retain=readCurrentDeployment=>evidence.retainPrivateQaFinitePriorRestoration({ctx:f.ctx,env:f.env,check,readCurrentDeployment});
+ await assert.rejects(()=>retain(async()=>({...exact,id:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'})));
+ assert.equal(f.rows.has(key),false);
+ const observed=await retain(async()=>exact);
+ assert.equal(observed.deploymentId,completion.canaryDeploymentId);
+ assert.equal(observed.completionHash,completion.receiptHash);
+ assert.equal(observed.operationalReadiness,false);
+ assert.deepEqual(f.rows.get(key),observed);
+ assert.deepEqual(await retain(async()=>exact),observed);
+ await assert.rejects(()=>retain(async()=>({...exact,annotations:{'workers/message':'foreign'}})));
+ assert.deepEqual(f.rows.get(key),observed);
  assert.equal(f.alarm,x.handoff.initialC0);
  for(const edit of [{bodyHash:'1'.repeat(64)},{issuedAt:f.plan.C1},{claimHash:'1'.repeat(64)}]){
   f.rows.set(sendKey,{...send,...edit});
