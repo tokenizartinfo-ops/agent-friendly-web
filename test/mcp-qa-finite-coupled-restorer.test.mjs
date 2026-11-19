@@ -226,9 +226,9 @@ test('authenticated exact 404 is pending, other 404s and foreign pending inputs 
  assert.deepEqual(await read(),{status:'not_yet_observed'});
  f.reads.set(f.instancePath,missing('wrong.Resource'));
  await assert.rejects(read());
- f.reads.set(f.instancePath,{...complete,status:'queued',end:null,output:null,step_count:0,steps:[]});
+ f.reads.set(f.instancePath,{...complete,status:'queued',success:null,end:null,output:null,step_count:0,steps:[]});
  assert.deepEqual(await read(),{status:'not_yet_observed'});
- f.reads.set(f.instancePath,{...complete,status:'queued',params:{...complete.params,controlHash:'f'.repeat(64)},end:null,output:null,step_count:0,steps:[]});
+ f.reads.set(f.instancePath,{...complete,status:'queued',success:null,params:{...complete.params,controlHash:'f'.repeat(64)},end:null,output:null,step_count:0,steps:[]});
  await assert.rejects(read());
  assert(f.calls.every(x=>x.method==='GET'));
 });
