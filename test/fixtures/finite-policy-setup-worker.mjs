@@ -1,5 +1,6 @@
 import {sealFiniteOwnerCleanupScope,finiteOwnerCleanupScopeTextHash} from '../../lib/mcp-qa-finite-owner-cleanup-scope.mjs';
 import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
+import * as installedPolicy from '../../lib/mcp-qa-finite-installed-policy.mjs';
 import {readPrivateQaFiniteInstalledPolicy} from '../../lib/mcp-qa-finite-installed-policy.mjs';
 import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
 import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
@@ -93,6 +94,26 @@ export class SetupFixture extends IndependentClosure{
   if(mode==='lost-selection-witness'){
    const {selection}=await storage.get('fixture:scenario');
    await storage.delete('source-selection:'+refs.sourceRevision+':publication:'+selection.selectionHash);
+  }
+  if(mode.startsWith('lineage-')){
+   const stem='afw.finite-policy-effect.v1:',scenario=await storage.get('fixture:scenario');
+   const identity={kind:'policy',...refs,setupInstanceId:native(scenario.T0).setupInstanceId,effect:'upload'};
+   const uploadHash=hashFinitePolicyEffectIdentity(identity),key=stem+uploadHash+':';
+   if(mode==='lineage-stale-writer'){
+    const send=JSON.parse(await storage.get(key+'send'));
+    await storage.put(stem+'writer-head',JSON.stringify({identityHash:uploadHash,sendHash:hash('PolicySend',send)}));
+   }
+   if(mode==='lineage-extra-row')await storage.put(key+'other','{}');
+   if(mode==='lineage-missing-confirmation'){
+    const activationHash=hashFinitePolicyEffectIdentity({...identity,effect:'activation'});
+    await storage.delete(stem+activationHash+':confirmation');
+   }
+   if(typeof installedPolicy.readPrivateQaFiniteInstalledPolicyLineage!=='function')return {status:'not_implemented'};
+   const parent={signal:new AbortController().signal,check:Date.now,deadline:Date.now()+5000};
+   try{
+    const {receipt,lineage}=await installedPolicy.readPrivateQaFiniteInstalledPolicyLineage({ctx:this.ctx,env:this.env,refs,parent});
+    return {status:'observed',receiptHash:receipt.receiptHash,policyRows:lineage.keys.length};
+   }catch{return {status:'unavailable'};}
   }
   const parent={signal:new AbortController().signal,check:Date.now,deadline:Date.now()+5000};
   try{
