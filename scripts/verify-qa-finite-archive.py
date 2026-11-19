@@ -282,7 +282,7 @@ def assemble_private_draft(raw):
     return {**receipt, "draftSha256": hashlib.sha256(bundle).hexdigest(), "draftBytes": len(bundle)}
 
 
-def assemble_private_compiler_draft(raw):
+def assemble_private_compiler_draft(raw, include_metadata=False):
     """Join actual compiler outputs to the private backup inside one process."""
     require(len(raw) >= 16)
     historical_size, canary_size, qa_size, receipt_size = struct.unpack_from("<IIII", raw)
@@ -305,15 +305,29 @@ def assemble_private_compiler_draft(raw):
             entry.compress_type = zipfile.ZIP_DEFLATED
             archive.writestr(entry, content)
     compiled = staged.getvalue()
-    return assemble_private_draft(
+    result = assemble_private_draft(
         struct.pack("<III", len(historical), len(compiled), len(receipt)) + historical + compiled + receipt
     )
+    if include_metadata:
+        # This mode is a private pipe to the compiler. The receipt emitted by
+        # the compiler contains only commitments and counts.
+        result["privateMetadata"] = {}
+        with zipfile.ZipFile(io.BytesIO(historical)) as archive:
+            for role in CLOSED_ROLES:
+                with archive.open(role + "/metadata.json") as source:
+                    data = source.read(MANIFEST_LIMIT + 1)
+                require(0 < len(data) <= MANIFEST_LIMIT)
+                metadata = json.loads(data.decode("utf-8"), object_pairs_hook=pairs,
+                                      parse_constant=invalid_constant)
+                require(isinstance(metadata, dict))
+                result["privateMetadata"][role] = metadata
+    return result
 
 
 def main():
     mode = tuple(sys.argv[1:])
     limit = 2 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 12 if mode == ("--assemble-private-draft",) else ARCHIVE_LIMIT
-    if mode == ("--assemble-compiler-draft",):
+    if mode in {("--assemble-compiler-draft",), ("--inspect-rollback-compiler-draft",)}:
         limit = 3 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 16
     raw = sys.stdin.buffer.read(limit + 1)
     require(len(raw) <= limit)
@@ -323,6 +337,7 @@ def main():
         ("--pinned-r2-historical-inputs",): inspect_pinned_r2_historical_inputs,
         ("--assemble-private-draft",): assemble_private_draft,
         ("--assemble-compiler-draft",): assemble_private_compiler_draft,
+        ("--inspect-rollback-compiler-draft",): lambda raw: assemble_private_compiler_draft(raw, True),
     }
     require(mode in inspectors)
     result = inspectors[mode](raw)

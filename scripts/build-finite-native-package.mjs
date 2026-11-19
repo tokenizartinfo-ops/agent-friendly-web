@@ -3,15 +3,16 @@ import {readFiniteR2Archive} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFile} from 'node:child_process';
-import {promisify} from 'node:util';
+import {isDeepStrictEqual,promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {readFile,mkdir,writeFile,realpath} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
-import {finiteWranglerProfileTemplate,finitePublicStaticExpectation} from '../lib/mcp-qa-finite-profile.mjs';
+import {finiteWranglerProfileTemplate,finitePublicStaticExpectation,finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
+import {qualifyOwnClosedVersionMetadata} from '../lib/mcp-qa-own-closed-readback.mjs';
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
 const fail=()=>{throw Error('Finite native package unavailable');};
 const workflow='.github/workflows/afw-finite-native-package.yml';
@@ -135,7 +136,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   historicalInput:built.historicalInput,modules,completePackage:false,operationalReadiness:false}));
  const head=Buffer.alloc(16);[archive,canary,qa,manifest].forEach((item,i)=>head.writeUInt32LE(item.length,i*4));
  const parsed=await new Promise((accept,reject)=>{
-  const child=execFile('python3',[resolve(cwd,archiveVerifier),'--assemble-compiler-draft'],{
+  const child=execFile('python3',[resolve(cwd,archiveVerifier),'--inspect-rollback-compiler-draft'],{
    cwd,timeout:30000,maxBuffer:65536
   },(error,stdout,stderr)=>{
    if(error||stderr){reject(Error('Finite private compiler draft unavailable'));return;}
@@ -150,7 +151,27 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  const allModules={...modules,...Object.fromEntries(Object.entries(historicalKeys).map(([role,key])=>[role,QA_CLOUD_CLOSED_PINS[key].module]))};
  const files=Object.fromEntries(Object.entries(allModules).map(([role,module])=>[role+'/'+module.name,{sha256:module.sha256,bytes:module.bytes}]));
  assert.deepEqual(parsed.files,files);
- return parsed;
+ const {privateMetadata,...receipt}=parsed;
+ if(!privateMetadata||Object.keys(privateMetadata).length!==Object.keys(historicalKeys).length)fail();
+ const rollbackProfiles={};
+ for(const role of Object.keys(historicalKeys)){
+  const metadata=privateMetadata[role];
+  rollbackProfiles[role]=qualifyOwnClosedVersionMetadata(role,metadata);
+  if(role==='operatorClosed')continue;
+  const liveRole=role==='qaClosed'?'qaLive':'canaryLive';
+  const liveProfile=finitePublicProfileTemplate(liveRole);
+  const closedNamespaces=metadata.bindings.filter(binding=>binding.type==='durable_object_namespace');
+  for(const closed of closedNamespaces){
+   const found=liveProfile.bindings.find(binding=>binding.name===closed.name);
+   if(!isDeepStrictEqual(found,closed))fail();
+   if(!closed.script_name){
+    if(metadata.exports?.[closed.class_name]?.type!=='durable-object'||
+       metadata.exports[closed.class_name].storage!=='sqlite'||
+       !built.modules[liveRole].module.exports.includes(closed.class_name))fail();
+   }
+  }
+ }
+ return {...receipt,rollbackProfiles};
 }
 /** Complete-package boundary. Deliberately no positive path until separately
  * reviewed historical input custody/privacy and actual native mounts qualify.
