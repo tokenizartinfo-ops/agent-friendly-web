@@ -1,3 +1,5 @@
+import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
+import {createFiniteOwnReductionActions} from '../../lib/mcp-own-finite-reduction.mjs';
 import {resolveFiniteOwnNativeCleanupHost} from '../../lib/mcp-own-finite-cleanup-host.mjs';
 import {withdrawOwnPermissions} from '../../lib/mcp-own-permission-withdrawal-host.mjs';
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
@@ -20,8 +22,8 @@ const finiteEntrypoint=globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__==='finite_tr
 const program=globalThis.__AFW_NODE_PROGRAM__??'',sourceRevision=globalThis.__AFW_NODE_SOURCE_REVISION__??'';
 
 export class AfwOwnEventNode extends DurableObject{
- #finite(){
-  const nativeCleanup=Object.freeze({program,programSourceRevision:sourceRevision,close:async (boundary,savedEvent)=>{
+ #finiteCleanupBindings(){
+  return Object.freeze({program,programSourceRevision:sourceRevision,close:async (boundary,savedEvent)=>{
    const c=this.#host(true),assertCurrent=()=>{boundary.assertCurrent();c.current();if(boundary.signal.aborted)fail();};
    const input={...boundary,assertCurrent};
    // Receipt lookup cannot stop the existing physical close attempt.
@@ -31,7 +33,12 @@ export class AfwOwnEventNode extends DurableObject{
    assertCurrent();const result=await c.host.close(input);assertCurrent();
    return notice===null?result:{...result,notice};
   }});
-  return resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env,nativeCleanup});
+ }
+ #finite(){return resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env,nativeCleanup:this.#finiteCleanupBindings()});}
+ async #finiteReduction(refs,operation){
+  const control=await readFiniteCanaryReductionControl({ctx:this.ctx,env:this.env,sourceRevision,refs,operation});
+  const actions=createFiniteOwnReductionActions({ctx:this.ctx,env:this.env,control,...this.#finiteCleanupBindings()});
+  return actions[operation==='observe'?'read':operation](refs);
  }
  #host(historical=false,diagnostic){
   const trace=stage=>{try{diagnostic?.record(stage);}catch{}};
@@ -53,9 +60,9 @@ export class AfwOwnEventNode extends DurableObject{
  }
  fetch(){return deny();}
  // Private fixed finite methods; closed profiles have no compiled factory.
- async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
- async closeFiniteTrial(...args){if(args.length!==1)fail();const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
- async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
+ async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'withdraw');const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
+ async closeFiniteTrial(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'close');const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
+ async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'observe');const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
  async readFiniteTrialAdmissionJournal(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialAdmissionJournal(args[0]);}
  async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.beginFiniteTrialReservation(args[0]);}
  async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.settleFiniteTrialReservation(args[0]);}

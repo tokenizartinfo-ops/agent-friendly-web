@@ -57,3 +57,26 @@ test('a wrong native version, guard hash or unwithdrawn business window never ex
  const stateKey=prefix+'control';f.rows.set(stateKey,{...f.rows.get(stateKey),withdrawnAt:null});
  await assert.rejects(call());
 });
+
+test('the candidate uses the existing private QA namespace and rejects changed expiry or canary version',async()=>{
+ assert.equal(typeof api.readFiniteCanaryReductionControl,'function');
+ const {f,p,refs,c}=fixture();
+ const revision=p.selectors.sourceRevision;p.canaryContainment.sourceRevision=revision;
+ const plan=structuredClone(p),version=plan.deployments.canaryLive.versionId;
+ const control={plan,planHash:digest(plan.purpose,plan),controlHash:c.controlHash};
+ const own={toString:()=>plan.resources.containerId},peer={toString:()=>plan.resources.actorId};
+ let calls=0,expiresAt=plan.C1;
+ const env={AFW_FINITE_TRIAL_VERSION:{id:version},AFW_DOSSIER_EVENTS_NODE:{idFromName(name){
+  assert.equal(name,'afw-own-event-first-successor-v1');return own;
+ }},AFW_FINITE_TRIAL_CONTROL:{idFromName(name){assert.equal(name,'afw-own-successor-closure-v1');return peer;},
+  get(id){assert.equal(id,peer);return {async readFiniteCanaryReductionControl(value){
+   assert.deepEqual(value,{...refs,operation:'close'});calls++;
+   return {purpose:'afw.qa-finite-reduction-control.v1',operation:'close',control,observedAt:f.now(),expiresAt};
+  }};}
+ }};
+ const call=()=>api.readFiniteCanaryReductionControl({ctx:{id:own,storage:{}},env,sourceRevision:revision,refs,operation:'close',now:f.now});
+ assert.deepEqual(await call(),control);
+ expiresAt++;await assert.rejects(call());expiresAt=plan.C1;
+ env.AFW_FINITE_TRIAL_VERSION={id:'99999999-9999-4999-8999-999999999999'};
+ await assert.rejects(call());assert.equal(calls,3);
+});
