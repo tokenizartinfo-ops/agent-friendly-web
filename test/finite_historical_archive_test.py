@@ -169,6 +169,13 @@ class PinnedHistoricalArchiveTests(unittest.TestCase):
                     self.assertIs(evidence["completePackage"], False)
                     self.assertIs(evidence["operationalReadiness"], False)
                     self.assertNotIn(b"synthetic-private-sentinel", outcome.stdout)
+                canary = files["canaryLive"]
+                qa = files["qaLive"] + (b"\n" if altered else b"")
+                direct = struct.pack("<IIII", len(historical), len(canary), len(qa), len(expected))
+                direct += historical + canary + qa + expected
+                result = self.run_pinned(direct, locator, "--assemble-compiler-draft")
+                self.assertEqual(result.returncode, outcome.returncode)
+                self.assertEqual(result.stdout, outcome.stdout)
 
 
 if __name__ == "__main__":

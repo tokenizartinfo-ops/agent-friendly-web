@@ -21,6 +21,7 @@ const paths={qaLive:'wrangler.independent-closure-qa.finite.jsonc',canaryLive:'w
 const expectedExports={qaLive:['IndependentClosure','PrivateQaBootstrap','PrivateQaCatalog','PrivateQaNamedConfirmation','PrivateQaPreregistration','default','observePrivateQa'],canaryLive:['AfwNodeControl','AfwOwnEventNode','default']};
 const historicalInputPath='scripts/mcp-finite-r2-historical-inputs.json';
 const closedPinPath='lib/mcp-qa-cloud-closed-pins.mjs';
+const archiveVerifier='scripts/verify-qa-finite-archive.py';
 const historicalKeys={qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'};
 const sha256Hex=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
 async function historicalInputLocator(cwd,sourceRevision){
@@ -55,7 +56,7 @@ async function inputs(cwd,revision){
  const result={};
  const origin=(await exec('git',['remote','get-url','origin'],{cwd,encoding:'utf8',timeout:10000})).stdout.trim();
  if(!['https://github.com/tokenizartinfo-ops/agent-friendly-web','https://github.com/tokenizartinfo-ops/agent-friendly-web.git'].includes(origin))fail();
- for(const path of [workflow,historicalInputPath,closedPinPath,...Object.values(paths),...Object.values(bootstrapPaths)]){
+ for(const path of [workflow,historicalInputPath,closedPinPath,archiveVerifier,...Object.values(paths),...Object.values(bootstrapPaths)]){
   const bytes=await readFile(resolve(cwd,path)),tracked=(await exec('git',['show',revision+':'+path],{cwd,encoding:null,timeout:10000,maxBuffer:1048576})).stdout;
   if(!bytes.equals(tracked))fail();result[path]=hash(bytes);
   const role=roles.find(r=>paths[r]===path);if(role)assert.deepEqual(JSON.parse(bytes),finiteWranglerProfileTemplate(role));
@@ -116,6 +117,35 @@ export async function compileFiniteNativeStaging(input){
   return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,historicalInput,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
  }catch{fail();}
 }
+/** Private STDIN path: exact R2 bytes and newly compiled modules travel only
+ * inside the executor. The verifier emits a digest receipt, never a bundle. */
+async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},stdin){
+ const built=await compileFiniteNativeStaging({cwd,sourceRevision}),expected=built.historicalInput.archiveBytes;
+ let length=0;const chunks=[];
+ for await(const part of stdin){
+  if(!(part instanceof Uint8Array)||(length+=part.byteLength)>expected)fail();chunks.push(part);
+ }
+ const archive=Buffer.concat(chunks,length);
+ if(length!==expected||hash(archive)!==built.historicalInput.archiveSha256)fail();
+ const canary=Buffer.from(built.files['canaryLive/index.mjs']),qa=Buffer.from(built.files['qaLive/index.mjs']);
+ const manifest=Buffer.from(JSON.stringify({purpose:built.purpose,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
+  historicalInput:built.historicalInput,modules:built.modules,completePackage:false,operationalReadiness:false}));
+ const head=Buffer.alloc(16);[archive,canary,qa,manifest].forEach((item,i)=>head.writeUInt32LE(item.length,i*4));
+ const parsed=await new Promise((accept,reject)=>{
+  const child=execFile('python3',[resolve(cwd,archiveVerifier),'--assemble-compiler-draft'],{
+   cwd,timeout:30000,maxBuffer:65536
+  },(error,stdout,stderr)=>{
+   if(error||stderr){reject(Error('Finite private compiler draft unavailable'));return;}
+   try{accept(JSON.parse(stdout));}catch{reject(Error('Finite private compiler draft unavailable'));}
+  });
+  child.stdin.on('error',()=>reject(Error('Finite private compiler draft unavailable')));
+  child.stdin.end(Buffer.concat([head,archive,canary,qa,manifest]));
+ });
+ if(parsed.purpose!=='afw.finite-native-private-draft.v1'||parsed.sourceRevision!==built.sourceRevision||
+    parsed.sourceTree!==built.sourceTree||parsed.historicalArchiveSha256!==built.historicalInput.archiveSha256||
+    parsed.moduleCount!==5||parsed.completePackage!==false||parsed.operationalReadiness!==false||!sha256Hex(parsed.draftSha256))fail();
+ return parsed;
+}
 /** Complete-package boundary. Deliberately no positive path until separately
  * reviewed historical input custody/privacy and actual native mounts qualify.
  * Class exports and successful compilation are insufficient evidence. */
@@ -128,11 +158,17 @@ export async function buildFiniteNativePackage(input){
  fail();
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- if(process.argv.length!==3&&!(process.argv.length===4&&process.argv[2]==='--staging'))fail();
- const staging=process.argv[2]==='--staging',sourceRevision=process.argv[staging?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
+ const mode=process.argv[2],staging=mode==='--staging',privateDraft=mode==='--verify-private-draft';
+ if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
+ const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
+ if(privateDraft){
+  const receipt=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},process.stdin);
+  process.stdout.write(JSON.stringify(receipt)+'\n');
+ }else{
  const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});
  // Separate isolated staging namespace; never eligible artifact name/layout.
  const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
  for(const [path,bytes] of Object.entries(built.files)){const target=resolve(root,path);await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,bytes);}
  if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
+ }
 }

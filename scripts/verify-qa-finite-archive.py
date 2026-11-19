@@ -282,9 +282,39 @@ def assemble_private_draft(raw):
     return {**receipt, "draftSha256": hashlib.sha256(bundle).hexdigest(), "draftBytes": len(bundle)}
 
 
+def assemble_private_compiler_draft(raw):
+    """Join actual compiler outputs to the private backup inside one process."""
+    require(len(raw) >= 16)
+    historical_size, canary_size, qa_size, receipt_size = struct.unpack_from("<IIII", raw)
+    require(0 < historical_size <= ARCHIVE_LIMIT and 0 < canary_size <= ARCHIVE_LIMIT
+            and 0 < qa_size <= ARCHIVE_LIMIT and 0 < receipt_size <= MANIFEST_LIMIT
+            and len(raw) == 16 + historical_size + canary_size + qa_size + receipt_size)
+    backup_end = 16 + historical_size
+    canary_end = backup_end + canary_size
+    qa_end = canary_end + qa_size
+    historical = raw[16:backup_end]
+    receipt = raw[qa_end:]
+    staged = io.BytesIO()
+    with zipfile.ZipFile(staged, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name, content in (
+            ("staging.json", receipt),
+            ("canaryLive/index.mjs", raw[backup_end:canary_end]),
+            ("qaLive/index.mjs", raw[canary_end:qa_end]),
+        ):
+            entry = zipfile.ZipInfo(name)
+            entry.compress_type = zipfile.ZIP_DEFLATED
+            archive.writestr(entry, content)
+    compiled = staged.getvalue()
+    return assemble_private_draft(
+        struct.pack("<III", len(historical), len(compiled), len(receipt)) + historical + compiled + receipt
+    )
+
+
 def main():
     mode = tuple(sys.argv[1:])
     limit = 2 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 12 if mode == ("--assemble-private-draft",) else ARCHIVE_LIMIT
+    if mode == ("--assemble-compiler-draft",):
+        limit = 3 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 16
     raw = sys.stdin.buffer.read(limit + 1)
     require(len(raw) <= limit)
     inspectors = {
@@ -292,6 +322,7 @@ def main():
         ("--historical-inputs",): inspect_historical_inputs,
         ("--pinned-r2-historical-inputs",): inspect_pinned_r2_historical_inputs,
         ("--assemble-private-draft",): assemble_private_draft,
+        ("--assemble-compiler-draft",): assemble_private_compiler_draft,
     }
     require(mode in inspectors)
     result = inspectors[mode](raw)
