@@ -113,3 +113,24 @@ test('the candidate cleanup journal can seal and read the original record withou
  assert.equal((await journal.seal()).status,'reconcile_only');assert.equal(f.puts,1);
  f.setNow(p.C1);await assert.rejects(journal.read());assert.equal(f.puts,1);
 });
+
+test('native QA proof reads require completed reduction and the original outstanding challenge',async()=>{
+ const {f,p,c,guardPrefix,allow}=fixture(),get=read();
+ const planRefs={intentId:p.intentId,planHash:c.planHash},proofChallenge='a'.repeat(64);
+ const options={ctx:f.ctx,env:f.env,compiledRevision:p.source.revision,now:f.now};
+ const readiness=()=>get({...options,refs:{...planRefs,operation:'proofReadiness'}});
+ const capture=(challenge=proofChallenge)=>get({...options,refs:{...planRefs,operation:'proofCapture',proofChallenge:challenge}});
+ for(const kind of ['withdraw','close','seal'])allow(kind);
+ await assert.rejects(readiness());
+ for(const kind of ['withdraw','close','seal']){
+  const key=guardPrefix+kind;f.rows.set(key,{...f.rows.get(key),phase:'complete',receipt:{completed:true},completedAt:f.now()});
+ }
+ assert.equal((await readiness()).control.planHash,c.planHash);
+ await assert.rejects(capture());
+ const prefix='afw.qa-finite-cleanup.v1:'+p.intentId+':',issuedAt=f.now();
+ f.rows.set(prefix+'capture',{purpose:prefix+'capture',controlHash:c.controlHash,challenge:proofChallenge,issuedAt});
+ await assert.rejects(readiness());await assert.rejects(capture('b'.repeat(64)));
+ assert.equal((await capture()).control.controlHash,c.controlHash);
+ f.rows.set(prefix+'proof',{});
+ await assert.rejects(capture());assert.equal(f.puts,0);
+});
