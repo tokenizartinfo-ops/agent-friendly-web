@@ -1,9 +1,9 @@
 {
-  "schema": 77,
-  "timestampUTC": "2026-11-19 18:31:13 UTC",
+  "schema": 78,
+  "timestampUTC": "2026-11-19 18:51:57 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "18a79c0334c2104877e4253810a48f8331ee7bb7",
+  "previousCheckpoint": "501b0f62789a4bbd63c5dd1b41632027ed300d5e",
   "phase": "Initial QA admission now reads the selected permission, prior revocations and process closure directly twice in first-primary D1 and independently compares the retained current owner permission. Scheduled dispatch and native executor preflight require it. The remaining native effect source, private credential and package gates remain closed.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Connect fixed native launch operations and candidate route under actual legacy containment, then qualify complete private QA/R2 package before the same-notice trial.",
+  "next": "Connect the finite launch and post-save controller to the private QA delivery action and the exact native subscription admission.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 176,
-  "updatedAtUTC": "2026-11-19T12:51:49Z",
+  "schemaVersion": 177,
+  "updatedAtUTC": "2026-11-19T18:51:57.930Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2609,6 +2609,15 @@
     "closed": "2b1a234b5f0bc7755f9dd392cf0c44ab357a608c",
     "run": 44588339806,
     "tests": 372,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeCanaryNoticeDelivery": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-canary-finite-notice-delivery.json",
+    "source": "6c22dc90671114fc273ae2d1636be53c7ec5ad3b",
+    "closed": "2e0a90ee917436e039c3cb4eb147bc4ee985850b",
+    "run": 44591973508,
+    "tests": 391,
     "completePackage": false,
     "realCloudTrial": false
   }
