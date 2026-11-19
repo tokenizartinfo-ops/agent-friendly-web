@@ -128,8 +128,9 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},stdin){
  const archive=Buffer.concat(chunks,length);
  if(length!==expected||hash(archive)!==built.historicalInput.archiveSha256)fail();
  const canary=Buffer.from(built.files['canaryLive/index.mjs']),qa=Buffer.from(built.files['qaLive/index.mjs']);
+ const modules=Object.fromEntries(roles.map(role=>[role,built.modules[role].module]));
  const manifest=Buffer.from(JSON.stringify({purpose:built.purpose,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
-  historicalInput:built.historicalInput,modules:built.modules,completePackage:false,operationalReadiness:false}));
+  historicalInput:built.historicalInput,modules,completePackage:false,operationalReadiness:false}));
  const head=Buffer.alloc(16);[archive,canary,qa,manifest].forEach((item,i)=>head.writeUInt32LE(item.length,i*4));
  const parsed=await new Promise((accept,reject)=>{
   const child=execFile('python3',[resolve(cwd,archiveVerifier),'--assemble-compiler-draft'],{
@@ -144,6 +145,9 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},stdin){
  if(parsed.purpose!=='afw.finite-native-private-draft.v1'||parsed.sourceRevision!==built.sourceRevision||
     parsed.sourceTree!==built.sourceTree||parsed.historicalArchiveSha256!==built.historicalInput.archiveSha256||
     parsed.moduleCount!==5||parsed.completePackage!==false||parsed.operationalReadiness!==false||!sha256Hex(parsed.draftSha256))fail();
+ const allModules={...modules,...Object.fromEntries(Object.entries(historicalKeys).map(([role,key])=>[role,QA_CLOUD_CLOSED_PINS[key].module]))};
+ const files=Object.fromEntries(Object.entries(allModules).map(([role,module])=>[role+'/'+module.name,{sha256:module.sha256,bytes:module.bytes}]));
+ assert.deepEqual(parsed.files,files);
  return parsed;
 }
 /** Complete-package boundary. Deliberately no positive path until separately
@@ -165,10 +169,10 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const receipt=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},process.stdin);
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
- const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});
- // Separate isolated staging namespace; never eligible artifact name/layout.
- const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
- for(const [path,bytes] of Object.entries(built.files)){const target=resolve(root,path);await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,bytes);}
- if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
+  const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});
+  // Separate isolated staging namespace; never eligible artifact name/layout.
+  const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
+  for(const [path,bytes] of Object.entries(built.files)){const target=resolve(root,path);await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,bytes);}
+  if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
  }
 }
