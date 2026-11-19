@@ -114,8 +114,8 @@ test('the original recovery accepts only a due reservation descended from the se
 });
 
 const originalRecovery=await import('../lib/mcp-qa-finite-alarm-handoff.mjs');
-async function recoveryOptions(){
- const {f,handoff,control}=await prepared();
+async function recoveryOptions(fixture){
+ const {f,handoff,control}=await prepared(fixture);
  assert.equal((await control.prepare()).status,'armed');
  const base=f.storage.transaction;
  f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
@@ -181,8 +181,8 @@ test('an exhausted original recovery reservation never reopens the delivery',asy
 });
 
 const ownRestore=await import('../lib/mcp-qa-finite-coupled-restore.mjs').catch(()=>({}));
-async function restorationOptions(){
- const x=await recoveryOptions(),options=x.options();
+async function restorationOptions(fixture){
+ const x=await recoveryOptions(fixture),options=x.options();
  const cap=await originalRecovery.reservePrivateQaFiniteOriginalRecovery(options);
  const authority=await originalRecovery.takePrivateQaFiniteOriginalRecovery(cap,options);
  const plan={recordHash:options.expectedPlanHash,C0:x.handoff.initialC0,C1:x.handoff.initialC1,
@@ -242,8 +242,8 @@ test('coupled restore rejects foreign or drifting publication before the provide
 });
 
 const terminalClose=await import('../lib/mcp-qa-finite-coupled-terminal.mjs').catch(()=>({}));
-async function terminalFixture(kind='original'){
- const x=await restorationOptions(),{f,handoff,request}=x,closure=(await f.storage.get('afw.finite-original-alarm-handoff.v1'));
+async function terminalFixture(kind='original',fixture){
+ const x=await restorationOptions(fixture),{f,handoff,request}=x,closure=(await f.storage.get('afw.finite-original-alarm-handoff.v1'));
  const {sealFiniteOwnerCleanupRecord:ownerSeal,encodeFiniteOwnerCleanupRecord:ownerEncode}=await import('../lib/mcp-qa-finite-owner-cleanup-records.mjs');
  const {sealFiniteOwnerIssuerProvenanceRecord:sdkSeal,encodeFiniteOwnerIssuerProvenanceRecord:sdkEncode}=await import('../lib/mcp-qa-finite-owner-issuer-provenance-records.mjs');
  const {finiteHash}=await import('../lib/mcp-finite-evidence.mjs');
@@ -306,4 +306,54 @@ test('coupled terminal receipt cannot clear the alarm without the exact SDK ackn
  await assert.rejects(()=>terminalClose.retainFiniteCoupledTerminalReceipt({storage:f.storage,authority:request.authority,receipt}));
  assert.equal(f.rows.has(terminalClose.FINITE_COUPLED_OWNER_CLOSURE),false);
  assert.equal(f.alarm,x.handoff.initialC0+60000);
+});
+
+const qaFinalization=await import('../lib/mcp-qa-finite-coupled-finalization.mjs').catch(()=>({}));
+test('the earlier business window cannot claim QA restore for the later original owner closure',async()=>{
+ const {f,control}=await prepared();
+ assert.equal((await control.prepare()).status,'armed');
+ f.setNow(f.plan.C0+10);
+ const claim=await control.claimEffect('qa_restore');
+ assert.equal(claim.status,'blocked');
+ assert.equal(f.rows.has('afw.qa-finite-trial.v1:'+f.plan.intentId+':effect:qa_restore'),false);
+});
+async function qaClosureFixture({foreignTarget=false}={}){
+ const {QA_CLOUD_CLOSED_PINS}=await import('../lib/mcp-qa-cloud-closed-pins.mjs'),fixture=finiteFixture();
+ const {id,configurationHash,module}=QA_CLOUD_CLOSED_PINS.qaClosed;
+ fixture.plan.deployments.qaClosed={...fixture.plan.deployments.qaClosed,versionId:id,configurationHash:foreignTarget?'8'.repeat(64):configurationHash,module};
+ const x=await terminalFixture('original',fixture),{f,request,closure}=x;
+ const receipt=terminalClose.sealFiniteCoupledTerminalReceipt(x.input);
+ const refs={intentId:closure.intentId,controlHash:closure.controlHash};
+ const options={ctx:f.ctx,env:f.env,refs,now:f.now};
+ const closeAlarm=()=>protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:closure.actorId,qaVersionId:closure.qaVersionId,now:f.now});
+ const save=()=>terminalClose.retainFiniteCoupledTerminalReceipt({storage:f.storage,authority:request.authority,receipt});
+ return {f,closure,options,receipt,closeAlarm,save};
+}
+test('QA restoration preparation waits for the original receipt and alarm close, then binds the pinned R2 restore target',async()=>{
+ const read=qaFinalization.readPrivateQaFiniteCoupledFinalization;
+ assert.equal(typeof read,'function');
+ const {closure,options,receipt,closeAlarm,save}=await qaClosureFixture();
+ assert.equal((await read(options)).status,'pending');
+ await save();
+ assert.equal((await read(options)).status,'pending');
+ await closeAlarm();
+ const result=await read(options);
+ assert.equal(result.status,'prepared');
+ assert.equal(result.ownerReceiptHash,receipt.receiptHash);
+ assert.equal(result.intentId,closure.intentId);
+ assert.equal(result.restoreBefore,closure.initialC1);
+ assert.equal(result.closedQa.versionId,result.backup.qaClosed.versionId);
+ assert.equal(result.closedQa.module.sha256,result.backup.qaClosed.moduleSha256);
+ assert.equal(result.authorizesEffects,false);
+ assert.equal(result.operationalReadiness,false);
+ assert.deepEqual(await read(options),result);
+});
+test('foreign identity, changed provider target and expired original deadline cannot prepare QA restore',async()=>{
+ const read=qaFinalization.readPrivateQaFiniteCoupledFinalization;
+ assert.equal(typeof read,'function');
+ const original=await qaClosureFixture();await original.save();await original.closeAlarm();
+ await assert.rejects(()=>read({...original.options,refs:{...original.options.refs,controlHash:'7'.repeat(64)}}));
+ await assert.rejects(()=>read({...original.options,now:()=>original.closure.initialC1}));
+ const foreign=await qaClosureFixture({foreignTarget:true});await foreign.save();await foreign.closeAlarm();
+ await assert.rejects(()=>read(foreign.options));
 });
