@@ -59,3 +59,20 @@ test('narrow writer deadline survives reconstruction while settlement keeps orig
  assert.equal((await restored.settleReservation()).status,'settled');
  assert.equal((await restored.read()).unresolvedWriters,0);
 });
+
+test('named launch reservation authority is confined to its original asynchronous request',async()=>{
+ const api=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ assert.equal(typeof api.withFiniteReleaseGate,'function');
+ const c={intentId:'intent',controlHash:'a'.repeat(64),planHash:'b'.repeat(64),containerId:'c'.repeat(64),
+  applicationId:'d'.repeat(32),grantHash:'e'.repeat(64),trialId:'f'.repeat(64),sourceRevision:'a'.repeat(40),
+  runtimeVersionId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',T0:0,N1:300000,C1:420000};
+ const id={toString:()=>c.containerId},namespace={idFromName:()=>id,get:()=>null};
+ const gate=api.createFiniteReservationGateClient({namespace,identity:c});
+ const other=api.createFiniteReservationGateClient({namespace,identity:c});
+ const env={},foreign={};
+ const results=await Promise.all([
+  api.withFiniteReleaseGate(env,gate,async()=>{await Promise.resolve();assert.equal(api.readFiniteReleaseGate(foreign),undefined);return api.readFiniteReleaseGate(env);}),
+  api.withFiniteReleaseGate(env,other,async()=>{await Promise.resolve();return api.readFiniteReleaseGate(env);}),
+ ]);
+ assert.deepEqual(results,[gate,other]);assert.equal(api.readFiniteReleaseGate(env),undefined);
+});

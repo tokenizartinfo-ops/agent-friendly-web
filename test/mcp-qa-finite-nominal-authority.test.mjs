@@ -150,7 +150,7 @@ async function noticeFixture(sql){
  const ctx={id:own,storage:f.storage};let reads=0,sends=0,reply=()=>proof,saveReads=0,saveReply;
  env.AFW_FINITE_TRIAL_CONTROL={idFromName:()=>qa,get:()=>({readFiniteCanaryNoticeContext:async selected=>{
   assert.deepEqual(selected,refs);return reply(++reads);
- },readFiniteCanarySaveContext:async selected=>{
+ },readFiniteCanaryNominalContext:({operation,...selected})=>read(operation,selected),readFiniteCanarySaveContext:async selected=>{
   assert.deepEqual(selected,refs);return saveReply(++saveReads);
  }})};
  const api=await import('../lib/mcp-own-finite-notice-delivery.mjs').catch(error=>{
@@ -167,7 +167,12 @@ async function noticeFixture(sql){
   assert.equal(typeof api.runFiniteOwnTrialDossier,'function');
   return api.runFiniteOwnTrialDossier({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,save,deliver,now:sql?Date.now:f.now});
  };
- return {f,p,refs,proof,run,runSave,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
+ const runSubscribe=async(subscribe,runDossier,selected=refs)=>{
+  const m=await import('../lib/mcp-own-finite-nominal-reservation.mjs');
+  assert.equal(typeof m.runFiniteOwnTrialSubscription,'function');
+  return m.runFiniteOwnTrialSubscription({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,subscribe,runDossier,now:f.now});
+ };
+ return {f,p,refs,proof,run,runSave,runSubscribe,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
 }
 test('finite canary delivers only the event and original subscription confirmed by QA',async()=>{
  const n=await noticeFixture();
@@ -258,4 +263,31 @@ test('the real save and signed delivery share the same subscription record with 
   assert.equal(sql.sends(),2);
   await sql.host.close();
  }finally{sql.close();}
+});
+test('finite subscription uses original native admission and only starts the dossier after verification',async()=>{
+ const n=await noticeFixture();
+ const {requireFiniteAdmissionCustodySource}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ n.env.AFW_DOSSIER_FINITE_CALLBACK_SECRET='whsec_'+Buffer.alloc(32,7).toString('base64');
+ let subscribed=false;
+ const value=await n.runSubscribe(async ({gate,request,assertCurrent,deadline})=>{
+  requireFiniteAdmissionCustodySource(gate,{db:n.env.DB,projectId:n.p.selectors.projectId});
+  assert.equal(request.delivery.url,'https://finite-review-qa.agentfriendlyweb.dev/mcp/finite-dossier-callback');
+  assert.equal(request.arguments.projectRef,'e'.repeat(64));
+  assert.ok(deadline<=n.p.C0);
+  assertCurrent();subscribed=true;
+  return {id:'sub_'+'b'.repeat(64),refreshBefore:new Date(deadline).toISOString(),cursor:null,truncated:false};
+ },async()=>{assert.equal(subscribed,true);return {saved:true,revision:2,delivery:n.result};});
+ assert.deepEqual(value,{saved:true,revision:2,delivery:n.result});
+});
+test('finite subscription rejects selector substitution, missing custody and lost verification',async()=>{
+ const n=await noticeFixture();let calls=0;
+ const never=()=>assert.fail('unexpected dossier write');
+ const {env}=n;
+ const subscribe=()=>{calls++;throw Error('lost verification ACK');};
+ await assert.rejects(n.runSubscribe(subscribe,never));
+ env.AFW_DOSSIER_FINITE_CALLBACK_SECRET='whsec_'+Buffer.alloc(32,7).toString('base64');
+ await assert.rejects(n.runSubscribe(subscribe,never,{...n.refs,callback:'https://other.invalid'}));
+ assert.equal(calls,0);
+ await assert.rejects(n.runSubscribe(subscribe,never));
+ assert.equal(calls,1);
 });
