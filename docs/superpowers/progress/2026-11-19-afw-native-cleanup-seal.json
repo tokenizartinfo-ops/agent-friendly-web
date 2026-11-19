@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 16:23:52 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "6422636c92d5c487b790a86d2626b1ba21b1e3d8",
+  "closed": "813ffb07c60615f07b271b783f8d14b0788dc37e",
+  "verification": {
+    "run": 44565219998,
+    "job": 135704996587,
+    "nodePassed": 327,
+    "pythonPassed": 5,
+    "stagingBuilt": true,
+    "prematureCompletePackageRejected": true,
+    "negativeControlRun": 44564262596,
+    "integrationFixtureCorrection": "native seal reconciliation now calls the dedicated sealed-journal RPC"
+  },
+  "change": {
+    "sealedAdmissionJournalConnectedInSource": true,
+    "originalQaClaimAndIndependentGuardRequired": true,
+    "sealUsesOriginalPlanHash": true,
+    "observationUsesOriginalControlHash": true,
+    "sourceVersionAndCleanupWindowRequired": true,
+    "finiteJournalCannotLaunch": true,
+    "existingNominalEntriesPreserved": true
+  },
+  "custody": {
+    "checkedGitHubEnvironment": "afw-qa-cloud-closed-rollback",
+    "lastQaSecretUpdateAt": "2026-10-31T15:54:32Z",
+    "qaCredentialLastProviderState": "expired",
+    "qaCredentialExpiresAt": "2026-11-08T02:59:59Z",
+    "r2ObjectPreviouslyVerified": true,
+    "protectedR2ReadUrlPresent": false,
+    "r2UsedByFullPackage": false
+  },
+  "remaining": [
+    "Mount the real primary and guard providers for nominal QA launch.",
+    "Connect the authoritative native canary proof and the final QA receiver policy.",
+    "Validate the complete package and exact restoration using current scoped provider custody and the private R2 input.",
+    "Observe one real remote occurrence, linked receipt and review of the same notice, then native withdrawal and independent closure readback."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}
