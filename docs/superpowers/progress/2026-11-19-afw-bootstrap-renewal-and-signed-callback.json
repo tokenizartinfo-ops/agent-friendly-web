@@ -1,0 +1,193 @@
+{
+  "schema": "afw.finite-progress.bootstrap-renewal-and-signed-callback.v1",
+  "atUTC": "2026-11-19T22:34:32.159Z",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "priorCheckpoint": "docs/superpowers/progress/2026-11-19-afw-final-primary-and-r2-draft.json",
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "revision": "4a4ce68fd30eacc3f01735796c94d79c58d63161",
+    "diagnosticTip": "eeddf3dbf7b0c9a9d73f5b6a199fb0e3d68ebf71",
+    "mainUnchanged": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "conditions": [
+      "Choose the source-approved credential pair from the original occurrence date; legacy entries are decoded under their original window.",
+      "The protected bootstrap workflow checks both exact identities and scoped GETs before the original command.",
+      "The canary inherits its callback secret only from the exact private closed donor, after checking the same baseline bytes and remaining configuration.",
+      "Closed archive validation uses the R2 configuration fingerprint and preserves the original restoration fingerprint in retained records."
+    ]
+  },
+  "credentialCustody": {
+    "provider": {
+      "atUTC": "2026-11-19T22:19:23.368Z",
+      "results": [
+        {
+          "role": "reader",
+          "id": "cc9aeb666b3616232df10a17598ced52",
+          "active": true,
+          "expiresAt": "2026-11-27T02:59:59Z",
+          "notBefore": null,
+          "matched": true
+        },
+        {
+          "role": "publisher",
+          "id": "0821b27a745d1ef581b445c75311711b",
+          "active": true,
+          "expiresAt": "2026-11-27T02:59:59Z",
+          "notBefore": null,
+          "matched": true
+        }
+      ]
+    },
+    "githubEnvironment": "afw-qa-cloud-closed-rollback",
+    "allowedDeploymentBranch": "main",
+    "githubSecretUpdatedAt": {
+      "AFW_MCP_CLOSURE_PUBLISH_TOKEN": "2026-11-19T22:09:33Z",
+      "AFW_MCP_CLOSURE_READ_TOKEN": "2026-11-19T22:18:40Z"
+    },
+    "tokenValueSelfVerificationInProtectedJob": false,
+    "qaWorkerSecretsDeployed": false,
+    "providerConnectorGranularCreation": "HTTP 400 Cloudflare 1001 OAuth tokens cannot create account tokens with granular resource scopes",
+    "windowEndUTC": "2026-11-27T02:59:59Z"
+  },
+  "r2": {
+    "closedArchiveObjectAndVersionBytes": {
+      "atUTC": "2026-11-19T21:56:57.719Z",
+      "archiveMatched": true,
+      "observed": [
+        {
+          "role": "qa",
+          "length": 395915,
+          "matchesR2VerifiedDraftPin": true
+        },
+        {
+          "role": "canary",
+          "length": 1830202,
+          "matchesR2VerifiedDraftPin": true
+        },
+        {
+          "role": "operator",
+          "length": 1971922,
+          "matchesR2VerifiedDraftPin": true
+        }
+      ]
+    },
+    "freshExactSourceDraft": {
+      "completePackage": false,
+      "draftBytes": 2021071,
+      "draftSha256": "1f8b331ce8d9ac21764032c6cbae14eaed2817763115f6fe57f7231223d28015",
+      "files": {
+        "canaryClosed/index.mjs": {
+          "bytes": 1830202,
+          "sha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3"
+        },
+        "canaryLive/index.mjs": {
+          "bytes": 1674967,
+          "sha256": "e8ff573580d18ef2ddbffa8e221fd6a41739d331e9c34a775e4c9290918e4774"
+        },
+        "operatorClosed/index.mjs": {
+          "bytes": 1971922,
+          "sha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51"
+        },
+        "qaClosed/closed-rollback.mjs": {
+          "bytes": 395915,
+          "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
+        },
+        "qaLive/index.mjs": {
+          "bytes": 2554803,
+          "sha256": "f62193b30ba8dd13e9c4a7a591d93fc9c77612f18861bdc97404336fbb3d1538"
+        }
+      },
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "moduleCount": 5,
+      "operationalReadiness": false,
+      "purpose": "afw.finite-native-private-draft.v1",
+      "sourceRevision": "4a4ce68fd30eacc3f01735796c94d79c58d63161",
+      "sourceTree": "4ab0dbc01fb75751e4004913023bd5feb0577486"
+    },
+    "closedConfigurationDigests": {
+      "atUTC": "2026-11-19T22:25:21.948Z",
+      "out": {
+        "canary": {
+          "matched": true,
+          "rawRestoration": "dcedc6ca0103750d5c24e51bc9066e257f9acc369b26b2fe1bca73fcdc6041d3",
+          "normalizedRestoration": "dcedc6ca0103750d5c24e51bc9066e257f9acc369b26b2fe1bca73fcdc6041d3",
+          "archiveDomain": "4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0",
+          "normalizedArchiveDomain": "4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0"
+        },
+        "operator": {
+          "matched": true,
+          "rawRestoration": "5c3088ab597fabab6cdc4cceaf49c10dfcae0bf2b86b2665c3df2e7ec79de82c",
+          "normalizedRestoration": "5c3088ab597fabab6cdc4cceaf49c10dfcae0bf2b86b2665c3df2e7ec79de82c",
+          "archiveDomain": "8c37301871c7fc3cc0f7471fddfdeb039f418a078b065fdde44ba5cbe8b24b4c",
+          "normalizedArchiveDomain": "8c37301871c7fc3cc0f7471fddfdeb039f418a078b065fdde44ba5cbe8b24b4c"
+        }
+      }
+    },
+    "donor": {
+      "atUTC": "2026-11-19T22:14:43.477Z",
+      "id": "7d4ec845-c1d0-4006-824d-d69e98c84221",
+      "modulesEqual": true,
+      "remainingBindingsEqual": true,
+      "keysDiff": [
+        "startup_time_ms",
+        "env"
+      ],
+      "signingAlias": [
+        {
+          "name": "AFW_DOSSIER_FINITE_CALLBACK_SECRET",
+          "type": "secret_text"
+        }
+      ],
+      "allFlagsOff": true
+    },
+    "storedRawBytesInGitHub": false,
+    "verifiedSignedR2Read": true,
+    "verifiedLiveRollbackExecution": false
+  },
+  "verification": {
+    "isolatedWindowTests": {
+      "pass": 2,
+      "fail": 0
+    },
+    "lastFull": {
+      "runId": 44628636600,
+      "passed": 832,
+      "failed": 12,
+      "cancelled": 5,
+      "result": "failure"
+    },
+    "nextSyntheticCleanupDiagnosticRunId": 44629774002,
+    "priorDiagnostics": [
+      44625881290,
+      44628143078
+    ],
+    "lastBlocker": "Original native alarm and rollback returned admin_pending in full CI, so end-to-end native approval is still blocked."
+  },
+  "protectedRuntimeReadback": {
+    "atUTC": "2026-11-19T22:30:57.481Z",
+    "r": [
+      {
+        "name": "agent-friendly-web-independent-closure-qa",
+        "deploymentId": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+        "expectedVersionAt100": true
+      },
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "deploymentId": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "expectedVersionAt100": true
+      },
+      {
+        "name": "agent-friendly-web-release-operator",
+        "deploymentId": "979026f8-9be0-439e-86d5-8bc493217f41",
+        "expectedVersionAt100": true
+      }
+    ]
+  },
+  "next": "Find the first failing guard in the original synthetic alarm, correct the matching source or fixture, validate the complete archive-backed package and run one closed protected preflight before a new synthetic occurrence.",
+  "completePackage": false,
+  "realCloudTrial": false,
+  "sameNoticeReviewedInRealTrial": false,
+  "subscriptionWithdrawnInNewTrial": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

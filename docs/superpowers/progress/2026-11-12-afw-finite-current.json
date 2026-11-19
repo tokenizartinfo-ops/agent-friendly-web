@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-renewed-custody-and-final-notice-verification.json",
-  "phase": "Final QA primary read connected in source and tested; exact five-module R2-backed draft verified. The full package and real cloud trial remain gated by native qualification and historical bootstrap custody.",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-final-primary-and-r2-draft.json",
+  "phase": "Scoped QA bootstrap reader and publisher are active in Cloudflare and stored in the protected GitHub environment. The original occurrence window is wired, exact R2-backed source draft verified; native alarm and deployment package remain gated.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Version the bootstrap custody and entry/recovery window against exact scoped host identities without changing existing records. Then qualify the native mounts, signed receiver and closed recovery before generating an eligible package and opening one synthetic cloud occurrence.",
+  "next": "Find the first failing guard in the original synthetic alarm, correct the matching source or fixture, validate the complete archive-backed package and run one closed protected preflight before a new synthetic occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 185,
-  "updatedAtUTC": "2026-11-19T21:42:24.006Z",
+  "schemaVersion": 186,
+  "updatedAtUTC": "2026-11-19T22:34:32.159Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2699,6 +2699,15 @@
     "closedLabHead": "dbcff154c77454b4f0714bf4b2457c321b854b89",
     "verificationRun": 44621042170,
     "privateDraftSha256": "8729c1c162530b0aa01a81b9ddb05d77cc9aeb2c9edd9d65f079d521a3577496",
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "bootstrapRenewalAndSignedCallback": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-bootstrap-renewal-and-signed-callback.json",
+    "revision": "4a4ce68fd30eacc3f01735796c94d79c58d63161",
+    "verificationRun": 44628636600,
+    "diagnosticRun": 44629774002,
+    "privateR2DraftSha256": "1f8b331ce8d9ac21764032c6cbae14eaed2817763115f6fe57f7231223d28015",
     "completePackage": false,
     "realCloudTrial": false
   }
