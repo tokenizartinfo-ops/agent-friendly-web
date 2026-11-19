@@ -1,0 +1,153 @@
+{
+  "schema": "afw.finite-progress.final-primary-and-r2-draft.v1",
+  "atUTC": "2026-11-19T21:42:24.006Z",
+  "project": "AFW",
+  "baseline": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "docs": "53043a95173a6b5701a2a4c294ce8e78b3a1368c"
+  },
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "verifiedRevision": "13be80b17f7d0b355602c2c71cf8dc7881d46fae",
+    "tree": "bae6a5dc20774b8e2f9c1b8b06f0c13c69f7044f",
+    "closedBranchTip": "dbcff154c77454b4f0714bf4b2457c321b854b89",
+    "closedBranchOnlyChangesOneShotVerificationWorkflow": true,
+    "behavior": [
+      "The original owner cleanup attests two fixed first-primary reads, bound to the closing trial, process proof and retained canary restoration.",
+      "Final same-notice evidence requires the new attestation as well as the original completion, withdrawal and correlated assistant review.",
+      "Historical terminal receipts remain readable and can support protective restoration. Missing optional proof cannot credit the business result.",
+      "The protected R2 draft workflow now passes the signed link secret name expected by the compiler. It has not been dispatched or installed on main."
+    ]
+  },
+  "CI": {
+    "missingPrimaryRedRun": 44619369445,
+    "beforeReceiptRegressionRun": 44619947059,
+    "regressionRedRun": 44620614160,
+    "finalGreenRun": 44621042170,
+    "jsPassed": 563,
+    "pythonPassed": 5,
+    "failures": 0,
+    "completePackageAttemptRejected": true,
+    "stagingPassed": true
+  },
+  "privateR2": {
+    "independentObjectRead": {
+      "at": "2026-11-19T21:34:57.657Z",
+      "bytes": 4209422,
+      "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "hashVerified": true
+    },
+    "compiledExactDraft": {
+      "completePackage": false,
+      "draftBytes": 2019139,
+      "draftSha256": "8729c1c162530b0aa01a81b9ddb05d77cc9aeb2c9edd9d65f079d521a3577496",
+      "files": {
+        "canaryClosed/index.mjs": {
+          "bytes": 1830202,
+          "sha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3"
+        },
+        "canaryLive/index.mjs": {
+          "bytes": 1673450,
+          "sha256": "6cdaaaa1538172de0a5b2a7a4b86f6e4ecb7d9cf5a52e936d238b319729f27ef"
+        },
+        "operatorClosed/index.mjs": {
+          "bytes": 1971922,
+          "sha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51"
+        },
+        "qaClosed/closed-rollback.mjs": {
+          "bytes": 395915,
+          "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
+        },
+        "qaLive/index.mjs": {
+          "bytes": 2550665,
+          "sha256": "37009b82486f34a4ebd74941aa159fa1e5bf415518c9332a41be4150c4434dda"
+        }
+      },
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "moduleCount": 5,
+      "operationalReadiness": false,
+      "purpose": "afw.finite-native-private-draft.v1",
+      "sourceRevision": "13be80b17f7d0b355602c2c71cf8dc7881d46fae",
+      "sourceTree": "bae6a5dc20774b8e2f9c1b8b06f0c13c69f7044f"
+    },
+    "rawArchiveCommitted": false,
+    "privateSignedObjectReadOnly": true
+  },
+  "providerReadback": {
+    "at": "2026-11-19T21:34:59.008Z",
+    "result": [
+      {
+        "name": "agent-friendly-web-independent-closure-qa",
+        "success": true,
+        "deploy": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+        "versions": [
+          {
+            "id": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+            "share": 100
+          }
+        ]
+      },
+      {
+        "name": "agent-friendly-web-delegated-canary",
+        "success": true,
+        "deploy": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "versions": [
+          {
+            "id": "2607abae-cec3-4e35-89eb-8b8572262b54",
+            "share": 100
+          }
+        ]
+      },
+      {
+        "name": "agent-friendly-web-release-operator",
+        "success": true,
+        "deploy": "979026f8-9be0-439e-86d5-8bc493217f41",
+        "versions": [
+          {
+            "id": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+            "share": 100
+          }
+        ]
+      }
+    ]
+  },
+  "scopedCredentialObservation": {
+    "at": "2026-11-19T21:36:01.642Z",
+    "tokens": [
+      {
+        "purpose": "legacy_worker_reader",
+        "http": "404"
+      },
+      {
+        "purpose": "legacy_canary_publisher",
+        "http": "404"
+      },
+      {
+        "purpose": "current_github_qa",
+        "matched": true,
+        "status": "active",
+        "expiresOn": "2026-11-27T02:59:59Z"
+      }
+    ]
+  },
+  "blockers": [
+    {
+      "id": "complete-package-native-qualification",
+      "stage": "deployable package",
+      "reason": "The full compiler and native profile still fail closed until native material and guard, receiver, and three-role rollback compatibility are qualified for the same intended occurrence."
+    },
+    {
+      "id": "legacy-bootstrap-custody-ceiling",
+      "stage": "owner bootstrap",
+      "reason": "The current original bootstrap still pins a historical reader/publisher pair and a fixed November 3 UTC ceiling. The separately validated protected QA GitHub credential has a different scoped identity. Direct metadata account reads for the two old IDs returned 404; this does not establish deletion or the contents of Worker secrets."
+    }
+  ],
+  "next": "Version the bootstrap custody and entry/recovery window against exact scoped host identities without changing existing records. Then qualify the native mounts, signed receiver and closed recovery before generating an eligible package and opening one synthetic cloud occurrence.",
+  "completePackage": false,
+  "deployedThisBlock": false,
+  "realCloudTrial": false,
+  "sameNoticeReviewedInRealTrial": false,
+  "nativeWithdrawalInNewTrial": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}
