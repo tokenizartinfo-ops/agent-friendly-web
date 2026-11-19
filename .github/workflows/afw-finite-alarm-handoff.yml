@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-QA-BOOTSTRAP-RENEWAL-SIGNING-DONOR-20261119' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-QA-BOOTSTRAP-RENEWED-IDENTITIES-20261119' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:

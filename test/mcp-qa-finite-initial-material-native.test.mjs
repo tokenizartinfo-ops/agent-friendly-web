@@ -118,7 +118,7 @@ ${retentionMethods("createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.
  const approvalDecl="Date.parse('2026-11-03T02:59:00Z')";
  const custody=await readFile('lib/mcp-qa-finite-initial-custody-profile.mjs','utf8');
  assert.equal(custody.split(approvalDecl).length,2);
- const syntheticCustody=custody.replace(approvalDecl,String(approval));
+ const syntheticCustody=custody.replace(approvalDecl,String(approval)).replace(/const approvedRenewals=Object\.freeze\([^\n]*\);/,'const approvedRenewals=Object.freeze([]);');
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
   b.onLoad({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({contents:product,loader:'js'}));
   b.onResolve({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({path:process.cwd()+'/lib/mcp-qa-finite-initial-material.mjs'}));

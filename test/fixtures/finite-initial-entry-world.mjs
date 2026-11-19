@@ -73,7 +73,7 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
  }
  const custody=await readFile('lib/mcp-qa-finite-initial-custody-profile.mjs','utf8');
  assert.equal(custody.split(approvalDecl).length,2);
- const syntheticCustody=custody.replace(approvalDecl,String(approval));
+ const syntheticCustody=custody.replace(approvalDecl,String(approval)).replace(/const approvedRenewals=Object\.freeze\([^\n]*\);/,'const approvedRenewals=Object.freeze([]);');
  if(firstConnection||mode.startsWith('phase-context-sdk-observed')){
   // Test-only original error frames; no return/guard/authority replacement.
   const frames=String.raw`console.info('T2 original upstream error',JSON.stringify({name:error?.name,status:error?.status??null,frames:String(error?.stack??'').split('\n').filter(line=>/^\s+at\s/.test(line)).slice(0,5)}));`;
