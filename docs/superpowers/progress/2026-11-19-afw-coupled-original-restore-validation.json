@@ -1,0 +1,52 @@
+{
+  "purpose": "afw.finite-coupled-original-restore-validation.v1",
+  "updatedAtUTC": "2026-11-19T11:18:26Z",
+  "workingBranch": "lab/afw-finite-alarm-handoff-20261118",
+  "sourceRevision": "e609235575ad6bd655201fef5bb3fb628ab0b3e8",
+  "sourceTree": "d7ef895e8b33a021df1020cca99d9e23fe160abf",
+  "closedWorkflowRevision": "581f791a26ed1cc48ea2856f401ad77bdd3c1f35",
+  "previousEvidence": "739b396b1a838be8e5f0d2006fe74bd6fb9990c6",
+  "verification": {
+    "run": 44512517834,
+    "counts": {
+      "owner-effects": 38,
+      "initial-cleanup": 55,
+      "core": 271,
+      "owner-context-a": 35,
+      "owner-context-b": 87
+    },
+    "total": 486,
+    "passed": 486,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "completePackage": false,
+    "operationalReadiness": false
+  },
+  "regressionEvidence": {
+    "red": 44511502707,
+    "earlierOwnerContextIntermittence": [
+      44511864946,
+      44512180037
+    ]
+  },
+  "qualifiedAtSource": [
+    "The original alarm borrows the exact one-use reservation after fresh evidence of the enrolled original issuer fence and D1 withdrawal. The target, original plan, publication identity, closure window and independent inventory gate constrain the source-mounted provider effect.",
+    "The same reservation writes one immutable restore SEND before the fixed deployment request and validates independent storage readback. A second primary pointer mismatch before the request is fail-closed and leaves the SEND consumed. An acknowledgement must identify the exact original closed version, deployment and annotation.",
+    "An acknowledged original restoration requires independent primary readback under the original window. A previous business restore uses a distinct evidence path and makes no new restore request. A lost original ACK cannot replay even across a fresh synthetic reserved slot and apparently closed provider.",
+    "The compiled runtime test uses native Durable Object storage and a synthetic provider response. Scope and time are modelled in that fixture."
+  ],
+  "limits": {
+    "sourceMountedOriginalRestore": true,
+    "compiledDurableStorageWithSyntheticProvider": true,
+    "coupledOriginalSdkRevocationMounted": false,
+    "finalCoupledOwnerReceiptMounted": false,
+    "qaFinalRestoreMounted": false,
+    "operationalPackageQualified": false,
+    "currentReleaseCredentialQualified": false,
+    "liveCloudflareMutation": false,
+    "actualSameNoticeTrial": false,
+    "pcOffTrial": false
+  },
+  "next": "Reuse the confirmation-bound owner SDK revoker under the same reservation and exact original grant. Accept only an original acknowledged restore with independent primary readback or the distinct prior-business restoration receipt. Persist a coupled terminal owner receipt before QA restoration. Cover acknowledgement loss, scoped denial and no replay with native tests, then qualify the complete package with current custody."
+}
