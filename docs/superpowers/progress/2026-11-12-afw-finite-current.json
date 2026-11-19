@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "99f758907b426771d71fcf85671860d01d91678e",
-  "phase": "Source verification passed for atomic transfer and retention of the Cloudflare alarm, the shared restore target, and independent readback of historical restoration evidence.",
+  "previousCheckpoint": "baf55f9191cdbfb2b7bcdea645d1e02814cff81c",
+  "phase": "Original alarm has a source-qualified independent observation of an already performed business restoration. Expired original delivery remains administrative; full original recovery remains incomplete.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Connect the original due alarm to its bounded recovery. The fixed initial handler currently rejects any business HEAD and original close requires its own RESTORE SEND and ACK. Reuse historical completion only with a new distinct original outcome, fresh exact provider pointer and module, and verified issuer and SDK closure. For an unfulfilled recovery use only the original authorized window and recipient, without repeating an ambiguous SEND. Then mount native launch and guard and qualify the complete package.",
+  "next": "Qualify the original owner cleanup for the bound selection and exact two setup policy journals, their shared writer-head, and the actual selected policy publication. Preserve the original window and fence/SQL/SDK proof requirements. Join those into a separate final outcome for the already verified restoration or perform the pending original recovery only when the single original restore is demonstrably safe. Then mount native launch/guard and qualify the full package with current custody.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 166,
-  "updatedAtUTC": "2026-11-19T00:01:18Z",
+  "schemaVersion": 167,
+  "updatedAtUTC": "2026-11-19T00:21:47Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2340,5 +2340,16 @@
     "tests": 224,
     "completePackage": false,
     "originalFallbackExecution": false
+  },
+  "originalRestorationObservation": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-original-restoration-observation.json",
+    "evidence": "8fa412edbb82602fa93e6365bcd4ef0d075cf987",
+    "head": "4ee598f943bb3755ed589e64134da19f227be3f1",
+    "closed": "8f36f5a974d28b9b00cd5b109cfff1f6e09c6ddf",
+    "verifiedRun": 44427746242,
+    "tests": 227,
+    "connectedObservation": true,
+    "originalRecoveryExecution": false,
+    "completePackage": false
   }
 }

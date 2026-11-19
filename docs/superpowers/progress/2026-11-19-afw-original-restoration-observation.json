@@ -1,0 +1,40 @@
+{
+  "purpose": "afw.finite-original-restoration-observation-validation.v1",
+  "updatedAtUTC": "2026-11-19T00:21:47Z",
+  "sourceRevision": "4ee598f943bb3755ed589e64134da19f227be3f1",
+  "sourceTree": "fd0769ae711247c1f3ca96b33b91f12475ce3065",
+  "workingBranch": "lab/afw-finite-alarm-handoff-20261118",
+  "closedWorkflowRevision": "8f36f5a974d28b9b00cd5b109cfff1f6e09c6ddf",
+  "parentEvidence": "3b4536c11a8bacf09e1c85bc7637ac1e2ead3a71",
+  "verification": {
+    "run": 44427746242,
+    "directed": 172,
+    "originalCleanupRegressions": 55,
+    "total": 227,
+    "passed": 227,
+    "failed": 0,
+    "skipped": 0,
+    "completePackage": false,
+    "operationalReadiness": false
+  },
+  "negativeEvidence": {
+    "missingReader": 44426815305,
+    "missingIndependentReceipt": 44427130009,
+    "expiredDeliveryMisclassification": 44427549866
+  },
+  "qualifiedAtSource": [
+    "After business expiry, a historical restoration requires both the immutable completion and the exact durable SEND, its hash, timestamp, control, claim, request body, and guard receipt.",
+    "At the original alarm, the mounted source checks the currently observed Cloudflare deployment and the recoverable original version under the existing credential, inventory and backup gates. A distinct immutable observation is retained only if they match. No second restoration is sent.",
+    "Unknown or contradictory evidence cannot acknowledge the original duty. At exact original C1 the dispatcher retains administrative evidence without rearming a past due delivery."
+  ],
+  "next": "Qualify the original owner cleanup for the bound selection and exact two setup policy journals, their shared writer-head, and the actual selected policy publication. Preserve the original window and fence/SQL/SDK proof requirements. Join those into a separate final outcome for the already verified restoration or perform the pending original recovery only when the single original restore is demonstrably safe. Then mount native launch/guard and qualify the full package with current custody.",
+  "limits": {
+    "originalRecoveryExecution": false,
+    "originalIssuerAndSdkSettlement": false,
+    "liveCloudflareRequests": false,
+    "activeQualifiedReleaseCredentialKnown": false,
+    "completePackage": false,
+    "nativeWithdrawalObserved": false,
+    "pcOffTrial": false
+  }
+}
