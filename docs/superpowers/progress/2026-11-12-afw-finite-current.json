@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "ef428f526f4ebe5aa12876db2b554c39521aa6e5",
-  "phase": "The source-mounted original recovery claims a single fixed restore after scoped D1 closure and distinguishes an acknowledged original restore, a prior business restore, and an uncertain SEND. SDK and final QA closure remain pending.",
+  "previousCheckpoint": "436ff714af497023a94821557495f8e10a07ce31",
+  "phase": "The source scopes OAuth revocation to the original SDK grant, requalifies the durable closure receipt before retiring the original alarm, and independently verifies private R2 archive integrity. The complete native package is gated before publication.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Reuse the confirmation-bound owner SDK revoker under the same reservation and exact original grant. Accept only an original acknowledged restore with independent primary readback or the distinct prior-business restoration receipt. Persist a coupled terminal owner receipt before QA restoration. Cover acknowledgement loss, scoped denial and no replay with native tests, then qualify the complete package with current custody.",
+  "next": "Connect and qualify the final QA restoration after the scoped owner receipt. Mount native material, Guard and launch operations, connect the held R2 archive to the complete builder and verify exact rollback and receiver. Launch one eligible cloud occurrence only after package and custody qualification.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 171,
-  "updatedAtUTC": "2026-11-19T11:18:26Z",
+  "schemaVersion": 172,
+  "updatedAtUTC": "2026-11-19T11:38:09Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2388,5 +2388,16 @@
     "verifiedRun": 44512517834,
     "tests": 486,
     "completePackage": false
+  },
+  "coupledOriginalOAuthClosure": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-coupled-oauth-owner-closure-validation.json",
+    "evidence": "ba48ed202886bfbb2bc7b827c84c6229744132e7",
+    "head": "937c9a250d1b387d3d3e279c4290e41c409ac412",
+    "closed": "f21e99748f189bc3fd33253619393d04e65bad54",
+    "verifiedRun": 44515762922,
+    "tests": 489,
+    "privateR2CurrentHashMatched": true,
+    "completePackage": false,
+    "actualTrial": false
   }
 }
