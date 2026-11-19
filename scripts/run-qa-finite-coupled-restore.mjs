@@ -3,6 +3,7 @@ import {pathToFileURL} from 'node:url';
 import {finiteFields as fields,finiteHex as hex,finiteTime as time} from '../lib/mcp-finite-evidence.mjs';
 import {isQaGithubBearerTransportValue} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 import {readFiniteMaterialSeedForCoupledRestore} from '../lib/mcp-qa-finite-seed-http.mjs';
+import {assertFiniteR2ArchiveCredential} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {finiteGhaCustody} from '../lib/mcp-qa-finite-custody.mjs';
 import {createPrivateQaFiniteCoupledGitHub,createPrivateQaFiniteCoupledRestoreHttp} from '../lib/mcp-qa-finite-http.mjs';
 
@@ -30,9 +31,10 @@ export async function runFiniteCoupledRestoreJob({runtime=process.env,read=readF
   const at=now();if(!time(at)||at<restoreFrom||at>=restoreBefore)fail();
   const scope=Object.freeze({intentId:input.intent_id,controlHash:input.control_hash,handoffHash:input.handoff_hash,
    sourceRevision,restoreFrom,restoreBefore});
-  const custody=finiteGhaCustody(),credential=runtime.AFW_QA_CLOSED_TOKEN,archiveCredential=runtime.AFW_R2_BACKUPS_READ_TOKEN,
+  const custody=finiteGhaCustody(),credential=runtime.AFW_QA_CLOSED_TOKEN,archiveCredential=runtime.AFW_R2_BACKUPS_READ_URL,
    githubToken=runtime.GITHUB_TOKEN;
-  if(custody.expiresAt<restoreBefore||[credential,archiveCredential,githubToken].some(v=>!isQaGithubBearerTransportValue(v)))fail();
+  if(custody.expiresAt<restoreBefore||[credential,githubToken].some(v=>!isQaGithubBearerTransportValue(v)))fail();
+  assertFiniteR2ArchiveCredential(archiveCredential,{now,requiredUntil:restoreBefore});
   const original=await readFiniteMaterialSeedForCoupledRestore({intentId:scope.intentId,sourceRevision,fetchImpl,now,signal});
   if(original.primaryEvidence.runId===runId||restoreFrom<=original.primaryEvidence.R1+30000)fail();
   const {versionId,deploymentId,configurationHash,module}=original.seed.qaPublication.qaLive;

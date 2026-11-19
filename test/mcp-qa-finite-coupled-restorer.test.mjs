@@ -182,7 +182,11 @@ test('Cloudflare credential failure blocks R2 access, the external claim and any
   calls.push({method:init.method,path:'/tokens/verify'});return new Response(null,{status:401,headers:{date:stamp}});
  };
  const custody=(await import('../lib/mcp-qa-finite-custody.mjs')).finiteGhaCustody();
- const runner=http.createPrivateQaFiniteCoupledRestoreHttp({...params,custody,archiveCredential:'SYNTHETIC-R2',
+ const archive=new URL('https://'+locator.bucket+'.85d0d5dadac3341a564f22ce885e9eec.r2.cloudflarestorage.com/'+locator.objectKey);
+ const fields={'X-Amz-Algorithm':'AWS4-HMAC-SHA256','X-Amz-Credential':'1'.repeat(32)+'/20261119/auto/s3/aws4_request',
+  'X-Amz-Date':'20261119T120000Z','X-Amz-Expires':'600','X-Amz-SignedHeaders':'host','X-Amz-Signature':'2'.repeat(64)};
+ for(const [k,v] of Object.entries(fields))archive.searchParams.set(k,v);
+ const runner=http.createPrivateQaFiniteCoupledRestoreHttp({...params,custody,archiveCredential:archive.href,
   qaLive:{versionId:live,deploymentId:active,configurationHash:'b'.repeat(64),module:{name:'index.mjs',sha256:'a'.repeat(64),bytes:100}},
   claimSend:async()=>{throw Error('must not claim');},readSend:async()=>{throw Error('must not look up');}});
  assert.equal((await runner.run()).status,'admin_pending');

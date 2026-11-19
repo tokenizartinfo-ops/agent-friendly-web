@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import backupLocator from './mcp-finite-r2-historical-inputs.json' with {type:'json'};
+import {readFiniteR2Archive} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFile} from 'node:child_process';
@@ -151,19 +151,6 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  assert.deepEqual(parsed.files,files);
  return parsed;
 }
-async function readPrivateR2DraftInput(credential){
- if(typeof credential!=='string'||credential.length<1||credential.length>8192||!/^[!-~]+$/.test(credential))fail();
- const {bucket,objectKey,archiveSha256,archiveBytes}=backupLocator;
- if(bucket!=='afw-release-backups'||!sha256Hex(archiveSha256)||objectKey!=='historical-v1/sha256-'+archiveSha256+'.zip')fail();
- const response=await fetch('https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/r2/buckets/'+bucket+'/objects/'+encodeURIComponent(objectKey),{
-  method:'GET',redirect:'error',cache:'no-store',signal:AbortSignal.timeout(15000),
-  headers:{Authorization:'Bearer '+credential,Accept:'application/octet-stream'}
- });
- const size=response.headers.get('content-length'),type=response.headers.get('content-type')?.split(';')[0].toLowerCase();
- if(response.status!==200||!response.body||!['application/octet-stream','application/zip'].includes(type)||
-    size!==null&&size!==String(archiveBytes))fail();
- return response.body;
-}
 /** Complete-package boundary. Deliberately no positive path until separately
  * reviewed historical input custody/privacy and actual native mounts qualify.
  * Class exports and successful compilation are insufficient evidence. */
@@ -180,7 +167,9 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
  if(privateDraft){
-  const receipt=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?()=>readPrivateR2DraftInput(process.env.AFW_R2_BACKUPS_READ_TOKEN):()=>process.stdin);
+  const receipt=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
+   await readFiniteR2Archive({credential:process.env.AFW_R2_BACKUPS_READ_URL,signal:AbortSignal.timeout(15000)})
+  ).body:()=>process.stdin);
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
   const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});

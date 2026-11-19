@@ -49,7 +49,7 @@ jobs:
         id: coupled_restore_once
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
-          AFW_R2_BACKUPS_READ_TOKEN: ${{ secrets.AFW_R2_BACKUPS_READ_TOKEN }}
+          AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |
