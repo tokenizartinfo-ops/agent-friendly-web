@@ -2,7 +2,7 @@ import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../li
 import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
 import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation,publishPrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
-import {privateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-origin.mjs';
+import {privateQaFiniteLaunchSource,schedulePrivateQaFiniteNominalLauncher} from '../../lib/mcp-qa-finite-launch-origin.mjs';
 import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
 import {readPrivateQaFiniteObserverInstallation} from '../../lib/mcp-qa-finite-observer-installation.mjs';
 import {readPrivateQaFiniteSetupOwnerSource} from '../../lib/mcp-qa-finite-policy-prearm-source.mjs';
@@ -23,7 +23,7 @@ import {runPrivateQaFiniteConfirmation} from '../../lib/mcp-qa-finite-confirmati
 installPrivateQaFiniteLaunchSource(privateQaFiniteLaunchSource);
 export {PrivateQaCatalog,PrivateQaPreregistration,observePrivateQa,default} from './index.mjs';
 export class PrivateQaBootstrap extends ClosedBootstrap{
- run(event,step){if(event?.payload?.operation===FINITE_COUPLED_QA_OPERATION)return observePrivateQaCoupledRestorePreparation({env:this.env,event,step,sourceRevision:globalThis.__AFW_QA_SOURCE_REVISION__});if(event?.payload?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step,requireSetupReceipt:true});if(event?.payload?.operation===FINITE_INITIAL_PREPARATION_OPERATION)return runPrivateQaFiniteInitialPreparation({env:this.env,event,step});if(event?.payload?.operation===FINITE_POLICY_SETUP_OPERATION)return runFinitePrivatePolicySetup({env:this.env,event,step});if(isPrivateQaFiniteLauncherPayload(event?.payload))return runPrivateQaFiniteLauncher({env:this.env,event,step});return super.run(event,step);}
+ run(event,step){if(event?.payload?.operation===FINITE_COUPLED_QA_OPERATION)return observePrivateQaCoupledRestorePreparation({env:this.env,event,step,sourceRevision:globalThis.__AFW_QA_SOURCE_REVISION__});if(event?.payload?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step,requireSetupReceipt:true,useNativeLauncher:true});if(event?.payload?.operation===FINITE_INITIAL_PREPARATION_OPERATION)return runPrivateQaFiniteInitialPreparation({env:this.env,event,step});if(event?.payload?.operation===FINITE_POLICY_SETUP_OPERATION)return runFinitePrivatePolicySetup({env:this.env,event,step});if(isPrivateQaFiniteLauncherPayload(event?.payload))return runPrivateQaFiniteLauncher({env:this.env,event,step});return super.run(event,step);}
 }
 export class PrivateQaNamedConfirmation extends ClosedConfirmation{
  run(event,step){if(event?.payload&&Object.hasOwn(event.payload,'planHash'))return runPrivateQaFiniteConfirmation({env:this.env,event,step});return super.run(event,step);}
@@ -76,6 +76,10 @@ export class IndependentClosure extends ClosedIndependentClosure{
   }
   const result=await runPrivateQaFiniteInitialCleanupAlarm({ctx:this.ctx,env:this.env});
   return result===null?super.alarm():result;
+ }
+ scheduleFiniteNominalLauncher(...args){
+  if(args.length!==1)return Promise.resolve({status:'pending',operationalReadiness:false});
+  return schedulePrivateQaFiniteNominalLauncher({ctx:this.ctx,env:this.env,refs:args[0]});
  }
  readFiniteCoupledQaFinalization(...args){
   if(args.length!==1)throw Error('Finite coupled QA finalization unavailable');

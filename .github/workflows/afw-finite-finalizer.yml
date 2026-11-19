@@ -61,15 +61,7 @@ jobs:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/run-qa-finite-trial-finalizer.mjs admit
-      - name: Create the exact AFW nominal launcher once
-        id: finite_nominal_launch_once
-        env:
-          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
-          GITHUB_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          export AFW_FINITE_LAUNCH_ORIGINAL_PID=$$
-          exec node scripts/run-qa-finite-trial-finalizer.mjs launch
+      # The fixed QA observer creates the native launcher after this admission.
       - name: Wait for exact observer terminal output
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
