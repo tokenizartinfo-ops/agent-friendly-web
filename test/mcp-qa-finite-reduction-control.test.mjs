@@ -8,8 +8,8 @@ const api=await import('../lib/mcp-qa-finite-reduction-control.mjs').catch(error
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-qa-finite-reduction-control.mjs'))throw error;
  return {};
 });
-function fixture(){
- const f=finiteFixture();
+function fixture(prepare=()=>{}){
+ const f=finiteFixture();prepare(f.plan);
  const nativePin=createPrivateQaFiniteTrialNativePin({ctx:f.ctx,env:f.env,sourceRevision:f.plan.source.revision});
  const c=readPrivateQaFiniteControlIdentity({nativePin,raw:JSON.stringify(f.plan)}),p=f.plan;
  const prefix=ROOT+':'+p.intentId+':',guardPrefix='afw.qa-finite-guard.v1:'+p.intentId+':effect:';
@@ -161,4 +161,62 @@ test('native QA reads only the authorized application inventory with the private
  await assert.rejects(call({...refs,operation:'seal'}));
  await assert.rejects(call({...refs,applicationId:'other'}));
  assert.equal(requests.length,1);assert.equal(f.puts,0);
+});
+
+test('canary proof route uses QA authorization and stopped inventory to prove an unopened run closed',async t=>{
+ const {createHash}=await import('node:crypto');
+ const {finiteCleanupPolicyHash}=await import('../lib/mcp-finite-cleanup-policy.mjs');
+ const {createFiniteOwnCleanupAdmissionJournal}=await import('../lib/mcp-own-finite-cleanup-host.mjs');
+ const {runFiniteOwnCleanupProof}=await import('../lib/mcp-own-finite-proof-route.mjs');
+ const {readPrivateQaFiniteProofInventory}=await import('../lib/mcp-qa-finite-proof-inventory.mjs');
+ const program='fixture-producer';
+ const {f,p,c,guardPrefix,allow}=fixture(plan=>{
+  plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
+  plan.selectors.programHash=createHash('sha256').update(program).digest('hex');
+  plan.closePolicyHash=finiteCleanupPolicyHash(plan);
+ });
+ const s=p.selectors,own={toString:()=>p.resources.containerId},peer={toString:()=>p.resources.actorId},canary=finiteFixture();
+ const ctx={id:own,storage:canary.storage};
+ const candidateDb={prepare(){throw Error('only first-primary allowed');},withSession(pin){
+  assert.equal(pin,'first-primary');return {prepare(query){
+   assert.match(query,/^SELECT /);return {bind:()=>({all:async()=>({success:true,results:[]})})};
+  }};
+ }};
+ f.env.AFW_MCP_CLOSURE_READ_TOKEN='fixture-read-only-token';
+ const qo={ctx:f.ctx,env:f.env,compiledRevision:p.source.revision,now:f.now};
+ const env={DB:candidateDb,AFW_FINITE_TRIAL_VERSION:{id:p.canaryContainment.runtimeVersionId},AFW_DOSSIER_EVENTS_ENABLED:'false',
+  AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',AFW_DOSSIER_EVENTS_NODE:{idFromName:()=>own,idFromString:()=>own,get:()=>null},
+  AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),
+  AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://fixed.invalid',
+  AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_OAUTH_RESOURCE:s.resource,
+  AFW_FINITE_TRIAL_CONTROL:{idFromName:()=>peer,get:()=>({
+   readFiniteCanaryReductionControl:refs=>api.readPrivateQaFiniteReductionControl({...qo,refs}),
+   readFiniteCanaryProofInventory:refs=>readPrivateQaFiniteProofInventory({...qo,refs}),
+  })}};
+ const fetch=globalThis.fetch;let observations=0;
+ t.after(()=>{globalThis.fetch=fetch;});
+ globalThis.fetch=async(url,options)=>{
+  observations++;assert.equal(options.method,'GET');
+  assert.equal(new URL(url).pathname.endsWith('/containers/applications/'+p.resources.applicationId+'/instances-v2'),true);
+  return Response.json({success:true,errors:[],result:[],result_info:{per_page:100}});
+ };
+ for(const kind of ['withdraw','close','seal']){
+  allow(kind);const key=guardPrefix+kind;
+  f.rows.set(key,{...f.rows.get(key),phase:'complete',receipt:{completed:true},completedAt:f.now()});
+ }
+ const identity={plan:p,planHash:c.planHash,controlHash:c.controlHash};
+ const raw={ctx,env,program,sourceRevision:s.sourceRevision,now:f.now};
+ const refs={intentId:p.intentId,planHash:c.planHash},proofChallenge='c'.repeat(64);
+ const journal=createFiniteOwnCleanupAdmissionJournal({...raw,control:identity});
+ await journal.seal();
+ const ready=await runFiniteOwnCleanupProof({...raw,refs,capture:false});
+ assert.equal(ready.status,'ready_for_capture');assert.equal(observations,2);
+ await assert.rejects(runFiniteOwnCleanupProof({...raw,refs:{...refs,proofChallenge},capture:true}));
+ const prefix='afw.qa-finite-cleanup.v1:'+p.intentId+':';
+ f.rows.set(prefix+'capture',{purpose:prefix+'capture',controlHash:c.controlHash,challenge:proofChallenge,issuedAt:f.now()});
+ const captured=await runFiniteOwnCleanupProof({...raw,refs:{...refs,proofChallenge},capture:true});
+ assert.equal(captured.proof.kind,'sealed_without_admission');assert.equal(captured.proof.proofChallenge,proofChallenge);
+ assert.equal(observations,4);assert.equal(canary.puts,2);
+ await assert.rejects(runFiniteOwnCleanupProof({...raw,refs:{...refs,proofChallenge},capture:true}));
+ assert.equal(canary.puts,2);
 });
