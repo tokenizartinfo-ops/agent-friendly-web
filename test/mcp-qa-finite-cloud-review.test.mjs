@@ -15,7 +15,7 @@ const api=await import('../lib/dossier-supervision-finite-review.mjs').catch(err
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('dossier-supervision-finite-review.mjs'))throw error;
  return {};
 });
-async function setup(){
+async function setup({reserve=true}={}){
  const f=operationsDb();
  for(const schema of ['consumer-state','notice-reservations','dossier-supervision'])f.sqlite.exec(readFileSync('worker/operations/'+schema+'.sql','utf8'));
  if(typeof api.readFiniteDossierReviewReceipt==='function')f.sqlite.exec(readFileSync('worker/operations/dossier-supervision-finite-reviews.sql','utf8'));
@@ -32,6 +32,8 @@ async function setup(){
  const token=await new SignJWT({type:'app',common_name:config.clientId}).setProtectedHeader({alg:'RS256'}).setIssuer('https://'+config.teamDomain).setAudience(config.audience).setSubject('').setExpirationTime('5m').sign(keys.privateKey);
  const handle=createOperationsServiceControls({db:f.db,config,keySet:keys.publicKey,now:()=>now,limiter:{limit:async()=>({success:true})},noticeEnv:env});
  const post=(path,body,jwt=token)=>handle(new Request(config.origin+path,{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt,'content-type':'application/json'},body:JSON.stringify(body)}));
+ const get=path=>handle(new Request(config.origin+path,{headers:{'Cf-Access-Jwt-Assertion':token}}));
+ if(!reserve)return {...f,get,post,now,signal,policy,env};
  const c=await post('/dossiers/claim',{eventId:signal.eventId,requestId:crypto.randomUUID()});
  assert.equal(c.status,200);
  const {reservation}=await c.json();
@@ -66,6 +68,33 @@ test('forged identity, alternate execution and ordinary ACK cannot finish the fi
  assert.equal((await f.post(route,f.payload)).status,503);
  assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_finite_reviews').get().n,0);
  assert.equal(f.sqlite.prepare('SELECT outcome FROM dossier_supervision_runs').get().outcome,null);
+});
+
+test('the finite receiver lists, claims and finishes only the policy-bound notice',async()=>{
+ const f=await setup({reserve:false}),other={...f.signal,eventId:'7'.repeat(64),projectRef:'8'.repeat(64)};
+ f.env.AFW_DOSSIER_PROJECT_REFS=JSON.stringify([f.signal.projectRef,other.projectRef]);
+ await recordDossierEvent(f.db,other,f.now-20);
+ const list=await f.get('/dossiers');assert.equal(list.status,200);
+ assert.deepEqual((await list.json()).signals.map(row=>row.eventId),[f.signal.eventId]);
+ const tried=await f.post('/dossiers/claim',{eventId:other.eventId,requestId:crypto.randomUUID()});
+ assert.equal(tried.status,409);
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_runs').get().n,0);
+ f.env.AFW_DOSSIER_FINITE_REVIEW_ENABLED='false';
+ const legacy=await f.post('/dossiers/claim',{eventId:other.eventId,requestId:crypto.randomUUID()});
+ assert.equal(legacy.status,200);
+ const {reservation}=await legacy.json();
+ f.env.AFW_DOSSIER_FINITE_REVIEW_ENABLED='true';
+ const finish=await f.post(route,{runId:reservation.runId,outcome:'reviewed'});
+ assert.equal(finish.status,409);
+ assert.equal(f.sqlite.prepare('SELECT outcome FROM dossier_supervision_runs WHERE run_id=?').get(reservation.runId).outcome,null);
+});
+
+test('an expired review window never falls through to ordinary claim or listing',async()=>{
+ const f=await setup({reserve:false});
+ f.env.AFW_DOSSIER_FINITE_REVIEW_POLICY=JSON.stringify({...f.policy,reviewBefore:f.now,readBefore:f.now+10000});
+ assert.equal((await f.get('/dossiers')).status,404);
+ assert.equal((await f.post('/dossiers/claim',{eventId:f.signal.eventId,requestId:crypto.randomUUID()})).status,404);
+ assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM dossier_supervision_runs').get().n,0);
 });
 
 import {finiteFinalizerFixture} from './fixtures/finite-finalizer.mjs';
