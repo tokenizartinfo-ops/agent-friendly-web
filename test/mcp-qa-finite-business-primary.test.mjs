@@ -25,7 +25,7 @@ function setup(t) {
  const binding={container_id:p.resources.containerId,program_hash:s.programHash,source_revision:s.sourceRevision};
  insert('site_projects',{id:s.projectId,user_id:s.subject,revision:s.expectedProjectRevision+1});
  insert('delegated_access_grants',{id:s.grantId,project_id:s.projectId,user_id:s.subject,client_id:s.clientId,resource:s.resource,revoked_at:'',expires_at:new Date(expiry).toISOString(),scopes_json:'["afw:project:read"]'});
- insert('dossier_monitoring_consent_events',{...scope,action:'grant',purpose:'afw.dossier-monitoring.v1',sequence:1,issued_at:p.T0+1,expires_at:expiry});
+ insert('dossier_monitoring_consent_events',{...scope,action:'grant',purpose:'afw.dossier-monitoring.v1',request_id:'original',revision:1,sequence:1,issued_at:p.T0+1,expires_at:expiry});
  insert('dossier_node_process_admissions',{...scope,...binding,image,process_generation:generation,created_at:p.T0+3,expires_at:expiry,consent_sequence:1,consent_issued_at:p.T0+1,consent_expires_at:expiry});
  insert('dossier_successor_reservations',{slot:'afw.own-successor.v1',trial_id:p.trialId,predecessor_container_id:'f'.repeat(64),predecessor_generation:'old',predecessor_program_hash:'9'.repeat(64),predecessor_source_revision:'8'.repeat(40),application_id:p.resources.applicationId,...binding,scope_hash:manifestHash,start_at:s.startAt,expires_at:expiry,budget:1,closed_at:p.T0,stopped_at:p.T0,observed_at:p.T0,reserved_at:p.T0+2,state:'prepared'});
  insert('dossier_successor_launch_claims',{trial_id:p.trialId,scope_hash:manifestHash,container_id:binding.container_id,process_generation:generation,grant_id:s.grantId,claimed_at:p.T0+4});
