@@ -3,7 +3,7 @@ import {issueFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-issuer.mjs';
 import {readFile,writeFile,appendFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {validateQaFiniteConfirmationCommand,assertQaFiniteConfirmationAdmission} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
-import {createPrivateQaFiniteObserverHttp,createPrivateQaFiniteRestoreHttp,createPrivateQaFiniteGithub,readFiniteFinalizerGithubContext} from '../lib/mcp-qa-finite-http.mjs';
+import {issuePrivateQaFiniteLauncher,createPrivateQaFiniteObserverHttp,createPrivateQaFiniteRestoreHttp,createPrivateQaFiniteGithub,readFiniteFinalizerGithubContext} from '../lib/mcp-qa-finite-http.mjs';
 import {validateFiniteExternalPlan,validateFiniteObserverOutput} from '../lib/mcp-qa-finite-external-contract.mjs';
 import {createPrivateQaFiniteTrialFinalizer} from '../lib/mcp-qa-finite-trial-finalizer.mjs';
 import {resolvePrivateQaFiniteExternalSource} from '../lib/mcp-qa-finite-source.mjs';
@@ -13,11 +13,11 @@ const fail=()=>{throw Error('Finite finalizer unavailable');};
 export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile,write=writeFile,append=appendFile,fetchImpl=fetch,now=Date.now,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms))}={}){
  let signal=AbortSignal.timeout(480000),adoption;
  try{
-  if(!['admission','seed-material','admit','poll','restore'].includes(phase))fail();
+  if(!['admission','seed-material','admit','launch','poll','restore'].includes(phase))fail();
   const raw=await read(env.GITHUB_EVENT_PATH,'utf8');if(Buffer.byteLength(raw)>262144)fail();
   const event=JSON.parse(raw),context={repository:env.GITHUB_REPOSITORY,repositoryId:env.GITHUB_REPOSITORY_ID,ref:env.GITHUB_REF,eventName:env.GITHUB_EVENT_NAME,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,sourceRevision:env.GITHUB_SHA};
   const admission=validateQaFiniteConfirmationCommand({event,context,now});
-  assertQaFiniteConfirmationAdmission(admission,phase==='admission'||phase==='seed-material'||phase==='admit'?'nominal':'cleanup');
+  assertQaFiniteConfirmationAdmission(admission,phase==='admission'||phase==='seed-material'||phase==='admit'||phase==='launch'?'nominal':'cleanup');
   if(phase==='admit'){
    adoption=createFiniteAdoptionParent({T0:admission.createdAt,N1:admission.expiresAt,now,signal});
    signal=adoption.parent.signal;adoption.parent.check();
@@ -27,6 +27,13 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
    return await issueFiniteMaterialSeed({admission,githubToken:env.GITHUB_TOKEN,credential:env.AFW_QA_CLOSED_TOKEN,fetchImpl,now,signal});
   }
   // Bootstrap facts identify only the original QA publication and custody.
+  if(phase==='launch'){
+   const raw=await read('afw-finite-plan.json');
+   if(Buffer.byteLength(raw)>65536)fail();
+   const plan=validateFiniteExternalPlan(JSON.parse(raw));
+   const result=await issuePrivateQaFiniteLauncher({plan,admission,runtime:env,credential:env.AFW_QA_CLOSED_TOKEN,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
+   return result.status==='uncertain'?{status:'launcher_uncertain',operationalReadiness:false}:result;
+  }
   const source=await resolvePrivateQaFiniteExternalSource({admission,phase,sourceRevision:admission.sourceRevision,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
   if(phase==='admit')adoption.parent.check();
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
@@ -74,5 +81,5 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  const result=await runFiniteFinalizerCli({phase:process.argv[2]});
- if(!['admitted','seed_material_created','ready','observer_complete','restored_observed','closed_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
+ if(!['admitted','seed_material_created','ready','observer_complete','launcher_created','launcher_uncertain','restored_observed','closed_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
 }

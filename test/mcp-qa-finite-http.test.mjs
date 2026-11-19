@@ -104,6 +104,7 @@ import custodyRecord from '../scripts/mcp-qa-finite-custody-receipt.json' with {
 import {finiteHash as hash} from '../lib/mcp-finite-evidence.mjs';
 import {finiteFinalizerFixture} from './fixtures/finite-finalizer.mjs';
 import * as transport from '../lib/mcp-qa-finite-http.mjs';
+import {validateQaFiniteConfirmationCommand} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 
 async function fixedLauncherFixture({lost=false}={}){
  const deadline=Date.parse(custodyRecord.expiresAt),sample=await finiteFinalizerFixture({authenticatedIntent:true,at:deadline-1200000});
@@ -136,11 +137,15 @@ async function fixedLauncherFixture({lost=false}={}){
   assert.equal(u.pathname,base+'/workflows/afw-own-qa-private-bootstrap/instances');assert.equal(init.method,'POST');
   assert.equal(x.refPosts,1);
   const body=JSON.parse(init.body);
-  assert.deepEqual(body,{instance_id:plan.workflows.launcher,params:{operation:'finite_nominal_launcher',intentId:v.intentId,sourceRevision:v.sourceRevision}});
+  assert.deepEqual(body,{instance_id:plan.workflows.launcher,params:JSON.stringify({operation:'finite_nominal_launcher',intentId:v.intentId,sourceRevision:v.sourceRevision})});
   if(lost)throw Error('synthetic unavailable acknowledgement');
   return response({success:true,errors:[],result:{id:plan.workflows.launcher}});
  };
- return {x,cf,calls,event,options:{plan,runtime:event,admission:x.admission,credential:'SYNTHETIC-PROVIDER',githubToken:'SYNTHETIC-GITHUB',fetchImpl:get,now:f.f.now,signal:new AbortController().signal}};
+ const owner={id:290715446,login:'tokenizartinfo-ops',type:'User'};
+ const admission=validateQaFiniteConfirmationCommand({event:{action:'created',repository:{id:1347578006,full_name:plan.finalizer.repository},issue:{number:497},sender:owner,
+   comment:{id:Number(plan.commandId),body:'/afw-qa-finite-confirmation v1 '+v.sourceRevision,created_at:new Date(v.T0).toISOString(),author_association:'OWNER',user:owner}},
+  context:{repository:plan.finalizer.repository,repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:String(plan.finalizer.runId),runAttempt:'1',sourceRevision:v.sourceRevision},now:f.f.now});
+ return {x,cf,calls,event,options:{plan,runtime:event,admission,credential:'SYNTHETIC-PROVIDER',githubToken:'SYNTHETIC-GITHUB',fetchImpl:get,now:f.f.now,signal:new AbortController().signal}};
 }
 
 for(const lost of [false,true])test('original READY launches exactly the named Cloudflare Workflow, lost ACK='+lost,async()=>{
