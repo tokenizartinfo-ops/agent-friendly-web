@@ -1,0 +1,62 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T12:08:53Z",
+  "scope": "Isolated candidate source and cloud tests using synthetic send and provider adapters, plus read-only verification of dated Cloudflare custody.",
+  "source": {
+    "branch": "lab/afw-finite-alarm-handoff-20261118",
+    "verifiedHead": "0fe1938dc899ebc5a5386f849d8ae98478380492",
+    "closedHead": "9a6d71055e72ab27df5eb712cf7ec97e43459862",
+    "run": 44520851337,
+    "runAttempt": 1,
+    "qualifiedAtUTC": "2026-11-19T12:07:41Z",
+    "redRun": 44520114036,
+    "redExpectedFailures": 9,
+    "firstControllerRun": 44520495126,
+    "passed": 167,
+    "failed": 0,
+    "verificationArtifacts": 0
+  },
+  "independentQaRestoration": {
+    "fixedOriginalActor": true,
+    "nativeWorkflowReadsOriginalOwnerClosure": true,
+    "consumerChecksExactWorkflowIdentity": true,
+    "privateR2TargetBound": true,
+    "durableSendAcknowledgementRequired": true,
+    "exactOriginalProviderReadbackRequiredBeforeSend": true,
+    "independentReadbackAfterSend": true,
+    "sendsAtMostOnceUnderDurableOriginalFence": true,
+    "lostAckReturnsClosedObservedUncertainWithoutReplay": true,
+    "windowUsesOriginalRecoveryNotBusinessR1": true,
+    "sourceFixtureOnly": true,
+    "providerWriterMounted": false,
+    "actualRestorePerformed": false
+  },
+  "custody": {
+    "primaryCheckedAtUTC": "2026-11-19 12:07:36 UTC",
+    "status": "expired",
+    "expiresAtUTC": "2026-11-08T02:59:59Z",
+    "activeAlternativeQualified": false,
+    "performingRenewalAloneWouldUnblock": false
+  },
+  "release": {
+    "compiledStaging": true,
+    "completeBuildRejectedBeforeArtifact": true,
+    "completePackage": false,
+    "realTrialAuthorizedByCurrentCredentials": false,
+    "launchEffectsMounted": false,
+    "nativeGuardMounted": false,
+    "actualArtifactPassedToCompleteBuilder": false
+  },
+  "acceptance": {
+    "actualSameNoticeReceipt": false,
+    "actualCloudReview": false,
+    "actualNativeWithdrawal": false,
+    "actualPcOff": false,
+    "operationalReadiness": false
+  },
+  "noRuntimeMutationThisBlock": true,
+  "noLocalSourceExecution": true,
+  "ownerActionNeededNow": false,
+  "next": "Bind the restorer to the fixed Cloudflare Workflow output and primary provider readback using the independent GitHub job, with an append-only authoritative send record under the original recovery window. Complete the native launch and Guard adapters and connect the exact R2 bytes to the complete builder. Requalify scoped custody only for the eligible exact bundle, then run one live synthetic occurrence and verify same-notice delivery, review and native withdrawal."
+}
