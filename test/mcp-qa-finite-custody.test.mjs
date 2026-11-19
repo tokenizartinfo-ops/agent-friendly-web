@@ -14,3 +14,15 @@ for(const mode of ['id','inactive','expiry','notbefore','receipt','groups','hash
  await assert.rejects(verifyFiniteGhaCustody({custody,check:()=>{},now:()=>at,R1:at+480000,request:async()=>({value:{success:true,errors:[],messages:mode==='malformed-message'?[{code:10000,message:'ok',token:'private'}]:[],result}})}));
 });
 test('malformed envelope cannot leak provider extras',()=>{for(const value of [{success:true,errors:[],messages:null,result:{}},{success:true,errors:[],messages:[],result:{},token:'secret'}])assert.throws(()=>finiteCfEnvelope(value));});
+
+test('finite QA custody accepts the renewed protected identity and refuses the expired identity',async()=>{
+ const custody=finiteGhaCustody(),now=Date.parse("2026-11-19T21:09:24.181Z");
+ assert.equal(custody.id,"388f5d1678e6760a973bd319136112e0");
+ assert.equal(custody.expiresAt,Date.parse("2026-11-27T02:59:59Z"));
+ assert.equal(custody.policyHash,"0b2e8815e00c5e7c4379dc528cfbdefa8a611c15ae7d5cb39b0b64ce2594b9d2");
+ const request=result=>async()=>({value:{success:true,errors:[],messages:[],result}});
+ const setup={custody,check:()=>{},now:()=>now,R1:now+480000};
+ const active={id:custody.id,status:'active',expires_on:"2026-11-27T02:59:59Z"};
+ assert.equal((await verifyFiniteGhaCustody({...setup,request:request(active)})).scopeVerified,false);
+ await assert.rejects(verifyFiniteGhaCustody({...setup,request:request({...active,id:'9db7901af95faf07e6f7ef378045328e'})}));
+});
