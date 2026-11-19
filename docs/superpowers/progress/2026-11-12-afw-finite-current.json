@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "70edd3db1cc5c9ed5b8b7f5f1cf0767a76fce4f7",
-  "phase": "Original recovery atomically reserves and independently reads back the actual original slot before the scoped coupled D1 issuer and monitoring reduction. Native restoration and SDK closure remain pending.",
+  "previousCheckpoint": "ef428f526f4ebe5aa12876db2b554c39521aa6e5",
+  "phase": "The source-mounted original recovery claims a single fixed restore after scoped D1 closure and distinguishes an acknowledged original restore, a prior business restore, and an uncertain SEND. SDK and final QA closure remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Wire the original bounded restore after the scoped D1 reduction for the pending-original disposition. Claim its sole fixed original restore SEND/ACK under the same borrowed reservation, preserve unknown outcome on missing ACK, and never re-send for an independently verified prior restore. For both dispositions qualify the actual closed version, revoke only the original SDK grant, and retain a distinct truthful final owner receipt before QA restoration and full package qualification.",
+  "next": "Reuse the confirmation-bound owner SDK revoker under the same reservation and exact original grant. Accept only an original acknowledged restore with independent primary readback or the distinct prior-business restoration receipt. Persist a coupled terminal owner receipt before QA restoration. Cover acknowledgement loss, scoped denial and no replay with native tests, then qualify the complete package with current custody.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 170,
-  "updatedAtUTC": "2026-11-19T01:57:26Z",
+  "schemaVersion": 171,
+  "updatedAtUTC": "2026-11-19T11:18:26Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2378,6 +2378,15 @@
     "closed": "a90e04f5569b0cca286c4e6258704d6c2e777c88",
     "verifiedRun": 44440024227,
     "tests": 481,
+    "completePackage": false
+  },
+  "coupledOriginalRestore": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-coupled-original-restore-validation.json",
+    "evidence": "2d163deda460d7b24b91b50390f0cf16a42592b1",
+    "head": "e609235575ad6bd655201fef5bb3fb628ab0b3e8",
+    "closed": "581f791a26ed1cc48ea2856f401ad77bdd3c1f35",
+    "verifiedRun": 44512517834,
+    "tests": 486,
     "completePackage": false
   }
 }
