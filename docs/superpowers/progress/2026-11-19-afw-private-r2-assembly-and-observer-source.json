@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T21:06:06.955Z",
+  "previousCheckpoint": "c9627c74fb93ad504598761d6c4ae89865c6039e",
+  "privateDraft": {
+    "verified": true,
+    "sourceRevision": "9a9bca6b2fcaa23666f4083e598ab07ad355d1d1",
+    "tree": "6c9d233ba5100d583ec1f264108d553c54062ef1",
+    "draftSha256": "320e36d65e018a77bbebd04f77265030dbd4bf177c473a1bc66c6282045c98c3",
+    "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "moduleCount": 5,
+    "bytes": 2017905,
+    "files": {
+      "canaryClosed/index.mjs": {
+        "bytes": 1830202,
+        "sha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3"
+      },
+      "canaryLive/index.mjs": {
+        "bytes": 1673344,
+        "sha256": "fcdf9bd4a022d66108ff7a09e627bb561f5e753f8ac5cea73b3740789d123190"
+      },
+      "operatorClosed/index.mjs": {
+        "bytes": 1971922,
+        "sha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51"
+      },
+      "qaClosed/closed-rollback.mjs": {
+        "bytes": 395915,
+        "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
+      },
+      "qaLive/index.mjs": {
+        "bytes": 2545875,
+        "sha256": "0c4abdd8bdb799e16bcb00c11fdae3296dab8a613f2fb13c868585bcce74efc5"
+      }
+    },
+    "completePackage": false,
+    "operationalReadiness": false,
+    "atUTC": "2026-11-19T21:00:40.294Z",
+    "command": "build-finite-native-package.mjs --verify-r2-draft",
+    "fetchedExactObjectUsingTemporarySignedGet": true,
+    "environment": "isolated local checkout with existing dependencies and a temporary Python executable alias",
+    "emittedRawBundle": false,
+    "temporaryReadIssuersRetired": true
+  },
+  "observer": {
+    "nativePreviewUsesCompiledRevision": true,
+    "wrongRevisionDeniedBeforeActorRead": true,
+    "verificationUsesSyntheticNativeFixture": true,
+    "regressionRunBefore": 44614569659,
+    "passingRun": 44614839849,
+    "revision": "d54d9e8db2c7999f57c4384f85cdfcc1389fcd63",
+    "closedLabHead": "938dd6e20e9081868c99dde0304bd946bfdd6dd8",
+    "passedJS": 549,
+    "passedPython": 5,
+    "failed": 0
+  },
+  "qaCredential": {
+    "protectedEnvironmentReadRun": 44611677834,
+    "expiresAtUTC": "2026-11-27T02:59:59Z",
+    "packageSourceCustodyPinStillExpired": true,
+    "exactProtectedTokenIdentityMustBeReattested": true
+  },
+  "package": {
+    "eligibleReleaseEmitted": false,
+    "rollbackPhysicallyExercised": false,
+    "completeAssemblyQualified": false,
+    "blockers": [
+      "Complete builder and source qualification still have explicit fail-closed gates.",
+      "Native observer final-primary material and effect-eligibility producer are not mounted.",
+      "Compiled custody still pins the expired QA credential identity."
+    ]
+  },
+  "realCloudTrial": false,
+  "liveAssistantReview": false,
+  "liveWithdrawal": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}

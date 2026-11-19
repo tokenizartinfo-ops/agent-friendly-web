@@ -1,10 +1,10 @@
 {
-  "schema": 83,
-  "timestampUTC": "2026-11-19 20:53:09 UTC",
+  "schema": 84,
+  "timestampUTC": "2026-11-19 21:06:06 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "4279250d316d2563ec2106cb2ef0fb0c722b43a7",
-  "phase": "Replaced protected QA credential passed GitHub read-only closed verification. The three exact R2 backup modules and metadata checked out. The canary staging profile requires both prelaunch secret bindings. The release package, signed challenge and real trial are pending.",
+  "previousCheckpoint": "c9627c74fb93ad504598761d6c4ae89865c6039e",
+  "phase": "The compiler consumed the exact private signed R2 archive and verified the five-module draft. The finite QA Workflow now uses its compiled source revision for the original observer preview. Native final-primary, refreshed custody identity and the eligible release remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify the full candidate and its receiver in closed QA against the exact R2 archive and recovery pins. Open a single finite trial only after the eligible package and rollback are both qualified.",
+  "next": "Qualify refreshed protected custody identity and mount the real, bounded observer final-primary producer before assembling a deployable release.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 182,
-  "updatedAtUTC": "2026-11-19T20:53:09.998Z",
+  "schemaVersion": 183,
+  "updatedAtUTC": "2026-11-19T21:06:06.955Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2668,6 +2668,18 @@
     "closedSource": "9a9bca6b2fcaa23666f4083e598ab07ad355d1d1",
     "run": 44612754343,
     "passed": 553,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "privateR2AssemblyAndObserverSource": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-private-r2-assembly-and-observer-source.json",
+    "draftRevision": "9a9bca6b2fcaa23666f4083e598ab07ad355d1d1",
+    "moduleCount": 5,
+    "draftSha256": "320e36d65e018a77bbebd04f77265030dbd4bf177c473a1bc66c6282045c98c3",
+    "verifiedSource": "d54d9e8db2c7999f57c4384f85cdfcc1389fcd63",
+    "closedSource": "938dd6e20e9081868c99dde0304bd946bfdd6dd8",
+    "run": 44614839849,
+    "tests": 554,
     "completePackage": false,
     "realCloudTrial": false
   }
