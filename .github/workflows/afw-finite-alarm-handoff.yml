@@ -1,9 +1,28 @@
-name: AFW coupled nominal launch verification closed
-on: workflow_dispatch
-permissions: {}
+name: AFW native guard and retained control validation
+on:
+  push:
+    branches: [lab/afw-finite-alarm-handoff-20261118]
+permissions:
+  contents: read
 jobs:
-  closed:
-    if: ${{ false }}
+  verify:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-NATIVE-GUARD-RETAINED-CONTROL-20261119' }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 7
     steps:
-      - run: exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify original closure, provider transport and compatibility
+        run: node --test --test-concurrency=2 --test-timeout=60000 test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-coupled-github.test.mjs test/mcp-qa-finite-coupled-restorer.test.mjs test/mcp-restoration-configuration.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-http.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-observer.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/build-finite-native-package.test.mjs
+      - run: python3 -m unittest discover -s test -p finite_historical_archive_test.py
+      - name: Verify staging and rejection of a premature complete package
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
+          if node scripts/build-finite-native-package.mjs "$GITHUB_SHA"; then exit 1; fi
+          test ! -e output/finite-native-package
+          echo "Complete package remains gated"

@@ -50,11 +50,11 @@ export class LaunchFixture extends DurableObject{
   if(mode==='provider-nominal')f.providerNominal='running';
   if(mode==='provider-expired')f.onRequest=async()=>{f.setNow(f.now()+5000);};
   if(mode==='snapshot-change')f.onRequest=async()=>{await this.ctx.storage.put('afw.qa-finite-child-create.v1:'+f.plan.intentId+':send',{purpose:'uncertain'});};
-  if(['prelaunch','issued','ack','send-race','prepared-tamper','alarm-tamper','cleanup-started','reconstruct-pending'].includes(mode)){
+  if(['prelaunch','issued','ack','send-race','prepared-tamper','alarm-tamper','cleanup-started','reconstruct-pending','cleanup-retained-prepared','cleanup-backdated-guard'].includes(mode)){
    f.launcher=true;const admission=f.primary.admission;
    f.primary.admission=async()=>{const r=await i.observeBeforeCreation();if(r.kind!=='never_issued')throw Error('inventory unavailable');return admission();};
    if(mode==='reconstruct-pending')f.primary.finalizer=async()=>{throw Error('lost finalizer');};
-   const control=createPrivateQaFiniteTrialControl({storage:this.ctx.storage,nativePin,plan:JSON.stringify(f.plan),readPrimary:f.primary,now:parent.check,timeoutMs:5000});
+   const control=createPrivateQaFiniteTrialControl({storage:this.ctx.storage,nativePin,plan:JSON.stringify(f.plan),readPrimary:f.primary,now:f.now,timeoutMs:5000});
    const armed=await control.prepare();
    if(mode==='reconstruct-pending'){
     const p2=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000}),c2=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:p2});
@@ -62,7 +62,7 @@ export class LaunchFixture extends DurableObject{
    }
    if(armed.status!=='armed')throw Error('fixture native prepare '+armed.status);
    const state=await snapshot(),effects=Object.fromEntries(['withdraw','close','seal','canary_restore'].map(k=>[k,{execute:async()=>{throw Error('unused effect');},reconcile:async()=>null}]));
-   const guard=createPrivateQaFiniteTrialGuard({ctx:this.ctx,env:this.env,control,capabilities:{identity:state.control,readPrimary:f.primary.admission,...effects,proof:{read:async()=>{throw Error('unused proof');}}},now:parent.check});
+   const guard=createPrivateQaFiniteTrialGuard({ctx:this.ctx,env:this.env,control,capabilities:{identity:state.control,readPrimary:admission,...effects,proof:{read:async()=>{throw Error('unused proof');}}},now:f.now});
    const guarded=await guard.arm();if(guarded.status!=='armed')throw Error('fixture native guard '+guarded.status);
    const claimed=await control.claimEffect('nominal');if(claimed.status!=='issued')throw Error('fixture native claim '+claimed.status);
    const after=await snapshot(),p=f.plan;
@@ -70,6 +70,21 @@ export class LaunchFixture extends DurableObject{
    const prepared={purpose:'afw.qa-finite-launch-prepared.v1',...identity,guardStateHash:finiteHash(after.guard),preparedAt:f.now(),...p.launchPolicy};
    const prefix='afw.qa-finite-child-create.v1:'+p.intentId+':';
    await this.ctx.storage.transaction(async tx=>{await tx.put(prefix+'prepared',prepared);});
+   if(mode==='cleanup-retained-prepared'||mode==='cleanup-backdated-guard'){
+    const guardKey='afw.qa-finite-guard.v1:'+p.intentId+':state';
+    if(mode==='cleanup-retained-prepared'){
+     f.setNow(p.C0);
+     await guard.alarm();
+    }else{
+     await this.ctx.storage.put(guardKey,{...after.guard,deliveries:1,state:'processing',nextAt:p.C0+60000});
+    }
+    const observed=await this.ctx.storage.get(guardKey);
+    const readParent=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000});
+    try{
+     const retained=await readPrivateQaFiniteControlSnapshot({storage:this.ctx.storage,nativePin,plan:JSON.stringify(f.plan),parent:readParent});
+     return {observed,retained,originalHash:prepared.guardStateHash};
+    }catch{return {observed,retained:null};}
+   }
    if(mode==='cleanup-started')await control.claimEffect('close');
    if(mode==='alarm-tamper')await this.ctx.storage.setAlarm(p.C0+1);
    if(mode==='prepared-tamper')await this.ctx.storage.put(prefix+'prepared',{...prepared,nominalClaimHash:'0'.repeat(64)});
@@ -220,6 +235,19 @@ test('prelaunch checks the actual sole C0 alarm as well as guard metadata',async
 
 test('orphan guard without a finite HEAD is not an unspent launch',async()=>{assert.equal((await native('orphan-guard')).result.kind,'unavailable');});
 test('actual cleanup permission claim prevents a new prelaunch observation',async()=>{assert.equal((await native('cleanup-started')).result.kind,'unavailable');});
+
+test('native cleanup progression keeps the exact preparation receipt independently readable',async()=>{
+ const r=await native('cleanup-retained-prepared');
+ assert.equal(r.observed.deliveries,1);
+ assert.equal(r.observed.state,'processing');
+ assert.ok(r.retained,'cleanup must not invalidate the immutable preparation receipt');
+ assert.equal(r.retained.guard.deliveries,1);
+ assert.equal(r.retained.prepared.guardStateHash,r.originalHash);
+ assert.equal(r.retained.cleanupStarted,true);
+});
+test('a guard claimed to have run before its first cleanup deadline cannot preserve preparation authority',async()=>{
+ const r=await native('cleanup-backdated-guard');assert.equal(r.observed.deliveries,1);assert.equal(r.retained,null);
+});
 
 test('one parent retains narrower absolute ends and rejects reversal, expiry and reuse',()=>{
  let at=1000;const p=inventoryApi.createPrivateQaFiniteLaunchParent({now:()=>at,deadline:1100});
