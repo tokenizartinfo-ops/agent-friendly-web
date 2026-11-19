@@ -1,30 +1,41 @@
-name: AFW owner context reference comparison
+name: AFW original recovery qualification
 on:
   push:
     branches: [lab/afw-finite-alarm-handoff-20261118]
 permissions:
   contents: read
 jobs:
-  compare:
+  verify:
     if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.run_attempt == '1' && github.event.head_commit.message == 'AFW-FINITE-NATIVE-ALARM-HANDOFF-VERIFY-20261118' }}
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - label: reference
-            revision: '0c7bc887cf5dd2e880a868655ba2dd3cca92b916'
-          - label: candidate
-            revision: '64e3f6910ab6d0f2a2dc73c72fd268512d917dd1'
+        suite: [core, owner-context-a, owner-context-b, initial-cleanup]
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          ref: ${{ matrix.revision }}
+          ref: ${{ github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Check the scoped original issuer
-        run: node --test --test-timeout=90000 --test-name-pattern="absent original issuer never triggers" test/mcp-qa-finite-owner-phase-context-native.test.mjs
+      - name: Verify native closure and protected recovery
+        if: matrix.suite == 'core'
+        run: node --test --test-concurrency=2 --test-timeout=75000 test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-alarm-handoff.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-canary-restorer.test.mjs test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-owner-cleanup.test.mjs test/build-finite-native-package.test.mjs
+      - name: Verify original owner context A through M
+        if: matrix.suite == 'owner-context-a'
+        run: node --test --test-timeout=360000 --test-name-pattern="^[A-Ma-m]" test/mcp-qa-finite-owner-phase-context-native.test.mjs
+      - name: Verify the rest of the original owner context
+        if: matrix.suite == 'owner-context-b'
+        run: node --test --test-timeout=360000 --test-name-pattern="^(?![A-Ma-m])" test/mcp-qa-finite-owner-phase-context-native.test.mjs
+      - name: Verify original cleanup regressions
+        if: matrix.suite == 'initial-cleanup'
+        run: node --test --test-timeout=240000 test/mcp-qa-finite-initial-cleanup-native.test.mjs
+      - name: Verify staging remains non-publishable
+        if: matrix.suite == 'core' && github.event.head_commit.message == 'AFW-FINITE-NATIVE-ALARM-HANDOFF-VERIFY-20261118'
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "$GITHUB_SHA"
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; const x=JSON.parse(readFileSync("output/finite-native-staging/staging.json")); if(x.sourceRevision!==process.env.GITHUB_SHA||x.completePackage!==false||x.operationalReadiness!==false)process.exit(1); console.log(JSON.stringify({revision:x.sourceRevision,completePackage:x.completePackage,operationalReadiness:x.operationalReadiness}));'
