@@ -1,3 +1,4 @@
+import {sealFiniteInitialCleanupRecord as seal,encodeFiniteInitialCleanupRecord as encode,decodeFiniteInitialCleanupRecord as decode} from '../lib/mcp-qa-finite-initial-cleanup-records.mjs';
 import {finiteCleanupPolicyHash} from '../lib/mcp-finite-cleanup-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -87,4 +88,23 @@ test('an expired original alarm keeps the obligation for administration without 
  assert.equal(result.kind,'original_expired');
  assert.equal(f.alarm,null);
  assert.deepEqual([...f.rows.keys()],keys);
+});
+
+test('the original recovery accepts only a due reservation descended from the sealed initial state',async()=>{
+ const {f,handoff,control}=await prepared();
+ assert.equal((await control.prepare()).status,'armed');
+ const key='afw.finite-initial-cleanup.v1:state',zero=decode('State',f.rows.get(key));
+ const one=seal('State',{planHash:zero.planHash,deliveries:1,status:'processing',nextAt:handoff.initialC0+60000,previousHash:zero.recordHash});
+ f.rows.set(key,encode('State',one));
+ await f.storage.transaction(tx=>tx.setAlarm(null));
+ const observe=()=>protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
+ f.setNow(handoff.initialC0-1);
+ await assert.rejects(observe);
+ f.setNow(handoff.initialC0+60001);
+ assert.equal((await observe()).kind,'original_due');
+ const {recordHash,...state}=one;
+ const foreign=seal('State',{...state,previousHash:'0'.repeat(64)});
+ f.rows.set(key,encode('State',foreign));
+ await assert.rejects(observe);
+ assert.equal(f.alarm,null);
 });
