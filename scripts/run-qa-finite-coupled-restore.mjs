@@ -1,9 +1,13 @@
-import {readFile} from 'node:fs/promises';
+import {readFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {finiteFields as fields,finiteHex as hex,finiteTime as time} from '../lib/mcp-finite-evidence.mjs';
+import {finiteFields as fields,finiteHex as hex,finiteTime as time,finiteHash as hash} from '../lib/mcp-finite-evidence.mjs';
 import {isQaGithubBearerTransportValue} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 import {readFiniteMaterialSeedForCoupledRestore} from '../lib/mcp-qa-finite-seed-http.mjs';
 import {assertFiniteR2ArchiveCredential} from '../lib/mcp-qa-finite-r2-object.mjs';
+import {finiteUuid} from '../lib/mcp-qa-finite-external-contract.mjs';
+import {validateFiniteCoupledNoticeEvidence} from '../lib/mcp-finite-notice-closure.mjs';
+import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 import {finiteGhaCustody} from '../lib/mcp-qa-finite-custody.mjs';
 import {createPrivateQaFiniteCoupledGitHub,createPrivateQaFiniteCoupledRestoreHttp} from '../lib/mcp-qa-finite-http.mjs';
 
@@ -46,7 +50,46 @@ export async function runFiniteCoupledRestoreJob({runtime=process.env,read=readF
  }catch{return pending();}
  finally{ctl.abort();}
 }
+
+/** Trial acceptance runs after protective restoration, with no provider writes. */
+export function verifyFiniteCoupledQaTrialResult(result,scope){
+ try{
+  const {controlHash,restoreFrom}=fields(scope,['controlHash','restoreFrom']);
+  const r=fields(result,['purpose','status','ownerReceiptHash','qaVersionId','qaDeploymentId',
+   'noticeEvidence','authorizesEffects','operationalReadiness','mayRetry']);
+  if(r.purpose!=='afw.finite-coupled-qa-restoration-result.v1'||r.status!=='restored_observed'||
+     !hex(r.ownerReceiptHash)||r.qaVersionId!==QA_CLOUD_CLOSED_PINS.qaClosed.id||!finiteUuid(r.qaDeploymentId)||
+     r.authorizesEffects!==false||r.operationalReadiness!==false||r.mayRetry!==false)fail();
+  const evidence=validateFiniteCoupledNoticeEvidence(r.noticeEvidence,{controlHash,originalRestoreFrom:restoreFrom});
+  return Object.freeze({purpose:'afw.finite-coupled-qa-trial-verification.v1',qaRestored:true,
+   sameNoticeReviewed:true,subscriptionWithdrawn:true,evidenceHash:hash(evidence),operationalReadiness:false});
+ }catch{throw Error('Finite QA trial verification unavailable');}
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
- const result=await runFiniteCoupledRestoreJob();process.stdout.write(JSON.stringify(result)+'\n');
- if(!['restored_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
+ const mode=process.argv[2],resultPath=process.env.RUNNER_TEMP&&join(process.env.RUNNER_TEMP,'afw-coupled-qa-result.json');
+ if(mode==='--verify-result'){
+  try{
+   if(!resultPath||process.argv.length!==3)fail();
+   const [raw,event]=await Promise.all([readFile(resultPath),readFile(process.env.GITHUB_EVENT_PATH)]);
+   if(raw.length>65536||event.length>262144)fail();
+   const {control_hash,restore_before}=fields(JSON.parse(event.toString()).inputs,
+    ['intent_id','control_hash','handoff_hash','restore_before']);
+   if(typeof restore_before!=='string'||!/^\d{13}$/.test(restore_before))fail();
+   const evidence=verifyFiniteCoupledQaTrialResult(JSON.parse(raw.toString()),
+    {controlHash:control_hash,restoreFrom:Number(restore_before)-180000});
+   process.stdout.write(JSON.stringify(evidence)+'\n');
+  }catch{
+   process.stderr.write('Finite QA trial verification unavailable\n');
+   process.exitCode=1;
+  }
+ }else{
+  const result=await runFiniteCoupledRestoreJob(),output=JSON.stringify(result)+'\n';
+  if(mode==='--record-result'){
+   if(!resultPath||process.argv.length!==3)fail();
+   await writeFile(resultPath,output,{flag:'wx',mode:0o600});
+  }else if(mode!==undefined)fail();
+  process.stdout.write(output);
+  if(!['restored_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
+ }
 }

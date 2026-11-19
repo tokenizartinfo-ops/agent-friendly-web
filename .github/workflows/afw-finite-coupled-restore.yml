@@ -54,4 +54,6 @@ jobs:
         shell: bash
         run: |
           export AFW_COUPLED_RESTORE_ORIGINAL_PID=$$
-          exec node scripts/run-qa-finite-coupled-restore.mjs
+          exec node scripts/run-qa-finite-coupled-restore.mjs --record-result
+      - name: Verify the reviewed notice and native withdrawal
+        run: node scripts/run-qa-finite-coupled-restore.mjs --verify-result
