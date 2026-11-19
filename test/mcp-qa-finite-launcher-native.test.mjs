@@ -41,7 +41,9 @@ async function native(mode){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:code,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{...flags,AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}},d1Databases:{RELEASE_DB:'launcher-db'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Native',useSQLite:true,uniqueKey:'launcher-do'},AFW_RELEASE_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'launcher-node'}},workflows:{FLOW:{name:'afw-own-qa-private-bootstrap',className:'Launcher'},AFW_QA_NAMED_CONFIRMATION:{name:'afw-own-qa-private-confirmation',className:'PrivateQaNamedConfirmation'}}}));
  try{
   const call=async x=>{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify(x)});assert.equal(r.status,200,await r.clone().text());return r.json();};
-  const seed=await call({action:'seed',mode}),env=await mf.getBindings(),wf=await env.FLOW.create({id:seed.id,params:seed.payload});
+  const seed=await call({action:'seed',mode}),env=await mf.getBindings();
+  const params=mode==='rest-params'?JSON.stringify(seed.payload):mode==='rest-params-extra'?JSON.stringify({...seed.payload,extra:true}):seed.payload;
+  const wf=await env.FLOW.create({id:seed.id,params});
   let r;const end=Date.now()+15000;do{r=await wf.status();if(['complete','errored'].includes(r.status))break;await new Promise(resolve=>setTimeout(resolve,25));}while(Date.now()<end);
   return {status:r,report:await call({action:'report'}),seed};
  }finally{await mf.dispose();}
@@ -62,3 +64,16 @@ test('recorded native successful outputs replay without prepare or native create
 test('lost native create RPC acknowledgement terminalizes without retry',async()=>{const r=await native('lost-create-response');assert.equal(r.status.output.status,'admin_pending');assert.equal(r.report.prepare,1);assert.equal(r.report.create,1);});
 
 test('cached successful prepare resumes at original150s and performs only first create',async()=>{const r=await native('replay-prepare');assert.equal(r.status.output.status,'acknowledged',JSON.stringify(r.report));assert.equal(r.report.prepare,1);assert.equal(r.report.read,1);assert.equal(r.report.create,1);});
+
+test('the actual finite Bootstrap accepts the fixed REST launcher JSON string',async()=>{
+ const r=await native('rest-params');
+ assert.equal(r.report.prepare,1,'the REST payload must reach the native launcher');
+ assert.equal(r.report.read,1);
+ assert.equal(r.report.create,1);
+ assert.equal(r.status.output?.status,'acknowledged');
+});
+test('a REST launcher JSON string with an extra field cannot prepare or create',async()=>{
+ const r=await native('rest-params-extra');
+ assert.equal(r.report.prepare,0);
+ assert.equal(r.report.create,0);
+});
