@@ -382,3 +382,23 @@ for(const lost of [false,true])test('the original QA alarm publishes its fixed r
  assert.equal(input.params.intentId,closure.intentId);
  assert.equal((await publish(scoped)).status,'recorded');assert.equal(creates,1);
 });
+
+test('coupled terminal binds the final primary read to the same completion and process proof',async()=>{
+ const x=await terminalFixture('prior'),{f,request,closure}=x;
+ const completion=f.rows.get('afw.qa-finite-cleanup.v1:'+closure.intentId+':completion');
+ completion.proofHash='d'.repeat(64);
+ const input={...x.input,businessPrimary:{
+  purpose:terminalClose.FINITE_COUPLED_BUSINESS_PRIMARY,controlHash:closure.controlHash,
+  completionHash:completion.receiptHash,proofHash:completion.proofHash,primaryHash:'e'.repeat(64),observedAt:x.now+29,
+ }};
+ const seal=terminalClose.sealFiniteCoupledTerminalReceipt,retain=terminalClose.retainFiniteCoupledTerminalReceipt;
+ const put=receipt=>retain({storage:f.storage,authority:request.authority,receipt});
+ await assert.rejects(()=>put(seal({...input,businessPrimary:{...input.businessPrimary,completionHash:'f'.repeat(64)}})));
+ await assert.rejects(()=>put(seal({...input,businessPrimary:{...input.businessPrimary,proofHash:'f'.repeat(64)}})));
+ const receipt=seal(input);
+ assert.deepEqual(await put(receipt),receipt);
+ const closed=await protectPrivateQaFiniteBusinessAlarm({storage:f.storage,actorId:f.ctx.id.toString(),
+  qaVersionId:f.env.AFW_QA_VERSION.id,now:f.now});
+ assert.equal(closed.kind,'original_closed');
+ assert.equal(f.alarm,null);
+});

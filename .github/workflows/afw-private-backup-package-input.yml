@@ -20,5 +20,5 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify exact private backup and compiler draft
         env:
-          AFW_R2_BACKUPS_READ_TOKEN: ${{ secrets.AFW_R2_BACKUPS_READ_TOKEN }}
+          AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
         run: node scripts/build-finite-native-package.mjs --verify-r2-draft "$GITHUB_SHA"
