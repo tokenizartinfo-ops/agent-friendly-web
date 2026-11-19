@@ -1,10 +1,10 @@
 {
-  "schema": 71,
-  "timestampUTC": "2026-11-19 17:18:07 UTC",
+  "schema": 72,
+  "timestampUTC": "2026-11-19 17:28:13 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "1621fc91000cc7aaf432a71f59ac792856b0ee88",
-  "phase": "QA reuses the original verified READY receipt for launch authorization and refuses nominal dispatch before writing an intent when either the source operation producer or the native QA guard is absent. The exact preserved R2 object was independently read and hashed again.",
+  "previousCheckpoint": "158b97eb1400dc8fb947e2310c0686514b248868",
+  "phase": "The canary's native closure-proof route now binds the exact retained QA cleanup and reads a fixed provider inventory through QA. Tested linked no-admission proof and challenge refusal. Real guard assembly, live receiver and credentialed package remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Mount qualified native launch/guard/proof adapters and align receiver policy, then validate the complete package and restoration from current protected credentials before the real one-notice trial.",
+  "next": "Mount the QA guard with actual restart-safe admission/nominal/effect and closure readers. Validate the complete private package and restoration before the same-notice cloud trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2555,6 +2555,15 @@
     "run": 44574936527,
     "tests": 345,
     "r2ArchiveReadback": true,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeCoupledClosureProof": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-coupled-closure-proof.json",
+    "source": "79751b7ff45990be3a13f9973498a677be0ad14a",
+    "closed": "f35f4bdecf19340857fd80bafaac87a6d0eb13e6",
+    "run": 44577119225,
+    "tests": 348,
     "completePackage": false,
     "realCloudTrial": false
   }

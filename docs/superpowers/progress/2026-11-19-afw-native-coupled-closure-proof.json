@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "timestampUTC": "2026-11-19 17:28:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-finite-alarm-handoff-20261118",
+  "source": "79751b7ff45990be3a13f9973498a677be0ad14a",
+  "closed": "f35f4bdecf19340857fd80bafaac87a6d0eb13e6",
+  "proofRoute": {
+    "nativeCanaryEntrypointMountedInSource": true,
+    "requiresOriginalQaPlan": true,
+    "requiresCompletedWithdrawCloseAndSeal": true,
+    "onlyExistingOneTimeChallengeMayCapture": true,
+    "providerFixedReadViaQa": true,
+    "canaryProviderCredentialAdded": false,
+    "retiredCustodyReaderReused": true
+  },
+  "verification": {
+    "run": 44577119225,
+    "job": 135747486313,
+    "nodePassed": 343,
+    "pythonPassed": 5,
+    "negativeRun": 44576277009,
+    "linkedNoAdmissionProofExercised": true,
+    "realRetirementAndReviewNotExercised": true,
+    "prematureCompletePackageRejected": true
+  },
+  "custody": {
+    "qaCredentialLastProviderState": "expired",
+    "qaGitHubCredentialLastUpdatedAt": "2026-10-31T15:54:32Z",
+    "lastVerifiedArchive": {
+      "verified": true,
+      "sha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "bytes": 4209422,
+      "readbackConfirmedAtUTC": "2026-11-19 17:16:53 UTC"
+    },
+    "protectedR2ReadUrlPresent": false,
+    "packageReadR2": false
+  },
+  "remaining": [
+    "Integrate qualified native admission/nominal/effect material and mount the restart-safe QA guard.",
+    "Enable the exact receiver policy and confirm the complete package and restoration using current private custody.",
+    "Observe a single real cloud occurrence with linked receipt, useful assistant review, native subscription withdrawal and independent restoration readback."
+  ],
+  "noRuntimeMutationThisBlock": true,
+  "completePackage": false,
+  "realCloudTrial": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
