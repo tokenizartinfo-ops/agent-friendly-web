@@ -11,7 +11,7 @@ const stores=await import('../lib/mcp-qa-finite-cleanup-store.mjs').catch(()=>({
 test('finite guard and fixed native alarm adapter are available',()=>{
  for(const k of ['createPrivateQaFiniteTrialGuard','runPrivateQaFiniteTrialAlarm'])assert.equal(typeof api[k],'function');
 });
-async function setup({missing,pending=false,ownNamespace,coupled=false}={}){
+async function setup({missing,pending=false,ownNamespace,coupled=false,withNotice=false}={}){
  const f=finiteFixture(),base=f.storage.transaction;f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
  if(ownNamespace)f.env.AFW_RELEASE_EVENTS_NODE=ownNamespace(f.plan);
  let store,armed;
@@ -23,7 +23,8 @@ async function setup({missing,pending=false,ownNamespace,coupled=false}={}){
  const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash});store=stores.createPrivateQaFiniteCleanupStore({storage:f.storage,control:proof.control,now:f.now});
  const calls=[],receipts=new Map();
  const withdrawal={purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false};
- const values={withdraw:withdrawal,close:{closed:true,runtimeStopRequested:true},seal:{sealHash:proof.proof.sealHash,sealedAt:f.plan.C0}};
+ const notice=withNotice?{purpose:'afw.finite-native-subscription-closure.v1',subscriptionHash:'2'.repeat(64),eventId:'3'.repeat(64),httpReceipt:{status:200,httpReceivedAt:f.plan.T0+10000},withdrawn:true,cloudReviewConfirmed:false}:undefined;
+ const values={withdraw:withdrawal,close:{closed:true,runtimeStopRequested:true,...(notice?{notice}:{})},seal:{sealHash:proof.proof.sealHash,sealedAt:f.plan.C0}};
  const capabilities={identity:proof.control,readPrimary:f.primary.admission,proof:{read:()=>store.capture(async challenge=>{const at=f.now(),support={...proof.support,primary:{...proof.support.primary,observedAt:at},providerBefore:{...proof.support.providerBefore,observedAt:at},providerAfter:{...proof.support.providerAfter,observedAt:at}};return {proof:{...proof.proof,proofChallenge:challenge,observedAt:at,primarySnapshotHash:finiteHash(support.primary),providerAbsenceHash:finiteHash([support.providerBefore,support.providerAfter]),evidenceHash:finiteHash({proofChallenge:challenge,sealHash:proof.proof.sealHash,support})},support};})}};
  for(const kind of ['withdraw','close','seal','canary_restore'])capabilities[kind]={
   execute:async({claim,proofHash})=>{
@@ -38,7 +39,7 @@ async function setup({missing,pending=false,ownNamespace,coupled=false}={}){
  };
  
  const options=()=>({ctx:f.ctx,env:f.env,control,capabilities,now:f.now});
- return {f,store,calls,capabilities,handoff,options,reconstruct:()=>{control=controls.createPrivateQaFiniteTrialControl(f.options(controls));},control};
+ return {f,store,calls,capabilities,handoff,notice,options,reconstruct:()=>{control=controls.createPrivateQaFiniteTrialControl(f.options(controls));},control};
 }
 test('nominal death and reconstruction leave durable cleanup independent of live nominal grant',async()=>{
  const x=await setup(),guard=api.createPrivateQaFiniteTrialGuard(x.options());assert.equal((await guard.arm()).status,'armed');
@@ -46,6 +47,37 @@ test('nominal death and reconstruction leave durable cleanup independent of live
  const result=await api.createPrivateQaFiniteTrialGuard(x.options()).alarm();assert.equal(result.status,'complete');assert.deepEqual(x.calls,['withdraw','close','seal','canary_restore']);assert.equal(x.f.alarm,null);
  assert.equal((await x.store.completion()).status,'complete');
  x.f.setNow(x.f.plan.C1+1);assert.equal((await x.store.read()).status,'observed');
+});
+test('coupled cleanup retains the matching cloud review before the receipt service closes',async()=>{
+ const x=await setup({coupled:true,withNotice:true});
+ const c=x.capabilities.identity,notice=x.notice;
+ const review={purpose:'afw.finite-dossier-review.v1',eventId:notice.eventId,controlHash:c.controlHash,actorHash:'4'.repeat(64),executionHash:'5'.repeat(64),resultHash:'6'.repeat(64),runId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',revision:c.plan.selectors.expectedProjectRevision+1,receivedAt:c.plan.T0+9999,reviewedAt:c.plan.C0-1};
+ let reads=0;
+ x.f.env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER={async readReview(refs){
+  reads++;assert.deepEqual(refs,{eventId:notice.eventId,controlHash:c.controlHash});
+  assert.ok(x.f.now()<c.plan.R1);return review;
+ }};
+ const guard=api.createPrivateQaFiniteTrialGuard(x.options());await guard.arm();
+ x.f.setNow(c.plan.C0+3);
+ const outcome=await guard.alarm();
+ assert.equal(outcome.status,'complete');assert.equal(reads,1);
+ x.f.setNow(x.handoff.initialC0);
+ delete x.f.env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER;
+ const readback=await x.store.completion();
+ assert.deepEqual(readback.receipt.review,review);
+ assert.equal(readback.receipt.notice.withdrawn,true);
+ assert.equal(readback.receipt.notice.eventId,readback.receipt.review.eventId);
+ assert.equal(x.f.alarm,x.handoff.initialC0);
+});
+test('a receiver result for another notice cannot attest a review or obstruct independent cleanup',async()=>{
+ const x=await setup({coupled:true,withNotice:true}),c=x.capabilities.identity;
+ x.f.env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER={async readReview(){
+  return {purpose:'afw.finite-dossier-review.v1',eventId:'7'.repeat(64),controlHash:c.controlHash,actorHash:'4'.repeat(64),executionHash:'5'.repeat(64),resultHash:'6'.repeat(64),runId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',revision:c.plan.selectors.expectedProjectRevision+1,receivedAt:c.plan.T0+9999,reviewedAt:c.plan.C0-1};
+ }};
+ const guard=api.createPrivateQaFiniteTrialGuard(x.options());await guard.arm();x.f.setNow(c.plan.C0+3);
+ assert.equal((await guard.alarm()).status,'complete');
+ const closed=await x.store.completion();assert.equal(closed.receipt.review,undefined);
+ assert.equal(closed.receipt.notice.withdrawn,true);assert.equal(x.f.alarm,x.handoff.initialC0);
 });
 test('unknown issued effects reconcile read only across at most three deliveries',async()=>{
  const x=await setup({missing:'withdraw'});await api.createPrivateQaFiniteTrialGuard(x.options()).arm();
