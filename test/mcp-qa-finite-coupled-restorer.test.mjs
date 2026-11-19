@@ -16,6 +16,7 @@ function fixture(){
  const {id,configurationHash,module}=pins.qaClosed;
  const basis={purpose,status:'prepared',intentId:intent.intentId,controlHash:intent.controlHash,sourceRevision:intent.sourceRevision,handoffHash:intent.handoffHash,
   ownerReceiptHash:'5'.repeat(64),ownerClosedAt:at-1000,restoreBefore:intent.restoreBefore,liveQa:{versionId:live,deploymentId:active},closedQa:{versionId:id,configurationHash,module},
+  restoredCanary:{versionId:pins.canary.id,deploymentId:pins.canary.deploymentId},
   backup:{archiveSha256:locator.archiveSha256,archiveBytes:locator.archiveBytes,receiptSha256:locator.receiptSha256,qaClosed:locator.inputs.qaClosed},authorizesEffects:false,operationalReadiness:false};
  const preparation={...basis,preparationHash:hash(basis)};
  const refs={intentId:intent.intentId,controlHash:intent.controlHash,sourceRevision:intent.sourceRevision};
@@ -140,4 +141,21 @@ for(const fault of ['foreignInstance','wrongStep','unstableResult'])test(fault+'
  const {params,calls}=await httpFixture({[fault]:true});
  await assert.rejects(()=>http.createPrivateQaFiniteCoupledObservationHttp(params)());
  assert.ok(calls.every(x=>x.method==='GET'));
+});
+
+test('Cloudflare credential failure blocks R2 access, the external claim and any deployment',async()=>{
+ assert.equal(typeof http.createPrivateQaFiniteCoupledRestoreHttp,'function');
+ const {params,calls,f}=await httpFixture();
+ const observedFetch=params.fetchImpl,stamp=new Date(f.deps.now()).toISOString();
+ params.fetchImpl=async(url,init)=>{
+  if(!new URL(url).pathname.endsWith('/tokens/verify'))return observedFetch(url,init);
+  calls.push({method:init.method,path:'/tokens/verify'});return new Response(null,{status:401,headers:{date:stamp}});
+ };
+ const custody=(await import('../lib/mcp-qa-finite-custody.mjs')).finiteGhaCustody();
+ const runner=http.createPrivateQaFiniteCoupledRestoreHttp({...params,custody,archiveCredential:'SYNTHETIC-R2',
+  qaLive:{versionId:live,deploymentId:active,configurationHash:'b'.repeat(64),module:{name:'index.mjs',sha256:'a'.repeat(64),bytes:100}},
+  claimSend:async()=>{throw Error('must not claim');},readSend:async()=>{throw Error('must not look up');}});
+ assert.equal((await runner.run()).status,'admin_pending');
+ assert.ok(calls.some(call=>call.path==='/tokens/verify'));
+ assert.ok(calls.every(call=>call.method==='GET'));
 });
