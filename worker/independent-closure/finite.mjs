@@ -1,5 +1,6 @@
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
 import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
+import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
 import {privateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-origin.mjs';
 import {FINITE_OBSERVER_INSTALLATION_URL,FINITE_OBSERVER_OPERATION,runPrivateQaFiniteObserver} from '../../lib/mcp-qa-finite-observer.mjs';
@@ -22,7 +23,7 @@ import {runPrivateQaFiniteConfirmation} from '../../lib/mcp-qa-finite-confirmati
 installPrivateQaFiniteLaunchSource(privateQaFiniteLaunchSource);
 export {PrivateQaCatalog,PrivateQaPreregistration,observePrivateQa,default} from './index.mjs';
 export class PrivateQaBootstrap extends ClosedBootstrap{
- run(event,step){if(event?.payload?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step,requireSetupReceipt:true});if(event?.payload?.operation===FINITE_INITIAL_PREPARATION_OPERATION)return runPrivateQaFiniteInitialPreparation({env:this.env,event,step});if(event?.payload?.operation===FINITE_POLICY_SETUP_OPERATION)return runFinitePrivatePolicySetup({env:this.env,event,step});if(event?.payload?.operation===FINITE_LAUNCHER_OPERATION)return runPrivateQaFiniteLauncher({env:this.env,event,step});return super.run(event,step);}
+ run(event,step){if(event?.payload?.operation===FINITE_COUPLED_QA_OPERATION)return observePrivateQaCoupledRestorePreparation({env:this.env,event,step,sourceRevision:globalThis.__AFW_QA_SOURCE_REVISION__});if(event?.payload?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step,requireSetupReceipt:true});if(event?.payload?.operation===FINITE_INITIAL_PREPARATION_OPERATION)return runPrivateQaFiniteInitialPreparation({env:this.env,event,step});if(event?.payload?.operation===FINITE_POLICY_SETUP_OPERATION)return runFinitePrivatePolicySetup({env:this.env,event,step});if(event?.payload?.operation===FINITE_LAUNCHER_OPERATION)return runPrivateQaFiniteLauncher({env:this.env,event,step});return super.run(event,step);}
 }
 export class PrivateQaNamedConfirmation extends ClosedConfirmation{
  run(event,step){if(event?.payload&&Object.hasOwn(event.payload,'planHash'))return runPrivateQaFiniteConfirmation({env:this.env,event,step});return super.run(event,step);}
