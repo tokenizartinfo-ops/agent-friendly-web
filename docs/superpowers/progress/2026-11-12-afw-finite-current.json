@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-18 13:52:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "436ff714af497023a94821557495f8e10a07ce31",
-  "phase": "The source scopes OAuth revocation to the original SDK grant, requalifies the durable closure receipt before retiring the original alarm, and independently verifies private R2 archive integrity. The complete native package is gated before publication.",
+  "previousCheckpoint": "d0b22e7032cea5e126d18da4a6a63293d58358a5",
+  "phase": "The private QA actor prepares final restoration only after the original OAuth closure and alarm retirement, anchored to the actual closed QA backup. Provider versions and configuration match the three private R2 backups under their exact archive fingerprint. The scoped external restore and complete launch still cannot execute.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Connect and qualify the final QA restoration after the scoped owner receipt. Mount native material, Guard and launch operations, connect the held R2 archive to the complete builder and verify exact rollback and receiver. Launch one eligible cloud occurrence only after package and custody qualification.",
+  "next": "Connect the new exact original-owner preparation readback to an independent QA writer with a one-send fence and provider confirmation within the original recovery window. Wire the native launch and Guard factories and actual private R2 bytes into the complete builder. Then qualify new narrow custody before one live same-notice occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 172,
-  "updatedAtUTC": "2026-11-19T11:38:09Z",
+  "schemaVersion": 173,
+  "updatedAtUTC": "2026-11-19T11:55:01Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2397,6 +2397,17 @@
     "verifiedRun": 44515762922,
     "tests": 489,
     "privateR2CurrentHashMatched": true,
+    "completePackage": false,
+    "actualTrial": false
+  },
+  "coupledQaRestoration": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-coupled-qa-restoration-validation.json",
+    "evidence": "e21c93d62eebbdc42f0c6bce5a7035c983d5d220",
+    "head": "67ee485d34658a039a9583eeeedc1113ebf79832",
+    "closed": "2eefcc6f636316eb26147230b59795640b064a36",
+    "verifiedRun": 44518802447,
+    "tests": 199,
+    "archivedRolesQualified": 3,
     "completePackage": false,
     "actualTrial": false
   }
