@@ -1,0 +1,51 @@
+{
+  "project": "AFW",
+  "timestampUTC": "2026-11-19 14:40:14 UTC",
+  "verifiedSource": "e73a3d269f1b97a4dbd8b749e0be6191159f6605",
+  "closedLabRef": "ea6891ee6d7c0a3f335230c40fa6ddf15a209354",
+  "github": {
+    "workflowRun": 44545121988,
+    "job": 135633513045,
+    "artifact": 14541580092,
+    "nodeTests": 299,
+    "pythonTests": 5
+  },
+  "receiver": {
+    "observedAt": "2026-11-19T14:37:29.560Z",
+    "status": "verified_inactive",
+    "version": "bd0cf7d0-68d3-4506-911d-7cd7eb7563e3",
+    "activeVersion": "47e8e866-8656-4e6a-b922-3abe33d9c68d",
+    "activeDeployment": "57891230-01ab-4ae4-a38d-9465bcebe544",
+    "candidateOperationsOff": true,
+    "candidateDedicatedMode": true,
+    "privateRoutes": true,
+    "sha256": "b2c5973f35468268078c0066187b324604eed92206d7850bb5d214c14027b03d",
+    "trafficPercent": 0,
+    "databaseInspection": "Read-only schema of the dedicated private D1 binding. The dossier tables are installed. The shared Operations investigation and notice-reservation tables are absent. The isolated mode uses the dossier's atomically fenced reservation. Shared profiles retain the existing Operations budget checks.",
+    "trialPolicyInstalled": false
+  },
+  "qa": {
+    "lastReadAt": "2026-11-19T14:15:43.819Z",
+    "activeVersion": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+    "activeDeployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+    "receiverBindingInstalled": false,
+    "nativeProviderOperationsMounted": false,
+    "nativeGuardFactoriesMounted": false
+  },
+  "sameNotice": {
+    "cloudReviewAndWithdrawalCorrelationVerifiedInSource": true,
+    "missingOrForeignReviewNeverPreventsProtectiveRestore": true,
+    "liveDeliveryAndReviewObserved": false,
+    "liveWithdrawalObserved": false
+  },
+  "authority": {
+    "qaRunnerCredentialExpired": true,
+    "r2AssemblyReaderSecretPresent": false,
+    "originalPreparationAuthorityExpired": true
+  },
+  "completePackage": false,
+  "realCloudOccurrence": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "ownerActionNeededNow": false
+}

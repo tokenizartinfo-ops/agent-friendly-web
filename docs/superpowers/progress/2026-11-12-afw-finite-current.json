@@ -1,10 +1,10 @@
 {
-  "schema": 62,
-  "timestampUTC": "2026-11-19 14:00:49 UTC",
+  "schema": 63,
+  "timestampUTC": "2026-11-19 14:40:14 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "63a66c9eed25ad44a51ad354c545c647b373c9fd",
-  "phase": "Native Workflow wire compatibility and durable same-notice review/withdrawal correlation are verified in bounded source tests. The private historical R2 archive and its three closed module pins matched dated provider reads. The complete package and real trial remain pending.",
+  "previousCheckpoint": "f5abba36ad113acabdb5264f91e703db88747b95",
+  "phase": "Private QA receiver staged at 0% after fixing the isolated D1 schema dependency. Bounded source verification binds the exact notice review and withdrawal to QA restoration. Full assembly and live delivery, review and withdrawal remain pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify the fixed native launch primary producer and QA/canary guard factories. Route launch through the fixed native QA binding without broadening shared-account writer permissions. Bind the receiver and actual runner to a new scoped QA/R2 custody window after package validation.",
+  "next": "Mount the concrete fixed native QA launch authority and original-guard/cleanup factories. Bind the private staged receiver to QA with an exact finite policy and validate current scoped preparation and R2/QA custody before the complete package and real trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1938,7 +1938,7 @@
   },
   "currentBlockSaved": true,
   "delegatedAuthorsActive": 0,
-  "noRuntimeMutationThisBlock": true,
+  "noRuntimeMutationThisBlock": false,
   "ownerActionNeededNow": false,
   "nominalNoticeController": {
     "atUTC": "2026-11-18 15:59:44 UTC",
@@ -2443,6 +2443,36 @@
     "completePackage": false,
     "actualTrial": false
   },
-  "coupledNominalLaunch": {"path":"docs/superpowers/progress/2026-11-19-afw-coupled-nominal-launch-validation.json","evidence":"7dc0b15f465df9d232c50a855629a8af13e07adb","head":"500078e27724524fb3b78ff21d9623186c5fa5e6","closed":"0bc68f1cf620fa9553be9943aa3d1876f3861566","verifiedRun":44530364116,"tests":277,"completePackage":false,"realCloudOccurrence":false},
-  "nativeGuardReviewValidation": {"path":"docs/superpowers/progress/2026-11-19-afw-native-launch-and-review-validation.json","evidence":"fb01ce0c8641fe944213e70c944c49fdedc5787b","head":"e73060beefef0a0c2f698c4fb9d082474b978469","closed":"3f6854d5d5a6134deb2a97bb1271bfda19284458","verifiedRun":44536967414,"tests":297,"fullSuiteTimedOut":true,"completePackage":false,"realCloudOccurrence":false}
+  "coupledNominalLaunch": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-coupled-nominal-launch-validation.json",
+    "evidence": "7dc0b15f465df9d232c50a855629a8af13e07adb",
+    "head": "500078e27724524fb3b78ff21d9623186c5fa5e6",
+    "closed": "0bc68f1cf620fa9553be9943aa3d1876f3861566",
+    "verifiedRun": 44530364116,
+    "tests": 277,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "nativeGuardReviewValidation": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-launch-and-review-validation.json",
+    "evidence": "fb01ce0c8641fe944213e70c944c49fdedc5787b",
+    "head": "e73060beefef0a0c2f698c4fb9d082474b978469",
+    "closed": "3f6854d5d5a6134deb2a97bb1271bfda19284458",
+    "verifiedRun": 44536967414,
+    "tests": 297,
+    "fullSuiteTimedOut": true,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  },
+  "privateQaReceiverStaging": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-private-qa-receiver-staging.json",
+    "head": "e73a3d269f1b97a4dbd8b749e0be6191159f6605",
+    "closed": "ea6891ee6d7c0a3f335230c40fa6ddf15a209354",
+    "verifiedRun": 44545121988,
+    "tests": 304,
+    "stagedReceiver": "bd0cf7d0-68d3-4506-911d-7cd7eb7563e3",
+    "receiverTrafficPercent": 0,
+    "completePackage": false,
+    "realCloudOccurrence": false
+  }
 }
