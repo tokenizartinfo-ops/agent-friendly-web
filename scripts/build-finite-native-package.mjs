@@ -66,18 +66,23 @@ async function inputs(cwd,revision){
 /** Real compiler staging, deliberately NOT a package or deployment attestation.
  * No provider, private policy, callback, caller pins or readiness flag accepted. */
 export async function compileFiniteNativeStaging(input){
+ let stage='input';
  try{
   const {cwd:requestedCwd,sourceRevision}=options(input),cwd=await realpath(requestedCwd);
   // Imported Node builder resolves its source beside this compiler. Restrict
   // the exported API to that same physical checkout before any compilation;
   // use the canonical path throughout so a caller alias cannot retarget inputs.
   if(cwd!==await realpath(fileURLToPath(new URL('..',import.meta.url))))fail();
+  stage='git';
   const before=await verifyMcpReleaseSource({cwd,sourceRevision}),inputBefore=await inputs(cwd,sourceRevision);
+  stage='historical';
   const historicalInput=await historicalInputLocator(cwd,sourceRevision);
+  stage='node';
   const node=await buildMcpNodeProgram(),files={},modules={},metafiles={};
   if(hash(node.program)!==node.programHash)fail();
   let candidateResidency;
   for(const role of roles){
+   stage=role+':build';
    const config=finiteWranglerProfileTemplate(role),entry=config.main;
    if(role==='qaLive'&&!candidateResidency)fail();
    const compiled=await build({absWorkingDir:cwd,entryPoints:[entry],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,metafile:true,define:{
@@ -91,17 +96,20 @@ export async function compileFiniteNativeStaging(input){
      'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':JSON.stringify({sourceRevision,sourceTree:before.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))}),
     }:{}),
    }});
+   stage=role+':exports';
    const out=Object.values(compiled.metafile.outputs);
    if(compiled.outputFiles.length!==1||out.length!==1)fail();
    assert.deepEqual(out[0].exports.slice().sort(),expectedExports[role]);
    const original=role==='qaLive'?'worker/independent-closure/index.mjs':'worker/mcp-own/index.mjs';
    if(!compiled.metafile.inputs[entry]||!compiled.metafile.inputs[original])fail();
    const bytes=compiled.outputFiles[0].contents;
+   stage=role+':residency';
    const bootstrapInput='lib/mcp-qa-finite-bootstrap-source.mjs';
    if(role==='qaLive'){
     if(!compiled.metafile.inputs[bootstrapInput]||Object.values(bootstrapPaths).some(p=>!Buffer.from(bytes).includes(Buffer.from(inputBefore[p]))))fail();
    }else if(compiled.metafile.inputs[bootstrapInput])fail();
    if(Object.keys(compiled.metafile.inputs).some(p=>['bootstrap-issuer','build-finite-native-package','node_modules/esbuild'].some(name=>p.includes(name))))fail();
+   stage=role+':size:'+bytes.length;
    if(bytes.length<1||bytes.length>(role==='canaryLive'?2097152:3145728))fail();
    const decoder='lib/mcp-qa-finite-candidate-residency.mjs';
    if(role==='canaryLive'){
@@ -110,13 +118,15 @@ export async function compileFiniteNativeStaging(input){
     if(compressed.length>2098176)fail();
     candidateResidency=Object.freeze({purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision,sourceTree:before.tree,sourceCheck:'git-inputs-before-after-v1',programHash:node.programHash,module:Object.freeze({name:'index.mjs',sha256:hash(bytes),bytes:bytes.length}),compressedSha256:hash(compressed),compressedBytes:compressed.length,content:compressed.toString('base64')});
    }else if(!compiled.metafile.inputs[decoder]||!Buffer.from(bytes).includes(Buffer.from(candidateResidency.content)))fail();
+   stage=role+':output';
    files[role+'/index.mjs']=Buffer.from(bytes);
    modules[role]={provenance:{kind:'compiled-source.v1',sourceRevision,sourceTree:before.tree},module:{name:'index.mjs',sha256:hash(bytes),bytes:bytes.length,exports:out[0].exports.slice().sort()},publicStatic:finitePublicStaticExpectation(role)};
    metafiles[role]=compiled.metafile;
   }
+  stage='git-after';
   const after=await verifyMcpReleaseSource({cwd,sourceRevision});assert.deepEqual(after,before);assert.deepEqual(await inputs(cwd,sourceRevision),inputBefore);
   return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,historicalInput,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
- }catch{fail();}
+ }catch(error){console.error('AFW_STAGING_DIAGNOSTIC',stage,error?.name??'Error');fail();}
 }
 /** Private STDIN path: exact R2 bytes and newly compiled modules travel only
  * inside the executor. The verifier emits a digest receipt, never a bundle. */

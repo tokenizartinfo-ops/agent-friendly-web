@@ -7,8 +7,8 @@ import {finiteArmedGuardState,finiteChildConfirmationBindingHash,hashFiniteLaunc
 const api=await import('../lib/mcp-qa-finite-nominal-authority.mjs').catch(error=>{
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-qa-finite-nominal-authority.mjs'))throw error;return {};
 });
-async function setup(configure=()=>{}){
- const f=finiteFixture(),p=f.plan;configure(p);const opts=f.options(controls);
+async function setup(configure=()=>{},at){
+ const f=finiteFixture({at}),p=f.plan;configure(p);const opts=f.options(controls);
  const t=controls.createPrivateQaFiniteTrialControl(opts);
  assert.equal((await t.prepare()).status,'armed');
  const {controlHash,planHash,claim}=await t.claimEffect('nominal');
@@ -100,28 +100,40 @@ test('candidate journal records one reservation under the acknowledged QA child 
  assert.equal(candidate.puts,1);
 });
 
-async function noticeFixture(){
- const program='synthetic finite notice candidate';
+async function noticeFixture(sql){
+ const program=sql?.config.program??'synthetic finite notice candidate';
  const {finiteCleanupPolicyHash}=await import('../lib/mcp-finite-cleanup-policy.mjs');
  const {f,p,prefix,ack,refs,read}=await setup(plan=>{
   plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
   plan.selectors.programHash=hash(program);plan.selectors.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';
   const s=plan.selectors;
   s.projectId='oauth-canary-owner';
+  if(sql){
+   Object.assign(s,{grantId:sql.config.context.grantId,subject:sql.config.context.subject,clientId:sql.config.context.clientId});
+   plan.grantHash=hash(s.grantId);
+   plan.resources.containerId=sql.config.ctx.id.toString();
+  }
   plan.eventPlanHash=hash(JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,
    clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}));
   plan.closePolicyHash=finiteCleanupPolicyHash(plan);
- });
+ },sql?Date.now()-151000:undefined);
+ if(sql)f.setNow(Date.now());
  f.rows.set(prefix+'ack',ack);
  const a=await read('journal'),s=p.selectors,own={toString:()=>p.resources.containerId},qa={toString:()=>p.resources.actorId};
+ let subscriptionReceiptHash='a'.repeat(64);
+ if(sql){
+  const {ownSubscriptionReceiptFields}=await import('../lib/mcp-own-subscription-receipt.mjs');
+  const row=sql.db.prepare('SELECT * FROM dossier_event_subscription_receipts').get();
+  subscriptionReceiptHash=hash(JSON.stringify(Object.fromEntries(ownSubscriptionReceiptFields.map(key=>[key,row[key]]))));
+ }
  const notice={
   eventId:hash(JSON.stringify(['afw.own-synthetic-save.v1',s.subject,s.projectId,s.saveIdempotencyKey])),
   revision:s.expectedProjectRevision+1,
   fingerprint:hash(JSON.stringify(['afw.own-synthetic-save.v1',s.grantId,s.expectedProjectRevision,s.goal])),
-  subscriptionReceiptHash:'a'.repeat(64),processReceiptHash:'b'.repeat(64),
+  subscriptionReceiptHash,processReceiptHash:'b'.repeat(64),
  };
  const proof={purpose:'afw.qa-finite-canary-notice.v1',control:a.control,ackHash:a.ackHash,notice,observedAt:f.now(),expiresAt:p.C0};
- const db={prepare(){throw Error('Unexpected primary access');},withSession(){throw Error('Unexpected primary access');}};
+ const db=sql?.options.db??{prepare(){throw Error('Unexpected primary access');},withSession(){throw Error('Unexpected primary access');}};
  const env={DB:db,AFW_FINITE_TRIAL_VERSION:{id:p.canaryContainment.runtimeVersionId},
   AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_SUCCESSOR_ENABLED:'true',
   AFW_DOSSIER_SUCCESSOR_POLICY:JSON.stringify({
@@ -153,7 +165,7 @@ async function noticeFixture(){
  const run=(select=refs,deliver=compose)=>api.runFiniteOwnTrialNotice({ctx,env,program,sourceRevision:s.sourceRevision,refs:select,deliver,now:f.now});
  const runSave=(save,deliver=compose,selected=refs)=>{
   assert.equal(typeof api.runFiniteOwnTrialDossier,'function');
-  return api.runFiniteOwnTrialDossier({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,save,deliver,now:f.now});
+  return api.runFiniteOwnTrialDossier({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,save,deliver,now:sql?Date.now:f.now});
  };
  return {f,p,refs,proof,run,runSave,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
 }
@@ -220,4 +232,30 @@ test('foreign plan, wrong save acknowledgment and uncertain dispatch never produ
  assert.deepEqual(await n.runSave(save,lost),{saved:true,revision:a.target.revision,delivery:null});
  assert.deepEqual(await n.runSave(save,()=>assert.fail('replayed save must not deliver')),{saved:true,revision:a.target.revision,delivery:null});
  assert.equal(effects,1);
+});
+
+test('the real save and signed delivery share the same subscription record with finite withdrawal',async()=>{
+ const {syntheticSaveFixture}=await import('./fixtures/mcp-own-synthetic-save.mjs');
+ const sql=await syntheticSaveFixture({projectId:'oauth-canary-owner',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',windowMs:180000});
+ try{
+  sql.config.db.withSession=mode=>{assert.equal(mode,'first-primary');return sql.config.db;};
+  const n=await noticeFixture(sql),proof=saveProof(n);
+  n.setSaveReply(()=>proof);
+  n.setReply(()=>{
+   const row=sql.db.prepare('SELECT * FROM project_events WHERE id=?').get(proof.target.eventId);
+   assert.deepEqual(JSON.parse(row.payload_json),{changedFields:['goals'],revision:proof.target.revision,fingerprint:proof.target.fingerprint});
+   return n.proof;
+  });
+  const result=await n.runSave(undefined,input=>sql.host.deliverFiniteOwnSaved(input));
+  assert.equal(result.saved,true);assert.equal(result.revision,2);
+  assert.equal(result.delivery.status,200);assert.equal(result.delivery.cloudReviewConfirmed,false);
+  const boundary={signal:new AbortController().signal,assertCurrent:()=>{},expiresAt:Date.now()+4000};
+  const withdrawn=await sql.host.withdrawFiniteSubscription(boundary,{id:proof.target.eventId,revision:result.revision});
+  assert.equal(withdrawn.withdrawn,true);assert.equal(withdrawn.eventId,result.delivery.eventId);
+  assert.equal(withdrawn.httpReceipt.httpReceivedAt,result.delivery.httpReceivedAt);
+  assert.equal((await sql.host.observeSubscription()).state,'withdrawn');
+  assert.equal(sql.db.prepare('SELECT count(*) n FROM project_events').get().n,1);
+  assert.equal(sql.sends(),2);
+  await sql.host.close();
+ }finally{sql.close();}
 });
