@@ -134,9 +134,11 @@ async function noticeFixture(){
   AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),
   AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',
   AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_OAUTH_RESOURCE:s.resource};
- const ctx={id:own,storage:f.storage};let reads=0,sends=0,reply=()=>proof;
+ const ctx={id:own,storage:f.storage};let reads=0,sends=0,reply=()=>proof,saveReads=0,saveReply;
  env.AFW_FINITE_TRIAL_CONTROL={idFromName:()=>qa,get:()=>({readFiniteCanaryNoticeContext:async selected=>{
   assert.deepEqual(selected,refs);return reply(++reads);
+ },readFiniteCanarySaveContext:async selected=>{
+  assert.deepEqual(selected,refs);return saveReply(++saveReads);
  }})};
  const api=await import('../lib/mcp-own-finite-notice-delivery.mjs').catch(error=>{
   if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-own-finite-notice-delivery.mjs'))throw error;return {};
@@ -148,7 +150,11 @@ async function noticeFixture(){
   assert.deepEqual(expected,proof.notice);assertCurrent();await recheck();assertCurrent();sends++;return result;
  };
  const run=(select=refs,deliver=compose)=>api.runFiniteOwnTrialNotice({ctx,env,program,sourceRevision:s.sourceRevision,refs:select,deliver,now:f.now});
- return {f,p,refs,proof,run,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;}};
+ const runSave=(save,deliver=compose,selected=refs)=>{
+  assert.equal(typeof api.runFiniteOwnTrialDossier,'function');
+  return api.runFiniteOwnTrialDossier({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,save,deliver,now:f.now});
+ };
+ return {f,p,refs,proof,run,runSave,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
 }
 test('finite canary delivers only the event and original subscription confirmed by QA',async()=>{
  const n=await noticeFixture();
@@ -173,4 +179,44 @@ test('finite canary refuses a missing fresh QA confirmation and never treats HTT
  n.f.setNow(n.p.C0);
  await assert.rejects(n.run());
  assert.equal(n.counts().sends,1);
+});
+
+function saveProof(n){
+ const {control,ackHash,notice,observedAt,expiresAt}=n.proof;
+ const target={eventId:notice.eventId,revision:notice.revision,fingerprint:notice.fingerprint,
+  subscriptionReceiptHash:notice.subscriptionReceiptHash,processReceiptHash:notice.processReceiptHash};
+ return {purpose:'afw.qa-finite-canary-save.v1',control,ackHash,target,observedAt,expiresAt};
+}
+
+test('the exact authorized QA save writes the pinned goal first and dispatches the same event once',async()=>{
+ const n=await noticeFixture(),admission=saveProof(n),s=n.p.selectors;let saved=false,attempts=0;
+ n.setSaveReply(()=>admission);
+ n.setReply(()=>{assert.equal(saved,true);return n.proof;});
+ const run=()=>n.runSave(async(options,value)=>{
+  attempts++;
+  assert.equal(options.expectedSubscriptionReceiptHash,admission.target.subscriptionReceiptHash);
+  assert.equal(options.window.expiresAt,n.f.now()+4800);
+  assert.deepEqual(value,{expectedRevision:s.expectedProjectRevision,idempotencyKey:s.saveIdempotencyKey,goal:s.goal});
+  assert.equal(await options.beforeCommit(),true);
+  assert.equal(await options.afterCommit(),true);
+  saved=true;
+  return {status:200,eventId:admission.target.eventId,revision:s.expectedProjectRevision+1,replayed:attempts>1};
+ });
+ assert.deepEqual(await run(),{saved:true,revision:s.expectedProjectRevision+1,delivery:n.result});
+ assert.deepEqual(await run(),{saved:true,revision:s.expectedProjectRevision+1,delivery:null});
+ assert.deepEqual(n.counts(),{reads:2,sends:1});
+});
+
+test('foreign plan, wrong save acknowledgment and uncertain dispatch never produce a second send',async()=>{
+ const n=await noticeFixture(),a=saveProof(n);
+ n.setSaveReply(()=>({...a,target:{...a.target,eventId:'0'.repeat(64)}}));
+ await assert.rejects(async()=>n.runSave(()=>assert.fail('unauthorized writer')));
+ n.setSaveReply(()=>a);
+ await assert.rejects(async()=>n.runSave(async()=>({status:200,eventId:'0'.repeat(64),revision:a.target.revision,replayed:false})));
+ let effects=0;
+ const save=async()=>({status:200,eventId:a.target.eventId,revision:a.target.revision,replayed:effects>0});
+ const lost=async input=>{await n.compose(input);effects++;throw Error('lost transport ACK');};
+ assert.deepEqual(await n.runSave(save,lost),{saved:true,revision:a.target.revision,delivery:null});
+ assert.deepEqual(await n.runSave(save,()=>assert.fail('replayed save must not deliver')),{saved:true,revision:a.target.revision,delivery:null});
+ assert.equal(effects,1);
 });

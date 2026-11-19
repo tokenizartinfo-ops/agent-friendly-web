@@ -37,3 +37,24 @@ test('saved source reads the committed event and lost acknowledgment retry canno
 test('identity withdrawn during final eligibility read and incompatible integer event ID block saving',async()=>{
  for(const mode of ['identity','schema']){const f=await setup();try{if(mode==='schema')f.db.exec('DROP TABLE project_events;CREATE TABLE project_events(id INTEGER NOT NULL PRIMARY KEY,project_id TEXT,user_id TEXT,type TEXT,payload_json TEXT,created_at TEXT);');else{let allowed=true,reads=0;f.options.beforeCommit=async()=>allowed;const prepare=f.options.db.prepare;f.options.db.prepare=text=>{const statement=prepare(text);return{bind(...args){const bound=statement.bind(...args);return{...bound,async first(){const out=await bound.first();if(text.startsWith('SELECT r.*')&&++reads===3)allowed=false;return out;}};}};};}assert.notEqual((await api.saveOwnSyntheticGoal(f.options,input)).status,200);assert.equal(f.db.prepare('SELECT revision FROM site_projects').get().revision,1);assert.equal(f.db.prepare('SELECT count(*) n FROM project_events').get().n,0);}finally{f.close();}}
 });
+
+function receiptDigest(f){
+ const r=f.db.prepare('SELECT * FROM dossier_event_subscription_receipts').get();
+ const keys=['grant_id','subscription_id','project_id','user_id','client_id','resource','container_id','process_generation',
+  'program_hash','source_revision','image','observed_at','recorded_at','expires_at'];
+ return createHash('sha256').update(JSON.stringify(Object.fromEntries(keys.map(key=>[key,r[key]])))).digest('hex');
+}
+
+test('finite save pins the original subscription and separates pre-write permission from post-write readback',async()=>{
+ const f=await setup();let after=0;
+ try{
+  const options={...f.options,expectedSubscriptionReceiptHash:receiptDigest(f),
+   beforeCommit:async()=>f.db.prepare('SELECT revision FROM site_projects').get().revision===1,
+   afterCommit:async()=>{after++;return f.db.prepare('SELECT revision FROM site_projects').get().revision===2;}};
+  assert.equal((await api.saveOwnSyntheticGoal({...options,expectedSubscriptionReceiptHash:'0'.repeat(64)},input)).status,503);
+  assert.equal(f.db.prepare('SELECT count(*) n FROM project_events').get().n,0);
+  assert.equal((await api.saveOwnSyntheticGoal(options,input)).status,200);
+  assert.equal(after,2);
+  assert.equal(f.db.prepare('SELECT count(*) n FROM project_events').get().n,1);
+ }finally{f.close();}
+});
