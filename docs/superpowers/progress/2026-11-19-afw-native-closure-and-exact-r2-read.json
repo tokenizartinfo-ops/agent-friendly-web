@@ -1,0 +1,60 @@
+{
+  "purpose": "afw.native-closure-and-exact-r2-read.v1",
+  "observedAtUTC": "2026-11-19 15:34:23 UTC",
+  "project": "AFW",
+  "source": {
+    "verifiedSource": "d45ad72c7493b7a06eb930705b89161b3d2b755a",
+    "closedLab": "6ba7d99cfaa24922f48a6ffceb2224810adc9309",
+    "verificationRun": 44555913457,
+    "regressions": [
+      44554606507,
+      44555519572
+    ],
+    "nodePass": 321,
+    "archivePass": 5
+  },
+  "nativeClosure": {
+    "usesExactOriginalWorkflow": true,
+    "authenticatesExactAbsenceAndPending": true,
+    "pollsReadOnlyBeforeClaim": true,
+    "doesNotPollAfterClaim": true,
+    "reservesOriginalRecoveryBudgetMs": 35000,
+    "launchesAtMostOneRestore": true,
+    "retainsMatchingDeliveryReviewAndWithdrawalInTests": true,
+    "actedOnLiveQa": false
+  },
+  "r2": {
+    "bucket": "afw-release-backups",
+    "jurisdiction": "default",
+    "credential": "AFW_R2_BACKUPS_READ_URL",
+    "scope": "One GET for the exact pinned historical archive, using R2 S3 presigned authentication",
+    "validatedPositiveInTests": true,
+    "actualPresignedUrlRead": false,
+    "contentDigestStillRequired": true,
+    "signedUrlSupplied": false,
+    "documentation": "https://developers.cloudflare.com/r2/api/s3/presigned-urls/"
+  },
+  "credentials": {
+    "qaToken": {
+      "at": "2026-11-19T15:26:28.520Z",
+      "state": "expired",
+      "expiresOn": "2026-11-08T02:59:59Z",
+      "dateExpired": true
+    },
+    "gitHubSecretUpdatedAt": "2026-10-31T15:54:32Z",
+    "archiveCredentialInEnvironment": false,
+    "archiveCredentialInRepository": false
+  },
+  "package": {
+    "compilerStagingPassed": true,
+    "emittedCompletePackage": false,
+    "reason": "Concrete QA first-primary and canary cleanup authority mounts, the actual QA receiver policy/binding, and current scoped custody remain unqualified."
+  },
+  "runtimeMutations": 0,
+  "realTrial": false,
+  "receivedReviewedSameNotice": false,
+  "subscriptionWithdrawn": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}

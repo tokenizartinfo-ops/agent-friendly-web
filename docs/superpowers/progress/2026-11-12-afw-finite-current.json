@@ -1,10 +1,10 @@
 {
-  "schema": 65,
-  "timestampUTC": "2026-11-19 15:16:20 UTC",
+  "schema": 66,
+  "timestampUTC": "2026-11-19 15:34:23 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "2f87a3d8fd815aca262eabe32ef1ff4f558d135a",
-  "phase": "Native QA launch source now uses the qualified private Workflow binding. The original recovery alarm must survive the last awaited permission check, with an acknowledged durable launch journal before creation. Three archived closed module pins and the R2 archive matched fresh readbacks. Complete assembly and live execution remain pending.",
+  "previousCheckpoint": "114f49ee53a16bba138538baea1f9c78722b8dea",
+  "phase": "The independent close executor now waits read-only on the exact original native receipt, protects the fixed restore margin, and assembly and rollback use only an exact signed R2 object GET. Current pinned QA credential is confirmed expired and the protected R2 URL secret is absent. No complete package or real trial yet.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete the concrete native effect mounts and original coupled closure executor, link the closed private receiver in the actual QA candidate, and validate the full package with current scoped QA and R2 custody before any live run.",
+  "next": "Mount the concrete QA first-primary/guard and canary cleanup authority, bind the dedicated receiver in the actual QA candidate and prove original launch/closure authority. Only then arrange the scoped QA token and signed single-object GET for a fresh package and the one-cloud-incident trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2495,6 +2495,16 @@
     "run": 44552478265,
     "tests": 319,
     "rollbackModulesMatched": 3,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "nativeClosureExactR2Read": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-native-closure-and-exact-r2-read.json",
+    "head": "d45ad72c7493b7a06eb930705b89161b3d2b755a",
+    "closed": "6ba7d99cfaa24922f48a6ffceb2224810adc9309",
+    "run": 44555913457,
+    "tests": 326,
+    "qaCredentialExpired": true,
     "completePackage": false,
     "realCloudTrial": false
   }
