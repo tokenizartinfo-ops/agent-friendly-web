@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "atUTC": "2026-11-19T21:21:03.683Z",
+  "previousCheckpoint": "d4d300f0bb876f643caf086e49024a8ed2142278",
+  "qaCredential": {
+    "actualProtectedIdentityRun": 44615862988,
+    "observedAtUTC": "2026-11-19T21:09:24.181Z",
+    "expiresAtUTC": "2026-11-27T02:59:59Z",
+    "exactPreviousScopeMatches": true,
+    "verifiedAgainstCloudflare": true,
+    "pinnedInLab": true,
+    "scopeProofIsDated": true,
+    "workflowCreateQualified": false
+  },
+  "finalQaVerification": {
+    "separateFromProtectiveRestore": true,
+    "requiresExactClosedQa": true,
+    "requiresSameNoticeReview": true,
+    "requiresOriginalSubscriptionWithdrawal": true,
+    "foreignOrMissingReviewBlocksAcceptance": true,
+    "missingReviewDoesNotBlockProtectiveRestore": true,
+    "realReceiptObserved": false,
+    "sourcePath": ".github/workflows/afw-finite-coupled-restore.yml",
+    "red": 44616895078,
+    "fullRun": 44617157341,
+    "cliRun": 44617603632,
+    "fullPass": 566,
+    "focusedPass": 33,
+    "failures": 0,
+    "qualifiedSource": "d1994f74c99101355637b3c0139ff463cbda565d",
+    "closedLabHead": "482f73560188bbf5c440cd5b084b9e62d01cc754"
+  },
+  "r2": {
+    "verified": true,
+    "protectedLinkUpdated": true,
+    "atUTC": "2026-11-19T21:18:38.983Z",
+    "revision": "1291d55444e6f3a1a1675fe58197dabb389315a5",
+    "sourceTree": "f38f95727af82cf32581b76b1430651db9aae55f",
+    "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "draftSha256": "4b9c78a9acea61eafa4ce69a820617c7586e02943cb7c74102b18403c9fc82b9",
+    "moduleCount": 5,
+    "files": {
+      "canaryClosed/index.mjs": {
+        "bytes": 1830202,
+        "sha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3"
+      },
+      "canaryLive/index.mjs": {
+        "bytes": 1673450,
+        "sha256": "e04efd5ba1912948e51a3594e1bb0345217d5620c2cf2c2ecf27cead783514c7"
+      },
+      "operatorClosed/index.mjs": {
+        "bytes": 1971922,
+        "sha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51"
+      },
+      "qaClosed/closed-rollback.mjs": {
+        "bytes": 395915,
+        "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f"
+      },
+      "qaLive/index.mjs": {
+        "bytes": 2546346,
+        "sha256": "e2c819c1fd065a5333c0e81982d5d30b79057d1ce73f1ddd9e97855060534c1b"
+      }
+    },
+    "completePackage": false,
+    "operationalReadiness": false,
+    "verifiedAgainstSignedObject": true,
+    "protectedLinkExpiresUTC": "2026-11-19T22:18:10.000Z",
+    "localDraftVerificationOnly": true
+  },
+  "release": {
+    "mainPromoted": false,
+    "deployableArtifactEmitted": false,
+    "nativeFinalPrimaryProducerMounted": false,
+    "rollbackActuallyExecuted": false,
+    "blocker": "The complete builder and source-package eligibility still fail closed before a deployable artifact. The live candidate and native material for final primary verification are unqualified."
+  },
+  "next": "Qualify the native final-primary material and complete-package emission, and verify the exact QA candidate and receiver with the existing closed recovery pins before opening an occurrence.",
+  "realCloudTrial": false,
+  "sameNoticeActuallyReviewed": false,
+  "subscriptionActuallyWithdrawn": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}

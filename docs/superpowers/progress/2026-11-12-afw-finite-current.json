@@ -1,10 +1,10 @@
 {
-  "schema": 84,
-  "timestampUTC": "2026-11-19 21:06:06 UTC",
+  "schema": 85,
+  "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "c9627c74fb93ad504598761d6c4ae89865c6039e",
-  "phase": "The compiler consumed the exact private signed R2 archive and verified the five-module draft. The finite QA Workflow now uses its compiled source revision for the original observer preview. Native final-primary, refreshed custody identity and the eligible release remain pending.",
+  "previousCheckpoint": "d4d300f0bb876f643caf086e49024a8ed2142278",
+  "phase": "Protected QA self-verification proved the renewed identity. Lab custody pins and final same-notice acceptance are connected. Signed R2 compilation draft verified; a deployable artifact and hosted trial remain gated.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Qualify refreshed protected custody identity and mount the real, bounded observer final-primary producer before assembling a deployable release.",
+  "next": "Qualify the native final-primary material and complete-package emission, and verify the exact QA candidate and receiver with the existing closed recovery pins before opening an occurrence.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 183,
-  "updatedAtUTC": "2026-11-19T21:06:06.955Z",
+  "schemaVersion": 184,
+  "updatedAtUTC": "2026-11-19T21:21:03.683Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2680,6 +2680,16 @@
     "closedSource": "938dd6e20e9081868c99dde0304bd946bfdd6dd8",
     "run": 44614839849,
     "tests": 554,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "renewedCustodyAndFinalNoticeVerification": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-renewed-custody-and-final-notice-verification.json",
+    "protectedIdentityRun": 44615862988,
+    "fullRun": 44617157341,
+    "focusedRun": 44617603632,
+    "closedLabHead": "482f73560188bbf5c440cd5b084b9e62d01cc754",
+    "privateDraftSha256": "4b9c78a9acea61eafa4ce69a820617c7586e02943cb7c74102b18403c9fc82b9",
     "completePackage": false,
     "realCloudTrial": false
   }
