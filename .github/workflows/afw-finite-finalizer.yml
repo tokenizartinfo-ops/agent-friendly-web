@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          export AFW_FINITE_LAUNCH_ORIGINAL_PID=$
+          export AFW_FINITE_LAUNCH_ORIGINAL_PID=$$
           exec node scripts/run-qa-finite-trial-finalizer.mjs launch
       - name: Wait for exact observer terminal output
         env:
