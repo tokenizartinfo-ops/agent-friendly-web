@@ -1,10 +1,10 @@
 {
-  "schema": 67,
-  "timestampUTC": "2026-11-19 15:53:19 UTC",
+  "schema": 68,
+  "timestampUTC": "2026-11-19 16:05:47 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "2568ccd715e2490253abf1e98854286d4b249945",
-  "phase": "Corrected exact original vs delivered event correlation in native closure. Added single-scope authenticated MCP callback ingestion and connected D1-backed review in Workerd. The new receiver build is uploaded inactive, with closed runtime and public routing unchanged.",
+  "previousCheckpoint": "376d7d43784e60e1e370b07edb36234e07894d4e",
+  "phase": "Native QA reduction context now requires the exact committed QA and guard claims and original cleanup clock; finite canary withdrawal/close/receipt paths use the fixed private binding. Corrected receiver revision is installed closed. Full source assembly and real execution remain gated.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Complete the native launch-primary and QA/canary cleanup factory authority, then publish the reviewed dedicated receiver/QA bindings with exact window and replacement QA/R2 custody for one real cloud trial.",
+  "next": "Complete the concrete native launch primary/guard and canary journal sealing/proof authority, then align real finite QA receiver policy and scoped QA/R2 custody for one complete package and trial.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -2516,6 +2516,16 @@
     "tests": 345,
     "stagedReceiver": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
     "trafficPercent": 0,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "qaNativeReductionBinding": {
+    "path": "docs/superpowers/progress/2026-11-19-afw-qa-native-reduction-binding.json",
+    "source": "8b1cd3195cb0d8e3334c7e09ea87a90ad5996378",
+    "closed": "d8ae624083358b588c68fcffc1d32bbba95a4afe",
+    "run": 44561553671,
+    "tests": 327,
+    "receiverDeployment": "3a2dad24-2f32-488c-a480-52633118adac",
     "completePackage": false,
     "realCloudTrial": false
   }

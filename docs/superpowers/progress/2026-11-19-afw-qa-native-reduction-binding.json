@@ -1,0 +1,76 @@
+{
+  "purpose": "afw.qa-native-reduction-binding.v1",
+  "observedAtUTC": "2026-11-19 16:05:47 UTC",
+  "project": "AFW",
+  "sources": {
+    "source": "8b1cd3195cb0d8e3334c7e09ea87a90ad5996378",
+    "closedSource": "d8ae624083358b588c68fcffc1d32bbba95a4afe",
+    "regressionRun": 44561160225,
+    "verificationRun": 44561553671,
+    "nodePass": 322,
+    "archivePass": 5,
+    "stagingCompiled": true
+  },
+  "connectedInFiniteSource": {
+    "canaryReductionPrivateQaBinding": true,
+    "exactCommittedWithdrawAndCloseClaimsRequired": true,
+    "originalCleanupWindowEnforced": true,
+    "wrongVersionAndForeignProofDenied": true,
+    "observationNoMutation": true,
+    "mountedInActualIndependentQaRuntime": false
+  },
+  "cloudflare": {
+    "closedReceiverReadback": {
+      "at": "2026-11-19T16:04:53.966Z",
+      "verifiedClosed": true,
+      "version": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+      "deployment": "3a2dad24-2f32-488c-a480-52633118adac",
+      "flags": [
+        [
+          "AFW_DOSSIER_FINITE_REVIEW_ENABLED",
+          true
+        ],
+        [
+          "AFW_DOSSIER_SUPERVISION_ENABLED",
+          true
+        ],
+        [
+          "AFW_OPERATIONS_CONSUMER_ENABLED",
+          true
+        ],
+        [
+          "AFW_DOSSIER_FINITE_CALLBACK_ENABLED",
+          true
+        ]
+      ],
+      "policyPresent": false,
+      "callbacksEnabled": false,
+      "public": false
+    },
+    "rollbackVersion": "bd0cf7d0-68d3-4506-911d-7cd7eb7563e3",
+    "promotedOnlyReceiver": true,
+    "eventIngressEnabled": false,
+    "qaLaunchEnabled": false,
+    "qaClosureTrialEnabled": false
+  },
+  "credentials": {
+    "qaPriorExpiredConfirmed": true,
+    "protectedSecretUpdatedAt": "2026-10-31T15:54:32Z",
+    "r2PresignedUrlInProtectedEnvironment": false
+  },
+  "pending": {
+    "nativeLaunchPrimaryOperationsAndAlarmGuard": true,
+    "canaryAdmissionSealProofFactory": true,
+    "finiteReceiverPolicyAndQaRelease": true,
+    "freshScopedCredentials": true,
+    "completePackage": true,
+    "realCloudTrial": true
+  },
+  "emittedCompletePackage": false,
+  "sameNoticeLiveDelivery": false,
+  "sameNoticeLiveReview": false,
+  "sameNoticeLiveWithdrawal": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
