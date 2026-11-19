@@ -1,3 +1,4 @@
+import {runFiniteOwnNominalReservation} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
 import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
 import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
 import {createFiniteOwnReductionActions} from '../../lib/mcp-own-finite-reduction.mjs';
@@ -69,9 +70,18 @@ export class AfwOwnEventNode extends DurableObject{
  async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'withdraw');const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
  async closeFiniteTrial(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'close');const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
  async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'observe');const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
- async readFiniteTrialAdmissionJournal(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialAdmissionJournal(args[0]);}
- async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.beginFiniteTrialReservation(args[0]);}
- async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.settleFiniteTrialReservation(args[0]);}
+ async readFiniteTrialAdmissionJournal(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'journal'});
+  const h=await this.#finite();return h.readFiniteTrialAdmissionJournal(args[0]);}
+ async beginFiniteTrialReservation(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'reserve'});
+  const h=await this.#finite();return h.beginFiniteTrialReservation(args[0]);}
+ async settleFiniteTrialReservation(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'settle'});
+  const h=await this.#finite();return h.settleFiniteTrialReservation(args[0]);}
  async readFiniteTrialSealedAdmissionJournal(...args){
   if(args.length!==1||!finiteEntrypoint)fail();
   return this.#finiteCleanupJournal(args[0],'observeSeal');
