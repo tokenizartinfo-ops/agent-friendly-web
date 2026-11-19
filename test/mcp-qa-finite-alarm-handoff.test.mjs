@@ -366,3 +366,19 @@ test('foreign identity, changed provider target and expired original deadline ca
  const foreign=await qaClosureFixture({foreignTarget:true});await foreign.save();await foreign.closeAlarm();
  await assert.rejects(()=>read(foreign.options));
 });
+
+const prepPublisher=await import('../lib/mcp-qa-finite-coupled-restore-observer.mjs');
+for(const lost of [false,true])test('the original QA alarm publishes its fixed restoration observation once, ACK loss='+lost,async()=>{
+ const publish=prepPublisher.publishPrivateQaCoupledRestorePreparation;
+ assert.equal(typeof publish,'function');
+ const {f,closure,options,receipt,closeAlarm,save}=await qaClosureFixture();
+ let creates=0,input;
+ f.env.AFW_QA_BOOTSTRAP={async create(v){creates++;input=v;if(lost)throw Error('synthetic original observer acknowledgement lost');return {id:v.id};}};
+ const scoped={ctx:options.ctx,env:options.env,receiptHash:receipt.receiptHash,now:options.now};
+ await assert.rejects(()=>publish(scoped));assert.equal(creates,0);
+ await save();await closeAlarm();const first=await publish(scoped);
+ assert.equal(first.status,lost?'uncertain':'acknowledged');assert.equal(creates,1);
+ assert.equal(input.id,prepPublisher.finiteCoupledQaPreparationInstanceId(closure));
+ assert.equal(input.params.intentId,closure.intentId);
+ assert.equal((await publish(scoped)).status,'recorded');assert.equal(creates,1);
+});
