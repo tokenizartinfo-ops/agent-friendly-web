@@ -14,6 +14,8 @@ on:
       - "test/verify-finite-native-rollback.test.mjs"
       - "test/verify-finite-native-staging.test.mjs"
       - "test/mcp-qa-finite-closed-profile.test.mjs"
+      - "test/mcp-qa-finite-publication-bridge.test.mjs"
+      - "test/fixtures/finite-seed-world.mjs"
       - "test/mcp-qa-finite-admission-primary.test.mjs"
       - "test/mcp-qa-finite-launch-admission.test.mjs"
       - "test/mcp-qa-finite-prelaunch-check.test.mjs"
