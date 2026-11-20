@@ -71,3 +71,21 @@ for(const mode of ['missing','malformed','nonstring-array'])test('issuer rejects
  await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));
  assert.equal(f.state.tagPosts,0);assert.equal(f.state.refPosts,0);
 });
+
+for(const shape of ['array','missing-class','wrong-storage','extra-descriptor']){
+ test('issuer rejects incompatible Cloudflare QA exports '+shape+' before POST',async()=>{
+  const f=await seedWorld();
+  f.state.hook=async url=>{
+   if(!url.includes('/workers/workers/')||!url.includes(f.live.versionId))return;
+   const original=structuredClone(f.versions[f.live.versionId]);
+   if(shape==='array')original.exports=['IndependentClosure','PrivateQaPreregistration','default'];
+   if(shape==='missing-class')delete original.exports.PrivateQaPreregistration;
+   if(shape==='wrong-storage')original.exports.IndependentClosure.storage='kv';
+   if(shape==='extra-descriptor')original.exports.ForeignNamespace={type:'durable-object',storage:'sqlite'};
+   return f.response({success:true,errors:[],messages:[],result:original});
+  };
+  await assert.rejects(f.api.issueFiniteMaterialSeed(f.options),{message:'Finite seed issuer unavailable'});
+  assert.equal(f.state.tagPosts,0);
+  assert.equal(f.state.refPosts,0);
+ });
+}

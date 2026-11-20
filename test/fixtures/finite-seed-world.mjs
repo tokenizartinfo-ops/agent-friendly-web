@@ -11,6 +11,7 @@ import {finiteGhaCustody} from '../../lib/mcp-qa-finite-custody.mjs';
 import {hashFinitePackageManifest} from '../../lib/mcp-qa-finite-seed.mjs';
 import {seedPrimaryFixture,digest,SEED_GH} from './finite-seed-primary.mjs';
 import {finitePrivateLocatorZip,finiteR2TestUrl} from './finite-package-resolver.mjs';
+const qaClasses=['IndependentClosure','PrivateQaPreregistration'];
 const MODULE=Buffer.from("throw new Error('ARCHIVE_MUST_NEVER_EXECUTE');\n");
 const ROOT='/accounts/85d0d5dadac3341a564f22ce885e9eec',QA='agent-friendly-web-independent-closure-qa',CF='https://api.cloudflare.com/client/v4';
 const SIGNED='https://productionresultssa1.blob.core.windows.net/actions-results/fixture/archive.zip?sig=SYNTHETIC';
@@ -19,8 +20,8 @@ const SIGNED='https://productionresultssa1.blob.core.windows.net/actions-results
 export async function seedWorld({sourceAuthority=true}={}){
  const f=await seedPrimaryFixture(),m=f.seed.manifest,versions={},closedId=f.seed.qaPublication.qaClosed.versionId,liveId=f.live.versionId;
  for(const role of Object.keys(m.modules)){
-  const d=m.modules[role];d.module={name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:digest(MODULE),bytes:MODULE.length,exports:['default']};
-  const v={id:role==='qaClosed'?closedId:liveId,main_module:d.module.name,compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],usage_model:'standard',urls:[],exports:['default'],modules:[{name:d.module.name,content_type:'application/javascript+module',content_base64:MODULE.toString('base64')}],bindings:[{name:'AFW_INDEPENDENT_CLOSURE',type:'durable_object_namespace',class_name:'IndependentClosure',namespace_id:'070c4a7708eb4592a3ded7c117a88225'}]};
+  const d=m.modules[role];d.module={name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:digest(MODULE),bytes:MODULE.length,exports:[...qaClasses,'default']};
+  const v={id:role==='qaClosed'?closedId:liveId,main_module:d.module.name,compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],usage_model:'standard',urls:[],exports:Object.fromEntries(qaClasses.map(name=>[name,{type:'durable-object',storage:'sqlite'}])),modules:[{name:d.module.name,content_type:'application/javascript+module',content_base64:MODULE.toString('base64')}],bindings:[{name:'AFW_INDEPENDENT_CLOSURE',type:'durable_object_namespace',class_name:'IndependentClosure',namespace_id:'070c4a7708eb4592a3ded7c117a88225'}]};
   d.publicStatic.configurationHash=digest('PUBLIC-CONFIG:'+role);
   // Explicit SYNTHETIC commitments. Production semantics remain unimplemented.
   d.publicStatic.profileHash=digest('SYNTHETIC-PROFILE:'+role);d.publicStatic.bindingsHash=digest('SYNTHETIC-BINDINGS:'+role);
@@ -45,7 +46,7 @@ export async function seedWorld({sourceAuthority=true}={}){
  const expected=${JSON.stringify(m)},versions=${JSON.stringify(versions)};
  const fail=()=>{throw Error('synthetic source authority mismatch');};
  export function qualifyFiniteSourcePackage({manifest}){assert.deepEqual(manifest,expected);return expected.modules;}
- export function qualifyFiniteSourceRoleMetadata({manifest,role,metadata}){qualifyFiniteSourcePackage({manifest});const v=versions[role==='qaLive'?"11111111-1111-4111-8111-111111111111":"c570b60b-95dc-48e1-89f3-9c4651691dbc"];const config=Object.fromEntries(['compatibility_date','compatibility_flags','main_module','usage_model','containers','exports','bindings'].map(k=>[k,v[k]??(k==='containers'?[]:undefined)]));if(!['qaLive','qaClosed'].includes(role)||JSON.stringify(metadata)!==JSON.stringify(config))fail();return {publicStatic:expected.modules[role].publicStatic};}
+ export function qualifyFiniteSourceRoleMetadata({manifest,role,metadata}){qualifyFiniteSourcePackage({manifest});const v=versions[role==='qaLive'?"11111111-1111-4111-8111-111111111111":"c570b60b-95dc-48e1-89f3-9c4651691dbc"];const config=Object.fromEntries(['compatibility_date','compatibility_flags','main_module','usage_model','containers','exports','bindings'].map(k=>[k,k==='exports'?expected.modules[role].module.exports:v[k]??(k==='containers'?[]:undefined)]));if(!['qaLive','qaClosed'].includes(role)||JSON.stringify(metadata)!==JSON.stringify(config))fail();return {publicStatic:expected.modules[role].publicStatic};}
  export function qualifyFiniteNativeSourceContext({ctx,env,intentId,sourceRevision,seed}){
   if(ctx.id.toString()!=='synthetic-actor'||env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString()!=='synthetic-actor'||env.AFW_QA_VERSION.id!==${JSON.stringify(liveId)}||env.SOURCE_TEMPLATE!==${JSON.stringify(m.sourceRevision)}||sourceRevision!==env.SOURCE_TEMPLATE||intentId!==${JSON.stringify(f.seed.intentId)})fail();
   if(seed){qualifyFiniteSourcePackage({manifest:seed.manifest});if(seed.qaPublication.qaLive.publicStatic.profileHash!==expected.modules.qaLive.publicStatic.profileHash||seed.qaPublication.qaLive.publicStatic.bindingsHash!==expected.modules.qaLive.publicStatic.bindingsHash)fail();}
