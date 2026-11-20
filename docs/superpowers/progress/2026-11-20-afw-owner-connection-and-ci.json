@@ -8,21 +8,18 @@
   },
   "candidate": {
     "pullRequest": 720,
-    "head": "ca9ca3caa51ca5f01e98c70a9b5e53cebd5a2423",
+    "head": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
     "sourceOnly": true,
     "sourcePackageChecks": {
-      "run": 44729251626,
+      "run": 44730020754,
       "result": "passed_staging"
     },
     "fullCi": {
-      "run": 44729252100,
-      "status": "in_progress_at_readback",
-      "previousQaPhaseShard": {
-        "job": 136256660154,
-        "status": "success"
-      }
+      "run": 44730021288,
+      "status": "not_green",
+      "failure": "The required synthetic cleanup producer reaches downstreamOwnerReference and receives 503 instead of 200."
     },
-    "tree": "bbc30be2ea8e380d4d4976682fd75e0489ac8b80"
+    "tree": "68fceee504771bb0693edf00e2ef5e325211a31a"
   },
   "verified": {
     "originalQaPreparation": "material_recorded in isolated Workerd",
@@ -31,25 +28,29 @@
     "accessFences": "wrong audience and wrong owner denied",
     "connectionForm": {
       "http": 200,
-      "elapsedMs": 12628,
-      "scope": "native Workerd, synthetic owner/provider"
+      "elapsedMs": 11562,
+      "scope": "Workerd with synthetic owner and provider, exact source head"
     },
     "approval": {
       "status": "committed_and_admitted",
       "scope": "same native synthetic POST",
-      "position": "approved",
+      "lastDurableStage": "enrollment-recorded",
       "publicationReceipt": false
     },
-    "initialChoiceRollback": "native conflict inside the transaction leaves original rows unchanged"
+    "initialChoiceRollback": "native conflict inside the transaction leaves original rows unchanged",
+    "historicalRollback": {
+      "pass": 2,
+      "fail": 0,
+      "scope": "The fixed engine accepts the historical baseline with the matching digest, rejects configuration drift and performs no writes."
+    }
   },
   "findings": {
     "ownerConnection": {
-      "phase": "publication continuation after recorded original approval",
+      "phase": "Recheck after the native enrollment write and before its ACK",
       "http": 503,
-      "proof": "native positive path reached approved with an admitted one-use original request. No publication receipt.",
-      "sourceRevision": "ca9ca3caa51ca5f01e98c70a9b5e53cebd5a2423",
-      "readPairCountAcrossOriginalFormAndApproval": 11,
-      "scope": "Workerd with a synthetic Cloudflare provider"
+      "scope": "Workerd with a synthetic Cloudflare provider",
+      "sourceRevision": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
+      "originalClocksPreserved": true
     },
     "nativeFixture": "Fixed storage wrapper expecting a string when replaying bulk reads and updated obsolete SDK capture point without changing its promise.",
     "restorationCi": "The raw test shard lacked its original synthetic fixture. The mandatory separate job now produces the fixture with its explicit runner clock in the same job as the native cleanup test. It still needs a full pass.",
@@ -58,7 +59,8 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Isolate the reason for failure inside publication after `approved`, then verify the full positive path and its native rollback on the accepted exact revision."
+    "next": "Reduce the cost of the fresh authoritative observations before the enrollment ACK within the original five-second child lease. Moving a bookend read out of the child still expired at enrollment-recorded in a separate test. Continue through downstream owner reference and the required native cleanup run before merging. Qualification of a complete private deployable package remains separate from source staging.",
+    "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule."
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -69,5 +71,5 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T11:40:29Z"
+  "updatedUTC": "2026-11-20T11:49:05Z"
 }
