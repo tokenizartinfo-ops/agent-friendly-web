@@ -1,9 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createFiniteOwnerRequestLease,readFiniteOwnerRequestBoundary,continuePrivateQaFiniteOwnerChoice} from '../lib/mcp-qa-finite-owner-preparation.mjs';
-import {observeFiniteOwnerRequestWork} from '../lib/mcp-qa-finite-stage-work.mjs';
-import {forwardFiniteOwnerChoice} from '../lib/mcp-qa-finite-owner-native-bridge.mjs';
-import {createFiniteOwnerNativeReceiver} from '../lib/mcp-qa-finite-owner-native-receiver.mjs';
+import {registerHooks} from 'node:module';
+
+// These transport and retention units run in Node. If any reaches an actual
+// OAuth RPC entrypoint the substitute throws. The SDK is exercised in Workerd.
+const workerModule='data:text/javascript,'+encodeURIComponent(
+ "export class WorkerEntrypoint { constructor() { throw Error('Native WorkerEntrypoint requires Workerd'); } }",
+);
+const hook=registerHooks({resolve(specifier,context,next){
+ return specifier==='cloudflare:workers'?{url:workerModule,shortCircuit:true}:next(specifier,context);
+}});
+const [
+ {createFiniteOwnerRequestLease,readFiniteOwnerRequestBoundary,continuePrivateQaFiniteOwnerChoice},
+ {observeFiniteOwnerRequestWork},
+ {forwardFiniteOwnerChoice},
+ {createFiniteOwnerNativeReceiver},
+]=await Promise.all([
+ import('../lib/mcp-qa-finite-owner-preparation.mjs'),
+ import('../lib/mcp-qa-finite-stage-work.mjs'),
+ import('../lib/mcp-qa-finite-owner-native-bridge.mjs'),
+ import('../lib/mcp-qa-finite-owner-native-receiver.mjs'),
+]).finally(()=>hook.deregister());
 const O='https://delegated-canary.agentfriendlyweb.dev',U=O+'/connections/finite-prepare',T='https://afw-private.invalid/_finite-owner/choice',V='11111111-1111-4111-8111-111111111111',A='a'.repeat(64);
 function sender(fetcher){
  const sent=[],stub={fetch(request){sent.push(request);return fetcher(request);}},ns={idFromName(name){assert.equal(name,'afw-own-successor-closure-v1');return {toString:()=>A};},get(){return stub;}};
@@ -43,7 +60,15 @@ test('oversized successful response fails closed and retains cancellation',async
  const r=await invoke(f,new Request(U));assert.equal(r.status,503);release();await Promise.all(f.retained);
 });
 function receiver(){
- const id={toString:()=>A},storage={get(){},transaction(){}},ctx={id,storage},env={AFW_INDEPENDENT_CLOSURE:{idFromName:()=>id,get(){}},RELEASE_DB:{prepare(){},withSession(){}},AFW_QA_VERSION:{id:V}};
+ const noSourceIo=()=>{throw Error('Unexpected finite owner source I/O');};
+ const id={toString:()=>A},storage={get:noSourceIo,list:noSourceIo,getAlarm:noSourceIo,transaction:noSourceIo,sync:noSourceIo},ctx={id,storage};
+ const env={
+  AFW_INDEPENDENT_CLOSURE:{idFromName:()=>id,get:noSourceIo},
+  AFW_RELEASE_EVENTS_NODE:{idFromName:noSourceIo,idFromString:noSourceIo,get:noSourceIo},
+  AFW_FINITE_OWNER_OAUTH_KV:{get:noSourceIo,put:noSourceIo,delete:noSourceIo,list:noSourceIo},
+  RELEASE_DB:{prepare:noSourceIo,withSession:noSourceIo},
+  AFW_QA_VERSION:{id:V},
+ };
  return {ctx,env,handler:createFiniteOwnerNativeReceiver({ctx,env})};
 }
 function headers(){

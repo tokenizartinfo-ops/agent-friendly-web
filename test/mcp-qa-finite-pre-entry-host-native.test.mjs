@@ -27,6 +27,8 @@ async function fixture(mode='normal'){
  const context={purpose:'afw.qa-pre-entry-custody-context.v1',id,sourceRevision:source,baselineVersionId:'c570b60b-95dc-48e1-89f3-9c4651691dbc',baselineModuleHash:baselineHash,startAt:now-1000,expiresAt:now+120000};
  if(mode==='expired')context.expiresAt=now-1;
  if(mode==='bad-source')context.sourceRevision='bad';
+ const readerId='1'.repeat(32),publisherId='2'.repeat(32),expiresAt=now+3600000;
+ const syntheticProfile={startAt:now-60000,endAt:expiresAt,reader:{id:readerId,expiresAt},publisher:{id:publisherId,expiresAt}};
  const entry=`import base,{IndependentClosure,PrivateQaBootstrap} from './scripts/qa-finite-pre-entry-custody-wrapper.mjs';
  import {observeFiniteOwnerStageWork} from './lib/mcp-qa-finite-stage-work.mjs';
  export class Actor extends IndependentClosure{
@@ -45,6 +47,11 @@ async function fixture(mode='normal'){
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-base-and-context',setup(b){
   b.onResolve({filter:/^\.\/closed-rollback\.mjs$/},()=>({path:'base',namespace:'fixture'}));
   b.onResolve({filter:/^\.\/pre-entry-custody-context\.mjs$/},()=>({path:'context',namespace:'fixture'}));
+  b.onLoad({filter:/[\\/]mcp-qa-finite-initial-custody-profile\.mjs$/},async ({path})=>{
+   const source=await readFile(path,'utf8'),renewals=/const approvedRenewals=Object\.freeze\([^\r\n]*\);/g;
+   assert.equal([...source.matchAll(renewals)].length,1,'synthetic custody fixture input');
+   return {contents:source.replace(renewals,()=>`const approvedRenewals=Object.freeze([${JSON.stringify(syntheticProfile)}]);`),loader:'js'};
+  });
   b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='context'?'export const custodyContext=Object.freeze('+JSON.stringify(context)+');':exact?exact.toString('utf8'):"export {IndependentClosure,PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation,default} from './worker/independent-closure/closed-rollback.mjs';",resolveDir:process.cwd(),loader:'js'}));
  }}]});
  let calls=[],release,held=false;
@@ -55,7 +62,7 @@ async function fixture(mode='normal'){
   calls.push({url:req.url,method:req.method});assert.equal(req.method,'GET');
   if(mode==='hold'&&req.url.endsWith('/tokens/verify')&&!held){held=true;await new Promise(r=>{release=r;});}
   let result;
-  if(req.url.endsWith('/tokens/verify'))result={id:mode==='wrong-holder'?'0'.repeat(32):req.headers.get('authorization')==='Bearer synthetic-native-reader'?'9aa97ad1fc9afe3021cf69ea497d5190':'05718105dcdfc92e55cc3624172c2740',status:'active',expires_on:new Date(Date.now()+3600000).toISOString(),not_before:null};
+  if(req.url.endsWith('/tokens/verify'))result={id:mode==='wrong-holder'?'0'.repeat(32):req.headers.get('authorization')==='Bearer synthetic-native-reader'?readerId:publisherId,status:'active',expires_on:new Date(expiresAt).toISOString(),not_before:null};
   else {assert.match(req.url,/\/workflows\/afw-own-qa-private-bootstrap\/instances\/afw-mcp-closure-/);result={status:'complete',step_count:6,output:{status:'blocked',dispatchStatus:'uncertain',nativeWithdrawalVerified:false,operationalReadiness:false,mayRetry:false},steps:[{name:'one'},{name:'restore-own-closed-canary-1',start:'2026-10-30T16:41:01.564Z',end:'2026-10-30T16:41:01.675Z',success:true},{name:'two'},{name:'three'},{name:'four'},{name:'five'}]};}
   return Response.json({success:true,errors:[],messages:[],result},{headers:{date:new Date().toUTCString()}});
  }}));
