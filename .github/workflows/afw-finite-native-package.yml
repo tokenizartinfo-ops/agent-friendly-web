@@ -10,6 +10,7 @@ on:
       - "scripts/verify-finite-native-rollback.mjs"
       - "scripts/verify-qa-finite-archive.py"
       - "test/verify-finite-native-rollback.test.mjs"
+      - "test/mcp-qa-finite-closed-profile.test.mjs"
       - "lib/**"
       - "worker/**"
   workflow_dispatch:
@@ -49,7 +50,7 @@ jobs:
       - name: Verify the bounded archive parser
         run: python3 -m unittest discover -s test -p finite_archive_test.py
       - name: Verify private R2 package transport and release provenance
-        run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs test/verify-finite-native-rollback.test.mjs
+        run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs test/verify-finite-native-rollback.test.mjs test/mcp-qa-finite-closed-profile.test.mjs
   package:
     needs: verify
     if: ${{ github.event_name == 'workflow_dispatch' && github.run_attempt == '1' && inputs.source_revision == github.sha }}
