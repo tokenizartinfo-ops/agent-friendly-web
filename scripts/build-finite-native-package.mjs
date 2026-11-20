@@ -10,9 +10,8 @@ import {readFile,mkdir,writeFile,realpath} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
-import {finiteWranglerProfileTemplate,finitePublicStaticExpectation,finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
+import {finiteWranglerProfileTemplate,finitePublicStaticExpectation,finitePublicProfileTemplate,qualifyHistoricalClosedVersionProfile} from '../lib/mcp-qa-finite-profile.mjs';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
-import {qualifyOwnClosedVersionMetadata} from '../lib/mcp-qa-own-closed-readback.mjs';
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
 const fail=()=>{throw Error('Finite native package unavailable');};
 const workflow='.github/workflows/afw-finite-native-package.yml';
@@ -160,7 +159,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  const rollbackProfiles={};
  for(const role of Object.keys(historicalKeys)){
   const metadata=privateMetadata[role];
-  rollbackProfiles[role]=qualifyOwnClosedVersionMetadata(role,metadata);
+  rollbackProfiles[role]=qualifyHistoricalClosedVersionProfile(role,metadata);
   if(role==='operatorClosed')continue;
   const liveRole=role==='qaClosed'?'qaLive':'canaryLive';
   const liveProfile=finitePublicProfileTemplate(liveRole);
