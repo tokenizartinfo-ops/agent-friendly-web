@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {build} from 'esbuild';
+import ts from 'typescript';
 import {Miniflare,NoOpLog,convertV4MiniflareOptions} from 'miniflare';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 
@@ -15,6 +16,9 @@ const fail=()=>{throw Error('Finite private rollback mounts unavailable');};
 
 export async function readArchivedExports(source,sourcefile,providerExports){
  const contents=new TextDecoder('utf-8',{fatal:true}).decode(source);
+ const syntax=ts.createSourceFile(sourcefile,contents,ts.ScriptTarget.Latest,false,ts.ScriptKind.JS);
+ // A bare star re-exports names that the current module's metadata cannot enumerate.
+ if(syntax.statements.some(statement=>ts.isExportDeclaration(statement)&&statement.moduleSpecifier&&!statement.exportClause))fail();
  // Parsing the pinned source must not resolve runtime imports or execute it.
  const result=await build({stdin:{contents,sourcefile,loader:'js'},bundle:false,write:false,
   format:'esm',platform:'neutral',metafile:true,logLevel:'silent'});

@@ -38,7 +38,7 @@ async function fixtureVerifier(modules){
  const modulePath=fileURLToPath(new URL('../scripts/verify-finite-native-rollback.mjs',import.meta.url));
  const compiled=await build({entryPoints:[modulePath],bundle:true,write:false,format:'esm',platform:'node',
   plugins:[{name:'synthetic-archive-pins',setup(builder){
-   builder.onResolve({filter:/^(?:esbuild|miniflare)$/},args=>({path:pathToFileURL(require.resolve(args.path)).href,external:true}));
+   builder.onResolve({filter:/^(?:esbuild|miniflare|typescript)$/},args=>({path:pathToFileURL(require.resolve(args.path)).href,external:true}));
    builder.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({
     contents:'export const QA_CLOUD_CLOSED_PINS='+JSON.stringify(pins)+';',loader:'js'
    }));
@@ -65,4 +65,10 @@ test('rollback cannot attest a partial export inventory from an external wildcar
  const archivedBytes=Buffer.concat([sources.operator,Buffer.from("\nexport /* namespace */ * from 'node:buffer';")]);
  await assert.rejects(readArchivedExports(archivedBytes,'index.mjs'),
   {message:'Finite private rollback mounts unavailable'});
+});
+
+test('an explicit namespace alias belongs to the exact export inventory',async()=>{
+ const {readArchivedExports}=await import('../scripts/verify-finite-native-rollback.mjs');
+ const bytes=Buffer.from("export default {}; export * as BufferAlias from 'node:buffer';");
+ assert.deepEqual(await readArchivedExports(bytes,'index.mjs'),['BufferAlias','default']);
 });
