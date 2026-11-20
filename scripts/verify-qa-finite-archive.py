@@ -158,6 +158,54 @@ def inspect_archive(raw):
     return {"manifest": manifest, "manifestText": manifest_text, "files": files}
 
 
+def write_verified_zip(manifest_text, modules, expected_files):
+    """Encode fixed members and independently check what the ZIP reader sees."""
+    require(set(modules) == set(expected_files) == NAMES - {"manifest.json"})
+    target = io.BytesIO()
+    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name, content in [("manifest.json", manifest_text.encode("utf-8")), *sorted(modules.items())]:
+            info = zipfile.ZipInfo(name)
+            info.compress_type = zipfile.ZIP_DEFLATED
+            archive.writestr(info, content)
+    bundle = target.getvalue()
+    seen_manifest, seen_files = inspect_members(bundle, NAMES, "manifest.json")
+    require(seen_manifest == manifest_text and seen_files == expected_files)
+    return bundle
+
+
+def assemble_release_package(raw):
+    """Mechanical packaging only. The Node producer owns native qualification."""
+    header_size = 4 * (1 + len(ROLES))
+    require(len(raw) >= header_size)
+    manifest_size, *module_sizes = struct.unpack_from("<6I", raw)
+    require(0 < manifest_size <= MANIFEST_LIMIT
+            and all(0 < size <= MODULE_LIMIT for size in module_sizes)
+            and len(raw) == header_size + manifest_size + sum(module_sizes))
+    offset = header_size + manifest_size
+    manifest_text = raw[header_size:offset].decode("utf-8")
+    manifest = canonical_record(manifest_text, "afw.finite-native-package.v2")
+    compatibility = manifest.get("compatibility")
+    require(isinstance(compatibility, dict) and compatibility.get("legacyContainmentQualified") is False)
+    descriptors = manifest.get("modules")
+    require(isinstance(descriptors, dict) and set(descriptors) == set(ROLES))
+    members, expected = {}, {}
+    for role, size in zip(ROLES, module_sizes):
+        name = module_name(role)
+        entry = descriptors[role]
+        require(isinstance(entry, dict) and isinstance(entry.get("module"), dict))
+        member = entry["module"]
+        require(member.get("name") == name and type(member.get("bytes")) is int
+                and member["bytes"] == size and isinstance(member.get("sha256"), str)
+                and re.fullmatch(r"[0-9a-f]{64}", member["sha256"]))
+        content = raw[offset:offset + size]
+        require(hashlib.sha256(content).hexdigest() == member["sha256"])
+        key = role + "/" + name
+        members[key] = content
+        expected[key] = {"bytes": size, "sha256": member["sha256"]}
+        offset += size
+    return write_verified_zip(manifest_text, members, expected)
+
+
 def inspect_private_locator(raw):
     require(0 < len(raw) <= 65536)
     text, _ = inspect_members(raw, {"locator.json"}, "locator.json")
@@ -283,15 +331,7 @@ def assemble_private_draft(raw, emit_bundle=False):
                "historicalArchiveSha256": historical["archiveSha256"], "moduleCount": len(modules),
                "files": expected_files, "completePackage": False, "operationalReadiness": False}
     receipt_text = json.dumps(receipt, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    target = io.BytesIO()
-    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for name, content in [("manifest.json", receipt_text.encode("utf-8")), *sorted(modules.items())]:
-            info = zipfile.ZipInfo(name)
-            info.compress_type = zipfile.ZIP_DEFLATED
-            archive.writestr(info, content)
-    bundle = target.getvalue()
-    manifest_text, files = inspect_members(bundle, NAMES, "manifest.json")
-    require(manifest_text == receipt_text and files == expected_files)
+    bundle = write_verified_zip(receipt_text, modules, expected_files)
     if emit_bundle:
         return bundle
     return {**receipt, "draftSha256": hashlib.sha256(bundle).hexdigest(), "draftBytes": len(bundle)}
@@ -361,11 +401,14 @@ def main():
     limit = 2 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 12 if mode == ("--assemble-private-draft",) else ARCHIVE_LIMIT
     if mode in {("--assemble-compiler-draft",), ("--inspect-rollback-compiler-draft",), ("--emit-private-compiler-bundle",)}:
         limit = 3 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 16
+    if mode == ("--assemble-release-package",):
+        limit = 24 + MANIFEST_LIMIT + len(ROLES) * MODULE_LIMIT
     raw = sys.stdin.buffer.read(limit + 1)
     require(len(raw) <= limit)
     inspectors = {
         (): inspect_archive,
         ("--private-locator",): inspect_private_locator,
+        ("--assemble-release-package",): assemble_release_package,
         ("--private-draft-readback",): inspect_private_draft,
         ("--historical-inputs",): inspect_historical_inputs,
         ("--pinned-r2-historical-inputs",): inspect_pinned_r2_historical_inputs,
@@ -377,7 +420,7 @@ def main():
     }
     require(mode in inspectors)
     result = inspectors[mode](raw)
-    if mode in {("--emit-private-compiler-bundle",), ("--emit-pinned-rollback-modules",)}:
+    if mode in {("--emit-private-compiler-bundle",), ("--emit-pinned-rollback-modules",), ("--assemble-release-package",)}:
         # Only the Node compiler consumes these bounded binary pipes.
         require(isinstance(result, bytes) and 0 < len(result) <= ARCHIVE_LIMIT)
         sys.stdout.buffer.write(result)

@@ -10,6 +10,7 @@ import {readFile,mkdir,writeFile,realpath} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
+import {encodeFiniteStagingPackageLayout} from '../lib/mcp-qa-finite-seed.mjs';
 import {finiteWranglerProfileTemplate,finitePublicStaticExpectation,finitePublicProfileTemplate,qualifyHistoricalClosedVersionProfile} from '../lib/mcp-qa-finite-profile.mjs';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
@@ -23,6 +24,7 @@ const expectedExports={qaLive:['IndependentClosure','PrivateQaBootstrap','Privat
 const historicalInputPath='scripts/mcp-finite-r2-historical-inputs.json';
 const closedPinPath='lib/mcp-qa-cloud-closed-pins.mjs';
 const archiveVerifier='scripts/verify-qa-finite-archive.py';
+const releaseRoles=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
 const historicalKeys={qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'};
 const sha256Hex=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
 async function historicalInputLocator(cwd,sourceRevision){
@@ -121,7 +123,8 @@ export async function compileFiniteNativeStaging(input){
 }
 function privateVerifier(cwd,mode,input,maxBuffer){
  return new Promise((accept,reject)=>{
-  const child=execFile('python3',['-I','-B',resolve(cwd,archiveVerifier),mode],{
+  const interpreter=process.platform==='win32'?'python':'python3';
+  const child=execFile(interpreter,['-I','-B',resolve(cwd,archiveVerifier),...(mode?[mode]:[])],{
    cwd,timeout:30000,maxBuffer,encoding:'buffer',windowsHide:true
   },(error,stdout,stderr)=>{
    if(error||stderr.length){reject(Error('Finite private compiler draft unavailable'));return;}
@@ -131,6 +134,30 @@ function privateVerifier(cwd,mode,input,maxBuffer){
   child.stdin.end(input);
  });
 }
+/** Verify the v2 ZIP layout with real module bytes, returning only readback evidence.
+ * A pending native guard is represented in the private manifest as false. */
+export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
+ if(!modules||Object.keys(modules).length!==releaseRoles.length)fail();
+ const manifestBytes=Buffer.from(encodeFiniteStagingPackageLayout(manifest),'utf8');
+ if(!manifestBytes.length||manifestBytes.length>24576)fail();
+ const inputs=[manifestBytes,...releaseRoles.map(role=>{
+  const bytes=modules[role];
+  if(!(bytes instanceof Uint8Array)||bytes.byteLength<1||bytes.byteLength>3145728)fail();
+  return bytes;
+ })];
+ const header=Buffer.alloc(inputs.length*4);
+ inputs.forEach((bytes,index)=>header.writeUInt32LE(bytes.byteLength,index*4));
+ const zip=await privateVerifier(cwd,'--assemble-release-package',Buffer.concat([header,...inputs]),64*1024*1024);
+ const readback=JSON.parse(await privateVerifier(cwd,null,zip,65536));
+ if(readback.manifestText!==manifestBytes.toString('utf8')||Object.keys(readback.files).length!==releaseRoles.length)fail();
+ for(const role of releaseRoles){
+  const {name,sha256,bytes}=manifest.modules[role].module;
+  assert.deepEqual(readback.files[role+'/'+name],{sha256,bytes});
+ }
+ return Object.freeze({archiveSha256:hash(zip),archiveBytes:zip.length,moduleCount:releaseRoles.length,
+  completePackage:false,operationalReadiness:false});
+}
+
 /** The digest and rollback configuration are verified before the binary
  * publisher can use the same immutable frame. */
 async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false}={}){
@@ -189,7 +216,26 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   rollbackProfiles[role]={...rollbackProfiles[role],exportCount:names.length,
    exportNamesHash:hash('afw.finite-historical-module-exports.v1\n'+JSON.stringify(names))};
  }
- const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts}};
+ // The archive rehearsal uses the exact closed modules that were just mounted.
+ const layoutModules={qaLive:qa,canaryLive:canary},layoutDescriptors={...built.modules};
+ let rollbackOffset=0;
+ for(const role of orderedClosedRoles){
+  const key=historicalKeys[role],modulePin=allModules[role],profile=rollbackProfiles[role];
+  layoutModules[role]=historicalModules.subarray(rollbackOffset,rollbackOffset+modulePin.bytes);
+  rollbackOffset+=modulePin.bytes;
+  layoutDescriptors[role]={
+   provenance:{kind:'historical-content-pin.v1',receiptPath:closedPinPath,receiptBlobSha:built.historicalInput.providerSourcePin,
+    receiptKey:key,versionId:profile.versionId},
+   module:{...modulePin,exports:moduleExports[role]},publicStatic:profile.publicStatic
+  };
+ }
+ const releaseLayout=await verifyFiniteReleaseLayout({cwd,modules:layoutModules,manifest:{
+  purpose:'afw.finite-native-package.v2',sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
+  sourceCheck:built.sourceCheck,buildWorkflowHash:built.buildWorkflowHash,modules:layoutDescriptors,
+  compatibility:{qaClassesPreserved:true,qaNamespacesPreserved:true,canaryClassesPreserved:true,canaryNamespacesPreserved:true,
+   closedEntrypointsDenied:true,legacyContainmentQualified:false}
+ }});
+ const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts},releaseLayout};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();

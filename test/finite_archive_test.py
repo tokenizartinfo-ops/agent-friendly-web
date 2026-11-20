@@ -85,9 +85,74 @@ def make_archive(manifest, mutation=None):
     return bytes(data)
 
 
+def release_frame(manifest=None):
+    items = {role: MODULE + ("// " + role + "\n").encode("ascii") for role in ROLES}
+    if manifest is None:
+        manifest = {
+            "purpose": "afw.finite-native-package.v2",
+            "compatibility": {"legacyContainmentQualified": False},
+            "modules": {role: {"module": {
+                "name": "closed-rollback.mjs" if role == "qaClosed" else "index.mjs",
+                "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw),
+            }} for role, raw in items.items()}
+        }
+    text = json.dumps(manifest, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    contents = [text, *items.values()]
+    return struct.pack("<6I", *(len(raw) for raw in contents)) + b"".join(contents), manifest
+
+
 class ArchiveTests(unittest.TestCase):
     def invoke(self, data):
         return subprocess.run([sys.executable, str(SCRIPT)], input=data, capture_output=True, timeout=8)
+
+    def assemble(self, data):
+        return subprocess.run(
+            [sys.executable, str(SCRIPT), "--assemble-release-package"],
+            input=data, capture_output=True, timeout=8,
+        )
+
+    def test_release_assembly_round_trips_exact_roles_and_bytes(self):
+        frame, manifest = release_frame()
+        first = self.assemble(frame)
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.assertEqual(first.stderr, b"")
+        self.assertEqual(first.stdout, self.assemble(frame).stdout)
+        decoded = self.invoke(first.stdout)
+        self.assertEqual(decoded.returncode, 0, decoded.stderr)
+        readback = json.loads(decoded.stdout)
+        self.assertEqual(readback["manifest"], manifest)
+        self.assertEqual(readback["files"], {
+            role + "/" + evidence["module"]["name"]: {
+                key: evidence["module"][key] for key in ("sha256", "bytes")
+            } for role, evidence in manifest["modules"].items()
+        })
+        self.assertNotIn(MODULE, decoded.stdout)
+
+    def test_release_assembly_rejects_incorrect_roles_or_bytes_before_emitting(self):
+        frame, manifest = release_frame()
+        altered = frame[:-1] + b"!"
+        manifest["modules"]["qaClosed"]["module"]["name"] = "index.mjs"
+        wrong_name, _ = release_frame(manifest)
+        missing_role, _ = release_frame({**manifest, "modules": {}})
+        for invalid in (frame[:-1], frame + b"x", altered, wrong_name, missing_role):
+            result = self.assemble(invalid)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(result.stdout, b"")
+            self.assertEqual(result.stderr, b"Finite archive unavailable\n")
+
+    def test_release_assembly_cannot_emit_an_enabled_or_undecided_zip(self):
+        _, manifest = release_frame()
+        for compatibility in ({"legacyContainmentQualified": True}, {}, None):
+            proposal = dict(manifest)
+            if compatibility is None:
+                proposal.pop("compatibility")
+            else:
+                proposal["compatibility"] = compatibility
+            frame, _ = release_frame(proposal)
+            result = self.assemble(frame)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(result.stdout, b"")
+            self.assertEqual(result.stderr, b"Finite archive unavailable\n")
 
     def test_rollback_pipe_emits_nothing_for_an_unpinned_archive(self):
         data = make_archive({"purpose": "afw.finite-native-package.v2"})
