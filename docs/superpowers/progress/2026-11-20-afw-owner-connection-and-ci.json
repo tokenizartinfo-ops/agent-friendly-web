@@ -181,6 +181,20 @@
       "eighteenFixedHooks": true,
       "arbitraryStageDenial": true,
       "readsBeforeStep": true
+    },
+    "previousFullShards": {
+      "run": 44764693226,
+      "passedShards": 6,
+      "originalQaCleanup": "success",
+      "sealedQaSources": "success",
+      "identityAndClosureFences": "success",
+      "finalStatus": "lint_failed"
+    },
+    "lintIdentifierRepair": {
+      "files": 7,
+      "syntax": "passed",
+      "focusedTests": 13,
+      "failures": 0
     }
   },
   "findings": {
@@ -274,7 +288,7 @@
     "packageBoundary": "Historical draft source keys remain under finite-bundles-v1. An exact revision's deployment archive now has its own finite-packages-v2 key and requires its own signed read URL in the protected issuer context. Tests reject swap attempts before transport. The compatibility gate still requires privately assembled v2 bytes and verified rollback.",
     "heldConcurrency": "GitHub diagnostic job 136340429745 captured a rejected concurrent OAuth request at the owner gate and the genuine original SDK reaching durable completion. Only the test adapter's blanket list ban interrupted the bounded read-after-write. The candidate now allows exactly the synthetic subject's grant reads after the original SDK observed record. Production bounds remain in place.",
     "fixtureClock": "A synthetic journal sampled the issue and deadline clock twice; a 1ms tick could make the required 5000ms window 5001ms. Fixture now derives both from one sample.",
-    "additionalCI": "Run 44753407506 reached all remaining shards except an old historical test's setup that expected an inline custody declaration, abandoned native workers and hit the 20-minute runner ceiling. The historical fixture now exercises the current selector, pins the closed QA hash domain and disposes the harness if setup fails. The original deadline test independently checks absence of an OAuth cookie and of a SQL effect even when the timed-out transport already closed the response body. The following full run exposed the previously masked native reservation gate issue and a timed-out notice GET whose response body the transport had already closed. The source gate handoff and the GET expiry assertion have been addressed in the new candidate. On revision 21035601 the native reservation now passed; the remaining shard-one and shard-two failures were white-box fixtures tied to the pre-change function call. Their source anchors are updated and the finite unit fixtures provide a branded test gate without calling any effect. The six focused tests passed.",
+    "additionalCI": "Run 44753407506 reached all remaining shards except an old historical test's setup that expected an inline custody declaration, abandoned native workers and hit the 20-minute runner ceiling. The historical fixture now exercises the current selector, pins the closed QA hash domain and disposes the harness if setup fails. The original deadline test independently checks absence of an OAuth cookie and of a SQL effect even when the timed-out transport already closed the response body. The following full run exposed the previously masked native reservation gate issue and a timed-out notice GET whose response body the transport had already closed. The source gate handoff and the GET expiry assertion have been addressed in the new candidate. On revision 21035601 the native reservation now passed; the remaining shard-one and shard-two failures were white-box fixtures tied to the pre-change function call. Their source anchors are updated and the finite unit fixtures provide a branded test gate without calling any effect. The six focused tests passed. Revision 3a72c9a9 passed all six full suites and original checkpoint cleanup. The final job reported seven lint errors in local identifier and test helper names. These were corrected without changing metadata shapes; syntax and thirteen impacted contract tests passed. Exact candidate CI is pending.",
     "nativeReservationBoundary": "Actual workerd Workflow step entry dropped the AsyncLocalStorage reservation gate. The original private environment-bound gate is now captured before the Workflow handoff and carried to the existing reservation writer. The candidate test mounts the real gate, exactly one durable write and first-primary readback. The synthetic measurement proxy explicitly forwards the two scoped RPC methods without invoking remote bind."
   },
   "effects": {
@@ -286,18 +300,18 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T15:35:24Z",
+  "updatedUTC": "2026-11-20T15:57:50Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "3a72c9a93eaf51a46114301137f7d2c54d7c515e",
-    "tree": "6668d1ad861dfad47c4685ab8dc56babd21f4bbd",
+    "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
+    "tree": "d74257bd84e24b8ef9b8c1570362e816e376ff04",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
     "ci": {
-      "runId": 44764693226,
+      "runId": 44768314004,
       "status": "in_progress"
     },
     "sourcePackageChecks": {
-      "runId": 44764693383,
+      "runId": 44768314400,
       "status": "in_progress",
       "completePackage": false
     }
