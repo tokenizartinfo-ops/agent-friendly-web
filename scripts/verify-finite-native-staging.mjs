@@ -57,7 +57,7 @@ function workerOptions(staging,role){
  };
 }
 
-async function verifyClosedQaWorkflows(runtime,qa){
+export async function verifyClosedQaWorkflows(runtime,qa,{timeoutMs=10000}={}){
  const bindings=await runtime.getBindings(qa);
  const planHash='1'.repeat(64);
  const attempts=[
@@ -67,17 +67,33 @@ async function verifyClosedQaWorkflows(runtime,qa){
    params:{planHash},status:'blocked'}
  ];
  for(const attempt of attempts){
-  const instance=await bindings[attempt.binding].create({id:attempt.id,params:attempt.params});
-  const end=performance.now()+10000;
-  let execution;
-  do{
-   execution=await instance.status();
-   if(execution.status==='complete')break;
-   assert(!['errored','terminated'].includes(execution.status),attempt.binding);
-   await delay(25);
-  }while(performance.now()<end);
-  assert.equal(execution.status,'complete',attempt.binding);
-  assert.deepEqual(execution.output,{...pending,status:attempt.status},attempt.binding);
+  const stop=new AbortController();
+  const deadline=performance.now()+timeoutMs;
+  const timedOut=Error(attempt.binding+' did not finish before the staging deadline');
+  const check=()=>{
+   if(stop.signal.aborted||performance.now()>=deadline)throw timedOut;
+  };
+  let timeout;
+  const expired=new Promise((_,reject)=>{
+   timeout=setTimeout(()=>{reject(timedOut);stop.abort();},timeoutMs);
+  });
+  const run=async()=>{
+   check();
+   const instance=await bindings[attempt.binding].create({id:attempt.id,params:attempt.params});
+   for(;;){
+    check();
+    const execution=await instance.status();
+    check();
+    if(execution.status==='complete'){
+     assert.deepEqual(execution.output,{...pending,status:attempt.status},attempt.binding);
+     return;
+    }
+    assert(!['errored','terminated'].includes(execution.status),attempt.binding);
+    await delay(25,undefined,{signal:stop.signal});
+   }
+  };
+  try{await Promise.race([expired,run()]);}
+  finally{clearTimeout(timeout);stop.abort();}
  }
  return attempts.length;
 }
