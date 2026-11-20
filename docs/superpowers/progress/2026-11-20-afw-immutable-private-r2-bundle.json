@@ -1,0 +1,91 @@
+{
+  "purpose": "afw.finite-immutable-private-r2-continuation.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "timestampUTC": "2026-11-20T00:42:11Z",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-independent-observer-and-r2-validation.json",
+  "r2": {
+    "sourceRevision": "8cf46ea2a5026fce7dfb0aacb52f23c7b4361e1a",
+    "sourceTree": "fdf23a2accdd8e2063ee7bc64a2421dff72497e2",
+    "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "moduleCount": 5,
+    "rollbackProfiles": {
+      "qaClosed": {
+        "versionId": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "moduleHash": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+        "configurationHash": "a8c8895f8375f4d09f01960e88bec8c3cac0a89f999e500f74fccf01733f7838",
+        "bindingCount": 31,
+        "closedFlagCount": 14
+      },
+      "canaryClosed": {
+        "versionId": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "moduleHash": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+        "configurationHash": "4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0",
+        "bindingCount": 29,
+        "closedFlagCount": 8
+      },
+      "operatorClosed": {
+        "versionId": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+        "moduleHash": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51",
+        "configurationHash": "8c37301871c7fc3cc0f7471fddfdeb039f418a078b065fdde44ba5cbe8b24b4c",
+        "bindingCount": 7,
+        "closedFlagCount": 3
+      }
+    },
+    "bucket": "afw-release-backups",
+    "objectKey": "finite-bundles-v1/8cf46ea2a5026fce7dfb0aacb52f23c7b4361e1a.zip",
+    "archiveSha256": "d4361a202c31be569f02af16ad8a5b8357a38d1196f70c180e4a6f34737fb241",
+    "archiveBytes": 2021666,
+    "status": "created_verified",
+    "primaryReadback": {
+      "atUTC": "2026-11-20T00:39:25.493Z",
+      "key": "finite-bundles-v1/8cf46ea2a5026fce7dfb0aacb52f23c7b4361e1a.zip",
+      "bytes": 2021666,
+      "sha256": "d4361a202c31be569f02af16ad8a5b8357a38d1196f70c180e4a6f34737fb241",
+      "customDomainCount": 0,
+      "managedPublicAccess": false
+    },
+    "completePackage": false,
+    "authorizesDeployment": false,
+    "publicWorkflowArtifactContainsPackage": false
+  },
+  "integration": {
+    "branch": "integration/afw-private-finite-20261120",
+    "head": "c7e19976bb81851b71564e59e33d8f2eff7a5830",
+    "qualifiedCommit": "d05e2cfc51357cf4c3679d027ac9b9d134711ebd",
+    "qualifiedTree": "418940170d9b2fe5bc3849dd5548038242c75dc2",
+    "baseMain": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "mainUpdated": false,
+    "files": 424,
+    "publicSiteTreePreserved": true,
+    "validationRun": 44647279065,
+    "nodePassed": 149,
+    "pythonPassed": 29,
+    "failed": 0,
+    "qualificationWorkflowRemoved": true
+  },
+  "liveReadback": {
+    "atUTC": "2026-11-20T00:40:28.663Z",
+    "deployments": {
+      "qa": {
+        "closedPin": true
+      },
+      "canary": {
+        "closedPin": true
+      },
+      "operator": {
+        "closedPin": true
+      }
+    }
+  },
+  "actualCloudTrial": false,
+  "sameNoticeReviewedLive": false,
+  "nativeWithdrawalObservedLive": false,
+  "ownerActionNeededNow": false,
+  "operationalReadiness": false,
+  "next": [
+    "Use a small source-bound manifest and locator receipt in GitHub. Resolve the exact ZIP directly in private R2 and verify archive hash, source tree, each role, and immutable rollback pins. The current resolver only accepts the complete public-repository Actions package shape and the source qualification gate still fails closed.",
+    "Emit an admitted release for the promoted main revision; the staged integration commit contains the main-preserving overlay and is intentionally a different source revision from the present private bundle.",
+    "After qualifying the main revision, recheck protected custody, stage exact runtime versions and rollback, then run one finite cloud occurrence. Accept only native unsubscription and assistant review of the identical notice with independent QA closure."
+  ]
+}

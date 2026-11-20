@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-verified-private-r2-rollback-compiler.json",
-  "phase": "Native observer and protected GitHub independent QA restoration wired in lab source, cloud validation and literal private R2 assembly passed. Default branch promotion, full package eligibility, and actual notice trial pending.",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-independent-observer-and-r2-validation.json",
+  "phase": "Exact five-module archive emitted to immutable private R2 and independently read back. Main-based finite integration branch qualified; release admission and real cloud occurrence pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "The protected environment admits main only. Main lacks the native finalizer; lab history diverged from main. Port qualified source dependencies and runnable workflows through a reviewed bounded change. Do not enable lab runtime custody by widening protected deployment policy. The existing complete-package compiler and source qualification still fail closed. Make private artifact assembly and the exact consumer locator agree, keeping literal archive bytes and policy data private, then qualify all five role modules and rollback before traffic. Before a new occurrence, install a fresh object-scoped R2 read link in the existing protected environment and verify all scoped token identities there. Keep the exact accepted receiver and independent restoration ready. Launch once and require same event review, native subscription withdrawal and provider restoration readback.",
+  "next": "Use a small source-bound manifest and locator receipt in GitHub. Resolve the exact ZIP directly in private R2 and verify archive hash, source tree, each role, and immutable rollback pins. The current resolver only accepts the complete public-repository Actions package shape and the source qualification gate still fails closed. Emit an admitted release for the promoted main revision; the staged integration commit contains the main-preserving overlay and is intentionally a different source revision from the present private bundle. After qualifying the main revision, recheck protected custody, stage exact runtime versions and rollback, then run one finite cloud occurrence. Accept only native unsubscription and assistant review of the identical notice with independent QA closure.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 188,
-  "updatedAtUTC": "2026-11-20T00:06:56Z",
+  "schemaVersion": 189,
+  "updatedAtUTC": "2026-11-20T00:42:11Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2729,5 +2729,14 @@
     "exactPrivateDraftSha256": "b7535bc136ca5a331552e0865703af636b7392abbd1dfd3f778c6b496315b8b5",
     "completePackage": false,
     "realCloudTrial": false
+  },
+  "immutablePrivateR2Bundle": {
+    "path": "docs/superpowers/progress/2026-11-20-afw-immutable-private-r2-bundle.json",
+    "sourceRevision": "8cf46ea2a5026fce7dfb0aacb52f23c7b4361e1a",
+    "archiveSha256": "d4361a202c31be569f02af16ad8a5b8357a38d1196f70c180e4a6f34737fb241",
+    "integrationHead": "c7e19976bb81851b71564e59e33d8f2eff7a5830",
+    "validationRun": 44647279065,
+    "completePackage": false,
+    "actualCloudTrial": false
   }
 }
