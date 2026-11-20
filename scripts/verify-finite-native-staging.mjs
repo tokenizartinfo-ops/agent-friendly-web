@@ -12,6 +12,23 @@ const canaryOrigin='https://delegated-canary.agentfriendlyweb.dev';
 const pending={status:'admin_pending',mayRetry:false,operationalReadiness:false};
 const qaActorName='afw-own-successor-closure-v1';
 const eventActorName='afw-own-event-first-successor-v1';
+const legacyProbeName='afw-staging-legacy-rpc-probe';
+const legacyProbeSource=`
+ export default {async fetch(_request,env){
+  const node=env.NODE.get(env.NODE.idFromName('${eventActorName}'));
+  const checks=[
+   [()=>node.deliverOwnSaved('synthetic-event'),'Private event Node unavailable'],
+   [()=>node.deliverSaved('synthetic-subscription','synthetic-event'),'Private event Node unavailable'],
+   [()=>node.withdrawPermissions(),'Finite legacy withdrawal unavailable'],
+   [()=>node.withdrawPermissionsForPlan({}),'Finite legacy withdrawal unavailable']
+  ];
+  for(const [invoke,expected] of checks){
+   try{await invoke();return Response.json({denied:false});}
+   catch(error){if(error?.message!==expected)return Response.json({denied:false});}
+  }
+  return Response.json({denied:true});
+ }};
+`;
 
 function workerOptions(staging,role){
  const config=finiteWranglerProfileTemplate(role);
@@ -38,15 +55,20 @@ function workerOptions(staging,role){
 
 export async function verifyFiniteStagingMounts(staging){
  const workers=roles.map(role=>workerOptions(staging,role));
+ const [canary,qa]=workers.map(worker=>worker.name);
  // All namespaces are ephemeral. Catch every external request, including
  // attempts handled as ordinary pending responses by the mounted Worker.
- const blocked=async()=>{outboundAttempts+=1;return new Response(null,{status:503});};
  let outboundAttempts=0;
+ const blocked=async()=>{outboundAttempts+=1;return new Response(null,{status:503});};
+ // Invoke legacy RPCs from Workerd so Miniflare's Node proxy cannot absorb
+ // the exception before the probe checks the denial reason.
+ const legacyProbe={name:legacyProbeName,modules:true,script:legacyProbeSource,
+  compatibilityDate:workers[0].compatibilityDate,
+  durableObjects:{NODE:{className:'AfwOwnEventNode',useSQLite:true,scriptName:canary}}};
  const mf=new Miniflare(convertV4MiniflareOptions({
-  workers:workers.map(worker=>({...worker,outboundService:blocked}))
+  workers:[...workers,legacyProbe].map(worker=>({...worker,outboundService:blocked}))
  }));
  try{
-  const [canary,qa]=workers.map(worker=>worker.name);
   const canaryFetch=await mf.getWorker(canary);
   for(const [path,method] of [
    ['/connections/finite-prepare','GET'],['/authorize','GET'],
@@ -80,11 +102,8 @@ export async function verifyFiniteStagingMounts(staging){
    const namespace=await mf.getDurableObjectNamespace(binding,qa);
    assert.equal(namespace.idFromName(eventActorName).toString(),eventId.toString());
   }
-  const event=localCanary.get(eventId);
-  await assert.rejects(async()=>event.deliverOwnSaved('synthetic-event'),/unavailable/i);
-  await assert.rejects(async()=>event.deliverSaved('synthetic-event','synthetic-subscription'),/unavailable/i);
-  await assert.rejects(async()=>event.withdrawPermissions(),/Finite legacy withdrawal unavailable/);
-  await assert.rejects(async()=>event.withdrawPermissionsForPlan({}),/Finite legacy withdrawal unavailable/);
+  const probe=await mf.getWorker(legacyProbeName);
+  assert.deepEqual(await (await probe.fetch('https://fixture.invalid')).json(),{denied:true});
   assert.equal(outboundAttempts,0);
   return Object.freeze({exactModuleCount:workers.length,operationalReadiness:false});
  }finally{
