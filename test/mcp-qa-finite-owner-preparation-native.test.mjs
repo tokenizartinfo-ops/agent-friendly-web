@@ -157,8 +157,17 @@ test('same-origin SDK-approved POST can map exact unconsumed transaction when in
 test('lost original snapshot acknowledgement returns no handle and preserves committed native facts',async t=>{
  const f=await native(t),result=await f.call('/connections/finite-prepare',{headers:{'X-Fixture-Lose-Ack':'true'}});
  assert.equal(result.status,503);assert.equal(result.headers.get('Set-Cookie'),null);assert.doesNotMatch(await result.text(),/name="handle"/);
- const stored=await rows(f);assert.equal(stored.filter(([k])=>k.endsWith(':source')).length,1);
- assert.equal(stored.filter(([k])=>k.startsWith('owner-ticket:')||k.startsWith('connection-approval:')).length,0);
+ const stored=await rows(f);
+ const sources=stored.filter(([key])=>key.endsWith(':source')),tickets=stored.filter(([key])=>key.startsWith('owner-ticket:'));
+ const projects=stored.filter(([key])=>key.startsWith('owner-project-ref:'));
+ assert.equal(sources.length,1);assert.equal(tickets.length,1);assert.equal(projects.length,1);
+ const [[,source]] = sources,[[ticketKey,ticket]] = tickets,[[projectKey,project]] = projects;
+ assert.equal(ticketKey,'owner-ticket:'+source.initialTicketHash);
+ assert.equal(ticket.ticketHash,source.initialTicketHash);
+ assert.equal(projectKey,'owner-project-ref:'+ticket.projectRef);
+ assert.equal(ticket.preconnectionId,source.preconnectionId);
+ assert.equal(project.preconnectionId,source.preconnectionId);
+ assert.equal(stored.some(([key])=>key.endsWith(':use')||key.startsWith('connection-approval:')),false);
 });
 test('unqualified product source and forwarding constructors remain unavailable despite caller DTOs',async()=>{
  const source=await import('../lib/mcp-qa-finite-owner-source.mjs');

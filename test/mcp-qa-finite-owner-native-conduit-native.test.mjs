@@ -14,7 +14,11 @@ async function fixture(t){
    durableObjects:{AFW_FINITE_TRIAL_CONTROL:{className:'NativeReceiverFixture',scriptName:'receiver',useSQLite:true,uniqueKey:'SYN-native-conduit'}},
    d1Databases:{DB:'SYN-M'},kvNamespaces:['OAUTH_KV'],ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'99126',simple:{limit:1000,period:60}}},bindings:{AFW_FINITE_TRIAL_VERSION:{id:V}}},
   {name:'receiver',modules:true,script:receiver,compatibilityDate:q.compatibility_date,compatibilityFlags:q.compatibility_flags,
-   durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'NativeReceiverFixture',useSQLite:true,uniqueKey:'SYN-native-conduit'}},d1Databases:{RELEASE_DB:'SYN-Q'},bindings:{AFW_QA_VERSION:{id:'22222222-2222-4222-8222-222222222222'}}}
+   durableObjects:{
+    AFW_INDEPENDENT_CLOSURE:{className:'NativeReceiverFixture',useSQLite:true,uniqueKey:'SYN-native-conduit'},
+    AFW_RELEASE_EVENTS_NODE:{className:'NativeReceiverFixture',useSQLite:true,uniqueKey:'SYN-native-events'}
+   },d1Databases:{RELEASE_DB:'SYN-Q'},kvNamespaces:['AFW_FINITE_OWNER_OAUTH_KV'],
+   bindings:{AFW_QA_VERSION:{id:'22222222-2222-4222-8222-222222222222'},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-reader',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-publisher'}}
  ]}));
  t.after(()=>mf.dispose());
  // Sender FIRST/default, direct established dispatchFetch path; no getWorker.
