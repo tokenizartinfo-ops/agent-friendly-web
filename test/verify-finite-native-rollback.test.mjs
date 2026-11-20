@@ -7,9 +7,16 @@ import {build} from 'esbuild';
 
 const require=createRequire(import.meta.url);
 const source=Buffer.from(`
- export default {async fetch(_request,env){
+ export default {async fetch(request,env){
   if(env.SYNTHETIC_MODE==='open')return new Response(null,{status:200});
   if(env.SYNTHETIC_MODE==='egress')await fetch('https://blocked.invalid');
+  if(env.SYNTHETIC_ROLE==='canaryClosed'){
+   const {origin,pathname}=new URL(request.url);
+   if(origin!=='https://delegated-canary.agentfriendlyweb.dev')return new Response(null,{status:500});
+   if(['/authorize','/monitoring'].includes(pathname)&&env.SYNTHETIC_MODE!=='generic-denial'){
+    return new Response('<h1>Esta prueba está en pausa</h1>',{status:404,headers:{'content-type':'text/html'}});
+   }
+  }
   return new Response(null,{status:404});
  }};
 `);
@@ -20,7 +27,7 @@ const pins=Object.fromEntries(Object.entries(members).map(([role,name])=>[role,{
 const frame=Buffer.concat([source,source,source]);
 const metadata=(mode='closed')=>Object.fromEntries(['qaClosed','canaryClosed','operatorClosed'].map(role=>[role,{
  compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],
- bindings:[{name:'SYNTHETIC_MODE',type:'plain_text',text:mode}]
+ bindings:[{name:'SYNTHETIC_MODE',type:'plain_text',text:mode},{name:'SYNTHETIC_ROLE',type:'plain_text',text:role}]
 }]));
 
 test('rollback mount probe checks exact bytes, closed routes and denied egress in Workerd',async()=>{
@@ -38,7 +45,7 @@ test('rollback mount probe checks exact bytes, closed routes and denied egress i
   exactModuleCount:3,deniedRouteCount:10,operationalReadiness:false
  });
  const corrupt=Buffer.from(frame);corrupt[0]^=1;
- for(const [bytes,config] of [[corrupt,metadata()],[frame,metadata('open')],[frame,metadata('egress')]]){
+ for(const [bytes,config] of [[corrupt,metadata()],[frame,metadata('open')],[frame,metadata('egress')],[frame,metadata('generic-denial')]]){
   await assert.rejects(verifyFiniteRollbackMounts(bytes,config),{message:'Finite private rollback mounts unavailable'});
  }
 });

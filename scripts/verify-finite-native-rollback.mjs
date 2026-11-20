@@ -8,6 +8,8 @@ const disabledRoutes=Object.freeze({
  canaryClosed:['/mcp','/authorize','/monitoring','/qa/expediente'],
  operatorClosed:['/','/mcp','/_finite-owner/monitoring']
 });
+const canaryOrigin='https://delegated-canary.agentfriendlyweb.dev';
+const humanPausedRoutes=new Set(['/authorize','/monitoring']);
 const fail=()=>{throw Error('Finite private rollback mounts unavailable');};
 
 export async function verifyFiniteRollbackMounts(moduleFrame,metadata){
@@ -38,9 +40,13 @@ export async function verifyFiniteRollbackMounts(moduleFrame,metadata){
    for(const [role,paths] of Object.entries(disabledRoutes)){
     const worker=await mf.getWorker(role);
     for(const path of paths){
-     const result=await worker.fetch('https://fixture.invalid'+path);
-     await result.body?.cancel();
-     if(result.status!==404)fail();
+     const origin=role==='canaryClosed'?canaryOrigin:'https://fixture.invalid';
+     const result=await worker.fetch(origin+path);
+     if(result.status!==404){await result.body?.cancel();fail();}
+     if(role==='canaryClosed'&&humanPausedRoutes.has(path)){
+      const type=result.headers.get('content-type');
+      if(!type?.startsWith('text/html')||!(await result.text()).includes('<h1>Esta prueba está en pausa</h1>'))fail();
+     }else await result.body?.cancel();
      deniedRouteCount+=1;
     }
    }
