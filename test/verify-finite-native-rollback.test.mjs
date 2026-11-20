@@ -23,17 +23,18 @@ const source=Buffer.from(`
 `);
 const members={qaClosed:'closed-rollback.mjs',canary:'index.mjs',operator:'index.mjs'};
 const sources=Object.fromEntries(Object.keys(members).map(role=>[role,Buffer.concat([source,Buffer.from('\n// '+role)])]));
-const pins=Object.fromEntries(Object.entries(members).map(([role,name])=>[role,{module:{
- name,bytes:sources[role].length,sha256:createHash('sha256').update(sources[role]).digest('hex')
+const fixturePins=modules=>Object.fromEntries(Object.entries(members).map(([role,name])=>[role,{module:{
+ name,bytes:modules[role].length,sha256:createHash('sha256').update(modules[role]).digest('hex')
 }}]));
 const frame=Buffer.concat(Object.values(sources));
 const metadata=(mode='closed')=>Object.fromEntries(['qaClosed','canaryClosed','operatorClosed'].map(role=>[role,{
  compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],
- exports:{[mode==='wrong-provider-export'?'WrongRollbackClass':'OwnRollbackFixture']:{type:'durable-object',storage:'sqlite'}},
+ ...(role==='operatorClosed'?{}:{exports:{[mode==='wrong-provider-export'?'WrongRollbackClass':'OwnRollbackFixture']:{type:'durable-object',storage:'sqlite'}}}),
  bindings:[{name:'SYNTHETIC_MODE',type:'plain_text',text:mode},{name:'SYNTHETIC_ROLE',type:'plain_text',text:role}]
 }]));
 
-test('rollback mount probe checks exact bytes, closed routes and denied egress in Workerd',async()=>{
+async function fixtureVerifier(modules){
+ const pins=fixturePins(modules);
  const modulePath=fileURLToPath(new URL('../scripts/verify-finite-native-rollback.mjs',import.meta.url));
  const compiled=await build({entryPoints:[modulePath],bundle:true,write:false,format:'esm',platform:'node',
   plugins:[{name:'synthetic-archive-pins',setup(builder){
@@ -44,6 +45,11 @@ test('rollback mount probe checks exact bytes, closed routes and denied egress i
   }}]
  });
  const {verifyFiniteRollbackMounts}=await import('data:text/javascript;base64,'+Buffer.from(compiled.outputFiles[0].contents).toString('base64'));
+ return verifyFiniteRollbackMounts;
+}
+
+test('rollback mount probe checks exact bytes, closed routes and denied egress in Workerd',async()=>{
+ const verifyFiniteRollbackMounts=await fixtureVerifier(sources);
  assert.deepEqual(await verifyFiniteRollbackMounts(frame,metadata()),{
   exactModuleCount:3,deniedRouteCount:10,operationalReadiness:false,
   moduleExports:{qaClosed:['OwnRollbackFixture','default'],canaryClosed:['OwnRollbackFixture','default'],operatorClosed:['OwnRollbackFixture','default']}
@@ -52,4 +58,11 @@ test('rollback mount probe checks exact bytes, closed routes and denied egress i
  for(const [bytes,config] of [[corrupt,metadata()],[frame,metadata('open')],[frame,metadata('egress')],[frame,metadata('generic-denial')],[frame,metadata('wrong-provider-export')]]){
   await assert.rejects(verifyFiniteRollbackMounts(bytes,config),{message:'Finite private rollback mounts unavailable'});
  }
+});
+
+test('rollback cannot attest a partial export inventory from an external wildcard',async()=>{
+ const modules={...sources,operator:Buffer.concat([sources.operator,Buffer.from("\nexport /* namespace */ * from 'node:buffer';")])};
+ const verify=await fixtureVerifier(modules);
+ await assert.rejects(verify(Buffer.concat(Object.values(modules)),metadata()),
+  {message:'Finite private rollback mounts unavailable'});
 });
