@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { operationsWindowOpen } from '../lib/operations-window.mjs';
 import receiver from '../worker/operations/index.mjs';
-import manager from '../worker/operations-manager/index.mjs';
+import manager from '../worker/operations-manager/fetch.mjs';
 
 const now = Date.parse('2026-10-04T20:00:00.000Z');
 test('operational window rejects missing, malformed and noncanonical deadlines and closes exactly at expiry', () => {

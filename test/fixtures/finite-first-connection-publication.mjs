@@ -399,8 +399,11 @@ export function instrumentFirstConnection(source,{mutation=null}={}){
   const i=matches[0];assert(lines[i].endsWith('fail();'));lines[i]=lines[i].slice(0,-7)+"{(globalThis.__t3Observation??=[]).push({kind:'correlator',name:'"+name+"'});fail();}";source=lines.join('\n');
  }
 
- source=source.replace("async function observeOwnerPhasePair(options){\n let clock,onAbort,parentSignal;",()=>"async function observeOwnerPhasePair(options){\ const observedAt=performance.now();\n let clock,onAbort,parentSignal;");
- source=source.replace("}finally{if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}",()=>"}finally{(globalThis.__t3Observation??=[]).push({kind:'pair',elapsedMs:performance.now()-observedAt});if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}");
+ const pairEntry="async function observeOwnerPhasePair(options,flow='owner-request'){";
+ const pairExit="}finally{if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}";
+ for(const marker of [pairEntry,pairExit])assert.equal(source.split(marker).length,2,'passive owner phase observation marker');
+ source=source.replace(pairEntry,pairEntry+"\n const observedAt=performance.now();");
+ source=source.replace(pairExit,"}finally{(globalThis.__t3Observation??=[]).push({kind:'pair',elapsedMs:performance.now()-observedAt});"+pairExit.slice('}finally{'.length));
  return instrumentFirstConnectionObserverIo(source);
 }
 
