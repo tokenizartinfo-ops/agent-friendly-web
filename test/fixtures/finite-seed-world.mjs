@@ -30,7 +30,7 @@ export async function seedWorld({sourceAuthority=true}={}){
  if(built.status!==0)throw Error('synthetic ZIP failed');const zip=built.stdout;
  const manifestHash=hashFinitePackageManifest(m),r2Credential=finiteR2TestUrl(m.sourceRevision,f.T0);
  const locator=finitePrivateLocatorZip({purpose:'afw.finite-private-package-locator.v1',sourceRevision:m.sourceRevision,
-  sourceTree:m.sourceTree,buildWorkflowHash:m.buildWorkflowHash,objectKey:'finite-bundles-v1/'+m.sourceRevision+'.zip',
+  sourceTree:m.sourceTree,buildWorkflowHash:m.buildWorkflowHash,objectKey:'finite-packages-v2/'+m.sourceRevision+'.zip',
   archiveBytes:zip.length,archiveSha256:digest(zip),manifestHash});
  f.seed.build.manifestHash=manifestHash;f.seed.build.artifactDigest='sha256:'+digest(locator);
  for(const role of ['qaLive','qaClosed'])for(const key of ['module','publicStatic'])f.seed.qaPublication[role][key]=structuredClone(m.modules[role][key]);

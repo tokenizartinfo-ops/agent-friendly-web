@@ -142,7 +142,11 @@ test('held actual approve denies fabricated results and concurrent complete bear
   console.info('D02 SYN held result',JSON.stringify({status:original.status,elapsed:f.timings.post,calls:denied.calls,probes:denied.probes,rows:denied.rows.map(([key])=>key.split(':').slice(-2).join(':'))}));
  }
  await issued(f,form,original);
- s=await observe(f);assert(s.calls.some(c=>c.method==='get'&&c.prefix==='transaction'));assert(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').every(c=>c.actualGrantAck));assert.equal(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').length,1);assert.equal(s.calls.filter(c=>c.method==='list').length,0);assert(s.calls.every(c=>c.method==='get'&&['client','transaction'].includes(c.prefix)||c.method==='put'&&c.prefix==='grant'||c.method==='delete'&&c.prefix==='transaction'),'no other SDK grant/token mutation');
+ s=await observe(f);
+ assert(s.calls.some(c=>c.method==='get'&&c.prefix==='transaction'));
+ assert.equal(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant'&&c.actualGrantAck).length,1);
+ assert.deepEqual(s.calls.filter(c=>c.completedGrantRead).map(c=>c.method),['list','get'],'one scoped verification of the actual issued grant');
+ assert(s.calls.every(c=>c.completedGrantRead||c.method==='get'&&['client','transaction'].includes(c.prefix)||c.method==='put'&&c.prefix==='grant'&&c.actualGrantAck||c.method==='delete'&&c.prefix==='transaction'),'no other SDK grant/token mutation');
  for(const p of s.probes.filter(p=>p.strictUnavailable!==undefined))assert.equal(p.strictUnavailable,true,'strict public reader denied same ambient unresolved SEND');
  for(const op of ['consume','grant'])assert(s.probes.some(p=>p.kind==='issuer'&&p.op===op&&p.strictUnavailable));for(const op of ['sdk_approve','sdk_complete'])assert(s.probes.some(p=>p.kind==='sdk'&&p.op===op&&p.strictUnavailable));
  const consumed=s.probes.find(p=>p.kind==='consumption');assert(consumed.sameStore&&consumed.sameChild);assert(consumed.windowMs<=5000&&consumed.remainingMs>0);

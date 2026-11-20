@@ -28,10 +28,20 @@ export function extendFiniteOwnerQaSdk(entry,{observed=false,noticeGet=false}={}
   const kv=this.env.AFW_FINITE_OWNER_OAUTH_KV;this.sdkCalls=[];this.sdkMode=mode;this.sdkRelease=null;this.sdkRestore?.();
   const methods={get:kv.get,put:kv.put,delete:kv.delete,list:kv.list};this.sdkRestore=()=>{for(const key of Object.keys(methods))kv[key]=methods[key];};
   for(const key of Object.keys(methods))kv[key]=async(...args)=>{
-   const call={method:key,prefix:String(args[0]).split(':')[0]};this.sdkCalls.push(call);
+   const call={method:key,prefix:String(key==='list'?args[0]?.prefix:args[0]).split(':')[0]};this.sdkCalls.push(call);
    if(key==='put'&&String(args[0]).startsWith('grant:'))call.actualGrantAck=[...await this.ctx.storage.list({prefix:'afw.finite-preparation-issuer.v1:'})].some(([k])=>k.endsWith(':grant:ack'));
    if(this.sdkMode==='stale'&&key==='get'&&String(args[0]).startsWith('transaction:'))return null;
-   if(key==='list')throw Error('SYN prohibited SDK list');
+   if(key==='list'||key==='get'&&call.prefix==='grant'){
+    const rows=[...await this.ctx.storage.list({prefix:'afw.finite-preparation-issuer.v1:'})];
+    const reservation=rows.find(([name])=>name.endsWith(':reservation'));
+    const identity=reservation?JSON.parse(reservation[1]).identity:null;
+    const subject=identity?.subject;
+    const originalComplete=identity&&await this.ctx.storage.get('afw.finite-owner-issuer-provenance.v1:'+identity.preconnectionId+':sdk_complete:observed');
+    const prefix='grant:'+subject+':';
+    const scoped=key==='list'?args[0]?.prefix===prefix&&args[0]?.limit===100:typeof args[0]==='string'&&args[0].startsWith(prefix)&&args[1]?.type==='json';
+    if(!subject||!originalComplete||!scoped)throw Error('SYN SDK read outside original completed grant');
+    call.completedGrantRead=true;
+   }
    if(this.sdkMode==='miss'&&key==='get'&&String(args[0]).startsWith('client:'))return null;
    if(this.sdkMode==='error'&&key==='get')throw Error('SYN KV error');
    const actual=Reflect.apply(methods[key],kv,args);

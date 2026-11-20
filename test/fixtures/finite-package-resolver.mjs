@@ -27,11 +27,11 @@ export function finitePrivateLocatorZip(value){
  return made.stdout;
 }
 
-export function finiteR2TestUrl(sourceRevision,at){
+export function finiteR2TestUrl(sourceRevision,at,draft=false){
  const stamp=new Date(at-1000).toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
  const api='https://afw-release-backups.85d0d5dadac3341a564f22ce885e9eec.r2.cloudflarestorage.com';
  const q=new URLSearchParams({'X-Amz-Algorithm':'AWS4-HMAC-SHA256',
   'X-Amz-Credential':'1'.repeat(32)+'/'+stamp.slice(0,8)+'/auto/s3/aws4_request',
   'X-Amz-Date':stamp,'X-Amz-Expires':'600','X-Amz-SignedHeaders':'host','X-Amz-Signature':'2'.repeat(64)});
- return api+'/finite-bundles-v1/'+sourceRevision+'.zip?'+q;
+ return api+'/'+(draft?'finite-bundles-v1':'finite-packages-v2')+'/'+sourceRevision+'.zip?'+q;
 }
