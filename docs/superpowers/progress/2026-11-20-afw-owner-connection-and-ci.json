@@ -110,6 +110,19 @@
     "historicalRollbackMount": {
       "status": "verified_historical_receipt",
       "scope": "Three closed roles matched their archived modules with disabled routes and zero outgoing requests; exact candidate compatibility remains pending"
+    },
+    "latestLocal": {
+      "privateZipContract": 5,
+      "privateR2TransportAndClosure": 9,
+      "cloudReviewContract": 7,
+      "receivedAndReviewedSameSyntheticNoticeThroughWorkerd": 1,
+      "nativeProfileAndLegacyContainment": 9
+    },
+    "nativeNoticeCi": {
+      "runId": 44749342875,
+      "noticeAndConsentPassed": true,
+      "originalCheckpointCleanupPassed": true,
+      "delayedFanoutCompletedWithinOriginalWindowMs": 3813
     }
   },
   "findings": {
@@ -127,7 +140,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Wait for the exact candidate's native CI jobs and required checks. Integrate once qualified. Complete live and closed mount compatibility, authenticated R2 package verification and independent rollback before starting the cloud trial.",
+    "next": "Observe exact PR candidate checks, qualify the package and independent rollback, and run the bounded synthetic-dossier cloud exercise. Require the actual receiver's receipt for the same notice, the signed review bound to its run, and a native withdrawn subscription with restoration.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -200,7 +213,9 @@
       }
     },
     "nativeNoticeSpecialist": "The previous test revision modeled and verified the separate notices publication in QA, then the test-only M runner still lacked the exact enabled policy and owner scope. The current candidate adopts the five required values from that same modeled configuration. Independent CI qualification pending.",
-    "packageBoundary": "Staging passed compiled inputs and private R2 transport fixtures. The protected locator job was skipped. No complete exact-revision v2 deployment package has been emitted."
+    "packageBoundary": "Historical draft source keys remain under finite-bundles-v1. An exact revision's deployment archive now has its own finite-packages-v2 key and requires its own signed read URL in the protected issuer context. Tests reject swap attempts before transport. The compatibility gate still requires privately assembled v2 bytes and verified rollback.",
+    "heldConcurrency": "GitHub diagnostic job 136340429745 captured a rejected concurrent OAuth request at the owner gate and the genuine original SDK reaching durable completion. Only the test adapter's blanket list ban interrupted the bounded read-after-write. The candidate now allows exactly the synthetic subject's grant reads after the original SDK observed record. Production bounds remain in place.",
+    "fixtureClock": "A synthetic journal sampled the issue and deadline clock twice; a 1ms tick could make the required 5000ms window 5001ms. Fixture now derives both from one sample."
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -211,26 +226,19 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T14:05:18Z",
+  "updatedUTC": "2026-11-20T14:27:15Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "890cf68f5bea08ee4f2839c560cc7fdc30844c17",
-    "tree": "2b6abaca2292fc2236547f5f7d68829b5459c313",
+    "head": "941059f8dbb23314c41d261745ca2bef20dc5c66",
+    "tree": "f5eff174c17f5b9c274411e60aa4e9019a3e113c",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-    "changes": [
-      "Strict readers reject incomplete issuer or notice journal pairs and a consent ACK pending its original link",
-      "Notice tests pin the adopted policy deadline and the exact settled stage publication",
-      "Native consume and grant share one fresh paired observation at their adjacent boundary, using the original five-second child and both actual SQL effects",
-      "Readback failure fixture distinguishes scalar receipt keys from bulk reads"
-    ],
     "ci": {
-      "runId": 44749342875,
+      "runId": 44753407506,
       "status": "in_progress"
     },
     "sourcePackageChecks": {
-      "runId": 44749342656,
-      "jobId": 136332852206,
-      "status": "success",
+      "runId": 44753407432,
+      "status": "in_progress",
       "completePackage": false
     }
   }
