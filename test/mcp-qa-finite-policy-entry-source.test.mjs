@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {createHash} from 'node:crypto';
+import {qaProviderExports} from './fixtures/finite-bootstrap-world.mjs';
 import {seedPrimaryFixture,SEED_GH} from './fixtures/finite-seed-primary.mjs';
 import {hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
 import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../lib/mcp-qa-finite-profile.mjs';
@@ -23,8 +24,9 @@ const iso=x=>new Date(x).toISOString();
 
 async function scenario(t,mode){
  const bytes=Buffer.from('export default {};');
- const qaModule={name:'index.mjs',sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,exports:[]};
- const configuration=structuredClone(finitePublicProfileTemplate('qaLive'));
+ const qaModule={name:'index.mjs',sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,exports:finitePublicProfileTemplate('qaLive').exports};
+ const configuration={...structuredClone(finitePublicProfileTemplate('qaLive')),exports:qaProviderExports()};
+ if(mode==='invalid-native-exports')configuration.exports.IndependentClosure.storage='kv';
  const seed=await seedPrimaryFixture({sourceRevision,qaLive:{versionId:qaVersionId,deploymentId,module:qaModule,configurationHash:qaClosedConfigurationHash(configuration)}});
  const publicStatic={...finitePublicStaticExpectation('qaLive')};
  if(mode==='profile-drift')publicStatic.profileHash='e'.repeat(64);
@@ -90,7 +92,7 @@ test('fixed setup source verifies original native occurrence, seed and active QA
  assert.equal(f.provider.length,5);
  assert.equal(f.seed.calls.length,11);
 });
-for(const mode of ['queued-before-seed','event-before-seed','failed-step','foreign-definition','foreign-version','pointer-drift','code-drift','profile-drift','foreign-seed','missing-credential','denied'])test('fixed setup source rejects '+mode,async t=>{
+for(const mode of ['queued-before-seed','event-before-seed','failed-step','foreign-definition','foreign-version','pointer-drift','code-drift','invalid-native-exports','profile-drift','foreign-seed','missing-credential','denied'])test('fixed setup source rejects '+mode,async t=>{
  const f=await scenario(t,mode);
  await assert.rejects(f.read());
  if(mode==='missing-credential')assert.equal(f.provider.length,0);
