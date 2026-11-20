@@ -1,0 +1,320 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as controls from '../lib/mcp-qa-finite-trial-control.mjs';
+import {finiteFixture,ROOT,hash,digest} from './fixtures/qa-finite-trial.mjs';
+import {finiteArmedGuardState,finiteChildConfirmationBindingHash,hashFiniteLaunchRecord,validateFiniteLaunchPrepared,validateFiniteChildCreateSend} from '../lib/mcp-qa-finite-launch-records.mjs';
+
+const api=await import('../lib/mcp-qa-finite-nominal-authority.mjs').catch(error=>{
+ if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-qa-finite-nominal-authority.mjs'))throw error;return {};
+});
+async function setup(configure=()=>{},at){
+ const f=finiteFixture({at}),p=f.plan;configure(p);const opts=f.options(controls);
+ const t=controls.createPrivateQaFiniteTrialControl(opts);
+ assert.equal((await t.prepare()).status,'armed');
+ const {controlHash,planHash,claim}=await t.claimEffect('nominal');
+ const guard=finiteArmedGuardState(controlHash,p.C0),prefix='afw.qa-finite-child-create.v1:'+p.intentId+':';
+ f.rows.set('afw.qa-finite-guard.v1:'+p.intentId+':state',guard);
+ const scope={intentId:p.intentId,finitePlanHash:planHash,controlHash,sourceRevision:p.source.revision,
+  qaVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,launcherId:p.workflows.launcher,nominalId:p.workflows.confirmation,
+  bundleHash:p.bundleHash,nominalClaimHash:digest(ROOT+':effect',claim)};
+ const prepared=validateFiniteLaunchPrepared({purpose:'afw.qa-finite-launch-prepared.v1',...scope,guardStateHash:hash(JSON.stringify(guard)),preparedAt:f.now(),...p.launchPolicy});
+ const send=validateFiniteChildCreateSend({purpose:'afw.qa-finite-child-create-send.v1',...scope,preparedHash:hashFiniteLaunchRecord(prepared),bindingHash:finiteChildConfirmationBindingHash(p),
+  issuedAt:p.launchPolicy.launchAt,deadline:p.launchPolicy.lastCreateAt});
+ const ack={purpose:'afw.qa-finite-child-create-ack.v1',intentId:p.intentId,controlHash,sendHash:hashFiniteLaunchRecord(send),nominalId:p.workflows.confirmation,acknowledgedAt:p.launchPolicy.launchAt+1};
+ f.rows.set(prefix+'prepared',prepared);f.rows.set(prefix+'send',send);f.setNow(p.launchPolicy.launchAt+2);
+ const refs={intentId:p.intentId,controlHash};
+ const read=(operation,selected=refs)=>api.readPrivateQaFiniteCanaryNominalContext({ctx:f.ctx,env:f.env,compiledRevision:p.source.revision,
+  refs:{...selected,operation},now:f.now});
+ return {f,p,prefix,ack,refs,read,t};
+}
+test('candidate receives exactly the acknowledged child context and cannot create from a SEND alone',async()=>{
+ assert.equal(typeof api.readPrivateQaFiniteCanaryNominalContext,'function');
+ const {f,p,prefix,ack,refs,read}=await setup(),before=f.puts;
+ await assert.rejects(read('reserve'));f.rows.set(prefix+'ack',ack);
+ const context=await read('reserve');
+ assert.equal(context.control.controlHash,refs.controlHash);assert.equal(context.control.plan.intentId,p.intentId);
+ assert.equal(context.expiresAt,p.C0);
+ assert.equal(context.ackHash,hashFiniteLaunchRecord(ack));
+ await assert.rejects(read('reserve',{...refs,controlHash:'0'.repeat(64)}));
+ assert.equal(f.puts,before);
+});
+test('native candidate cannot begin or read nominal work after withdrawal; only its exact existing settlement window remains',async()=>{
+ assert.equal(typeof api.readPrivateQaFiniteCanaryNominalContext,'function');
+ const {f,p,prefix,ack,read,t}=await setup();f.rows.set(prefix+'ack',ack);
+ f.setNow(p.C0+1);assert.equal((await t.withdrawNominal()).status,'withdrawn');
+ await assert.rejects(read('reserve'));await assert.rejects(read('journal'));
+ assert.equal((await read('settle')).expiresAt,p.C1);
+ f.setNow(p.C1);await assert.rejects(read('settle'));
+});
+
+test('candidate journal records one reservation under the acknowledged QA child only',async()=>{
+ const {finiteCleanupPolicyHash}=await import('../lib/mcp-finite-cleanup-policy.mjs');
+ const {runFiniteOwnNominalReservation}=await import('../lib/mcp-own-finite-nominal-reservation.mjs');
+ const program='synthetic nominal candidate';
+ const {f,p,prefix,ack,refs,read}=await setup(plan=>{
+  plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
+  plan.selectors.programHash=hash(program);plan.selectors.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';
+  plan.closePolicyHash=finiteCleanupPolicyHash(plan);
+ });
+ const candidate=finiteFixture(),s=p.selectors,own={toString:()=>p.resources.containerId},qa={toString:()=>p.resources.actorId};
+ const ctx={id:own,storage:candidate.storage};
+ const db={prepare(){throw Error('writer claim must not mutate D1');},withSession(){throw Error('writer claim does not invent first-primary receipt');}};
+ const env={DB:db,AFW_FINITE_TRIAL_VERSION:{id:p.canaryContainment.runtimeVersionId},
+  AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_SUCCESSOR_ENABLED:'true',
+  AFW_DOSSIER_SUCCESSOR_POLICY:JSON.stringify({
+   scope:{accountId:'a'.repeat(32),workerName:'agent-friendly-web-delegated-canary',namespaceId:p.resources.namespaceId,
+    applicationId:p.resources.applicationId,ownerRef:'f'.repeat(64),projectRef:'e'.repeat(64),resource:s.resource},
+   original:{containerId:'d'.repeat(64),applicationId:p.resources.applicationId,programHash:'b'.repeat(64),sourceRevision:'a'.repeat(40)},
+   candidate:{trialId:p.trialId,programHash:s.programHash,sourceRevision:s.sourceRevision,startAt:s.startAt,expiresAt:s.expiresAt,budget:1},
+   publication:{artifactKey:'6'.repeat(64),workerHash:'7'.repeat(64),activationKey:'8'.repeat(64)},
+  }),AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',
+  AFW_DOSSIER_EVENTS_NODE:{idFromName:()=>own,idFromString:()=>own,get:()=>null},
+  AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),
+  AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',
+  AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_OAUTH_RESOURCE:s.resource,
+  AFW_FINITE_TRIAL_CONTROL:{idFromName:()=>qa,get:()=>({
+   readFiniteCanaryNominalContext:({operation,...selected})=>read(operation,selected),
+   readFiniteTrialNominalControl:async selected=>{
+    const {control,nominalClaim}=await read('reserve',selected);
+    const g=await run('journal'),existing=g.writers.reservation;
+    const ownedWriters=existing?[{intentId:p.intentId,controlHash:control.controlHash,actorId:p.resources.containerId,
+     kind:'reservation',claimHash:hash(JSON.stringify(existing.claim)),phase:'issued'}]:[];
+    return {status:'observed',value:{purpose:'afw.qa-finite-nominal-control.v1',intentId:p.intentId,controlHash:control.controlHash,
+     planHash:control.planHash,sourceRevision:p.source.revision,runtimeVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,
+     observedAt:f.now(),phase:'armed',withdrawnAt:null,claim:nominalClaim,claimHash:digest(ROOT+':effect',nominalClaim),ownedWriters,
+     consent:{valid:true,grantHash:p.grantHash,monitorHash:p.monitorHash,expiresAt:p.C0}}};
+   },
+  })}};
+ const run=operation=>runFiniteOwnNominalReservation({ctx,env,program,sourceRevision:s.sourceRevision,refs,operation,now:f.now});
+ await assert.rejects(run('reserve'));assert.equal(candidate.puts,0);
+ f.rows.set(prefix+'ack',ack);
+ const policy=env.AFW_DOSSIER_SUCCESSOR_POLICY,foreign=JSON.parse(policy);foreign.candidate.trialId='9'.repeat(64);
+ env.AFW_DOSSIER_SUCCESSOR_POLICY=JSON.stringify(foreign);
+ await assert.rejects(run('reserve'));assert.equal(candidate.puts,0);
+ env.AFW_DOSSIER_SUCCESSOR_POLICY=policy;
+ assert.equal((await run('journal')).writers.reservation,null);
+ assert.equal((await run('reserve')).status,'issued');
+ assert.equal((await run('reserve')).status,'reconcile_only');
+ assert.equal(candidate.puts,1);
+ f.setNow(p.C0);await assert.rejects(run('reserve'));
+ assert.equal(candidate.puts,1);
+});
+
+async function noticeFixture(sql){
+ const program=sql?.config.program??'synthetic finite notice candidate';
+ const {finiteCleanupPolicyHash}=await import('../lib/mcp-finite-cleanup-policy.mjs');
+ const {f,p,prefix,ack,refs,read}=await setup(plan=>{
+  plan.canaryContainment.sourceRevision=plan.selectors.sourceRevision;
+  plan.selectors.programHash=hash(program);plan.selectors.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';
+  const s=plan.selectors;
+  s.projectId='oauth-canary-owner';
+  if(sql){
+   Object.assign(s,{grantId:sql.config.context.grantId,subject:sql.config.context.subject,clientId:sql.config.context.clientId});
+   plan.grantHash=hash(s.grantId);
+   plan.resources.containerId=sql.config.ctx.id.toString();
+  }
+  plan.eventPlanHash=hash(JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,
+   clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}));
+  plan.closePolicyHash=finiteCleanupPolicyHash(plan);
+ },sql?Date.now()-151000:undefined);
+ if(sql)f.setNow(Date.now());
+ f.rows.set(prefix+'ack',ack);
+ const a=await read('journal'),s=p.selectors,own={toString:()=>p.resources.containerId},qa={toString:()=>p.resources.actorId};
+ let subscriptionReceiptHash='a'.repeat(64);
+ if(sql){
+  const {ownSubscriptionReceiptFields}=await import('../lib/mcp-own-subscription-receipt.mjs');
+  const row=sql.db.prepare('SELECT * FROM dossier_event_subscription_receipts').get();
+  subscriptionReceiptHash=hash(JSON.stringify(Object.fromEntries(ownSubscriptionReceiptFields.map(key=>[key,row[key]]))));
+ }
+ const notice={
+  eventId:hash(JSON.stringify(['afw.own-synthetic-save.v1',s.subject,s.projectId,s.saveIdempotencyKey])),
+  revision:s.expectedProjectRevision+1,
+  fingerprint:hash(JSON.stringify(['afw.own-synthetic-save.v1',s.grantId,s.expectedProjectRevision,s.goal])),
+  subscriptionReceiptHash,processReceiptHash:'b'.repeat(64),
+ };
+ const proof={purpose:'afw.qa-finite-canary-notice.v1',control:a.control,ackHash:a.ackHash,notice,observedAt:f.now(),expiresAt:p.C0};
+ const db=sql?.options.db??{prepare(){throw Error('Unexpected primary access');},withSession(){throw Error('Unexpected primary access');}};
+ const env={DB:db,AFW_FINITE_TRIAL_VERSION:{id:p.canaryContainment.runtimeVersionId},
+  AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_SUCCESSOR_ENABLED:'true',
+  AFW_DOSSIER_SUCCESSOR_POLICY:JSON.stringify({
+   scope:{accountId:'a'.repeat(32),workerName:'agent-friendly-web-delegated-canary',namespaceId:p.resources.namespaceId,
+    applicationId:p.resources.applicationId,ownerRef:'f'.repeat(64),projectRef:'e'.repeat(64),resource:s.resource},
+   original:{containerId:'d'.repeat(64),applicationId:p.resources.applicationId,programHash:'b'.repeat(64),sourceRevision:'a'.repeat(40)},
+   candidate:{trialId:p.trialId,programHash:s.programHash,sourceRevision:s.sourceRevision,startAt:s.startAt,expiresAt:s.expiresAt,budget:1},
+   publication:{artifactKey:'6'.repeat(64),workerHash:'7'.repeat(64),activationKey:'8'.repeat(64)},
+  }),AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',
+  AFW_DOSSIER_EVENTS_NODE:{idFromName:()=>own,idFromString:()=>own,get:()=>null},
+  AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:s.grantId,subject:s.subject,projectId:s.projectId,clientId:s.clientId,resource:s.resource,startAt:s.startAt,expiresAt:s.expiresAt}),
+  AFW_DOSSIER_EVENTS_PROJECTION_SECRET:'z'.repeat(32),AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',
+  AFW_OAUTH_PILOT_CLIENT_ID:s.clientId,AFW_OAUTH_PILOT_PROJECT_ID:s.projectId,AFW_OAUTH_RESOURCE:s.resource};
+ const ctx={id:own,storage:f.storage};let reads=0,sends=0,reply=()=>proof,saveReads=0,saveReply;
+ env.AFW_FINITE_TRIAL_CONTROL={idFromName:()=>qa,get:()=>({readFiniteCanaryNoticeContext:async selected=>{
+  assert.deepEqual(selected,refs);return reply(++reads);
+ },readFiniteCanaryNominalContext:({operation,...selected})=>read(operation,selected),readFiniteCanarySaveContext:async selected=>{
+  assert.deepEqual(selected,refs);return saveReply(++saveReads);
+ }})};
+ const api=await import('../lib/mcp-own-finite-notice-delivery.mjs').catch(error=>{
+  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-own-finite-notice-delivery.mjs'))throw error;return {};
+ });
+ assert.equal(typeof api.runFiniteOwnTrialNotice,'function');
+ const result={eventId:'d'.repeat(64),status:202,httpReceivedAt:f.now(),cloudReviewConfirmed:false};
+ const compose=async({notice:expected,assertCurrent,recheck,deliveryDeadline})=>{
+  assert.equal(deliveryDeadline,Math.min(proof.expiresAt,f.now()+4800));
+  assert.deepEqual(expected,proof.notice);assertCurrent();await recheck();assertCurrent();sends++;return result;
+ };
+ const run=(select=refs,deliver=compose)=>api.runFiniteOwnTrialNotice({ctx,env,program,sourceRevision:s.sourceRevision,refs:select,deliver,now:f.now});
+ const runSave=(save,deliver=compose,selected=refs)=>{
+  assert.equal(typeof api.runFiniteOwnTrialDossier,'function');
+  return api.runFiniteOwnTrialDossier({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,save,deliver,now:sql?Date.now:f.now});
+ };
+ const runSubscribe=async(subscribe,runDossier,selected=refs)=>{
+  const m=await import('../lib/mcp-own-finite-nominal-reservation.mjs');
+  assert.equal(typeof m.runFiniteOwnTrialSubscription,'function');
+  return m.runFiniteOwnTrialSubscription({ctx,env,program,sourceRevision:s.sourceRevision,refs:selected,subscribe,runDossier,now:f.now});
+ };
+ return {f,p,refs,proof,run,runSave,runSubscribe,ctx,program,env,result,compose,counts:()=>({reads,sends}),setReply:fn=>{reply=fn;},setSaveReply:fn=>{saveReply=fn;}};
+}
+test('finite canary delivers only the event and original subscription confirmed by QA',async()=>{
+ const n=await noticeFixture();
+ assert.deepEqual(await n.run(),n.result);
+ assert.deepEqual(n.counts(),{reads:2,sends:1});
+});
+test('finite canary refuses caller payloads, foreign saved events and a replaced subscription before transport',async()=>{
+ const n=await noticeFixture();
+ await assert.rejects(n.run({...n.refs,eventId:n.proof.notice.eventId}));
+ assert.deepEqual(n.counts(),{reads:0,sends:0});
+ n.setReply(()=>({...n.proof,notice:{...n.proof.notice,eventId:'0'.repeat(64)}}));
+ await assert.rejects(n.run());
+ assert.deepEqual(n.counts(),{reads:1,sends:0});
+ n.setReply(i=>i===2?n.proof:{...n.proof,notice:{...n.proof.notice,subscriptionReceiptHash:'e'.repeat(64)}});
+ await assert.rejects(n.run());
+ assert.deepEqual(n.counts(),{reads:3,sends:0});
+});
+test('finite canary refuses a missing fresh QA confirmation and never treats HTTP as an assistant review',async()=>{
+ const n=await noticeFixture();
+ await assert.rejects(n.run(n.refs,async()=>n.result));
+ await assert.rejects(n.run(n.refs,async input=>({...await n.compose(input),cloudReviewConfirmed:true})));
+ n.f.setNow(n.p.C0);
+ await assert.rejects(n.run());
+ assert.equal(n.counts().sends,1);
+});
+
+function saveProof(n){
+ const {control,ackHash,notice,observedAt,expiresAt}=n.proof;
+ const target={eventId:notice.eventId,revision:notice.revision,fingerprint:notice.fingerprint,
+  subscriptionReceiptHash:notice.subscriptionReceiptHash,processReceiptHash:notice.processReceiptHash};
+ return {purpose:'afw.qa-finite-canary-save.v1',control,ackHash,target,observedAt,expiresAt};
+}
+
+test('the exact authorized QA save writes the pinned goal first and dispatches the same event once',async()=>{
+ const n=await noticeFixture(),admission=saveProof(n),s=n.p.selectors;let saved=false,attempts=0;
+ n.setSaveReply(()=>admission);
+ n.setReply(()=>{assert.equal(saved,true);return n.proof;});
+ const run=()=>n.runSave(async(options,value)=>{
+  attempts++;
+  assert.equal(options.expectedSubscriptionReceiptHash,admission.target.subscriptionReceiptHash);
+  assert.equal(options.window.expiresAt,n.f.now()+4800);
+  assert.deepEqual(value,{expectedRevision:s.expectedProjectRevision,idempotencyKey:s.saveIdempotencyKey,goal:s.goal});
+  assert.equal(await options.beforeCommit(),true);
+  assert.equal(await options.assertCurrent(),true);
+  saved=true;
+  return {status:200,eventId:admission.target.eventId,revision:s.expectedProjectRevision+1,replayed:attempts>1};
+ });
+ assert.deepEqual(await run(),{saved:true,revision:s.expectedProjectRevision+1,delivery:n.result});
+ assert.deepEqual(await run(),{saved:true,revision:s.expectedProjectRevision+1,delivery:null});
+ assert.deepEqual(n.counts(),{reads:2,sends:1});
+});
+
+test('foreign plan, wrong save acknowledgment and uncertain dispatch never produce a second send',async()=>{
+ const n=await noticeFixture(),a=saveProof(n);
+ n.setSaveReply(()=>({...a,target:{...a.target,eventId:'0'.repeat(64)}}));
+ await assert.rejects(async()=>n.runSave(()=>assert.fail('unauthorized writer')));
+ n.setSaveReply(()=>a);
+ await assert.rejects(async()=>n.runSave(async()=>({status:200,eventId:'0'.repeat(64),revision:a.target.revision,replayed:false})));
+ let effects=0;
+ const save=async()=>({status:200,eventId:a.target.eventId,revision:a.target.revision,replayed:effects>0});
+ const lost=async input=>{await n.compose(input);effects++;throw Error('lost transport ACK');};
+ assert.deepEqual(await n.runSave(save,lost),{saved:true,revision:a.target.revision,delivery:null});
+ assert.deepEqual(await n.runSave(save,()=>assert.fail('replayed save must not deliver')),{saved:true,revision:a.target.revision,delivery:null});
+ assert.equal(effects,1);
+});
+
+test('the real save and signed delivery share the same subscription record with finite withdrawal',async()=>{
+ const {syntheticSaveFixture}=await import('./fixtures/mcp-own-synthetic-save.mjs');
+ const sql=await syntheticSaveFixture({projectId:'oauth-canary-owner',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',windowMs:180000});
+ try{
+  sql.config.db.withSession=mode=>{assert.equal(mode,'first-primary');return sql.config.db;};
+  const n=await noticeFixture(sql),proof=saveProof(n);
+  n.setSaveReply(()=>proof);
+  n.setReply(()=>{
+   const row=sql.db.prepare('SELECT * FROM project_events WHERE id=?').get(proof.target.eventId);
+   assert.deepEqual(JSON.parse(row.payload_json),{changedFields:['goals'],revision:proof.target.revision,fingerprint:proof.target.fingerprint});
+   return n.proof;
+  });
+  const result=await n.runSave(undefined,input=>sql.host.deliverFiniteOwnSaved(input));
+  assert.equal(result.saved,true);assert.equal(result.revision,2);
+  assert.equal(result.delivery.status,200);assert.equal(result.delivery.cloudReviewConfirmed,false);
+  const boundary={signal:new AbortController().signal,assertCurrent:()=>{},expiresAt:Date.now()+4000};
+  const withdrawn=await sql.host.withdrawFiniteSubscription(boundary,{id:proof.target.eventId,revision:result.revision});
+  assert.equal(withdrawn.withdrawn,true);assert.equal(withdrawn.eventId,result.delivery.eventId);
+  assert.equal(withdrawn.httpReceipt.httpReceivedAt,result.delivery.httpReceivedAt);
+  assert.equal((await sql.host.observeSubscription()).state,'withdrawn');
+  assert.equal(sql.db.prepare('SELECT count(*) n FROM project_events').get().n,1);
+  assert.equal(sql.sends(),2);
+  await sql.host.close();
+ }finally{sql.close();}
+});
+test('finite subscription uses original native admission and only starts the dossier after verification',async()=>{
+ const n=await noticeFixture();
+ const {requireFiniteAdmissionCustodySource}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ n.env.AFW_DOSSIER_FINITE_CALLBACK_SECRET='whsec_'+Buffer.alloc(32,7).toString('base64');
+ let subscribed=false;
+ const value=await n.runSubscribe(async ({gate,request,assertCurrent,deadline})=>{
+  requireFiniteAdmissionCustodySource(gate,{db:n.env.DB,projectId:n.p.selectors.projectId});
+  assert.equal(request.delivery.url,'https://finite-review-qa.agentfriendlyweb.dev/mcp/finite-dossier-callback');
+  assert.equal(request.arguments.projectRef,'e'.repeat(64));
+  assert.ok(deadline<=n.p.C0);
+  assertCurrent();subscribed=true;
+  return {id:'sub_'+'b'.repeat(64),refreshBefore:new Date(deadline).toISOString(),cursor:null,truncated:false};
+ },async()=>{assert.equal(subscribed,true);return {saved:true,revision:2,delivery:n.result};});
+ assert.deepEqual(value,{saved:true,revision:2,delivery:n.result});
+});
+test('finite subscription rejects selector substitution, missing custody and lost verification',async()=>{
+ const n=await noticeFixture();let calls=0;
+ const never=()=>assert.fail('unexpected dossier write');
+ const {env}=n;
+ const subscribe=()=>{calls++;throw Error('lost verification ACK');};
+ await assert.rejects(n.runSubscribe(subscribe,never));
+ env.AFW_DOSSIER_FINITE_CALLBACK_SECRET='whsec_'+Buffer.alloc(32,7).toString('base64');
+ await assert.rejects(n.runSubscribe(subscribe,never,{...n.refs,callback:'https://other.invalid'}));
+ assert.equal(calls,0);
+ await assert.rejects(n.runSubscribe(subscribe,never));
+ assert.equal(calls,1);
+});
+
+test('the pristine candidate signs its projected event without starting a subscription',async()=>{
+ const n=await noticeFixture();
+ const {observeFiniteOwnPrelaunch}=await import('../lib/mcp-own-finite-prelaunch.mjs');
+ const {verifyMcpSignedEnvelope}=await import('../lib/mcp-signed-envelope.mjs');
+ const {finiteDossierChannelTag}=await import('../lib/mcp-qa-finite-dossier-channel.mjs');
+ const {projectDossierEventId}=await import('../lib/dossier-supervision.mjs');
+ const secret='whsec_'+Buffer.alloc(32,9).toString('base64');
+ Object.assign(n.env,{AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'false',AFW_DOSSIER_OWN_SAVE_ENABLED:'false',
+  AFW_DOSSIER_FINITE_CALLBACK_SECRET:secret,AFW_DOSSIER_PROVIDER_READ_TOKEN:'synthetic-reader-only'});
+ n.ctx.container={running:false};
+ n.ctx.storage.list=async({prefix,limit})=>new Map([...n.f.rows].filter(([key])=>key.startsWith(prefix)).slice(0,limit));
+ const challenge=Buffer.alloc(32,8).toString('base64url');
+ const run=()=>observeFiniteOwnPrelaunch({ctx:n.ctx,env:n.env,program:n.program,sourceRevision:n.p.selectors.sourceRevision,
+  refs:{control:n.proof.control,challenge},now:n.f.now});
+ const {isolation,signed}=await run(),{body,headers}=signed.envelope;
+ assert.equal(isolation.pristine,true);
+ const eventId=await projectDossierEventId({id:n.proof.notice.eventId,projectId:n.p.selectors.projectId},
+  n.env.AFW_DOSSIER_EVENTS_PROJECTION_SECRET);
+ assert.equal(signed.eventId,eventId);
+ assert.equal(headers['webhook-id'],'verify_'+finiteDossierChannelTag(signed));
+ assert.equal(verifyMcpSignedEnvelope({body,id:headers['webhook-id'],subscriptionId:headers['X-MCP-Subscription-Id'],
+  timestamp:headers['webhook-timestamp'],signature:headers['webhook-signature'],secret}),true);
+ assert.equal(n.counts().sends,0);
+ n.f.rows.set('afw.own-finite-admission.v1:head',{synthetic:'already used'});
+ await assert.rejects(run);
+});

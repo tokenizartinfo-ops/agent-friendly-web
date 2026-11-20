@@ -1,3 +1,10 @@
+import {runPrivateQaFiniteLaunchOperation} from '../../lib/mcp-qa-finite-launch.mjs';
+import {createPrivateQaFiniteLaunchParent} from '../../lib/mcp-qa-finite-launch-inventory.mjs';
+import {runPrivateQaFiniteObserver,FINITE_OBSERVER_OPERATION} from '../../lib/mcp-qa-finite-observer.mjs';
+import {previewPrivateQaFiniteTrialMaterial,claimPrivateQaFiniteTrialRestore,readPrivateQaFiniteFinalPrimary} from '../../lib/mcp-qa-finite-observer-native.mjs';
+import {finiteFields as finiteReadFields} from '../../lib/mcp-finite-evidence.mjs';
+import {readFiniteTrialCleanupProofHead,readRetainedFiniteCleanupProof,readFiniteTrialCleanupCompletion} from '../../lib/mcp-qa-finite-cleanup-store.mjs';
+import {runPrivateQaFiniteTrialAlarm,readPrivateQaFiniteNominalControl} from '../../lib/mcp-qa-finite-trial-guard.mjs';
 import {readPrivateQaGenerationPreparation,runPrivateQaGenerationPreparation} from '../../lib/mcp-qa-generation-preparation.mjs';
 import {readPrivateQaNamedPacket,runPrivateQaNamedPacketObservation} from '../../lib/mcp-qa-named-preflight.mjs';
 import {readPrivateQaCurrentGeneration,readPrivateQaRetainedGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
@@ -145,6 +152,7 @@ export class PrivateQaPreregistration extends DurableObject {
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals'||decoded?.operation==='mcp_canary_dispatch_reduce_restore'&&params.length<=512)params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
+  if(params?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step});
   if(params?.operation==='mcp_closure_publisher_probe')return runPrivateClosurePublisherProbeWorkflow({env:this.env,event,step});
   if(params?.operation==='mcp_closure_reader_probe')return runPrivateClosureReaderProbeWorkflow({env:this.env,event,step});
   if(['mcp_canary_dispatch_reduce_restore','mcp_canary_reduce_restore','mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});
@@ -176,6 +184,23 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ #finiteLaunch(operation,args,keys){
+  const parent=createPrivateQaFiniteLaunchParent({deadline:Date.now()+5000});
+  if(args.length!==1)throw Error('Finite launch unavailable');
+  const refs=finiteReadFields(args[0],keys);
+  return runPrivateQaFiniteLaunchOperation({ctx:this.ctx,env:this.env,operation,refs,parent});
+ }
+ prepareFiniteNominalLaunch(...args){return this.#finiteLaunch('prepare',args,['intentId','sourceRevision']);}
+ createFiniteNominalChild(...args){return this.#finiteLaunch('create',args,['intentId','controlHash']);}
+ readFiniteNominalLaunch(...args){return this.#finiteLaunch('read',args,['intentId','controlHash']);}
+ readFiniteTrialFinalPrimary(...args){if(args.length!==1)throw Error('Finite primary unavailable');return readPrivateQaFiniteFinalPrimary({ctx:this.ctx,env:this.env,refs:args[0]});}
+ previewFiniteTrialMaterial(...args){if(args.length!==1)throw Error('Finite preview unavailable');return previewPrivateQaFiniteTrialMaterial({ctx:this.ctx,env:this.env,refs:args[0]});}
+ claimFiniteTrialQaRestore(...args){if(args.length!==1)throw Error('Finite claim unavailable');return claimPrivateQaFiniteTrialRestore({ctx:this.ctx,env:this.env,refs:args[0]});}
+ async #finiteRead(fn,args,keys){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite read unavailable');const refs=finiteReadFields(args[0],keys);return fn({...refs,storage:this.ctx.storage});}
+ async readFiniteTrialNominalControl(...args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite nominal control unavailable');return readPrivateQaFiniteNominalControl({ctx:this.ctx,env:this.env,refs:args[0]});}
+ readFiniteTrialCleanupProofHead(...args){return this.#finiteRead(readFiniteTrialCleanupProofHead,args,['intentId','controlHash']);}
+ readRetainedFiniteCleanupProof(...args){return this.#finiteRead(readRetainedFiniteCleanupProof,args,['intentId','proofHash']);}
+ readFiniteTrialCleanupCompletion(...args){return this.#finiteRead(readFiniteTrialCleanupCompletion,args,['intentId','controlHash','proofHash']);}
  readOwnQaGenerationPreparation(...args){return readPrivateQaGenerationPreparation({env:this.env,ctx:this.ctx,args});}
  readOwnQaNamedPacket(...args){return readPrivateQaNamedPacket({env:this.env,ctx:this.ctx,args});}
  readOwnQaGeneration(...args){return readPrivateQaCurrentGeneration({env:this.env,ctx:this.ctx,args});}
@@ -209,7 +234,7 @@ export class IndependentClosure extends DurableObject {
  }
  arm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.arm();}
  status(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.status();}
- alarm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.alarm();}
+ async alarm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx)){const finite=await runPrivateQaFiniteTrialAlarm({ctx:this.ctx,env:this.env});return finite??{state:'unavailable'};}return this.actor.alarm();}
  fetch(){return new Response(null,{status:404});}
 }
 const worker={async fetch(request,env){if(new URL(request.url).pathname.startsWith('/assistance/occurrences/'))return fetchOwnOccurrence(request,env);if(env?.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request)||!env.AFW_QA_PREREGISTRY)return new Response(null,{status:404});try{return await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);}catch{return Response.json({code:'unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}}};

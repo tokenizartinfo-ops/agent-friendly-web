@@ -85,3 +85,31 @@ test('independent SQL clock retains its strict future predicate',async()=>{
   }finally{f.db.close();}
  }
 });
+
+test('finite seal blocks the actual administrative reservation INSERT',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const {createSuccessorReservation}=await load(),f=fixture(),g=finiteGateFixture(Date.now()-1000);
+ try{const gate=createFiniteAdmissionGate(g.options);await gate.seal();
+ await assert.rejects(createSuccessorReservation({...f.options,finiteGate:gate}).reserve());
+ assert.equal(f.rows().length,0);assert.equal((await gate.read()).sealed,true);
+ }finally{f.db.close();}
+});
+
+test('finite reservation SQL fences a held send at the narrower nominal deadline',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const f=fixture();try{
+  let at=f.candidate.startAt,held=false;const deadline=at+20000;
+  const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.candidate.containerId,trialId:f.candidate.trialId}});
+  f.options.original.applicationId=g.identity.applicationId;f.evidence.applicationId=g.identity.applicationId;
+  const db=f.options.db;const primary={withSession(){return this;},prepare(sql){const q=db.prepare(sql);return{bind(...args){const r=q.bind(...args);return{async run(){
+   await Promise.resolve();held=true;at=deadline;
+   f.db.function('strftime',(format,value)=>{assert.equal(value,'now');return format==='%s'?String(Math.floor(at/1000)):format==='%f'?(at%60000/1000).toFixed(3).padStart(6,'0'):null;});
+   return r.run();
+  }};}};}};
+  await assert.rejects((await load()).createSuccessorReservation({...f.options,db:primary,now:()=>at,finiteGate:createFiniteAdmissionGate(g.options)}).reserve());
+  assert.equal(held,true);assert.equal(f.rows().length,0);
+  assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.reservation.settlement,null);
+ }finally{f.db.close();}
+});

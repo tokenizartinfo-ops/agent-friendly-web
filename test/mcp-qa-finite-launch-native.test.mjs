@@ -1,0 +1,267 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {createHash} from 'node:crypto';
+import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
+const entry=`
+import {IndependentClosure,PrivateQaNamedConfirmation} from './worker/independent-closure/index.mjs';
+import {fixture,resolvePrivateQaFiniteLaunchContext} from './test/fixtures/finite-launch-operations-native.mjs';
+import {createPrivateQaFiniteLaunchParent,withPrivateQaFiniteLaunchCoordinator} from './lib/mcp-qa-finite-launch-inventory.mjs';
+import {runPrivateQaFiniteLaunchOperation} from './lib/mcp-qa-finite-launch.mjs';
+import {hashFiniteLaunchRecord} from './lib/mcp-qa-finite-launch-records.mjs';
+import {stageAlarmFixture,useNativeAlarmIntent} from './test/fixtures/finite-alarm-handoff.mjs';
+import {createPrivateQaFiniteTrialNativePin} from './lib/mcp-qa-finite-trial-control.mjs';
+import {readPrivateQaFiniteNominalExecution} from './lib/mcp-qa-finite-confirmation-provenance.mjs';
+export {PrivateQaNamedConfirmation};
+export class Native extends IndependentClosure{
+ async run(mode){
+  const methods=['prepareFiniteNominalLaunch','createFiniteNominalChild','readFiniteNominalLaunch'];
+  if(methods.some(k=>typeof this[k]!=='function'))return {missingMount:true};
+  const f=await fixture(this.ctx,this.env);f.setup='completed';f.seed='original';f.launcher=true;
+  Date.now=f.now;
+  if(mode==='final-permission-withdrawn'||mode==='final-permission-valid')f.finalAuthorizationMode=mode==='final-permission-valid'?'valid':'withdrawn';
+  if(mode==='original-alarm' || mode==='changed-original-alarm'){
+   useNativeAlarmIntent(f);
+   const nativePin=createPrivateQaFiniteTrialNativePin({ctx:this.ctx,env:this.env,sourceRevision:f.plan.source.revision});
+   f.handoff=await stageAlarmFixture(f,{nativePin,plan:JSON.stringify(f.plan)});
+   if(mode==='changed-original-alarm')await this.ctx.storage.setAlarm(f.handoff.initialC0+1);
+  }
+  const prepareRefs={intentId:f.plan.intentId,sourceRevision:f.plan.source.revision};
+  const prefix='afw.qa-finite-child-create.v1:'+f.plan.intentId+':',controlPrefix='afw.qa-finite-trial.v1:'+f.plan.intentId+':';
+  const originalTx=this.ctx.storage.transaction,originalGet=this.ctx.storage.get,originalCreate=this.env.AFW_QA_NAMED_CONFIRMATION.create;
+  let calls=0,callArgs=null,armedAt=null,enter,release,settled=false;
+  const reached=new Promise(r=>{enter=r;}),held=new Promise(r=>{release=r;});
+  this.env.AFW_QA_NAMED_CONFIRMATION.create=async options=>{
+   calls++;callArgs=options;
+   const actual=await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,options);
+   if(mode==='held-create'){enter();await held;settled=true;}
+   if(mode==='lost-create')throw Error('SYNTHETIC lost create ACK');
+   if(mode==='late-create')f.setNow(f.now()+5000);
+   if(mode==='wrong-create')return {id:'foreign'};
+   return actual;
+  };
+  if(mode==='missing-setup')f.setup=null;
+  if(mode==='unsettled-setup')f.setup='running';
+  if(mode==='altered-seed')f.seed='changed';
+  if(mode==='source-unavailable')f.sourceUnavailable=true;
+  if(mode==='operations-unavailable')f.operationsUnavailable=true;
+  if(mode==='workflow-context'){const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000});return {outcome:await runPrivateQaFiniteLaunchOperation({ctx:{},env:this.env,operation:'prepare',refs:prepareRefs,parent}),calls};}
+  if(mode==='prepare-90000')f.setNow(f.plan.T0+90000);
+  if(mode==='hydrate-expiry')f.hydrate=async()=>{f.setNow(f.now()+5000);};
+  if(mode==='old-head')await this.ctx.storage.put('afw.qa-finite-trial.v1:head',{intentId:'old'});
+  if(mode==='prepare-phase-hydration'){f.setNow(f.plan.T0+89900);f.hydrate=async()=>{f.setNow(f.plan.launchPolicy.armAckBy);};}
+  if(mode==='binding-after-await'){const original=f.primary.finalizer;f.primary.finalizer=async()=>{const r=await original();this.env.AFW_QA_NAMED_CONFIRMATION.create=async()=>{throw Error('foreign');};return r;};}
+  if(mode==='invalid-args'){
+   const cases=[[],[prepareRefs,{}],[{...prepareRefs,source:{}}],[{...prepareRefs,operation:'create'}]];
+   const results=[];for(const a of cases){try{await this.prepareFiniteNominalLaunch(...a);results.push(false);}catch{results.push(true);}}
+   return {results,calls};
+  }
+  if(['lost-prepare','lost-prepared','late-prepared','late-guard','late-claim','late-prepared-readback','lost-prepared-reconstruction'].includes(mode)){
+   let seen=0;
+   this.ctx.storage.transaction=async fn=>{
+    const r=await originalTx.call(this.ctx.storage,fn);
+    const state=await originalGet.call(this.ctx.storage,mode==='lost-prepare'?controlPrefix+'control':mode==='late-guard'?'afw.qa-finite-guard.v1:'+f.plan.intentId+':state':mode==='late-claim'?controlPrefix+'effect:nominal':prefix+'prepared');
+    if(state&&(mode!=='lost-prepare'||state.phase==='armed')){
+     if(mode.startsWith('late-')){if(mode!=='late-prepared-readback'||++seen===2)f.setNow(f.now()+5000);}else throw Error('SYNTHETIC unknown transaction ACK');
+    }return r;
+   };
+  }
+  const prepared=await this.prepareFiniteNominalLaunch(prepareRefs);
+  this.ctx.storage.transaction=originalTx;
+  const journal=async()=>({prepared:await this.ctx.storage.get(prefix+'prepared')??null,send:await this.ctx.storage.get(prefix+'send')??null,ack:await this.ctx.storage.get(prefix+'ack')??null,claim:await this.ctx.storage.get(controlPrefix+'effect:nominal')??null,guard:await this.ctx.storage.get('afw.qa-finite-guard.v1:'+f.plan.intentId+':state')??null,alarm:await this.ctx.storage.getAlarm()});
+  if(mode==='lost-prepared-reconstruction'){const s=await journal();f.prepareSuccess=false;f.setNow(f.plan.launchPolicy.launchAt);const created=await this.createFiniteNominalChild({intentId:f.plan.intentId,controlHash:s.prepared.controlHash});return {prepared,created,journal:await journal(),calls};}
+  if(f.handoff)return {prepared,journal:await journal(),calls,handoff:await this.ctx.storage.get('afw.finite-original-alarm-handoff.v1')??null,originalAt:f.handoff.initialC0};
+  if(prepared.status!=='prepared'||mode==='prepare')return {prepared,journal:await journal(),calls};
+  armedAt=f.now();f.prepareSuccess=true;
+  const refs={intentId:f.plan.intentId,controlHash:prepared.prepared.controlHash};
+  if(mode==='reprepare')return {prepared,again:await this.prepareFiniteNominalLaunch(prepareRefs),journal:await journal(),calls};
+  f.setNow(f.plan.T0+(mode==='create-149999'?149999:mode==='create-160000'?160000:150000));
+  if(mode==='consent-changed'){const original=f.primary.admission;f.primary.admission=async()=>{const p=await original();p.consent.valid=false;return p;};}
+  if(mode==='readiness-changed')f.primary.finalizer=async()=>{throw Error('SYNTHETIC not READY');};
+  if(['readiness-missing','readiness-stale','readiness-after-await','create-primary-expired'].includes(mode)){
+   const original=f.primary.finalizer;let n=0;f.primary.finalizer=async()=>{
+    const r=await original();n++;if(mode==='readiness-missing')return null;
+    if(mode==='readiness-stale')r.observedAt=f.now()-5001;
+    if(mode==='readiness-after-await'||mode==='create-primary-expired'&&n===2)f.setNow(f.now()+5000);
+    return r;
+   };
+  }
+  if(mode==='prepare-step-failed')f.prepareSuccess=false;
+  if(mode==='rest-get-launcher'||mode==='rest-get-launcher-foreign'){
+   f.launcherParamsWire=JSON.stringify({operation:'finite_nominal_launcher',intentId:f.plan.intentId,
+    sourceRevision:mode==='rest-get-launcher'?f.plan.source.revision:'0'.repeat(40)});
+  }else if(mode.startsWith('provider-'))f.launchProvider=mode.slice('provider-'.length);
+  if(mode==='sealed')f.sealed=true;
+  if(mode==='withdrawn'){const c=await this.ctx.storage.get(controlPrefix+'control');await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});}
+  if(mode==='pin-changed')this.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};
+  if(mode.startsWith('current-consent-')){
+   const admission=f.primary.admission,finalizer=f.primary.finalizer;let primaryReads=0,finalizerReads=0,crossed=false;
+   const expiresAt=f.plan.T0+150000+(mode==='current-consent-no-widen'?1000:mode==='current-consent-held-snapshot'?500:100);
+   f.primary.admission=async()=>{const value=await admission();primaryReads++;value.consent.expiresAt=mode==='current-consent-no-widen'?(primaryReads===1?expiresAt:f.plan.N1):(primaryReads===1?f.plan.N1:expiresAt);return value;};
+   f.primary.finalizer=async()=>{const value=await finalizer();finalizerReads++;return value;};
+   this.ctx.storage.transaction=async fn=>{
+    let journalWithSend=false;
+    const result=await originalTx.call(this.ctx.storage,tx=>fn({
+     get:tx.get.bind(tx),put:tx.put.bind(tx),setAlarm:tx.setAlarm.bind(tx),getAlarm:tx.getAlarm.bind(tx),
+     list:async options=>{const rows=await tx.list(options);if(options.prefix==='afw.qa-finite-child-create.v1:'&&rows.has(prefix+'send'))journalWithSend=true;return rows;}
+    }));
+    // SECOND fresh() snapshot, after acknowledged SEND and the second real
+    // readLaunchControl() result. The claim retains its older wider deadline.
+    if(!crossed&&journalWithSend&&finalizerReads===2){
+     crossed=true;f.consentCrossed=true;
+     if(mode==='current-consent-held-snapshot'){enter();await held;settled=true;}
+     f.setNow(expiresAt+1);
+    }
+    return result;
+   };
+  }
+  if(['lost-send','late-send','late-send-readback','late-ack','late-ack-readback'].includes(mode)){
+   let seen=0;
+   this.ctx.storage.transaction=async fn=>{
+    const result=await originalTx.call(this.ctx.storage,fn);
+    if(await originalGet.call(this.ctx.storage,prefix+(mode.startsWith('late-ack')?'ack':'send'))){
+     if(mode.startsWith('late-')){if(!mode.endsWith('readback')||++seen===2)f.setNow(f.now()+5000);}else throw Error('SYNTHETIC lost SEND ACK');
+    }return result;
+   };
+  }
+  if(mode==='duplicate-id'){await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});f.providerNominal='running';}
+  if(['held-create','held-send','current-consent-held-snapshot'].includes(mode)){
+   if(mode!=='current-consent-held-snapshot')f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
+   if(mode==='held-send'){let heldOnce=false;this.ctx.storage.transaction=async fn=>{const r=await originalTx.call(this.ctx.storage,fn);if(!heldOnce&&await originalGet.call(this.ctx.storage,prefix+'send')){heldOnce=true;enter();await held;settled=true;}return r;};}
+   const enteredAt=performance.now(),first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled,elapsedAtReturn=performance.now()-enteredAt;
+   const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000}),context=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent});
+   let enteredFresh=false;const fresh=withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context,parent},async check=>{check();enteredFresh=true;return true;});
+   await new Promise(r=>setTimeout(r,30));const enteredBeforeSettlement=enteredFresh;release();await fresh;
+   const again=await this.createFiniteNominalChild(refs);return {firstResult,settledAtReturn,elapsedAtReturn,enteredBeforeSettlement,again,journal:await journal(),calls};
+  }
+  const created=await this.createFiniteNominalChild(refs);
+  this.ctx.storage.transaction=originalTx;
+  const before=await journal();
+  if(mode.startsWith('confirm-')||mode==='lost-create'){
+   const createdAt=f.now();
+   f.setNow(createdAt+1);
+   if(mode==='confirm-foreign-send'){
+    const foreign={...before.send,bindingHash:'e'.repeat(64)};
+    await this.ctx.storage.put(prefix+'send',foreign);
+    await this.ctx.storage.put(prefix+'ack',{...before.ack,sendHash:hashFiniteLaunchRecord(foreign)});
+   }
+   const event={bundleHash:f.plan.bundleHash,instanceId:f.plan.workflows.confirmation,createdAt};
+   if(mode==='confirm-old-event')event.createdAt--;
+   if(mode==='confirm-foreign-event')event.instanceId='afw-release-'+'8'.repeat(64);
+   if(mode==='confirm-withdrawn'){
+    const c=await this.ctx.storage.get(controlPrefix+'control');
+    await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});
+   }
+   const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000});
+   const proof=await readPrivateQaFiniteNominalExecution({ctx:this.ctx,env:this.env,refs:event,parent}).catch(()=>null);
+   if(mode.startsWith('confirm-'))return {proof,calls,unchanged:mode==='confirm-exact'&&JSON.stringify(before)===JSON.stringify(await journal())};
+   if(proof!==null)throw Error('A lost native acknowledgement cannot hydrate confirmation');
+  }
+  const again=await this.createFiniteNominalChild(refs),read=await this.readFiniteNominalLaunch(refs);
+  return {prepared,created,again,read,journal:await journal(),unchanged:JSON.stringify(before)===JSON.stringify(await journal()),calls,callArgs,armedAt,plan:f.plan,paths:f.paths,consentCrossed:f.consentCrossed??false};
+ }
+}
+export default{async fetch(r,e){const {mode}=await r.json();const s=e.AFW_INDEPENDENT_CLOSURE.get(e.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));try{return Response.json(await s.run(mode));}catch(error){return Response.json({error:String(error)},{status:500});}}};
+`;
+let bundled;
+async function native(mode,synthetic=true){
+ const key=synthetic?'yes':'no';bundled??={};
+ if(!bundled[key])bundled[key]=(await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:synthetic?[{name:'SYNTHETIC C2 source only',setup(b){b.onLoad({filter:/mcp-qa-finite-launch-source\.mjs$/},async args=>({contents:"export {resolvePrivateQaFiniteLaunchContext,readPrivateQaFiniteLaunchMaterial,readPrivateQaFiniteLaunchOperations} from '../test/fixtures/finite-launch-operations-native.mjs';",loader:'js',resolveDir:args.path.slice(0,args.path.lastIndexOf('/'))}));}}]:[]})).outputFiles[0].text;
+ const release=['AFW_RELEASE_OPERATOR_ENABLED','AFW_RELEASE_WORKFLOW_ENABLED','AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED','AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED'];
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundled[key],compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(release.map(k=>[k,'true'])),AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}},d1Databases:{RELEASE_DB:'launch-operation-db'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Native',useSQLite:true,uniqueKey:'launch-operation-native'},AFW_RELEASE_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'launch-operation-node'}},workflows:{AFW_QA_NAMED_CONFIRMATION:{name:'afw-own-qa-private-confirmation',className:'PrivateQaNamedConfirmation'}}}));
+ try{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(r.status,200,await r.clone().text());const value=await r.json();assert.notEqual(value.missingMount,true,'actual IndependentClosure fixed launch methods must exist');return value;}finally{await mf.dispose();}
+}
+test('actual native prepare arms C0 guard then consumes same-object nominal once',async()=>{
+ const r=await native('prepare');assert.equal(r.prepared.status,'prepared');assert.equal(r.journal.claim.kind,'nominal');assert.equal(r.journal.guard.state,'armed');assert.equal(r.journal.alarm,r.journal.guard.nextAt);assert.equal(r.journal.send,null);assert.equal(r.calls,0);
+});
+test('actual native binding creates exact fixed child once; receipt/read/reconstruction grant no send',async()=>{
+ const r=await native('create');assert.equal(r.created.status,'acknowledged');assert.equal(r.calls,1);assert.deepEqual(r.callArgs,{id:r.plan.workflows.confirmation,params:{planHash:r.plan.bundleHash}});assert.ok(r.journal.send);assert.ok(r.journal.ack);assert.equal(r.unchanged,true);assert.equal(r.again.authorizesEffects,false);assert.equal(r.read.operationalReadiness,false);
+ const identity={accountId:'85d0d5dadac3341a564f22ce885e9eec',bindingName:'AFW_QA_NAMED_CONFIRMATION',className:'PrivateQaNamedConfirmation',definitionName:'afw-own-qa-private-confirmation',qaVersionId:r.plan.deployments.qaLive.versionId,scriptName:'agent-friendly-web-independent-closure-qa',sourceModuleHash:r.plan.source.moduleHash,sourceProfileHash:r.plan.source.profileHash,sourceRevision:r.plan.source.revision};
+ const hash=s=>createHash('sha256').update(s).digest('hex');
+ assert.equal(r.journal.send.bindingHash,hash('afw.finite-native-child-binding.v1\n'+JSON.stringify(Object.fromEntries(Object.keys(identity).sort().map(k=>[k,identity[k]])))));
+ assert.equal(r.journal.prepared.guardStateHash,hash(JSON.stringify(r.journal.guard)));
+ assert.equal(r.journal.prepared.nominalClaimHash,hash('afw.qa-finite-trial.v1:effect\n'+JSON.stringify(r.journal.claim)));
+});
+test('RPC exact arity/fields reject caller source and operation',async()=>{assert.deepEqual((await native('invalid-args')).results,[true,true,true,true]);});
+test('default unqualified C2 denies before storage/effects',async()=>{const r=await native('prepare',false);assert.equal(r.prepared.status,'admin_pending');assert.equal(r.journal.prepared,null);assert.equal(r.journal.claim,null);assert.equal(r.calls,0);});
+for(const mode of ['missing-setup','unsettled-setup','altered-seed','source-unavailable','operations-unavailable','prepare-90000','hydrate-expiry','prepare-phase-hydration','binding-after-await','old-head','lost-prepare','lost-prepared','late-prepared','late-guard','late-claim','late-prepared-readback'])test('prepare denies '+mode,async()=>{const r=await native(mode);assert.equal(r.prepared.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+test('reconstructed prepare never acquires same-object claim again',async()=>{const r=await native('reprepare');assert.equal(r.again.status,'admin_pending');assert.equal(r.calls,0);});
+for(const mode of ['create-149999','create-160000','consent-changed','readiness-changed','readiness-missing','readiness-stale','readiness-after-await','prepare-step-failed','sealed','withdrawn','pin-changed'])test('create denies '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+for(const mode of ['lost-send','late-send','late-send-readback','create-primary-expired'])test('durable '+mode+' consumes SEND without native invocation/refund',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,0);assert.equal(r.unchanged,true);});
+for(const mode of ['lost-create','late-create','wrong-create'])test('one-shot '+mode+' retains unresolved SEND without retry',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,1);assert.equal(r.unchanged,true);});
+
+test('preexisting actual native child denies SEND even though Miniflare create returns its existing ID',async()=>{const r=await native('duplicate-id');assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+test('Workflow context cannot replace actual DO storage context',async()=>{const r=await native('workflow-context');assert.equal(r.outcome.status,'admin_pending');assert.equal(r.calls,0);});
+test('held actual native create retains coordinator after caller expiry against a fresh parent',async()=>{const r=await native('held-create');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,1);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
+for(const mode of ['late-ack','late-ack-readback'])test('late actual ACK persistence remains factual after '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,1);assert.ok(r.journal.send);assert.ok(r.journal.ack);assert.equal(r.unchanged,true);});
+
+test('held actual SEND transaction retains coordinator after caller expiry against fresh parent',async()=>{const r=await native('held-send');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
+
+test('lost prepared ACK cannot reconstruct launch from its durable receipt without source step success',async()=>{const r=await native('lost-prepared-reconstruction');assert.equal(r.prepared.status,'admin_pending');assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.prepared);assert.equal(r.journal.send,null);assert.equal(r.calls,0);});
+
+for(const mode of ['current-consent-crossing','current-consent-no-widen'])test('current consent expiry survives second fresh storage await: '+mode,async()=>{
+ const r=await native(mode);assert.equal(r.consentCrossed,true,'cross the independently read current expiry during second fresh snapshot after SEND');
+ assert.equal(r.calls,0,'expired current consent must prevent native create');assert.equal(r.created.status,'admin_pending');
+ assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.unchanged,true);assert.equal(r.journal.claim.deadline,r.plan.N1,'persisted claim is deliberately wider than current consent');
+});
+test('narrowed current consent timeout retains actual second snapshot work against a fresh parent',async()=>{
+ const r=await native('current-consent-held-snapshot');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.ok(r.elapsedAtReturn<2000,'500ms current consent narrows the caller timeout without waiting for original 5s');
+ assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);
+});
+
+test('confirmation reads the same native SEND and acknowledged instance without writing',async()=>{
+ const r=await native('confirm-exact');
+ assert.equal(r.proof.execution.nominalId,'afw-release-'+r.proof.execution.bundleHash);
+ assert.equal(r.proof.execution.bundleHash,JSON.parse(r.proof.plan).bundleHash);
+ assert.equal(r.calls,1);
+ assert.equal(r.unchanged,true);
+});
+for(const mode of ['confirm-old-event','confirm-foreign-event','confirm-foreign-send','confirm-withdrawn'])test('confirmation refuses '+mode,async()=>{
+ const r=await native(mode);
+ assert.equal(r.proof,null);
+ assert.equal(r.calls,1);
+});
+
+for(const mode of ['provider-failed','provider-wrong-envelope','provider-replayed','provider-duplicate','provider-wrong-version'])test('native create requires provider launch preparation evidence: '+mode,async()=>{
+ const r=await native(mode);
+ assert.equal(r.created.status,'admin_pending');
+ assert.equal(r.journal.send,null);
+ assert.equal(r.calls,0);
+});
+test('native create reads the exact REST-encoded launcher parameters returned by Cloudflare',async()=>{
+ const r=await native('rest-get-launcher');assert.equal(r.created.status,'acknowledged');assert.equal(r.calls,1);
+ assert.ok(r.journal.send);assert.ok(r.journal.ack);
+});
+test('a REST-encoded provider launcher for another source cannot issue a child',async()=>{
+ const r=await native('rest-get-launcher-foreign');assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);
+ assert.equal(r.journal.send,null);
+});
+test('native create reads the original provider launcher and version before sending',async()=>{
+ const r=await native('create');
+ assert.equal(r.calls,1);
+ assert(r.paths.includes('/workflows/afw-own-qa-private-bootstrap/instances/'+r.plan.workflows.launcher));
+ assert(r.paths.includes('/workflows/afw-own-qa-private-bootstrap/versions/70000000-0000-4000-8000-000000000007'));
+});
+
+test('the native launcher transfers the exact initial alarm to guarded business preparation',async()=>{
+ const r=await native('original-alarm');
+ assert.equal(r.prepared.status,'prepared');
+ assert.equal(r.handoff.initialC0,r.originalAt);
+ assert.equal(r.handoff.controlHash,r.prepared.prepared.controlHash);
+ assert.equal(r.journal.alarm,r.journal.guard.nextAt);
+ assert.equal(r.calls,0);
+});
+test('a changed original alarm cannot be consumed during native preparation',async()=>{
+ const r=await native('changed-original-alarm');
+ assert.equal(r.prepared.status,'admin_pending');assert.equal(r.handoff,null);
+ assert.equal(r.journal.alarm,r.originalAt+1);assert.equal(r.journal.guard,null);assert.equal(r.calls,0);
+});
+
+test('final original consent authorizes the same committed native SEND once',async()=>{
+ const valid=await native('final-permission-valid');assert.equal(valid.created.status,'acknowledged');assert.equal(valid.calls,1);
+ const withdrawn=await native('final-permission-withdrawn');
+ assert.equal(withdrawn.created.status,'admin_pending');assert.equal(withdrawn.calls,0);
+ assert.ok(withdrawn.journal.send);assert.equal(withdrawn.journal.ack,null);
+ assert.equal(withdrawn.again.status,'issued');
+});

@@ -1,0 +1,120 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
+
+async function using(fn,mode='normal'){
+ const f=await initialEntryHarness('normal');
+ try{await f.stub.configure(mode);await fn(f);}
+ finally{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();}
+}
+const has=(f,part)=>f.requests.some(x=>x.includes(part));
+test('same original initial actor observes preliminary gates before activation',()=>using(async f=>{
+ const r=await f.stub.invoke(f.refs);
+ assert.equal(r.status,'material_recorded',JSON.stringify(r));
+ assert.equal(r.authorizesEffects,false);assert.equal(r.completePackage,false);
+ assert.ok(has(f,'/instances/afw-mcp-closure-d56b5e850d24cc23058a024d73bae4c830a91c1fb9659f2e96282854ccae2c04'));
+ assert.ok(has(f,'/workflows?per_page=100&page=1'));
+ assert.equal(f.requests.filter(x=>x.includes('independent-closure-qa/deployments?per_page=1')).length>=4,true);
+ assert.equal(f.uploads.length,1);assert.equal(f.restores.length,0);
+ assert.equal(f.activations.length,1);
+}));
+for(const fault of ['guard','inventory','schema','qa','history','custody'])test('preliminary '+fault+' failure cannot progress after arm',()=>using(async f=>{
+ if(fault==='guard')f.oldGuardMode='http-401';
+ if(fault==='inventory')f.inventoryMode='foreign';
+ if(fault==='schema')await f.db.exec('DROP TRIGGER dossier_node_process_no_update');
+ if(['qa','history','custody'].includes(fault))f.gateMode=fault;
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending',fault);
+ assert.equal(f.uploads.length,1);assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'),fault+' reached durable arm');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+}));
+
+test('failed sibling retains the actual unfinished D1 read until it settles',()=>using(async f=>{
+ f.oldGuardMode='retention-401';
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending');
+ assert.equal((await f.stub.stats()).held,true,'the native query completion remains held');
+ assert.equal((await f.stub.probeStageAvailability()).available,false,'the prior actor work remains retained');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
+ await f.stub.release();
+ let available=false;
+ for(let n=0;n<100&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
+ assert.equal(available,true,'settlement releases the prior retention');
+ assert.deepEqual(await f.stub.snapshot(),rows);
+},'gate-retention'));
+
+for(const fault of ['active-container','schedule','ineligible','candidate-module','candidate-resource','candidate-secret'])test('pre-effect primary '+fault+' blocks without activation',()=>using(async f=>{
+ f.alarmMode=fault;
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending',fault);
+ assert.equal(f.uploads.length,1);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ const target=fault==='active-container'?'/instances-v2?':fault==='schedule'?'/schedules':fault==='ineligible'?'/versions?deployable=true':'/versions/55555555-5555-4555-8555-555555555555?include=modules';
+ assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
+}));
+
+test('failed primary sibling retains actual outstanding provider read',()=>using(async f=>{
+ f.gateMode='primary-retention';
+ const result=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(result.status,'admin_pending');
+ assert.equal(f.held,'provider-read');
+ try{
+  assert.equal((await f.stub.probeStageAvailability()).available,false);
+  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ }finally{f.release();}
+ let available=false;
+ for(let n=0;n<100&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
+ assert.equal(available,true);
+ assert.deepEqual(await f.stub.snapshot(),rows);
+}));
+
+for(const fault of ['operator-pointer','operator-version','canary-pointer','tails'])test('pre-effect primary '+fault+' fails closed',()=>using(async f=>{
+ f.gateMode=fault;
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending',fault);
+ assert.equal(f.uploads.length,1);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ const target=fault==='operator-pointer'?'agent-friendly-web-release-operator/deployments?':fault==='operator-version'?'agent-friendly-web-release-operator/versions/':fault==='canary-pointer'?'agent-friendly-web-delegated-canary/deployments?':'/tails';
+ assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
+}));
+
+test('late primary headers cancel open response body after sibling failure',()=>using(async f=>{
+ f.gateMode='primary-late-headers';
+ const result=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(result.status,'admin_pending');
+ assert.equal(f.held,'provider-read');
+ assert.equal((await f.stub.probeStageAvailability()).available,false);
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ f.release();
+ let cancelled=false;
+ for(let n=0;n<200&&!cancelled;n++){cancelled=(await f.stub.stats()).bodyCancelled===true;if(!cancelled)await new Promise(resolve=>setTimeout(resolve,10));}
+ assert.equal(cancelled,true,'the actual late body is cancelled');
+ let available=false;
+ for(let n=0;n<200&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
+ assert.equal(available,true,'the body cancellation has settled');
+ assert.deepEqual(await f.stub.snapshot(),rows);
+},'late-body-observe'));
+
+test('final serial canary pointer drift blocks before activation',()=>using(async f=>{
+ f.gateMode='final-pointer';
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending');
+ assert.ok(f.pointerReads>=5,'the post-inventory pointer was observed');
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
+}));
+test('late initial journal conflict blocks the final gate',()=>using(async f=>{
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending');
+ assert.ok(f.pointerReads>=5);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
+},'late-initial-journal'));

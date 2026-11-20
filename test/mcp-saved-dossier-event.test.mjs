@@ -18,3 +18,57 @@ test('mutations specifically during later authorization and event projection awa
 test('same host delivers a saved event through the original signed Node loop with no caller metadata',async()=>{
  await load();const {createOwnDurableEventHost}=await import('../lib/mcp-own-durable-host.mjs'),f=prepared();try{const h=createOwnDurableEventHost(f.config);f.setHost(h);const projectRef=await h.list(),r=await h.subscribe({name:'afw.dossier.changed',arguments:{projectRef},delivery:{mode:'webhook',url:'https://callback.agentfriendlyweb.dev/hook',secret:'whsec_'+Buffer.alloc(32,3).toString('base64')}});f.db.prepare('INSERT INTO project_events VALUES(?,?,?,?,?,?)').run('event-after-subscribe','p','owner','project_updated',new Date().toISOString(),JSON.stringify({revision:1}));const delivered=await h.deliverSaved(r.id,'event-after-subscribe');assert.equal(delivered.status,200);assert.equal(delivered.cloudReviewConfirmed,false);assert.equal(f.boots(),1);assert.equal(f.sends(),2);await assert.rejects(h.deliverSaved(r.id,'event-after-subscribe'));assert.equal(f.sends(),2);await h.close();}finally{f.close();}
 });
+
+async function finiteDeliveryFixture(){
+ const [{createOwnDurableEventHost},{ownSubscriptionReceiptFields},{createHash}]=await Promise.all([
+  import('../lib/mcp-own-durable-host.mjs'),import('../lib/mcp-own-subscription-receipt.mjs'),import('node:crypto'),
+ ]);
+ const f=prepared(),db=f.config.db;
+ try{
+  db.withSession=mode=>{assert.equal(mode,'first-primary');return db;};
+  const h=createOwnDurableEventHost(f.config);f.setHost(h);
+  const projectRef=await h.list();
+  await h.subscribe({name:'afw.dossier.changed',arguments:{projectRef},delivery:{
+   mode:'webhook',url:'https://callback.agentfriendlyweb.dev/hook',secret:'whsec_'+Buffer.alloc(32,3).toString('base64'),
+  }});
+  const eventId='e'.repeat(64),fingerprint='f'.repeat(64),revision=2;
+  f.db.exec('UPDATE site_projects SET revision=2');
+  f.db.prepare('INSERT INTO project_events VALUES(?,?,?,?,?,?)').run(eventId,'p','owner','project_updated',
+   new Date().toISOString(),JSON.stringify({changedFields:['goals'],revision,fingerprint}));
+  const row=f.db.prepare('SELECT * FROM dossier_event_subscription_receipts').get();
+  const receipt=Object.fromEntries(ownSubscriptionReceiptFields.map(key=>[key,row[key]]));
+  const subscriptionReceiptHash=createHash('sha256').update(JSON.stringify(receipt)).digest('hex');
+  return {f,h,notice:{eventId,revision,fingerprint,subscriptionReceiptHash,processReceiptHash:'a'.repeat(64)}};
+ }catch(error){f.close();throw error;}
+}
+
+test('finite delivery uses the exact primary event and original subscription through the signed Node loop',async()=>{
+ const {f,h,notice}=await finiteDeliveryFixture();let checks=0;
+ const input={notice,deliveryDeadline:Date.now()+4000,assertCurrent:()=>{},recheck:async()=>{assert.equal(f.sends(),1);checks++;}};
+ try{
+  await assert.rejects(h.deliverFiniteOwnSaved({...input,notice:{...notice,subscriptionReceiptHash:'0'.repeat(64)}}));
+  await assert.rejects(h.deliverFiniteOwnSaved({...input,notice:{...notice,fingerprint:'0'.repeat(64)}}));
+  assert.equal(f.sends(),1);assert.equal(checks,0);
+  const result=await h.deliverFiniteOwnSaved(input);
+  const {readSavedDossierMcpEvent}=await load();
+  const projected=await readSavedDossierMcpEvent(f.options,notice.eventId);
+  assert.deepEqual(result,{eventId:projected.eventId,status:200,httpReceivedAt:result.httpReceivedAt,cloudReviewConfirmed:false});
+  const issued=f.rows().map(row=>JSON.parse(row.v)).find(row=>row.phase==='delivery'&&row.preparedAt!==undefined);
+  assert.equal(issued.expiresAt,input.deliveryDeadline);
+  assert.equal(checks,1);assert.equal(f.boots(),1);assert.equal(f.sends(),2);
+  await assert.rejects(h.deliverFiniteOwnSaved(input));
+  assert.equal(checks,1);assert.equal(f.sends(),2);
+  await h.close();
+ }finally{f.close();}
+});
+
+test('loss of QA authority at dispatch forbids transport and does not reset the send budget',async()=>{
+ const {f,h,notice}=await finiteDeliveryFixture();let checks=0;
+ const input={notice,deliveryDeadline:Date.now()+4000,assertCurrent:()=>{},recheck:async()=>{checks++;throw Error('QA authority has ended');}};
+ try{
+  await assert.rejects(h.deliverFiniteOwnSaved(input));
+  await assert.rejects(h.deliverFiniteOwnSaved({...input,recheck:async()=>{checks++;}}));
+  assert.equal(checks,1);assert.equal(f.sends(),1);assert.equal(f.boots(),1);
+  await h.close();
+ }finally{f.close();}
+});

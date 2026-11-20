@@ -1,0 +1,73 @@
+# SOURCE definition only; separate owner command after approved initial publication.
+name: afw-finite-qa-bootstrap
+run-name: AFW finite QA bootstrap comment-${{ github.event.comment.id }} source-${{ github.sha }}
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  publish:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && github.event.comment.body == format('/afw-qa-finite-bootstrap v1 {0}', github.sha) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify the exact private QA bootstrap credentials
+        env:
+          AFW_MCP_CLOSURE_READ_TOKEN: ${{ secrets.AFW_MCP_CLOSURE_READ_TOKEN }}
+          AFW_MCP_CLOSURE_PUBLISH_TOKEN: ${{ secrets.AFW_MCP_CLOSURE_PUBLISH_TOKEN }}
+        shell: bash
+        run: |
+          node --input-type=module <<'AFW_CUSTODY'
+          import {finiteInitialCustodyAt,assertFiniteInitialToken} from './lib/mcp-qa-finite-initial-custody-profile.mjs';
+          import {finiteCfEnvelope} from './lib/mcp-qa-finite-custody.mjs';
+          const root='https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec';
+          const names={reader:'AFW_MCP_CLOSURE_READ_TOKEN',publisher:'AFW_MCP_CLOSURE_PUBLISH_TOKEN'};
+          const roles={reader:['/workflows?per_page=100&page=1','/containers/applications/d6fc71552de7494a863aca20365a572d/instances-v2?state=active&per_page=100','/workers/workers/agent-friendly-web-independent-closure-qa','/workers/workers/agent-friendly-web-release-operator'],publisher:['/workers/scripts/agent-friendly-web-delegated-canary/deployments?per_page=1']};
+          try {
+            const at=Date.now(),profile=finiteInitialCustodyAt(at);
+            if(profile.endAt-at<=1080000)throw Error('insufficient recovery window');
+            await Promise.all(Object.entries(names).map(async ([role,name])=>{
+              const token=process.env[name];
+              if(typeof token!=='string'||!/^[-A-Za-z0-9_]{16,4096}$/.test(token))throw Error('invalid credential');
+              const get=path=>fetch(root+path,{headers:{Authorization:'Bearer '+token,Accept:'application/json'},redirect:'error',cache:'no-store',signal:AbortSignal.timeout(7000)});
+              const response=await get('/tokens/verify');
+              if(!response.ok)throw Error('identity unavailable');
+              assertFiniteInitialToken(finiteCfEnvelope(await response.json()),profile[role],Date.now());
+              await Promise.all(roles[role].map(async path=>{
+                const permission=await get(path);
+                if(!permission.ok)throw Error('required read unavailable');
+                await permission.body?.cancel();
+              }));
+            }));
+            if(finiteInitialCustodyAt(Date.now())!==profile)throw Error('custody changed');
+            console.log('Scoped bootstrap credential identities and capability reads accepted');
+          }catch{
+            console.error('AFW bootstrap custody preflight failed');
+            process.exitCode=1;
+          }
+          AFW_CUSTODY
+      - name: qa-bootstrap-provenance
+        id: finite_bootstrap_once
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          export AFW_FINITE_BOOTSTRAP_ORIGINAL_PID=$$
+          exec node scripts/run-qa-finite-bootstrap.mjs
+

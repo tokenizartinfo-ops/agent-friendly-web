@@ -39,3 +39,13 @@ for(const admitted of [false,true])test('native permissions-only preserves admis
 test('legacy native constructor still requests its qualified close callback',async()=>{
  const f=await fixture();try{let calls=0;const result=await withdrawal.createOwnPermissionWithdrawal({...f.options,close:async()=>{calls++;return{closed:true,runtimeStopRequested:true};}}).withdraw();assert.equal(calls,1);assert.equal(result.runtimeStopRequested,true);assert.equal(result.permissionsWithdrawn,true);}finally{await f.mf.dispose();}
 });
+
+test('permissions-only observer is read only before and after actual native reduction',async()=>{
+ const f=await fixture();try{
+  const before=await f.permissions(),read=withdrawal.createOwnPermissionsOnlyObservation(f.options);
+  assert.equal((await read.observe()).permissionsWithdrawn,false);assert.deepEqual(await f.permissions(),before);
+  await make(f.options).withdraw();const after=await f.permissions();
+  assert.equal((await withdrawal.createOwnPermissionsOnlyObservation({...f.options,db:f.other}).observe()).permissionsWithdrawn,true);
+  assert.deepEqual(await f.permissions(),after);
+ }finally{await f.mf.dispose();}
+});

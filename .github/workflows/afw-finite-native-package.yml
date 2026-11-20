@@ -1,0 +1,30 @@
+name: AFW finite native package
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Complete source and historical qualification
+        run: node scripts/build-finite-native-package.mjs "${{ github.sha }}"
+      # No upload step while Native5/4C2/4C3, privacy-qualified historical
+      # inputs, exact locator and rollback compatibility remain unqualified.
+      # Future exact six files: manifest.json, qaLive/index.mjs,
+      # qaClosed/closed-rollback.mjs, canaryLive/index.mjs,
+      # canaryClosed/index.mjs, operatorClosed/index.mjs.
+      # Eligible artifact name will be afw-finite-native-package-<M>.

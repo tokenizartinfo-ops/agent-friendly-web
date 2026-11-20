@@ -1,0 +1,125 @@
+name: afw-finite-finalizer
+run-name: AFW finite finalizer comment-${{ github.event.comment.id }} source-${{ github.sha }}
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  admission:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && startsWith(github.event.comment.body, '/afw-qa-finite-confirmation v1 ') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    outputs:
+      intent_id: ${{ steps.command.outputs.intent_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - id: command
+        run: node scripts/run-qa-finite-trial-finalizer.mjs admission
+  admit:
+    needs: admission
+    outputs:
+      restore_mode: ${{ steps.observe.outputs.restore_mode }}
+    concurrency:
+      group: afw-finite-finalizer-${{ needs.admission.outputs.intent_id }}
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: seed-material
+        id: finite_seed_once
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          export AFW_FINITE_SEED_ORIGINAL_PID=$$
+          exec node scripts/run-qa-finite-trial-finalizer.mjs seed-material
+      - name: admit-and-ready
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/run-qa-finite-trial-finalizer.mjs admit
+      # The fixed QA observer creates the native launcher after this admission.
+      - name: Wait for exact observer terminal output
+        id: observe
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/run-qa-finite-trial-finalizer.mjs poll
+  restore:
+    needs: admit
+    if: ${{ contains(fromJSON('["legacy","independent"]'), needs.admit.outputs.restore_mode) }}
+    concurrency:
+      group: afw-qa-cloud-closed-rollback
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Restore exact QA candidate once under original R1
+        id: finite_restore_once
+        if: ${{ needs.admit.outputs.restore_mode == 'legacy' }}
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          # Trusted once-launched attempt1 entry. No retry/supervisor or recovery
+          # wrapper may regenerate this coherence marker.
+          export AFW_FINITE_RESTORE_ORIGINAL_PID=$$
+          exec node scripts/run-qa-finite-trial-finalizer.mjs restore
+      - name: Restore exact QA after original owner closure
+        id: coupled_restore_once
+        if: ${{ needs.admit.outputs.restore_mode == 'independent' }}
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          export AFW_COUPLED_RESTORE_ORIGINAL_PID=$$
+          exec node scripts/run-qa-finite-trial-finalizer.mjs restore-independent
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-finite-finalizer-${{ github.run_id }}-${{ github.run_attempt }}
+          path: afw-finite-result.json
+          if-no-files-found: error
+          retention-days: 7

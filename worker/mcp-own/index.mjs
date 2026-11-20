@@ -1,3 +1,10 @@
+import {observeFiniteOwnPrelaunch} from '../../lib/mcp-own-finite-prelaunch.mjs';
+import {runFiniteOwnTrialDossier,runFiniteOwnTrialNotice} from '../../lib/mcp-own-finite-notice-delivery.mjs';
+import {runFiniteOwnNominalReservation,runFiniteOwnTrialSubscription} from '../../lib/mcp-own-finite-nominal-reservation.mjs';
+import {runFiniteOwnCleanupProof} from '../../lib/mcp-own-finite-proof-route.mjs';
+import {readFiniteCanaryReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
+import {createFiniteOwnReductionActions} from '../../lib/mcp-own-finite-reduction.mjs';
+import {resolveFiniteOwnNativeCleanupHost,createFiniteOwnCleanupAdmissionJournal} from '../../lib/mcp-own-finite-cleanup-host.mjs';
 import {withdrawOwnPermissions} from '../../lib/mcp-own-permission-withdrawal-host.mjs';
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
@@ -13,19 +20,45 @@ import {observeMcpDiscoveryRequest,observeMcpEventAuthority,createMcpRpcCatalogD
 const deny=()=>new Response('{"code":"unavailable"}',{status:404,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const fail=()=>{throw Error('Private event Node unavailable');};
 // Build replaces these public program/revision literals; no key is embedded.
+// Entrypoint family is fixed in compiled bytes, never read from caller/env.
+// Metadata and source qualification must still prove this profile before ARM.
+const finiteEntrypoint=globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__==='finite_trial_event';
 const program=globalThis.__AFW_NODE_PROGRAM__??'',sourceRevision=globalThis.__AFW_NODE_SOURCE_REVISION__??'';
 
 export class AfwOwnEventNode extends DurableObject{
- #host(historical=false,diagnostic){
+ #finiteCleanupBindings(){
+  return Object.freeze({program,programSourceRevision:sourceRevision,close:async (boundary,savedEvent)=>{
+   const c=this.#host(true),assertCurrent=()=>{boundary.assertCurrent();c.current();if(boundary.signal.aborted)fail();};
+   const input={...boundary,assertCurrent};
+   // Receipt lookup cannot stop the existing physical close attempt.
+   let notice=null;
+   assertCurrent();
+   try{notice=await c.host.withdrawFiniteSubscription(input,savedEvent);}catch{}
+   assertCurrent();const result=await c.host.close(input);assertCurrent();
+   return notice===null?result:{...result,notice};
+  }});
+ }
+ #finite(){return resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env,nativeCleanup:this.#finiteCleanupBindings()});}
+ async #finiteCleanupJournal(refs,operation){
+  const control=await readFiniteCanaryReductionControl({ctx:this.ctx,env:this.env,sourceRevision,refs,operation});
+  const journal=createFiniteOwnCleanupAdmissionJournal({ctx:this.ctx,env:this.env,control,sourceRevision});
+  return operation==='seal'?journal.seal():journal.read();
+ }
+ async #finiteReduction(refs,operation){
+  const control=await readFiniteCanaryReductionControl({ctx:this.ctx,env:this.env,sourceRevision,refs,operation});
+  const actions=createFiniteOwnReductionActions({ctx:this.ctx,env:this.env,control,...this.#finiteCleanupBindings()});
+  return actions[operation==='observe'?'read':operation](refs);
+ }
+ #host(historical=false,diagnostic,now=Date.now,finiteGate){
   const trace=stage=>{try{diagnostic?.record(stage);}catch{}};
-  const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical}),p=config.policy;
+  const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical,now}),p=config.policy;
   trace('native_policy_ready');
-  const successor=historical?null:readOwnSuccessorHost({env:this.env,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt}});
+  const successor=historical?null:readOwnSuccessorHost({env:this.env,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},now});
   trace('native_successor_ready');
   if(this.ctx.id.toString()!==p.containerId)fail();const secret=this.env.AFW_DOSSIER_EVENTS_CUSTODY_KEY;
   if(typeof secret!=='string'||secret.length!==44)fail();const key=Buffer.from(secret,'base64');if(key.length!==32||key.toString('base64')!==secret){key.fill(0);fail();}
   trace('native_custody_ready');
-  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now:Date.now},trace);}finally{key.fill(0);}
+  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),...(finiteGate?{finiteGate}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now},trace);}finally{key.fill(0);}
   return{host,current:()=>{config.current();successor?.current();}};
  }
  async #call(method,...args){
@@ -35,6 +68,70 @@ export class AfwOwnEventNode extends DurableObject{
   catch{diagnostic?.record('native_failed');fail();}
  }
  fetch(){return deny();}
+ // Private fixed finite methods; closed profiles have no compiled factory.
+ async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'withdraw');const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
+ async closeFiniteTrial(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'close');const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
+ async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteReduction(args[0],'observe');const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
+ async #runFiniteNotice(run,refs,now=Date.now){
+  try{
+   return await run({ctx:this.ctx,env:this.env,program,sourceRevision,refs,now,deliver:async input=>{
+    const c=this.#host(false,undefined,input.assertCurrent);
+    c.current();const result=await c.host.deliverFiniteOwnSaved(input);c.current();return result;
+   }});
+  }catch{fail();}
+ }
+ async deliverFiniteTrialNotice(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  return this.#runFiniteNotice(runFiniteOwnTrialNotice,args[0]);
+ }
+ async readFiniteTrialPrelaunch(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  return observeFiniteOwnPrelaunch({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0]});
+ }
+ async startFiniteTrialSubscription(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  const refs=args[0];
+  try{
+   return await runFiniteOwnTrialSubscription({ctx:this.ctx,env:this.env,program,sourceRevision,refs,
+    subscribe:async ({gate,request,assertCurrent,deadline})=>{
+     const c=this.#host(false,undefined,assertCurrent,gate);
+     c.current();const result=await c.host.subscribe(request,deadline);c.current();return result;
+    },
+    runDossier:assertCurrent=>this.#runFiniteNotice(runFiniteOwnTrialDossier,refs,assertCurrent),
+   });
+  }catch{fail();}
+ }
+ async saveAndDeliverFiniteTrialNotice(...args){
+  if(!finiteEntrypoint||args.length!==1)fail();
+  return this.#runFiniteNotice(runFiniteOwnTrialDossier,args[0]);
+ }
+ async readFiniteTrialAdmissionJournal(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'journal'});
+  const h=await this.#finite();return h.readFiniteTrialAdmissionJournal(args[0]);}
+ async beginFiniteTrialReservation(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'reserve'});
+  const h=await this.#finite();return h.beginFiniteTrialReservation(args[0]);}
+ async settleFiniteTrialReservation(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnNominalReservation({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],operation:'settle'});
+  const h=await this.#finite();return h.settleFiniteTrialReservation(args[0]);}
+ async readFiniteTrialSealedAdmissionJournal(...args){
+  if(args.length!==1||!finiteEntrypoint)fail();
+  return this.#finiteCleanupJournal(args[0],'observeSeal');
+ }
+ async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();if(finiteEntrypoint)return this.#finiteCleanupJournal(args[0],'seal');const h=await this.#finite();return h.sealFiniteTrialAdmission(args[0]);}
+ async readFiniteTrialCleanupReadiness(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnCleanupProof({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],capture:false});
+  const h=await this.#finite();return h.readFiniteTrialCleanupReadiness(args[0]);
+ }
+ async observeFiniteTrialCleanup(...args){
+  if(args.length!==1)fail();
+  if(finiteEntrypoint)return runFiniteOwnCleanupProof({ctx:this.ctx,env:this.env,program,sourceRevision,refs:args[0],capture:true});
+  const h=await this.#finite();return h.observeFiniteTrialCleanup(args[0]);
+ }
  // Private original-custody observation; no caller selectors or live runtime.
  async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
  // Fixed read-only challenged wrappers. No selectors, fallback or new authority.
@@ -43,7 +140,7 @@ export class AfwOwnEventNode extends DurableObject{
  // Separate successor readback; preserves original observeRetired policy.
  async observeSuccessorRetired(...args){try{if(args.length)fail();return await observeOwnSuccessorRetiredCustody({env:this.env,ctx:this.ctx,program,sourceRevision});}catch{fail();}}
  list(){return this.#call('list');}
- subscribe(value){return this.#call('subscribe',value);}
+ subscribe(value){if(finiteEntrypoint)fail();return this.#call('subscribe',value);}
  unsubscribe(value){return this.#call('unsubscribe',value);}
  // Trusted server observation only; never boots or refreshes the original.
  readReadiness(){return this.#call('readReadiness');}
@@ -60,8 +157,8 @@ export class AfwOwnEventNode extends DurableObject{
    close:async(signal,assertStage,expiresAt)=>{const c=this.#host(true);const assertCurrent=()=>{assertStage();c.current();if(signal.aborted)fail();};assertCurrent();const result=await c.host.close({signal,assertCurrent,expiresAt});assertCurrent();return result;}},boundary);
  }catch{fail();}}
  // Internal producer reference only; never accept a caller-authored signal.
- deliverSaved(subscriptionId,eventId){return this.#call('deliverSaved',subscriptionId,eventId);}
- deliverOwnSaved(eventId){return this.#call('deliverOwnSaved',eventId);}
+ async deliverSaved(subscriptionId,eventId){if(finiteEntrypoint)fail();return this.#call('deliverSaved',subscriptionId,eventId);}
+ async deliverOwnSaved(eventId){if(finiteEntrypoint)fail();return this.#call('deliverOwnSaved',eventId);}
  async consume(request,serverProps){try{return await this.#call('consume',request,serverProps);}catch{return deny();}}
 }
 
@@ -80,5 +177,5 @@ const worker={fetch(request,env,ctx){
   issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,
   eventsAuthorityFactory:options=>observeMcpEventAuthority(diagnostic,()=>createDossierEventRpcAuthority({enabled:true,...options,diagnostic})),
  }).fetch(request,env,ctx));
-},async scheduled(controller,env){const result=await runOwnEventSchedule(controller,env);if(result===null){const witness=readClosedOwnScheduleWitness(controller,env,{sourceRevision});if(witness)console.info(JSON.stringify(witness));}return result;}};
+},async scheduled(controller,env){if(finiteEntrypoint)return null;const result=await runOwnEventSchedule(controller,env);if(result===null){const witness=readClosedOwnScheduleWitness(controller,env,{sourceRevision});if(witness)console.info(JSON.stringify(witness));}return result;}};
 export default worker;

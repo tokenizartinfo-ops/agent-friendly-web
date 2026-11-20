@@ -1,0 +1,25 @@
+{
+  "purpose": "afw.finite-gha-custody-receipt.v1",
+  "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+  "tokenKind": "account",
+  "tokenId": "388f5d1678e6760a973bd319136112e0",
+  "metadataObservedAt": "2026-11-19T21:11:36.150Z",
+  "identityObservedAt": "2026-11-19T21:09:24.181Z",
+  "notBefore": null,
+  "expiresAt": "2026-11-27T02:59:59Z",
+  "policyHash": "0b2e8815e00c5e7c4379dc528cfbdefa8a611c15ae7d5cb39b0b64ce2594b9d2",
+  "permissionGroupIds": [
+    "1b68681d11f443a4979c6d08c3211f13",
+    "7e79ec33834341f28dd431ab73884400",
+    "cfd39eebc07c4e3ea849e4b3d2644637",
+    "da1261c3d38544a4bba805b22566f8b6"
+  ],
+  "sourceQualification": "dated-static-policy-with-unchanged-policy-operator-assumption",
+  "scopeVerified": false,
+  "identityEvidence": {
+    "runId": 44615862988,
+    "jobId": 135884244345,
+    "artifactId": 14574088700
+  },
+  "metadataEvidence": "Cloudflare exact account token metadata; effective grants equal the previous receipt. SHA-256 of sorted exact grant tuples under afw.qa-custody-effective-grants.v1."
+}

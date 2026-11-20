@@ -1,0 +1,278 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash,randomBytes,randomUUID} from 'node:crypto';
+import {hashFinitePreparationRecord,hashFiniteOwnerPreparationProject,hashFiniteOwnerEvidence} from '../lib/mcp-qa-finite-preparation-records.mjs';
+import {finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
+const qaLimiterBinding=finitePublicProfileTemplate('qaLive').bindings.find(b=>b.type==='ratelimit').name;
+const qaVersionBinding=finitePublicProfileTemplate('qaLive').bindings.find(b=>b.type==='version_metadata').name;
+const origin='https://delegated-canary.agentfriendlyweb.dev';
+import {native} from './fixtures/finite-owner-native.mjs';
+
+test('initial owned synthetic selection needs no OAuth grant and uses release primary',async t=>{
+ const f=await native(t),s=await f.screen();
+ assert.match(s.html,/facilitar que encuentren y entiendan el sitio/);assert.doesNotMatch(s.html,/discovery/);assert.match(s.html,/configuración/i);assert.match(s.html,/quince minutos/);assert.match(s.html,/<time datetime=/);assert.doesNotMatch(s.html,/synthetic-owned|synthetic-client/);
+ assert.match(s.handle,/^[a-f0-9]{64}$/);assert.match(s.projectRef,/^[a-f0-9]{64}$/);
+ assert.equal((await f.db.prepare('SELECT COUNT(*) n FROM delegated_access_grants').first()).n,0);
+ assert.ok(f.jwksReads()>0);
+ const rows=await f.json('/fixture/rows',{});
+ assert.equal(rows.filter(([k])=>k.endsWith(':source')).length,1);
+ assert.equal(rows.filter(([k])=>k.startsWith('owner-project-ref:')).length,1);
+ assert.equal(rows.filter(([k])=>k.startsWith('owner-ticket:')).length,1);
+ assert.equal((await f.submit(s)).status,202);
+ const after=await f.json('/fixture/rows',{});
+ assert.equal(after.filter(([k])=>k.startsWith('connection-preparation:')&&k.endsWith(':record')).length,1);
+ assert.equal(after.filter(([k])=>k.startsWith('source-selection:')).length,0);
+});
+test('signature audience and current owner are independently checked',async t=>{
+ const f=await native(t);
+ for(const token of ['invalid',await f.jwt('owner','foreign-audience')])assert.equal((await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token}})).status,401);
+ assert.equal((await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':await f.jwt('other')}})).status,403);
+});
+test('origin cookie duplicate fields raw IDs and ticket mismatch deny before approval',async t=>{
+ const f=await native(t),s=await f.screen();
+ assert.equal((await f.submit(s,{headers:{Origin:'https://foreign.invalid'}})).status,403);
+ assert.equal((await f.submit(s,{headers:{Cookie:'__Host-afw-finite-prepare='+'f'.repeat(64)}})).status,403);
+ assert.equal((await f.submit(s,{fields:{projectRef:'synthetic-owned'}})).status,400);
+ assert.equal((await f.submit(s,{fields:{handle:'f'.repeat(64)}})).status,403);
+ assert.equal((await f.submit(s,{fields:{project:'synthetic-owned'}})).status,400);
+ assert.equal((await f.json('/fixture/rows',{})).filter(([k])=>k.endsWith(':record')).length,0);
+});
+for(const field of ['goal','programContext','initialBaseline','window','project','sourceRevision','qaVersionId']){
+ test('displayed initial choice rejects changed '+field,async t=>{
+  const f=await native(t),s=await f.screen();
+  const changes={goal:'content',programContext:{programHash:'e'.repeat(64),sourceRevision:'d'.repeat(40),originalContextHash:'a'.repeat(64)},initialBaseline:{versionId:'22222222-2222-4222-8222-222222222222',deploymentId:'11111111-1111-4111-8111-111111111111',moduleHash:'a'.repeat(64),configurationHash:'a'.repeat(64),bindingsHash:'a'.repeat(64)},window:{startedAt:Date.now(),expiresAt:Date.now()+800000},project:{projectId:'synthetic-owned',revision:2,synthetic:true},sourceRevision:'e'.repeat(40),qaVersionId:'22222222-2222-4222-8222-222222222222'};
+  await f.json('/fixture/source',{[field]:changes[field]});
+  assert.notEqual((await f.submit(s)).status,202);
+  assert.equal((await f.json('/fixture/rows',{})).filter(([k])=>k.startsWith('connection-approval:')).length,0);
+ });
+}
+for(const mode of ['missing','wrong'])test('missing or wrong release primary cannot fall back '+mode,async t=>{
+ const f=await native(t,mode);assert.equal((await f.call('/connections/finite-prepare')).status,503);
+ assert.equal((await f.json('/fixture/rows',{})).length,0);
+});
+
+const sha=v=>createHash('sha256').update(v).digest('hex');
+const rows=async f=>(await f.json('/fixture/rows',{})).map(([key,value])=>[key,JSON.parse(value)]);
+async function connection(t){
+ const f=await native(t),screen=await f.screen();assert.equal((await f.submit(screen)).status,202);
+ const initial=(await rows(f)).find(([k])=>k.endsWith(':source'))[1].source;
+ const stage=async phase=>f.json('/fixture/source',{phase,currentPublication:{stage:phase==='read_consent'?'connection':'notices',versionId:initial.initialBaseline.versionId,deploymentId:initial.initialBaseline.deploymentId,receiptHash:'f'.repeat(64)}});
+ await stage('read_consent');
+ const handle=randomBytes(32).toString('base64url'),authorizationHash=sha(handle),until=new Date(Date.now()+590000).toISOString();
+ await f.db.prepare('INSERT INTO delegated_consent_sessions(handle_hash,user_id,kind,project_id,client_id,resource,scopes_json,expires_at,consumed_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(authorizationHash,'owner','authorize','synthetic-owned','synthetic-client',origin+'/mcp','["afw:project:read","afw:evidence:read"]',until,'').run();
+ const link=(kind,refs,request)=>f.json('/fixture/link',{kind,...refs,...request});
+ const headers={'Cf-Access-Jwt-Assertion':f.token,Cookie:screen.cookie};
+ const authRequest={url:origin+'/authorize?'+new URLSearchParams({client_id:'synthetic-client',resource:origin+'/mcp',project:'synthetic-owned',scope:'afw:project:read afw:evidence:read'}),headers};
+ return {...f,screen,initial,stage,handle,authorizationHash,until,link,headers,authRequest};
+}
+async function granted(t){
+ const f=await connection(t);
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'recorded');
+ const at=new Date().toISOString();
+ await f.db.prepare('UPDATE delegated_consent_sessions SET consumed_at=? WHERE handle_hash=?').bind(at,f.authorizationHash).run();
+ for(const [id,created] of [['accepted-grant',at],['later-unrelated-grant',new Date(Date.now()+1).toISOString()]]){
+  await f.db.prepare('INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(id,'owner','synthetic-client','synthetic-owned',origin+'/mcp','["afw:project:read"]',created,f.until,'').run();
+ }
+ const grantRequest={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',project:'synthetic-owned',scope:'afw:project:read'}).toString()};
+ assert.equal((await f.link('grant',{grantId:'accepted-grant'},grantRequest)).result?.status,'recorded');
+ return {...f,grantRequest};
+}
+test('exact original authorization and server accepted grant win over newer matching grant',async t=>{
+ const f=await granted(t),stored=await rows(f),grant=stored.find(([k])=>k.endsWith(':grant'))[1];
+ assert.equal(grant.grantId,'accepted-grant');assert.equal(grant.grantHash,sha('accepted-grant'));assert.equal(grant.authorizationHash,f.authorizationHash);
+ assert.equal((await f.link('grant',{grantId:'later-unrelated-grant'},f.grantRequest)).rejected,true);
+ const snapshot=await rows(f);
+ await f.db.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='accepted-grant'").bind(new Date().toISOString()).run();
+ assert.equal((await f.link('grant',{grantId:'accepted-grant'},f.grantRequest)).rejected,true);
+ assert.deepEqual(await rows(f),snapshot);
+});
+test('unmapped or unconsumed authorization cannot create a link and reconstructed exact map survives',async t=>{
+ const f=await connection(t),request={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',scope:'afw:project:read'}).toString()};
+ assert.equal((await f.link('grant',{grantId:'unmapped'},request)).rejected,true);
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'recorded');
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'existing');
+ assert.equal((await f.link('grant',{grantId:'unmapped'},request)).rejected,true);
+ assert.equal((await rows(f)).filter(([k])=>k.endsWith(':grant')).length,0);
+});
+test('notice producer rereads exact acknowledged primary event and terminal revocation denies relinking',async t=>{
+ const f=await granted(t);await f.stage('notice_consent');
+ const monitorHandle=randomBytes(32).toString('base64url'),requestId=randomUUID(),at=Date.now(),expires=Math.min(Date.parse(f.until),at+500000);
+ await f.db.prepare('INSERT INTO dossier_monitoring_owner_tickets VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(sha(monitorHandle),requestId,'owner','accepted-grant','synthetic-owned','synthetic-client',origin+'/mcp','afw.dossier-monitoring-owner.v1','grant',1,0,at,expires,expires).run();
+ const ack=await f.json('/fixture/monitoring',{requestId,action:'grant',expectedSequence:0,expiresAt:expires});
+ assert.equal(ack.status,200);assert.equal(ack.eventHash,undefined);
+ const request={url:origin+'/monitoring/grant',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.screen.cookie+'; __Host-afw-monitoring-owner='+monitorHandle},body:'handle='+monitorHandle};
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence+1},request)).rejected,true);
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence},request)).result?.status,'recorded');
+ const snapshot=await rows(f),notice=snapshot.find(([k])=>k.endsWith(':notice'))[1];
+ assert.equal(notice.sequence,ack.sequence);assert.equal(notice.grantHash,sha('accepted-grant'));assert.match(notice.eventHash,/^[a-f0-9]{64}$/);
+ const revoked=await f.json('/fixture/monitoring',{requestId:randomUUID(),action:'revoke',expectedSequence:ack.sequence,expiresAt:Date.now()});
+ assert.equal(revoked.status,200);
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence},request)).rejected,true);
+ assert.deepEqual(await rows(f),snapshot);
+});
+test('expired original parent cannot record authorization or reconstruct a new lease',async t=>{
+ const f=await connection(t);
+ assert.equal((await f.json('/fixture/link',{kind:'authorization',authorizationHash:f.authorizationHash,...f.authRequest,expired:true})).rejected,true);
+ assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,0);
+});
+
+test('factual selected preparation without actual stage receipts and audit cannot become qualified',async t=>{
+ const f=await granted(t);await f.stage('notice_consent');
+ const monitorHandle=randomBytes(32).toString('base64url'),requestId=randomUUID(),at=Date.now(),expires=Math.min(Date.parse(f.until),at+580000);
+ await f.db.prepare('INSERT INTO dossier_monitoring_owner_tickets VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(sha(monitorHandle),requestId,'owner','accepted-grant','synthetic-owned','synthetic-client',origin+'/mcp','afw.dossier-monitoring-owner.v1','grant',1,0,at,expires,expires).run();
+ const ack=await f.json('/fixture/monitoring',{requestId,action:'grant',expectedSequence:0,expiresAt:expires});
+ const request={url:origin+'/monitoring/grant',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.screen.cookie+'; __Host-afw-monitoring-owner='+monitorHandle},body:'handle='+monitorHandle};
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence},request)).result?.status,'recorded');
+ const saved=await rows(f),pre=saved.find(([k])=>k.endsWith(':record'))[1],approval=saved.find(([k])=>k.startsWith('connection-approval:'))[1],notice=saved.find(([k])=>k.endsWith(':notice'))[1];
+ const raw=await f.db.prepare('SELECT * FROM delegated_consent_sessions WHERE handle_hash=?').bind(f.authorizationHash).first();
+ const consentHash=hashFiniteOwnerEvidence('consent',{handle_hash:raw.handle_hash,user_id:raw.user_id,kind:raw.kind,project_id:raw.project_id,client_id:raw.client_id,resource:raw.resource,scopes:JSON.parse(raw.scopes_json),expires_at:raw.expires_at,consumed_at:raw.consumed_at});
+ const now=Date.now(),relation=saved.find(([k])=>k.endsWith(':connection'))?.[1];
+ assert.ok(relation,'actual genuine grant producer must supply the exact next-stage relation');
+ const connectionRef=relation.connectionRef,map=saved.find(([k])=>k==='owner-connection-ref:'+connectionRef)?.[1];
+ assert.equal(map?.grantId,'accepted-grant');
+ const prep={purpose:'afw.finite-owner-preparation.v1',prepId:pre.preconnectionId,sourceRevision:pre.sourceRevision,actorId:pre.actorId,selectedAt:now,expiresAt:pre.expiresAt,commandBy:expires-510000,owner:pre.owner,connection:{connectionRef,grantId:'accepted-grant',clientId:'synthetic-client',resource:origin+'/mcp',grantHash:sha('accepted-grant'),consentHash,noticesHash:notice.eventHash,permissionExpiresAt:expires},project:pre.project,goal:'discovery',programContext:f.initial.programContext,approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:pre.sourceRevision,projectHash:hashFiniteOwnerPreparationProject(pre.project),goal:'discovery',approvedAt:approval.approvedAt,expiresAt:approval.expiresAt,csrfReceiptHash:approval.csrfReceiptHash},auditHash:'a'.repeat(64)};
+ prep.preparationHash=hashFinitePreparationRecord('OwnerPreparation',prep);
+ const selection={purpose:'afw.finite-owner-selection.v1',sourceRevision:pre.sourceRevision,prepId:pre.preconnectionId,preparationHash:prep.preparationHash,selectedAt:now,sequence:1,previousSelectionHash:null};
+ selection.selectionHash=hashFinitePreparationRecord('Selection',selection);
+ assert.equal((await f.json('/fixture/store',{method:'publishSelection',arg:{preparation:prep,selection,expectedHeadHash:null}})).result?.status,'recorded');
+ await f.json('/fixture/source',{phase:'finite_prearm',currentPublication:{stage:'finite',versionId:f.initial.initialBaseline.versionId,deploymentId:f.initial.initialBaseline.deploymentId,receiptHash:'e'.repeat(64)}});
+ const found=await f.json('/fixture/read',{sourceRevision:pre.sourceRevision});
+ assert.equal(found.rejected,true);
+ await f.json('/fixture/source',{sourceRevision:'e'.repeat(40)});
+ assert.equal((await f.json('/fixture/read',{sourceRevision:pre.sourceRevision})).rejected,true);
+ await f.json('/fixture/source',{sourceRevision:pre.sourceRevision});
+ await f.db.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='accepted-grant'").bind(new Date().toISOString()).run();
+ assert.equal((await f.json('/fixture/read',{sourceRevision:pre.sourceRevision})).rejected,true);
+});
+
+test('same-origin SDK-approved POST can map exact unconsumed transaction when initial GET omitted preparation cookie',async t=>{
+ const f=await connection(t);
+ const post={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',scope:'afw:project:read',project:'synthetic-owned'}).toString()};
+ assert.equal((await f.link('authorization',{authorizationHash:sha('wrong-handle')},post)).rejected,true);
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},post)).result?.status,'recorded');
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},post)).result?.status,'existing');
+ assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,1);
+});
+
+test('lost original snapshot acknowledgement returns no handle and preserves committed native facts',async t=>{
+ const f=await native(t),result=await f.call('/connections/finite-prepare',{headers:{'X-Fixture-Lose-Ack':'true'}});
+ assert.equal(result.status,503);assert.equal(result.headers.get('Set-Cookie'),null);assert.doesNotMatch(await result.text(),/name="handle"/);
+ const stored=await rows(f);assert.equal(stored.filter(([k])=>k.endsWith(':source')).length,1);
+ assert.equal(stored.filter(([k])=>k.startsWith('owner-ticket:')||k.startsWith('connection-approval:')).length,0);
+});
+test('unqualified product source and forwarding constructors remain unavailable despite caller DTOs',async()=>{
+ const source=await import('../lib/mcp-qa-finite-owner-source.mjs');
+ for(const name of ['readPrivateQaFiniteOwnerSource','forwardPrivateQaFiniteOwnerAuthorization','forwardPrivateQaFiniteOwnerGrant','forwardPrivateQaFiniteOwnerNotice']){
+  assert.throws(()=>source[name]({ctx:{},env:{enabled:true,verified:true},sourceRevision:'b'.repeat(40),identity:{subject:'owner'}},{signal:new AbortController().signal,assertCurrent(){}}),/unavailable/);
+ }
+});
+
+test('the same verified Access expiration remains a fence across asynchronous primary preparation',async t=>{
+ const f=await native(t);await f.json('/fixture/delay',{atCall:5,ms:2200});
+ const token=await f.jwt('owner','finite-owner',Math.floor(Date.now()/1000)+2);
+ const result=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token}});
+ const delay=await f.json('/fixture/delay-state',{});
+ assert.equal(delay.fired,true,'the native source delay must occur after signature verification');
+ assert.equal((await rows(f)).length,0,'expired proof cannot append even an initial source snapshot');
+ assert.equal(result.status,401);
+ assert.equal(result.headers.get('Set-Cookie'),null);
+});
+
+async function pairFixture(t){
+ const f=await connection(t),pre=(await rows(f)).find(([k])=>k.endsWith(':record'))[1],at=Date.now();
+ const grant={preconnectionId:pre.preconnectionId,authorizationHash:f.authorizationHash,grantId:'paired-grant',grantHash:sha('paired-grant'),acceptedAt:at};
+ assert.equal((await f.json('/fixture/store',{method:'putLink',arg:{kind:'grant',record:grant}})).result?.status,'recorded');
+ const make=()=>{const linkedAt=Date.now(),connectionRef=randomBytes(32).toString('hex');return {relation:{preconnectionId:pre.preconnectionId,connectionRef,grantHash:grant.grantHash,linkedAt},connection:{connectionRef,subject:pre.owner.subject,grantId:grant.grantId,clientId:pre.clientId,projectId:pre.project.projectId,resource:pre.resource,issuedAt:linkedAt,expiresAt:pre.expiresAt}};};
+ return {...f,pre,make};
+}
+test('native relation transaction accepts one competing pair without orphan connection maps',async t=>{
+ const f=await pairFixture(t),a=f.make(),b=f.make();
+ const results=await Promise.all([a,b].map(arg=>f.json('/fixture/store',{method:'putPreconnectionConnection',arg})));
+ assert.equal(results.filter(r=>r.result?.status==='recorded').length,1);
+ assert.equal(results.filter(r=>r.rejected).length,1);
+ const stored=await rows(f),relation=stored.find(([k])=>k.endsWith(':connection'))[1];
+ assert.ok([a.relation.connectionRef,b.relation.connectionRef].includes(relation.connectionRef));
+ assert.equal(stored.filter(([k])=>k.startsWith('owner-connection-ref:')).length,1);
+ assert.equal(stored.find(([k])=>k==='owner-connection-ref:'+relation.connectionRef)[1].grantId,'paired-grant');
+});
+test('native pair lost ACK preserves one exact retrievable relation and idempotent reconstruction',async t=>{
+ const f=await pairFixture(t),arg=f.make();
+ const lost=await f.json('/fixture/store',{method:'putPreconnectionConnection',arg,loseAck:true});
+ assert.equal(lost.result?.status,'uncertain');
+ const relation=await f.json('/fixture/store',{method:'readPreconnectionConnection',arg:{preconnectionId:f.pre.preconnectionId}});
+ assert.deepEqual(relation.result?.record,arg.relation);
+ const before=await rows(f);
+ assert.equal((await f.json('/fixture/store',{method:'putPreconnectionConnection',arg})).result?.status,'existing');
+ assert.deepEqual(await rows(f),before);
+ assert.equal((await f.json('/fixture/store',{method:'putPreconnectionConnection',arg:f.make()})).rejected,true);
+ assert.deepEqual(await rows(f),before);
+});
+test('pre-existing GrantLink without a pair is not a new allocation opportunity',async t=>{
+ const f=await connection(t),at=new Date().toISOString(),pre=(await rows(f)).find(([k])=>k.endsWith(':record'))[1];
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'recorded');
+ await f.db.prepare('UPDATE delegated_consent_sessions SET consumed_at=? WHERE handle_hash=?').bind(at,f.authorizationHash).run();
+ await f.db.prepare('INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)').bind('accepted-grant','owner','synthetic-client','synthetic-owned',origin+'/mcp','["afw:project:read"]',at,f.until,'').run();
+ await f.json('/fixture/store',{method:'putLink',arg:{kind:'grant',record:{preconnectionId:pre.preconnectionId,authorizationHash:f.authorizationHash,grantId:'accepted-grant',grantHash:sha('accepted-grant'),acceptedAt:Date.now()}}});
+ const request={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',scope:'afw:project:read'}).toString()};
+ const result=await f.link('grant',{grantId:'accepted-grant'},request);
+ assert.equal(result.result?.status,'uncertain');
+ assert.equal((await rows(f)).filter(([k])=>k.endsWith(':connection')||k.startsWith('owner-connection-ref:')).length,0);
+});
+
+for(const mode of ['before','after'])test('child timeout '+mode+' native transaction settles without reviving its captured deadline',async t=>{
+ const f=await connection(t),secondHash=sha(randomBytes(32).toString('base64url'));
+ await f.db.prepare('INSERT INTO delegated_consent_sessions(handle_hash,user_id,kind,project_id,client_id,resource,scopes_json,expires_at,consumed_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(secondHash,'owner','authorize','synthetic-owned','synthetic-client',origin+'/mcp','["afw:project:read"]',f.until,'').run();
+ const result=await f.json('/fixture/held-child',{mode,authorizationHash:f.authorizationHash,secondHash,...f.authRequest});
+ assert.equal(result.hookRejected,true);
+ assert.equal(result.parentAlive,true);
+ assert.equal(result.transactions,2);
+ assert.equal(result.consumed,true);
+ assert.equal(result.grantActive,true);
+ assert.equal(result.committedBeforeRelease,mode==='after');
+ assert.equal(result.secondStatus,'recorded');
+ assert.equal(result.secondPresent,true);
+ assert.equal(result.firstPresent,mode==='after',mode==='before'?'expired child must not append after original consent consumption':'timeout must preserve already-committed uncertain facts');
+});
+
+test('accepted qaLive profile version and limiter bindings alone qualify actual owner source',async t=>{
+ assert.equal(qaVersionBinding,'AFW_QA_VERSION');
+ assert.equal(qaLimiterBinding,'AFW_QA_OCCURRENCE_RATE_LIMITER');
+ const f=await native(t,'normal',qaVersionBinding,qaLimiterBinding),s=await f.screen();
+ assert.match(s.handle,/^[a-f0-9]{64}$/);
+ assert.equal((await f.submit(s)).status,202);
+});
+test('obsolete QA_VERSION alone cannot qualify actual owner source',async t=>{
+ const f=await native(t,'normal','QA_VERSION');
+ assert.equal((await f.call('/connections/finite-prepare')).status,503);
+ assert.deepEqual(await f.json('/fixture/rows',{}),[]);
+});
+
+test('canary DELEGATED_RATE_LIMITER alone cannot qualify private QA owner preparation',async t=>{
+ const f=await native(t,'normal',qaVersionBinding,'DELEGATED_RATE_LIMITER');
+ assert.equal((await f.call('/connections/finite-prepare')).status,503);
+ assert.deepEqual(await f.json('/fixture/rows',{}),[]);
+});
+
+test('Task3 stage approval is immutable exact lookup over actual original owner decision',async t=>{
+ const f=await native(t),s=await f.screen();assert.equal((await f.submit(s)).status,202);
+ const all=await rows(f),pre=all.find(([k])=>k.endsWith(':record'))[1],snapshot=all.find(([k])=>k.endsWith(':source'))[1];
+ const record={purpose:'afw.finite-connection-stage-approval.v1',preconnectionId:pre.preconnectionId,sourceRevision:pre.sourceRevision,stage:'connection',ticketHash:snapshot.initialTicketHash,approvalHash:pre.approvalHash};
+ const put=arg=>f.json('/fixture/store',{method:'putStageApproval',arg});
+ assert.equal((await put(record)).result?.status,'existing');
+ assert.equal((await put(record)).result?.status,'existing');
+ const got=await f.json('/fixture/store',{method:'readStageApproval',arg:{preconnectionId:pre.preconnectionId,stage:'connection'}});
+ assert.deepEqual(got.result,{status:'observed',record});
+ for(const change of [{stage:'notices'},{sourceRevision:'e'.repeat(40)},{ticketHash:'e'.repeat(64)},{approvalHash:'e'.repeat(64)},{preconnectionId:'e'.repeat(64)}]){
+  assert.equal((await put({...record,...change})).rejected,true);
+ }
+ assert.equal((await f.json('/fixture/store',{method:'readStageApproval',arg:{preconnectionId:pre.preconnectionId,stage:'notices'}})).result?.status,'absent');
+});
+
+for(const mode of ['original','wrong','finished'])test('Task3 source admission consumed once by '+mode+' original request lease',async t=>{
+ const f=await native(t),s=await f.screen();
+ const r=await f.json('/fixture/admission',{url:origin+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:s.cookie},body:new URLSearchParams({handle:s.handle,projectRef:s.projectRef,decision:'approve'}).toString(),wrong:mode==='wrong',finish:mode==='finished'});
+ assert.equal(r.deadlineBound,true);assert.equal(r.cloneDenied,true);assert.equal(r.finishedDenied,true);
+ assert.equal(r.prepared,true);assert.equal(r.first,mode==='original');assert.equal(r.qualified,mode==='original');assert.equal(r.second,false);assert.equal(r.wrong,false);assert.equal(r.expired,true);
+ const stored=await rows(f);assert.equal(stored.filter(([k])=>k.endsWith(':connection:approval')).length,1);
+ assert.notEqual((await f.submit(s)).status,202);
+});

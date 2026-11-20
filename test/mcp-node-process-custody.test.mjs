@@ -121,3 +121,33 @@ test('retired-only facade exposes no execution methods and preserves original re
  assert.throws(()=>createRetiredCustodyReader({...options,runtime:f.config.runtime}));
  }finally{f.close();}
 });
+
+test('finite seal blocks actual custody admission before primary or launch',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const m=await load(),f=fixture(),g=finiteGateFixture(Date.now()-1000);
+ try{f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();
+ const gate=createFiniteAdmissionGate(g.options);await gate.seal();
+ await assert.rejects(m.createNodeProcessCustody({...f.config,finiteGate:gate}).start());
+ assert.equal(f.launches(),0);assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_node_process_admissions').get().n,0);
+ }finally{f.close();}
+});
+
+
+test('finite settled admission reuse observes readiness without another writer or launch',async()=>{
+ const {exercise}=await import('./fixtures/finite-premature-admission-native.mjs');
+ const r=await exercise('reuse');
+ assert.equal(r.error,null);assert.equal(r.result.ready,true);assert.deepEqual(r.reused,r.result);assert.deepEqual(r.reuseBefore,r.reuseAfter);assert.equal(r.launches,1);assert.equal(r.sealedDenied,true);
+});
+test('finite custody retains the narrow deadline after a held admission read and permits independent close',async()=>{
+ const {exercise}=await import('./fixtures/finite-premature-admission-native.mjs');
+ const r=await exercise('read-held');
+ assert.equal(r.heldRead,true);assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.launches,0);assert.equal(r.runs,0);assert.equal(r.closes,1);
+ const raw=r.after.do.find(([k])=>k==='afw.own-finite-admission.v1:head')[1];assert.equal(raw.writers.admission.settlement,null);
+});
+test('finite custody passes its retained lease into REAL runtime makeControl continuation',async()=>{
+ const {exercise}=await import('./fixtures/finite-premature-admission-native.mjs');
+ const r=await exercise('runtime-held');
+ assert.equal(r.heldControl,true);assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.launches,0);assert.ok(r.closes>=1);
+ const raw=r.after.do.find(([k])=>k==='afw.own-finite-admission.v1:head')[1];assert.equal(raw.writers.admission.settlement,null);
+});
