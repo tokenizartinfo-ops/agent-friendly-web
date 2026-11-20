@@ -27,6 +27,8 @@ jobs:
         run: node scripts/run-qa-finite-trial-finalizer.mjs admission
   admit:
     needs: admission
+    outputs:
+      restore_mode: ${{ steps.observe.outputs.restore_mode }}
     concurrency:
       group: afw-finite-finalizer-${{ needs.admission.outputs.intent_id }}
       queue: max
@@ -63,18 +65,20 @@ jobs:
         run: node scripts/run-qa-finite-trial-finalizer.mjs admit
       # The fixed QA observer creates the native launcher after this admission.
       - name: Wait for exact observer terminal output
+        id: observe
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/run-qa-finite-trial-finalizer.mjs poll
   restore:
     needs: admit
+    if: ${{ contains(fromJSON('["legacy","independent"]'), needs.admit.outputs.restore_mode) }}
     concurrency:
       group: afw-qa-cloud-closed-rollback
       queue: max
       cancel-in-progress: false
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 15
     environment: afw-qa-cloud-closed-rollback
     permissions:
       contents: write
@@ -91,6 +95,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Restore exact QA candidate once under original R1
         id: finite_restore_once
+        if: ${{ needs.admit.outputs.restore_mode == 'legacy' }}
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
@@ -100,6 +105,17 @@ jobs:
           # wrapper may regenerate this coherence marker.
           export AFW_FINITE_RESTORE_ORIGINAL_PID=$$
           exec node scripts/run-qa-finite-trial-finalizer.mjs restore
+      - name: Restore exact QA after original owner closure
+        id: coupled_restore_once
+        if: ${{ needs.admit.outputs.restore_mode == 'independent' }}
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          export AFW_COUPLED_RESTORE_ORIGINAL_PID=$$
+          exec node scripts/run-qa-finite-trial-finalizer.mjs restore-independent
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -3,21 +3,26 @@ import {issueFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-issuer.mjs';
 import {readFile,writeFile,appendFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {validateQaFiniteConfirmationCommand,assertQaFiniteConfirmationAdmission} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
-import {issuePrivateQaFiniteLauncher,createPrivateQaFiniteObserverHttp,createPrivateQaFiniteRestoreHttp,createPrivateQaFiniteGithub,readFiniteFinalizerGithubContext} from '../lib/mcp-qa-finite-http.mjs';
+import {issuePrivateQaFiniteLauncher,createPrivateQaFiniteObserverHttp,createPrivateQaFiniteRestoreHttp,createPrivateQaFiniteGithub,readFiniteFinalizerGithubContext,createPrivateQaFiniteCoupledGitHub,createPrivateQaFiniteCoupledRestoreHttp} from '../lib/mcp-qa-finite-http.mjs';
 import {validateFiniteExternalPlan,validateFiniteObserverOutput} from '../lib/mcp-qa-finite-external-contract.mjs';
 import {createPrivateQaFiniteTrialFinalizer} from '../lib/mcp-qa-finite-trial-finalizer.mjs';
 import {resolvePrivateQaFiniteExternalSource} from '../lib/mcp-qa-finite-source.mjs';
+import {validateFiniteNativeObserverHandoff} from '../lib/mcp-qa-finite-observer.mjs';
+import {assertFiniteR2ArchiveCredential} from '../lib/mcp-qa-finite-r2-object.mjs';
+import {verifyFiniteCoupledQaTrialResult} from './run-qa-finite-coupled-restore.mjs';
 const fail=()=>{throw Error('Finite finalizer unavailable');};
 /** Fixed phase CLI. Source implementation may be installed only in reviewed code.
  * Environment contributes GitHub's authenticated event/context, never a plan. */
 export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile,write=writeFile,append=appendFile,fetchImpl=fetch,now=Date.now,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms))}={}){
- let signal=AbortSignal.timeout(480000),adoption;
+ let signal=AbortSignal.timeout(phase==='restore-independent'?900000:480000),adoption;
  try{
-  if(!['admission','seed-material','admit','launch','poll','restore'].includes(phase))fail();
+  if(!['admission','seed-material','admit','launch','poll','restore','restore-independent'].includes(phase))fail();
   const raw=await read(env.GITHUB_EVENT_PATH,'utf8');if(Buffer.byteLength(raw)>262144)fail();
   const event=JSON.parse(raw),context={repository:env.GITHUB_REPOSITORY,repositoryId:env.GITHUB_REPOSITORY_ID,ref:env.GITHUB_REF,eventName:env.GITHUB_EVENT_NAME,runId:env.GITHUB_RUN_ID,runAttempt:env.GITHUB_RUN_ATTEMPT,sourceRevision:env.GITHUB_SHA};
   const admission=validateQaFiniteConfirmationCommand({event,context,now});
   assertQaFiniteConfirmationAdmission(admission,phase==='admission'||phase==='seed-material'||phase==='admit'||phase==='launch'?'nominal':'cleanup');
+  if(phase==='restore-independent'&&(env.GITHUB_JOB!=='restore'||env.GITHUB_ACTION!=='coupled_restore_once'||
+     env.AFW_COUPLED_RESTORE_ORIGINAL_PID!==String(process.pid)))fail();
   if(phase==='admit'){
    adoption=createFiniteAdoptionParent({T0:admission.createdAt,N1:admission.expiresAt,now,signal});
    signal=adoption.parent.signal;adoption.parent.check();
@@ -34,7 +39,7 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
    const result=await issuePrivateQaFiniteLauncher({plan,admission,runtime:env,credential:env.AFW_QA_CLOSED_TOKEN,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
    return result.status==='uncertain'?{status:'launcher_uncertain',operationalReadiness:false}:result;
   }
-  const source=await resolvePrivateQaFiniteExternalSource({admission,phase,sourceRevision:admission.sourceRevision,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
+  const source=await resolvePrivateQaFiniteExternalSource({admission,phase:phase==='restore-independent'?'restore':phase,sourceRevision:admission.sourceRevision,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
   if(phase==='admit')adoption.parent.check();
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const githubToken=env.GITHUB_TOKEN,finalizer=await readFiniteFinalizerGithubContext({admission,githubToken,fetchImpl,now,signal});
@@ -61,12 +66,43 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
     if(now()<target)await sleep(target-now());
     assertQaFiniteConfirmationAdmission(admission,'cleanup');
     const result=await observer.read();
-    if(result.status==='complete'){const output=validateFiniteObserverOutput(result.output,plan);await write('afw-finite-terminal.json',JSON.stringify(output));return {status:'observer_complete',operationalReadiness:false};}
+    if(result.status!=='complete')continue;
+    if(result.output?.purpose==='afw.finite-native-observer-handoff.v1'){
+     validateFiniteNativeObserverHandoff(result.output,plan.preview);
+     await append(env.GITHUB_OUTPUT,'restore_mode=independent\n');
+     return {status:'independent_observer_ready',operationalReadiness:false};
+    }
+    const output=validateFiniteObserverOutput(result.output,plan);
+    await write('afw-finite-terminal.json',JSON.stringify(output));
+    if(env.GITHUB_OUTPUT)await append(env.GITHUB_OUTPUT,'restore_mode=legacy\n');
+    return {status:'observer_complete',operationalReadiness:false};
    }fail();
   }
   // Restart/restore loads the exact ORIGINAL observer primary output. No live
   // canary proof method, reseal, challenge or replacement observer is invoked.
   const observed=await observer.read();if(observed.status!=='complete')fail();
+  if(phase==='restore-independent'){
+   assertQaFiniteConfirmationAdmission(admission,'cleanup');
+   const {scope:reservation}=validateFiniteNativeObserverHandoff(observed.output,observed.preview);
+   const {intentId,controlHash,handoffHash,sourceRevision,restoreFrom,restoreBefore}=reservation;
+   const scope=Object.freeze({intentId,controlHash,handoffHash,sourceRevision,restoreFrom,restoreBefore});
+   const archiveCredential=env.AFW_R2_BACKUPS_READ_URL;
+   if(source.custody.expiresAt<restoreBefore)fail();
+   const started=now();
+   assertFiniteR2ArchiveCredential(archiveCredential,{now,requiredUntil:restoreBefore});
+   if(started<restoreFrom)await sleep(restoreFrom-started);
+   if(signal.aborted||now()<restoreFrom||now()>=restoreBefore)fail();
+   signal=AbortSignal.any([signal,AbortSignal.timeout(restoreBefore-now())]);
+   const github=createPrivateQaFiniteCoupledGitHub({scope,runId:finalizer.runId,runtime:env,credential:githubToken,
+    confirmation:{commentId:admission.commentId,admitJobId:finalizer.jobId,T0:admission.createdAt},fetchImpl,now,signal});
+   const restore=createPrivateQaFiniteCoupledRestoreHttp({intent:scope,qaLive:source.qaLive,custody:source.custody,credential,
+    archiveCredential,claimSend:github.claimSend,readSend:github.readSend,fetchImpl,now,signal});
+   const closed=await restore.run();
+   let result;
+   try{result={status:'restore_verified',...verifyFiniteCoupledQaTrialResult(closed,{controlHash,restoreFrom})};}
+   catch{result={status:'independent_trial_unverified',restorationStatus:closed.status,operationalReadiness:false,mayRetry:false};}
+   await write('afw-finite-result.json',JSON.stringify(result));return result;
+  }
   const plan=validateFiniteExternalPlan(observed.output.plan);
   if(plan.preview.intentId!==admission.intentId||plan.preview.sourceRevision!==admission.sourceRevision||JSON.stringify(plan.finalizer)!==JSON.stringify(finalizer))fail();
   validateFiniteObserverOutput(observed.output,plan);
@@ -81,5 +117,5 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  const result=await runFiniteFinalizerCli({phase:process.argv[2]});
- if(!['admitted','seed_material_created','ready','observer_complete','launcher_created','launcher_uncertain','restored_observed','closed_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
+ if(!['admitted','seed_material_created','ready','observer_complete','independent_observer_ready','restore_verified','launcher_created','launcher_uncertain','restored_observed','closed_observed','closed_observed_uncertain'].includes(result.status))process.exitCode=1;
 }

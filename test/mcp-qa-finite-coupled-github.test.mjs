@@ -36,9 +36,17 @@ function fixture(){
   const path=u.pathname.slice(root.length),method=init.method,body=init.body?JSON.parse(init.body):null;f.events.push({method,path});
   if(method==='GET'&&path==='/git/ref/heads/main')return response(200,{ref:'refs/heads/main',object:{type:'commit',sha:f.branchDrift?'e'.repeat(40):scope.sourceRevision}});
   if(method==='GET'&&path==='/actions/runs/123')return response(200,{id:123,run_attempt:1,actor:owner,triggering_actor:owner,repository,head_repository:repository,
-   head_branch:'main',head_sha:scope.sourceRevision,event:'workflow_dispatch',path:workflow,status:'in_progress',created_at:started});
-  if(method==='GET'&&path==='/actions/runs/123/attempts/1/jobs')return response(200,{total_count:1,jobs:[{id:456,run_id:123,name:'restore',
-   started_at:started,head_sha:scope.sourceRevision,status:'in_progress',steps:[{name:step,number:4,started_at:stepStart,status:f.terminalStep?'completed':'in_progress',conclusion:f.terminalStep?'success':null}]}]});
+   head_branch:'main',head_sha:scope.sourceRevision,event:f.env.GITHUB_EVENT_NAME,path:f.confirmation?'.github/workflows/afw-finite-finalizer.yml':workflow,status:'in_progress',created_at:f.confirmation?new Date(f.confirmation.T0).toISOString():started});
+  if(method==='GET'&&path==='/issues/comments/42'&&f.confirmation)return response(200,{id:42,body:f.foreignCommand?'other':'/afw-qa-finite-confirmation v1 '+scope.sourceRevision,
+   author_association:'OWNER',issue_url:'https://api.github.com'+root+'/issues/497',user:owner,created_at:new Date(f.confirmation.T0).toISOString()});
+  if(method==='GET'&&path==='/actions/runs/123/attempts/1/jobs'){
+   const restore={id:456,run_id:123,name:'restore',started_at:started,head_sha:scope.sourceRevision,status:'in_progress',
+    steps:[{name:step,number:4,started_at:stepStart,status:f.terminalStep?'completed':'in_progress',conclusion:f.terminalStep?'success':null}]};
+   const jobs=f.confirmation?[{id:50,run_id:123,name:'admission',status:'completed',conclusion:'success',head_sha:scope.sourceRevision},
+    {id:51,run_id:123,name:'admit',status:'completed',conclusion:'success',head_sha:scope.sourceRevision,
+     steps:[{name:'Wait for exact observer terminal output',status:'completed',conclusion:f.pollFailed?'failure':'success',completed_at:new Date(at-200000).toISOString()}]},restore]:[restore];
+   return response(200,{total_count:jobs.length,jobs});
+  }
   if(method==='GET'&&path==='/git/ref/tags/afw-finite-coupled-qa-send/'+key)return f.refExists?response(200,{ref,object:{type:'tag',sha:tagSha}}):response(404,{message:'Not Found'});
   if(method==='GET'&&path==='/git/tags/'+tagSha)return response(200,f.tag);
   if(method==='POST'&&path==='/git/tags'){
@@ -77,6 +85,16 @@ test('a lost GitHub ref ACK never grants the original writer or a retry',async()
  assert.equal(await make(f.options).claimSend(f.record,signal,assertCurrent),'uncertain');
  assert.equal(await make(f.options).claimSend(f.record,signal,assertCurrent),'existing');
  assert.equal(f.events.filter(x=>x.method==='POST').length,2);
+});
+for(const mode of ['original','foreignCommand','pollFailed'])test('independent writer checks authenticated confirmation and successful observer polling: '+mode,async()=>{
+ const f=fixture();
+ f.confirmation={commentId:'42',admitJobId:51,T0:f.options.now()-570000};
+ f.env.GITHUB_EVENT_NAME='issue_comment';
+ f.env.GITHUB_WORKFLOW_REF=repository.full_name+'/.github/workflows/afw-finite-finalizer.yml@refs/heads/main';
+ if(mode!=='original')f[mode]=true;
+ const gh=create()({...f.options,confirmation:f.confirmation});
+ assert.equal(await gh.claimSend(f.record,f.options.signal,()=>{}),mode==='original'?'issued':'uncertain');
+ assert.equal(f.events.filter(x=>x.method==='POST').length,mode==='original'?2:0);
 });
 for(const bad of ['terminalStep','branchDrift','childProcess'])test(bad+' cannot acquire an independent QA publication claim',async()=>{
  const f=fixture(),make=create();

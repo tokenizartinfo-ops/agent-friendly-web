@@ -41,7 +41,8 @@ export async function cfFiniteFixture({at,configure=()=>{}}={}){
   if(path===ROOT+'/workflows/'+def.name+'/instances/'+p.workflows.bootstrap){
    const provenance=structuredClone(base.output.provenance);if(state.mode==='wrong-native')provenance.runtimeVersionId=p.deployments.qaClosed.versionId;
    const step={name:state.mode==='wrong-first'?'other':state.previewStepName??'finite-material-preview',type:'step',success:true,start:new Date(v.T0).toISOString(),end:new Date(v.T0+1).toISOString(),attempts:[{success:true}],output:JSON.stringify({purpose:state.setupReceiptHash?'afw.finite-observer-preview.v2':'afw.finite-observer-preview.v1',provenance,material:v,...state.setupReceiptHash?{setupReceiptHash:state.setupReceiptHash,...state.omitObserverPlan?{}:{plan:state.observerPlan??p}}:{}})};
-   return response(answer({versionId:workflowVersion,status:state.observerStatus,success:true,queued:new Date(v.T0).toISOString(),end:new Date(base.f.now()).toISOString(),params:{operation:'finite_cleanup_observer',intentId:v.intentId,sourceRevision:v.sourceRevision},step_count:1,steps:[step],output:JSON.stringify(base.output)}));
+   const steps=[step,...state.observerScopeStep?[state.observerScopeStep]:[]];
+   return response(answer({versionId:workflowVersion,status:state.observerStatus,success:true,queued:new Date(v.T0).toISOString(),end:new Date(base.f.now()).toISOString(),params:{operation:'finite_cleanup_observer',intentId:v.intentId,sourceRevision:v.sourceRevision},step_count:steps.length,steps,output:JSON.stringify(state.observerOutput??base.output)}));
   }
   if(path===ROOT+'/workers/scripts/'+QA+'/deployments'){
    if(init.method==='POST'){state.posts++;state.qaVersion=p.deployments.qaClosed.versionId;state.qaDeployment='99999999-9999-4999-8999-999999999999';state.annotation=JSON.parse(init.body).annotations; if(state.mode==='lost-post')throw Error('lost');return response(answer({id:state.qaDeployment}));}

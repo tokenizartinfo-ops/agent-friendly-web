@@ -24,6 +24,30 @@ test('atomic control prepare preserves original obligation and mutually links bo
  assert.equal(f.rows.get(FINITE_ALARM_HANDOFF).controlHash,f.rows.get(HEAD).controlHash);
  assert.equal((await control.prepare()).status,'blocked');
 });
+test('independent QA exposes exactly the committed restore scope without changing the alarm',async()=>{
+ const {readPrivateQaFiniteIndependentRestoreScope:read}=await import('../lib/mcp-qa-finite-coupled-finalization.mjs');
+ const {QA_CLOUD_CLOSED_PINS}=await import('../lib/mcp-qa-cloud-closed-pins.mjs'),fixture=finiteFixture();
+ const {id,configurationHash,module}=QA_CLOUD_CLOSED_PINS.qaClosed;
+ fixture.plan.deployments.qaClosed={...fixture.plan.deployments.qaClosed,versionId:id,configurationHash,module};
+ const {f,handoff,control}=await prepared(fixture);
+ const refs={intentId:f.plan.intentId,sourceRevision:f.plan.source.revision,controlHash:handoff.control.controlHash};
+ const options={ctx:f.ctx,env:f.env,refs,now:f.now};
+ assert.equal((await read(options)).status,'pending');
+ assert.equal((await control.prepare()).status,'armed');
+ const row=f.rows.get(FINITE_ALARM_HANDOFF),puts=f.puts;
+ assert.deepEqual(await read(options),{
+  purpose:'afw.finite-independent-qa-restore-scope.v1',status:'reserved',...refs,
+  planHash:row.planHash,runtimeVersionId:row.qaVersionId,handoffHash:row.handoffHash,
+  restoreFrom:row.initialC0,restoreBefore:row.initialC1,authorizesEffects:false,operationalReadiness:false
+ });
+ assert.equal(f.alarm,f.plan.C0);assert.equal(f.puts,puts);
+ await assert.rejects(()=>read({...options,refs:{...refs,sourceRevision:'f'.repeat(40)}}));
+ await assert.rejects(()=>read({...options,now:()=>f.plan.C0}));
+ const head=f.rows.get(HEAD);
+ f.rows.set(HEAD,{...head,controlHash:'f'.repeat(64)});
+ await assert.rejects(()=>read(options));
+ assert.equal(f.alarm,f.plan.C0);assert.equal(f.puts,puts);
+});
 test('changed original alarm evidence and original issued restore deny before any business write',async()=>{
  for(const change of [
   f=>f.rows.set('afw.finite-initial-cleanup.v1:state','{}'),

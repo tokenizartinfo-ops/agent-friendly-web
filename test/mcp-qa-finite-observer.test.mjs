@@ -81,18 +81,52 @@ test('adoption only accepts a preview with the independently read setup receipt'
  assert.deepEqual(validateFiniteObserverPreviewEnvelope(legacy),legacy);
 });
 
-test('the finite observer schedules only its bound launcher after the native preview and stops on an uncertain send',async()=>{
- const f=await fixture();const calls=[];
+function independentScope(v){
+ return {purpose:'afw.finite-independent-qa-restore-scope.v1',status:'reserved',intentId:v.intentId,
+  sourceRevision:v.sourceRevision,controlHash:v.controlHash,planHash:v.planHash,runtimeVersionId:v.runtimeVersionId,
+  handoffHash:'6'.repeat(64),restoreFrom:v.R1+60000,restoreBefore:v.R1+240000,
+  authorizesEffects:false,operationalReadiness:false};
+}
+test('the native observer stops sending on an uncertain launch and hands the committed scope to independent QA',async()=>{
+ const f=await fixture(),calls=[],reads=[],scope=independentScope(f.v);
  f.actor.fetch=async()=>Response.json({material:f.v,setupReceiptHash:'7'.repeat(64),plan:f.f.plan});
  f.actor.scheduleFiniteNominalLauncher=async refs=>{
   calls.push({refs,at:f.now()});
   if(calls.length===1)return {status:'pending',operationalReadiness:false};
   return {status:'uncertain',operationalReadiness:false};
  };
+ f.actor.readFiniteIndependentQaRestoreScope=async refs=>{
+  reads.push(refs);
+  return reads.length===1?{status:'pending',authorizesEffects:false,operationalReadiness:false}:scope;
+ };
  const result=await runPrivateQaFiniteObserver({...f,requireSetupReceipt:true,useNativeLauncher:true});
- assert.equal(result.purpose,'afw.finite-observer-output.v1');
+ assert.equal(result.purpose,'afw.finite-native-observer-handoff.v1');
+ assert.deepEqual(result.scope,scope);
  assert.deepEqual(calls.map(row=>row.refs),Array(2).fill({intentId:f.v.intentId,sourceRevision:f.v.sourceRevision,controlHash:f.v.controlHash}));
  assert(calls[0].at>=f.v.T0&&calls[1].at<f.v.T0+90000);
  assert.equal(f.names[0],FINITE_PREVIEW_STEP);
- assert.equal(f.claims,1);
+ assert.deepEqual(reads,Array(2).fill({intentId:f.v.intentId,sourceRevision:f.v.sourceRevision,controlHash:f.v.controlHash}));
+ assert.equal(f.samples,0);assert.equal(f.claims,0);assert.equal(f.finalReads,0);
+});
+for(const fault of ['missing handoff','foreign control','wrong clock','late cached scope'])test('native observer denies '+fault+' without the legacy restore path',async()=>{
+ const f=await fixture(),scope=independentScope(f.v);let reads=0;
+ f.actor.fetch=async()=>Response.json({material:f.v,setupReceiptHash:'7'.repeat(64),plan:f.f.plan});
+ f.actor.scheduleFiniteNominalLauncher=async()=>({status:'acknowledged',operationalReadiness:false});
+ f.actor.readFiniteIndependentQaRestoreScope=async()=>{
+  reads++;
+  if(fault==='missing handoff')return {status:'pending',authorizesEffects:false,operationalReadiness:false};
+  if(fault==='foreign control')return {...scope,controlHash:'f'.repeat(64)};
+  if(fault==='wrong clock')return {...scope,restoreFrom:f.v.R1};
+  return scope;
+ };
+ const base=f.step.do;
+ if(fault==='late cached scope')f.step.do=async(name,opts,fn)=>{
+  const value=await base(name,opts,fn);
+  if(name.startsWith('finite-independent-qa-scope-'))await f.step.sleepUntil('delayed step resume',new Date(f.v.C0));
+  return value;
+ };
+ const result=await runPrivateQaFiniteObserver({...f,requireSetupReceipt:true,useNativeLauncher:true});
+ assert.equal(result.status,'admin_pending');
+ assert(reads>0&&reads<=6);
+ assert.equal(f.samples,0);assert.equal(f.claims,0);assert.equal(f.finalReads,0);
 });

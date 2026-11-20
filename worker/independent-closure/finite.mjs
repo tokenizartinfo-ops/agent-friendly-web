@@ -4,7 +4,7 @@ import {installPrivateQaFiniteNativeGuardFactory,installPrivateQaFiniteRecoveryF
 import {FINITE_ALARM_HANDOFF,protectPrivateQaFiniteBusinessAlarm} from '../../lib/mcp-qa-finite-alarm-handoff.mjs';
 import {readPrivateQaFiniteProofInventory} from '../../lib/mcp-qa-finite-proof-inventory.mjs';
 import {readPrivateQaFiniteReductionControl} from '../../lib/mcp-qa-finite-reduction-control.mjs';
-import {readPrivateQaFiniteCoupledFinalization} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
+import {readPrivateQaFiniteCoupledFinalization,readPrivateQaFiniteIndependentRestoreScope} from '../../lib/mcp-qa-finite-coupled-finalization.mjs';
 import {FINITE_COUPLED_QA_OPERATION,observePrivateQaCoupledRestorePreparation,publishPrivateQaCoupledRestorePreparation} from '../../lib/mcp-qa-finite-coupled-restore-observer.mjs';
 import {installPrivateQaFiniteLaunchSource} from '../../lib/mcp-qa-finite-launch-source.mjs';
 import {privateQaFiniteLaunchSource,schedulePrivateQaFiniteNominalLauncher} from '../../lib/mcp-qa-finite-launch-origin.mjs';
@@ -126,6 +126,10 @@ export class IndependentClosure extends ClosedIndependentClosure{
   if(args.length!==1)throw Error('Finite coupled QA finalization unavailable');
   const refs=args[0];
   return readPrivateQaFiniteCoupledFinalization({ctx:this.ctx,env:this.env,refs});
+ }
+ readFiniteIndependentQaRestoreScope(...args){
+  if(args.length!==1)throw Error('Finite independent QA scope unavailable');
+  return readPrivateQaFiniteIndependentRestoreScope({ctx:this.ctx,env:this.env,refs:args[0]});
  }
  prepareFiniteInitialMaterial(...args){if(args.length!==1)return Promise.resolve({status:'admin_pending',mayRetry:false,operationalReadiness:false});return createPrivateQaFiniteInitialEntry({ctx:this.ctx,env:this.env}).run(args[0]);}
  readFiniteNominalConfirmation(...args){
