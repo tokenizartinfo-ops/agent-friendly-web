@@ -59,8 +59,71 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Reduce the cost of the fresh authoritative observations before the enrollment ACK within the original five-second child lease. Moving a bookend read out of the child still expired at enrollment-recorded in a separate test. Continue through downstream owner reference and the required native cleanup run before merging. Qualification of a complete private deployable package remains separate from source staging.",
-    "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule."
+    "next": "Use paired timing and exact stage transitions in cloud CI to separate the original POST deadline from the five-second enrollment child. Reduce repeated full proofs between adjacent checks only when no native side effect or independent authority boundary is skipped. Keep fresh ownership and provider readbacks around writes and the absolute deadlines. Then require end-to-end connection, original cleanup, full CI and qualifying private rollback package before integrating or running a live synthetic trial.",
+    "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
+    "latencyWork": {
+      "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
+      "scope": "Disposable local Workerd with synthetic owner and provider. No real Cloudflare operation.",
+      "experiment": "Parallelized independent provider readbacks and removed redundant digest work only for byte-identical historical backup evidence read twice in the same pair. A follow-on also overlapped independent storage reads.",
+      "results": [
+        {
+          "getHttp": 200,
+          "getElapsedMs": 9813,
+          "postHttp": 503
+        },
+        {
+          "getHttp": 200,
+          "getElapsedMs": 13690,
+          "postHttp": 503,
+          "lastStage": "approved",
+          "preparationEnrollmentWritten": false,
+          "publicationWritten": false,
+          "pairsMs": [
+            3533,
+            2828,
+            3057,
+            2203,
+            1928,
+            1810,
+            1920,
+            2082,
+            1862,
+            1871,
+            1896,
+            1623,
+            2549,
+            2072
+          ]
+        },
+        {
+          "getHttp": 200,
+          "getElapsedMs": 12497,
+          "postHttp": null,
+          "result": "Runner stopped after hanging in the combined test/teardown. No conclusive result for the added storage concurrency."
+        }
+      ],
+      "promoted": false,
+      "deadlinesModified": false
+    },
+    "ciFailureClasses": {
+      "run": 44730021288,
+      "result": "failure",
+      "originalCheckpointCleanup": {
+        "job": 136267084805,
+        "reason": "Native synthetic downstreamOwnerReference expected 200, got 503."
+      },
+      "noticeConsentAndLink": {
+        "jobs": [
+          136267085073,
+          136267084929
+        ],
+        "reason": "Multiple native notice tests also receive 503."
+      },
+      "fixtureBuild": {
+        "job": 136267085065,
+        "reason": "A stale SDK hook and a missing Workerd node:crypto declaration produced independent build failures."
+      }
+    }
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -71,5 +134,28 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T11:49:05Z"
+  "updatedUTC": "2026-11-20T12:10:09Z",
+  "latestCandidate": {
+    "pullRequest": 720,
+    "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
+    "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+    "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+    "onlyFixtureChanges": true,
+    "workerdReview": {
+      "passed": 2,
+      "failed": 0
+    },
+    "oauthObservation": {
+      "exactHookCheck": "pass",
+      "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+    },
+    "ci": {
+      "run": 44733489856,
+      "status": "in_progress_at_checkpoint"
+    },
+    "sourcePackageChecks": {
+      "run": 44733489786,
+      "status": "in_progress_at_checkpoint"
+    }
+  }
 }
