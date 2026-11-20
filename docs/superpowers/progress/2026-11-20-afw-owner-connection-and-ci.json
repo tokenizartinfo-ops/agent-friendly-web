@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "timeUTC": "2026-11-20T11:27:50Z",
+  "project": "AFW",
+  "main": {
+    "commit": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+    "fullFlowMerged": false
+  },
+  "candidate": {
+    "pullRequest": 720,
+    "head": "0464d4a815367d35806c08fbde8674118fce09d5",
+    "sourceOnly": true,
+    "sourcePackageChecks": {
+      "run": 44726949486,
+      "result": "passed_staging"
+    },
+    "fullCi": {
+      "run": 44726949321,
+      "status": "not_green",
+      "qaPhaseShard": {
+        "job": 136256660154,
+        "status": "success"
+      },
+      "cleanup": {
+        "job": 136256659624,
+        "status": "failure"
+      },
+      "shard6": {
+        "job": 136256660142,
+        "status": "failure"
+      }
+    }
+  },
+  "verified": {
+    "originalQaPreparation": "material_recorded in isolated Workerd",
+    "qaContext": "closed source and original anchors replicated under native test",
+    "ownerNominal": "initial synthetic selection and approval pass",
+    "accessFences": "wrong audience and wrong owner denied"
+  },
+  "findings": {
+    "ownerConnection": {
+      "http": 503,
+      "stage": "initial signed GET of finite connection",
+      "elapsedMs": 30131,
+      "pairedReads": 10,
+      "source": "0464d4a815367d35806c08fbde8674118fce09d5",
+      "nativeProvider": "synthetic",
+      "originDeadlineMs": 30000
+    },
+    "nativeFixture": "Fixed storage wrapper expecting a string when replaying bulk reads and updated obsolete SDK capture point without changing its promise.",
+    "restorationCi": "Raw test sharding opened a nonexistent producer checkpoint; CI now generates the original synthetic occurrence and runs the closure test in the same mandatory job."
+  },
+  "effects": {
+    "cloudflareDeploy": false,
+    "actualCloudTrial": false,
+    "sameNoticeReviewedLive": false,
+    "nativeWithdrawalLive": false,
+    "pcOffVerified": false,
+    "operationalReadiness": false,
+    "ownerActionRequired": false
+  }
+}

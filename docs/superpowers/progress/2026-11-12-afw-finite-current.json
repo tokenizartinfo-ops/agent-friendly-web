@@ -1821,7 +1821,7 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 192,
+  "schemaVersion": 193,
   "updatedAtUTC": "2026-11-20T01:53:24.774Z",
   "pause": {
     "requestedByOwner": true,
@@ -2760,5 +2760,15 @@
     "completePackage": false,
     "actualCloudTrial": false,
     "packageSourceVerification": 44662320122
+  },
+  "qaOwnerConnectionAndCi": {
+    "path": "docs/superpowers/progress/2026-11-20-afw-owner-connection-and-ci.json",
+    "pr": 720,
+    "head": "0464d4a815367d35806c08fbde8674118fce09d5",
+    "mainAccepted": false,
+    "fullNativeCi": 44726949321,
+    "sourcePackageVerify": 44726949486,
+    "ownerConnectionSynthetic": "503_at_original_deadline",
+    "actualCloudTrial": false
   }
 }
