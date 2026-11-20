@@ -10,14 +10,21 @@
     "verifiedMainR2Ci": 44656726035,
     "integration": {
       "pr": 720,
-      "head": "6f69a68f58e081e0543e03d4c39fb5c4959c42f6",
-      "tree": "83b31ba09f4740f7b66c09d713b65ae7c8296f98",
+      "head": "377814f18198a8a8e033a311c0d884e69459e62a",
+      "tree": "95139bbecaf577895ce0d1bc5bad42ebab9c0ac0",
       "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
       "merged": false,
-      "latestMainSuite": 44661439166,
-      "latestPackageSourceSuite": 44661439110,
+      "latestMainSuite": 44662320082,
+      "latestPackageSourceSuite": 44662320122,
       "previousMainSuite": 44659658176,
-      "previousPackageSourceSuite": 44659658372
+      "previousPackageSourceSuite": 44659658372,
+      "latestObserved": "cloud CI in progress at checkpoint",
+      "sourceBuildVerified": {
+        "revision": "6f69a68f58e081e0543e03d4c39fb5c4959c42f6",
+        "run": 44661439110,
+        "phase": "staging",
+        "completePackage": false
+      }
     }
   },
   "initialQa": {
@@ -60,9 +67,28 @@
       "phasePairChecks": 24,
       "workerd": true,
       "phase": "GET de conexión antes del recibo",
-      "next": "Medir por separado las lecturas de versiones y la reconstrucción de respaldos. Optimizar el trabajo repetido con el mismo plazo original, manteniendo la comprobación de titular, estado, bytes, credenciales y diario."
+      "next": "Reducir el coste de las lecturas primarias duplicadas. Empezar midiendo el GET de módulos de QA y canary dentro de cada pasada. Mantener la vigencia original, observación primaria fresca, la comprobación de bytes y las guardas de titular y diario. El recorrido completo aún devuelve 503.",
+      "instrumentedFollowup": {
+        "result": "503",
+        "elapsedMs": 30076,
+        "completedProviderPasses": 46,
+        "providerPassMs": 19094,
+        "completedDurableFactsPasses": 46,
+        "durableFactsPassMs": 9247,
+        "pairAttempts": 24
+      }
     },
-    "otherIntegrationGate": "El CI anterior falló en pruebas de compatibilidad y nativas. Candidato PR720 conserva la regresión T3 abierta; requerir CI completo verde y corrección reproducida antes de merge."
+    "otherIntegrationGate": "La revisión anterior de CI falló. Las 43 pruebas dirigidas reparan los tres fallos del shard 3 de la revisión anterior. La candidata actual todavía requiere CI completo verde y resolución del 503 nativo antes de integrar.",
+    "fixtureCoverage": {
+      "passed": 43,
+      "failed": 0,
+      "exclusiveToTests": true,
+      "includes": [
+        "custodia sintética con vencimiento explícito",
+        "registro con perfiles correctos de inicio y reversión",
+        "transporte con guardas reales en Node y sin inicializar entradas nativas"
+      ]
+    }
   },
   "r2": {
     "bucket": "afw-release-backups",
@@ -100,5 +126,6 @@
     "pcOffVerified": false,
     "operationalReadiness": false,
     "ownerActionRequired": false
-  }
+  },
+  "updatedAtUTC": "2026-11-20T02:39:12Z"
 }

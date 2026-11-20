@@ -2752,12 +2752,13 @@
   "qaInitialStreamingAndOwnerDeadline": {
     "path": "docs/superpowers/progress/2026-11-20-afw-qa-initial-streaming.json",
     "pr": 720,
-    "head": "6f69a68f58e081e0543e03d4c39fb5c4959c42f6",
+    "head": "377814f18198a8a8e033a311c0d884e69459e62a",
     "initialQaSynthetic": "material_recorded",
     "ownerConnectionSynthetic": "503_at_original_deadline",
     "mainAccepted": false,
-    "fullNativeCi": 44661439166,
+    "fullNativeCi": 44662320082,
     "completePackage": false,
-    "actualCloudTrial": false
+    "actualCloudTrial": false,
+    "packageSourceVerification": 44662320122
   }
 }
