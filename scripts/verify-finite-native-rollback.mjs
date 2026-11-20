@@ -13,7 +13,7 @@ const canaryOrigin='https://delegated-canary.agentfriendlyweb.dev';
 const humanPausedRoutes=new Set(['/authorize','/monitoring']);
 const fail=()=>{throw Error('Finite private rollback mounts unavailable');};
 
-async function readArchivedExports(source,sourcefile,providerExports){
+export async function readArchivedExports(source,sourcefile,providerExports){
  const contents=new TextDecoder('utf-8',{fatal:true}).decode(source);
  // Parsing the pinned source must not resolve runtime imports or execute it.
  const result=await build({stdin:{contents,sourcefile,loader:'js'},bundle:false,write:false,
