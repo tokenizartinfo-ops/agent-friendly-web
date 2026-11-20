@@ -8,8 +8,9 @@ import {createFinitePrivateR2Locator} from '../lib/mcp-qa-finite-package.mjs';
 const fail=()=>{throw Error('Finite private package locator unavailable');};
 try{
  const {GITHUB_SHA:sourceRevision,GITHUB_EVENT_NAME:event,GITHUB_REF:ref,GITHUB_RUN_ATTEMPT:attempt,
-  GITHUB_REPOSITORY:repository,GITHUB_REPOSITORY_ID:id,AFW_R2_BUNDLE_READ_URL:credential}=process.env;
- if(process.argv.length!==2||event!=='push'||ref!=='refs/heads/main'||attempt!=='1'||
+  GITHUB_REPOSITORY:repository,GITHUB_REPOSITORY_ID:id,AFW_R2_PACKAGE_SOURCE_REVISION:requestedRevision,
+  AFW_R2_BUNDLE_READ_URL:credential}=process.env;
+ if(process.argv.length!==2||event!=='workflow_dispatch'||ref!=='refs/heads/main'||attempt!=='1'||requestedRevision!==sourceRevision||
     repository!=='tokenizartinfo-ops/agent-friendly-web'||id!=='1347578006')fail();
  const cwd=fileURLToPath(new URL('..',import.meta.url));
  const workflow=resolve(cwd,'.github/workflows/afw-finite-native-package.yml');

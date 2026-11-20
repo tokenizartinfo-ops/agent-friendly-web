@@ -15,7 +15,7 @@ const REPO='tokenizartinfo-ops/agent-friendly-web',ID=1347578006;
 const API='https://api.github.com/repos/'+REPO;
 const M='a'.repeat(40),TREE='b'.repeat(40),OLD='c'.repeat(40),OLDTREE='d'.repeat(40);
 const WORKFLOW='.github/workflows/afw-finite-native-package.yml';
-const WORKFLOW_TEXT='name: Finite native package\non:\n  push:\n    branches: [main]\npermissions:\n  contents: read\njobs:\n  package:\n    runs-on: ubuntu-24.04\n    steps:\n      - run: echo source-only-synthetic-fixture\n';
+const WORKFLOW_TEXT='name: Finite native package\non:\n  push:\n    branches: [main]\n  workflow_dispatch:\n    inputs:\n      source_revision:\n        description: Exact current main revision of the verified R2 package\n        required: true\n        type: string\npermissions:\n  contents: read\njobs:\n  package:\n    runs-on: ubuntu-24.04\n    steps:\n      - run: echo source-only-synthetic-fixture\n';
 const SIGNED='https://productionresultssa1.blob.core.windows.net/actions-results/11111111-1111-4111-8111-111111111111/artifacts/fixture.zip?sig=SYNTHETIC_PRIVATE_SIGNATURE';
 const TOKEN='opaque+/=~.future-'+'z'.repeat(30);
 const AT=Date.parse('2026-11-01T18:00:00.000Z');
@@ -90,8 +90,9 @@ test('real ZIP through actual Python subprocess yields immutable technical mater
  for(const {url,init} of f.calls){assert.equal(init.method,'GET');assert.equal(init.redirect,'manual');assert.equal(init.headers.Authorization,url===SIGNED?undefined:'Bearer '+TOKEN);}
 });
 test('the protected resolver verifies an Actions receipt, then reads the exact ZIP only from private R2',async()=>{
- const f=fixture();f.privateR2=true;f.options.r2Credential=R2;
+ const f=fixture();f.run.event='workflow_dispatch';f.privateR2=true;f.options.r2Credential=R2;
  const result=await resolve(f);
+ assert(f.calls.some(({url})=>url.includes('&event=workflow_dispatch&')));
  assert.deepEqual(result.manifest,f.manifest);
  assert.equal(result.build.artifactDigest,'sha256:'+sha(f.zip));
  assert.equal(result.build.manifestHash,hashFinitePackageManifest(f.manifest));
@@ -100,9 +101,14 @@ test('the protected resolver verifies an Actions receipt, then reads the exact Z
  assert.equal(Object.keys(steps[1].init.headers).some(k=>k.toLowerCase()==='authorization'),false);
  assert(!JSON.stringify(result).includes(R2));
 });
+test('private R2 requires a main dispatch at the exact head, rejecting a push receipt',async()=>{
+ const f=fixture();f.privateR2=true;f.options.r2Credential=R2;
+ await denied(f);
+ assert(!f.calls.some(({url})=>url===R2));
+});
 test('the private route rejects locator or ZIP drift and refuses legacy artifact fallback',async()=>{
  for(const fault of ['objectKey','sourceTree','manifestHash','digest','legacy','redirect']){
-  const f=fixture();f.privateR2=fault!=='legacy';f.options.r2Credential=R2;
+  const f=fixture();f.run.event='workflow_dispatch';f.privateR2=fault!=='legacy';f.options.r2Credential=R2;
   if(fault==='objectKey')f.editLocator={objectKey:'other.zip'};
   if(fault==='sourceTree')f.editLocator={sourceTree:'e'.repeat(40)};
   if(fault==='manifestHash')f.editLocator={manifestHash:'1'.repeat(64)};
