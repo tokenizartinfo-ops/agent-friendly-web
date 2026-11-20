@@ -64,7 +64,10 @@ AfwReleaseWorkflow.prototype.run=async function(event,step){
  const wrappedDb=forward(db,{prepare:sql=>statement(db.prepare(sql),sql),withSession:(...args)=>session(db.withSession(...args))});
  const node=originalEnv.AFW_RELEASE_EVENTS_NODE;
  const wrappedNode=forward(node,{get:(...args)=>{
-  const target=node.get(...args);return forward(target,{observeRetiredReceipt:async challenge=>{
+  const target=node.get(...args);return forward(target,{
+   beginFiniteTrialReservation:input=>target.beginFiniteTrialReservation(input),
+   settleFiniteTrialReservation:input=>target.settleFiniteTrialReservation(input),
+   observeRetiredReceipt:async challenge=>{
    const begin=performance.now();try{return await target.observeRetiredReceipt(challenge);}
    finally{measurement.rpcReads++;measurement.rpcMs+=performance.now()-begin;}
   }});

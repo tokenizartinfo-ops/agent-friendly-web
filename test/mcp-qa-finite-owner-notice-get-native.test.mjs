@@ -152,7 +152,10 @@ test('freeze after actual SQL commit blocks own ACK without deleting ticket',()=
 }));
 test('queue past original five-second SQL window cannot mutate or ACK',()=>withIssued(async f=>{
  await f.stub.noticeConfigure('queue');const pending=notice(f),seen=await gate(f,'before-sql');assert(seen.state.sqlEnteredAt);
- await new Promise(resolve=>setTimeout(resolve,5100));await deny(await pending);assert.deepEqual(await plain(f.stub.noticeProbe()),{allowed:false},'actual queued SQL retains scope after child abort');await f.stub.noticeReleaseHeld();
+ await new Promise(resolve=>setTimeout(resolve,5100));const expired=await pending;
+ assert.equal(expired.status,503);assert.equal(expired.headers.get('Set-Cookie'),null);
+ if(!expired.bodyUsed&&!expired.body?.locked)assert.doesNotMatch(await expired.text(),/<form|name="handle"/);
+ assert.deepEqual(await plain(f.stub.noticeProbe()),{allowed:false},'actual queued SQL retains scope after child abort');await f.stub.noticeReleaseHeld();
  const after=await plain(f.stub.noticeInspect());assert.equal(after.tickets.length,0);assert.equal(after.notice.some(([key])=>key.endsWith('ticket:ack')),false);
 }));
 test('original CLOSE wins queued INSERT without deleting history or revoking grant',()=>withIssued(async f=>{

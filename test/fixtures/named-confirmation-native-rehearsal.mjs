@@ -19,7 +19,7 @@ export function rehearseExactFiniteNamedConfirmation({artifact,mode='confirmed',
 // Unmounted test-only wrapper: the ACTUAL fixed finite Known core receives the
 // exact native event and step. No legacy validator or RPC operator is involved.
 async function buildFiniteKnownFixture(bundle,witness){
- const source="import {WorkflowEntrypoint} from 'cloudflare:workers';import {runFiniteKnownCancellationReleaseWorkflow} from './lib/mcp-release-runtime.mjs';const bundle="+JSON.stringify(bundle)+";export class AfwReleaseWorkflow extends WorkflowEntrypoint{run(event,step){return runFiniteKnownCancellationReleaseWorkflow({bundle,env:this.env,event,step});}}export default{fetch(){return new Response(null,{status:404});}};";
+ const source="import {WorkflowEntrypoint} from 'cloudflare:workers';import {runFiniteKnownCancellationReleaseWorkflow} from './lib/mcp-release-runtime.mjs';import {createFiniteReservationGateClient,withFiniteReleaseGate} from './lib/mcp-own-finite-admission-gate.mjs';const bundle="+JSON.stringify(bundle)+";export class AfwReleaseWorkflow extends WorkflowEntrypoint{run(event,step){const env=this.env;const gate=createFiniteReservationGateClient({namespace:env.AFW_RELEASE_EVENTS_NODE,identity:env.FINITE_RESERVATION_IDENTITY});return withFiniteReleaseGate(env,gate,()=>runFiniteKnownCancellationReleaseWorkflow({bundle,env,event,step}));}}export default{fetch(){return new Response(null,{status:404});}};";
  const result=await compileFixture({stdin:{contents:source,resolveDir:process.cwd(),sourcefile:'finite-known-native-test.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  let script=result.outputFiles[0].text;
  if(witness){
@@ -37,6 +37,9 @@ async function rehearseNamedConfirmation(finite,{artifact,build,mode,payloadMode
  const compiledIdentity=await compileFixture({stdin:{resolveDir:process.cwd(),sourcefile:'named-custody-fixture.mjs',contents:`
 import {DurableObject} from 'cloudflare:workers';
 import {createRetiredRpcReceipt} from './lib/mcp-retired-rpc-receipt.mjs';
+import {createFiniteAdmissionGate} from './lib/mcp-own-finite-admission-gate.mjs';
+import {createHash} from 'node:crypto';
+const fixtureHash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 export class Own extends DurableObject{
  serverNow(){return Date.now()+(this.env.RETIREMENT==='server-ahead'?21:0);}
  observeRetired(){
@@ -44,9 +47,38 @@ export class Own extends DurableObject{
   return {...r,observedAt:this.env.RETIREMENT==='future-string'?String(this.serverNow()+1000):this.env.RETIREMENT==='future-unsafe'?8640000000000001:this.serverNow()+(this.env.RETIREMENT==='stale'?-31000:this.env.RETIREMENT==='future'?1000:0),...(this.env.RETIREMENT==='mismatch'?{programHash:'0'.repeat(64)}:{})};
  }
  observeRetiredReceipt(challenge){return createRetiredRpcReceipt({challenge,now:()=>this.serverNow(),observe:async()=>({value:this.observeRetired()})});}
+ #reservationGate(input){
+  const identity=this.env.FINITE_RESERVATION_IDENTITY,expiresAt=this.env.FINITE_RESERVATION_EXPIRES_AT;
+  if(!identity||this.ctx.id.toString()!==identity.containerId||input.intentId!==identity.intentId||input.controlHash!==identity.controlHash)throw Error('SYN reservation scope');
+  const storage=this.ctx.storage,monitorHash='9'.repeat(64);
+  const {intentId,controlHash,planHash,sourceRevision,runtimeVersionId,T0}=identity;
+  const claim={purpose:'afw.qa-finite-trial.v1:effect',intentId,controlHash,kind:'nominal',phase:'issued',issuedAt:T0,deadline:expiresAt,proofHash:null};
+  const claimHash=createHash('sha256').update(['afw.qa-finite-trial.v1:effect',JSON.stringify(claim)].join(String.fromCharCode(10))).digest('hex');
+  const gate=createFiniteAdmissionGate({storage,identity,timeoutMs:5000,now:Date.now,
+   nominalIdentity:{sourceRevision,runtimeVersionId,actorId:identity.containerId,monitorHash,consentExpiresAt:expiresAt},
+   readNominalControl:async()=>{
+    const reservation=(await gate.read()).writers.reservation;
+    const ownedWriters=reservation?[{intentId,controlHash,actorId:identity.containerId,kind:'reservation',
+     claimHash:fixtureHash(reservation.claim),phase:reservation.settlement?'settled':'issued'}]:[];
+    return {purpose:'afw.qa-finite-nominal-control.v1',intentId,controlHash,planHash,sourceRevision,runtimeVersionId,
+     actorId:identity.containerId,observedAt:Date.now(),phase:'armed',withdrawnAt:null,claim,claimHash,ownedWriters,
+     consent:{grantHash:identity.grantHash,monitorHash,expiresAt,valid:true}};
+   },
+   readPrimary:{reservation:async({identityHash,claimHash})=>{
+    const row=await this.env.FINITE_RESERVATION_DB.withSession('first-primary')
+     .prepare("SELECT * FROM dossier_successor_reservations WHERE slot=? AND trial_id=? AND container_id=? AND application_id=? AND state='prepared'")
+     .bind('afw.own-successor.v1',identity.trialId,identity.containerId,identity.applicationId).first();
+    if(!row)return null;
+    return {purpose:'afw.own-finite-admission.v1:settled',identityHash,kind:'reservation',claimHash,primaryRowHash:fixtureHash(row),settledAt:Date.now()};
+   },admission:async()=>null,launch:async()=>null}
+  });
+  return gate;
+ }
+ beginFiniteTrialReservation(input){return this.#reservationGate(input).beginReservation();}
+ settleFiniteTrialReservation(input){return this.#reservationGate(input).settleReservation();}
  fetch(){throw Error('No actor launch in package qualification');}
 }
-export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString()});}}
+export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:e.NODE.idFromName('afw-own-event-first-successor-v1').toString()});}}
 `},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',mainFields:['module','main'],external:['node:*','cloudflare:*'],legalComments:'none'});
  const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:finite?['nodejs_compat','global_fetch_strictly_public','enable_request_signal']:['nodejs_compat'],script:compiledIdentity.outputFiles[0].text,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
@@ -106,6 +138,15 @@ AfwReleaseWorkflow.prototype.run=async function(event,step){
   if(fault!==null)operator.script+='\n'+reservationFaultHarness(fault);
   const retired={purpose:'afw.node-retirement-observation.v1',containerId:ids.original,programHash:manifest.original.programHash,sourceRevision:manifest.original.sourceRevision,processGeneration:'8'.repeat(64),image:'cloudflare/debian-trixie',createdAt:window.startAt-10000,expiresAt:window.startAt-5000,closedAt:window.startAt-3000,observedAt:window.startAt-2000,physicalStopVerified:false,mayStartSuccessor:false};
   identity.bindings={RETIREMENT:retirement,...(retirement==='absent'?{}:{RETIRED:JSON.stringify(retired)})};
+  if(finite){
+   const T0=window.startAt,finiteIdentity={intentId:'SYN-known-reservation',controlHash:'d'.repeat(64),planHash:compiled.planHash,
+    containerId:ids.candidate,applicationId:manifest.scope.applicationId,
+    grantHash:createHash('sha256').update(JSON.parse(events.text).grantId).digest('hex'),
+    trialId:manifest.candidate.trialId,sourceRevision:artifact.sourceRevision,runtimeVersionId:versionId,T0,N1:T0+300000,C1:T0+420000};
+   operator.bindings.FINITE_RESERVATION_IDENTITY=finiteIdentity;
+   Object.assign(identity.bindings,{FINITE_RESERVATION_IDENTITY:finiteIdentity,FINITE_RESERVATION_EXPIRES_AT:window.expiresAt});
+   identity.d1Databases={FINITE_RESERVATION_DB:'exact-named-rehearsal'};
+  }
   if(['expired','rewind'].includes(retirement))operator.script="const originalFetch=globalThis.fetch;globalThis.fetch=async(...args)=>{const r=await originalFetch(...args);if(String(args[0]).includes('/instances/'))Date.now=()=>"+(retirement==='expired'?window.expiresAt+1:window.startAt)+";return r;};\\n".replace('\\n','\n')+operator.script;
   const caller={name:'rpc-caller',modules:true,compatibilityDate:'2026-09-07',bindings:{PLAN_HASH:compiled.planHash},serviceBindings:{OPERATOR:{name:'operator',entrypoint:'AfwReleaseOperator'}},script:'export default{async fetch(r,e){try{return Response.json(await e.OPERATOR.run(e.PLAN_HASH));}catch(error){return Response.json({error:error.message});}}}'};
   await mf.setOptions(convertV4MiniflareOptions({workers:finite?[identity,operator]:[identity,operator,caller]}));
