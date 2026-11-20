@@ -144,6 +144,26 @@
       "fails": 0,
       "includesExactCustodyCutoff": true,
       "includesBothAcquiredBodyCancellationModes": true
+    },
+    "scopedNativeReservation": {
+      "localActualWorkflow": true,
+      "originalGatePreservedThroughStep": true,
+      "oneReservation": true,
+      "elapsedMs": 990,
+      "mayBoot": false
+    },
+    "providerClosedReadback": {
+      "workersAt": "2026-11-20T15:05:24Z",
+      "candidateAndOperatorAndQaFlagsFalse": [
+        8,
+        3,
+        14
+      ],
+      "cron": 0,
+      "tails": 0,
+      "instancesAt": "2026-11-20T15:06:33Z",
+      "ownActiveContainers": 0,
+      "ownNonterminalWorkflows": 0
     }
   },
   "findings": {
@@ -237,7 +257,8 @@
     "packageBoundary": "Historical draft source keys remain under finite-bundles-v1. An exact revision's deployment archive now has its own finite-packages-v2 key and requires its own signed read URL in the protected issuer context. Tests reject swap attempts before transport. The compatibility gate still requires privately assembled v2 bytes and verified rollback.",
     "heldConcurrency": "GitHub diagnostic job 136340429745 captured a rejected concurrent OAuth request at the owner gate and the genuine original SDK reaching durable completion. Only the test adapter's blanket list ban interrupted the bounded read-after-write. The candidate now allows exactly the synthetic subject's grant reads after the original SDK observed record. Production bounds remain in place.",
     "fixtureClock": "A synthetic journal sampled the issue and deadline clock twice; a 1ms tick could make the required 5000ms window 5001ms. Fixture now derives both from one sample.",
-    "additionalCI": "Run 44753407506 reached all remaining shards except an old historical test's setup that expected an inline custody declaration, abandoned native workers and hit the 20-minute runner ceiling. The historical fixture now exercises the current selector, pins the closed QA hash domain and disposes the harness if setup fails. The original deadline test independently checks absence of an OAuth cookie and of a SQL effect even when the timed-out transport already closed the response body."
+    "additionalCI": "Run 44753407506 reached all remaining shards except an old historical test's setup that expected an inline custody declaration, abandoned native workers and hit the 20-minute runner ceiling. The historical fixture now exercises the current selector, pins the closed QA hash domain and disposes the harness if setup fails. The original deadline test independently checks absence of an OAuth cookie and of a SQL effect even when the timed-out transport already closed the response body. The following full run exposed the previously masked native reservation gate issue and a timed-out notice GET whose response body the transport had already closed. The source gate handoff and the GET expiry assertion have been addressed in the new candidate.",
+    "nativeReservationBoundary": "Actual workerd Workflow step entry dropped the AsyncLocalStorage reservation gate. The original private environment-bound gate is now captured before the Workflow handoff and carried to the existing reservation writer. The candidate test mounts the real gate, exactly one durable write and first-primary readback. The synthetic measurement proxy explicitly forwards the two scoped RPC methods without invoking remote bind."
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -248,18 +269,18 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T15:00:21Z",
+  "updatedUTC": "2026-11-20T15:27:25Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "d1fdef5959269e1518ad3b21d79625343fe592fd",
-    "tree": "694c54cbcb97db9c8d4ebda0b67684176ee35e5f",
+    "head": "2103560193eecc2966078eefadcb7b84e0e52035",
+    "tree": "b1f1c843499af4b613971107e061ab280f16d703",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
     "ci": {
-      "runId": 44758796277,
+      "runId": 44763291846,
       "status": "in_progress"
     },
     "sourcePackageChecks": {
-      "runId": 44758796328,
+      "runId": 44763291893,
       "status": "in_progress",
       "completePackage": false
     }
