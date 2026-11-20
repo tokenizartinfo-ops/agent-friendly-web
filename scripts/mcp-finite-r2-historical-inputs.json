@@ -1,0 +1,36 @@
+{
+  "purpose": "afw.finite-r2-historical-inputs.v1",
+  "bucket": "afw-release-backups",
+  "objectKey": "historical-v1/sha256-63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28.zip",
+  "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+  "archiveBytes": 4209422,
+  "receiptSha256": "22bf46883ed25f0b480470aab075db6fb298f63ec347235c876e350fe98023d2",
+  "providerSourcePin": "26213123304eea25e652a52d808d25b7e0e3475e",
+  "preservedAtUTC": "2026-11-18T17:33:11.265Z",
+  "inputs": {
+    "qaClosed": {
+      "versionId": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+      "moduleBytes": 395915,
+      "moduleSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+      "configurationSha256": "a8c8895f8375f4d09f01960e88bec8c3cac0a89f999e500f74fccf01733f7838",
+      "metadataSha256": "98dda8793f96eed064fcd006d31281b015adbd6ffde175a218fa7195cca7bcd1",
+      "moduleName": "closed-rollback.mjs"
+    },
+    "canaryClosed": {
+      "versionId": "2607abae-cec3-4e35-89eb-8b8572262b54",
+      "moduleBytes": 1830202,
+      "moduleSha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+      "configurationSha256": "4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0",
+      "metadataSha256": "2f6db41a4d021665d973ca38001c4ff11d2261b3e7d64c92a0373deb15b4343c",
+      "moduleName": "index.mjs"
+    },
+    "operatorClosed": {
+      "versionId": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+      "moduleBytes": 1971922,
+      "moduleSha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51",
+      "configurationSha256": "8c37301871c7fc3cc0f7471fddfdeb039f418a078b065fdde44ba5cbe8b24b4c",
+      "metadataSha256": "8c3a5e2f0a83349faed821a4afc03b2edecd0a8ad5820e39c6bfcb626f5a097a",
+      "moduleName": "index.mjs"
+    }
+  }
+}

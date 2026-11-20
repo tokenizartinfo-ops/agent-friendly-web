@@ -1,0 +1,58 @@
+name: AFW finite native package
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      source_revision:
+        description: Exact current main revision of the verified R2 package
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.source_revision == github.sha) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify private R2 package transport and release provenance
+        run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs
+  package:
+    needs: verify
+    if: ${{ github.event_name == 'workflow_dispatch' && github.run_attempt == '1' && inputs.source_revision == github.sha }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: afw-qa-cloud-closed-rollback
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify private R2 bundle and write its public locator
+        env:
+          AFW_R2_PACKAGE_SOURCE_REVISION: ${{ inputs.source_revision }}
+          AFW_R2_BUNDLE_READ_URL: ${{ secrets.AFW_R2_BUNDLE_READ_URL }}
+        run: node scripts/write-finite-r2-locator.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-finite-native-package-${{ github.sha }}
+          path: output/finite-r2-locator/locator.json
+          if-no-files-found: error
+          retention-days: 7
