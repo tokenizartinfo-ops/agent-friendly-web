@@ -13,7 +13,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {readFile,mkdtemp,rm,mkdir,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
-import {join,resolve} from 'node:path';
+import {basename,join,resolve} from 'node:path';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {bootstrapWorld,UUID,GH,CF} from './finite-bootstrap-world.mjs';
@@ -100,7 +100,7 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
   if(cleanupCheckpoint)b.onLoad({filter:/mcp-qa-finite-(?:owner-cleanup|initial-cleanup)\.mjs$/},async args=>{
-   const name=args.path.split('/').at(-1),source=sources.get(name)??await readFile(args.path,'utf8');
+   const name=basename(args.path),source=sources.get(name)??await readFile(args.path,'utf8');
    return {contents:instrumentCleanupConsumer(source),loader:'js'};
   });
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8'),{mutation:firstConnectionMutation})),loader:'js'}));
@@ -120,7 +120,7 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
   if(mode.startsWith('enrollment')||enrollmentComponent)b.onResolve({filter:/mcp-qa-finite-(owner-source|connection-source)\.mjs$/},()=>({path:process.cwd()+'/test/fixtures/finite-preparation-cleanup-source.mjs'}));
   b.onLoad({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({contents:product,loader:'js'}));
   b.onResolve({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({path:process.cwd()+'/lib/mcp-qa-finite-initial-material.mjs'}));
-  b.onLoad({filter:/mcp-qa-finite-(initial-entry|initial-cleanup|bootstrap-native)\.mjs$/},args=>({contents:sources.get(args.path.split('/').at(-1)),loader:'js'}));
+  b.onLoad({filter:/mcp-qa-finite-(initial-entry|initial-cleanup|bootstrap-native)\.mjs$/},args=>({contents:sources.get(basename(args.path)),loader:'js'}));
   b.onLoad({filter:/mcp-qa-finite-initial-custody-profile\.mjs$/},()=>({contents:syntheticCustody,loader:'js'}));
   b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));
   b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));

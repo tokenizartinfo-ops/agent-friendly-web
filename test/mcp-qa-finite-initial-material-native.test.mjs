@@ -52,7 +52,7 @@ ${retentionMethods("createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.
    if(result?.purpose!=='afw.finite-initial-material-result.v1')return{ok:false,status:result?.status};
    producer.assertCurrent(result,lease);
    const originalContext=result.originalContext,artifact=originalContext.artifact,script=artifact.script;
-   const frozenOwnership=Object.isFrozen(result)&&Object.isFrozen(originalContext)&&Object.isFrozen(artifact)&&typeof script==='string';
+   const frozenOwnership=Object.isFrozen(result)&&Object.isFrozen(originalContext)&&Object.isFrozen(artifact)&&Object.isFrozen(result.material)&&Object.isFrozen(result.material.originalContext)&&typeof script==='string';
    let scriptWriteDenied=false,artifactWriteDenied=false,forgedScriptDenied=false,borrowedArtifactsDenied=false;
    try{artifact.script=script+'SYN changed';}catch{scriptWriteDenied=true;}
    try{originalContext.artifact=Object.freeze({...artifact});}catch{artifactWriteDenied=true;}
@@ -61,13 +61,13 @@ ${retentionMethods("createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.
    try{producer.assertCurrent(Object.freeze({...result,originalContext, candidateBytes:result.candidateBytes}),lease);}catch{borrowedArtifactsDenied=true;}
    producer.assertCurrent(result,lease);
    const sameOwnedContext=result.originalContext===originalContext&&result.originalContext.artifact===artifact&&artifact.script===script;
-   let cloneDenied=false,otherDenied=false,otherLeaseDenied=false,mutatedDenied=false,expiredDenied=false;
+   let cloneDenied=false,otherDenied=false,otherLeaseDenied=false,candidateCopyIsolated=false,expiredDenied=false;
    try{producer.assertCurrent(structuredClone(result),lease);}catch{cloneDenied=true;}
    try{createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.env}).assertCurrent(result,lease);}catch{otherDenied=true;}
    try{producer.assertCurrent(result,{...lease});}catch{otherLeaseDenied=true;}
-   result.candidateBytes[0]^=1;try{producer.assertCurrent(result,lease);}catch{mutatedDenied=true;}result.candidateBytes[0]^=1;
+   const copy=result.candidateBytes,first=copy[0];copy[0]^=1;producer.assertCurrent(result,lease);const unmodified=result.candidateBytes;candidateCopyIsolated=copy[0]!==first&&unmodified!==copy&&unmodified[0]===first;
    abort.abort();try{producer.assertCurrent(result,lease);}catch{expiredDenied=true;}
-   return{ok:true,frozenOwnership,scriptWriteDenied,artifactWriteDenied,forgedScriptDenied,borrowedArtifactsDenied,sameOwnedContext,otherLeaseDenied,mutatedDenied,expiredDenied,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.completePackage,result.operationalReadiness],cloneDenied,otherDenied,material:result.material,scriptHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(result.originalContext.artifact.script)).then(v=>[...new Uint8Array(v)].map(b=>b.toString(16).padStart(2,'0')).join('')),candidateBytes:result.candidateBytes.length,storageSame:storage===this.ctx.storage};
+   return{ok:true,frozenOwnership,scriptWriteDenied,artifactWriteDenied,forgedScriptDenied,borrowedArtifactsDenied,sameOwnedContext,otherLeaseDenied,candidateCopyIsolated,expiredDenied,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.completePackage,result.operationalReadiness],cloneDenied,otherDenied,material:result.material,scriptHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(result.originalContext.artifact.script)).then(v=>[...new Uint8Array(v)].map(b=>b.toString(16).padStart(2,'0')).join('')),candidateBytes:result.candidateBytes.length,storageSame:storage===this.ctx.storage};
   }catch(e){return{ok:false,error:e.message};}finally{clearTimeout(timer);abort.abort();storage.transaction=nativeTransaction;}
  }
  async holdReady(){return typeof this.releaseHeld==='function';}
@@ -154,7 +154,7 @@ ${retentionMethods("createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.
 test('C2-A actual native B1+B2+C1 composition retains private factual material, never authority',async()=>{
  const f=await harness();try{
   const before=await f.stub.snapshot(),r=await f.stub.run();assert.equal(r.ok,true,J(r));
-  assert.deepEqual(r.claims,[false,false,false,false,false]);assert.ok(r.cloneDenied&&r.otherDenied&&r.otherLeaseDenied&&r.mutatedDenied&&r.expiredDenied&&r.storageSame);
+  assert.deepEqual(r.claims,[false,false,false,false,false]);assert.ok(r.cloneDenied&&r.otherDenied&&r.otherLeaseDenied&&r.candidateCopyIsolated&&r.expiredDenied&&r.storageSame);
   assert.equal(r.material.intent.sourceRevision,M);assert.equal(r.material.originalContext.artifact.sourceRevision,M);assert.equal(r.material.originalContext.original.sourceRevision,'2'.repeat(40));
   assert.equal(r.material.originalContext.legacy.sourceRevision,M);assert.equal(r.material.ownerSelection.project.synthetic,true);assert.equal(r.material.ownerSelection.project.revision,1);
   assert.equal(r.material.originalContext.retirementPolicy,J({...f.x.events,grantId:'original',containerId:f.x.original.containerId,startAt:f.x.at,expiresAt:f.x.at+10000,programHash:f.x.original.programHash,sourceRevision:f.x.original.sourceRevision}));
@@ -210,10 +210,10 @@ test('C2-A partially consumed original parent aborts held child, retains real pr
  }finally{await f.stub.releaseHold();await f.mf.dispose();}
 });
 
-test('T2 material native ownership keeps frozen script and mutable bytes fenced',async()=>{
+test('T2 material native ownership isolates byte copies and keeps the original lease',async()=>{
  const f=await harness();try{
   const result=await f.stub.run();assert.equal(result.ok,true,J(result));
-  for(const key of ['frozenOwnership','scriptWriteDenied','artifactWriteDenied','forgedScriptDenied','borrowedArtifactsDenied','sameOwnedContext','cloneDenied','otherDenied','otherLeaseDenied','mutatedDenied','expiredDenied'])assert.equal(result[key],true,key);
+  for(const key of ['frozenOwnership','scriptWriteDenied','artifactWriteDenied','forgedScriptDenied','borrowedArtifactsDenied','sameOwnedContext','cloneDenied','otherDenied','otherLeaseDenied','candidateCopyIsolated','expiredDenied'])assert.equal(result[key],true,key);
   assert.equal(result.scriptHash,f.resident.module.sha256);assert.equal(result.candidateBytes,f.resident.module.bytes);
   assert.deepEqual(result.claims,[false,false,false,false,false]);
  }finally{await f.mf.dispose();}

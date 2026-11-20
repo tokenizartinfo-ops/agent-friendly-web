@@ -137,7 +137,14 @@ export async function compileFirstConnectionCandidate(revision,tree,{negativePro
   if(!['qa-absent','actor'].includes(fault))prepared.AFW_FINITE_TRIAL_CONTROL={idFromName:ns.idFromName.bind(ns),get(id){
    const stub=ns.get(id);return {fetch(req){forwarded++;if(fault==='version-drift'){prepared.AFW_FINITE_TRIAL_VERSION={id:env.AFW_FINITE_TRIAL_VERSION.id};}return stub.fetch(req);}};
   }};
-  if(fault==='oauth-open')prepared.AFW_DELEGATED_OAUTH_ENABLED='true';
+  if(['oauth-open','notices-open'].includes(fault))prepared.AFW_DELEGATED_OAUTH_ENABLED='true';
+  if(fault==='notices-open'){
+   prepared.AFW_DOSSIER_MONITORING_OWNER_ENABLED='true';
+   prepared.AFW_OAUTH_PILOT_PROJECT_ID='synthetic-project';
+   prepared.AFW_OAUTH_PILOT_CLIENT_ID='synthetic-client';
+   const now=Date.now();
+   prepared.AFW_DOSSIER_MONITORING_OWNER_POLICY=JSON.stringify({grantId:'synthetic-grant',projectId:prepared.AFW_OAUTH_PILOT_PROJECT_ID,clientId:prepared.AFW_OAUTH_PILOT_CLIENT_ID,startAt:now-1000,expiresAt:now+60000});
+  }
   // Literal actor is asserted in the product forwards, never selected by input.
   if(!finiteNativeActor)throw Error('SYN missing actor');
   return finite.fetch(request,prepared,ctx);
@@ -343,7 +350,7 @@ export async function approveFirstConnection(f,{token=null}={}){
  return f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':postToken,Cookie:cookie},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
 }
 export async function setFirstConnectionFault(f,fault){
- assert.equal(f.mode,'first-connection-publication');assert(['none','qa-absent','version','actor','version-drift','oauth-open'].includes(fault));
+ assert.equal(f.mode,'first-connection-publication');assert(['none','qa-absent','version','actor','version-drift','oauth-open','notices-open'].includes(fault));
  const response=await f.negative.fetch(origin+'/_fixture/fault',{method:'POST',body:fault});assert.equal(response.status,204);
 }
 export async function readFirstConnectionProbe(f){

@@ -34,8 +34,12 @@ test('T2 finite dispatch never falls through ordinary',{timeout:120000},async t=
  }
  await setFirstConnectionFault(f,'oauth-open');
  for(const path of ['/authorize?bad=1','/monitoring','/monitoring/grant']){const r=await spy.fetch(O+path,path.endsWith('grant')?{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:'handle='+'a'.repeat(43)}:{});assert.notEqual(r.status,200,path);await r.body?.cancel();}
+ const oauthOnly=await readFirstConnectionProbe(f);
+ assert(!oauthOnly.native.calls.some(c=>c.url==='https://afw-private.invalid/_finite-owner/monitoring'),'OAuth alone keeps monitoring closed');
+ await setFirstConnectionFault(f,'notices-open');
+ const notices=await spy.fetch(O+'/monitoring');assert.notEqual(notices.status,200);await notices.body?.cancel();
  const probe=await readFirstConnectionProbe(f);assert.equal(probe.negative.ordinary,0,'finite paths never enter ordinary handler before SQL');assert.equal(probe.negative.sql,0,'zero ordinary SQL');assert.equal(probe.effects,0);assert.equal(probe.uploads,1);assert.equal(probe.activations,1);
- assert(probe.native.calls.some(c=>c.url==='https://afw-private.invalid/_finite-owner/monitoring'),'OAuth=true reaches QA without ordinary monitoring flag');
+ assert(probe.native.calls.some(c=>c.url==='https://afw-private.invalid/_finite-owner/monitoring'),'Both finite notice flags reach QA without bypassing the native gate');
  const target='https://afw-private.invalid/_finite-owner/';
  for(const url of [target+'unknown',target+'choice?x=1',target+'monitoring/revoke']){const r=await f.stub.fetch(url,{method:'POST'});assert.notEqual(r.status,200);await r.body?.cancel();}
  console.info('T2 negative bundle',JSON.stringify({spyHash:f.firstConnectionBuild.spyHash,probe:{...probe,rows:undefined,providerRequests:undefined,native:{...probe.native,business:undefined}}}));
@@ -113,7 +117,7 @@ function assertPublicationOrderDataSensitivity(trace,rows,requests,actual){
 }
 
 test('T3 same initial bytes produce connection and downstream',{timeout:120000},async t=>{
- const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');assert.equal(f.firstConnectionBuild.M.sha256,'c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32','positive initial M stays exact D11');assert.equal(f.firstConnectionBuild.M.bytes,1988061);await f.stub.firstConnectionConfigure('normal');
+ const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');assert.equal(f.firstConnectionBuild.M.sha256,f.resident.module.sha256,'positive initial M matches the exact current compiler input');assert.equal(f.firstConnectionBuild.M.bytes,f.resident.module.bytes);assert(f.firstConnectionBuild.M.bytes<=2097152);await f.stub.firstConnectionConfigure('normal');
  const owner=(await plain(f.stub.capsuleFacts())).material.ownerSelection,originalToken=await f.firstConnectionToken(owner,{expiresAt:Math.floor((Date.now()+120000)/1000)}),choiceHeaders={'Cf-Access-Jwt-Assertion':originalToken};
  const foreignUrl='https://foreign.invalid/connections/finite-prepare',foreign=await f.mf.dispatchFetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreign.status,200);await foreign.body?.cancel();
  const foreignSpy=await f.negative.fetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreignSpy.status,200);await foreignSpy.body?.cancel();
