@@ -164,6 +164,12 @@ export function instrumentFiniteOwnerQaSdk(source){
  once("await sdkAppend('SdkSend',send,op);await recheckOwned();check();","await sdkAppend('SdkSend',send,op);"+probe('sdk')+"await recheckOwned();check();");
  once("await issuerAppend('Send',send,op);await recheckOwned();check();","await issuerAppend('Send',send,op);"+probe('issuer')+"await recheckOwned();check();");
  once("if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();","if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();(globalThis.__d02Probes??=[]).push({kind:'consumption',sameChild:consumptionChild===l,sameStore:consumptionStore===store,remainingMs:w.deadline-Date.now(),windowMs:w.deadline-w.startedAt});");
+ once(" let clock,onAbort;"," let clock,onAbort;const diagnostic={startedAt:Date.now(),position:'enter'};");
+ once("position='sdk-pending';","position='sdk-pending';diagnostic.position=op+':pending';");
+ once("settled=true;position='sdk-resolved';","settled=true;position='sdk-resolved';diagnostic.position=op+':resolved';");
+ once("position='issuer-pending';","position='issuer-pending';diagnostic.position=op+':pending';");
+ once("position='issuer-resolved';","position='issuer-resolved';diagnostic.position=op+':resolved';");
+ once("}catch{return pending();}finally","}catch(error){console.info('D02 SYN original denial',JSON.stringify({position:diagnostic.position,elapsed:Date.now()-diagnostic.startedAt,aborted:originalLease.signal.aborted,frames:String(error?.stack??'').split('\\n').slice(1,5).map(frame=>frame.slice(0,210))}));return pending();}finally");
  return beforeOAuth+source+afterOAuth;
 }
 

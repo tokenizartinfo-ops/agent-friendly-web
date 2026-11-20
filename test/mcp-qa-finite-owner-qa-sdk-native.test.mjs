@@ -135,7 +135,13 @@ test('held actual approve denies fabricated results and concurrent complete bear
  assert.equal(await plain(f.stub.sdkGrant(form.identity.grantId)),null);
  const [replay,current]=await Promise.all([status(f.post(form)),plain(f.stub.sdkReadCurrent())]);
  assert.equal(replay,503);assert.equal(current.status,'unavailable');
- await f.stub.sdkReleaseHeld();await issued(f,form,await pending);
+ await f.stub.sdkReleaseHeld();
+ const original=await pending;
+ if(original.status!==302){
+  const denied=await observe(f);
+  console.info('D02 SYN held result',JSON.stringify({status:original.status,elapsed:f.timings.post,calls:denied.calls,probes:denied.probes,rows:denied.rows.map(([key])=>key.split(':').slice(-2).join(':'))}));
+ }
+ await issued(f,form,original);
  s=await observe(f);assert(s.calls.some(c=>c.method==='get'&&c.prefix==='transaction'));assert(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').every(c=>c.actualGrantAck));assert.equal(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').length,1);assert.equal(s.calls.filter(c=>c.method==='list').length,0);assert(s.calls.every(c=>c.method==='get'&&['client','transaction'].includes(c.prefix)||c.method==='put'&&c.prefix==='grant'||c.method==='delete'&&c.prefix==='transaction'),'no other SDK grant/token mutation');
  for(const p of s.probes.filter(p=>p.strictUnavailable!==undefined))assert.equal(p.strictUnavailable,true,'strict public reader denied same ambient unresolved SEND');
  for(const op of ['consume','grant'])assert(s.probes.some(p=>p.kind==='issuer'&&p.op===op&&p.strictUnavailable));for(const op of ['sdk_approve','sdk_complete'])assert(s.probes.some(p=>p.kind==='sdk'&&p.op===op&&p.strictUnavailable));

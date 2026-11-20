@@ -49,7 +49,7 @@ import {sealFiniteInitialUploadRecord as phaseSealUpload,encodeFiniteInitialUplo
    const versionId=kind==='settled-original'?c.activatedVersionId:'77777777-7777-4777-8777-777777777777',deploymentId=kind==='settled-original'?c.activatedDeploymentId:'88888888-8888-4888-8888-888888888888';
    let activation;
    for(const effect of ['upload','activation']){
-    const send={purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection',contextHash,effect,baselineVersionId:c.activatedVersionId,baselineDeploymentId:c.activatedDeploymentId,requestHash:'6'.repeat(64),issuedAt:Date.now(),deadline:Date.now()+5000},j=journal(effect);
+    const issuedAt=Date.now(),send={purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection',contextHash,effect,baselineVersionId:c.activatedVersionId,baselineDeploymentId:c.activatedDeploymentId,requestHash:'6'.repeat(64),issuedAt,deadline:issuedAt+5000},j=journal(effect);
     if((await j.issue(send,parent.lease)).status!=='recorded')throw Error('SYN journal SEND');
     if(kind==='upload-send'&&effect==='upload'||kind==='activation-send'&&effect==='activation')return {provenance:'SYN unresolved SEND',preconnectionId:id};
     const ack={purpose:'afw.finite-connection-ack.v1',sendHash:phaseHash('ConnectionSend',send),resourceId:effect==='upload'?versionId:deploymentId,acknowledgedAt:Date.now()};
