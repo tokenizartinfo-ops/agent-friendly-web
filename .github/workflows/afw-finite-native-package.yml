@@ -61,7 +61,7 @@ jobs:
         run: |
           staging=$(node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION")
           printf '%s\n' "$staging"
-          jq -e --arg revision "$AFW_PACKAGE_REVISION" '.sourceRevision == $revision and .nativeMount.nativeWorkflowDenials == 2 and .nativeMount.operationalReadiness == false' <<< "$staging"
+          jq -e --arg revision "$AFW_PACKAGE_REVISION" '.sourceRevision == $revision and .nativeMount.nativeWorkflowDenials == 2 and .nativeMount.nativeReviewReceiverDenials == 3 and .nativeMount.operationalReadiness == false' <<< "$staging"
       - name: Verify the bounded archive parser
         run: python3 -m unittest discover -s test -p 'finite_*archive_test.py'
       - name: Verify predecessor isolation
