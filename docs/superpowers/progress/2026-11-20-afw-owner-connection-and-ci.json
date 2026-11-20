@@ -16,7 +16,9 @@
     "ci": {
       "runId": 44771886494,
       "status": "in_progress"
-    }
+    },
+    "latestVerifiedCommit": "0d9ea61424c08ebbd89bb45b916b98f744f95cf3",
+    "latestVerifiedTree": "96bc7ea356eb2076093ec6aeaa759d52e366cbec"
   },
   "candidate": {
     "pullRequest": 720,
@@ -231,18 +233,18 @@
     },
     "exactPackageWorkerdCandidate": {
       "pullRequest": 722,
-      "head": "6def327c802622c3a9d5b1e5593f6e29fd24c24d",
-      "tree": "8d51269d235cb92719b498f8718ab83186a607bc",
+      "head": "d17bf1fea7b7ea4e742fd45fc99378ace9b457c7",
+      "tree": "1e190fdba841a15e22d15b8191afc6880165c421",
       "cloudCheck": {
-        "runId": 44777691141,
-        "jobId": 136431785245,
+        "runId": 44778941982,
+        "jobId": 136436179451,
         "status": "success"
       },
-      "fullCiRun": 44777691153,
+      "fullCiRun": 44778942092,
       "exactStagedModules": 2,
       "rollbackRuntimeFromProtectedR2": "Pending protected dispatch on admitted exact main",
       "operationalReadiness": false,
-      "independentSourceReview": "No unresolved actionable findings after credential isolation, canonical rollback host and exact finite-only RPC denial",
+      "independentSourceReview": "Functional head 6def327c reviewed, no unresolved actionable findings. d17bf1fe only lint identifier changes and earlier scoped lint execution.",
       "syntheticRollbackWorkerd": true
     },
     "finiteReceiverPrimary": {
@@ -266,7 +268,20 @@
       "tree": "96bc7ea356eb2076093ec6aeaa759d52e366cbec",
       "targetedSourcePackageRun": 44776291266,
       "fullCiRun": 44776291445,
-      "sourceReview": "No actionable findings"
+      "sourceReview": "No actionable findings",
+      "mergedCommit": "0d9ea61424c08ebbd89bb45b916b98f744f95cf3",
+      "fullCiResult": "success",
+      "exactTreeVerified": true
+    },
+    "currentProviderGate": {
+      "checkedAtUTC": "2026-11-20T16:55:41.847Z",
+      "dependencyProfile": "prebuilt-closed-publication",
+      "readStatus": 200,
+      "gate": "unknown",
+      "reason": "active_related_incident",
+      "incident": "0ocqieaifg7h",
+      "impactAttribution": "not-established",
+      "operationalReadiness": false
     }
   },
   "findings": {
@@ -284,7 +299,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Wait on exact current PR CI and integrate with tree readback. Run the exact-main protected R2 GET and Workerd rollback checks. Full native package success still requires real source authority/custody, private v2 emission and exact readback. Then prove one real signed synthetic notice delivery, review and native withdrawal, before PC-off.",
+    "next": "Finish exact R2 verification PR 722 CI, integrate and wait for exact-main staged gate, then dispatch protected read-only backup verification once. Qualify full native package/rollback and finish an actual finite signed review and removal lifecycle only once current prerequisites permit the trial.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -373,7 +388,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T16:55:00Z",
+  "updatedUTC": "2026-11-20T17:06:45Z",
   "latestCandidate": {
     "pullRequest": 720,
     "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
