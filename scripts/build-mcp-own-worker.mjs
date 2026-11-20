@@ -5,9 +5,9 @@ import {resolve} from 'node:path';
 import {writeFile,mkdir} from 'node:fs/promises';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
-export async function buildMcpOwnWorker({sourceRevision}={}){
+export async function buildMcpOwnWorker({sourceRevision,minify=false}={}){
  if(typeof sourceRevision!=='string'||!/^[0-9a-f]{40}$/.test(sourceRevision))throw Error('Explicit source revision required');
- const node=await buildMcpNodeProgram(),r=await build({entryPoints:[fileURLToPath(new URL('../worker/mcp-own/index.mjs',import.meta.url))],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,define:{'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify(node.program),'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(sourceRevision)}});
+ const node=await buildMcpNodeProgram(),r=await build({entryPoints:[fileURLToPath(new URL('../worker/mcp-own/index.mjs',import.meta.url))],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,minify,define:{'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify(node.program),'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(sourceRevision)}});
  const script=r.outputFiles[0].text;return Object.freeze({script,sourceRevision,programHash:node.programHash,workerHash:createHash('sha256').update(script).digest('hex')});
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){

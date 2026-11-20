@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {AFW_FIXED_WORKFLOWS,readFiniteTrialAfwWorkflows} from '../lib/mcp-fixed-terminal-workflows.mjs';
+import {AFW_FIXED_WORKFLOWS} from '../lib/mcp-fixed-terminal-workflows.mjs';
+import {readFiniteTrialAfwWorkflows} from '../lib/mcp-qa-finite-workflow-inventory.mjs';
 const confirmationId='afw-release-'+'6'.repeat(64),observerId='afw-qa-arm-'+'7'.repeat(64);
 function fixture(phase,{absent=false,nominalStatus='complete',observerStatus='complete'}={}){
  const rows=AFW_FIXED_WORKFLOWS.map(spec=>({id:spec.id,name:spec.name,script_name:spec.script,class_name:spec.className}));

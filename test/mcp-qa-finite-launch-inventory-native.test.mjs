@@ -21,7 +21,7 @@ test('default fixed launch context and caller DTO cannot mint absence',async()=>
 
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-import {consumePrivateFiniteLaunchInventory} from '../lib/mcp-fixed-terminal-workflows.mjs';
+import {consumePrivateFiniteLaunchInventory} from '../lib/mcp-qa-finite-workflow-inventory.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 import {readFile} from 'node:fs/promises';
 const entry=`
@@ -276,7 +276,7 @@ for(const boundary of ['provider','storage','snapshot'])test('expired active '+b
 });
 
 test('finite restoration inventory requires actual terminal launcher AND nominal, exact observer only',async()=>{
- const api=await import('../lib/mcp-fixed-terminal-workflows.mjs');
+ const api=await import('../lib/mcp-qa-finite-workflow-inventory.mjs');
  assert.equal(typeof api.readFiniteLaunchTrialAfwWorkflows,'function','finite restoration phase composition must exist');
  const {finiteLauncherInstanceId}=await import('../lib/mcp-qa-finite-launch-records.mjs');
  const intentId='phase-fixture',sourceRevision='b'.repeat(40),launcherId=finiteLauncherInstanceId({intentId,sourceRevision}),confirmationId='afw-release-'+'6'.repeat(64),observerId='observer-fixed';
@@ -298,7 +298,8 @@ test('finite restoration inventory requires actual terminal launcher AND nominal
  await assert.rejects(run('qa_restore','complete','complete','running'));
 });
 
-const {readFiniteAfwWorkflowInventory,AFW_FIXED_WORKFLOWS:fixedRegistry}=await import('../lib/mcp-fixed-terminal-workflows.mjs');
+const {readFiniteAfwWorkflowInventory}=await import('../lib/mcp-qa-finite-workflow-inventory.mjs');
+const {AFW_FIXED_WORKFLOWS:fixedRegistry}=await import('../lib/mcp-fixed-terminal-workflows.mjs');
 test('launch registry follows all account pages and reads only AFW workflow instances',async()=>{
  const calls=[],foreign=Array.from({length:99},(_,i)=>({id:'11111111-1111-4111-8111-'+String(i).padStart(12,'0'),name:'other-'+i,script_name:'another-worker',class_name:'Other'}));
  const owned=fixedRegistry.map(x=>({id:x.id,name:x.name,script_name:x.script,class_name:x.className}));

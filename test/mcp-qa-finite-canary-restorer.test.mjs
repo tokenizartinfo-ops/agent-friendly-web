@@ -3,7 +3,7 @@ import {finiteCleanupPolicy} from '../lib/mcp-finite-cleanup-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finiteRestorationFixture} from './fixtures/finite-restoration.mjs';
-import {readFiniteTrialAfwWorkflows} from '../lib/mcp-fixed-terminal-workflows.mjs';
+import {readFiniteTrialAfwWorkflows} from '../lib/mcp-qa-finite-workflow-inventory.mjs';
 const api=await import('../lib/mcp-qa-finite-canary-restorer.mjs').catch(()=>({}));
 const inventory=await import('../lib/mcp-finite-primary-inventory.mjs').catch(()=>({}));
 test('finite restore uses retained proof and exact closed bytes once; lost POST only reconciles',async()=>{

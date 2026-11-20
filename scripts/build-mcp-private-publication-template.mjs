@@ -9,7 +9,10 @@ import {RELEASE_TARGET} from '../lib/mcp-release-operator-policy.mjs';
 
 export async function buildMcpPublicPublicationPackage({sourceRevision}={}){
  const cwd=fileURLToPath(new URL('..',import.meta.url)),hash=x=>createHash('sha256').update(x).digest('hex');
- const before=await verifyMcpReleaseSource({cwd,sourceRevision}),own=await buildMcpOwnWorker({sourceRevision});
+ const before=await verifyMcpReleaseSource({cwd,sourceRevision});
+ // The publication wrapper embeds the own Worker as a string. Compact that
+ // build to keep the template and materialized script within the fixed cap.
+ const own=await buildMcpOwnWorker({sourceRevision,minify:true});
  const artifact={...own,sourceTree:before.tree,sourceCheck:'git-inputs-before-after-v1'};
  // Deliberately expired, non-existent base: NEVER upload/invoke this seed.
  const policy={operation:'publish',startAt:0,expiresAt:1,pins:{...RELEASE_TARGET,baseVersionId:'00000000-0000-4000-8000-000000000000'}};
