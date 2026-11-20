@@ -171,9 +171,25 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
    const mountedRaw={...rawFinalOptions,workers:rawFinalOptions.workers.map(worker=>worker.name==='qa-first-connection'?worker:{...worker,bindings:{...vars,AFW_FINITE_TRIAL_VERSION:{id:f.uploaded.id}}})},mounted=convertV4MiniflareOptions(mountedRaw);
    mark('mount-updateOptions-start');try{if(budget)await f.captureBudgetEpoch('before-first-connection-remount');await mf.setOptions(mounted);if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;}catch(error){f.mountFailed=true;console.info('T2 original mount error',JSON.stringify({name:error?.name,code:error?.code??null,issues:(error?.issues??[]).map(({path,code,expected})=>({path,code,expected})),frames:String(error?.stack??'').split('\n').filter(line=>/^\s+at\s/.test(line)).slice(0,5),workers:mounted.workers.map(worker=>({name:worker.name,keys:Object.keys(worker),bindings:Object.entries(worker.bindings??{}).map(([key,value])=>({key,type:typeof value,defined:value!==undefined}))}))}));throw error;}mark('mount-updateOptions-ready');const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');mark('mount-ready');
   };
-  f.adoptConnectionConfiguration=async({upstream=false}={})=>{
-   assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);const pointer=f.providerRegistry.pointer,version=f.providerRegistry.versions[pointer.versions[0].version_id],closed=f.providerRegistry.versions['55555555-5555-4555-8555-555555555555'];
-   assert.equal(version.id,pointer.versions[0].version_id);assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);const candidate=structuredClone(closed);candidate.id=version.id;candidate.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';assert.deepEqual(version,candidate);
+  f.adoptConnectionConfiguration=async({upstream=false,stage='connection'}={})=>{
+   assert(['connection','notices'].includes(stage));
+   const count=stage==='notices'?3:2;
+   assert.equal(f.uploads.length,count);assert.equal(f.activations.length,count);
+   const pointer=f.providerRegistry.pointer,version=f.providerRegistry.versions[pointer.versions[0].version_id],closed=f.providerRegistry.versions['55555555-5555-4555-8555-555555555555'];
+   assert.equal(version.id,pointer.versions[0].version_id);
+   assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);
+   const candidate=structuredClone(closed);candidate.id=version.id;
+   const binding=(config,name)=>config.bindings.find(b=>b.name===name);
+   binding(candidate,'AFW_DELEGATED_OAUTH_ENABLED').text='true';
+   if(stage==='notices'){
+    binding(candidate,'AFW_DOSSIER_MONITORING_OWNER_ENABLED').text='true';
+    const name='AFW_DOSSIER_MONITORING_OWNER_POLICY';
+    const recordedPolicy=binding(version,name).text,policy=JSON.parse(recordedPolicy);
+    assert.deepEqual(Object.keys(policy).sort(),['clientId','expiresAt','grantId','projectId','startAt']);
+    assert(Number.isSafeInteger(policy.startAt)&&Number.isSafeInteger(policy.expiresAt)&&policy.startAt<policy.expiresAt);
+    binding(candidate,name).text=recordedPolicy;
+   }
+   assert.deepEqual(version,candidate);
    const vars=Object.fromEntries(version.bindings.filter(b=>b.type==='plain_text').map(b=>[b.name,b.text]));const mountedRaw={...rawFinalOptions,...upstream?{upstream:'https://delegated-canary.agentfriendlyweb.dev'}:{},workers:rawFinalOptions.workers.map(worker=>worker.name==='qa-first-connection'?worker:{...worker,bindings:{...vars,AFW_FINITE_TRIAL_VERSION:{id:version.id}}})},mounted=convertV4MiniflareOptions(mountedRaw);f.transportNormalized=upstream;if(upstream)assert.equal(mounted.upstream,'https://delegated-canary.agentfriendlyweb.dev');
    const originalWorker=rawFinalOptions.workers.find(worker=>worker.name==='canary-first-connection');assert.equal(sha(originalWorker.script),f.firstConnectionBuild.M.sha256,'actual script input remains initial M');if(budget)await f.captureBudgetEpoch('before-connection-configuration-remount');await mf.setOptions(mounted);if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');
   };
@@ -289,7 +305,9 @@ export function createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,crea
    }
    else if(firstConnection&&f.uploads.length>1&&req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments'){
     assert.equal(req.method,'POST');const body=await req.text(),data=JSON.parse(body);assert.equal(data.versions[0].percentage,100);assert.ok(f.providerRegistry.versions[data.versions[0].version_id]);
-    f.activations.push({body,data});result={id:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',...data};f.providerRegistry.pointer=structuredClone(result);
+    const id=f.activations.length===1?'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb':'dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+    assert.notEqual(id,f.providerRegistry.pointer.id);
+    f.activations.push({body,data});result={id,...data};f.providerRegistry.pointer=structuredClone(result);
    }
    else if(firstConnection&&f.uploads.length>1&&req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments?per_page=1')result={deployments:[structuredClone(f.providerRegistry.pointer)]};
    else if(firstConnection&&f.uploads.length>1&&req.url.includes('/workers/workers/agent-friendly-web-delegated-canary/versions/')&&f.providerRegistry.versions[new URL(req.url).pathname.split('/').at(-1)])result=structuredClone(f.providerRegistry.versions[new URL(req.url).pathname.split('/').at(-1)]);
@@ -309,8 +327,8 @@ export function createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,crea
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments?per_page=1'){f.pointerReads++;if(f.phaseDrift&&++f.phaseObservation===2){if(f.phaseDrift==='schema')await f.db.prepare('DROP TABLE finite_preparation_issuer_fences').run();if(f.phaseDrift==='revision')await f.db.prepare('UPDATE site_projects SET revision=revision+1').run();if(f.phaseDrift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN drift'").run();if(f.phaseDrift==='configuration')f.phaseFault='configuration';if(f.phaseDrift==='original-open')f.ownerFault='original-open';if(f.phaseDrift==='pointer')f.phaseCurrent.receipt.deploymentId='11111111-1111-4111-8111-111111111111';if(f.phaseDrift==='grant')await f.db.prepare("UPDATE delegated_access_grants SET revoked_at=?").bind(new Date().toISOString()).run();if(f.phaseDrift==='exchange')await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(f.exchangeDrift.exchangedAt,f.exchangeDrift.grantId).run();}if(f.phaseCurrent)result={deployments:[{id:f.phaseCurrent.receipt.deploymentId,strategy:'percentage',versions:[{version_id:f.phaseCurrent.receipt.versionId,percentage:100}]}]};else if(f.pointerMode==='restored')result={deployments:[f.restored]};else if(f.pointerMode==='candidate'||f.pointerMode==='foreign')result={deployments:[{id:f.pointerMode==='foreign'?'99999999-9999-4999-8999-999999999999':'66666666-6666-4666-8666-666666666666',strategy:'percentage',versions:[{version_id:f.uploaded.id,percentage:100}],annotations:{'workers/message':f.activationAnnotation}}]};else result={deployments:[{id:mode==='baseline-drift'||mode==='pointer-drift'&&f.uploads.length||(f.gateMode==='canary-pointer'&&f.gateReached||f.gateMode==='final-pointer'&&f.pointerReads>=5)?'99999999-9999-4999-8999-999999999999':x.pin.deploymentId,strategy:'percentage',versions:[{version_id:x.pin.id,percentage:100}]}]};}
    else if(req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions?deploy=false'){
     assert.equal(req.method,'POST');assert.equal(req.headers.get('authorization'),'Bearer synthetic-native-publisher');assert.match(req.headers.get('content-type'),/^application\/json/);
-    const body=await req.text(),data=JSON.parse(body);f.uploads.push({body,data});f.uploaded={...data,id:firstConnection&&f.uploads.length>1?'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa':'55555555-5555-4555-8555-555555555555',urls:[],containers:data.containers.map(c=>({...c,name:'agent-friendly-web-delegated-canary-afwowneventnode'})),bindings:data.bindings.map(b=>b.type==='inherit'?{name:b.name,type:'secret_text'}:b)};
-    if(firstConnection)f.providerRegistry.versions[f.uploaded.id]=structuredClone(f.uploaded);
+    const body=await req.text(),data=JSON.parse(body);f.uploads.push({body,data});f.uploaded={...data,id:firstConnection&&f.uploads.length>1?(f.uploads.length===2?'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa':'cccccccc-cccc-4ccc-8ccc-cccccccccccc'):'55555555-5555-4555-8555-555555555555',urls:[],containers:data.containers.map(c=>({...c,name:'agent-friendly-web-delegated-canary-afwowneventnode'})),bindings:data.bindings.map(b=>b.type==='inherit'?{name:b.name,type:'secret_text'}:b)};
+    if(firstConnection){assert(!f.providerRegistry.versions[f.uploaded.id],'synthetic publication requires a new version');f.providerRegistry.versions[f.uploaded.id]=structuredClone(f.uploaded);}
     result={id:mode==='ack-baseline'?x.pin.id:mode==='ack-qa'?UUID:mode==='ack-latest'?'latest':mode==='ack-invalid'?'not-a-uuid':f.uploaded.id};
     if(mode==='lost-http-ack')throw Error('SYN provider ACK lost after version creation');
     if(mode==='held-http'){f.held='fetch';await new Promise(resolve=>{f.release=resolve;});}

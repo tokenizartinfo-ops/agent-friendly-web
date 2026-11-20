@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
 import {initialEntryHarness} from './finite-initial-entry-world.mjs';
-import {plain,approveFirstConnection,readFirstConnectionProbe} from './finite-first-connection-publication.mjs';
+import {plain,approveFirstConnection,prepareNoticesStage,readFirstConnectionProbe} from './finite-first-connection-publication.mjs';
 import {sealFiniteOwnerIssuerProvenanceRecord as seal} from '../../lib/mcp-qa-finite-owner-issuer-provenance-records.mjs';
 import {sealFinitePreparationIssuerRecord as issuerSeal} from '../../lib/mcp-qa-finite-preparation-issuer-records.mjs';
 export const O='https://delegated-canary.agentfriendlyweb.dev';
@@ -151,9 +151,11 @@ export async function downstreamOwnerReference(f,response,prepared,{cleanupParti
  if(f.cleanupQualification)f.sdkAfterExchange=await observeCleanupSdkExchange(f,token);
  const client=new Client({name:'SYN-owner-reference',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
  try{await client.connect(new StreamableHTTPClientTransport(new URL(f.source.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host}},fetch:(url,options)=>f.mf.dispatchFetch(String(url),options)}));const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,f.source.project.projectId);}finally{await client.close();}
- const screen=await f.call('/monitoring',{headers:prepared.headers});assert.equal(screen.status,200);const html=await screen.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1],cookie=screen.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
+ const {headers:noticeHeaders}=await prepareNoticesStage(f,prepared.headers);
+ f.kv=await f.mf.getKVNamespace('OAUTH_KV','canary-first-connection');
+ const screen=await f.call('/monitoring',{headers:noticeHeaders});assert.equal(screen.status,200);const html=await screen.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1],cookie=screen.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
  if(cleanupPartial)await f.stub.ownerCleanupFault('notice-before-link');
- const posted=await f.call('/monitoring/grant',{method:'POST',headers:{...prepared.headers,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.choice.cookie+'; '+cookie},body:new URLSearchParams({handle})});if(cleanupPartial)assert.notEqual(posted.status,200);else assert.equal(posted.status,200);await posted.body?.cancel();
+ const posted=await f.call('/monitoring/grant',{method:'POST',headers:{...noticeHeaders,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:noticeHeaders.Cookie+'; '+cookie},body:new URLSearchParams({handle})});if(cleanupPartial)assert.notEqual(posted.status,200);else assert.equal(posted.status,200);await posted.body?.cancel();
  const rows=await plain(f.stub.snapshot()),root=JSON.parse(rows.find(([key])=>key.endsWith(':root')&&key.startsWith('afw.finite-owner-issuer-provenance.v1:'))[1]);assert.equal(rows.some(([k])=>k==='connection-preparation:'+root.preconnectionId+':notice'),!cleanupPartial);
 }
 export async function waitReferenceState(f,predicate){

@@ -349,6 +349,25 @@ export async function approveFirstConnection(f,{token=null}={}){
  f.choice={handle,projectRef,cookie};const postToken=token??await f.enrollmentToken(source);f.choicePostStarted=performance.now();
  return f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':postToken,Cookie:cookie},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
 }
+// Follow the native owner choice that enables the separate notice consent form.
+export async function prepareNoticesStage(f,headers){
+ const path='/connections/finite-prepare';
+ const screen=await f.call(path,{headers});
+ assert.equal(screen.status,200,'native notices preparation form');
+ const html=await screen.text(),cookie=screen.headers.get('set-cookie')?.split(';')[0];
+ const handle=/name="handle" value="([a-f0-9]{64})"/.exec(html)?.[1],projectRef=/name="projectRef" value="([a-f0-9]{64})"/.exec(html)?.[1];
+ assert.match(html,/Preparar configuración de avisos/);
+ assert(handle&&projectRef&&cookie&&cookie!==headers.Cookie);
+ const stageHeaders={...headers,Cookie:cookie};
+ const approved=await f.call(path,{method:'POST',headers:{...stageHeaders,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
+ assert.equal(approved.status,200,'native notices publication receipt');
+ await approved.body?.cancel();
+ await f.adoptConnectionConfiguration({upstream:true,stage:'notices'});
+ const context=await plain(f.stub.firstConnectionContext());
+ assert.equal(context.source?.phase,'notice_consent','adopt actual notices publication');
+ return {headers:stageHeaders,context};
+}
+
 export async function setFirstConnectionFault(f,fault){
  assert.equal(f.mode,'first-connection-publication');assert(['none','qa-absent','version','actor','version-drift','oauth-open','notices-open'].includes(fault));
  const response=await f.negative.fetch(origin+'/_fixture/fault',{method:'POST',body:fault});assert.equal(response.status,204);
