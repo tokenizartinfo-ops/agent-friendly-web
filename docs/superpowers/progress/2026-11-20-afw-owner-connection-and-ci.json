@@ -341,6 +341,35 @@
         "receiver": 4
       },
       "publishedVersionUrls": 0
+    },
+    "protectedR2Renewed": {
+      "runId": 44792649095,
+      "jobId": 136484043462,
+      "secretUpdatedAtUTC": "2026-11-20T18:25:03Z",
+      "temporarySigningPermission": "Read-only, AFW afw-release-backups bucket only",
+      "signedOperation": "GetObject, exact historical ZIP",
+      "signingPermissionExpiresUTC": "2026-11-20T19:53:53Z",
+      "signedUrlTtlSeconds": 4500,
+      "receipt": {
+        "purpose": "afw.finite-native-private-draft.v1",
+        "sourceRevision": "ace9d41e24b5221a1bea27cd69355e2b20f8d1e5",
+        "sourceTree": "7f79b7ec95b55551e94a8394ed5157ada13e521a",
+        "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+        "moduleCount": 5,
+        "nativeMounts": {
+          "current": {
+            "exactModuleCount": 2,
+            "operationalReadiness": false
+          },
+          "rollback": {
+            "exactModuleCount": 3,
+            "deniedRouteCount": 10,
+            "operationalReadiness": false
+          }
+        },
+        "completePackage": false,
+        "operationalReadiness": false
+      }
     }
   },
   "findings": {
@@ -358,7 +387,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Renew only the private, signing-authorized GET for the exact immutable historical R2 ZIP in the existing afw-qa-cloud-closed-rollback Actions secret AFW_R2_BACKUPS_READ_URL. The latest protected run reached the signing expiry guard without an HTTP request. Direct R2 object is intact and exact. Use a new exact authorized read only after the credential is replaced, without consuming an existing live intent. Then complete qualified private v2 package, recoverable restoration, and one true same-notice review and native withdrawal before PC-off.",
+    "next": "Protected Actions has verified exact-source recovery compatibility from the actual R2 historical ZIP. The compiler still emits a private staged proof only. Complete the qualified deployable v2 archive and independent reversal before an authorized signed same-notice review and native withdrawal trial. Keep AFW and Atelier resource effects separate. Do not repeat the protected scope check after link expiration without renewed need.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -447,7 +476,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T17:51:27Z",
+  "updatedUTC": "2026-11-20T18:27:29Z",
   "latestCandidate": {
     "pullRequest": 720,
     "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
