@@ -61,7 +61,37 @@
       "job": 136286487346,
       "scope": "Original cleanup producer in synthetic Workerd; actual product routes, synthetic provider.",
       "result": "Reached recordOwnerReference after the notices preparation, active configuration adoption, native monitoring GET and consent POST had completed.",
-      "laterFailure": "The canary remount discarded the in-memory OAuth reference observer. The original KV budget assertion had no counts."
+      "earlierRevisionFailure": "The canary remount discarded the in-memory OAuth reference observer. The original KV budget assertion had no counts."
+    },
+    "originalCheckpointCleanup": {
+      "scope": "Native synthetic Workerd with a modeled provider in GitHub Actions",
+      "result": "3/3 pass; original alarm restores the produced current cycle at real C0",
+      "runs": [
+        {
+          "head": "3ff0ad9b45bb96280bb5bade6f2b69fbacddd268",
+          "run": 44736711258,
+          "job": 136289820303
+        },
+        {
+          "head": "237268ec071baa6e6fd3215d9c7ef6ddfa69dd5d",
+          "run": 44738870631,
+          "job": 136297102966
+        }
+      ]
+    },
+    "nativeEndToEnd": {
+      "head": "237268ec071baa6e6fd3215d9c7ef6ddfa69dd5d",
+      "run": 44738870631,
+      "job": 136297102424,
+      "test": "T3 same initial bytes produce connection and downstream",
+      "result": "pass",
+      "scope": "Synthetic connection, OAuth, MCP read, separate notices preparation and consent and exact NoticeLink, then explicit final consent form. Original deploys and created records are synthetic."
+    },
+    "additionalLocalFixtureChecks": {
+      "nativeConduit": "Three targeted cases passed across isolated runs: header rewriting, physical cancellation after real receiver signal, and 413 from both boundaries.",
+      "lostChoiceAck": "Pass; actual commit contains matching source, ticket and project ref, without handle or approval admission.",
+      "exactInitialOwnerSelector": "Pass; native binding and modeled schema were brought current.",
+      "retainedOriginalApproval": "Pass on local experiment; after a lost atomic ACK the same payload fails closed. Change pending on candidate."
     }
   },
   "findings": {
@@ -79,7 +109,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Complete the original cleanup run and reconcile the remaining failing contract fixtures with the required notices state. Verify complete package and real-copy rollback evidence after the synthetic stage gates. Full CI, private native package and live cloud same-notice receive/review/withdrawal are still required before PC-off.",
+    "next": "The principal synthetic journey and native timed recovery passed. Repair remaining specialist fixtures and gates, then qualify the complete private R2 package and reversal. Do not activate or launch live with the PR draft and incomplete package. A live run still requires same-notice receipt, review, and native withdrawal proof.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -161,44 +191,67 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T12:34:53Z",
+  "updatedUTC": "2026-11-20T13:04:35Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "3ff0ad9b45bb96280bb5bade6f2b69fbacddd268",
-    "tree": "bf91ff011dba19e979024e011612cd58506f746c",
+    "head": "237268ec071baa6e6fd3215d9c7ef6ddfa69dd5d",
+    "tree": "6ec0ea10a23dd7e93533e221f2d31212c9926174",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-    "changes": "Test fixtures only. Exercise the separate notices stage and preserve real OAuth measurement before remount; compare durable OAuth records after.",
+    "changes": "Fixture corrections only; live gate conditions unchanged.",
+    "ci": {
+      "run": 44738870631,
+      "status": "not_green",
+      "nativeJourneyJob": 136297102424,
+      "originalCleanupJob": 136297102966,
+      "remainingFailingShards": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "sourcePackageChecks": {
+      "run": 44738870636,
+      "status": "passed_staging"
+    },
     "previousFixtureRepair": {
       "pullRequest": 720,
-      "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
-      "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+      "head": "3ff0ad9b45bb96280bb5bade6f2b69fbacddd268",
+      "tree": "bf91ff011dba19e979024e011612cd58506f746c",
       "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-      "onlyFixtureChanges": true,
-      "workerdReview": {
-        "passed": 2,
-        "failed": 0
-      },
-      "oauthObservation": {
-        "exactHookCheck": "pass",
-        "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+      "changes": "Test fixtures only. Exercise the separate notices stage and preserve real OAuth measurement before remount; compare durable OAuth records after.",
+      "previousFixtureRepair": {
+        "pullRequest": 720,
+        "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
+        "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+        "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+        "onlyFixtureChanges": true,
+        "workerdReview": {
+          "passed": 2,
+          "failed": 0
+        },
+        "oauthObservation": {
+          "exactHookCheck": "pass",
+          "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+        },
+        "ci": {
+          "run": 44733489856,
+          "status": "in_progress_at_checkpoint"
+        },
+        "sourcePackageChecks": {
+          "run": 44733489786,
+          "status": "in_progress_at_checkpoint"
+        }
       },
       "ci": {
-        "run": 44733489856,
+        "run": 44736711258,
+        "originalCleanupJob": 136289820303,
         "status": "in_progress_at_checkpoint"
       },
       "sourcePackageChecks": {
-        "run": 44733489786,
-        "status": "in_progress_at_checkpoint"
+        "run": 44736711241,
+        "status": "passed_staging"
       }
-    },
-    "ci": {
-      "run": 44736711258,
-      "originalCleanupJob": 136289820303,
-      "status": "in_progress_at_checkpoint"
-    },
-    "sourcePackageChecks": {
-      "run": 44736711241,
-      "status": "passed_staging"
     }
   }
 }
