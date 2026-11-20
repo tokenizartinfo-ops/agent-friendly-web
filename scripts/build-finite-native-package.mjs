@@ -207,13 +207,21 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const fromR2=mode==='--verify-r2-draft'||emit,privateDraft=mode==='--verify-private-draft'||fromR2;
  if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
+ // Keep the signed URLs in the CLI alone. Git, Python and Workerd may
+ // inherit the process environment, and none needs access to R2.
+ const backupReadUrl=process.env.AFW_R2_BACKUPS_READ_URL;
+ const bundleWriteUrl=process.env.AFW_R2_BUNDLE_WRITE_URL;
+ const bundleReadUrl=process.env.AFW_R2_BUNDLE_READ_URL;
+ delete process.env.AFW_R2_BACKUPS_READ_URL;
+ delete process.env.AFW_R2_BUNDLE_WRITE_URL;
+ delete process.env.AFW_R2_BUNDLE_READ_URL;
  if(privateDraft){
   const result=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
-   await readFiniteR2Archive({credential:process.env.AFW_R2_BACKUPS_READ_URL,signal:AbortSignal.timeout(15000)})
+   await readFiniteR2Archive({credential:backupReadUrl,signal:AbortSignal.timeout(15000)})
   ).body:()=>process.stdin,{emit});
   const receipt=emit?{...result.verified,privateR2Bundle:await storeFiniteR2Bundle({
-   sourceRevision,bytes:result.bundle,writeCredential:process.env.AFW_R2_BUNDLE_WRITE_URL,
-   readCredential:process.env.AFW_R2_BUNDLE_READ_URL,signal:AbortSignal.timeout(30000)
+   sourceRevision,bytes:result.bundle,writeCredential:bundleWriteUrl,
+   readCredential:bundleReadUrl,signal:AbortSignal.timeout(30000)
   }),authorizesDeployment:false}:result;
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
