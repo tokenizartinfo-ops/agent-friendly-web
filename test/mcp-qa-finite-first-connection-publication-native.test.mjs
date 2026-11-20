@@ -278,9 +278,21 @@ test('T3 source and rollback must be recoverable',{timeout:120000},async t=>{
  const form=await actualChoice(f,token);assert(form.handle);const p=await readFirstConnectionProbe(f);assert.equal(ticketUses(p).length,0);assert.equal(effectRows(p).length,0);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
 });
 test('T3 original deadline fences each native boundary: shorter signed Access before TicketUse',{timeout:120000},async t=>{
- const f=await fixture(t),source=(await plain(f.stub.capsuleFacts())).material.ownerSelection,expiresAt=Math.floor((Date.now()+5000)/1000),token=await f.firstConnectionToken(source,{expiresAt});assert(Date.now()<expiresAt*1000);
- await f.stub.firstConnectionConfigure('access-expiry-held');const pending=f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token}});const state=await waitFirstState(f,s=>s.jwkFetched&&s.workHeld,'actual signed verification followed by retained factual read');assert.equal(state.workSettled,undefined);
- await new Promise(resolve=>setTimeout(resolve,Math.max(1,expiresAt*1000-Date.now()+1)));await f.stub.firstConnectionRelease('work');const response=await pending;assert.equal(response.status,401,'current signed expiry crosses before ticket/admission');await response.body?.cancel();await firstSettled(f);const p=await readFirstConnectionProbe(f);assert.equal(ticketUses(p).length,0);assert.equal(effectRows(p).length,0);assert.equal(f.uploads.length,1);
+ const f=await fixture(t),source=(await plain(f.stub.capsuleFacts())).material.ownerSelection;
+ await f.stub.firstConnectionConfigure('access-expiry-held');
+ const expiresAt=Math.floor((Date.now()+6000)/1000),token=await f.firstConnectionToken(source,{expiresAt});
+ const pending=f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token}});
+ const state=await waitFirstState(f,s=>s.jwkFetched&&s.workHeld,'actual signed verification followed by retained factual read');
+ assert.equal(state.workSettled,undefined);assert(Date.now()<expiresAt*1000,'work entered before the signed expiry');
+ await new Promise(resolve=>setTimeout(resolve,Math.max(1,expiresAt*1000-Date.now()+1)));
+ await f.stub.firstConnectionRelease('work');
+ const response=await pending;
+ assert([401,503].includes(response.status),'the verified Access window ended before admission');
+ assert.deepEqual(await response.json(),{status:'admin_pending',mayRetry:false,operationalReadiness:false});
+ await firstSettled(f);
+ const p=await readFirstConnectionProbe(f);
+ assert(!p.rows.some(([key])=>key.startsWith('owner-ticket:')));
+ assert.equal(effectRows(p).length,0);assert.equal(f.uploads.length,1);
 });
 test('T3 admission cannot cross lineage or resume',{timeout:120000},async t=>{
  const {f,probe}=await failureCase(t,'upload-lost');await firstSettled(f);const before=probe.rows,source=(await plain(f.stub.capsuleFacts())).material.ownerSelection,token=await f.firstConnectionToken(source);await f.stub.firstConnectionRestore();
@@ -297,7 +309,13 @@ test('T3 resealed completed owner baseline physical and receipt facts remain cor
  const variants=['owner','source','context','baseline','preconnection','module','configuration','version','deployment','writer-head','receipt-links','receipt-time'];
  for(const variant of variants){
   assert.equal((await plain(f.stub.firstConnectionContext())).source?.phase,'read_consent','valid produced baseline before '+variant);
-  assert.deepEqual(await plain(f.stub.firstConnectionCorruptCompleted(variant)),{codecRoundtrip:true,journalValid:true},variant);
+  const {modeledForeignVersionId,...qualification}=await plain(f.stub.firstConnectionCorruptCompleted(variant));
+  assert.deepEqual(qualification,{codecRoundtrip:true,journalValid:true},variant);
+  if(variant==='version'){
+   const {pointer,versions}=f.providerRegistry,current=versions[pointer.versions[0].version_id];
+   assert(modeledForeignVersionId&&!versions[modeledForeignVersionId]);
+   versions[modeledForeignVersionId]={...structuredClone(current),id:modeledForeignVersionId};
+  }
 
   const observedBefore=(await plain(f.stub.firstConnectionProbe())).observation.length;
   const r=await plain(f.stub.firstConnectionContext());assert.equal(r.status,'unavailable',variant+' must fail current correlation after valid codecs/journals');
@@ -307,6 +325,7 @@ test('T3 resealed completed owner baseline physical and receipt facts remain cor
 
   const probe=await readFirstConnectionProbe(f),observations=probe.native.observation.filter(v=>v.kind==='public-reader-rejected');assert(observations.length,variant);console.info('T3 completed correlator',JSON.stringify({variant,codecRoundtrip:true,journalValid:true,frames:observations.at(-1).frames}));
   assert.equal(probe.providerRequests.filter(r=>r.method==='POST').length,posts,'no next provider effect for '+variant);
+  if(modeledForeignVersionId)delete f.providerRegistry.versions[modeledForeignVersionId];
   await f.stub.firstConnectionCorruptCompleted('restore');assert.deepEqual((await readFirstConnectionProbe(f)).rows,baseline.rows,'foreign/original rows preserved for '+variant);
  }
 });

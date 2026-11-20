@@ -354,7 +354,9 @@ export async function issueNotice(f){
   const stageHandle='9'.repeat(64),predecessor=f.phaseCurrent;
   const modeled=await plain(f.stub.seedNoticePublication(predecessor.receipt,stageHandle));
   f.noticePredecessor=predecessor;f.phaseCurrent=modeled;
-  const adopted=await f.mf.dispatchFetch(f.source.origin+'/fixture/notice-publication',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({versionId:modeled.receipt.versionId})});
+  const noticeBindings=new Set(['AFW_DELEGATED_OAUTH_ENABLED','AFW_DOSSIER_MONITORING_OWNER_ENABLED','AFW_DOSSIER_MONITORING_OWNER_POLICY','AFW_OAUTH_PILOT_CLIENT_ID','AFW_OAUTH_PILOT_PROJECT_ID']);
+  const bindings=Object.fromEntries(modeled.configuration.bindings.filter(b=>b.type==='plain_text'&&noticeBindings.has(b.name)).map(b=>[b.name,b.text]));
+  const adopted=await f.mf.dispatchFetch(f.source.origin+'/fixture/notice-publication',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({versionId:modeled.receipt.versionId,bindings})});
   assert.equal(adopted.status,204);
   const prepared=await plain(f.stub.sdkReadCurrent());
   assert.equal(prepared.source?.phase,'notice_consent',JSON.stringify(prepared));

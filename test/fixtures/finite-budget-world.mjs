@@ -368,7 +368,7 @@ function budgetScopeSeams(source,path){
   replace(n,n+"__afwBudget.root(lease,'setup',__afwBudget.deadline(lease));");
  }
  if(path==='lib/mcp-qa-finite-initial-cleanup.mjs'){
-  const n='parent=clock(Date.now()+30000,holders);const lease=parent.lease;';
+  const n='parent=createFiniteInitialLease(entered+30000,bootstrapCustody.endAt,holders,fail);const lease=parent.lease;';
   replace(n,n+"__afwBudget.root(lease,'cleanup_before_restore',__afwBudget.deadline(lease));");
  }
  if(path==='lib/mcp-qa-finite-owner-preparation.mjs'){

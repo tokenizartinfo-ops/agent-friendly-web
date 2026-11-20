@@ -420,7 +420,7 @@ async function coldSourceExpressions(kind, controls=''){
  const ts=(await import('typescript')).default;
  const {transformBudgetPreparedSource}=await import('./fixtures/finite-budget-world.mjs');
  const [file,pin]=kind==='initial'
-  ?['lib/mcp-qa-finite-initial-cleanup.mjs','f0e8a2720987d13d0011c437abd3c5ef7d1452493b3c0e67b5da5d319e474de5']
+  ?['lib/mcp-qa-finite-initial-cleanup.mjs','67daafc95eb05a4243832fa39688417ee556f0791e2778ff24b14bd491732ba0']
   :['lib/mcp-qa-finite-owner-cleanup-journal.mjs','e40290e120266cd57bceb6faa5ea3c871ddd8aa00c9d02e98094aaf11dd4c888'];
  const raw=await readFile(file,'utf8');
  assert.equal(createHash('sha256').update(raw).digest('hex'),pin);
