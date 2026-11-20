@@ -32,7 +32,16 @@ function fixtures(){
  rollbackConfig.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];
  for(const binding of rollbackConfig.bindings)if(binding.type==='plain_text'&&binding.name.endsWith('_ENABLED'))binding.text='false';
  const context={purpose:'afw.finite-policy-context.v1',intentId:'intent-1',sourceRevision:M,seedHash:H,preparationHash:contextPreparation.preparationHash,selectionHash:contextSelection.selectionHash,bindingHash:domain('Binding',contextBinding),T0,C0:T0+240000,C1:T0+420000,ownerPreparation:contextPreparation,baselineProjectRevision:1,goal:'discovery',saveIdempotencyKey:U,legacy,policies:{AFW_DOSSIER_EVENTS_POLICY:'synthetic',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:'synthetic',AFW_DOSSIER_RETIREMENT_POLICY:'synthetic',AFW_DOSSIER_SUCCESSOR_POLICY:'synthetic',AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'project'},baseline:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:config},rollback:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:rollbackConfig},expectedFull:{activationHash:H,restorationHash:H,bindingsHash:H}};
- return {preparation,selection,binding,ticket,identity,send,ack,preconnection,receipt,context,contextSelection,contextBinding};
+ const source={
+  sourceRevision:M,actorId:H,qaNamespaceId:'c'.repeat(32),qaVersionId:U,
+  origin:'https://delegated-canary.agentfriendlyweb.dev',phase:'closed_ui',access:{teamDomain:'synthetic.cloudflareaccess.com',audience:'owner'},
+  clientId:'client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',project,goal:preparation.goal,programContext:preparation.programContext,
+  initialBaseline:{versionId:U,deploymentId:U,moduleHash:H,configurationHash:H,bindingsHash:H},
+  currentPublication:{stage:null,versionId:U,deploymentId:U,receiptHash:null},window:{startedAt:0,expiresAt:ticket.expiresAt},
+ };
+ const snapshot=seal('OwnerSourceSnapshot',{preconnectionId:ticket.preconnectionId,initialTicketHash:ticket.ticketHash,source},'sourceHash');
+ const initialChoice={snapshot,project:{projectRef:ticket.projectRef,preconnectionId:ticket.preconnectionId,subjectHash:ticket.subjectHash,sourceRevision:M,projectId:project.projectId,revision:project.revision,issuedAt:ticket.createdAt,expiresAt:ticket.expiresAt},ticket};
+ return {preparation,selection,binding,ticket,identity,send,ack,preconnection,receipt,context,contextSelection,contextBinding,initialChoice};
 }
 export class FinitePreparationFixture extends DurableObject{
  async fetch(request){

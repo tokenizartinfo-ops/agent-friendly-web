@@ -18,6 +18,18 @@ test('selection_cas_one_winner',async t=>{
  assert.equal(selected.selection.selectionHash,r.find(x=>x.status==='recorded').recordHash);
  assert.ok((await call('rows')).length>=3);
 });
+test('initial choice rolls back all new records when its project reference conflicts',async t=>{
+ const {call,f}=await native(t),choice=f.initialChoice;
+ const conflict={...choice.project,projectId:'other-synthetic-project'};
+ assert.equal((await call('putProjectRef',conflict)).result.status,'recorded');
+ const before=await call('rows');
+ const denied=await call('putInitialChoice',choice);
+ assert.equal(denied.rejected,true);
+ assert.equal(denied.committed,false);
+ assert(denied.assertions>4,'conflict is reached inside the transaction');
+ assert.deepEqual(await call('rows'),before);
+});
+
 test('preparation_cannot_bind_second_intent',async t=>{
  const {call,f}=await native(t);
  assert.equal((await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null},{now:15})).result.status,'recorded');
