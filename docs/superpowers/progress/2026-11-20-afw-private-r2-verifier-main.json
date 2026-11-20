@@ -1,6 +1,6 @@
 {
   "phase": "AFW private R2 verifier accepted on main; complete native trial blocked",
-  "updatedAtUTC": "2026-11-20T01:53:24.774Z",
+  "updatedAtUTC": "2026-11-20T01:54:48.602Z",
   "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-private-r2-verifier-integration.json",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "verifierIntegration": {
@@ -19,7 +19,11 @@
     "mainVerifierRun": 44656726035,
     "mainVerifierJob": 136024660544,
     "mainVerifierConclusion": "success",
-    "privateLocatorPublicationJob": "skipped on push"
+    "privateLocatorPublicationJob": "skipped on push",
+    "mainVerifierTests": {
+      "passed": 114,
+      "failed": 0
+    }
   },
   "privateDraftReadback": {
     "purpose": "afw.finite-native-private-draft.v1",
@@ -97,5 +101,20 @@
   "sameNoticeReviewed": false,
   "nativeWithdrawalObserved": false,
   "operationalReadiness": false,
-  "ownerActionNeededNow": false
+  "ownerActionNeededNow": false,
+  "canaryCallbackDonorReadback": {
+    "checkedAtUTC": "2026-11-20T01:54:18.876Z",
+    "sameVersion": true,
+    "matchingBindings": 1,
+    "exactSecretDescriptor": true,
+    "version": "7d4ec845-c1d0-4006-824d-d69e98c84221",
+    "actualSecretRead": false
+  },
+  "nativePreparationDiagnostic": {
+    "synthetic": true,
+    "status": "admin_pending",
+    "previousStage": "canary closed baseline read",
+    "donorReached": false,
+    "uploadTransactions": 0
+  }
 }
