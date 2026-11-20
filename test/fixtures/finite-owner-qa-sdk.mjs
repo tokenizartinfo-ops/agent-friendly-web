@@ -152,15 +152,19 @@ export async function seedFiniteOwnerSdkClient(mf,source){
 /** Fixed read-only observation in the same genuine request scope, used only in
  * hostile fixtures. No witness/root/source result leaves the lexical stack. */
 export function instrumentFiniteOwnerQaSdk(source){
- const noticeStart=source.indexOf('/** UNMOUNTED fixed GET.'),noticeSuffix=noticeStart<0?'':source.slice(noticeStart);if(noticeStart>=0)source=source.slice(0,noticeStart);
+ const oauthStart=source.indexOf('export async function handlePrivateQaFiniteOwnerOAuth(');
+ const noticeStart=source.indexOf('/** UNMOUNTED fixed GET.');
+ if(oauthStart<0||noticeStart<=oauthStart)throw Error('SYN OAuth observation scope changed');
+ const beforeOAuth=source.slice(0,oauthStart),afterOAuth=source.slice(noticeStart);
+ source=source.slice(oauthStart,noticeStart);
  const once=(needle,replacement)=>{if(source.split(needle).length!==2)throw Error('SYN observation point changed');source=source.replace(needle,replacement);};
  once("onAbort=()=>clock.close();originalLease.signal.addEventListener('abort',onAbort,{once:true});","globalThis.__d02QaSignals={entryAborted:originalLease.signal.aborted,abortObserved:false,sdkSettledAborted:null};const signalSeen=globalThis.__d02QaSignals;onAbort=()=>{signalSeen.abortObserved=true;clock.close();};originalLease.signal.addEventListener('abort',onAbort,{once:true});");
- once("actualPromise=retain(Promise.resolve().then(()=>{check();return call();}));position='sdk-pending';","actualPromise=retain(Promise.resolve().then(()=>{check();return call();}).then(value=>{signalSeen.sdkSettledAborted=originalLease.signal.aborted;return value;}));position='sdk-pending';");
+ once("actualPromise=retain(Promise.resolve().then(()=>{check();return call(send);}));position='sdk-pending';","actualPromise=retain(Promise.resolve().then(()=>{check();return call(send);}).then(value=>{signalSeen.sdkSettledAborted=originalLease.signal.aborted;return value;}));position='sdk-pending';");
  const probe=kind=>`let strictUnavailable=false;try{await readPrivateQaFiniteOwnerContext({ctx,env,parent:originalLease});}catch{strictUnavailable=true;}(globalThis.__d02Probes??=[]).push({kind:'${kind}',op,strictUnavailable});`;
  once("await sdkAppend('SdkSend',send,op);await recheckOwned();check();","await sdkAppend('SdkSend',send,op);"+probe('sdk')+"await recheckOwned();check();");
  once("await issuerAppend('Send',send,op);await recheckOwned();check();","await issuerAppend('Send',send,op);"+probe('issuer')+"await recheckOwned();check();");
  once("if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();","if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();(globalThis.__d02Probes??=[]).push({kind:'consumption',sameChild:consumptionChild===l,sameStore:consumptionStore===store,remainingMs:w.deadline-Date.now(),windowMs:w.deadline-w.startedAt});");
- return source+noticeSuffix;
+ return beforeOAuth+source+afterOAuth;
 }
 
 /** Read-only audit of this test's actual SDK1.2.1 encrypted grant. This public
