@@ -8,47 +8,57 @@
   },
   "candidate": {
     "pullRequest": 720,
-    "head": "0464d4a815367d35806c08fbde8674118fce09d5",
+    "head": "ca9ca3caa51ca5f01e98c70a9b5e53cebd5a2423",
     "sourceOnly": true,
     "sourcePackageChecks": {
-      "run": 44726949486,
+      "run": 44729251626,
       "result": "passed_staging"
     },
     "fullCi": {
-      "run": 44726949321,
-      "status": "not_green",
-      "qaPhaseShard": {
+      "run": 44729252100,
+      "status": "in_progress_at_readback",
+      "previousQaPhaseShard": {
         "job": 136256660154,
         "status": "success"
-      },
-      "cleanup": {
-        "job": 136256659624,
-        "status": "failure"
-      },
-      "shard6": {
-        "job": 136256660142,
-        "status": "failure"
       }
-    }
+    },
+    "tree": "bbc30be2ea8e380d4d4976682fd75e0489ac8b80"
   },
   "verified": {
     "originalQaPreparation": "material_recorded in isolated Workerd",
     "qaContext": "closed source and original anchors replicated under native test",
     "ownerNominal": "initial synthetic selection and approval pass",
-    "accessFences": "wrong audience and wrong owner denied"
+    "accessFences": "wrong audience and wrong owner denied",
+    "connectionForm": {
+      "http": 200,
+      "elapsedMs": 12628,
+      "scope": "native Workerd, synthetic owner/provider"
+    },
+    "approval": {
+      "status": "committed_and_admitted",
+      "scope": "same native synthetic POST",
+      "position": "approved",
+      "publicationReceipt": false
+    },
+    "initialChoiceRollback": "native conflict inside the transaction leaves original rows unchanged"
   },
   "findings": {
     "ownerConnection": {
+      "phase": "publication continuation after recorded original approval",
       "http": 503,
-      "stage": "initial signed GET of finite connection",
-      "elapsedMs": 30131,
-      "pairedReads": 10,
-      "source": "0464d4a815367d35806c08fbde8674118fce09d5",
-      "nativeProvider": "synthetic",
-      "originDeadlineMs": 30000
+      "proof": "native positive path reached approved with an admitted one-use original request. No publication receipt.",
+      "sourceRevision": "ca9ca3caa51ca5f01e98c70a9b5e53cebd5a2423",
+      "readPairCountAcrossOriginalFormAndApproval": 11,
+      "scope": "Workerd with a synthetic Cloudflare provider"
     },
     "nativeFixture": "Fixed storage wrapper expecting a string when replaying bulk reads and updated obsolete SDK capture point without changing its promise.",
-    "restorationCi": "Raw test sharding opened a nonexistent producer checkpoint; CI now generates the original synthetic occurrence and runs the closure test in the same mandatory job."
+    "restorationCi": "The raw test shard lacked its original synthetic fixture. The mandatory separate job now produces the fixture with its explicit runner clock in the same job as the native cleanup test. It still needs a full pass.",
+    "candidateChanges": [
+      "Bundle initial form records into a single guarded transaction with exact readback.",
+      "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
+      "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
+    ],
+    "next": "Isolate the reason for failure inside publication after `approved`, then verify the full positive path and its native rollback on the accepted exact revision."
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -58,5 +68,6 @@
     "pcOffVerified": false,
     "operationalReadiness": false,
     "ownerActionRequired": false
-  }
+  },
+  "updatedUTC": "2026-11-20T11:40:29Z"
 }

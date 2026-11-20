@@ -2764,11 +2764,11 @@
   "qaOwnerConnectionAndCi": {
     "path": "docs/superpowers/progress/2026-11-20-afw-owner-connection-and-ci.json",
     "pr": 720,
-    "head": "0464d4a815367d35806c08fbde8674118fce09d5",
+    "head": "ca9ca3caa51ca5f01e98c70a9b5e53cebd5a2423",
     "mainAccepted": false,
-    "fullNativeCi": 44726949321,
-    "sourcePackageVerify": 44726949486,
-    "ownerConnectionSynthetic": "503_at_original_deadline",
+    "fullNativeCi": 44729252100,
+    "sourcePackageVerify": 44729251626,
+    "ownerConnectionSynthetic": "GET_200_approval_recorded_publication_503",
     "actualCloudTrial": false
   }
 }
