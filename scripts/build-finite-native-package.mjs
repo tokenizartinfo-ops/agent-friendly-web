@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFiniteR2Archive} from '../lib/mcp-qa-finite-r2-object.mjs';
+import {readFiniteR2Archive,storeFiniteR2Bundle} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFile} from 'node:child_process';
@@ -120,9 +120,21 @@ export async function compileFiniteNativeStaging(input){
   return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,historicalInput,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
  }catch{fail();}
 }
-/** Private STDIN path: exact R2 bytes and newly compiled modules travel only
- * inside the executor. The verifier emits a digest receipt, never a bundle. */
-async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive){
+function privateVerifier(cwd,mode,input,maxBuffer){
+ return new Promise((accept,reject)=>{
+  const child=execFile('python3',['-I','-B',resolve(cwd,archiveVerifier),mode],{
+   cwd,timeout:30000,maxBuffer,encoding:'buffer',windowsHide:true
+  },(error,stdout,stderr)=>{
+   if(error||stderr.length){reject(Error('Finite private compiler draft unavailable'));return;}
+   accept(stdout);
+  });
+  child.stdin.on('error',()=>reject(Error('Finite private compiler draft unavailable')));
+  child.stdin.end(input);
+ });
+}
+/** The digest and rollback configuration are verified before the binary
+ * publisher can use the same immutable frame. */
+async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false}={}){
  const built=await compileFiniteNativeStaging({cwd,sourceRevision}),expected=built.historicalInput.archiveBytes;
  let length=0;const chunks=[];
  for await(const part of await readArchive()){
@@ -135,16 +147,8 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  const manifest=Buffer.from(JSON.stringify({purpose:built.purpose,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
   historicalInput:built.historicalInput,modules,completePackage:false,operationalReadiness:false}));
  const head=Buffer.alloc(16);[archive,canary,qa,manifest].forEach((item,i)=>head.writeUInt32LE(item.length,i*4));
- const parsed=await new Promise((accept,reject)=>{
-  const child=execFile('python3',[resolve(cwd,archiveVerifier),'--inspect-rollback-compiler-draft'],{
-   cwd,timeout:30000,maxBuffer:65536
-  },(error,stdout,stderr)=>{
-   if(error||stderr){reject(Error('Finite private compiler draft unavailable'));return;}
-   try{accept(JSON.parse(stdout));}catch{reject(Error('Finite private compiler draft unavailable'));}
-  });
-  child.stdin.on('error',()=>reject(Error('Finite private compiler draft unavailable')));
-  child.stdin.end(Buffer.concat([head,archive,canary,qa,manifest]));
- });
+ const frame=Buffer.concat([head,archive,canary,qa,manifest]);
+ const parsed=JSON.parse(await privateVerifier(cwd,'--inspect-rollback-compiler-draft',frame,65536));
  if(parsed.purpose!=='afw.finite-native-private-draft.v1'||parsed.sourceRevision!==built.sourceRevision||
     parsed.sourceTree!==built.sourceTree||parsed.historicalArchiveSha256!==built.historicalInput.archiveSha256||
     parsed.moduleCount!==5||parsed.completePackage!==false||parsed.operationalReadiness!==false||!sha256Hex(parsed.draftSha256))fail();
@@ -171,7 +175,11 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
    }
   }
  }
- return {...receipt,rollbackProfiles};
+ const verified={...receipt,rollbackProfiles};
+ if(!emit)return verified;
+ const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
+ if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
+ return {verified,bundle};
 }
 /** Complete-package boundary. Deliberately no positive path until separately
  * reviewed historical input custody/privacy and actual native mounts qualify.
@@ -185,13 +193,18 @@ export async function buildFiniteNativePackage(input){
  fail();
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const mode=process.argv[2],staging=mode==='--staging',fromR2=mode==='--verify-r2-draft',privateDraft=mode==='--verify-private-draft'||fromR2;
+ const mode=process.argv[2],staging=mode==='--staging',emit=mode==='--emit-private-r2';
+ const fromR2=mode==='--verify-r2-draft'||emit,privateDraft=mode==='--verify-private-draft'||fromR2;
  if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
  if(privateDraft){
-  const receipt=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
+  const result=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
    await readFiniteR2Archive({credential:process.env.AFW_R2_BACKUPS_READ_URL,signal:AbortSignal.timeout(15000)})
-  ).body:()=>process.stdin);
+  ).body:()=>process.stdin,{emit});
+  const receipt=emit?{...result.verified,privateR2Bundle:await storeFiniteR2Bundle({
+   sourceRevision,bytes:result.bundle,writeCredential:process.env.AFW_R2_BUNDLE_WRITE_URL,
+   readCredential:process.env.AFW_R2_BUNDLE_READ_URL,signal:AbortSignal.timeout(30000)
+  }),authorizesDeployment:false}:result;
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
   const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});

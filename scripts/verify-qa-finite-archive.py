@@ -210,8 +210,8 @@ def inspect_pinned_r2_historical_inputs(raw):
     return {**result, "archiveSha256": digest}
 
 
-def assemble_private_draft(raw):
-    """Assemble and read back a private draft. Do not emit or execute modules."""
+def assemble_private_draft(raw, emit_bundle=False):
+    """Assemble and read back the exact five modules without executing them."""
     require(len(raw) >= 12)
     historical_size, compiled_size, receipt_size = struct.unpack_from("<III", raw)
     require(0 < historical_size <= ARCHIVE_LIMIT and 0 < compiled_size <= ARCHIVE_LIMIT
@@ -279,10 +279,12 @@ def assemble_private_draft(raw):
     bundle = target.getvalue()
     manifest_text, files = inspect_members(bundle, NAMES, "manifest.json")
     require(manifest_text == receipt_text and files == expected_files)
+    if emit_bundle:
+        return bundle
     return {**receipt, "draftSha256": hashlib.sha256(bundle).hexdigest(), "draftBytes": len(bundle)}
 
 
-def assemble_private_compiler_draft(raw, include_metadata=False):
+def assemble_private_compiler_draft(raw, include_metadata=False, emit_bundle=False):
     """Join actual compiler outputs to the private backup inside one process."""
     require(len(raw) >= 16)
     historical_size, canary_size, qa_size, receipt_size = struct.unpack_from("<IIII", raw)
@@ -306,7 +308,8 @@ def assemble_private_compiler_draft(raw, include_metadata=False):
             archive.writestr(entry, content)
     compiled = staged.getvalue()
     result = assemble_private_draft(
-        struct.pack("<III", len(historical), len(compiled), len(receipt)) + historical + compiled + receipt
+        struct.pack("<III", len(historical), len(compiled), len(receipt)) + historical + compiled + receipt,
+        emit_bundle=emit_bundle,
     )
     if include_metadata:
         # This mode is a private pipe to the compiler. The receipt emitted by
@@ -327,7 +330,7 @@ def assemble_private_compiler_draft(raw, include_metadata=False):
 def main():
     mode = tuple(sys.argv[1:])
     limit = 2 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 12 if mode == ("--assemble-private-draft",) else ARCHIVE_LIMIT
-    if mode in {("--assemble-compiler-draft",), ("--inspect-rollback-compiler-draft",)}:
+    if mode in {("--assemble-compiler-draft",), ("--inspect-rollback-compiler-draft",), ("--emit-private-compiler-bundle",)}:
         limit = 3 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 16
     raw = sys.stdin.buffer.read(limit + 1)
     require(len(raw) <= limit)
@@ -338,9 +341,15 @@ def main():
         ("--assemble-private-draft",): assemble_private_draft,
         ("--assemble-compiler-draft",): assemble_private_compiler_draft,
         ("--inspect-rollback-compiler-draft",): lambda raw: assemble_private_compiler_draft(raw, True),
+        ("--emit-private-compiler-bundle",): lambda raw: assemble_private_compiler_draft(raw, emit_bundle=True),
     }
     require(mode in inspectors)
     result = inspectors[mode](raw)
+    if mode == ("--emit-private-compiler-bundle",):
+        # Only the Node publisher consumes this bounded binary pipe.
+        require(isinstance(result, bytes) and 0 < len(result) <= ARCHIVE_LIMIT)
+        sys.stdout.buffer.write(result)
+        return
     output = json.dumps(result, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
     require(len(output) <= 65536)
     sys.stdout.buffer.write(output)

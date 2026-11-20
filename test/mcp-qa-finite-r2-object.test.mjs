@@ -47,3 +47,47 @@ test('redirects and upstream exceptions cannot leak the signed URL or start anot
   fetchImpl:async()=>{calls++;throw Error(credential);}}),{message:'Finite R2 archive unavailable'});
  assert.equal(calls,1);
 });
+
+const revision='a'.repeat(40),object='finite-bundles-v1/'+revision+'.zip';
+function bundleUrl(write=false){
+ const url=signed();
+ url.pathname='/'+object;
+ if(write){
+  url.searchParams.set('x-id','PutObject');
+  url.searchParams.set('X-Amz-SignedHeaders','host;if-none-match');
+ }
+ return url.href;
+}
+test('private bundle is created conditionally and a separate GET verifies the exact bytes',async()=>{
+ const bytes=Buffer.from('private finite bundle'),calls=[];
+ const result=await api.storeFiniteR2Bundle({sourceRevision:revision,bytes,writeCredential:bundleUrl(true),readCredential:bundleUrl(),
+  now,signal,fetchImpl:async(url,options)=>{
+   calls.push({url,options});
+   if(options.method==='PUT')return new Response(null,{status:200});
+   return new Response(bytes,{headers:{'content-type':'application/zip','content-length':String(bytes.length)}});
+  }});
+ assert.equal(result.objectKey,object);assert.equal(result.status,'created_verified');
+ assert.deepEqual(calls.map(c=>c.options.method),['PUT','GET']);
+ assert.equal(calls[0].options.headers['If-None-Match'],'*');
+ assert.equal(calls[0].options.body,bytes);
+});
+
+test('occupied or uncertain object is read back once, and conflicting contents fail without overwrite',async()=>{
+ const bytes=Buffer.from('private finite bundle');
+ for(const fault of ['existing','uncertain','different','foreign']){
+  const calls=[],options={sourceRevision:revision,bytes,writeCredential:bundleUrl(true),readCredential:fault==='foreign'?signed().href:bundleUrl(),
+   now,signal,fetchImpl:async(url,init)=>{
+    calls.push(init.method);
+    if(init.method==='PUT'){
+     if(fault==='uncertain')throw Error(url);
+     return new Response(null,{status:412});
+    }
+    const payload=fault==='different'?Buffer.from('foreign content'):bytes;
+    return new Response(payload,{headers:{'content-type':'application/zip','content-length':String(payload.length)}});
+   }};
+  if(fault==='different'||fault==='foreign'){
+   await assert.rejects(api.storeFiniteR2Bundle(options),{message:'Finite R2 archive unavailable'});
+  }else assert.equal((await api.storeFiniteR2Bundle(options)).status,'readback_verified');
+  assert.deepEqual(calls,fault==='foreign'?[]:['PUT','GET']);
+ }
+});
