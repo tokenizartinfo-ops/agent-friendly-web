@@ -183,7 +183,12 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   import('./verify-finite-native-staging.mjs'),import('./verify-finite-native-rollback.mjs')
  ]);
  const currentMounts=await verifyFiniteStagingMounts(built);
- const rollbackMounts=await verifyFiniteRollbackMounts(historicalModules,privateMetadata);
+ const {moduleExports,...rollbackMounts}=await verifyFiniteRollbackMounts(historicalModules,privateMetadata);
+ for(const role of orderedClosedRoles){
+  const names=moduleExports[role];
+  rollbackProfiles[role]={...rollbackProfiles[role],exportCount:names.length,
+   exportNamesHash:hash('afw.finite-historical-module-exports.v1\n'+JSON.stringify(names))};
+ }
  const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts}};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
