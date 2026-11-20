@@ -107,3 +107,63 @@ test('draft and deployable package credentials for the same revision cannot be i
  assert.equal(await (await api.readFiniteR2Package({...options,credential:release.href})).text(),'z');
  assert.deepEqual(calls,[draft,release.href]);
 });
+
+test('protected historical access failures distinguish a missing secret, expiry and HTTP refusal without exposing the URL',async()=>{
+ const credential=signed().href, expired=signed(),future=signed();
+ expired.searchParams.set('X-Amz-Expires','20');
+ future.searchParams.set('X-Amz-Date','20261119T153530Z');
+ const cases=[
+  [undefined,'credential_missing',null],
+  ['https://synthetic.invalid/foreign.zip','credential_format_or_scope',null],
+  [future.href,'signing_time_in_future',null],
+  [expired.href,'signing_window_too_short',null],
+  [credential,'archive_http_status',403,()=>new Response('private error body',{status:403})],
+  [credential,'archive_response_metadata',200,()=>new Response('not a zip',{status:200})],
+  [credential,'archive_request_failed',null,()=>{throw Error(credential);}]
+ ];
+ for(const [input,stage,httpStatus,respond] of cases){
+  let calls=0;
+  await assert.rejects(api.readFiniteR2Archive({credential:input,now,signal,fetchImpl:async()=>{
+   calls+=1;
+   return respond();
+  }}),{message:'Finite R2 archive unavailable',cause:{stage,httpStatus}});
+  assert.equal(calls,respond?1:0);
+ }
+});
+
+test('official AWS CLI GetObject checksum query preserves the signature and remains GET-only',async()=>{
+ const credential=signed();
+ credential.searchParams.set('x-amz-checksum-mode','ENABLED');
+ await api.readFiniteR2Archive({credential:credential.href,now,signal,fetchImpl:async(input,init)=>{
+  assert.equal(input,credential.href);assert.equal(init.method,'GET');
+  return new Response('archive',{headers:{'content-type':'application/zip'}});
+ }});
+ credential.searchParams.set('x-amz-checksum-mode','DISABLED');
+ await assert.rejects(api.readFiniteR2Archive({credential:credential.href,now,signal,fetchImpl:async()=>assert.fail('unexpected fetch')}),
+  {cause:{stage:'credential_format_or_scope',httpStatus:null}});
+ const put=new URL(bundleUrl(true));
+ put.searchParams.set('x-amz-checksum-mode','ENABLED');
+ await assert.rejects(api.storeFiniteR2Bundle({sourceRevision:revision,bytes:Buffer.from('archive'),
+  writeCredential:put.href,readCredential:bundleUrl(),now,signal,fetchImpl:async()=>assert.fail('unexpected fetch')}),
+  {message:'Finite R2 archive unavailable'});
+});
+
+test('protected diagnostics do not trust thrown properties, reread status or wait for a rejected stream',{timeout:2000},async()=>{
+ const credential=signed().href, malicious=Object.defineProperty(new Error(credential),'cause',{
+  get(){assert.fail('untrusted cause inspected');}
+ });
+ await assert.rejects(api.readFiniteR2Archive({credential,now:()=>{throw malicious;},signal,
+  fetchImpl:async()=>assert.fail('unexpected fetch')}),{cause:{stage:'credential_format_or_scope',httpStatus:null}});
+ const stream=new ReadableStream({cancel:()=>new Promise(()=>{})});
+ const refused=new Response(stream,{status:403});
+ let reads=0;
+ Object.defineProperty(refused,'status',{get:()=>++reads===1?403:credential});
+ await assert.rejects(api.readFiniteR2Archive({credential,now,signal,fetchImpl:async()=>refused}),
+  {cause:{stage:'archive_http_status',httpStatus:403}});
+ assert.equal(reads,1);
+ const controller=new AbortController();
+ Object.defineProperty(controller.signal,'aborted',{get(){assert.fail('untrusted abort property inspected');}});
+ await assert.rejects(api.readFiniteR2Archive({credential,now,signal:controller.signal,fetchImpl:async()=>{
+  controller.abort();throw new Error(credential);
+ }}),{cause:{stage:'archive_read_deadline',httpStatus:null}});
+});
