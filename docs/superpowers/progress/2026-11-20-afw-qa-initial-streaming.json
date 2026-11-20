@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "project": "AFW",
+  "timestampUTC": "2026-11-20T02:32:05Z",
+  "headline": "Preparación nativa de QA corregida y conexión de dueño aún bloqueada en el laboratorio",
+  "source": {
+    "main": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+    "mainTree": "dc36abd33be159809e1ee0ecc4bb40b65849f01e",
+    "verifiedMainCi": 44656725898,
+    "verifiedMainR2Ci": 44656726035,
+    "integration": {
+      "pr": 720,
+      "head": "6f69a68f58e081e0543e03d4c39fb5c4959c42f6",
+      "tree": "83b31ba09f4740f7b66c09d713b65ae7c8296f98",
+      "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+      "merged": false,
+      "latestMainSuite": 44661439166,
+      "latestPackageSourceSuite": 44661439110,
+      "previousMainSuite": 44659658176,
+      "previousPackageSourceSuite": 44659658372
+    }
+  },
+  "initialQa": {
+    "environment": "Workerd con proveedor y expediente sintéticos",
+    "before": "admin_pending en la descarga de la versión histórica del canary por agotamiento del subplazo de 5 s antes de la carga.",
+    "measuredBaseline": {
+      "readsBeforeExpiry": 77,
+      "bytesBeforeExpiryApprox": 315000,
+      "guardMs": 3886,
+      "readMs": 35
+    },
+    "correction": "Los datos se validan y congelan una vez y el módulo se entrega por copia defensiva. Las comprobaciones de titular, vigencia, señal y lectura de bytes siguen activas.",
+    "after": {
+      "result": "material_recorded",
+      "historicalGetBytes": 2445221,
+      "reads": 599,
+      "guardMs": 51,
+      "readMs": 78
+    },
+    "scope": "Preparación antes de la conexión de dueño. Hay carga, activación y registro sintéticos. Ningún efecto Cloudflare real."
+  },
+  "checks": {
+    "receiverReviewRestore": {
+      "total": 37,
+      "passed": 37,
+      "failed": 0,
+      "workerd": true,
+      "includes": [
+        "recibir aviso firmado",
+        "revisar el mismo aviso exacto",
+        "vincular revisión y retirada con restauración sintética",
+        "compatibilidad del receptor operativo"
+      ]
+    },
+    "firstNativeOwnerRequest": {
+      "result": "timeout",
+      "status": 503,
+      "requestBudgetMs": 30000,
+      "observedMs": 30081,
+      "phasePairChecks": 24,
+      "workerd": true,
+      "phase": "GET de conexión antes del recibo",
+      "next": "Medir por separado las lecturas de versiones y la reconstrucción de respaldos. Optimizar el trabajo repetido con el mismo plazo original, manteniendo la comprobación de titular, estado, bytes, credenciales y diario."
+    },
+    "otherIntegrationGate": "El CI anterior falló en pruebas de compatibilidad y nativas. Candidato PR720 conserva la regresión T3 abierta; requerir CI completo verde y corrección reproducida antes de merge."
+  },
+  "r2": {
+    "bucket": "afw-release-backups",
+    "key": "finite-bundles-v1/8cf46ea2a5026fce7dfb0aacb52f23c7b4361e1a.zip",
+    "bytes": 2021666,
+    "sha256": "d4361a202c31be569f02af16ad8a5b8357a38d1196f70c180e4a6f34737fb241",
+    "modules": 5,
+    "purpose": "afw.finite-native-private-draft.v1",
+    "completePackage": false,
+    "remaining": "Calificar los perfiles nativos, custodia histórica y restauración independiente de la revisión exacta aceptada. El ZIP conservado es un borrador privado."
+  },
+  "cloudflarePrimary": {
+    "checkedAtUTC": "2026-11-20T02:20:12.778Z",
+    "readOnly": true,
+    "versionsAt100Percent": {
+      "qa": {
+        "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "deployment": "4c78c652-5e8a-43e6-a622-bb0def85b9a1"
+      },
+      "canary": {
+        "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "deployment": "7b5a3683-eb21-4f6c-95d4-639570595362"
+      },
+      "operator": {
+        "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+        "deployment": "979026f8-9be0-439e-86d5-8bc493217f41"
+      }
+    }
+  },
+  "readiness": {
+    "completePackage": false,
+    "actualCloudTrial": false,
+    "sameNoticeReviewedLive": false,
+    "subscriptionWithdrawnLive": false,
+    "pcOffVerified": false,
+    "operationalReadiness": false,
+    "ownerActionRequired": false
+  }
+}

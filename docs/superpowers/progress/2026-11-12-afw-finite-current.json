@@ -1821,7 +1821,7 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 191,
+  "schemaVersion": 192,
   "updatedAtUTC": "2026-11-20T01:53:24.774Z",
   "pause": {
     "requestedByOwner": true,
@@ -2746,6 +2746,17 @@
     "mainAccepted": true,
     "mainVerifierRun": 44656726035,
     "fullNativePR": 720,
+    "completePackage": false,
+    "actualCloudTrial": false
+  },
+  "qaInitialStreamingAndOwnerDeadline": {
+    "path": "docs/superpowers/progress/2026-11-20-afw-qa-initial-streaming.json",
+    "pr": 720,
+    "head": "6f69a68f58e081e0543e03d4c39fb5c4959c42f6",
+    "initialQaSynthetic": "material_recorded",
+    "ownerConnectionSynthetic": "503_at_original_deadline",
+    "mainAccepted": false,
+    "fullNativeCi": 44661439166,
     "completePackage": false,
     "actualCloudTrial": false
   }
