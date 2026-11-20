@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "72b736d73a7907ef153e98b871e5609849f754ab",
-    "latestVerifiedTree": "c3477fcf28e0b002077104815fd840acc266ef4e"
+    "latestVerifiedCommit": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
+    "latestVerifiedTree": "511358558920805e686d12b5608e8d16ba2261ba"
   },
   "candidate": {
     "pullRequest": 720,
@@ -603,6 +603,109 @@
         "signedUrlExpiresAtUTC": "2026-11-20T21:23:09.000Z",
         "parentExpiresAtUTC": "2026-11-20T21:55:23Z"
       }
+    },
+    "pr730Isolation": {
+      "pullRequest": 730,
+      "previousPullRequest": 729,
+      "sourceHead": "f90283c084d1135a6fa3259899a2f17a3234189f",
+      "mergedRevision": "72b736d73a7907ef153e98b871e5609849f754ab",
+      "tree": "c3477fcf28e0b002077104815fd840acc266ef4e",
+      "state": "merged",
+      "isolation": {
+        "redRun": 44819278985,
+        "expectedFailures": 3,
+        "greenRun": 44820384948,
+        "passes": 21,
+        "scope": "Reject omitted or substituted original actor, absent/late native D1 closure or revocation, and legacy close before host access on compiled canary."
+      },
+      "receiver": {
+        "run": 44820384948,
+        "passes": 1,
+        "scope": "Ephemeral D1; signed callback, authenticated list/claim/finish, rejects substituted event, same event receipt over private Workerd RPC. Native withdrawal was not part of this case."
+      },
+      "fullCi": {
+        "run": 44820384970,
+        "status": "success",
+        "shardsPassed": 6,
+        "originalCheckpointCleanup": "success",
+        "gate": "success"
+      },
+      "privateMainPackageVerification": {
+        "run": 44823430631,
+        "job": 136589864392,
+        "status": "success",
+        "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+        "sourceTree": "c3477fcf28e0b002077104815fd840acc266ef4e",
+        "sourceRevision": "72b736d73a7907ef153e98b871e5609849f754ab",
+        "nativeMounts": {
+          "current": {
+            "exactModuleCount": 2,
+            "nativeWorkflowDenials": 2,
+            "operationalReadiness": false
+          },
+          "rollback": {
+            "exactModuleCount": 3,
+            "deniedRouteCount": 10,
+            "operationalReadiness": false
+          }
+        },
+        "releaseLayout": {
+          "archiveSha256": "0ad010793dc29df7129567d04769333e2eb786c279deb504dff3f03515107f09",
+          "archiveBytes": 2026312,
+          "moduleCount": 5,
+          "completePackage": false,
+          "operationalReadiness": false
+        }
+      },
+      "cloudflareStatus": {
+        "id": "0ocqieaifg7h",
+        "updatedUTC": "2026-11-11T05:05:06.331Z",
+        "components": [
+          "Workers",
+          "Queues"
+        ],
+        "status": "identified",
+        "observedAtUTC": "2026-11-20T21:44:18.4752560+00:00"
+      },
+      "cloudflareClosedReadback": {
+        "atUTC": "2026-11-20T21:33:59.949Z",
+        "workers": {
+          "qa": {
+            "matchesClosedPointer": true,
+            "closedFlags": 14,
+            "cron": 0,
+            "tails": 0,
+            "allClosed": true
+          },
+          "canary": {
+            "matchesClosedPointer": true,
+            "closedFlags": 8,
+            "cron": 0,
+            "tails": 0,
+            "allClosed": true
+          },
+          "operator": {
+            "matchesClosedPointer": true,
+            "closedFlags": 3,
+            "cron": 0,
+            "tails": 0,
+            "allClosed": true
+          },
+          "receiver": {
+            "matchesClosedPointer": true,
+            "closedFlags": 4,
+            "cron": 0,
+            "tails": 0,
+            "allClosed": true
+          }
+        }
+      },
+      "disposition": {
+        "deployable": false,
+        "realTrial": false,
+        "operationalReadiness": false,
+        "remaining": "Qualify the combined native start, notice review, subscription withdrawal and rollback before promoting the v2 ZIP. Cloudflare's current guard also rejects the nominal trial. Do not reuse an expired R2 URL."
+      }
     }
   },
   "findings": {
@@ -709,40 +812,31 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T21:49:05.904Z",
+  "updatedUTC": "2026-11-20T22:50:01.857Z",
   "latestCandidate": {
-    "pullRequest": 730,
-    "previousPullRequest": 729,
-    "sourceHead": "f90283c084d1135a6fa3259899a2f17a3234189f",
-    "mergedRevision": "72b736d73a7907ef153e98b871e5609849f754ab",
-    "tree": "c3477fcf28e0b002077104815fd840acc266ef4e",
+    "pullRequest": 731,
+    "previousPullRequest": 730,
+    "sourceHead": "fd6e5de5d03ce7eac6e0e5ad53e2f6c26eb25def",
+    "mergedRevision": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
+    "tree": "511358558920805e686d12b5608e8d16ba2261ba",
     "state": "merged",
-    "isolation": {
-      "redRun": 44819278985,
-      "expectedFailures": 3,
-      "greenRun": 44820384948,
-      "passes": 21,
-      "scope": "Reject omitted or substituted original actor, absent/late native D1 closure or revocation, and legacy close before host access on compiled canary."
-    },
-    "receiver": {
-      "run": 44820384948,
-      "passes": 1,
-      "scope": "Ephemeral D1; signed callback, authenticated list/claim/finish, rejects substituted event, same event receipt over private Workerd RPC. Native withdrawal was not part of this case."
-    },
     "fullCi": {
-      "run": 44820384970,
+      "run": 44829110656,
       "status": "success",
       "shardsPassed": 6,
       "originalCheckpointCleanup": "success",
       "gate": "success"
     },
-    "privateMainPackageVerification": {
-      "run": 44823430631,
-      "job": 136589864392,
+    "focused": {
+      "run": 44829110611,
       "status": "success",
-      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
-      "sourceTree": "c3477fcf28e0b002077104815fd840acc266ef4e",
-      "sourceRevision": "72b736d73a7907ef153e98b871e5609849f754ab",
+      "isolationTests": 21,
+      "sameOccurrenceTests": 1,
+      "transportAndProvenanceTests": 174
+    },
+    "singleProtectedRun": {
+      "run": 44831977636,
+      "sameJob": true,
       "nativeMounts": {
         "current": {
           "exactModuleCount": 2,
@@ -755,62 +849,34 @@
           "operationalReadiness": false
         }
       },
+      "sourceTree": "511358558920805e686d12b5608e8d16ba2261ba",
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "job": 136618907918,
       "releaseLayout": {
-        "archiveSha256": "0ad010793dc29df7129567d04769333e2eb786c279deb504dff3f03515107f09",
-        "archiveBytes": 2026312,
+        "archiveSha256": "7dbda5299e2511f8c2b6f915cc1481f345a8063271f9e06aaf3792b3bf485203",
+        "archiveBytes": 2026292,
         "moduleCount": 5,
         "completePackage": false,
         "operationalReadiness": false
-      }
+      },
+      "success": true,
+      "sourceRevision": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
+      "scope": "Same job, exact main. Modeled container with real boot controller and bridge, signed webhook to mounted Worker/D1, authenticated claim and review, revocation and persisted same subscription withdrawal, private RPC correlated receipt, process stopped and late send denied. The same job fetched the pinned R2 snapshot and mounted three exact closed rollback programs in Workerd. This is a restoration rehearsal, not a Cloudflare traffic switch."
     },
-    "cloudflareStatus": {
-      "id": "0ocqieaifg7h",
-      "updatedUTC": "2026-11-11T05:05:06.331Z",
+    "provider": {
+      "status": "identified",
+      "observedAtUTC": "2026-11-20T22:44:20.0408081+00:00",
       "components": [
         "Workers",
         "Queues"
       ],
-      "status": "identified",
-      "observedAtUTC": "2026-11-20T21:44:18.4752560+00:00"
-    },
-    "cloudflareClosedReadback": {
-      "atUTC": "2026-11-20T21:33:59.949Z",
-      "workers": {
-        "qa": {
-          "matchesClosedPointer": true,
-          "closedFlags": 14,
-          "cron": 0,
-          "tails": 0,
-          "allClosed": true
-        },
-        "canary": {
-          "matchesClosedPointer": true,
-          "closedFlags": 8,
-          "cron": 0,
-          "tails": 0,
-          "allClosed": true
-        },
-        "operator": {
-          "matchesClosedPointer": true,
-          "closedFlags": 3,
-          "cron": 0,
-          "tails": 0,
-          "allClosed": true
-        },
-        "receiver": {
-          "matchesClosedPointer": true,
-          "closedFlags": 4,
-          "cron": 0,
-          "tails": 0,
-          "allClosed": true
-        }
-      }
+      "id": "0ocqieaifg7h"
     },
     "disposition": {
-      "deployable": false,
+      "deployableZip": false,
       "realTrial": false,
       "operationalReadiness": false,
-      "remaining": "Qualify the combined native start, notice review, subscription withdrawal and rollback before promoting the v2 ZIP. Cloudflare's current guard also rejects the nominal trial. Do not reuse an expired R2 URL."
+      "blocker": "Complete build and native source authority still fail closed. Workerd rehearsal does not establish the real Cloudflare QA context, custody, or coupled restoration. Cloudflare provider admission remains blocked by the open Workers/Queues incident."
     }
   }
 }
