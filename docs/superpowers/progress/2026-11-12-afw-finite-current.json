@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-immutable-private-r2-bundle.json",
-  "phase": "private-R2-reader-verified-integration-CI-running",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-private-r2-verifier-integration.json",
+  "phase": "AFW private R2 verifier accepted on main; complete native trial blocked",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Verify on GitHub and merge source only after whole-PR checks pass. Qualify and emit the exact main release, verify R2 and the closed restore pointers, then launch once and compare a same-notice cloud review receipt with the actual native withdrawal and independent QA closure.",
+  "next": "Resolve the native preparation and whole-suite failures on a current-main overlay while retaining the closed wrapper byte pin, finish the independent source/package qualification, then produce the exact main release in private R2. Run one cloud occurrence once the scoped credentials and rollback are verified. Check the same notice identity in the cloud assistant review and in the native subscription withdrawal and final QA restoration.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 190,
-  "updatedAtUTC": "2026-11-20T01:23:01.901Z",
+  "schemaVersion": 191,
+  "updatedAtUTC": "2026-11-20T01:53:24.774Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2740,10 +2740,12 @@
     "actualCloudTrial": false
   },
   "privateR2VerifierIntegration": {
-    "path": "docs/superpowers/progress/2026-11-20-afw-private-r2-verifier-integration.json",
-    "pr": 720,
-    "head": "bacc5d60dcb8934423a47fa7b6a61294764259d2",
-    "mainAccepted": false,
+    "path": "docs/superpowers/progress/2026-11-20-afw-private-r2-verifier-main.json",
+    "pr": 721,
+    "main": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+    "mainAccepted": true,
+    "mainVerifierRun": 44656726035,
+    "fullNativePR": 720,
     "completePackage": false,
     "actualCloudTrial": false
   }

@@ -1,0 +1,101 @@
+{
+  "phase": "AFW private R2 verifier accepted on main; complete native trial blocked",
+  "updatedAtUTC": "2026-11-20T01:53:24.774Z",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-private-r2-verifier-integration.json",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "verifierIntegration": {
+    "pullRequest": 721,
+    "head": "3eed96286738aabaf7f580633f8baaec8affc4d6",
+    "main": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+    "tree": "dc36abd33be159809e1ee0ecc4bb40b65849f01e",
+    "mergedAtUTC": "2026-11-20T01:52:15Z",
+    "requiredChecksPassed": 9,
+    "ciRun": 44655356011,
+    "fullSuite": {
+      "passed": 5297,
+      "failed": 0,
+      "skipped": 1
+    },
+    "mainVerifierRun": 44656726035,
+    "mainVerifierJob": 136024660544,
+    "mainVerifierConclusion": "success",
+    "privateLocatorPublicationJob": "skipped on push"
+  },
+  "privateDraftReadback": {
+    "purpose": "afw.finite-native-private-draft.v1",
+    "sourceRevision": "8cf46ea2a5026fce7dfb0aacb52f23c7b4361e1a",
+    "sourceTree": "fdf23a2accdd8e2063ee7bc64a2421dff72497e2",
+    "archiveSha256": "d4361a202c31be569f02af16ad8a5b8357a38d1196f70c180e4a6f34737fb241",
+    "archiveBytes": 2021666,
+    "moduleCount": 5,
+    "completePackage": false,
+    "authorizesDeployment": false,
+    "operationalReadiness": false,
+    "checkedAtUTC": "2026-11-20T01:02:02.8666653Z",
+    "publicAccess": false
+  },
+  "fullNativeIntegration": {
+    "pullRequest": 720,
+    "head": "bacc5d60dcb8934423a47fa7b6a61294764259d2",
+    "accepted": false,
+    "ciRun": 44653002982,
+    "previousFullLogRun": 44652198338,
+    "fullJobConclusion": "cancelled",
+    "diagnosticHead": "868aa04cd41b95d20d5b62b6b7b03fb5c4d6f4cb",
+    "unmergedDiagnostics": [
+      "Two workerd fixtures now resolve native node:crypto.",
+      "Both finite entrypoint rejection checks and the fixed-engine export test pass after fixture alignment.",
+      "The candidate now loads under Workerd with the production size settings. The positive preparation result still returns admin_pending before any upload transaction.",
+      "Five VM instrumentation checks pass when Node enables experimental-vm-modules. Exact budget fixture source pins still need reconciliation after moving the finite inventory off the legacy build."
+    ]
+  },
+  "runtimeDeploymentPointers": {
+    "checkedAtUTC": "2026-11-20T01:20:11.672Z",
+    "deployments": [
+      {
+        "worker": "agent-friendly-web-independent-closure-qa",
+        "status": "observed",
+        "id": "4c78c652-5e8a-43e6-a622-bb0def85b9a1",
+        "versions": [
+          {
+            "id": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+            "percentage": 100
+          }
+        ]
+      },
+      {
+        "worker": "agent-friendly-web-delegated-canary",
+        "status": "observed",
+        "id": "7b5a3683-eb21-4f6c-95d4-639570595362",
+        "versions": [
+          {
+            "id": "2607abae-cec3-4e35-89eb-8b8572262b54",
+            "percentage": 100
+          }
+        ]
+      },
+      {
+        "worker": "agent-friendly-web-release-operator",
+        "status": "observed",
+        "id": "979026f8-9be0-439e-86d5-8bc493217f41",
+        "versions": [
+          {
+            "id": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+            "percentage": 100
+          }
+        ]
+      }
+    ]
+  },
+  "blockers": [
+    "The private object verifies five exact modules for the lab revision but its draft manifest cannot pass release admission.",
+    "The complete native integration is unmerged. Its full checks expose fixture faults and a positive native preparation that returns admin_pending before upload.",
+    "The final builder still refuses to emit a qualified release. Exact historical role declarations, native material and custody, and the applicable rollback must be verified for the main release. Cloudflare version declarations are maps, distinct from the ESM export arrays recorded in the module-byte manifest."
+  ],
+  "next": "Resolve the native preparation and whole-suite failures on a current-main overlay while retaining the closed wrapper byte pin, finish the independent source/package qualification, then produce the exact main release in private R2. Run one cloud occurrence once the scoped credentials and rollback are verified. Check the same notice identity in the cloud assistant review and in the native subscription withdrawal and final QA restoration.",
+  "actualCloudTrial": false,
+  "sameNoticeReviewed": false,
+  "nativeWithdrawalObserved": false,
+  "operationalReadiness": false,
+  "ownerActionNeededNow": false
+}
