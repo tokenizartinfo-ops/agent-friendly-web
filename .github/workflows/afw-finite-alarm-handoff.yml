@@ -1,9 +1,0 @@
-name: AFW staged main integration
-on: workflow_dispatch
-permissions: {}
-jobs:
-  closed:
-    if: ${{ false }}
-    runs-on: ubuntu-24.04
-    steps:
-      - run: exit 1
