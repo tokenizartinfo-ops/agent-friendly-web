@@ -62,7 +62,7 @@ test('rollback mount probe checks exact bytes, closed routes and denied egress i
 
 test('rollback cannot attest a partial export inventory from an external wildcard',async()=>{
  const {readArchivedExports}=await import('../scripts/verify-finite-native-rollback.mjs');
- const module=Buffer.concat([sources.operator,Buffer.from("\nexport /* namespace */ * from 'node:buffer';")]);
- await assert.rejects(readArchivedExports(module,'index.mjs'),
+ const archivedBytes=Buffer.concat([sources.operator,Buffer.from("\nexport /* namespace */ * from 'node:buffer';")]);
+ await assert.rejects(readArchivedExports(archivedBytes,'index.mjs'),
   {message:'Finite private rollback mounts unavailable'});
 });
