@@ -175,7 +175,17 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
    }
   }
  }
- const verified={...receipt,rollbackProfiles};
+ // Keep the pinned historical bytes inside the verifier and Workerd process.
+ const orderedClosedRoles=['qaClosed','canaryClosed','operatorClosed'];
+ const rollbackByteLength=orderedClosedRoles.reduce((length,role)=>length+allModules[role].bytes,0);
+ const historicalModules=await privateVerifier(cwd,'--emit-pinned-rollback-modules',archive,rollbackByteLength);
+ if(historicalModules.length!==rollbackByteLength)fail();
+ const [{verifyFiniteStagingMounts},{verifyFiniteRollbackMounts}]=await Promise.all([
+  import('./verify-finite-native-staging.mjs'),import('./verify-finite-native-rollback.mjs')
+ ]);
+ const currentMounts=await verifyFiniteStagingMounts(built);
+ const rollbackMounts=await verifyFiniteRollbackMounts(historicalModules,privateMetadata);
+ const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts}};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();

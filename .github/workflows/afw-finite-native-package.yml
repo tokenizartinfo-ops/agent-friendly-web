@@ -7,6 +7,8 @@ on:
       - ".github/workflows/afw-finite-native-package.yml"
       - "scripts/build-finite-native-package.mjs"
       - "scripts/verify-finite-native-staging.mjs"
+      - "scripts/verify-finite-native-rollback.mjs"
+      - "scripts/verify-qa-finite-archive.py"
       - "lib/**"
       - "worker/**"
   workflow_dispatch:
@@ -41,6 +43,8 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Mount exact compiled modules in Workerd
         run: node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION"
+      - name: Verify the bounded archive parser
+        run: python3 -m unittest discover -s test -p finite_archive_test.py
       - name: Verify private R2 package transport and release provenance
         run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs
   package:
