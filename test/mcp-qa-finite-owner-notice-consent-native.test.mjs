@@ -36,7 +36,9 @@ test('native consent POST records original decision after actual ticket GET',()=
  assert.deepEqual(row,{sequence:row.sequence,grant_id:i.grantId,project_id:i.projectId,user_id:i.subject,client_id:i.clientId,resource:i.resource,revision:i.projectRevision,action:'grant',purpose:'afw.dossier-monitoring.v1',request_id:r.ticket.requestId,issued_at:row.issued_at,expires_at:r.ticket.permissionExpiresAt});
  assert(Number.isSafeInteger(row.sequence)&&row.sequence>0);assert(row.issued_at>=send.issuedAt);assert(row.issued_at<send.window.deadline);assert.equal(ack.sequence,row.sequence);assert.equal(ack.rowHash,initialHash('afw.finite-preparation-notice-row.v1',row));assert.equal(ack.sendHash,send.recordHash);
  console.info('CONSENT native original window',JSON.stringify({childElapsed:observation.state.trace.find(v=>v.position==='complete').at-send.window.startedAt,windowMs:send.window.deadline-send.window.startedAt,parentElapsed:elapsed}));assert(send.window.deadline-send.window.startedAt<=5000);assert(observation.state.trace.find(v=>v.position==='complete').at<send.window.deadline);
- assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ const settled=await plain(f.stub.sdkReadCurrent());
+ assert.equal(settled.source?.phase,'notice_consent');
+ assert.equal(settled.preconnectionId,f.identity.preconnectionId);
  for(const path of ['/monitoring','/authorize']){
   const response=await f.mf.dispatchFetch(f.source.origin+path,{headers:f.headers});assert.notEqual(response.status,200);await response.body?.cancel();
  }
@@ -85,7 +87,7 @@ test('native consent grammar denies untrusted request corpus',()=>withIssued(asy
  ['duplicate cookie',()=>consent(f,{headers:{...h,Cookie:h.Cookie+'; '+h.Cookie.split('; ')[1]}})],
  ['bad cookie hash',()=>consent(f,{headers:{...h,Cookie:f.headers.Cookie+'; __Host-afw-monitoring-owner='+'b'.repeat(43)}})],
  ['missing prepare',()=>consent(f,{headers:{...h,Cookie:h.Cookie.split('; ')[1]}})],
- ['prepare mismatch',()=>consent(f,{headers:{...h,Cookie:h.Cookie.replace('a'.repeat(64),'b'.repeat(64))}})],
+ ['prepare mismatch',()=>consent(f,{headers:{...h,Cookie:h.Cookie.replace(f.headers.Cookie,'__Host-afw-finite-prepare='+'b'.repeat(64))}})],
  ['quoted own cookie',()=>consent(f,{headers:{...h,Cookie:f.headers.Cookie+'; __Host-afw-monitoring-owner="'+f.notice.handle+'"'}})]
  ];
  for(const [kind,call]of cases){await denied(f,await call(),before);assert.equal((await plain(f.stub.noticeInspect())).events.length,0,kind);}
