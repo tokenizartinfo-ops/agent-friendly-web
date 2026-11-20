@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "0d9ea61424c08ebbd89bb45b916b98f744f95cf3",
-    "latestVerifiedTree": "96bc7ea356eb2076093ec6aeaa759d52e366cbec"
+    "latestVerifiedCommit": "be241fae4fb5bd8378bdd882f9ffcde563ebf312",
+    "latestVerifiedTree": "fda9ffcababb6ace8b56c4d0cbdf0422b48a68dc"
   },
   "candidate": {
     "pullRequest": 720,
@@ -238,14 +238,20 @@
       "cloudCheck": {
         "runId": 44778941982,
         "jobId": 136436179451,
-        "status": "success"
+        "status": "success",
+        "nodeTests": 117,
+        "archiveTests": 25
       },
       "fullCiRun": 44778942092,
       "exactStagedModules": 2,
-      "rollbackRuntimeFromProtectedR2": "Pending protected dispatch on admitted exact main",
+      "rollbackRuntimeFromProtectedR2": "attempt 1 failed before archive validation",
       "operationalReadiness": false,
       "independentSourceReview": "Functional head 6def327c reviewed, no unresolved actionable findings. d17bf1fe only lint identifier changes and earlier scoped lint execution.",
-      "syntheticRollbackWorkerd": true
+      "syntheticRollbackWorkerd": true,
+      "fullCiResult": "success",
+      "mergedCommit": "be241fae4fb5bd8378bdd882f9ffcde563ebf312",
+      "mergedExactCombinedTree": "fda9ffcababb6ace8b56c4d0cbdf0422b48a68dc",
+      "mainPackageCheck": 44782293127
     },
     "finiteReceiverPrimary": {
       "atUTC": "2026-11-20T16:38:59.866Z",
@@ -282,6 +288,27 @@
       "incident": "0ocqieaifg7h",
       "impactAttribution": "not-established",
       "operationalReadiness": false
+    },
+    "protectedR2Attempt": {
+      "runId": 44782365542,
+      "jobId": 136448125171,
+      "status": "failed_before_archive_validation",
+      "readFunction": "readFiniteR2Archive",
+      "causeKnown": false
+    },
+    "r2DirectReadAfterFailure": {
+      "atUTC": "2026-11-20T17:25:17.349Z",
+      "bytes": 4209422,
+      "sha256Matches": true
+    },
+    "r2DiagnosticCandidate": {
+      "pullRequest": 724,
+      "head": "65ac0fc4645617cacdbbf8859d9f5cd634b02743",
+      "tree": "7f79b7ec95b55551e94a8394ed5157ada13e521a",
+      "scopedRun": 44783638697,
+      "fullCi": 44783638481,
+      "review": "No unresolved actionable findings",
+      "cloudflareReference": "https://developers.cloudflare.com/r2/api/s3/presigned-urls/#presigned-url-example"
     }
   },
   "findings": {
@@ -299,7 +326,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Finish exact R2 verification PR 722 CI, integrate and wait for exact-main staged gate, then dispatch protected read-only backup verification once. Qualify full native package/rollback and finish an actual finite signed review and removal lifecycle only once current prerequisites permit the trial.",
+    "next": "Integrate the safe protected R2 diagnostic and documented optional checksum parameter. Dispatch a new exact-main read-only verification once. Distinguish signing window, scope, HTTP and response metadata before requesting a replacement. The direct archive is intact. Exact-stage/protected rollback proof does not authorize package v2, runtime activation, operational review or PC-off.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -388,7 +415,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T17:06:45Z",
+  "updatedUTC": "2026-11-20T17:33:00Z",
   "latestCandidate": {
     "pullRequest": 720,
     "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
