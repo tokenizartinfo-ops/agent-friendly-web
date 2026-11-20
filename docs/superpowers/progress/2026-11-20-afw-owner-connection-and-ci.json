@@ -472,6 +472,51 @@
       "ci": 44799247555,
       "ciConclusion": "success",
       "exactCombinedTreeVerified": true
+    },
+    "runtimeClosedAfter727": {
+      "observedAtUTC": "2026-11-20T20:04:39.599Z",
+      "workers": {
+        "qa": {
+          "status": "closed",
+          "version": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+          "flagCount": 14,
+          "publishedVersionUrls": 0
+        },
+        "canary": {
+          "status": "closed",
+          "version": "2607abae-cec3-4e35-89eb-8b8572262b54",
+          "flagCount": 8,
+          "publishedVersionUrls": 0
+        },
+        "operator": {
+          "status": "closed",
+          "version": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+          "flagCount": 3,
+          "publishedVersionUrls": 0
+        },
+        "receiver": {
+          "status": "closed",
+          "version": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+          "flagCount": 4,
+          "publishedVersionUrls": 0
+        }
+      }
+    },
+    "post727MainSourceChecks": {
+      "runId": 44806316519,
+      "sourceRevision": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
+      "status": "success",
+      "operationalReadiness": false
+    },
+    "historicalExportDescriptorCandidate": {
+      "pullRequest": 728,
+      "head": "bdec94ab01bb26c3fd09d98c83455507d136421f",
+      "redArchiveExportsTest": 44806595520,
+      "redUnresolvedWildcardTest": 44807717054,
+      "packageVerifier": 44807975636,
+      "verification": "success",
+      "r2ArtifactReplay": "not attempted: previous signed read lease expired",
+      "currentOperationalReadiness": false
     }
   },
   "findings": {
@@ -489,7 +534,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Qualify exact historical module export descriptors for deployable v2 assembly. The previous signed backup URL expired before the new main merge, so no replay was attempted. The public Workers/Queues incident remains identified. No real trial requested from the closed runtime.",
+    "next": "Collect full exact CI for PR728. Export descriptors derive from exact historical ESM bytes and the native Cloudflare maps where supplied; operator absence is supported. Close the remaining v2 release envelope and private native qualification before using a fresh scoped R2 URL. Public incident 0ocqieaifg7h still prevents the existing named confirmation preflight from admitting a real trial. No candidate was deployed.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -578,11 +623,20 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T19:55:19Z",
+  "updatedUTC": "2026-11-20T20:06:47Z",
   "latestCandidate": {
     "pullRequest": 728,
-    "head": "6687c3150482fc6a84c45d53ff41ea90355eccbe",
+    "head": "bdec94ab01bb26c3fd09d98c83455507d136421f",
+    "tree": "827528302f54a3c9fc643bb65b46faf6ac2b38e9",
     "base": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
-    "status": "historical module export assertions awaiting GitHub check"
+    "sourcePackageChecks": {
+      "runId": 44807975636,
+      "status": "success",
+      "completePackage": false
+    },
+    "ci": {
+      "runId": 44807975872,
+      "status": "in_progress"
+    }
   }
 }
