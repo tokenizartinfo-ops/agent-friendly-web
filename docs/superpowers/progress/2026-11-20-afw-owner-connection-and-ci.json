@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "d6af6ad208a0b4a10b491895db47af0092828b22",
-    "latestVerifiedTree": "7f3b1ed84b715e6932fc8f9dde16ebe7460c8873"
+    "latestVerifiedCommit": "74f35606f94dcf5cccd7531b80140cdf8ba99162",
+    "latestVerifiedTree": "dfe952868c5e9b46f94bc79bf9192efc34e6e6fb"
   },
   "candidate": {
     "pullRequest": 720,
@@ -772,6 +772,104 @@
         "operationalReadiness": false,
         "blocker": "Complete build and native source authority still fail closed. Workerd rehearsal does not establish the real Cloudflare QA context, custody, or coupled restoration. Cloudflare provider admission remains blocked by the open Workers/Queues incident."
       }
+    },
+    "pr732CustodyGuard": {
+      "pullRequest": 732,
+      "previousPullRequest": 731,
+      "sourceHead": "10741e4b77544bd947f8c118abc874e90ee3ea33",
+      "mergedRevision": "d6af6ad208a0b4a10b491895db47af0092828b22",
+      "tree": "7f3b1ed84b715e6932fc8f9dde16ebe7460c8873",
+      "state": "merged",
+      "fullCi": {
+        "run": 44833443595,
+        "status": "success",
+        "shardsPassed": 6,
+        "originalCheckpointCleanup": "success",
+        "gate": "success"
+      },
+      "focused": {
+        "redRun": 44833274988,
+        "expectedFailures": 8,
+        "greenRun": 44833443618,
+        "greenCases": 184,
+        "predecessorCases": 21,
+        "sameNoticeCases": 1
+      },
+      "nativeCustodyProofSource": "Bridge snapshots the actor, storage, QA version, D1, namespaces, methods and stored reader for one verification. The expected current account reader comes from the prior approval window; legacy and expired profiles rejected. This establishes no native loaded identity on its own.",
+      "primary": {
+        "closed": {
+          "observedAtUTC": "2026-11-20T22:55:31.397Z",
+          "workers": {
+            "qa": {
+              "matchesClosedPointer": true,
+              "flags": 14,
+              "cron": 0,
+              "tails": 0,
+              "closed": true,
+              "readAndPublishSecretBindingsPresent": [
+                true,
+                true
+              ]
+            },
+            "canary": {
+              "matchesClosedPointer": true,
+              "flags": 8,
+              "cron": 0,
+              "tails": 0,
+              "closed": true
+            },
+            "operator": {
+              "matchesClosedPointer": true,
+              "flags": 3,
+              "cron": 0,
+              "tails": 0,
+              "closed": true
+            },
+            "receiver": {
+              "matchesClosedPointer": true,
+              "flags": 4,
+              "cron": 0,
+              "tails": 0,
+              "closed": true
+            }
+          }
+        },
+        "credentials": {
+          "observedAtUTC": "2026-11-20T22:56:32.677Z",
+          "out": {
+            "reader": {
+              "idMatches": true,
+              "active": true,
+              "expiresAt": "2026-11-27T02:59:59Z",
+              "expiryMatches": true,
+              "policyHash": "52f206f2a70a1b7a650863c6551739555ac9a56d43574d402641c67bd408368e"
+            },
+            "publisher": {
+              "idMatches": true,
+              "active": true,
+              "expiresAt": "2026-11-27T02:59:59Z",
+              "expiryMatches": true,
+              "policyHash": "5c60496910d590a18ddf55ea3122190c428483573247f630074b836cd6be6ce4"
+            }
+          },
+          "scope": "Cloudflare token metadata; does not establish stored credential values or activation."
+        }
+      },
+      "provider": {
+        "status": "identified",
+        "id": "0ocqieaifg7h",
+        "components": [
+          "Workers",
+          "Queues"
+        ],
+        "observedAtUTC": "2026-11-20T23:17:50.2891727+00:00"
+      },
+      "disposition": {
+        "deployableZip": false,
+        "realTrial": false,
+        "operationalReadiness": false,
+        "blocker": "Actual QA source/profile and loaded read identity remain unqualified, the complete build still fails closed. The Cloudflare Workers/Queues incident is still open."
+      }
     }
   },
   "findings": {
@@ -878,103 +976,36 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T23:20:32.276Z",
+  "updatedUTC": "2026-11-20T23:45:32.446Z",
   "latestCandidate": {
-    "pullRequest": 732,
-    "previousPullRequest": 731,
-    "sourceHead": "10741e4b77544bd947f8c118abc874e90ee3ea33",
-    "mergedRevision": "d6af6ad208a0b4a10b491895db47af0092828b22",
-    "tree": "7f3b1ed84b715e6932fc8f9dde16ebe7460c8873",
+    "pullRequest": 733,
+    "previousPullRequest": 732,
     "state": "merged",
+    "sourceHead": "e80a9467f8cb2b6d443b41e49be1304b96f0979c",
+    "mergedRevision": "74f35606f94dcf5cccd7531b80140cdf8ba99162",
+    "tree": "dfe952868c5e9b46f94bc79bf9192efc34e6e6fb",
     "fullCi": {
-      "run": 44833443595,
+      "run": 44836699417,
       "status": "success",
       "shardsPassed": 6,
       "originalCheckpointCleanup": "success",
-      "gate": "success"
+      "verify": "success"
     },
     "focused": {
-      "redRun": 44833274988,
-      "expectedFailures": 8,
-      "greenRun": 44833443618,
-      "greenCases": 184,
-      "predecessorCases": 21,
-      "sameNoticeCases": 1
+      "redRun": 44836539778,
+      "greenRun": 44836699464,
+      "exactPackageModuleCount": 2,
+      "auxiliaryReceiver": true,
+      "nativeWorkflowDenials": 2,
+      "nativeReviewReceiverDenials": 3,
+      "outboundAttempts": 0
     },
-    "nativeCustodyProofSource": "Bridge snapshots the actor, storage, QA version, D1, namespaces, methods and stored reader for one verification. The expected current account reader comes from the prior approval window; legacy and expired profiles rejected. This establishes no native loaded identity on its own.",
-    "primary": {
-      "closed": {
-        "observedAtUTC": "2026-11-20T22:55:31.397Z",
-        "workers": {
-          "qa": {
-            "matchesClosedPointer": true,
-            "flags": 14,
-            "cron": 0,
-            "tails": 0,
-            "closed": true,
-            "readAndPublishSecretBindingsPresent": [
-              true,
-              true
-            ]
-          },
-          "canary": {
-            "matchesClosedPointer": true,
-            "flags": 8,
-            "cron": 0,
-            "tails": 0,
-            "closed": true
-          },
-          "operator": {
-            "matchesClosedPointer": true,
-            "flags": 3,
-            "cron": 0,
-            "tails": 0,
-            "closed": true
-          },
-          "receiver": {
-            "matchesClosedPointer": true,
-            "flags": 4,
-            "cron": 0,
-            "tails": 0,
-            "closed": true
-          }
-        }
-      },
-      "credentials": {
-        "observedAtUTC": "2026-11-20T22:56:32.677Z",
-        "out": {
-          "reader": {
-            "idMatches": true,
-            "active": true,
-            "expiresAt": "2026-11-27T02:59:59Z",
-            "expiryMatches": true,
-            "policyHash": "52f206f2a70a1b7a650863c6551739555ac9a56d43574d402641c67bd408368e"
-          },
-          "publisher": {
-            "idMatches": true,
-            "active": true,
-            "expiresAt": "2026-11-27T02:59:59Z",
-            "expiryMatches": true,
-            "policyHash": "5c60496910d590a18ddf55ea3122190c428483573247f630074b836cd6be6ce4"
-          }
-        },
-        "scope": "Cloudflare token metadata; does not establish stored credential values or activation."
-      }
-    },
-    "provider": {
-      "status": "identified",
-      "id": "0ocqieaifg7h",
-      "components": [
-        "Workers",
-        "Queues"
-      ],
-      "observedAtUTC": "2026-11-20T23:17:50.2891727+00:00"
-    },
+    "scope": "Workerd mounts the real operations-manager auxiliary worker built from the same verified Git tree, with the service-binding mapping in the staged QA profile. The diagnostic Worker shares that binding and observes verifyChannel false and readReview null. Direct signed HTTP verification gets 404. No extra release ZIP role, live credentials, provider I/O or activation.",
     "disposition": {
       "deployableZip": false,
       "realTrial": false,
       "operationalReadiness": false,
-      "blocker": "Actual QA source/profile and loaded read identity remain unqualified, the complete build still fails closed. The Cloudflare Workers/Queues incident is still open."
+      "remaining": "Owner explicitly deferred real activation. Resume with native QA identity and loaded-token evidence and exact restoration; do not infer from the rehearsal. Last provider and R2 proof retained under earlier checkpoints."
     }
   }
 }
