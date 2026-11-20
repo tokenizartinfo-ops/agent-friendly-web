@@ -112,7 +112,11 @@ async function issued(f,form,response){
  const [subject,sdkId]=code.split(':'),kv=await f.mf.getKVNamespace('OAUTH_KV','m-sdk'),grant=await kv.get('grant:'+subject+':'+sdkId,{type:'json'});
  assert(grant,'M fixture alias observes actual SDK grant');assert.equal(grant.userId,form.identity.subject);assert.equal(grant.clientId,form.identity.clientId);assert.equal(grant.resource,form.identity.resource);assert.deepEqual(grant.scope,['afw:project:read']);assert(grant.encryptedProps);assert(grant.authCodeId);
  assert.deepEqual(await readSyntheticIssuedGrantProps(code,grant),{applicationGrantId:form.identity.grantId,userId:form.identity.subject,projectId:form.identity.projectId});
- const final=await observe(f);assert(has(final,'sdk_complete:observed'));assert.equal(final.rows.length,8);
+ const final=await observe(f);
+ const journalSuffixes=final.rows.map(([key])=>key.split(':').slice(2).join(':')).sort();
+ assert.deepEqual(journalSuffixes,['root','grant','reference',...['sdk_begin','sdk_approve','sdk_complete'].flatMap(name=>[name+':send',name+':observed'])].sort());
+ const reference=JSON.parse(final.rows.find(([key])=>key.endsWith(':reference'))[1]);
+ assert.equal(reference.sdkGrantId,sdkId,'the native reference identifies the actual SDK grant');
  const journal=await plain(f.stub.snapshot()),read=suffix=>JSON.parse(journal.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(suffix))[1]),consume=read(':consume:send'),ack=read(':grant:ack');assert(ack.observedAt<consume.deadline);console.info('D02 native timing',JSON.stringify({...f.timings,consumeSendToGrantAckMs:ack.observedAt-consume.issuedAt,childRemainingAtGrantAckMs:consume.deadline-ack.observedAt,consumeIssuedAt:consume.issuedAt,grantAckObservedAt:ack.observedAt,mockedProviderGetObservations:(f.observationTimes??[]).filter(v=>v.kind==='provider'&&v.method==='GET'&&v.at>=consume.issuedAt&&v.at<=ack.observedAt).length,mockedLedgerGetObservations:(f.observationTimes??[]).filter(v=>v.kind==='ledger'&&v.method==='GET'&&v.at>=consume.issuedAt&&v.at<=ack.observedAt).length}));
  return {app,code,sdkId,grant};
 }

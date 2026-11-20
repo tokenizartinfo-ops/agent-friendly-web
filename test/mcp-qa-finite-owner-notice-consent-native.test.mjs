@@ -6,7 +6,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 import {seedFiniteOwnerSdkClient} from './fixtures/finite-owner-qa-sdk.mjs';
-const PREP='__Host-afw-finite-prepare='+'a'.repeat(64);
 async function plain(p){const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r?.[Symbol.dispose]?.();}}
 async function withIssued(fn){
  const f=await initialEntryHarness('phase-context-sdk-token-notice-get');
@@ -84,10 +83,10 @@ test('native consent grammar denies untrusted request corpus',()=>withIssued(asy
  ['MIME parameter',()=>consent(f,{headers:{...h,'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}})],
  ['1025 bytes',()=>consent(f,{body:'a'.repeat(1025)})],
  ['duplicate cookie',()=>consent(f,{headers:{...h,Cookie:h.Cookie+'; '+h.Cookie.split('; ')[1]}})],
- ['bad cookie hash',()=>consent(f,{headers:{...h,Cookie:PREP+'; __Host-afw-monitoring-owner='+'b'.repeat(43)}})],
+ ['bad cookie hash',()=>consent(f,{headers:{...h,Cookie:f.headers.Cookie+'; __Host-afw-monitoring-owner='+'b'.repeat(43)}})],
  ['missing prepare',()=>consent(f,{headers:{...h,Cookie:h.Cookie.split('; ')[1]}})],
  ['prepare mismatch',()=>consent(f,{headers:{...h,Cookie:h.Cookie.replace('a'.repeat(64),'b'.repeat(64))}})],
- ['quoted own cookie',()=>consent(f,{headers:{...h,Cookie:PREP+'; __Host-afw-monitoring-owner="'+f.notice.handle+'"'}})]
+ ['quoted own cookie',()=>consent(f,{headers:{...h,Cookie:f.headers.Cookie+'; __Host-afw-monitoring-owner="'+f.notice.handle+'"'}})]
  ];
  for(const [kind,call]of cases){await denied(f,await call(),before);assert.equal((await plain(f.stub.noticeInspect())).events.length,0,kind);}
 }));

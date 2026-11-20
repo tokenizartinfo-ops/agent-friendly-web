@@ -343,14 +343,22 @@ export async function prepareNoticeIssued(f){
 export async function issueNotice(f){
   f.verifier='v'.repeat(64);f.challenge=createHash('sha256').update(f.verifier).digest('base64url');
   const query=new URLSearchParams({client_id:f.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:f.source.resource,scope:'afw:project:read',state:'SYN-state',code_challenge:f.challenge,code_challenge_method:'S256'});
-  const get=await f.mf.dispatchFetch(f.source.origin+'/authorize?'+query,{redirect:'manual',headers:f.headers});assert.equal(get.status,200);
+  const get=await f.mf.dispatchFetch(f.source.origin+'/authorize?'+query,{redirect:'manual',headers:f.headers});assert.equal(get.status,200,'native OAuth authorization form before notices');
   const html=await get.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle);
   const cookie=get.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(cookie);
   const post=await f.mf.dispatchFetch(f.source.origin+'/authorize',{method:'POST',redirect:'manual',headers:{Origin:f.source.origin,'Content-Type':'application/x-www-form-urlencoded',...f.headers,Cookie:PREP+'; '+cookie},body:new URLSearchParams({handle,decision:'approve',scope:'afw:project:read'})});
-  assert.equal(post.status,302);f.code=new URL(post.headers.get('Location')).searchParams.get('code');assert(f.code);await post.body?.cancel();
+  assert.equal(post.status,302,'native OAuth consent before notices');f.code=new URL(post.headers.get('Location')).searchParams.get('code');assert(f.code);await post.body?.cancel();
   const rows=await plain(f.stub.snapshot()),r=JSON.parse(rows.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(':reservation'))[1]);f.identity=r.identity;
   f.grant=await plain(f.stub.sdkGrant(f.identity.grantId));assert.equal(f.grant.revoked_at,'');assert.equal(f.grant.exchanged_at,'');
   assert.equal((await plain(f.stub.sdkReadCurrent())).source.phase,'read_consent');
+  const stageHandle='9'.repeat(64),predecessor=f.phaseCurrent;
+  const modeled=await plain(f.stub.seedNoticePublication(predecessor.receipt,stageHandle));
+  f.noticePredecessor=predecessor;f.phaseCurrent=modeled;
+  const adopted=await f.mf.dispatchFetch(f.source.origin+'/fixture/notice-publication',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({versionId:modeled.receipt.versionId})});
+  assert.equal(adopted.status,204);
+  const prepared=await plain(f.stub.sdkReadCurrent());
+  assert.equal(prepared.source?.phase,'notice_consent',JSON.stringify(prepared));
+  f.source=prepared.source;f.headers={...f.headers,Cookie:'__Host-afw-finite-prepare='+stageHandle};
 }
 export async function actualExchangeMcp(f){
  const config=await f.mf.dispatchFetch(f.source.origin+'/fixture/token-config',{method:'POST',body:JSON.stringify({clientId:f.source.clientId,projectId:f.source.project.projectId,audience:f.source.access.audience,teamDomain:f.source.access.teamDomain,expiresAt:new Date(f.source.window.expiresAt).toISOString()})});assert.equal(config.status,204);
@@ -362,14 +370,14 @@ export async function actualExchangeMcp(f){
   const summary=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(summary.isError,undefined);assert.equal(summary.structuredContent.data.id,f.identity.projectId);
  }finally{await client.close();}
  f.grant=await plain(f.stub.sdkGrant(f.identity.grantId));assert.notEqual(f.grant.exchanged_at,'');
- const context=await plain(f.stub.sdkReadCurrent());assert.deepEqual(Object.keys(context).sort(),['capsuleHash','preconnectionId','source']);assert.equal(context.source.phase,'read_consent');
+ const context=await plain(f.stub.sdkReadCurrent());assert.deepEqual(Object.keys(context).sort(),['capsuleHash','preconnectionId','source']);assert.equal(context.source.phase,'notice_consent');
 }
 
 export async function ticket(f,extra=''){
- const response=await f.mf.dispatchFetch(f.source.origin+'/monitoring',{headers:{...f.headers,Cookie:PREP+extra},redirect:'manual'});
- const html=await response.text();assert.equal(response.status,200);const handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle);
+ const response=await f.mf.dispatchFetch(f.source.origin+'/monitoring',{headers:{...f.headers,Cookie:f.headers.Cookie+extra},redirect:'manual'});
+ const html=await response.text();assert.equal(response.status,200,'native notice form after the modeled predecessor');const handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle);
  const cookie=response.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(cookie);
- f.notice={handle,headers:{...f.headers,Origin:f.source.origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:PREP+'; '+cookie+extra}};
+ f.notice={handle,headers:{...f.headers,Origin:f.source.origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.headers.Cookie+'; '+cookie+extra}};
  return plain(f.stub.noticeInspect());
 }
 export const consent=(f,options={})=>f.mf.dispatchFetch(f.source.origin+'/monitoring/grant',{method:'POST',redirect:'manual',headers:f.notice.headers,body:new URLSearchParams({handle:f.notice.handle}),...options});

@@ -12,7 +12,16 @@ for(const mode of ['source','ticket','approval'])test('actual pre-admission '+mo
  try{await blocked(f);}finally{await f.json('/fixture/request-release',{});}
  await wait(f,'settled');await new Promise(r=>setTimeout(r,30));
  assert.equal((await f.json('/fixture/request-probe',{})).requestAllowed,true);
- const rows=await f.json('/fixture/rows',{});assert.equal(rows.filter(([k])=>k.endsWith(':connection:approval')).length,0,'no late stage admission or publication');
+ const rows=await f.json('/fixture/rows',{});
+ // This fault delays the result of an already-committed atomic write.
+ // The audit data may exist while the original request still failed closed.
+ assert.equal(rows.filter(([key])=>key.endsWith(':connection:approval')).length,mode==='approval'?1:0);
+ assert(!rows.some(([key])=>key.startsWith('afw.finite-policy-effect.v1:')),'no late policy publication');
+ if(mode==='approval'){
+  const replay=await f.json('/fixture/request-prepare',{...input,mode:'normal'});
+  assert.equal(replay.rejected,true,'a fresh request cannot turn the recorded approval into late admission');
+  assert.deepEqual(await f.json('/fixture/rows',{}),rows);
+ }
 });
 test('late streamed body cancellation keeps request occupied until cancellation settles',async t=>{
  const f=await native(t),p=f.json('/fixture/request-prepare',{mode:'body',method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'}});

@@ -62,6 +62,58 @@ import {sealFiniteInitialUploadRecord as phaseSealUpload,encodeFiniteInitialUplo
    await storage.sync();return {provenance:'SYN external publication evidence; real native journals',receipt,configuration:cfg};
   }catch(e){return {fixtureError:String(e),stack:e.stack};}finally{parent.finish();Date.now=now;}
  }
+ // The specialized notice tests model the preceding provider publication.
+ // They use the actual SDK grant and native journals without adding product authority.
+ async seedNoticePublication(previous,handle){
+  if(!/^[a-f0-9]{64}$/.test(handle))throw Error('SYN invalid notice preparation handle');
+  const f=this.phaseSeededFacts,storage=this.ctx.storage;
+  const parent=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/connections/finite-prepare'));
+  try{
+   const {source,preconnectionId:id}=await readPrivateQaFiniteOwnerContext({ctx:this.ctx,env:this.env,parent:parent.lease});
+   const current=source.currentPublication;
+   if(!f||source.phase!=='read_consent'||current.versionId!==previous.versionId||current.deploymentId!==previous.deploymentId||current.receiptHash!==previous.receiptHash)throw Error('SYN wrong notice predecessor');
+   const store=phaseStore({storage,now:Date.now}),lease=parent.lease;
+   const {record:grantLink}=await store.readLink({kind:'grant',preconnectionId:id},lease);
+   const {record:relation}=await store.readPreconnectionConnection({preconnectionId:id},lease);
+   const {record:connection}=await store.readConnectionRef({connectionRef:relation.connectionRef},lease);
+   const db=this.env.RELEASE_DB.withSession('first-primary');
+   const grant=await db.prepare('SELECT id,user_id,project_id,client_id,resource,expires_at,revoked_at FROM delegated_access_grants WHERE id=?').bind(grantLink.grantId).first();
+   const {identity}= (await phaseIssuerJournal({ctx:this.ctx,env:this.env}).read({preconnectionId:id},lease)).reservation;
+   if(!grant||grant.revoked_at!==''||grant.id!==identity.grantId||grant.user_id!==identity.subject||grant.project_id!==source.project.projectId||grant.client_id!==source.clientId||grant.resource!==source.resource)throw Error('SYN wrong notice grant');
+   const at=Date.now(),expiresAt=Math.min(f.ticket.expiresAt,f.preconnection.expiresAt,connection.expiresAt),ticketHash=phaseRawSha(handle);
+   const ticket={...f.ticket,ticketHash,action:'notices',connectionRef:relation.connectionRef,createdAt:at,expiresAt};
+   const approval={...f.approval,approvedAt:at,expiresAt};
+   approval.csrfReceiptHash=phaseEvidence('decision',{ticket,decision:'approve',projectHash:approval.projectHash,goal:source.goal,clientId:source.clientId,approvedAt:at,expiresAt});
+   const stage='notices',stageApproval={...f.stageApproval,stage,ticketHash,approvalHash:phaseHash('ConfigurationApproval',approval)};
+   const record=async(method,data)=>{if((await store[method](data,lease)).status!=='recorded')throw Error('SYN notice readiness '+method);};
+   await record('putTicket',ticket);
+   await record('consumeTicket',{ticketHash,recordHash:approval.csrfReceiptHash});
+   await record('putConfigurationApproval',approval);
+   await record('putStageApproval',stageApproval);
+   const configuration=structuredClone(f.anchors.plan.configuration),put=(name,text)=>{configuration.bindings.find(b=>b.name===name).text=text;};
+   put('AFW_DELEGATED_OAUTH_ENABLED','true');
+   put('AFW_DOSSIER_MONITORING_OWNER_ENABLED','true');
+   const policy={grantId:grant.id,projectId:grant.project_id,clientId:grant.client_id,startAt:at,expiresAt:Math.min(at+600000,Date.parse(grant.expires_at),Date.parse(identity.consentExpiresAt),f.preconnection.owner.accessExpiresAt,f.anchors.capsule.C0,expiresAt)};
+   if(policy.expiresAt<=at)throw Error('SYN notice readiness is expired');
+   put('AFW_DOSSIER_MONITORING_OWNER_POLICY',JSON.stringify(policy));
+   const contextHash=phaseDigest('afw.finite-connection-context.v1',{preconnection:f.preconnection,stageApproval,predecessors:[previous],grant:grantLink,notice:null});
+   const versionId='cccccccc-cccc-4ccc-8ccc-cccccccccccc',deploymentId='dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+   for(const effect of ['upload','activation']){
+    const j=phaseJournal({storage,identity:{kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage,effect},now:Date.now});
+    const issuedAt=Date.now(),send={purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:source.sourceRevision,stage,effect,contextHash,baselineVersionId:previous.versionId,baselineDeploymentId:previous.deploymentId,requestHash:phaseRawSha('modeled notice '+effect),issuedAt,deadline:Math.min(issuedAt+5000,expiresAt)};
+    if((await j.issue(send,lease)).status!=='recorded')throw Error('SYN notice modeled SEND');
+    const ack={purpose:'afw.finite-connection-ack.v1',sendHash:phaseHash('ConnectionSend',send),resourceId:effect==='upload'?versionId:deploymentId,acknowledgedAt:Date.now()};
+    if((await j.acknowledge(ack,lease)).status!=='recorded')throw Error('SYN notice modeled ACK');
+    if(effect==='activation'){
+     const receipt={purpose:'afw.finite-connection-installed.v1',preconnectionId:id,sourceRevision:source.sourceRevision,stage,baselineVersionId:previous.versionId,baselineDeploymentId:previous.deploymentId,versionId,deploymentId,moduleHash:f.anchors.capsule.moduleHash,configurationHash:phaseConfigurationHash(configuration),completedAt:Date.now()};
+     receipt.receiptHash=phaseHash('ConnectionReceipt',receipt);
+     if((await j.finish(receipt,lease)).status!=='recorded')throw Error('SYN modeled notice receipt');
+     await storage.sync();
+     return {provenance:'SYN modeled notice publication; native factual reader rechecks all records',receipt,configuration};
+    }
+   }
+  }finally{parent.finish();}
+ }
  async phaseEnrollmentMutations(){
   const original=this.phaseSeededFacts;if(!original)throw Error('SYN facts absent');
   const results={exact:!!phaseEnrollmentFacts(original),nullAck:phaseEnrollmentFacts({...original,ack:null}).ack===null};

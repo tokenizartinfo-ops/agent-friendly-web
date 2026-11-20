@@ -354,6 +354,10 @@ export function createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,crea
     if(mode==='new-migration')result.migrations=[];
     if(mode==='enabled-cache')result.exports.default.cache={enabled:true};
    }
+   else if(f.noticePredecessor&&req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/'+f.noticePredecessor.receipt.versionId+'?include=modules'){
+    const {receipt,configuration}=f.noticePredecessor;
+    result={...structuredClone(configuration),id:receipt.versionId,urls:[],modules:structuredClone(f.uploaded.modules)};
+   }
    else if(f.phaseCurrent&&req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/'+f.phaseCurrent.receipt.versionId+'?include=modules'){result={...structuredClone(f.phaseCurrent.configuration),id:f.phaseCurrent.receipt.versionId,urls:[],modules:structuredClone(f.uploaded.modules)};if(f.phaseFault==='module')result.modules[0].content_base64='AAAA';if(f.phaseFault==='configuration')result.bindings.find(b=>b.name==='ACCESS_AUD').text='SYN drift';if(f.phaseFault==='later')result.bindings.find(b=>b.name==='AFW_DOSSIER_MONITORING_OWNER_ENABLED').text='true';if(f.phaseFault==='empty-private'||f.phaseFault==='placeholder-private'){result.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY').text=f.phaseFault==='empty-private'?'':'SYNTHETIC-PRIVATE-AFW_DOSSIER_EVENTS_POLICY';result.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_ENABLED').text='true';}}
    else{assert.equal(req.method,'GET');assert.equal(req.url,CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/2607abae-cec3-4e35-89eb-8b8572262b54?include=modules');result=structuredClone(x.metadata);f.baselineReads++;if(f.gateMode==='history'&&f.uploads.length>0)result.modules[0].content_base64=Buffer.from('SYN drift').toString('base64');
     if(f.baselineReads>=3){
