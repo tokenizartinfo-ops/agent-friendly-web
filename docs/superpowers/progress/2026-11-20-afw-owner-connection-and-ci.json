@@ -223,6 +223,32 @@
     "postMergeR2Release": {
       "observedAt": "2026-11-20T16:18:23Z",
       "exactDeployableObjectPresent": false
+    },
+    "postMergeMainCi": {
+      "runId": 44771886494,
+      "conclusion": "success",
+      "sourceRevision": "e1abb784c8ebdc33542b6bb325489b3987218611"
+    },
+    "exactPackageWorkerdCandidate": {
+      "pullRequest": 722,
+      "head": "ccd0719745714705a4f4aa223d2858d39cc389da",
+      "tree": "53bb103a40442a19db56d4eb6cccbf7585d71dec",
+      "cloudCheck": {
+        "runId": 44775158634,
+        "jobId": 136422885012,
+        "status": "success"
+      },
+      "fullCiRun": 44775158337,
+      "exactStagedModules": 2,
+      "rollbackRuntimeFromProtectedR2": "Pending protected dispatch on admitted exact main",
+      "operationalReadiness": false
+    },
+    "finiteReceiverPrimary": {
+      "atUTC": "2026-11-20T16:38:59.866Z",
+      "deploymentId": "3a2dad24-2f32-488c-a480-52633118adac",
+      "versionId": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
+      "exactContentInspectionNamedExport": true,
+      "flagsClosed": true
     }
   },
   "findings": {
@@ -240,7 +266,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "The merged source and its staged package checks are qualified. The package assembly must still produce a verified private v2 object for exact main, with exact native mount compatibility and recoverable rollback. After that, read back the package in the protected workflow and record the real synthetic-dossier cloud review and native withdrawal for the same notice before preparing the PC-off trial.",
+    "next": "Await exact PR 722 CI, integrate, then request one read-only protected Actions private R2 verification on exact main. Continue with exact provider live metadata adoption, authorization semantics, private v2 assembly and custody, then one real finite signed notice delivery, review and native withdrawal. No PC-off readiness from source or staged/rollback mount checks.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -317,7 +343,8 @@
     "heldConcurrency": "GitHub diagnostic job 136340429745 captured a rejected concurrent OAuth request at the owner gate and the genuine original SDK reaching durable completion. Only the test adapter's blanket list ban interrupted the bounded read-after-write. The candidate now allows exactly the synthetic subject's grant reads after the original SDK observed record. Production bounds remain in place.",
     "fixtureClock": "A synthetic journal sampled the issue and deadline clock twice; a 1ms tick could make the required 5000ms window 5001ms. Fixture now derives both from one sample.",
     "additionalCI": "Run 44753407506 reached all remaining shards except an old historical test's setup that expected an inline custody declaration, abandoned native workers and hit the 20-minute runner ceiling. The historical fixture now exercises the current selector, pins the closed QA hash domain and disposes the harness if setup fails. The original deadline test independently checks absence of an OAuth cookie and of a SQL effect even when the timed-out transport already closed the response body. The following full run exposed the previously masked native reservation gate issue and a timed-out notice GET whose response body the transport had already closed. The source gate handoff and the GET expiry assertion have been addressed in the new candidate. On revision 21035601 the native reservation now passed; the remaining shard-one and shard-two failures were white-box fixtures tied to the pre-change function call. Their source anchors are updated and the finite unit fixtures provide a branded test gate without calling any effect. The six focused tests passed. Revision 3a72c9a9 passed all six full suites and original checkpoint cleanup. The final job reported seven lint errors in local identifier and test helper names. These were corrected without changing metadata shapes; syntax and thirteen impacted contract tests passed. Exact candidate CI is pending.",
-    "nativeReservationBoundary": "Actual workerd Workflow step entry dropped the AsyncLocalStorage reservation gate. The original private environment-bound gate is now captured before the Workflow handoff and carried to the existing reservation writer. The candidate test mounts the real gate, exactly one durable write and first-primary readback. The synthetic measurement proxy explicitly forwards the two scoped RPC methods without invoking remote bind."
+    "nativeReservationBoundary": "Actual workerd Workflow step entry dropped the AsyncLocalStorage reservation gate. The original private environment-bound gate is now captured before the Workflow handoff and carried to the existing reservation writer. The candidate test mounts the real gate, exactly one durable write and first-primary readback. The synthetic measurement proxy explicitly forwards the two scoped RPC methods without invoking remote bind.",
+    "providerQaPublicationShape": "Cloudflare exact closed QA version c570b60b metadata exports is an object keyed by actual classes, including SQLite IndependentClosure. Pending publication verifier currently expects an array of JavaScript export names. Treat module identity separately from the provider class map and qualify historical role commitments before enabling package authorization."
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -328,7 +355,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T16:19:35Z",
+  "updatedUTC": "2026-11-20T16:39:00Z",
   "latestCandidate": {
     "pullRequest": 720,
     "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
