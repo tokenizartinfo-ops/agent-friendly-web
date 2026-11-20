@@ -162,6 +162,7 @@ test('protected diagnostics do not trust thrown properties, reread status or wai
   {cause:{stage:'archive_http_status',httpStatus:403}});
  assert.equal(reads,1);
  const controller=new AbortController();
+ Object.defineProperty(controller.signal,'aborted',{get(){assert.fail('untrusted abort property inspected');}});
  await assert.rejects(api.readFiniteR2Archive({credential,now,signal:controller.signal,fetchImpl:async()=>{
   controller.abort();throw new Error(credential);
  }}),{cause:{stage:'archive_read_deadline',httpStatus:null}});
