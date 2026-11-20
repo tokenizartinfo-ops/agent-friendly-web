@@ -123,6 +123,27 @@
       "noticeAndConsentPassed": true,
       "originalCheckpointCleanupPassed": true,
       "delayedFanoutCompletedWithinOriginalWindowMs": 3813
+    },
+    "correctedOAuthHeldRun": {
+      "run": 44753407506,
+      "job": 136346779586,
+      "status": "success",
+      "missingReplayEffect": true,
+      "scopedGrantReadback": true
+    },
+    "r2Staging": {
+      "run": 44753407432,
+      "job": 136346778758,
+      "status": "success",
+      "tests": 116,
+      "completePackage": false
+    },
+    "historicalNativeRerun": {
+      "local": true,
+      "passes": 39,
+      "fails": 0,
+      "includesExactCustodyCutoff": true,
+      "includesBothAcquiredBodyCancellationModes": true
     }
   },
   "findings": {
@@ -215,7 +236,8 @@
     "nativeNoticeSpecialist": "The previous test revision modeled and verified the separate notices publication in QA, then the test-only M runner still lacked the exact enabled policy and owner scope. The current candidate adopts the five required values from that same modeled configuration. Independent CI qualification pending.",
     "packageBoundary": "Historical draft source keys remain under finite-bundles-v1. An exact revision's deployment archive now has its own finite-packages-v2 key and requires its own signed read URL in the protected issuer context. Tests reject swap attempts before transport. The compatibility gate still requires privately assembled v2 bytes and verified rollback.",
     "heldConcurrency": "GitHub diagnostic job 136340429745 captured a rejected concurrent OAuth request at the owner gate and the genuine original SDK reaching durable completion. Only the test adapter's blanket list ban interrupted the bounded read-after-write. The candidate now allows exactly the synthetic subject's grant reads after the original SDK observed record. Production bounds remain in place.",
-    "fixtureClock": "A synthetic journal sampled the issue and deadline clock twice; a 1ms tick could make the required 5000ms window 5001ms. Fixture now derives both from one sample."
+    "fixtureClock": "A synthetic journal sampled the issue and deadline clock twice; a 1ms tick could make the required 5000ms window 5001ms. Fixture now derives both from one sample.",
+    "additionalCI": "Run 44753407506 reached all remaining shards except an old historical test's setup that expected an inline custody declaration, abandoned native workers and hit the 20-minute runner ceiling. The historical fixture now exercises the current selector, pins the closed QA hash domain and disposes the harness if setup fails. The original deadline test independently checks absence of an OAuth cookie and of a SQL effect even when the timed-out transport already closed the response body."
   },
   "effects": {
     "cloudflareDeploy": false,
@@ -226,18 +248,18 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T14:27:15Z",
+  "updatedUTC": "2026-11-20T15:00:21Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "941059f8dbb23314c41d261745ca2bef20dc5c66",
-    "tree": "f5eff174c17f5b9c274411e60aa4e9019a3e113c",
+    "head": "d1fdef5959269e1518ad3b21d79625343fe592fd",
+    "tree": "694c54cbcb97db9c8d4ebda0b67684176ee35e5f",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
     "ci": {
-      "runId": 44753407506,
+      "runId": 44758796277,
       "status": "in_progress"
     },
     "sourcePackageChecks": {
-      "runId": 44753407432,
+      "runId": 44758796328,
       "status": "in_progress",
       "completePackage": false
     }
