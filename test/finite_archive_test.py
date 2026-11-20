@@ -90,6 +90,7 @@ def release_frame(manifest=None):
     if manifest is None:
         manifest = {
             "purpose": "afw.finite-native-package.v2",
+            "compatibility": {"legacyContainmentQualified": False},
             "modules": {role: {"module": {
                 "name": "closed-rollback.mjs" if role == "qaClosed" else "index.mjs",
                 "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw),
@@ -135,6 +136,20 @@ class ArchiveTests(unittest.TestCase):
         missing_role, _ = release_frame({**manifest, "modules": {}})
         for invalid in (frame[:-1], frame + b"x", altered, wrong_name, missing_role):
             result = self.assemble(invalid)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(result.stdout, b"")
+            self.assertEqual(result.stderr, b"Finite archive unavailable\n")
+
+    def test_release_assembly_cannot_emit_an_enabled_or_undecided_zip(self):
+        _, manifest = release_frame()
+        for compatibility in ({"legacyContainmentQualified": True}, {}, None):
+            proposal = dict(manifest)
+            if compatibility is None:
+                proposal.pop("compatibility")
+            else:
+                proposal["compatibility"] = compatibility
+            frame, _ = release_frame(proposal)
+            result = self.assemble(frame)
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(result.stdout, b"")
             self.assertEqual(result.stderr, b"Finite archive unavailable\n")
