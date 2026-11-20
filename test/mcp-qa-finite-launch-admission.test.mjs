@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finiteFixture} from './fixtures/qa-finite-trial.mjs';
 import * as controls from '../lib/mcp-qa-finite-trial-control.mjs';
-const module=await import('../lib/mcp-qa-finite-launch-admission.mjs').catch(error=>{
+const admissionApi=await import('../lib/mcp-qa-finite-launch-admission.mjs').catch(error=>{
  if(error.code!=='ERR_MODULE_NOT_FOUND'||!error.message.includes('mcp-qa-finite-launch-admission.mjs'))throw error;return {};
 });
 function setup(){
@@ -23,14 +23,14 @@ function setup(){
   isolation,channel:{verified:true,challenge:Buffer.alloc(32,4).toString('base64url')},now:f.now};
 }
 test('QA arm projects only matching fresh native launch facts and proven receiver scope',()=>{
- assert.equal(typeof module.projectFiniteLaunchAdmission,'function');
- const evidence=setup(),out=module.projectFiniteLaunchAdmission(evidence);
+ assert.equal(typeof admissionApi.projectFiniteLaunchAdmission,'function');
+ const evidence=setup(),out=admissionApi.projectFiniteLaunchAdmission(evidence);
  assert.equal(out.purpose,'afw.qa-finite-primary.v1');assert.equal(out.containment.enteredWritersIsolated,true);
  assert.equal(out.quiescence.currentWriters,0);assert.equal(out.quiescence.completeInventory,true);
  assert.equal(out.consent.valid,true);assert.equal(out.controlHash,undefined);
 });
 test('QA arm rejects incomplete native facts, an old inventory or an unverified signature',()=>{
- assert.equal(typeof module.projectFiniteLaunchAdmission,'function');
+ assert.equal(typeof admissionApi.projectFiniteLaunchAdmission,'function');
  const x=setup();
  for(const patch of [
   {inventory:{...x.inventory,kind:'issued'}},
@@ -38,5 +38,5 @@ test('QA arm rejects incomplete native facts, an old inventory or an unverified 
   {admission:{...x.admission,permission:{...x.admission.permission,valid:false}}},
   {isolation:{...x.isolation,pristine:false}},
   {channel:{verified:false}},
- ])assert.throws(()=>module.projectFiniteLaunchAdmission({...x,...patch}));
+ ])assert.throws(()=>admissionApi.projectFiniteLaunchAdmission({...x,...patch}));
 });

@@ -24,10 +24,10 @@ import {RELEASE_TARGET} from '../lib/mcp-release-operator-policy.mjs';
 
 for(const role of ['canary','operator'])test('the archived '+role+' uses the same configuration commitment as the closed QA archive',()=>{
  const isCanary=role==='canary',bytes=Buffer.from('export default {};');
- const module={name:'index.mjs',bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};
+ const versionModule={name:'index.mjs',bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};
  const metadata={
-  id:QA_CLOUD_CLOSED_PINS[role].id,main_module:module.name,urls:[],
-  modules:[{name:module.name,content_type:'application/javascript+module',content_base64:bytes.toString('base64')}],
+  id:QA_CLOUD_CLOSED_PINS[role].id,main_module:versionModule.name,urls:[],
+  modules:[{name:versionModule.name,content_type:'application/javascript+module',content_base64:bytes.toString('base64')}],
   compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],
   bindings:[
    {name:isCanary?'DB':'RELEASE_DB',type:'d1',id:RELEASE_TARGET.databaseId},
@@ -36,7 +36,7 @@ for(const role of ['canary','operator'])test('the archived '+role+' uses the sam
   ],
   ...(isCanary?{exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}},containers:[]}:{}),
  };
- const pin={versionId:metadata.id,module,configurationHash:qaClosedConfigurationHash(metadata)};
+ const pin={versionId:metadata.id,module:versionModule,configurationHash:qaClosedConfigurationHash(metadata)};
  assert.equal(qualifyFiniteWorkerVersion({metadata,pin,role,closed:true}).configurationHash,pin.configurationHash);
  const legacyHash=restorationConfigurationHash(metadata);
  assert.throws(()=>qualifyFiniteWorkerVersion({metadata,pin:{...pin,configurationHash:legacyHash},role,closed:true}));

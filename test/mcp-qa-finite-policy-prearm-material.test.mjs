@@ -27,16 +27,16 @@ async function getProject(){
 function fixture(){
  const h='a'.repeat(64),sourceRevision='b'.repeat(40),sourceTree='c'.repeat(40),qaVersionId='qa-fixed',programHash='d'.repeat(64);
  const candidateBytes=Buffer.from('export default {};'),rollbackBytes=Buffer.from('export default {test:1};');
- const module={name:'index.mjs',bytes:candidateBytes.length,sha256:sha(candidateBytes)};
- const sourceCheck='git-inputs-before-after-v1',candidate={sourceRevision,sourceTree,programHash,module,sourceCheck,bytes:candidateBytes};
+ const candidateModule={name:'index.mjs',bytes:candidateBytes.length,sha256:sha(candidateBytes)};
+ const sourceCheck='git-inputs-before-after-v1',candidate={sourceRevision,sourceTree,programHash,module:candidateModule,sourceCheck,bytes:candidateBytes};
  const native={sourceRevision,qaVersionId,T0:1000};
  const configuration=structuredClone(finitePublicProfileTemplate('canaryLive'));
  for(const binding of configuration.bindings)if(binding.privateSlot){delete binding.privateSlot;binding.text='SYNTHETIC';}
- const receipt={stage:'finite',versionId:'active-prearm',deploymentId:'active-deployment',receiptHash:h,moduleHash:module.sha256,configurationHash:finiteActivationConfigurationHash(configuration)};
+ const receipt={stage:'finite',versionId:'active-prearm',deploymentId:'active-deployment',receiptHash:h,moduleHash:candidateModule.sha256,configurationHash:finiteActivationConfigurationHash(configuration)};
  const project={projectId:'SYNTHETIC',revision:1,synthetic:true};
  const ownerSource={sourceRevision,qaVersionId,actorId:h,phase:'finite_prearm',project,currentPublication:receipt};
- const capsule={capsuleHash:h,preconnectionId:h,qaVersionId,sourceRevision,sourceTree,moduleHash:module.sha256,activatedVersionId:'initial-M',I0:0,C0:2000};
- const originalContext={artifact:{sourceRevision,sourceTree,programHash,workerHash:module.sha256,sourceCheck},trialId:h};
+ const capsule={capsuleHash:h,preconnectionId:h,qaVersionId,sourceRevision,sourceTree,moduleHash:candidateModule.sha256,activatedVersionId:'initial-M',I0:0,C0:2000};
+ const originalContext={artifact:{sourceRevision,sourceTree,programHash,workerHash:candidateModule.sha256,sourceCheck},trialId:h};
  const plan={entryHash:h,manifestHash:h,baselineVersionId:'closed-version',baselineDeploymentId:'closed-deployment'};
  const prefix='afw.finite-initial-upload.v1:'+h+':';
  const rollbackModule={index:0,bytes:rollbackBytes.length,sha256:sha(rollbackBytes)};

@@ -23,9 +23,9 @@ const iso=x=>new Date(x).toISOString();
 
 async function scenario(t,mode){
  const bytes=Buffer.from('export default {};');
- const module={name:'index.mjs',sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,exports:[]};
+ const qaModule={name:'index.mjs',sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,exports:[]};
  const configuration=structuredClone(finitePublicProfileTemplate('qaLive'));
- const seed=await seedPrimaryFixture({sourceRevision,qaLive:{versionId:qaVersionId,deploymentId,module,configurationHash:qaClosedConfigurationHash(configuration)}});
+ const seed=await seedPrimaryFixture({sourceRevision,qaLive:{versionId:qaVersionId,deploymentId,module:qaModule,configurationHash:qaClosedConfigurationHash(configuration)}});
  const publicStatic={...finitePublicStaticExpectation('qaLive')};
  if(mode==='profile-drift')publicStatic.profileHash='e'.repeat(64);
  seed.seed.manifest.modules.qaLive.publicStatic=publicStatic;
@@ -40,7 +40,7 @@ async function scenario(t,mode){
   [path+'/instances/'+setupInstanceId,{status:'running',queued:iso(T0+2200),start:iso(T0+2500),params:{...payload},versionId:workflowVersion,steps:[],step_count:0}],
   [path+'/versions/'+workflowVersion,{id:workflowVersion,workflow_id:definition.id,class_name:definition.className,language:'javascript'}],
   ['/workers/scripts/'+definition.script+'/deployments?per_page=1',{deployments:[{id:deploymentId,strategy:'percentage',versions:[{version_id:qaVersionId,percentage:100}]}]}],
-  ['/workers/workers/'+definition.script+'/versions/'+qaVersionId+'?include=modules',{...configuration,id:qaVersionId,urls:[],modules:[{name:module.name,content_type:'application/javascript+module',content_base64:bytes.toString('base64')}]}],
+  ['/workers/workers/'+definition.script+'/versions/'+qaVersionId+'?include=modules',{...configuration,id:qaVersionId,urls:[],modules:[{name:qaModule.name,content_type:'application/javascript+module',content_base64:bytes.toString('base64')}]}],
  ]);
  const row=map.get(path+'/instances/'+setupInstanceId);
  const native={setupInstanceId,sourceRevision,qaVersionId,eventTimestamp:T0+2400,queuedAt:T0+2200,startedAt:T0+2500,T0};
