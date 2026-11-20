@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "302ad4650f2522c2b9a6b55b6bad96bf2377ab1a",
-    "latestVerifiedTree": "05ee5a4ca57e006b1670f250f60ecd253fdf82e1"
+    "latestVerifiedCommit": "72b736d73a7907ef153e98b871e5609849f754ab",
+    "latestVerifiedTree": "c3477fcf28e0b002077104815fd840acc266ef4e"
   },
   "candidate": {
     "pullRequest": 720,
@@ -709,20 +709,108 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T21:10:05Z",
+  "updatedUTC": "2026-11-20T21:49:05.904Z",
   "latestCandidate": {
-    "pullRequest": 729,
-    "head": "d913a610c41e1b901d149091f6335a93cb0f20a4",
-    "tree": "05ee5a4ca57e006b1670f250f60ecd253fdf82e1",
-    "mergedRevision": "302ad4650f2522c2b9a6b55b6bad96bf2377ab1a",
-    "sourcePackageChecks": {
-      "runId": 44813988470,
-      "status": "success",
-      "completePackage": false
+    "pullRequest": 730,
+    "previousPullRequest": 729,
+    "sourceHead": "f90283c084d1135a6fa3259899a2f17a3234189f",
+    "mergedRevision": "72b736d73a7907ef153e98b871e5609849f754ab",
+    "tree": "c3477fcf28e0b002077104815fd840acc266ef4e",
+    "state": "merged",
+    "isolation": {
+      "redRun": 44819278985,
+      "expectedFailures": 3,
+      "greenRun": 44820384948,
+      "passes": 21,
+      "scope": "Reject omitted or substituted original actor, absent/late native D1 closure or revocation, and legacy close before host access on compiled canary."
     },
-    "ci": {
-      "runId": 44813988493,
-      "status": "success"
+    "receiver": {
+      "run": 44820384948,
+      "passes": 1,
+      "scope": "Ephemeral D1; signed callback, authenticated list/claim/finish, rejects substituted event, same event receipt over private Workerd RPC. Native withdrawal was not part of this case."
+    },
+    "fullCi": {
+      "run": 44820384970,
+      "status": "success",
+      "shardsPassed": 6,
+      "originalCheckpointCleanup": "success",
+      "gate": "success"
+    },
+    "privateMainPackageVerification": {
+      "run": 44823430631,
+      "job": 136589864392,
+      "status": "success",
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "sourceTree": "c3477fcf28e0b002077104815fd840acc266ef4e",
+      "sourceRevision": "72b736d73a7907ef153e98b871e5609849f754ab",
+      "nativeMounts": {
+        "current": {
+          "exactModuleCount": 2,
+          "nativeWorkflowDenials": 2,
+          "operationalReadiness": false
+        },
+        "rollback": {
+          "exactModuleCount": 3,
+          "deniedRouteCount": 10,
+          "operationalReadiness": false
+        }
+      },
+      "releaseLayout": {
+        "archiveSha256": "0ad010793dc29df7129567d04769333e2eb786c279deb504dff3f03515107f09",
+        "archiveBytes": 2026312,
+        "moduleCount": 5,
+        "completePackage": false,
+        "operationalReadiness": false
+      }
+    },
+    "cloudflareStatus": {
+      "id": "0ocqieaifg7h",
+      "updatedUTC": "2026-11-11T05:05:06.331Z",
+      "components": [
+        "Workers",
+        "Queues"
+      ],
+      "status": "identified",
+      "observedAtUTC": "2026-11-20T21:44:18.4752560+00:00"
+    },
+    "cloudflareClosedReadback": {
+      "atUTC": "2026-11-20T21:33:59.949Z",
+      "workers": {
+        "qa": {
+          "matchesClosedPointer": true,
+          "closedFlags": 14,
+          "cron": 0,
+          "tails": 0,
+          "allClosed": true
+        },
+        "canary": {
+          "matchesClosedPointer": true,
+          "closedFlags": 8,
+          "cron": 0,
+          "tails": 0,
+          "allClosed": true
+        },
+        "operator": {
+          "matchesClosedPointer": true,
+          "closedFlags": 3,
+          "cron": 0,
+          "tails": 0,
+          "allClosed": true
+        },
+        "receiver": {
+          "matchesClosedPointer": true,
+          "closedFlags": 4,
+          "cron": 0,
+          "tails": 0,
+          "allClosed": true
+        }
+      }
+    },
+    "disposition": {
+      "deployable": false,
+      "realTrial": false,
+      "operationalReadiness": false,
+      "remaining": "Qualify the combined native start, notice review, subscription withdrawal and rollback before promoting the v2 ZIP. Cloudflare's current guard also rejects the nominal trial. Do not reuse an expired R2 URL."
     }
   }
 }
