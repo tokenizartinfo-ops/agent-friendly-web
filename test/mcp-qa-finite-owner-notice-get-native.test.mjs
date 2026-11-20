@@ -41,12 +41,17 @@ test('GET acknowledged original after actual QA code M token MCP and D04 reader'
  assert.deepEqual(reservation.identity,i);assert.deepEqual(reservation.expectedGrant,{scopes:JSON.parse(f.grant.scopes_json),createdAt:f.grant.created_at,expiresAt:f.grant.expires_at});
  assert.deepEqual(ticket,{handle_hash:createHash('sha256').update(handle).digest('hex'),request_id:rt.requestId,user_id:i.subject,grant_id:i.grantId,project_id:i.projectId,client_id:i.clientId,resource:i.resource,purpose:'afw.dossier-monitoring-owner.v1',action:'grant',revision:i.projectRevision,expected_sequence:0,issued_at:rt.issuedAt,expires_at:rt.expiresAt,permission_expires_at:rt.permissionExpiresAt});
  assert.equal(records['ticket:ack'].rowHash,initialHash('afw.finite-preparation-notice-row.v1',ticket));
- assert.equal(ticket.expires_at,Math.min(ticket.issued_at+600000,reservation.accessExpiresAt,reservation.preconnectionExpiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(f.grant.expires_at)));
+ const policy=JSON.parse(f.phaseCurrent.configuration.bindings.find(binding=>binding.name==='AFW_DOSSIER_MONITORING_OWNER_POLICY').text);
+ const expectedExpiry=Math.min(ticket.issued_at+600000,policy.expiresAt,reservation.accessExpiresAt,reservation.preconnectionExpiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(f.grant.expires_at));
+ assert.equal(ticket.expires_at,expectedExpiry);assert.equal(ticket.permission_expires_at,expectedExpiry);
  const sourceRowsAfter=await plain(f.stub.snapshot());for(const row of originalRows)assert.deepEqual(sourceRowsAfter.find(([key])=>key===row[0]),row,'original preparation/issuer/SDK history retained');
  assert.equal(records['ticket:ack'].outcome,'applied');assert.equal(records['ticket:ack'].sequence,null);assert(records['ticket:ack'].observedAt<records['ticket:send'].window.deadline);assert(state.trace.find(v=>v.position==='complete').at<records['ticket:send'].window.deadline);assert(records['ticket:send'].window.deadline-records['ticket:send'].window.startedAt<=5000);
  assert.match(html,/<form method="post" action="\/monitoring\/grant">/);assert.match(html,/<button type="submit">Permitir avisos temporales<\/button>/);assert.doesNotMatch(html,/<script|disabled|autosubmit/);assert.match(html,/Podés registrar un permiso temporal para avisos/);assert(html.includes(new Date(ticket.permission_expires_at).toISOString()));
  assert.match(response.headers.get('Content-Security-Policy'),/form-action 'self'/);assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Referrer-Policy'),'same-origin');assert.match(response.headers.get('Set-Cookie'),/; Path=\/; Secure; HttpOnly; SameSite=Strict; Max-Age=\d+/);
- assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
+ const settled=await plain(f.stub.sdkReadCurrent()),publication=f.phaseCurrent.receipt;
+ assert.equal(settled.preconnectionId,i.preconnectionId);assert.equal(settled.source?.phase,'notice_consent');
+ assert.deepEqual(settled.source.currentPublication,{stage:'notices',versionId:publication.versionId,deploymentId:publication.deploymentId,receiptHash:publication.receiptHash});
+ assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
  const repeat=await f.mf.dispatchFetch(f.source.origin+'/monitoring',{headers:f.headers});assert.equal(repeat.status,503);await repeat.body?.cancel();assert.deepEqual(await plain(f.stub.noticeInspect()),after);
 }));
 

@@ -59,7 +59,10 @@ test('native notice link retains global event sequence and foreign history',()=>
 test('native notice link never advances source or public readers and remains factual after deadline',()=>withIssued(async f=>{
  const after=await success(f),entry=await linkEntry(f),send=JSON.parse(after.notice.find(([key])=>key.endsWith('consent:send'))[1]);
  await new Promise(r=>setTimeout(r,Math.max(0,send.window.deadline-Date.now()+25)));assert(Date.now()>send.window.deadline);
- await f.stub.noticeConfigure();assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ await f.stub.noticeConfigure();
+ const settled=await plain(f.stub.sdkReadCurrent()),publication=f.phaseCurrent.receipt;
+ assert.equal(settled.preconnectionId,f.identity.preconnectionId);assert.equal(settled.source?.phase,'notice_consent');
+ assert.deepEqual(settled.source.currentPublication,{stage:'notices',versionId:publication.versionId,deploymentId:publication.deploymentId,receiptHash:publication.receiptHash});
  const trace=(await state(f)).trace;assert(trace.some(v=>v.correlator==='noticeLink'&&v.phase==='enter'&&v.at>send.window.deadline));assert(trace.some(v=>v.correlator==='noticeLink'&&v.phase==='exit'));
  for(const path of ['/monitoring','/authorize','/monitoring/notice-link']){const response=await f.mf.dispatchFetch(f.source.origin+path,{headers:f.headers});assert.notEqual(response.status,200);await response.body?.cancel();}
  await replayClosed(f,after);assert.deepEqual(await linkEntry(f),entry);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
