@@ -208,9 +208,15 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
   const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});
+  let nativeMount;
+  if(staging){
+   const {verifyFiniteStagingMounts}=await import('./verify-finite-native-staging.mjs');
+   nativeMount=await verifyFiniteStagingMounts(built);
+   process.stdout.write(JSON.stringify({sourceRevision,nativeMount})+'\n');
+  }
   // Separate isolated staging namespace; never eligible artifact name/layout.
   const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
   for(const [path,bytes] of Object.entries(built.files)){const target=resolve(root,path);await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,bytes);}
-  if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
+  if(staging){const evidence={...built,nativeMount};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
  }
 }

@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/afw-finite-native-package.yml"
       - "scripts/build-finite-native-package.mjs"
+      - "scripts/verify-finite-native-staging.mjs"
       - "lib/**"
       - "worker/**"
   workflow_dispatch:
@@ -38,7 +39,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify exact compiled inputs
+      - name: Mount exact compiled modules in Workerd
         run: node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION"
       - name: Verify private R2 package transport and release provenance
         run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs
