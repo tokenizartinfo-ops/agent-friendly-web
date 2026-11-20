@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "ace9d41e24b5221a1bea27cd69355e2b20f8d1e5",
-    "latestVerifiedTree": "7f79b7ec95b55551e94a8394ed5157ada13e521a"
+    "latestVerifiedCommit": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
+    "latestVerifiedTree": "88ae6ce9b03f6cf67aeb6a811f0a4436cdf71728"
   },
   "candidate": {
     "pullRequest": 720,
@@ -284,13 +284,13 @@
       "exactTreeVerified": true
     },
     "currentProviderGate": {
-      "checkedAtUTC": "2026-11-20T16:55:41.847Z",
-      "dependencyProfile": "prebuilt-closed-publication",
-      "readStatus": 200,
-      "gate": "unknown",
-      "reason": "active_related_incident",
       "incident": "0ocqieaifg7h",
-      "impactAttribution": "not-established",
+      "officialStatus": "identified",
+      "observedAtUTC": "2026-11-20T18:52:00Z",
+      "dependsOn": [
+        "Workers",
+        "Queues"
+      ],
       "operationalReadiness": false
     },
     "protectedR2Attempt": {
@@ -370,6 +370,81 @@
         "completePackage": false,
         "operationalReadiness": false
       }
+    },
+    "historicalClosedProfiles": {
+      "observedAtUTC": "2026-11-20T18:31:59.653Z",
+      "checks": {
+        "qaClosed": {
+          "bindingsHash": "69ee386c99509440ec3ca6bbf5e4296d04015e3f3fcd985b0c1afc09c4d04b0f",
+          "bindingCount": 31,
+          "closedFlags": 14,
+          "exactSourcePin": true
+        },
+        "canaryClosed": {
+          "bindingsHash": "379f2f3e7f655675e30af08142fb38c30bae04624f6a2a79c2b64721d3ac4249",
+          "bindingCount": 29,
+          "closedFlags": 8,
+          "exactSourcePin": true
+        },
+        "operatorClosed": {
+          "bindingsHash": "efeac7ce7d4eb2b3ca91321f502d3cbaf8394da5bde0a10bef4c035b4c3850bd",
+          "bindingCount": 7,
+          "closedFlags": 3,
+          "exactSourcePin": true
+        }
+      },
+      "pullRequest": 725,
+      "sourceRevision": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
+      "ci": 44794630175,
+      "mergeTimeUTC": "2026-11-20T18:58:27Z",
+      "protectedRun": 44797846056,
+      "verifiedAtUTC": "2026-11-20T18:59:30Z",
+      "receipt": {
+        "purpose": "afw.finite-native-private-draft.v1",
+        "sourceRevision": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
+        "sourceTree": "88ae6ce9b03f6cf67aeb6a811f0a4436cdf71728",
+        "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+        "moduleCount": 5,
+        "nativeMounts": {
+          "current": {
+            "exactModuleCount": 2,
+            "operationalReadiness": false
+          },
+          "rollback": {
+            "exactModuleCount": 3,
+            "deniedRouteCount": 10,
+            "operationalReadiness": false
+          }
+        },
+        "completePackage": false,
+        "operationalReadiness": false,
+        "rollbackProfiles": [
+          {
+            "role": "qaClosed",
+            "bindingsHash": "69ee386c99509440ec3ca6bbf5e4296d04015e3f3fcd985b0c1afc09c4d04b0f",
+            "profileHash": "bc86576126db009d7bb24503502a37e3f24f66c31ea51d0ef8e1c73d4f13b641",
+            "configurationHash": "9e9e8348c12393e4224990ea14b402d56992ba9b25dec912e5f56960a04b01b1",
+            "bindingCount": 31,
+            "closedFlags": 14
+          },
+          {
+            "role": "canaryClosed",
+            "bindingsHash": "379f2f3e7f655675e30af08142fb38c30bae04624f6a2a79c2b64721d3ac4249",
+            "profileHash": "e4492d34867955847fc264843ee98d693e2ef62db3cdc467873a36cb3d83bcd1",
+            "configurationHash": "d974806a442a64f8545e3292ec0514c9439f28bd30b68a6f5c81469145360194",
+            "bindingCount": 29,
+            "closedFlags": 8
+          },
+          {
+            "role": "operatorClosed",
+            "bindingsHash": "efeac7ce7d4eb2b3ca91321f502d3cbaf8394da5bde0a10bef4c035b4c3850bd",
+            "profileHash": "71a81626f3c7fb769bf379dccb178262e84d9113833a00fe8ca4eedca4e11fad",
+            "configurationHash": "961f07377a2cc015d71d0aaa125652a19ca5803343c67dd3034f7d650b3dcdd7",
+            "bindingCount": 7,
+            "closedFlags": 3
+          }
+        ]
+      }
     }
   },
   "findings": {
@@ -387,7 +462,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Protected Actions has verified exact-source recovery compatibility from the actual R2 historical ZIP. The compiler still emits a private staged proof only. Complete the qualified deployable v2 archive and independent reversal before an authorized signed same-notice review and native withdrawal trial. Keep AFW and Atelier resource effects separate. Do not repeat the protected scope check after link expiration without renewed need.",
+    "next": "The three R2 rollback profiles and five exact module mounts are verified. Finish source qualification of the native QA material and its actual receiver/Workflow bindings before issuing the deployable v2 artifact. Then verify named publication and independent reversal, and a single real signed notice review and native withdrawal. Runtime remains closed, approved private object lease is scoped and temporary. Preserve AFW/Tokenizart isolation.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -476,21 +551,21 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T18:27:29Z",
+  "updatedUTC": "2026-11-20T19:01:32Z",
   "latestCandidate": {
-    "pullRequest": 720,
-    "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
-    "tree": "d74257bd84e24b8ef9b8c1570362e816e376ff04",
-    "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-    "ci": {
-      "runId": 44768314004,
-      "status": "success",
-      "verifyJob": 136408450696
-    },
+    "pullRequest": 726,
+    "head": "bc131e30652cba0460626e51b99ac332981b290b",
+    "tree": "62e604b507ebf8b8839bb2263725c7c58fed6c11",
+    "base": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
     "sourcePackageChecks": {
-      "runId": 44768314400,
+      "runId": 44797951369,
       "status": "success",
       "completePackage": false
-    }
+    },
+    "ci": {
+      "runId": 44797951265,
+      "status": "in_progress"
+    },
+    "scope": "Native QA version metadata only. Exact two-class SQLite provider map checked separately from the compiled ESM exports. Earlier fixed pre-entry binding import regression exercised and corrected."
   }
 }
