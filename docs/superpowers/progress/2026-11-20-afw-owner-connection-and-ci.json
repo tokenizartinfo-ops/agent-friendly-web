@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "aa3da595a50da6c983a3901653d4a87ae9337066",
-    "latestVerifiedTree": "827528302f54a3c9fc643bb65b46faf6ac2b38e9"
+    "latestVerifiedCommit": "302ad4650f2522c2b9a6b55b6bad96bf2377ab1a",
+    "latestVerifiedTree": "05ee5a4ca57e006b1670f250f60ecd253fdf82e1"
   },
   "candidate": {
     "pullRequest": 720,
@@ -286,12 +286,8 @@
     "currentProviderGate": {
       "incident": "0ocqieaifg7h",
       "officialStatus": "identified",
-      "dependsOn": [
-        "Workers",
-        "Queues"
-      ],
-      "operationalReadiness": false,
-      "providerFeedUpdatedAtUTC": "2026-11-20T20:18:54.321Z"
+      "providerFeedUpdatedAtUTC": "2026-11-20T20:43:24.227Z",
+      "operationalReadiness": false
     },
     "protectedR2Attempt": {
       "runId": 44782365542,
@@ -546,6 +542,67 @@
       "runId": 44811333369,
       "conclusion": "success",
       "sourceRevision": "aa3da595a50da6c983a3901653d4a87ae9337066"
+    },
+    "privateV2ZipAssembly": {
+      "pullRequest": 729,
+      "mergedRevision": "302ad4650f2522c2b9a6b55b6bad96bf2377ab1a",
+      "mergeTimeUTC": "2026-11-20T21:03:48Z",
+      "focusedCI": 44813988470,
+      "fullPrCI": 44813988493,
+      "protectedRun": 44817640790,
+      "protectedJob": 136570007202,
+      "result": "success",
+      "receipt": {
+        "sourceRevision": "302ad4650f2522c2b9a6b55b6bad96bf2377ab1a",
+        "sourceTree": "05ee5a4ca57e006b1670f250f60ecd253fdf82e1",
+        "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+        "moduleCount": 5,
+        "nativeMounts": {
+          "current": {
+            "exactModuleCount": 2,
+            "nativeWorkflowDenials": 2,
+            "operationalReadiness": false
+          },
+          "rollback": {
+            "exactModuleCount": 3,
+            "deniedRouteCount": 10,
+            "operationalReadiness": false
+          }
+        },
+        "releaseLayout": {
+          "archiveSha256": "fc9ad18d2295a7f76e59001a3ada5ecb649fa4c71d45769116f73be9a5b788cc",
+          "archiveBytes": 2026121,
+          "moduleCount": 5,
+          "completePackage": false,
+          "operationalReadiness": false
+        },
+        "historicalExportCounts": [
+          {
+            "role": "qaClosed",
+            "count": 5,
+            "closedFlags": 14
+          },
+          {
+            "role": "canaryClosed",
+            "count": 3,
+            "closedFlags": 8
+          },
+          {
+            "role": "operatorClosed",
+            "count": 3,
+            "closedFlags": 3
+          }
+        ],
+        "completePackage": false
+      },
+      "transportAuthority": "cloud runner only; rehearsal archive generated and independently reopened in memory; no publication",
+      "temporaryReadAuthorization": {
+        "scopeVerified": true,
+        "objectOnly": true,
+        "issuedAtUTC": "2026-11-20T21:08:09.000Z",
+        "signedUrlExpiresAtUTC": "2026-11-20T21:23:09.000Z",
+        "parentExpiresAtUTC": "2026-11-20T21:55:23Z"
+      }
     }
   },
   "findings": {
@@ -563,7 +620,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Complete and merge private v2 ZIP rehearsal after exact CI. Cloudflare API independently verified the seven R2 backup members against fixed hashes, including three rollback modules and three metadata records. The newly integrated rehearsal preserves the canonical v2 schema while keeping the legacy guard false and returns only hashes and counts. A bounded local Workerd preflight stalled and was stopped, with its isolated checkout removed. Use the existing protected Linux workflow and a fresh narrowly scoped signed R2 GET for combined actual-source/R2 verification. No Cloudflare promotion or trial while provider preflight is blocked.",
+    "next": "The real v2 archive was assembled and reopened against the exact protected main source and all three mounted historical rollback modules. Finish the native legacy containment qualification and source authority before allowing the v2 manifest to enter the release reader. Real signed notice, assistant review correlation and final native withdrawal remain unobserved. The existing live provider preflight still blocks this trial.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -652,12 +709,12 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T20:49:12Z",
+  "updatedUTC": "2026-11-20T21:10:05Z",
   "latestCandidate": {
     "pullRequest": 729,
     "head": "d913a610c41e1b901d149091f6335a93cb0f20a4",
     "tree": "05ee5a4ca57e006b1670f250f60ecd253fdf82e1",
-    "base": "aa3da595a50da6c983a3901653d4a87ae9337066",
+    "mergedRevision": "302ad4650f2522c2b9a6b55b6bad96bf2377ab1a",
     "sourcePackageChecks": {
       "runId": 44813988470,
       "status": "success",
@@ -665,7 +722,7 @@
     },
     "ci": {
       "runId": 44813988493,
-      "status": "in_progress"
+      "status": "success"
     }
   }
 }
