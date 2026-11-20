@@ -91,7 +91,16 @@
       "nativeConduit": "Three targeted cases passed across isolated runs: header rewriting, physical cancellation after real receiver signal, and 413 from both boundaries.",
       "lostChoiceAck": "Pass; actual commit contains matching source, ticket and project ref, without handle or approval admission.",
       "exactInitialOwnerSelector": "Pass; native binding and modeled schema were brought current.",
-      "retainedOriginalApproval": "Pass on local experiment; after a lost atomic ACK the same payload fails closed. Change pending on candidate."
+      "retainedOriginalApproval": "Pass on local experiment; after a lost atomic ACK the same payload fails closed. Change pending on candidate.",
+      "diagnosticBudget": "8/8 pass with exact reviewed initial cleanup source and updated original lease instrumentation.",
+      "sourceEnvelope": "The native identity fixture exercises actual JWT signature validation then confirms primary ownership and fresh context drift rejection before writes. Targeted test passes."
+    },
+    "followOnCandidate": {
+      "head": "c0e432dc95f18a0f8a69c6194738a8dd9ea78a3b",
+      "run": 44742836397,
+      "nativeJourneyJob": 136310531827,
+      "originalCleanupJob": 136310531427,
+      "result": "Principal synthetic native journey and retained cleanup pass; CI not fully green. Request-retention suite 6/6 passes."
     }
   },
   "findings": {
@@ -109,7 +118,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "The principal synthetic journey and native timed recovery passed. Repair remaining specialist fixtures and gates, then qualify the complete private R2 package and reversal. Do not activate or launch live with the PR draft and incomplete package. A live run still requires same-notice receipt, review, and native withdrawal proof.",
+    "next": "Wait for the exact candidate CI and recheck remaining fixture failures. Avoid product timeout changes based on local timing. Prepare qualified v2 archive and rollback once primary native compatibility evidence and the required package profile pass. Actual same-notice review and withdrawal and PC-off remain pending.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -180,6 +189,13 @@
         "job": 136267085065,
         "reason": "A stale SDK hook and a missing Workerd node:crypto declaration produced independent build failures."
       }
+    },
+    "nativeNoticeSpecialist": "The previous test revision modeled and verified the separate notices publication in QA, then the test-only M runner still lacked the exact enabled policy and owner scope. The current candidate adopts the five required values from that same modeled configuration. Independent CI qualification pending.",
+    "packageBoundary": {
+      "staging": true,
+      "deployable": false,
+      "r2HistoricalCustody": "Historical backups and their reproducible draft are distinct from the qualified v2 release package.",
+      "remaining": "Demonstrate native compatibility for the exact compiled candidate and preserved rollback roles; emit and independently verify the qualified v2 release archive with the protected R2 reader before deploying."
     }
   },
   "effects": {
@@ -191,66 +207,85 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T13:04:35Z",
+  "updatedUTC": "2026-11-20T13:41:08Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "237268ec071baa6e6fd3215d9c7ef6ddfa69dd5d",
-    "tree": "6ec0ea10a23dd7e93533e221f2d31212c9926174",
+    "head": "776bb0aa10415b0be634d146ff7ac066d0933240",
+    "tree": "205ee18149f57b8b245f5b3af960d4feb8c9ebc1",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-    "changes": "Fixture corrections only; live gate conditions unchanged.",
+    "changes": "Test fixtures only: mount the modeled notices publication descriptor and policy in specialist component tests. Keep the principal test using actual synthetic provider writes and native journals. Exercise cryptographically valid identity before the source drift checks.",
     "ci": {
-      "run": 44738870631,
-      "status": "not_green",
-      "nativeJourneyJob": 136297102424,
-      "originalCleanupJob": 136297102966,
-      "remainingFailingShards": [
-        3,
-        4,
-        5,
+      "run": 44744961861,
+      "status": "in_progress_at_checkpoint",
+      "greenShards": [
+        2,
         6
       ]
     },
     "sourcePackageChecks": {
-      "run": 44738870636,
+      "run": 44744961966,
       "status": "passed_staging"
     },
     "previousFixtureRepair": {
       "pullRequest": 720,
-      "head": "3ff0ad9b45bb96280bb5bade6f2b69fbacddd268",
-      "tree": "bf91ff011dba19e979024e011612cd58506f746c",
+      "head": "237268ec071baa6e6fd3215d9c7ef6ddfa69dd5d",
+      "tree": "6ec0ea10a23dd7e93533e221f2d31212c9926174",
       "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-      "changes": "Test fixtures only. Exercise the separate notices stage and preserve real OAuth measurement before remount; compare durable OAuth records after.",
+      "changes": "Fixture corrections only; live gate conditions unchanged.",
+      "ci": {
+        "run": 44738870631,
+        "status": "not_green",
+        "nativeJourneyJob": 136297102424,
+        "originalCleanupJob": 136297102966,
+        "remainingFailingShards": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "sourcePackageChecks": {
+        "run": 44738870636,
+        "status": "passed_staging"
+      },
       "previousFixtureRepair": {
         "pullRequest": 720,
-        "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
-        "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+        "head": "3ff0ad9b45bb96280bb5bade6f2b69fbacddd268",
+        "tree": "bf91ff011dba19e979024e011612cd58506f746c",
         "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-        "onlyFixtureChanges": true,
-        "workerdReview": {
-          "passed": 2,
-          "failed": 0
-        },
-        "oauthObservation": {
-          "exactHookCheck": "pass",
-          "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+        "changes": "Test fixtures only. Exercise the separate notices stage and preserve real OAuth measurement before remount; compare durable OAuth records after.",
+        "previousFixtureRepair": {
+          "pullRequest": 720,
+          "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
+          "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+          "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+          "onlyFixtureChanges": true,
+          "workerdReview": {
+            "passed": 2,
+            "failed": 0
+          },
+          "oauthObservation": {
+            "exactHookCheck": "pass",
+            "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+          },
+          "ci": {
+            "run": 44733489856,
+            "status": "in_progress_at_checkpoint"
+          },
+          "sourcePackageChecks": {
+            "run": 44733489786,
+            "status": "in_progress_at_checkpoint"
+          }
         },
         "ci": {
-          "run": 44733489856,
+          "run": 44736711258,
+          "originalCleanupJob": 136289820303,
           "status": "in_progress_at_checkpoint"
         },
         "sourcePackageChecks": {
-          "run": 44733489786,
-          "status": "in_progress_at_checkpoint"
+          "run": 44736711241,
+          "status": "passed_staging"
         }
-      },
-      "ci": {
-        "run": 44736711258,
-        "originalCleanupJob": 136289820303,
-        "status": "in_progress_at_checkpoint"
-      },
-      "sourcePackageChecks": {
-        "run": 44736711241,
-        "status": "passed_staging"
       }
     }
   }
