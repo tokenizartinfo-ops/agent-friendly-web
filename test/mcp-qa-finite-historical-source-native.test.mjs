@@ -10,7 +10,8 @@ import {QA_CLOUD_CLOSED_PINS as REAL_PINS} from '../lib/mcp-qa-cloud-closed-pins
 const sha=x=>createHash('sha256').update(x).digest('hex'),J=JSON.stringify;
 const ACCOUNT='85d0d5dadac3341a564f22ce885e9eec',APP='d6fc71552de7494a863aca20365a572d',VERSION='2607abae-cec3-4e35-89eb-8b8572262b54',QA='11111111-1111-4111-8111-111111111111';
 const PRODUCTION_CEILING=Date.parse('2026-11-03T02:59:00Z');
-const CEILING_DECLARATION="CEILING=Date.parse('2026-11-03T02:59:00Z')";
+const LEGACY_READER_ID='9aa97ad1fc9afe3021cf69ea497d5190';
+const SYN_READER_ID='1'.repeat(32);
 const keys=['afw.canary-restoration-control.v1','afw.private-prepared-dispatch.v1','afw.private-reduction-dispatch.v1','afw.successor-canary-restoration.v1','afw.successor-retirement-handoff.v1'];
 function fixture(ids){
  const at=Date.now()-600000,start=at+20000,end=start+60000,script='//'+('"'.repeat(1830100))+'\nexport default{};',hash=sha(script),original={containerId:ids.original,applicationId:APP,programHash:'1'.repeat(64),sourceRevision:'2'.repeat(40)},candidate={trialId:'3'.repeat(64),programHash:'4'.repeat(64),sourceRevision:'5'.repeat(40),startAt:start,expiresAt:end,budget:1};
@@ -41,27 +42,27 @@ async function seed(db,x){
 async function harness(actualPins=false,productionExpiry=null,commitmentFault=null){
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:QA},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader'},d1Databases:{RELEASE_DB:'history'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'History',useSQLite:true,uniqueKey:'history-b2'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'history-node-b2'}}};
  const mf=new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from"cloudflare:workers";export class History extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));
+ try{
  const first=await mf.getBindings(),ns=first.AFW_RELEASE_EVENTS_NODE,ids={original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},x=fixture(ids);x.ids=ids;
  if(commitmentFault==='receipt-version')x.receipt.baseVersionId='22222222-2222-4222-8222-222222222222';
  if(commitmentFault==='source-link')x.historical.artifactSourceRevision='f'.repeat(40);
- let source;try{source=await readFile('lib/mcp-qa-finite-historical-source.mjs','utf8');}catch{source='export async function readPrivateQaFiniteHistoricalSource(){throw Error("Finite historical source unavailable:input");}';}
- // Explicit test-only build boundary: no product API or caller-clock override.
- assert.equal(source.split(CEILING_DECLARATION).length,2,'exact production approval datum occurs once');
- const fixtureApproval=Math.max(Date.now()+86400000,Date.parse('2026-11-04T00:00:00Z'));
+ let source=await readFile('lib/mcp-qa-finite-historical-source.mjs','utf8');
+ const fixtureApproval=Math.max(Date.now()+86400000,Date.parse('2026-11-04T00:00:00Z')),tokenExpiry=fixtureApproval+60000;
+ const readerId=productionExpiry===null?SYN_READER_ID:LEGACY_READER_ID;
+ const custodyPath='lib/mcp-qa-finite-initial-custody-profile.mjs';
+ let custodySource;
  if(productionExpiry!==null){
   assert.ok(['before','at'].includes(productionExpiry));
-  // Only this focused boundary case freezes the reader clock. The parent lease,
-  // performance clock, native storage and D1 keep their actual clocks.
-  assert.equal(source.match(/Date\.now\(\)/g)?.length,7,'known reader-only clock call sites');
+  // Freeze only the reader clock to exercise the actual legacy cutoff.
+  assert.equal(source.match(/Date\.now\(\)/g)?.length,5,'known reader-only clock call sites');
   source=source.replaceAll('Date.now()',String(PRODUCTION_CEILING-(productionExpiry==='before'?1:0)));
   assert.equal(source.includes('Date.now()'),false);
-  assert.equal(source.split(CEILING_DECLARATION).length,2,'production ceiling remains unchanged');
  }else{
-  // Synthetic approval is renewed for the test bundle, never for production.
-  // This also applies when historical pins remain real in the metadata negative.
-  source=source.replace(CEILING_DECLARATION,'CEILING='+fixtureApproval);
-  assert.equal(source.includes(CEILING_DECLARATION),false);
-  assert.equal(source.split('CEILING='+fixtureApproval).length,2);
+  const custody=await readFile(custodyPath,'utf8'),profile={startAt:PRODUCTION_CEILING,endAt:fixtureApproval,
+   reader:{id:readerId,expiresAt:tokenExpiry},publisher:{id:'2'.repeat(32),expiresAt:tokenExpiry}};
+  const renewals=/^const approvedRenewals=Object[.]freeze[(].*[)];$/gm;
+  assert.equal([...custody.matchAll(renewals)].length,1,'one custody data declaration in the test bundle');
+  custodySource=custody.replace(renewals,'const approvedRenewals=Object.freeze('+J([profile])+');');
  }
  const entry=String.raw`import{DurableObject}from'cloudflare:workers';import{readPrivateQaFiniteHistoricalSource as read,qualifyFiniteInitialHistoricalBaseline as baseline}from'./lib/mcp-qa-finite-historical-source.mjs';import{createHash}from'node:crypto';import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
@@ -92,7 +93,7 @@ ${retentionMethods("read({ctx:this.ctx,env:this.env},parent.lease)")}
  const blocked=!(await tryEntry(this.env));await new Promise(resolve=>setTimeout(resolve,700));const released=await tryEntry(this.env);return JSON.stringify({blocked,released});
  }
  }export default{fetch(){return new Response(null,{status:404})}};`;
- const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));if(actualPins)return;b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
+ const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));if(custodySource)b.onLoad({filter:/mcp-qa-finite-initial-custody-profile[.]mjs$/},()=>({contents:custodySource,loader:'js',resolveDir:process.cwd()+'/lib'}));if(actualPins)return;b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
  const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin]});
  await captureRetentionBuild('historical-source',built);
  const f={x,mf,requests:[],mode:'normal',delay:0,versionReads:0,fixtureApproval};
@@ -100,7 +101,7 @@ ${retentionMethods("read({ctx:this.ctx,env:this.env},parent.lease)")}
  const u=new URL(req.url);f.requests.push(u.pathname);assert.equal(req.method,'GET');assert.equal(req.headers.get('Authorization'),'Bearer synthetic-native-reader');
  if(f.delay)await new Promise(r=>setTimeout(r,f.delay));
  let result;
- if(u.pathname.endsWith('/tokens/verify'))result={id:f.mode==='wrong-token'?'9db7901af95faf07e6f7ef378045328e':'9aa97ad1fc9afe3021cf69ea497d5190',status:'active',expires_on:f.mode==='expired-token'?'2020-01-01T00:00:00Z':new Date(fixtureApproval+60000).toISOString(),not_before:null};
+ if(u.pathname.endsWith('/tokens/verify'))result={id:f.mode==='wrong-token'?'9db7901af95faf07e6f7ef378045328e':readerId,status:'active',expires_on:f.mode==='expired-token'?'2020-01-01T00:00:00Z':new Date(tokenExpiry).toISOString(),not_before:null};
  else{assert.equal(u.pathname,'/client/v4/accounts/'+ACCOUNT+'/workers/workers/'+x.pin.name+'/versions/'+VERSION);assert.equal(u.search,'?include=modules');result=structuredClone(x.metadata);f.versionReads++;
  if(f.mode==='defaults'||f.mode==='drift'&&f.versionReads%2===0){for(const e of Object.values(result.exports))e.state='created';result.exports.default.cache={enabled:false};result.cache_options={enabled:false,cross_version_cache:false};}
  if(f.mode==='transfer')result.exports.AfwOwnEventNode={...result.exports.AfwOwnEventNode,state:'expecting-transfer',transfer_from:'foreign'};
@@ -113,6 +114,7 @@ ${retentionMethods("read({ctx:this.ctx,env:this.env},parent.lease)")}
  return new Response(J({success:true,errors:[],messages:[],result}),{status:f.mode==='redirect'?302:200,headers:{date:new Date().toUTCString(),'content-type':'application/json'}});
  }}));
  const b=await mf.getBindings();f.stub=b.AFW_INDEPENDENT_CLOSURE.get(b.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB');await seed(f.db,x);await f.stub.seed(x.rows);return f;
+ }catch(error){await mf.dispose();throw error;}
 }
 test('B2-AB actual native historical reader, private CF boundary is synthetic',async t=>{
  const f=await harness();try{

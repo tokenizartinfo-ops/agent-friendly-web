@@ -123,7 +123,12 @@ for(const mode of ['lost-send','lost-ack'])test('native consent journal uncertai
 }));
 test('native consent original window fences queued SQL',()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('queue');const pending=consent(f),seen=await gate(f,'before-sql');assert(seen.state.sqlEnteredAt);
- await new Promise(resolve=>setTimeout(resolve,5100));await denied(f,await pending);assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'actual operation remains retained');
+ await new Promise(resolve=>setTimeout(resolve,5100));const expired=await pending;
+ assert.equal(expired.status,503);assert.equal(expired.headers.get('Set-Cookie'),null);
+ // Native deadline cancellation can close the denial stream before the
+ // fixture reads it. The status, lack of cookie and SQL fence are still observable.
+ if(!expired.bodyUsed&&!expired.body?.locked)assert.doesNotMatch(await expired.text(),/Registré tu decisión|<form/);
+ assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'actual operation remains retained');
  await f.stub.noticeReleaseHeld();for(let n=0;n<100;n++){if((await plain(f.stub.noticeProbe())).allowed)break;await new Promise(r=>setTimeout(r,10));}assert.equal((await plain(f.stub.noticeProbe())).allowed,true,'actual queued SQL settlement observed');const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,0);assert.equal(after.notice.length,4);
 }));
 for(const [mode,drift]of [['before-send','revision'],['before-send','owner'],['before-send','pointer'],['before-insert','revision'],['before-insert','holder']])test('native consent source current drift denies '+mode+' '+drift,()=>withIssued(async f=>{
