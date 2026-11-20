@@ -362,10 +362,14 @@ export async function prepareNoticesStage(f,headers){
  const approved=await f.call(path,{method:'POST',headers:{...stageHeaders,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
  assert.equal(approved.status,200,'native notices publication receipt');
  await approved.body?.cancel();
+ return stageHeaders;
+}
+
+export async function adoptNoticesStage(f){
  await f.adoptConnectionConfiguration({upstream:true,stage:'notices'});
  const context=await plain(f.stub.firstConnectionContext());
  assert.equal(context.source?.phase,'notice_consent','adopt actual notices publication');
- return {headers:stageHeaders,context};
+ return context;
 }
 
 export async function setFirstConnectionFault(f,fault){

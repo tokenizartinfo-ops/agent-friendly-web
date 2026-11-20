@@ -7,7 +7,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {initialHash} from '../lib/mcp-qa-finite-initial-material-records.mjs';
 import {hashFinitePreparationRecord,hashFinitePolicyEffectIdentity} from '../lib/mcp-qa-finite-preparation-records.mjs';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
-import {plain,approveFirstConnection,prepareNoticesStage,readFirstConnectionProbe,setFirstConnectionFault} from './fixtures/finite-first-connection-publication.mjs';
+import {plain,approveFirstConnection,prepareNoticesStage,adoptNoticesStage,readFirstConnectionProbe,setFirstConnectionFault} from './fixtures/finite-first-connection-publication.mjs';
 const O='https://delegated-canary.agentfriendlyweb.dev';
 async function fixture(t,options){
  const f=await initialEntryHarness('first-connection-publication',options);
@@ -163,7 +163,7 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  f.providerPhase='verification context after exchange';const actualCurrent=await plain(f.stub.firstConnectionContext());assert.equal(actualCurrent.source?.phase,'read_consent');const afterExchange=await plain(f.stub.snapshot());assert.deepEqual(afterExchange.find(([k])=>k===grantAck[0]),grantAck,'immutable original grant ACK');
  const grant=(await f.db.prepare("SELECT exchanged_at FROM delegated_access_grants WHERE id=?").bind(JSON.parse(beforeExchange.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(':reservation'))[1]).identity.grantId).first());assert.notEqual(grant.exchanged_at,'','real native exchange timestamp');
  const closedNotice=await f.call('/monitoring',{headers});assert.equal(closedNotice.status,503);await closedNotice.body?.cancel();
- const {headers:noticeHeaders,context:noticeContext}=await prepareNoticesStage(f,headers);
+ const noticeHeaders=await prepareNoticesStage(f,headers),noticeContext=await adoptNoticesStage(f);
  const noticeGet=await f.call('/monitoring',{headers:noticeHeaders});assert.equal(noticeGet.status,200);const noticeHtml=await noticeGet.text(),noticeHandle=/name="handle" value="([^"]+)"/.exec(noticeHtml)?.[1],noticeCookie=noticeGet.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(noticeHandle&&noticeCookie);
  const noticePost=await f.call('/monitoring/grant',{method:'POST',headers:{...noticeHeaders,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:noticeHeaders.Cookie+'; '+noticeCookie},body:new URLSearchParams({handle:noticeHandle})});assert.equal(noticePost.status,200);await noticePost.body?.cancel();
  const final=await readFirstConnectionProbe(f),link=final.rows.find(([k])=>k==='connection-preparation:'+noticeContext.preconnectionId+':notice');assert(link,'actual native NoticeLink follows actual GET/POST');

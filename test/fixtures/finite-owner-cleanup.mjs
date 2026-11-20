@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
 import {initialEntryHarness} from './finite-initial-entry-world.mjs';
-import {plain,approveFirstConnection,prepareNoticesStage,readFirstConnectionProbe} from './finite-first-connection-publication.mjs';
+import {plain,approveFirstConnection,prepareNoticesStage,adoptNoticesStage,readFirstConnectionProbe} from './finite-first-connection-publication.mjs';
 import {sealFiniteOwnerIssuerProvenanceRecord as seal} from '../../lib/mcp-qa-finite-owner-issuer-provenance-records.mjs';
 import {sealFinitePreparationIssuerRecord as issuerSeal} from '../../lib/mcp-qa-finite-preparation-issuer-records.mjs';
 export const O='https://delegated-canary.agentfriendlyweb.dev';
@@ -133,10 +133,20 @@ export async function assertActualComplete(f,{reference=false}={}){
  assert.equal(observed.completeWrites,1,'one actual SDK grant effect');assert.equal(observed.completeNormal,1,'actual SDK complete fulfilled normally');assert(rows.some(([k])=>k.endsWith(':sdk_complete:observed')),'actual complete observation durable');
  const ref=rows.find(([k])=>k.endsWith(':reference'));if(reference)assert(ref,'R1 missing durable SDK Reference AFTER actual completeAuthorization');return {observed,reference:ref?JSON.parse(ref[1]):null};
 }
+async function collectOwnerReferenceEvidence(f){
+ const observation=await plain(f.stub.ownerReferenceObserve());
+ const state=await plain(f.stub.firstConnectionState());
+ const {calls}=await plain(f.stub.firstConnectionProbe());
+ return {observation,state,calls};
+}
 export async function recordOwnerReference(f,label,extra={}){
- const o=await plain(f.stub.ownerReferenceObserve()),state=await plain(f.stub.firstConnectionState());
- assert(o.lists<=2&&o.gets<=200&&o.peak<=2,'native KV calls stay within fixed budget');
- const result={label,testRevision:process.env.GITHUB_SHA??null,M:{sha256:f.firstConnectionBuild.M.sha256,bytes:f.firstConnectionBuild.M.bytes},QA:{sha256:f.firstConnectionBuild.QA.sha256,bytes:f.firstConnectionBuild.QA.bytes},completeWrites:o.completeWrites,completeNormal:o.completeNormal,referenceRows:o.rows.filter(([k])=>k.endsWith(':reference')).length,lists:o.lists,gets:o.gets,peak:o.peak,listLimit:o.nativeListLimit??null,trace:o.trace,requests:o.requests,children:o.children,lookupChild:o.lookupChild??null,referenceReadbacks:o.referenceReadbacks,sdkSuffixes:o.rows.map(([key])=>key.split(':').slice(2).join(':')),roots:(await plain(f.stub.firstConnectionProbe())).calls.map(c=>({method:c.originalMethod,windowMs:c.boundary.deadline-c.boundary.startedAt})),httpSpans:state.http.filter(v=>Number.isSafeInteger(v.childStartedAt)).map(v=>({kind:v.kind,bytes:v.bytes,elapsedMs:v.elapsedMs,bodyGuardMs:v.bodyGuardMs??0,childStartedAt:v.childStartedAt})),http:state.http.reduce((a,v)=>({requests:a.requests+1,bytes:a.bytes+v.bytes}),{requests:0,bytes:0}),completePackage:false,operationalReadiness:false,PCoff:false,custodyReal:false,...extra};
+ const {observation:o,state,calls}=f.originalOwnerReferenceEvidence??await collectOwnerReferenceEvidence(f);
+ if(f.originalOwnerReferenceEvidence){
+  const current=await plain(f.stub.ownerReferenceObserve());
+  assert.deepEqual(current.rows,o.rows,'adopting notices preserves the original OAuth provenance');
+ }
+ assert(o.lists<=2&&o.gets<=200&&o.peak<=2,JSON.stringify({reason:'native KV budget',lists:o.lists,gets:o.gets,peak:o.peak}));
+ const result={label,testRevision:process.env.GITHUB_SHA??null,M:{sha256:f.firstConnectionBuild.M.sha256,bytes:f.firstConnectionBuild.M.bytes},QA:{sha256:f.firstConnectionBuild.QA.sha256,bytes:f.firstConnectionBuild.QA.bytes},completeWrites:o.completeWrites,completeNormal:o.completeNormal,referenceRows:o.rows.filter(([k])=>k.endsWith(':reference')).length,lists:o.lists,gets:o.gets,peak:o.peak,listLimit:o.nativeListLimit??null,trace:o.trace,requests:o.requests,children:o.children,lookupChild:o.lookupChild??null,referenceReadbacks:o.referenceReadbacks,sdkSuffixes:o.rows.map(([key])=>key.split(':').slice(2).join(':')),roots:calls.map(c=>({method:c.originalMethod,windowMs:c.boundary.deadline-c.boundary.startedAt})),httpSpans:state.http.filter(v=>Number.isSafeInteger(v.childStartedAt)).map(v=>({kind:v.kind,bytes:v.bytes,elapsedMs:v.elapsedMs,bodyGuardMs:v.bodyGuardMs??0,childStartedAt:v.childStartedAt})),http:state.http.reduce((a,v)=>({requests:a.requests+1,bytes:a.bytes+v.bytes}),{requests:0,bytes:0}),completePackage:false,operationalReadiness:false,PCoff:false,custodyReal:false,...extra};
  if(f.captureBudgetEpoch)result.diagnostics={purpose:'afw.finite-budget-diagnostics.syn.v1',testRevision:process.env.GITHUB_SHA,epochs:await f.captureBudgetEpoch('owner-reference-record')};
  const evidence=await persistBudgetEvidence({path:'output/owner-reference/'+label+'.json',full:result,testRevision:process.env.GITHUB_SHA??null,caseName:label,counts:{}});console.info('R1 sanitized native marker',evidence.summary);return result;
 }
@@ -151,7 +161,12 @@ export async function downstreamOwnerReference(f,response,prepared,{cleanupParti
  if(f.cleanupQualification)f.sdkAfterExchange=await observeCleanupSdkExchange(f,token);
  const client=new Client({name:'SYN-owner-reference',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
  try{await client.connect(new StreamableHTTPClientTransport(new URL(f.source.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host}},fetch:(url,options)=>f.mf.dispatchFetch(String(url),options)}));const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,f.source.project.projectId);}finally{await client.close();}
- const {headers:noticeHeaders}=await prepareNoticesStage(f,prepared.headers);
+ const noticeHeaders=await prepareNoticesStage(f,prepared.headers);
+ // Capture actual OAuth measurements before the canary remount replaces the
+ // in-memory observer. The durable provenance is verified after adoption.
+ f.originalOwnerReferenceEvidence=await collectOwnerReferenceEvidence(f);
+ await f.stub.ownerReferenceControl('released');
+ await adoptNoticesStage(f);
  f.kv=await f.mf.getKVNamespace('OAUTH_KV','canary-first-connection');
  const screen=await f.call('/monitoring',{headers:noticeHeaders});assert.equal(screen.status,200);const html=await screen.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1],cookie=screen.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
  if(cleanupPartial)await f.stub.ownerCleanupFault('notice-before-link');

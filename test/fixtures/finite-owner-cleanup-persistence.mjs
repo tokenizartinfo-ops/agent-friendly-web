@@ -108,7 +108,8 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   const partialBoundary=variant==='principal'?null:await plain(f.stub.ownerCleanupFaultFacts());if(partialBoundary)assert.equal(partialBoundary.sqlWrites,1);
   await f.stub.ownerCleanupReset();
   const ownerReference=await recordOwnerReference(f,'r2-produced-'+variant);
-  await f.stub.ownerReferenceControl('released');await f.stub.firstConnectionRestore();await f.stub.restoreMethods();
+  if(!f.originalOwnerReferenceEvidence)await f.stub.ownerReferenceControl('released');
+  await f.stub.firstConnectionRestore();await f.stub.restoreMethods();
   const facts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(facts.rows.find(([k])=>k===P+'plan')[1]);
   assert.equal(facts.signal.entered,0);assert.equal(facts.alarm,plan.C0);assert(facts.dbNow<plan.C0);assert(Math.abs(facts.dbNow-facts.wall)<=1000);
   assert(plan.C0-120000<started+870000,'original checkpoint wait must fit job budget');
