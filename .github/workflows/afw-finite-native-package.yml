@@ -42,6 +42,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Lint the compiler and native mount checks
+        run: npx --no-install eslint scripts/build-finite-native-package.mjs scripts/verify-finite-native-staging.mjs scripts/verify-finite-native-rollback.mjs test/verify-finite-native-rollback.test.mjs
       - name: Mount exact compiled modules in Workerd
         run: node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION"
       - name: Verify the bounded archive parser

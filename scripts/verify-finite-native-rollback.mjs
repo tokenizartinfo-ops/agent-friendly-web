@@ -16,14 +16,14 @@ export async function verifyFiniteRollbackMounts(moduleFrame,metadata){
  let offset=0,outboundAttempts=0;
  try{
   const workers=Object.entries(roles).map(([role,key])=>{
-   const {module}=QA_CLOUD_CLOSED_PINS[key];
-   const source=moduleFrame.subarray(offset,offset+module.bytes);
-   offset+=module.bytes;
-   if(source.length!==module.bytes||createHash('sha256').update(source).digest('hex')!==module.sha256)fail();
+   const {module:closedModule}=QA_CLOUD_CLOSED_PINS[key];
+   const source=moduleFrame.subarray(offset,offset+closedModule.bytes);
+   offset+=closedModule.bytes;
+   if(source.length!==closedModule.bytes||createHash('sha256').update(source).digest('hex')!==closedModule.sha256)fail();
    const model=metadata[role];
    return {
     name:role,
-    modules:[{type:'ESModule',path:role+'/'+module.name,contents:source}],
+    modules:[{type:'ESModule',path:role+'/'+closedModule.name,contents:source}],
     compatibilityDate:model.compatibility_date,
     compatibilityFlags:model.compatibility_flags,
     bindings:Object.fromEntries(model.bindings.filter(binding=>binding.type==='plain_text')

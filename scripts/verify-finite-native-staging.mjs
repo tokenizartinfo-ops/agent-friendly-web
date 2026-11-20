@@ -33,9 +33,9 @@ const legacyProbeSource=`
 function workerOptions(staging,role){
  const config=finiteWranglerProfileTemplate(role);
  const source=staging.files[role+'/index.mjs'];
- const module=staging.modules[role].module;
- assert.equal(source.byteLength,module.bytes);
- assert.equal(createHash('sha256').update(source).digest('hex'),module.sha256);
+ const compiledModule=staging.modules[role].module;
+ assert.equal(source.byteLength,compiledModule.bytes);
+ assert.equal(createHash('sha256').update(source).digest('hex'),compiledModule.sha256);
  return {
   name:config.name,
   modules:[{type:'ESModule',path:role+'/index.mjs',contents:source}],
