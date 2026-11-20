@@ -144,9 +144,9 @@ let harnessSerial=0;
 async function closureHarness(capture){
  const url=new URL('../lib/mcp-release-runtime.mjs',import.meta.url);
  let source=readFileSync(url,'utf8');
- const anchor='const result=await runReleaseWorkflowImpl(profile,{bundle,env,event,step:Object.freeze({do:(...args)=>Reflect.apply(stepDo,step,args)}),authorize,cancellationHistory:first.raw,requestLease});';
+ const anchor='const result=await runReleaseWorkflowImpl(profile,{bundle,env,event,step:Object.freeze({do:(...args)=>Reflect.apply(stepDo,step,args)}),authorize,cancellationHistory:first.raw,requestLease},finiteGate);';
  assert.ok(source.includes(anchor));
- source=source.replace(anchor,'const result=await globalThis.__knownAdapterCapture({bundle,env,event,step,authorize,cancellationHistory:first.raw,requestLease,runReleaseWorkflow:options=>runReleaseWorkflowImpl(profile,options)});');
+ source=source.replace(anchor,'const result=await globalThis.__knownAdapterCapture({bundle,env,event,step,authorize,cancellationHistory:first.raw,requestLease,runReleaseWorkflow:options=>runReleaseWorkflowImpl(profile,options,finiteGate)});');
  source=source.replace(/from '([^']+)'/g,(whole,path)=>path.startsWith('.')?"from '"+new URL(path,url).href+"'":whole);
  globalThis.__knownAdapterCapture=capture;
  return import('data:text/javascript;base64,'+Buffer.from(source+'\n// harness '+(++harnessSerial)).toString('base64'));

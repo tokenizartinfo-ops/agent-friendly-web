@@ -6,6 +6,7 @@ import {resolveSuccessorPreparation} from '../lib/mcp-successor-manifest.mjs';
 import {createSuccessorReservation} from '../lib/mcp-successor-reservation.mjs';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import * as runtime from '../lib/mcp-release-runtime.mjs';
+import {createFiniteReservationGateClient,withFiniteReleaseGate} from '../lib/mcp-own-finite-admission-gate.mjs';
 import {reserveReleaseSuccessor,reserveFiniteReleaseSuccessor} from '../lib/mcp-release-successor-reservation.mjs';
 import {activationConfigurationHash,finiteActivationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
@@ -14,7 +15,7 @@ const hash=x=>createHash('sha256').update(x).digest('hex');
 const script='export default {fetch(){return new Response(null,{status:404})}}';
 const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:hash(script),sourceCheck:'git-inputs-before-after-v1'};
 const blocked={status:'blocked',mayRetry:false,operationalReadiness:false};
-const call=f=>runtime.runFiniteKnownCancellationReleaseWorkflow(f.input);
+const call=(f,api=runtime)=>withFiniteReleaseGate(f.input.env,f.gate,()=>api.runFiniteKnownCancellationReleaseWorkflow(f.input));
 async function fixture(){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default{fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'adapter-only-synthetic'}}));
  try{
@@ -40,6 +41,11 @@ async function fixture(){
  Object.defineProperty(env,'AFW_RELEASE_READ_TOKEN',{get(){f.credentials++;throw Error('private credential must not be read');}});
  const planHash=hash(JSON.stringify(bundle)),event={timestamp:new Date(at),instanceId:'afw-release-'+planHash,payload:{planHash}};
  const step={async do(name,options){f.steps++;f.timeout=options.timeout;assert.equal(name,'confirm-named-activation');return f.stepResult;}};
+ const T0=window.startAt;
+ f.gate=createFiniteReservationGateClient({namespace:node,identity:{intentId:'SYN-finite-known-closure',controlHash:'d'.repeat(64),planHash,
+  containerId:node.idFromName('afw-own-event-first-successor-v1').toString(),applicationId:manifest.scope.applicationId,
+  grantHash:hash(JSON.parse(eb.text).grantId),trialId:manifest.candidate.trialId,sourceRevision:artifact.sourceRevision,
+  runtimeVersionId:policy.observation.versionId,T0,N1:T0+300000,C1:T0+420000}});
  f.input={bundle,env,event,step};return f;
  }catch(e){await mf.dispose();throw e;}
 }
@@ -120,7 +126,7 @@ test('a forged lease is denied by the selected finite core before its methods ru
   assert.deepEqual(await args.runReleaseWorkflow({...f.input,requestLease:{...args.requestLease}}),blocked);
   return blocked;
  });
- assert.deepEqual(await h.runFiniteKnownCancellationReleaseWorkflow(f.input),blocked);
+ assert.deepEqual(await call(f,h),blocked);
  assert.equal(calls,0);assert.equal(f.steps,0);assert.equal(f.credentials,0);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
@@ -133,9 +139,9 @@ let harnessSerial=0;
 async function closureHarness(capture){
  const url=new URL('../lib/mcp-release-runtime.mjs',import.meta.url);
  let source=readFileSync(url,'utf8');
- const anchor='const result=await runReleaseWorkflowImpl(profile,{bundle,env,event,step:Object.freeze({do:(...args)=>Reflect.apply(stepDo,step,args)}),authorize,cancellationHistory:first.raw,requestLease});';
+ const anchor='const result=await runReleaseWorkflowImpl(profile,{bundle,env,event,step:Object.freeze({do:(...args)=>Reflect.apply(stepDo,step,args)}),authorize,cancellationHistory:first.raw,requestLease},finiteGate);';
  assert.ok(source.includes(anchor));
- source=source.replace(anchor,'const result=await globalThis.__knownAdapterCapture({bundle,env,event,step,authorize,cancellationHistory:first.raw,requestLease,runReleaseWorkflow:options=>runReleaseWorkflowImpl(profile,options)});');
+ source=source.replace(anchor,'const result=await globalThis.__knownAdapterCapture({bundle,env,event,step,authorize,cancellationHistory:first.raw,requestLease,runReleaseWorkflow:options=>runReleaseWorkflowImpl(profile,options,finiteGate)});');
  source=source.replace(/from '([^']+)'/g,(whole,path)=>path.startsWith('.')?"from '"+new URL(path,url).href+"'":whole);
  globalThis.__knownAdapterCapture=capture;
  return import('data:text/javascript;base64,'+Buffer.from(source+'\n// harness '+(++harnessSerial)).toString('base64'));
@@ -145,7 +151,7 @@ test('private closure rechecks complete primary eligibility at all 18 fixed hook
  const f=await fixture();let captured;
  try{
  const h=await closureHarness(async args=>{captured=args;for(const stage of stages)assert.equal(await args.authorize(stage,new AbortController().signal),true,stage);return blocked;});
- assert.deepEqual(await h.runFiniteKnownCancellationReleaseWorkflow(f.input),blocked);
+ assert.deepEqual(await call(f,h),blocked);
  assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,19);
  assert.deepEqual(await captured.runReleaseWorkflow({...f.input,requestLease:captured.requestLease}),blocked);
  assert.deepEqual(await captured.runReleaseWorkflow({...f.input,requestLease:{...captured.requestLease}}),blocked);
@@ -156,7 +162,7 @@ test('arbitrary stage permanently invalidates the internal closure',async()=>{
  const f=await fixture(),answers=[];try{const h=await closureHarness(async args=>{
  answers.push(await args.authorize('subscription_send',new AbortController().signal));
  answers.push(await args.authorize('operator_credential',new AbortController().signal));return blocked;
- });assert.equal((await h.runFiniteKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.deepEqual(answers,[false,false]);assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,1);
+ });assert.equal((await call(f,h)).status,'uncertain');assert.deepEqual(answers,[false,false]);assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,1);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('concurrent hook reentry invalidates both checks without refreshing authority',async()=>{
@@ -165,7 +171,7 @@ test('concurrent hook reentry invalidates both checks without refreshing authori
  const first=args.authorize('operator_credential',new AbortController().signal);
  answers.push(await args.authorize('operator_primary_read',new AbortController().signal));release();
  answers.push(await first);return blocked;
- })()));assert.equal((await h.runFiniteKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');await task;assert.deepEqual(answers,[false,false]);
+ })()));assert.equal((await call(f,h)).status,'uncertain');await task;assert.deepEqual(answers,[false,false]);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('grant drift after initial admission blocks the next fixed hook permanently',async()=>{
@@ -173,7 +179,7 @@ test('grant drift after initial admission blocks the next fixed hook permanently
  await f.db.prepare(faults['revoked-current']).run();
  answers.push(await args.authorize('operator_credential',new AbortController().signal));
  answers.push(await args.authorize('operator_primary_read',new AbortController().signal));return blocked;
- });assert.equal((await h.runFiniteKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.deepEqual(answers,[false,false]);assert.equal(f.credentials,0);
+ });assert.equal((await call(f,h)).status,'uncertain');assert.deepEqual(answers,[false,false]);assert.equal(f.credentials,0);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 
@@ -215,7 +221,7 @@ for(const own of [true,false])test('adapter hook after a '+(own?'matching':'fore
  const r=await createSuccessorReservation({db:f.db,original:resolved.original,candidate,cancellationHistory:args.cancellationHistory,authorize:async()=>true,now:Date.now,timeoutMs:5000,readRetirement:async()=>({purpose:'afw.retirement-evidence.v1',...resolved.original,processGeneration:f.retired.processGeneration,closedAt:f.retired.closedAt,stoppedAt:f.retired.closedAt+1,observedAt:Date.now(),physicalStopVerified:true,mayStartSuccessor:false})}).reserve();
  answers.push(r.state,await args.authorize('successor_after_write',new AbortController().signal));return blocked;
  });
- const r=await h.runFiniteKnownCancellationReleaseWorkflow(f.input);
+ const r=await call(f,h);
  assert.deepEqual(answers,['prepared',own]);assert.equal(r.status,own?'blocked':'uncertain');
  assert.equal((await f.db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_reservations').first()).n,1);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
