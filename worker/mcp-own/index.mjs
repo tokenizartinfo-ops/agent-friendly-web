@@ -149,7 +149,10 @@ export class AfwOwnEventNode extends DurableObject{
  observeSubscription(){return this.#call('observeSubscription');}
  // Private operator shutdown retains original scope/config/DO fences but
  // must not depend on the live monitoring flag or window. Never starts Node.
- async close(){try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}}
+ async close(){
+  if(finiteEntrypoint)throw Error('Finite legacy close unavailable');
+  try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}
+ }
  // Finite, server-fixed reduction. No RPC arguments or live grant renewal.
  async withdrawPermissionsForPlan(...args){if(args.length!==1||args[0]===undefined)fail();return this.#withdraw(args[0]);}
  async withdrawPermissions(...args){if(args.length)fail();return this.#withdraw();}

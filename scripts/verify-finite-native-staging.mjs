@@ -20,6 +20,7 @@ const legacyProbeSource=`
   const checks=[
    [()=>node.deliverOwnSaved('synthetic-event'),'Finite legacy delivery unavailable'],
    [()=>node.deliverSaved('synthetic-subscription','synthetic-event'),'Finite legacy delivery unavailable'],
+   [()=>node.close(),'Finite legacy close unavailable'],
    [()=>node.withdrawPermissions(),'Finite legacy withdrawal unavailable'],
    [()=>node.withdrawPermissionsForPlan({}),'Finite legacy withdrawal unavailable']
   ];
