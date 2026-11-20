@@ -3,8 +3,20 @@
   "timeUTC": "2026-11-20T11:27:50Z",
   "project": "AFW",
   "main": {
-    "commit": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-    "fullFlowMerged": false
+    "commit": "e1abb784c8ebdc33542b6bb325489b3987218611",
+    "tree": "d74257bd84e24b8ef9b8c1570362e816e376ff04",
+    "fullFlowMerged": true,
+    "mergedAtUTC": "2026-11-20T16:17:26Z",
+    "sourcePackageChecks": {
+      "runId": 44771886316,
+      "verifyJob": 136411397571,
+      "status": "success",
+      "completePackage": false
+    },
+    "ci": {
+      "runId": 44771886494,
+      "status": "in_progress"
+    }
   },
   "candidate": {
     "pullRequest": 720,
@@ -195,6 +207,22 @@
       "syntax": "passed",
       "focusedTests": 13,
       "failures": 0
+    },
+    "mergedSource": {
+      "sixSuitesPassed": true,
+      "originalQaCleanupPassed": true,
+      "lintPassed": true,
+      "buildPassed": true,
+      "mergeTreeMatchesQualifiedCandidate": true
+    },
+    "postMergeProviderClosed": {
+      "observedAt": "2026-11-20T16:19:02Z",
+      "qaCanaryAndOperatorSameVersions": true,
+      "allObservedFlagsFalse": true
+    },
+    "postMergeR2Release": {
+      "observedAt": "2026-11-20T16:18:23Z",
+      "exactDeployableObjectPresent": false
     }
   },
   "findings": {
@@ -212,7 +240,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Observe exact PR candidate checks, qualify the package and independent rollback, and run the bounded synthetic-dossier cloud exercise. Require the actual receiver's receipt for the same notice, the signed review bound to its run, and a native withdrawn subscription with restoration.",
+    "next": "The merged source and its staged package checks are qualified. The package assembly must still produce a verified private v2 object for exact main, with exact native mount compatibility and recoverable rollback. After that, read back the package in the protected workflow and record the real synthetic-dossier cloud review and native withdrawal for the same notice before preparing the PC-off trial.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -300,7 +328,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T15:57:50Z",
+  "updatedUTC": "2026-11-20T16:19:35Z",
   "latestCandidate": {
     "pullRequest": 720,
     "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
@@ -308,11 +336,12 @@
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
     "ci": {
       "runId": 44768314004,
-      "status": "in_progress"
+      "status": "success",
+      "verifyJob": 136408450696
     },
     "sourcePackageChecks": {
       "runId": 44768314400,
-      "status": "in_progress",
+      "status": "success",
       "completePackage": false
     }
   }
