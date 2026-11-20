@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
-    "latestVerifiedTree": "bd4ee2a8861edb9340ade05a8facec93dd36f259"
+    "latestVerifiedCommit": "aa3da595a50da6c983a3901653d4a87ae9337066",
+    "latestVerifiedTree": "827528302f54a3c9fc643bb65b46faf6ac2b38e9"
   },
   "candidate": {
     "pullRequest": 720,
@@ -291,7 +291,7 @@
         "Queues"
       ],
       "operationalReadiness": false,
-      "providerFeedUpdatedAtUTC": "2026-11-20T18:45:54.261Z"
+      "providerFeedUpdatedAtUTC": "2026-11-20T20:18:54.321Z"
     },
     "protectedR2Attempt": {
       "runId": 44782365542,
@@ -516,7 +516,21 @@
       "packageVerifier": 44807975636,
       "verification": "success",
       "r2ArtifactReplay": "not attempted: previous signed read lease expired",
-      "currentOperationalReadiness": false
+      "currentOperationalReadiness": false,
+      "mergedRevision": "aa3da595a50da6c983a3901653d4a87ae9337066",
+      "mergedAtUTC": "2026-11-20T20:26:04Z",
+      "prFullCI": 44807975872,
+      "postMergePackageVerifier": 44811333363,
+      "postMergePackageVerifierConclusion": "success",
+      "mainFullCI": {
+        "runId": 44811333369,
+        "status": "in_progress"
+      }
+    },
+    "post727MainCI": {
+      "runId": 44806316615,
+      "conclusion": "success",
+      "sourceRevision": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6"
     }
   },
   "findings": {
@@ -534,7 +548,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Collect full exact CI for PR728. Export descriptors derive from exact historical ESM bytes and the native Cloudflare maps where supplied; operator absence is supported. Close the remaining v2 release envelope and private native qualification before using a fresh scoped R2 URL. Public incident 0ocqieaifg7h still prevents the existing named confirmation preflight from admitting a real trial. No candidate was deployed.",
+    "next": "Finish private native qualification and construct the deployable v2 archive with the exact five-role descriptors. Then perform a protected read with a fresh approved R2 link. The live AFW trial remains blocked by the existing provider preflight while 0ocqieaifg7h is active. Last closed readback 20:04:39Z, version pointer and feature flag checks only. No trial, notice receipt, review or withdrawal has been observed from this turn.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -623,7 +637,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T20:06:47Z",
+  "updatedUTC": "2026-11-20T20:27:37Z",
   "latestCandidate": {
     "pullRequest": 728,
     "head": "bdec94ab01bb26c3fd09d98c83455507d136421f",
@@ -636,7 +650,8 @@
     },
     "ci": {
       "runId": 44807975872,
-      "status": "in_progress"
-    }
+      "status": "success"
+    },
+    "mergedRevision": "aa3da595a50da6c983a3901653d4a87ae9337066"
   }
 }
