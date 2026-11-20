@@ -40,3 +40,19 @@ test('QA arm rejects incomplete native facts, an old inventory or an unverified 
   {channel:{verified:false}},
  ])assert.throws(()=>admissionApi.projectFiniteLaunchAdmission({...x,...patch}));
 });
+
+test('launch evidence rejects a predecessor that is not the original named actor before accessing provider or owner state',async()=>{
+ const {control}=setup(),p=control.plan;
+ const predecessor={containerId:'4'.repeat(64),applicationId:p.resources.applicationId,programHash:'5'.repeat(64),sourceRevision:'6'.repeat(40)};
+ const names=[];
+ const node={get(){assert.fail('actor accessed before verifying the original name');},idFromName(name){
+  names.push(name);
+  return {toString:()=>name==='afw-own-event-first-successor-v1'?p.resources.containerId:'3'.repeat(64)};
+ }};
+ const env={AFW_RELEASE_EVENTS_NODE:node};
+ Object.defineProperty(env,'RELEASE_DB',{get(){assert.fail('D1 read started before verifying the original actor');}});
+ await assert.rejects(admissionApi.readFiniteQaLaunchEvidence({
+  ctx:{},env,control,predecessor,readPermission:()=>assert.fail('owner read started before verifying the original actor'),
+ }),{message:'Finite QA launch admission unavailable'});
+ assert.deepEqual(names,['afw-own-event-first-successor-v1','afw-own-event-one-occurrence-v1']);
+});
