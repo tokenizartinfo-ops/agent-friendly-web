@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
-    "latestVerifiedTree": "511358558920805e686d12b5608e8d16ba2261ba"
+    "latestVerifiedCommit": "d6af6ad208a0b4a10b491895db47af0092828b22",
+    "latestVerifiedTree": "7f3b1ed84b715e6932fc8f9dde16ebe7460c8873"
   },
   "candidate": {
     "pullRequest": 720,
@@ -706,6 +706,72 @@
         "operationalReadiness": false,
         "remaining": "Qualify the combined native start, notice review, subscription withdrawal and rollback before promoting the v2 ZIP. Cloudflare's current guard also rejects the nominal trial. Do not reuse an expired R2 URL."
       }
+    },
+    "pr731SingleProtectedRun": {
+      "pullRequest": 731,
+      "previousPullRequest": 730,
+      "sourceHead": "fd6e5de5d03ce7eac6e0e5ad53e2f6c26eb25def",
+      "mergedRevision": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
+      "tree": "511358558920805e686d12b5608e8d16ba2261ba",
+      "state": "merged",
+      "fullCi": {
+        "run": 44829110656,
+        "status": "success",
+        "shardsPassed": 6,
+        "originalCheckpointCleanup": "success",
+        "gate": "success"
+      },
+      "focused": {
+        "run": 44829110611,
+        "status": "success",
+        "isolationTests": 21,
+        "sameOccurrenceTests": 1,
+        "transportAndProvenanceTests": 174
+      },
+      "singleProtectedRun": {
+        "run": 44831977636,
+        "sameJob": true,
+        "nativeMounts": {
+          "current": {
+            "exactModuleCount": 2,
+            "nativeWorkflowDenials": 2,
+            "operationalReadiness": false
+          },
+          "rollback": {
+            "exactModuleCount": 3,
+            "deniedRouteCount": 10,
+            "operationalReadiness": false
+          }
+        },
+        "sourceTree": "511358558920805e686d12b5608e8d16ba2261ba",
+        "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+        "job": 136618907918,
+        "releaseLayout": {
+          "archiveSha256": "7dbda5299e2511f8c2b6f915cc1481f345a8063271f9e06aaf3792b3bf485203",
+          "archiveBytes": 2026292,
+          "moduleCount": 5,
+          "completePackage": false,
+          "operationalReadiness": false
+        },
+        "success": true,
+        "sourceRevision": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
+        "scope": "Same job, exact main. Modeled container with real boot controller and bridge, signed webhook to mounted Worker/D1, authenticated claim and review, revocation and persisted same subscription withdrawal, private RPC correlated receipt, process stopped and late send denied. The same job fetched the pinned R2 snapshot and mounted three exact closed rollback programs in Workerd. This is a restoration rehearsal, not a Cloudflare traffic switch."
+      },
+      "provider": {
+        "status": "identified",
+        "observedAtUTC": "2026-11-20T22:44:20.0408081+00:00",
+        "components": [
+          "Workers",
+          "Queues"
+        ],
+        "id": "0ocqieaifg7h"
+      },
+      "disposition": {
+        "deployableZip": false,
+        "realTrial": false,
+        "operationalReadiness": false,
+        "blocker": "Complete build and native source authority still fail closed. Workerd rehearsal does not establish the real Cloudflare QA context, custody, or coupled restoration. Cloudflare provider admission remains blocked by the open Workers/Queues incident."
+      }
     }
   },
   "findings": {
@@ -812,71 +878,103 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T22:50:01.857Z",
+  "updatedUTC": "2026-11-20T23:20:32.276Z",
   "latestCandidate": {
-    "pullRequest": 731,
-    "previousPullRequest": 730,
-    "sourceHead": "fd6e5de5d03ce7eac6e0e5ad53e2f6c26eb25def",
-    "mergedRevision": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
-    "tree": "511358558920805e686d12b5608e8d16ba2261ba",
+    "pullRequest": 732,
+    "previousPullRequest": 731,
+    "sourceHead": "10741e4b77544bd947f8c118abc874e90ee3ea33",
+    "mergedRevision": "d6af6ad208a0b4a10b491895db47af0092828b22",
+    "tree": "7f3b1ed84b715e6932fc8f9dde16ebe7460c8873",
     "state": "merged",
     "fullCi": {
-      "run": 44829110656,
+      "run": 44833443595,
       "status": "success",
       "shardsPassed": 6,
       "originalCheckpointCleanup": "success",
       "gate": "success"
     },
     "focused": {
-      "run": 44829110611,
-      "status": "success",
-      "isolationTests": 21,
-      "sameOccurrenceTests": 1,
-      "transportAndProvenanceTests": 174
+      "redRun": 44833274988,
+      "expectedFailures": 8,
+      "greenRun": 44833443618,
+      "greenCases": 184,
+      "predecessorCases": 21,
+      "sameNoticeCases": 1
     },
-    "singleProtectedRun": {
-      "run": 44831977636,
-      "sameJob": true,
-      "nativeMounts": {
-        "current": {
-          "exactModuleCount": 2,
-          "nativeWorkflowDenials": 2,
-          "operationalReadiness": false
-        },
-        "rollback": {
-          "exactModuleCount": 3,
-          "deniedRouteCount": 10,
-          "operationalReadiness": false
+    "nativeCustodyProofSource": "Bridge snapshots the actor, storage, QA version, D1, namespaces, methods and stored reader for one verification. The expected current account reader comes from the prior approval window; legacy and expired profiles rejected. This establishes no native loaded identity on its own.",
+    "primary": {
+      "closed": {
+        "observedAtUTC": "2026-11-20T22:55:31.397Z",
+        "workers": {
+          "qa": {
+            "matchesClosedPointer": true,
+            "flags": 14,
+            "cron": 0,
+            "tails": 0,
+            "closed": true,
+            "readAndPublishSecretBindingsPresent": [
+              true,
+              true
+            ]
+          },
+          "canary": {
+            "matchesClosedPointer": true,
+            "flags": 8,
+            "cron": 0,
+            "tails": 0,
+            "closed": true
+          },
+          "operator": {
+            "matchesClosedPointer": true,
+            "flags": 3,
+            "cron": 0,
+            "tails": 0,
+            "closed": true
+          },
+          "receiver": {
+            "matchesClosedPointer": true,
+            "flags": 4,
+            "cron": 0,
+            "tails": 0,
+            "closed": true
+          }
         }
       },
-      "sourceTree": "511358558920805e686d12b5608e8d16ba2261ba",
-      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
-      "job": 136618907918,
-      "releaseLayout": {
-        "archiveSha256": "7dbda5299e2511f8c2b6f915cc1481f345a8063271f9e06aaf3792b3bf485203",
-        "archiveBytes": 2026292,
-        "moduleCount": 5,
-        "completePackage": false,
-        "operationalReadiness": false
-      },
-      "success": true,
-      "sourceRevision": "5b26ed705b13ed67e3db937d3fa73e51de27edd9",
-      "scope": "Same job, exact main. Modeled container with real boot controller and bridge, signed webhook to mounted Worker/D1, authenticated claim and review, revocation and persisted same subscription withdrawal, private RPC correlated receipt, process stopped and late send denied. The same job fetched the pinned R2 snapshot and mounted three exact closed rollback programs in Workerd. This is a restoration rehearsal, not a Cloudflare traffic switch."
+      "credentials": {
+        "observedAtUTC": "2026-11-20T22:56:32.677Z",
+        "out": {
+          "reader": {
+            "idMatches": true,
+            "active": true,
+            "expiresAt": "2026-11-27T02:59:59Z",
+            "expiryMatches": true,
+            "policyHash": "52f206f2a70a1b7a650863c6551739555ac9a56d43574d402641c67bd408368e"
+          },
+          "publisher": {
+            "idMatches": true,
+            "active": true,
+            "expiresAt": "2026-11-27T02:59:59Z",
+            "expiryMatches": true,
+            "policyHash": "5c60496910d590a18ddf55ea3122190c428483573247f630074b836cd6be6ce4"
+          }
+        },
+        "scope": "Cloudflare token metadata; does not establish stored credential values or activation."
+      }
     },
     "provider": {
       "status": "identified",
-      "observedAtUTC": "2026-11-20T22:44:20.0408081+00:00",
+      "id": "0ocqieaifg7h",
       "components": [
         "Workers",
         "Queues"
       ],
-      "id": "0ocqieaifg7h"
+      "observedAtUTC": "2026-11-20T23:17:50.2891727+00:00"
     },
     "disposition": {
       "deployableZip": false,
       "realTrial": false,
       "operationalReadiness": false,
-      "blocker": "Complete build and native source authority still fail closed. Workerd rehearsal does not establish the real Cloudflare QA context, custody, or coupled restoration. Cloudflare provider admission remains blocked by the open Workers/Queues incident."
+      "blocker": "Actual QA source/profile and loaded read identity remain unqualified, the complete build still fails closed. The Cloudflare Workers/Queues incident is still open."
     }
   }
 }
