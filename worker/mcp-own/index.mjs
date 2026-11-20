@@ -19,6 +19,7 @@ import {createOwnSyntheticSaveHost} from '../../lib/mcp-own-synthetic-save-host.
 import {observeMcpDiscoveryRequest,observeMcpEventAuthority,createMcpRpcCatalogDiagnostic} from '../../lib/mcp-discovery-diagnostic.mjs';
 const deny=()=>new Response('{"code":"unavailable"}',{status:404,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const fail=()=>{throw Error('Private event Node unavailable');};
+const denyFiniteLegacyDelivery=()=>{throw Error('Finite legacy delivery unavailable');};
 // Build replaces these public program/revision literals; no key is embedded.
 // Entrypoint family is fixed in compiled bytes, never read from caller/env.
 // Metadata and source qualification must still prove this profile before ARM.
@@ -157,8 +158,8 @@ export class AfwOwnEventNode extends DurableObject{
    close:async(signal,assertStage,expiresAt)=>{const c=this.#host(true);const assertCurrent=()=>{assertStage();c.current();if(signal.aborted)fail();};assertCurrent();const result=await c.host.close({signal,assertCurrent,expiresAt});assertCurrent();return result;}},boundary);
  }catch{fail();}}
  // Internal producer reference only; never accept a caller-authored signal.
- async deliverSaved(subscriptionId,eventId){if(finiteEntrypoint)fail();return this.#call('deliverSaved',subscriptionId,eventId);}
- async deliverOwnSaved(eventId){if(finiteEntrypoint)fail();return this.#call('deliverOwnSaved',eventId);}
+ async deliverSaved(subscriptionId,eventId){if(finiteEntrypoint)denyFiniteLegacyDelivery();return this.#call('deliverSaved',subscriptionId,eventId);}
+ async deliverOwnSaved(eventId){if(finiteEntrypoint)denyFiniteLegacyDelivery();return this.#call('deliverOwnSaved',eventId);}
  async consume(request,serverProps){try{return await this.#call('consume',request,serverProps);}catch{return deny();}}
 }
 

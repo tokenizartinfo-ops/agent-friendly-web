@@ -17,8 +17,8 @@ const legacyProbeSource=`
  export default {async fetch(_request,env){
   const node=env.NODE.get(env.NODE.idFromName('${eventActorName}'));
   const checks=[
-   [()=>node.deliverOwnSaved('synthetic-event'),'Private event Node unavailable'],
-   [()=>node.deliverSaved('synthetic-subscription','synthetic-event'),'Private event Node unavailable'],
+   [()=>node.deliverOwnSaved('synthetic-event'),'Finite legacy delivery unavailable'],
+   [()=>node.deliverSaved('synthetic-subscription','synthetic-event'),'Finite legacy delivery unavailable'],
    [()=>node.withdrawPermissions(),'Finite legacy withdrawal unavailable'],
    [()=>node.withdrawPermissionsForPlan({}),'Finite legacy withdrawal unavailable']
   ];

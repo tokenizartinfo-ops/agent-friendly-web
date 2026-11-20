@@ -21,10 +21,11 @@ const source=Buffer.from(`
  }};
 `);
 const members={qaClosed:'closed-rollback.mjs',canary:'index.mjs',operator:'index.mjs'};
+const sources=Object.fromEntries(Object.keys(members).map(role=>[role,Buffer.concat([source,Buffer.from('\n// '+role)])]));
 const pins=Object.fromEntries(Object.entries(members).map(([role,name])=>[role,{module:{
- name,bytes:source.length,sha256:createHash('sha256').update(source).digest('hex')
+ name,bytes:sources[role].length,sha256:createHash('sha256').update(sources[role]).digest('hex')
 }}]));
-const frame=Buffer.concat([source,source,source]);
+const frame=Buffer.concat(Object.values(sources));
 const metadata=(mode='closed')=>Object.fromEntries(['qaClosed','canaryClosed','operatorClosed'].map(role=>[role,{
  compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],
  bindings:[{name:'SYNTHETIC_MODE',type:'plain_text',text:mode},{name:'SYNTHETIC_ROLE',type:'plain_text',text:role}]
