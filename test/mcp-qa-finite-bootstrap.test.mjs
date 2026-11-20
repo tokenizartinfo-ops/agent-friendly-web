@@ -74,3 +74,26 @@ test('D0.1 old sealed QA public binding commitment is rejected by actual bootstr
  old.qaLive.publicStatic={...old.qaLive.publicStatic,bindingsHash:oldHash};
  assert.throws(()=>recordApi.encodeFiniteQaBootstrap(old));
 });
+
+test('QA bootstrap compares both deployed native classes and staged module exports',async()=>{
+ const {bootstrapWorld}=await import('./fixtures/finite-bootstrap-world.mjs');
+ const {readFiniteQaBootstrapPublication}=await import('../lib/mcp-qa-finite-bootstrap-publication.mjs');
+ const w=await bootstrapWorld(),{qaLive,sourceRevision,sourceTree,sourceCheck,observedAt}=w.record;
+ const staging={purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree,sourceCheck,
+  completePackage:false,operationalReadiness:false,
+  modules:{qaLive:{module:qaLive.module,publicStatic:qaLive.publicStatic,provenance:{kind:'compiled-source.v1',sourceRevision,sourceTree}}},
+  files:{'qaLive/index.mjs':Buffer.from('export default{};')}};
+ const requests=[];
+ const request=async path=>{
+  requests.push(path);
+  const result=path.endsWith('?include=modules')?w.version:w.pointer;
+  return {date:observedAt,value:{success:true,errors:[],messages:[],result:structuredClone(result)}};
+ };
+ assert.deepEqual(await readFiniteQaBootstrapPublication({staging,request,check(){}}),{qaLive,observedAt});
+ assert.equal(requests.length,3);
+ assert.equal(requests[0],requests[2]);
+ w.version.exports.IndependentClosure.storage='kv';
+ await assert.rejects(readFiniteQaBootstrapPublication({staging,request,check(){}}));
+ w.version.exports=qaLive.module.exports;
+ await assert.rejects(readFiniteQaBootstrapPublication({staging,request,check(){}}));
+});

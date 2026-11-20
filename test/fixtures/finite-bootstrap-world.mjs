@@ -3,6 +3,9 @@ import {createHash} from 'node:crypto';
 import {finitePublicStaticExpectation,finitePublicProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
 import {BOOTSTRAP,bootstrapHash,encodeFiniteQaBootstrap} from '../../lib/mcp-qa-finite-bootstrap-record.mjs';
 export const UUID='11111111-1111-4111-8111-111111111111',DEP='22222222-2222-4222-8222-222222222222';
+export function qaProviderExports(){
+ return {IndependentClosure:{type:'durable-object',storage:'sqlite'},PrivateQaPreregistration:{type:'durable-object',storage:'sqlite'}};
+}
 export const GH='https://api.github.com/repos/'+BOOTSTRAP.repository,CF='https://api.cloudflare.com/client/v4/accounts/'+BOOTSTRAP.accountId;
 export async function bootstrapWorld(staging){
  const actor={id:290715446,login:'tokenizartinfo-ops',type:'User'},repo={id:1347578006,full_name:BOOTSTRAP.repository},P0=Math.floor((Date.now()-10000)/1000)*1000,M=staging?.sourceRevision??'a'.repeat(40),tree=staging?.sourceTree??'b'.repeat(40);
@@ -20,7 +23,7 @@ export async function bootstrapWorld(staging){
  ['/git/commits/'+M,{sha:M,tree:{sha:tree}}],
  ['/contents/'+BOOTSTRAP.workflowPath+'?ref='+M,file(BOOTSTRAP.workflowPath,workflow)],
  ['/contents/'+BOOTSTRAP.cliPath+'?ref='+M,file(BOOTSTRAP.cliPath,cli)]]);
- const pointer={deployments:[{id:DEP,strategy:'percentage',versions:[{version_id:UUID,percentage:100}]}]},version={...structuredClone(finitePublicProfileTemplate('qaLive')),id:UUID,urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from(staging?.files['qaLive/index.mjs']??'export default{};').toString('base64')}]};
+ const pointer={deployments:[{id:DEP,strategy:'percentage',versions:[{version_id:UUID,percentage:100}]}]},version={...structuredClone(finitePublicProfileTemplate('qaLive')),exports:qaProviderExports(),id:UUID,urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from(staging?.files['qaLive/index.mjs']??'export default{};').toString('base64')}]};
  const refresh=()=>{map.set(refPath,{ref:'refs/tags/afw-finite-bootstrap/'+UUID,object:{type:'tag',sha:tagSha}});map.set('/git/tags/'+tagSha,{sha:tagSha,tag:'afw-finite-bootstrap-'+UUID,object:{type:'commit',sha:M},message:encodeFiniteQaBootstrap(r)});};refresh();
  const event={action:'created',repository:repo,issue:{number:497},comment,sender:actor},context={repository:repo.full_name,repositoryId:String(repo.id),ref:'refs/heads/main',eventName:'issue_comment',runId:'456',runAttempt:'1',sourceRevision:M};
  return {record:r,expected,map,comment,run,job,step,pointer,version,refPath,tagSha,refresh,event,context,issuer(){run.status=job.status=step.status='in_progress';run.conclusion=job.conclusion=step.conclusion=null;job.completed_at=step.completed_at=null;map.delete(refPath);map.delete('/git/tags/'+tagSha);},get:async p=>{if(!map.has(p))throw Error('SYN GH missing '+p);return structuredClone(map.get(p));}};
