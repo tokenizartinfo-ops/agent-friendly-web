@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {seedWorld} from './fixtures/finite-seed-world.mjs';
+
+test('the protected seed requires a private R2 read credential before any external request',async()=>{
+ const f=await seedWorld();
+ const {r2Credential,...options}=f.options;
+ assert.equal(typeof r2Credential,'string');
+ await assert.rejects(f.api.issueFiniteMaterialSeed(options),{message:'Finite seed issuer unavailable'});
+ assert.deepEqual(f.calls,[]);
+});
 test('actual CLI resolves real archive, verifies bytes/primaries and issues one annotated seed/ref',async()=>{
  const f=await seedWorld(),r=await f.cli();assert.equal(r.status,'seed_material_created');assert.equal(r.qaPublicationBridgeVerified,false);
  assert.equal(f.state.tagPosts,1);assert.equal(f.state.refPosts,1);

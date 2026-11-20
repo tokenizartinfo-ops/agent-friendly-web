@@ -53,6 +53,7 @@ jobs:
         id: finite_seed_once
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          AFW_R2_BUNDLE_READ_URL: ${{ secrets.AFW_R2_BUNDLE_READ_URL }}
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |

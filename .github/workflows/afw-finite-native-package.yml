@@ -6,7 +6,7 @@ permissions:
   contents: read
   actions: read
 jobs:
-  package:
+  verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
@@ -20,11 +20,31 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Complete source and historical qualification
-        run: node scripts/build-finite-native-package.mjs "${{ github.sha }}"
-      # No upload step while Native5/4C2/4C3, privacy-qualified historical
-      # inputs, exact locator and rollback compatibility remain unqualified.
-      # Future exact six files: manifest.json, qaLive/index.mjs,
-      # qaClosed/closed-rollback.mjs, canaryLive/index.mjs,
-      # canaryClosed/index.mjs, operatorClosed/index.mjs.
-      # Eligible artifact name will be afw-finite-native-package-<M>.
+      - name: Verify exact compiled inputs
+        run: node scripts/build-finite-native-package.mjs --staging "${{ github.sha }}"
+  package:
+    needs: verify
+    if: ${{ github.run_attempt == '1' && vars.AFW_R2_PACKAGE_SOURCE_REVISION == github.sha }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: afw-qa-cloud-closed-rollback
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify private R2 bundle and write its public locator
+        env:
+          AFW_R2_BUNDLE_READ_URL: ${{ secrets.AFW_R2_BUNDLE_READ_URL }}
+        run: node scripts/write-finite-r2-locator.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-finite-native-package-${{ github.sha }}
+          path: output/finite-r2-locator/locator.json
+          if-no-files-found: error
+          retention-days: 7

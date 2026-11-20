@@ -6,7 +6,8 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {encodeFinitePackageManifest,hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
-import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver} from './fixtures/finite-package-resolver.mjs';
+import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver,finitePrivateLocatorZip,
+ finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator} from './fixtures/finite-package-resolver.mjs';
 
 let resolver;
 resolver=syntheticResolver;
@@ -23,6 +24,8 @@ const ROLES=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const blob=b=>createHash('sha1').update('blob '+Buffer.byteLength(b)+'\0').update(b).digest('hex');
 const clone=o=>structuredClone(o);
+const R2_KEY='finite-bundles-v1/'+M+'.zip';
+const R2=finiteR2TestUrl(M,AT);
 function fixture(){
  const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:sha(WORKFLOW_TEXT),modules:{},compatibility:{}};
  for(const role of ROLES)manifest.modules[role]={sourceRevision:role==='operatorClosed'?OLD:M,sourceTree:role==='operatorClosed'?OLDTREE:TREE,module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:sha(MODULE),bytes:MODULE.length,exports:[]},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)};
@@ -50,12 +53,21 @@ function fixture(){
    const built=spawnSync('python3',[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],{input:JSON.stringify({manifest:f.manifest,mutation:f.mutation}),maxBuffer:64*1024*1024,timeout:5000});
    assert.equal(built.status,0,built.stderr?.toString());
    f.zip=built.stdout;
+   if(f.privateR2){
+    f.r2Zip=f.zip;
+    const locator={purpose:'afw.finite-private-package-locator.v1',sourceRevision:M,sourceTree:TREE,
+     buildWorkflowHash:sha(f.workflowText),objectKey:R2_KEY,archiveBytes:f.r2Zip.length,
+     archiveSha256:sha(f.r2Zip),manifestHash:hashFinitePackageManifest(f.manifest)};
+    f.zip=finitePrivateLocatorZip({...locator,...f.editLocator});
+   }
    const artifact={id:202,name:'afw-finite-native-package-'+M,expired:false,expires_at:new Date(AT+86400000).toISOString(),digest:'sha256:'+sha(f.zip),size_in_bytes:f.zip.length,workflow_run:{id:101,repository_id:ID,head_repository_id:ID,head_sha:M,head_branch:'main'}};
    if(f.editArtifact)f.editArtifact(artifact);
    return json(f.artifact??{total_count:1,artifacts:[artifact]});
   }
   if(url===API+'/actions/artifacts/202/zip')return new Response(null,{status:302,headers:{location:SIGNED}});
   if(url===SIGNED)return new Response(f.zip);
+  if(url===R2)return new Response(f.editPrivateBody?.(f.r2Zip)??f.r2Zip,{
+   headers:{'content-type':'application/zip','content-length':String(f.r2Zip.length)}});
   throw Error('Unexpected synthetic URL '+url);
  }};
  return f;
@@ -76,6 +88,47 @@ test('real ZIP through actual Python subprocess yields immutable technical mater
  assert(!f.calls.some(x=>x.url===API+'/git/commits/'+OLD));
  assert(f.calls.some(x=>x.url===API+'/contents/lib/mcp-qa-cloud-closed-pins.mjs?ref='+M));
  for(const {url,init} of f.calls){assert.equal(init.method,'GET');assert.equal(init.redirect,'manual');assert.equal(init.headers.Authorization,url===SIGNED?undefined:'Bearer '+TOKEN);}
+});
+test('the protected resolver verifies an Actions receipt, then reads the exact ZIP only from private R2',async()=>{
+ const f=fixture();f.privateR2=true;f.options.r2Credential=R2;
+ const result=await resolve(f);
+ assert.deepEqual(result.manifest,f.manifest);
+ assert.equal(result.build.artifactDigest,'sha256:'+sha(f.zip));
+ assert.equal(result.build.manifestHash,hashFinitePackageManifest(f.manifest));
+ const steps=f.calls.filter(r=>[SIGNED,R2].includes(r.url));assert.deepEqual(steps.map(r=>r.url),[SIGNED,R2]);
+ assert.equal(steps[1].init.method,'GET');assert.equal(steps[1].init.redirect,'error');
+ assert.equal(Object.keys(steps[1].init.headers).some(k=>k.toLowerCase()==='authorization'),false);
+ assert(!JSON.stringify(result).includes(R2));
+});
+test('the private route rejects locator or ZIP drift and refuses legacy artifact fallback',async()=>{
+ for(const fault of ['objectKey','sourceTree','manifestHash','digest','legacy','redirect']){
+  const f=fixture();f.privateR2=fault!=='legacy';f.options.r2Credential=R2;
+  if(fault==='objectKey')f.editLocator={objectKey:'other.zip'};
+  if(fault==='sourceTree')f.editLocator={sourceTree:'e'.repeat(40)};
+  if(fault==='manifestHash')f.editLocator={manifestHash:'1'.repeat(64)};
+  if(fault==='digest')f.editPrivateBody=b=>Buffer.from(b).fill(0,0,1);
+  if(fault==='redirect')f.hook=async url=>url===R2?new Response(null,{status:302,headers:{location:'https://example.invalid/private'}}):null;
+  await denied(f);
+  assert.equal(f.calls.filter(r=>r.url===R2).length,['manifestHash','digest','redirect'].includes(fault)?1:0,fault);
+ }
+});
+test('private readback verifies every draft member without issuing a release locator',async()=>{
+ const drafts={purpose:'afw.finite-native-private-draft.v1',sourceRevision:M,sourceTree:TREE,moduleCount:5,
+  completePackage:false,operationalReadiness:false,files:{}};
+ for(const role of ROLES)drafts.files[role+'/'+(role==='qaClosed'?'closed-rollback.mjs':'index.mjs')]=
+  {bytes:MODULE.length,sha256:sha(MODULE)};
+ const built=spawnSync('python3',[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],
+  {input:JSON.stringify({manifest:drafts}),timeout:5000,maxBuffer:65536});
+ assert.equal(built.status,0,built.stderr?.toString());
+ const bytes=built.stdout;
+ const options={sourceRevision:M,sourceTree:TREE,archiveBytes:bytes.length,archiveSha256:sha(bytes),
+  credential:R2,now:()=>AT,fetchImpl:async(url,req)=>{
+   assert.equal(url,R2);assert.equal(req.method,'GET');
+   return new Response(bytes,{headers:{'content-type':'application/zip','content-length':String(bytes.length)}});
+  }};
+ const result=await verifyFinitePrivateR2Draft(options);
+ assert.equal(result.moduleCount,5);assert.equal(result.authorizesDeployment,false);
+ await assert.rejects(createFinitePrivateR2Locator({...options,workflowHash:sha(WORKFLOW_TEXT)}),{message:'Finite package unavailable'});
 });
 test('source constructor invokes concrete resolver only during seed-material',async()=>{
  const f=fixture(),r=await resolvePrivateQaFiniteExternalSource({phase:'seed-material',...f.options});

@@ -29,7 +29,8 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   }
   if(phase==='admission'){await append(env.GITHUB_OUTPUT,'intent_id='+admission.intentId+'\n');return {status:'admitted',operationalReadiness:false};}
   if(phase==='seed-material'){
-   return await issueFiniteMaterialSeed({admission,githubToken:env.GITHUB_TOKEN,credential:env.AFW_QA_CLOSED_TOKEN,fetchImpl,now,signal});
+   return await issueFiniteMaterialSeed({admission,githubToken:env.GITHUB_TOKEN,credential:env.AFW_QA_CLOSED_TOKEN,
+    r2Credential:env.AFW_R2_BUNDLE_READ_URL,fetchImpl,now,signal});
   }
   // Bootstrap facts identify only the original QA publication and custody.
   if(phase==='launch'){

@@ -10,6 +10,7 @@ import {qaClosedConfigurationHash} from '../../lib/mcp-restoration-configuration
 import {finiteGhaCustody} from '../../lib/mcp-qa-finite-custody.mjs';
 import {hashFinitePackageManifest} from '../../lib/mcp-qa-finite-seed.mjs';
 import {seedPrimaryFixture,digest,SEED_GH} from './finite-seed-primary.mjs';
+import {finitePrivateLocatorZip,finiteR2TestUrl} from './finite-package-resolver.mjs';
 const MODULE=Buffer.from("throw new Error('ARCHIVE_MUST_NEVER_EXECUTE');\n");
 const ROOT='/accounts/85d0d5dadac3341a564f22ce885e9eec',QA='agent-friendly-web-independent-closure-qa',CF='https://api.cloudflare.com/client/v4';
 const SIGNED='https://productionresultssa1.blob.core.windows.net/actions-results/fixture/archive.zip?sig=SYNTHETIC';
@@ -27,11 +28,15 @@ export async function seedWorld({sourceAuthority=true}={}){
  }
  const built=spawnSync('python3',[fileURLToPath(new URL('../finite_archive_test.py',import.meta.url)),'--fixture'],{input:JSON.stringify({manifest:m}),maxBuffer:67108864,timeout:5000});
  if(built.status!==0)throw Error('synthetic ZIP failed');const zip=built.stdout;
- f.seed.build.manifestHash=hashFinitePackageManifest(m);f.seed.build.artifactDigest='sha256:'+digest(zip);
+ const manifestHash=hashFinitePackageManifest(m),r2Credential=finiteR2TestUrl(m.sourceRevision,f.T0);
+ const locator=finitePrivateLocatorZip({purpose:'afw.finite-private-package-locator.v1',sourceRevision:m.sourceRevision,
+  sourceTree:m.sourceTree,buildWorkflowHash:m.buildWorkflowHash,objectKey:'finite-bundles-v1/'+m.sourceRevision+'.zip',
+  archiveBytes:zip.length,archiveSha256:digest(zip),manifestHash});
+ f.seed.build.manifestHash=manifestHash;f.seed.build.artifactDigest='sha256:'+digest(locator);
  for(const role of ['qaLive','qaClosed'])for(const key of ['module','publicStatic'])f.seed.qaPublication[role][key]=structuredClone(m.modules[role][key]);
  for(const role of ['qaLive','qaClosed'])f.seed.qaPublication[role].configurationHash=qaClosedConfigurationHash(versions[f.seed.qaPublication[role].versionId]);
  f.refresh();
- const artifact=f.map.get('/actions/artifacts/202');artifact.digest=f.seed.build.artifactDigest;artifact.size_in_bytes=zip.length;
+ const artifact=f.map.get('/actions/artifacts/202');artifact.digest=f.seed.build.artifactDigest;artifact.size_in_bytes=locator.length;
  f.seedStep.status='in_progress';f.seedStep.conclusion=null;f.seedStep.completed_at=null;f.setNow(f.T0+1000);
  f.map.delete('/git/ref/tags/afw-finite-observer-create/'+f.seed.intentId);f.map.delete('/git/tags/'+f.tagSha);
  const pins={...QA_CLOUD_CLOSED_PINS,qaClosed:{name:QA,id:closedId,configurationHash:f.seed.qaPublication.qaClosed.configurationHash,bindingCount:1,flagCount:0,module:{name:'closed-rollback.mjs',bytes:MODULE.length,sha256:digest(MODULE)}}};
@@ -59,7 +64,8 @@ export async function seedWorld({sourceAuthority=true}={}){
  const fetchImpl=async(url,init)=>{
   calls.push({url,init});
   if(state.hook){const response=await state.hook(url,init);if(response)return response;}
-  if(url===SIGNED)return new Response(zip);
+  if(url===SIGNED)return new Response(locator);
+  if(url===r2Credential)return new Response(zip,{headers:{'content-type':'application/zip','content-length':String(zip.length)}});
   if(url.startsWith(CF)){
    const path=url.slice(CF.length);
    if(init.method!=='GET')throw Error('NO CF MUTATION');
@@ -96,8 +102,8 @@ export async function seedWorld({sourceAuthority=true}={}){
  const event={action:'created',repository:f.repository,issue:{number:497},sender:f.actor,comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+m.sourceRevision,created_at:new Date(f.T0).toISOString(),author_association:'OWNER',user:f.actor}};
  const context={repository:f.repository.full_name,repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:m.sourceRevision};
  const admission=api.validateQaFiniteConfirmationCommand({event,context,now:f.now});
- const options={admission,githubToken:'synthetic-gh',credential:'synthetic-cf',fetchImpl,now:f.now,signal:new AbortController().signal};
- const env={GITHUB_EVENT_PATH:'synthetic-event',GITHUB_REPOSITORY:context.repository,GITHUB_REPOSITORY_ID:context.repositoryId,GITHUB_REF:context.ref,GITHUB_EVENT_NAME:context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:m.sourceRevision,GITHUB_TOKEN:'synthetic-gh',AFW_QA_CLOSED_TOKEN:'synthetic-cf'};
+ const options={admission,githubToken:'synthetic-gh',credential:'synthetic-cf',r2Credential,fetchImpl,now:f.now,signal:new AbortController().signal};
+ const env={GITHUB_EVENT_PATH:'synthetic-event',GITHUB_REPOSITORY:context.repository,GITHUB_REPOSITORY_ID:context.repositoryId,GITHUB_REF:context.ref,GITHUB_EVENT_NAME:context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:m.sourceRevision,GITHUB_TOKEN:'synthetic-gh',AFW_QA_CLOSED_TOKEN:'synthetic-cf',AFW_R2_BUNDLE_READ_URL:r2Credential};
  const nativeEnv={AFW_QA_VERSION:{id:liveId},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native',SOURCE_TEMPLATE:m.sourceRevision,AFW_INDEPENDENT_CLOSURE:{idFromName:()=>({toString:()=> 'synthetic-actor'})}};
  return {...f,api,state,calls,tags,versions,fetchImpl,options,event,env,nativeEnv,complete(){f.setNow(f.T0+3000);f.seedStep.status='completed';f.seedStep.conclusion='success';f.seedStep.completed_at=new Date(f.T0+2000).toISOString();},nativeOptions(){return {ctx:{id:{toString:()=> 'synthetic-actor'}},env:nativeEnv,intentId:f.seed.intentId,sourceRevision:m.sourceRevision,fetchImpl,now:f.now,signal:new AbortController().signal};},async cli(){return api.runFiniteFinalizerCli({phase:'seed-material',env,read:async()=>JSON.stringify(event),write:async()=>{},fetchImpl,now:f.now});}};
 }

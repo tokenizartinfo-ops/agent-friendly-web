@@ -158,6 +158,19 @@ def inspect_archive(raw):
     return {"manifest": manifest, "manifestText": manifest_text, "files": files}
 
 
+def inspect_private_locator(raw):
+    require(0 < len(raw) <= 65536)
+    text, _ = inspect_members(raw, {"locator.json"}, "locator.json")
+    return canonical_record(text, "afw.finite-private-package-locator.v1")
+
+
+def inspect_private_draft(raw):
+    text, files = inspect_members(raw, NAMES, "manifest.json")
+    manifest = canonical_record(text, "afw.finite-native-private-draft.v1")
+    require(manifest.get("files") == files)
+    return {"manifest": manifest, "files": files}
+
+
 def inspect_historical_inputs(raw):
     receipt_text, files = inspect_members(raw, HISTORICAL_FILES | {"receipt.json"}, "receipt.json")
     receipt = canonical_record(receipt_text, HISTORICAL_RECEIPT_PURPOSE)
@@ -336,6 +349,8 @@ def main():
     require(len(raw) <= limit)
     inspectors = {
         (): inspect_archive,
+        ("--private-locator",): inspect_private_locator,
+        ("--private-draft-readback",): inspect_private_draft,
         ("--historical-inputs",): inspect_historical_inputs,
         ("--pinned-r2-historical-inputs",): inspect_pinned_r2_historical_inputs,
         ("--assemble-private-draft",): assemble_private_draft,
