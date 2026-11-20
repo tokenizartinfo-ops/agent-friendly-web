@@ -107,3 +107,26 @@ test('draft and deployable package credentials for the same revision cannot be i
  assert.equal(await (await api.readFiniteR2Package({...options,credential:release.href})).text(),'z');
  assert.deepEqual(calls,[draft,release.href]);
 });
+
+test('protected historical access failures distinguish a missing secret, expiry and HTTP refusal without exposing the URL',async()=>{
+ const credential=signed().href, expired=signed(),future=signed();
+ expired.searchParams.set('X-Amz-Expires','20');
+ future.searchParams.set('X-Amz-Date','20261119T153530Z');
+ const cases=[
+  [undefined,'credential_missing',null],
+  ['https://synthetic.invalid/foreign.zip','credential_format_or_scope',null],
+  [future.href,'signing_time_in_future',null],
+  [expired.href,'signing_window_too_short',null],
+  [credential,'archive_http_status',403,()=>new Response('private error body',{status:403})],
+  [credential,'archive_response_metadata',200,()=>new Response('not a zip',{status:200})],
+  [credential,'archive_request_failed',null,()=>{throw Error(credential);}]
+ ];
+ for(const [input,stage,httpStatus,respond] of cases){
+  let calls=0;
+  await assert.rejects(api.readFiniteR2Archive({credential:input,now,signal,fetchImpl:async()=>{
+   calls+=1;
+   return respond();
+  }}),{message:'Finite R2 archive unavailable',cause:{stage,httpStatus}});
+  assert.equal(calls,respond?1:0);
+ }
+});
