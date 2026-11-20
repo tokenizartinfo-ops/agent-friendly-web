@@ -7,7 +7,7 @@ const O='https://delegated-canary.agentfriendlyweb.dev',V='11111111-1111-4111-81
 async function fixture(t){
  const profile=name=>JSON.parse(readFileSync(name,'utf8'));
  const m=profile('wrangler.mcp-own.finite.jsonc'),q=profile('wrangler.independent-closure-qa.finite.jsonc');
- const compile=async name=>(await build({entryPoints:['test/fixtures/finite-native-conduit-'+name+'.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*']})).outputFiles[0].text;
+ const compile=async name=>(await build({entryPoints:['test/fixtures/finite-native-conduit-'+name+'.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*']})).outputFiles[0].text;
  const [sender,receiver]=await Promise.all([compile('sender'),compile('receiver')]);
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[
   {name:'sender',modules:true,script:sender,compatibilityDate:m.compatibility_date,compatibilityFlags:m.compatibility_flags,

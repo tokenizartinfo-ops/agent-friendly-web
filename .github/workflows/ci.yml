@@ -57,6 +57,7 @@ jobs:
       - run: npm ci
       - name: Produce the original synthetic occurrence and verify its native cleanup
         run: |
+          export AFW_JOB_STARTED_MS="$(date +%s%3N)"
           node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group "$AFW_R2_CHECKPOINT" "$AFW_R2_GROUP"
           node --experimental-vm-modules --test --test-reporter=spec test/mcp-qa-finite-owner-cleanup-native.test.mjs
   verify:

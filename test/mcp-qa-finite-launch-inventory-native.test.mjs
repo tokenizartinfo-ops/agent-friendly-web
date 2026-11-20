@@ -281,11 +281,11 @@ test('finite restoration inventory requires actual terminal launcher AND nominal
  const {finiteLauncherInstanceId}=await import('../lib/mcp-qa-finite-launch-records.mjs');
  const intentId='phase-fixture',sourceRevision='b'.repeat(40),launcherId=finiteLauncherInstanceId({intentId,sourceRevision}),confirmationId='afw-release-'+'6'.repeat(64),observerId='observer-fixed';
  const q={intentId,sourceRevision,controlHash:'1'.repeat(64),moduleHash:'2'.repeat(64),admissionHash:'3'.repeat(64),confirmationId,observerId,launcherId};
- const rows=api.AFW_FIXED_WORKFLOWS.map(s=>({id:s.id,name:s.name,script_name:s.script,class_name:s.className}));
+ const rows=fixedRegistry.map(s=>({id:s.id,name:s.name,script_name:s.script,class_name:s.className}));
  async function run(phase,nominal,launcher,observer='running'){
   const read=async path=>{
    if(path==='/workflows')return {value:rows,info:{per_page:100,count:3,total_count:3}};
-   const spec=api.AFW_FIXED_WORKFLOWS.find(s=>path.startsWith('/workflows/'+s.name));
+   const spec=fixedRegistry.find(s=>path.startsWith('/workflows/'+s.name));
    if(!path.endsWith('/instances'))return {value:rows.find(r=>r.id===spec.id)};
    const value=spec.className==='PrivateQaNamedConfirmation'?(nominal?[{id:confirmationId,status:nominal,workflow_id:spec.id}]:[]):spec.className==='PrivateQaBootstrap'?[{id:observerId,status:observer,workflow_id:spec.id},...(launcher?[{id:launcherId,status:launcher,workflow_id:spec.id}]:[])]:[];
    return {value,info:{per_page:100,count:value.length,total_count:value.length}};
