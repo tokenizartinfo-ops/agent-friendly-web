@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {setTimeout as delay} from 'node:timers/promises';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {finiteWranglerProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
 
@@ -48,9 +49,53 @@ function workerOptions(staging,role){
     ...(binding.script_name?{scriptName:binding.script_name}:{})
    }
   ])),
+  workflows:Object.fromEntries((config.workflows??[]).map(workflow=>[
+   workflow.binding,{name:workflow.name,className:workflow.class_name}
+  ])),
   d1Databases:Object.fromEntries(config.d1_databases.map(binding=>[binding.binding,binding.database_id])),
   kvNamespaces:Object.fromEntries(config.kv_namespaces.map(binding=>[binding.binding,binding.id]))
  };
+}
+
+export async function verifyClosedQaWorkflows(runtime,qa,{timeoutMs=10000}={}){
+ const bindings=await runtime.getBindings(qa);
+ const planHash='1'.repeat(64);
+ const attempts=[
+  {binding:'AFW_QA_BOOTSTRAP',id:'afw-staging-deny-initial',
+   params:{operation:'finite_initial_preparation'},status:'admin_pending'},
+  {binding:'AFW_QA_NAMED_CONFIRMATION',id:'afw-release-'+planHash,
+   params:{planHash},status:'blocked'}
+ ];
+ for(const attempt of attempts){
+  const stop=new AbortController();
+  const deadline=performance.now()+timeoutMs;
+  const timedOut=Error(attempt.binding+' did not finish before the staging deadline');
+  const check=()=>{
+   if(stop.signal.aborted||performance.now()>=deadline)throw timedOut;
+  };
+  let timeout;
+  const expired=new Promise((_,reject)=>{
+   timeout=setTimeout(()=>{reject(timedOut);stop.abort();},timeoutMs);
+  });
+  const run=async()=>{
+   check();
+   const instance=await bindings[attempt.binding].create({id:attempt.id,params:attempt.params});
+   for(;;){
+    check();
+    const execution=await instance.status();
+    check();
+    if(execution.status==='complete'){
+     assert.deepEqual(execution.output,{...pending,status:attempt.status},attempt.binding);
+     return;
+    }
+    assert(!['errored','terminated'].includes(execution.status),attempt.binding);
+    await delay(25,undefined,{signal:stop.signal});
+   }
+  };
+  try{await Promise.race([expired,run()]);}
+  finally{clearTimeout(timeout);stop.abort();}
+ }
+ return attempts.length;
 }
 
 export async function verifyFiniteStagingMounts(staging){
@@ -104,8 +149,9 @@ export async function verifyFiniteStagingMounts(staging){
   }
   const probe=await mf.getWorker(legacyProbeName);
   assert.deepEqual(await (await probe.fetch('https://fixture.invalid')).json(),{denied:true});
+  const nativeWorkflowDenials=await verifyClosedQaWorkflows(mf,qa);
   assert.equal(outboundAttempts,0);
-  return Object.freeze({exactModuleCount:workers.length,operationalReadiness:false});
+  return Object.freeze({exactModuleCount:workers.length,nativeWorkflowDenials,operationalReadiness:false});
  }finally{
   await mf.dispose();
  }
