@@ -531,6 +531,21 @@
       "runId": 44806316615,
       "conclusion": "success",
       "sourceRevision": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6"
+    },
+    "directR2RollbackArchiveMembers": {
+      "observedAtUTC": "2026-11-20T20:33:49.032Z",
+      "archiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "archiveBytes": 4209422,
+      "verifiedMembers": 7,
+      "rollbackModules": 3,
+      "rollbackMetadataDocuments": 3,
+      "receiptVerified": true,
+      "readOnly": true
+    },
+    "post728MainCI": {
+      "runId": 44811333369,
+      "conclusion": "success",
+      "sourceRevision": "aa3da595a50da6c983a3901653d4a87ae9337066"
     }
   },
   "findings": {
@@ -548,7 +563,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Finish private native qualification and construct the deployable v2 archive with the exact five-role descriptors. Then perform a protected read with a fresh approved R2 link. The live AFW trial remains blocked by the existing provider preflight while 0ocqieaifg7h is active. Last closed readback 20:04:39Z, version pointer and feature flag checks only. No trial, notice receipt, review or withdrawal has been observed from this turn.",
+    "next": "Complete and merge private v2 ZIP rehearsal after exact CI. Cloudflare API independently verified the seven R2 backup members against fixed hashes, including three rollback modules and three metadata records. The newly integrated rehearsal preserves the canonical v2 schema while keeping the legacy guard false and returns only hashes and counts. A bounded local Workerd preflight stalled and was stopped, with its isolated checkout removed. Use the existing protected Linux workflow and a fresh narrowly scoped signed R2 GET for combined actual-source/R2 verification. No Cloudflare promotion or trial while provider preflight is blocked.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -637,21 +652,20 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T20:27:37Z",
+  "updatedUTC": "2026-11-20T20:49:12Z",
   "latestCandidate": {
-    "pullRequest": 728,
-    "head": "bdec94ab01bb26c3fd09d98c83455507d136421f",
-    "tree": "827528302f54a3c9fc643bb65b46faf6ac2b38e9",
-    "base": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
+    "pullRequest": 729,
+    "head": "d913a610c41e1b901d149091f6335a93cb0f20a4",
+    "tree": "05ee5a4ca57e006b1670f250f60ecd253fdf82e1",
+    "base": "aa3da595a50da6c983a3901653d4a87ae9337066",
     "sourcePackageChecks": {
-      "runId": 44807975636,
+      "runId": 44813988470,
       "status": "success",
       "completePackage": false
     },
     "ci": {
-      "runId": 44807975872,
-      "status": "success"
-    },
-    "mergedRevision": "aa3da595a50da6c983a3901653d4a87ae9337066"
+      "runId": 44813988493,
+      "status": "in_progress"
+    }
   }
 }
