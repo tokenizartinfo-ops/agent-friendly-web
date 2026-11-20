@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
-    "latestVerifiedTree": "88ae6ce9b03f6cf67aeb6a811f0a4436cdf71728"
+    "latestVerifiedCommit": "bc335b1ddb2cbc77928e3373e2647a04081da6dc",
+    "latestVerifiedTree": "62e604b507ebf8b8839bb2263725c7c58fed6c11"
   },
   "candidate": {
     "pullRequest": 720,
@@ -286,12 +286,12 @@
     "currentProviderGate": {
       "incident": "0ocqieaifg7h",
       "officialStatus": "identified",
-      "observedAtUTC": "2026-11-20T18:52:00Z",
       "dependsOn": [
         "Workers",
         "Queues"
       ],
-      "operationalReadiness": false
+      "operationalReadiness": false,
+      "providerFeedUpdatedAtUTC": "2026-11-20T18:45:54.261Z"
     },
     "protectedR2Attempt": {
       "runId": 44782365542,
@@ -445,6 +445,27 @@
           }
         ]
       }
+    },
+    "qaVersionMetadata": {
+      "pullRequest": 726,
+      "sourceRevision": "bc335b1ddb2cbc77928e3373e2647a04081da6dc",
+      "sourceTree": "62e604b507ebf8b8839bb2263725c7c58fed6c11",
+      "mergedAtUTC": "2026-11-20T19:19:57Z",
+      "ci": 44797951265,
+      "sourceCheck": 44797951369,
+      "description": "The native SQLite class map is qualified before the independent ESM export list is projected. Raw configuration hashes, deployment pointers and module bytes remain separate checks."
+    },
+    "isolatedNamedQaWorkflows": {
+      "pullRequest": 727,
+      "head": "307815e2fde3dadcfc523de5a979a3bb46b3cee9",
+      "buildRun": 44799247556,
+      "exactModuleCount": 2,
+      "nativeWorkflowDenials": 2,
+      "deadlineCovers": [
+        "create",
+        "status"
+      ],
+      "operationalReadiness": false
     }
   },
   "findings": {
@@ -462,7 +483,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "The three R2 rollback profiles and five exact module mounts are verified. Finish source qualification of the native QA material and its actual receiver/Workflow bindings before issuing the deployable v2 artifact. Then verify named publication and independent reversal, and a single real signed notice review and native withdrawal. Runtime remains closed, approved private object lease is scoped and temporary. Preserve AFW/Tokenizart isolation.",
+    "next": "Finish source CI for PR727 and read back the integrated tree. A single protected R2 read on the final source may verify that the three historical rollback modules and the configured native QA Workflow mounts work together, only if the existing lease is still valid. The deployable v2 artifact and independent cloud trial of the same signed notice and native withdrawal remain open.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -551,21 +572,20 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T19:01:32Z",
+  "updatedUTC": "2026-11-20T19:22:47Z",
   "latestCandidate": {
-    "pullRequest": 726,
-    "head": "bc131e30652cba0460626e51b99ac332981b290b",
-    "tree": "62e604b507ebf8b8839bb2263725c7c58fed6c11",
+    "pullRequest": 727,
+    "head": "307815e2fde3dadcfc523de5a979a3bb46b3cee9",
+    "tree": "f3d00f2d8f7b62092fb9f3ae3f6f4aa857861599",
     "base": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
     "sourcePackageChecks": {
-      "runId": 44797951369,
+      "runId": 44799247556,
       "status": "success",
       "completePackage": false
     },
     "ci": {
-      "runId": 44797951265,
+      "runId": 44799247555,
       "status": "in_progress"
-    },
-    "scope": "Native QA version metadata only. Exact two-class SQLite provider map checked separately from the compiled ESM exports. Earlier fixed pre-entry binding import regression exercised and corrected."
+    }
   }
 }
