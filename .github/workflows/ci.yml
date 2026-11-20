@@ -30,9 +30,37 @@ jobs:
       - name: Run full-suite shard
         env:
           TEST_SHARD: ${{ matrix.shard }}
-        run: node --experimental-vm-modules --test --test-reporter=spec --test-shard="$TEST_SHARD" test/*.test.mjs
+        run: |
+          files=()
+          for file in test/*.test.mjs; do
+            if [[ "$file" != test/mcp-qa-finite-owner-cleanup-native.test.mjs ]]; then
+              files+=("$file")
+            fi
+          done
+          node --experimental-vm-modules --test --test-reporter=spec --test-shard="$TEST_SHARD" "${files[@]}"
+  owner-cleanup:
+    name: Finite QA cleanup with original checkpoint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      AFW_R2_GROUP: g0
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+          cache: npm
+      - run: npm ci
+      - name: Produce the original synthetic occurrence and verify its native cleanup
+        run: |
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group "$AFW_R2_CHECKPOINT" "$AFW_R2_GROUP"
+          node --experimental-vm-modules --test --test-reporter=spec test/mcp-qa-finite-owner-cleanup-native.test.mjs
   verify:
-    needs: test
+    needs: [test, owner-cleanup]
     # Keep the OS family used by native workerd/SQLite acceptance.
     # Qualify a new OS explicitly instead of following ubuntu-latest migration.
     runs-on: ubuntu-24.04
