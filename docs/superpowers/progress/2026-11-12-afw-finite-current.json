@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-bootstrap-renewal-and-signed-callback.json",
-  "phase": "Compiler validates the literal private R2 rollback modules and archived configuration. Isolated Workerd closed-path verification and targeted CI passed. Eligible full deployment package and real cloud trial remain pending.",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-verified-private-r2-rollback-compiler.json",
+  "phase": "Native observer and protected GitHub independent QA restoration wired in lab source, cloud validation and literal private R2 assembly passed. Default branch promotion, full package eligibility, and actual notice trial pending.",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "The finite Workflow takes the native launcher route, but the shared observer tail still uses the legacy claimFiniteTrialQaRestore and readFiniteTrialFinalPrimary RPCs, whose material producer is not mounted. The business restore claim in trial-control rejects an existing original-alarm handoff. Source-qualify the coupled observer path against the original alarm and independent QA restorer instead of enabling the legacy writer. After the source integration and private package eligibility, perform the protected secret readback, signed receiver check, and one real cloud occurrence. Close only if identical notice review and native unsubscription are verified and rollback is independently read back.",
+  "next": "The protected environment admits main only. Main lacks the native finalizer; lab history diverged from main. Port qualified source dependencies and runnable workflows through a reviewed bounded change. Do not enable lab runtime custody by widening protected deployment policy. The existing complete-package compiler and source qualification still fail closed. Make private artifact assembly and the exact consumer locator agree, keeping literal archive bytes and policy data private, then qualify all five role modules and rollback before traffic. Before a new occurrence, install a fresh object-scoped R2 read link in the existing protected environment and verify all scoped token identities there. Keep the exact accepted receiver and independent restoration ready. Launch once and require same event review, native subscription withdrawal and provider restoration readback.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 187,
-  "updatedAtUTC": "2026-11-19T23:38:45Z",
+  "schemaVersion": 188,
+  "updatedAtUTC": "2026-11-20T00:06:56Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2718,6 +2718,15 @@
     "validationRun": 44638609301,
     "r2DraftSha256": "ca89e3d7e4547721d604b0b79014e72020430aaf7fbae53e881397ebc91bbf5b",
     "isolatedRollbackRoutes": 10,
+    "completePackage": false,
+    "realCloudTrial": false
+  },
+  "independentQaObserverAndR2": {
+    "path": "docs/superpowers/progress/2026-11-20-afw-independent-observer-and-r2-validation.json",
+    "revision": "94ef3010007dfff6e68e27125d3aaf648053d552",
+    "closedLabHead": "185b0d69cb9ff3484b49ca1fe0aea4bad7f0b3db",
+    "validationRun": 44642718812,
+    "exactPrivateDraftSha256": "b7535bc136ca5a331552e0865703af636b7392abbd1dfd3f778c6b496315b8b5",
     "completePackage": false,
     "realCloudTrial": false
   }

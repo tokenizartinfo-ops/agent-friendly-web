@@ -1,0 +1,100 @@
+{
+  "purpose": "afw.finite-independent-observer-continuation.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "timestampUTC": "2026-11-20T00:06:56Z",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-19-afw-verified-private-r2-rollback-compiler.json",
+  "source": {
+    "revision": "94ef3010007dfff6e68e27125d3aaf648053d552",
+    "sourceTree": "7a5aa70baa9201861bafcf96bfa061ba1cae2265",
+    "labHead": "185b0d69cb9ff3484b49ca1fe0aea4bad7f0b3db",
+    "productionMain": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "defaultBranchFinalizerAbsent": true,
+    "protectedEnvironmentBranch": "main"
+  },
+  "cloudQualification": {
+    "runId": 44642718812,
+    "runHead": "468d40f6199aedd287dd5461d2261a906bb0f715",
+    "checkout": "94ef3010007dfff6e68e27125d3aaf648053d552",
+    "jsPass": 144,
+    "pythonPass": 29,
+    "fail": 0,
+    "scenario": "synthetic receiver, evidence of review and native withdrawal for the same notice, independent QA and Cloudflare-compatible Workerd code",
+    "diagnosticWorkflowClosed": true
+  },
+  "observer": {
+    "readsCommittedOriginalAlarm": true,
+    "returnsIndependentRecoveryScope": true,
+    "legacyWriteUnavailableInNativeMode": true,
+    "externalReadMatchesCloudflareRetainedStep": true,
+    "protectedFinalizerChoosesIndependentRestore": true,
+    "requiresSameNoticeReviewAndNativeWithdrawalForAcceptance": true,
+    "losesAcknowledgementWithoutReplaying": true,
+    "readyBranchKeepsOriginalClocks": true
+  },
+  "R2": {
+    "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+    "draftSha256": "b7535bc136ca5a331552e0865703af636b7392abbd1dfd3f778c6b496315b8b5",
+    "modules": 5,
+    "exactSourceRevision": "94ef3010007dfff6e68e27125d3aaf648053d552",
+    "restorationProfiles": {
+      "qaClosed": {
+        "versionId": "c570b60b-95dc-48e1-89f3-9c4651691dbc",
+        "moduleHash": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+        "configurationHash": "a8c8895f8375f4d09f01960e88bec8c3cac0a89f999e500f74fccf01733f7838",
+        "bindingCount": 31,
+        "closedFlagCount": 14
+      },
+      "canaryClosed": {
+        "versionId": "2607abae-cec3-4e35-89eb-8b8572262b54",
+        "moduleHash": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+        "configurationHash": "4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0",
+        "bindingCount": 29,
+        "closedFlagCount": 8
+      },
+      "operatorClosed": {
+        "versionId": "855dc5c1-e757-49aa-a6f5-cb02f8d03ea4",
+        "moduleHash": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51",
+        "configurationHash": "8c37301871c7fc3cc0f7471fddfdeb039f418a078b065fdde44ba5cbe8b24b4c",
+        "bindingCount": 7,
+        "closedFlagCount": 3
+      }
+    },
+    "completePackage": false,
+    "historicalArchiveContainsPrivatePolicies": true,
+    "privateInputsPreserved": true,
+    "compilerExecutedUnderFixedReadOnlyR2Lease": true
+  },
+  "liveReadback": {
+    "atUTC": "2026-11-20T00:05:24.433Z",
+    "roles": {
+      "qa": {
+        "pinned": true,
+        "cronCount": 0,
+        "tailCount": 0
+      },
+      "canary": {
+        "pinned": true,
+        "cronCount": 0,
+        "tailCount": 0
+      },
+      "operator": {
+        "pinned": true,
+        "cronCount": 0,
+        "tailCount": 0
+      }
+    },
+    "ownActiveContainers": 0
+  },
+  "blockers": [
+    "The protected environment admits main only. Main lacks the native finalizer; lab history diverged from main. Port qualified source dependencies and runnable workflows through a reviewed bounded change. Do not enable lab runtime custody by widening protected deployment policy.",
+    "The existing complete-package compiler and source qualification still fail closed. Make private artifact assembly and the exact consumer locator agree, keeping literal archive bytes and policy data private, then qualify all five role modules and rollback before traffic.",
+    "Before a new occurrence, install a fresh object-scoped R2 read link in the existing protected environment and verify all scoped token identities there. Keep the exact accepted receiver and independent restoration ready. Launch once and require same event review, native subscription withdrawal and provider restoration readback."
+  ],
+  "realCloudTrial": false,
+  "sameNoticeReviewedLive": false,
+  "nativeSubscriptionWithdrawnLive": false,
+  "runtimeMutated": false,
+  "ownerActionNeededNow": false,
+  "operationalReadiness": false
+}
