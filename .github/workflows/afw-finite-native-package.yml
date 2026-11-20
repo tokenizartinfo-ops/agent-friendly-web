@@ -46,7 +46,10 @@ jobs:
       - name: Lint the compiler and native mount checks
         run: npx --no-install eslint scripts/build-finite-native-package.mjs scripts/verify-finite-native-staging.mjs scripts/verify-finite-native-rollback.mjs test/verify-finite-native-rollback.test.mjs lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-publication.mjs test/mcp-qa-finite-closed-profile.test.mjs
       - name: Mount exact compiled modules in Workerd
-        run: node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION"
+        run: |
+          staging=$(node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION")
+          printf '%s\n' "$staging"
+          jq -e --arg revision "$AFW_PACKAGE_REVISION" '.sourceRevision == $revision and .nativeMount.nativeWorkflowDenials == 2 and .nativeMount.operationalReadiness == false' <<< "$staging"
       - name: Verify the bounded archive parser
         run: python3 -m unittest discover -s test -p finite_archive_test.py
       - name: Verify private R2 package transport and release provenance
