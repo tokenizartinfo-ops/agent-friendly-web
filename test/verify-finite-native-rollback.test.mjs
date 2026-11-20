@@ -37,7 +37,7 @@ test('rollback mount probe checks exact bytes, closed routes and denied egress i
  const modulePath=fileURLToPath(new URL('../scripts/verify-finite-native-rollback.mjs',import.meta.url));
  const compiled=await build({entryPoints:[modulePath],bundle:true,write:false,format:'esm',platform:'node',
   plugins:[{name:'synthetic-archive-pins',setup(builder){
-   builder.onResolve({filter:/^miniflare$/},()=>({path:pathToFileURL(require.resolve('miniflare')).href,external:true}));
+   builder.onResolve({filter:/^(?:esbuild|miniflare)$/},args=>({path:pathToFileURL(require.resolve(args.path)).href,external:true}));
    builder.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({
     contents:'export const QA_CLOUD_CLOSED_PINS='+JSON.stringify(pins)+';',loader:'js'
    }));
