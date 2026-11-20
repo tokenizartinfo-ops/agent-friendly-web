@@ -42,6 +42,26 @@
       "pass": 2,
       "fail": 0,
       "scope": "The fixed engine accepts the historical baseline with the matching digest, rejects configuration drift and performs no writes."
+    },
+    "linuxNativeJourney": {
+      "run": 44730021288,
+      "job": 136267084929,
+      "syntheticOnly": true,
+      "head": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
+      "actualTestMergeRevision": "53e83ffbb33c742c7257deb37af8691a447709fa",
+      "ownerChoice": "HTTP 200; native SEND and ACK ordering for upload and activation and verified connection receipt",
+      "connectionReceiptRawSha256": "2e9f966e7ddfb2e5b098f218f0add462256053c8123ade39111eff4e9d330878",
+      "oauth": "native authorize GET 200, consent POST 302 and token exchange 200",
+      "mcp": "native read_project_summary matches original synthetic project",
+      "blockedAt": "GET /monitoring at line 165 of the original T3 fixture; notices preparation was missing, so the actual canary denied the route in read_consent"
+    },
+    "linuxNativeNotices": {
+      "head": "f82884feab4baa2b0e5e25e16cf5e61ee3e3f44b",
+      "run": 44735727991,
+      "job": 136286487346,
+      "scope": "Original cleanup producer in synthetic Workerd; actual product routes, synthetic provider.",
+      "result": "Reached recordOwnerReference after the notices preparation, active configuration adoption, native monitoring GET and consent POST had completed.",
+      "laterFailure": "The canary remount discarded the in-memory OAuth reference observer. The original KV budget assertion had no counts."
     }
   },
   "findings": {
@@ -59,7 +79,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Use paired timing and exact stage transitions in cloud CI to separate the original POST deadline from the five-second enrollment child. Reduce repeated full proofs between adjacent checks only when no native side effect or independent authority boundary is skipped. Keep fresh ownership and provider readbacks around writes and the absolute deadlines. Then require end-to-end connection, original cleanup, full CI and qualifying private rollback package before integrating or running a live synthetic trial.",
+    "next": "Complete the original cleanup run and reconcile the remaining failing contract fixtures with the required notices state. Verify complete package and real-copy rollback evidence after the synthetic stage gates. Full CI, private native package and live cloud same-notice receive/review/withdrawal are still required before PC-off.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -103,7 +123,14 @@
         }
       ],
       "promoted": false,
-      "deadlinesModified": false
+      "deadlinesModified": false,
+      "followOn": {
+        "getHttp": 200,
+        "getElapsedMs": 25287,
+        "postHttp": 503,
+        "lastStage": "entry",
+        "scope": "Disposable local Workerd, concurrent diagnostic tests. Moving duplicate read-only bookends was not promoted."
+      }
     },
     "ciFailureClasses": {
       "run": 44730021288,
@@ -134,28 +161,44 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T12:10:09Z",
+  "updatedUTC": "2026-11-20T12:34:53Z",
   "latestCandidate": {
     "pullRequest": 720,
-    "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
-    "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+    "head": "3ff0ad9b45bb96280bb5bade6f2b69fbacddd268",
+    "tree": "bf91ff011dba19e979024e011612cd58506f746c",
     "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
-    "onlyFixtureChanges": true,
-    "workerdReview": {
-      "passed": 2,
-      "failed": 0
-    },
-    "oauthObservation": {
-      "exactHookCheck": "pass",
-      "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+    "changes": "Test fixtures only. Exercise the separate notices stage and preserve real OAuth measurement before remount; compare durable OAuth records after.",
+    "previousFixtureRepair": {
+      "pullRequest": 720,
+      "head": "a5c91ab9e55165b17dd1a5586cdc53f570e751cf",
+      "tree": "f622e6217e006c8fd7b1c8aef420c46766ea575f",
+      "base": "c09c640f1a37788ffa9581bd03f943f07fe7d2cd",
+      "onlyFixtureChanges": true,
+      "workerdReview": {
+        "passed": 2,
+        "failed": 0
+      },
+      "oauthObservation": {
+        "exactHookCheck": "pass",
+        "targetedNativeResult": "The fixture compiled and reached the real request. It received 503 instead of 200."
+      },
+      "ci": {
+        "run": 44733489856,
+        "status": "in_progress_at_checkpoint"
+      },
+      "sourcePackageChecks": {
+        "run": 44733489786,
+        "status": "in_progress_at_checkpoint"
+      }
     },
     "ci": {
-      "run": 44733489856,
+      "run": 44736711258,
+      "originalCleanupJob": 136289820303,
       "status": "in_progress_at_checkpoint"
     },
     "sourcePackageChecks": {
-      "run": 44733489786,
-      "status": "in_progress_at_checkpoint"
+      "run": 44736711241,
+      "status": "passed_staging"
     }
   }
 }
