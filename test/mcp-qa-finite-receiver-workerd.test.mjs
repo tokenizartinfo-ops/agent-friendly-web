@@ -1,23 +1,32 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finiteDossierChannelTag} from '../lib/mcp-qa-finite-dossier-channel.mjs';
-import {signDossierMcpEvent,signMcpVerification} from '../lib/mcp-signed-envelope.mjs';
+import {signMcpVerification} from '../lib/mcp-signed-envelope.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash,randomUUID} from 'node:crypto';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {syntheticSaveFixture} from './fixtures/mcp-own-synthetic-save.mjs';
+import {saveOwnSyntheticGoal} from '../lib/mcp-own-synthetic-save.mjs';
+import {projectDossierEvent} from '../lib/dossier-supervision.mjs';
+import {ownSubscriptionReceiptFields} from '../lib/mcp-own-subscription-receipt.mjs';
 
-test('the mounted QA receiver ingests and reviews the same signed notice through authenticated routes and private RPC',async()=>{
+const digest=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+test('one isolated occurrence boots, sends, reviews and withdraws the same notice',async()=>{
  const {privateKey,publicKey}=await generateKeyPair('RS256'),kid='finite-review-workerd-test';
  const jwk={...await exportJWK(publicKey),kid,alg:'RS256'};
  const access={team:'afw-review-fixture.cloudflareaccess.com',audience:'synthetic-finite-review',client:'synthetic-review.access'};
  const jwt=await new SignJWT({type:'app',common_name:access.client}).setProtectedHeader({alg:'RS256',kid})
   .setIssuer('https://'+access.team).setAudience(access.audience).setSubject('').setExpirationTime('5m').sign(privateKey);
  const actorHash=createHash('sha256').update(JSON.stringify(['afw.finite-dossier-review-actor.v1',access.team,access.audience,access.client])).digest('hex');
- const startAt=Date.now()-2000,observedAt=startAt+100;
+ const startAt=Date.now()-2000,projectId='oauth-canary-owner',idempotencyKey='11111111-1111-4111-8111-111111111111';
+ const savedId=digest(['afw.own-synthetic-save.v1','owner',projectId,idempotencyKey]);
+ const signal=await projectDossierEvent({id:savedId,projectId,type:'project_updated',revision:2,
+  createdAt:new Date(startAt).toISOString()},'z'.repeat(32));
  const callbackKey='whsec_'+Buffer.alloc(32,7).toString('base64');
- const policy={purpose:'afw.finite-dossier-review-policy.v1',projectRef:'1'.repeat(64),eventId:'2'.repeat(64),
+ const policy={purpose:'afw.finite-dossier-review-policy.v1',projectRef:signal.projectRef,eventId:signal.eventId,
   controlHash:'3'.repeat(64),actorHash,executionHash:'5'.repeat(64),revision:2,startAt,
   reviewBefore:startAt+90000,readBefore:startAt+120000};
  const resultHash='6'.repeat(64);
@@ -31,10 +40,9 @@ test('the mounted QA receiver ingests and reviews the same signed notice through
      const result=await env.AFW_FINITE_DOSSIER_REVIEW_RECEIVER.verifyChannel(await request.json());
      return Response.json(result);
     }
-    const matched=path==='/match';
-    const eventId=matched?${JSON.stringify(policy.eventId)}:'e'.repeat(64);
+    const notice=await request.json();
     const control={controlHash:${JSON.stringify(policy.controlHash)},plan:{T0:${startAt},C0:${policy.reviewBefore},selectors:{expectedProjectRevision:1}}};
-    const completion={notice:{eventId,withdrawn:true,httpReceipt:{httpReceivedAt:Date.now()}}};
+    const completion={notice};
     return Response.json({receipt:await observePrivateQaFiniteDossierReview({env,control,completion,check:Date.now})});
    }};`}}),
   build({...buildOptions,mainFields:['module','main'],entryPoints:['worker/operations-manager/index.mjs']}),
@@ -57,6 +65,8 @@ test('the mounted QA receiver ingests and reviews the same signed notice through
     AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(policy.reviewBefore).toISOString(),AFW_DOSSIER_PROJECT_REFS:JSON.stringify([policy.projectRef]),
     AFW_DOSSIER_FINITE_REVIEW_POLICY:JSON.stringify(policy)}},
  ]}));
+ let source;
+ const callbacks=[];
  try{
   const db=await runtime.getD1Database('OPERATIONS_DB','receiver');
   const schema=readFileSync('worker/operations/dossier-supervision.sql','utf8').replace(/--[^\n]*/g,'');
@@ -81,10 +91,33 @@ test('the mounted QA receiver ingests and reviews the same signed notice through
   assert.deepEqual(await channel(callbackKey,policy.eventId,true),{verified:false});
   const before=await db.prepare('SELECT count(*) AS n FROM dossier_supervision_events').first();
   assert.equal(before.n,0);
-  const message=signDossierMcpEvent({version:'afw-dossier-event-v1',eventId:policy.eventId,projectRef:policy.projectRef,
-   revision:policy.revision,kind:'project_updated',observedAt:new Date(observedAt).toISOString()},policy.projectRef,'sub_'+'8'.repeat(64),callbackKey,Date.now());
-  const first=await handler.fetch(endpoint,{method:'POST',headers:message.headers,body:message.body});
-  assert.equal(first.status,202);assert.deepEqual(await first.json(),{eventId:policy.eventId,duplicate:false});
+  source=await syntheticSaveFixture({projectId,windowMs:90000,
+   delivery:{mode:'webhook',url:endpoint,secret:callbackKey},
+   async sendCallback(url,envelope){
+    assert.equal(url,endpoint);
+    const reply=await handler.fetch(url,{method:'POST',headers:envelope.headers,body:envelope.body});
+    callbacks.push(reply.status);
+    return {status:reply.status,body:await reply.text()};
+   },
+  });
+  assert.equal(source.boots(),1);
+  assert.deepEqual(callbacks,[200]);
+  assert.equal(source.config.ctx.container.running,true);
+  source.config.db.withSession=name=>{assert.equal(name,'first-primary');return source.config.db;};
+  const saved=await saveOwnSyntheticGoal(source.options,{expectedRevision:1,idempotencyKey,goal:'discovery'});
+  assert.equal(saved.status,200);
+  assert.equal(saved.eventId,savedId);
+  const subscription=source.db.prepare('SELECT * FROM dossier_event_subscription_receipts').get();
+  const receiptHash=digest(Object.fromEntries(ownSubscriptionReceiptFields.map(key=>[key,subscription[key]])));
+  const fingerprint=digest(['afw.own-synthetic-save.v1','g',1,'discovery']);
+  const boundary=new AbortController();
+  const assertCurrent=()=>assert.equal(boundary.signal.aborted,false);
+  const input={notice:{eventId:saved.eventId,revision:saved.revision,fingerprint,
+   subscriptionReceiptHash:receiptHash,processReceiptHash:null},assertCurrent,recheck:async()=>{},
+   deliveryDeadline:source.config.window.expiresAt-1};
+  const sent=await source.host.deliverFiniteOwnSaved(input);
+  assert.equal(sent.eventId,policy.eventId);
+  assert.deepEqual(callbacks,[200,202]);
   const auth={'Cf-Access-Jwt-Assertion':jwt};
   const post=(path,value,headers=auth)=>handler.fetch(origin+path,{
    method:'POST',headers:{...headers,'content-type':'application/json'},body:JSON.stringify(value),
@@ -111,12 +144,33 @@ test('the mounted QA receiver ingests and reviews the same signed notice through
   assert.equal(receipt.receivedAt,row.receivedAt);
   assert.equal(keyReads,1);
   const {receivedAt,reviewedAt}=receipt;
-  const read=async route=>{
-   const response=await runtime.dispatchFetch('https://qa-receiver.invalid/'+route);
+  const read=async notice=>{
+   const response=await runtime.dispatchFetch('https://qa-receiver.invalid/read',{
+    method:'POST',body:JSON.stringify(notice),
+   });
    assert.equal(response.status,200);return (await response.json()).receipt;
   };
-  assert.equal(await read('other'),null);
-  assert.deepEqual(await read('match'),{purpose:'afw.finite-dossier-review.v1',eventId:policy.eventId,controlHash:policy.controlHash,
+  source.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?')
+   .run(new Date().toISOString(),'g');
+  const withdrawn=await source.host.withdrawFiniteSubscription({
+   signal:boundary.signal,assertCurrent,expiresAt:Date.now()+5000,
+  },{id:saved.eventId,revision:saved.revision});
+  assert.equal(withdrawn.eventId,sent.eventId);
+  assert.equal(withdrawn.subscriptionHash,createHash('sha256').update(subscription.subscription_id).digest('hex'));
+  assert.equal(withdrawn.withdrawn,true);
+  assert.deepEqual(withdrawn.httpReceipt,{status:202,httpReceivedAt:sent.httpReceivedAt});
+  assert.equal(await read({...withdrawn,eventId:'e'.repeat(64)}),null);
+  assert.equal(await read({...withdrawn,withdrawn:false}),null);
+  assert.deepEqual(await read(withdrawn),{purpose:'afw.finite-dossier-review.v1',eventId:policy.eventId,controlHash:policy.controlHash,
    actorHash:policy.actorHash,executionHash:policy.executionHash,resultHash,runId,revision:policy.revision,receivedAt,reviewedAt});
- }finally{await runtime.dispose();}
+  await source.host.close();
+  assert.equal(source.config.ctx.container.running,false);
+  assert.ok(source.db.prepare('SELECT 1 FROM dossier_node_process_closures WHERE grant_id=?').get('g'));
+  await assert.rejects(source.host.deliverFiniteOwnSaved(input));
+  assert.equal(source.boots(),1);
+  assert.deepEqual(callbacks,[200,202]);
+ }finally{
+  try{if(source?.config.ctx.container.running)await source.host.close();}
+  finally{source?.close();await runtime.dispose();}
+ }
 });
