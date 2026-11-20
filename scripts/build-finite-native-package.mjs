@@ -6,7 +6,8 @@ import {execFile} from 'node:child_process';
 import {isDeepStrictEqual,promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
-import {readFile,mkdir,writeFile,realpath} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {readFile,mkdir,writeFile,realpath,mkdtemp,unlink,rmdir} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
@@ -134,6 +135,40 @@ function privateVerifier(cwd,mode,input,maxBuffer){
   child.stdin.end(input);
  });
 }
+// Reuse the native Workflow/DO test against the archived QA program, with
+// fixture credentials and intercepted provider replies. The test never
+// receives the signed R2 URL or a Cloudflare credential.
+async function verifyArchivedQaCustodyProbe(cwd,moduleBytes){
+ const pin=QA_CLOUD_CLOSED_PINS.qaClosed.module;
+ if(moduleBytes.byteLength!==pin.bytes||hash(moduleBytes)!==pin.sha256)fail();
+ const dir=await mkdtemp(resolve(tmpdir(),'afw-qa-custody-'));
+ const path=resolve(dir,'closed-rollback.mjs');
+ let wrote=false;
+ try{
+  await writeFile(path,moduleBytes,{mode:0o600,flag:'wx'});
+  wrote=true;
+  const environment=Object.fromEntries(['PATH','SystemRoot','TMPDIR','TMP','TEMP']
+   .filter(k=>typeof process.env[k]==='string').map(k=>[k,process.env[k]]));
+  const {stdout}=await exec(process.execPath,['--test','--test-reporter=tap','test/mcp-qa-finite-pre-entry-host-native.test.mjs'],{
+   cwd,env:{...environment,AFW_REQUIRE_EXACT_BASELINE:'1',AFW_QA_INSPECTION_BASE_MODULE:path},
+   encoding:'utf8',timeout:90000,maxBuffer:262144,windowsHide:true
+  });
+  const lines=stdout.split(/\r?\n/);
+  const baseline=lines.find(line=>line.startsWith('# CUSTODY_HOST_BASELINE '));
+  const expected='# CUSTODY_HOST_BASELINE '+JSON.stringify({mode:'exact',bytes:pin.bytes,sha256:pin.sha256});
+  const count=Number(lines.find(line=>line.startsWith('# tests '))?.slice(8));
+  if(baseline!==expected||!Number.isSafeInteger(count)||count<2||!lines.includes('# pass '+count)||
+     !lines.includes('# fail 0')||!lines.includes('# skipped 0')||
+     !lines.some(line=>/^ok \d+ - fixed native Workflow reaches actual custody actor/.test(line))||
+     !lines.some(line=>/^ok \d+ - loaded wrong credential identity fails closed/.test(line)))fail();
+  return Object.freeze({baselineSha256:pin.sha256,testsPassed:count,syntheticProvider:true,
+   loadedCloudCredentialObserved:false,operationalReadiness:false});
+ }catch{throw Error('Archived QA custody rehearsal unavailable');}
+ finally{
+  try{if(wrote)await unlink(path);}finally{await rmdir(dir);}
+ }
+}
+
 /** Verify the v2 ZIP layout with real module bytes, returning only readback evidence.
  * A pending native guard is represented in the private manifest as false. */
 export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
@@ -235,7 +270,9 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   compatibility:{qaClassesPreserved:true,qaNamespacesPreserved:true,canaryClassesPreserved:true,canaryNamespacesPreserved:true,
    closedEntrypointsDenied:true,legacyContainmentQualified:false}
  }});
- const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts},releaseLayout};
+ const custodyRehearsal=await verifyArchivedQaCustodyProbe(cwd,layoutModules.qaClosed);
+ const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts},
+  custodyRehearsal,releaseLayout};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
