@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 // Actual source class, isolated bundled module. Only the platform base-class
 // constructors are synthetic here; workerd composition is qualified separately.
 async function source(profile){
- const result=await build({entryPoints:['worker/mcp-own/index.mjs'],bundle:true,write:false,format:'esm',platform:'node',define:{'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify(profile)},plugins:[{name:'synthetic-platform-base',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'base',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:'export class DurableObject{constructor(ctx,env){this.ctx=ctx;this.env=env;}} export class WorkerEntrypoint{constructor(ctx,env){this.ctx=ctx;this.env=env;}}'}));}}]});
+ const result=await build({entryPoints:['worker/mcp-own/index.mjs'],bundle:true,write:false,format:'esm',platform:'node',banner:{js:"import {createRequire as afwCreateRequire} from 'node:module'; const require=afwCreateRequire("+JSON.stringify(process.cwd()+'/package.json')+");"},define:{'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify(profile)},plugins:[{name:'synthetic-platform-base',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'base',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:'export class DurableObject{constructor(ctx,env){this.ctx=ctx;this.env=env;}} export class WorkerEntrypoint{constructor(ctx,env){this.ctx=ctx;this.env=env;}}'}));}}]});
  return import('data:text/javascript;base64,'+Buffer.from(result.outputFiles[0].text+'\n// '+profile).toString('base64'));
 }
 test('compiled finite receiver denies legacy delivery before every host capability',async()=>{

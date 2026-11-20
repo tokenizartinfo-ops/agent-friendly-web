@@ -104,7 +104,7 @@ export async function compileFirstConnectionCandidate(revision,tree,{negativePro
  const node=await buildMcpNodeProgram(),define={'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(revision),'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(revision),'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify(node.program),'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify('finite_trial_event')};
  const options={bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',define};
  const budget=budgetQualification?createBudgetCompiler('M'):null;
- const m=await build({...options,entryPoints:['worker/mcp-own/finite.mjs'],...budget?{plugins:[budget.plugin()]}:{}});
+ const m=await build({...options,minifyWhitespace:true,entryPoints:['worker/mcp-own/finite.mjs'],...budget?{plugins:[budget.plugin()]}:{}});
  const bytes=m.outputFiles[0].contents,compressed=gzipSync(bytes,{level:9,mtime:0});
  const resident={purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision:revision,sourceTree:tree,sourceCheck:'git-inputs-before-after-v1',programHash:node.programHash,module:{name:'index.mjs',sha256:digest(bytes),bytes:bytes.length},compressedSha256:digest(compressed),compressedBytes:compressed.length,content:Buffer.from(compressed).toString('base64')};
  // Negative-only, separately hashed ordinary-entry/SQL spy. The positive M
@@ -382,10 +382,10 @@ export function instrumentFirstConnection(source,{mutation=null}={}){
   ["pre.owner.subject!==p.subject","sa.ticketHash!==t.ticketHash",'preparation'],
   ["t.ticketHash!==data.sourceSnapshot.initialTicketHash","t.action!=='connection'",'ticket-map'],
   ["data.sourceSnapshot.preconnectionId!==id","canonical(data.sourceSnapshot.source)!==canonical(source)",'source-snapshot'],
-  ["s.preconnectionId!==id","s.contextHash!==contextHash",'connection-history'],
-  ["upload.ack.resourceId===capsule.activatedVersionId","actual.pointer.versionId!==upload.ack.resourceId",'publication-pointer'],
-  ["receipt.moduleHash!==capsule.moduleHash","receipt.configurationHash!==finiteActivationConfigurationHash",'receipt-physical-hash'],
-  ["f.effects.size!==expectedRows","writer-head",'writer-head']
+  ["v.preconnectionId!==id","v.contextHash!==contextHash",'connection-history'],
+  ["actual.pointer.versionId!==pointer.versionId","actual.pointer.deploymentId!==pointer.deploymentId",'publication-pointer'],
+  ["installed.moduleHash!==capsule.moduleHash","installed.configurationHash!==finiteActivationConfigurationHash",'receipt-physical-hash'],
+  ["f.effects.size!==expectedKeys.length","writer-head",'writer-head']
  ];
  for(const [first,second,name]of correlators){
   const lines=source.split('\n'),matches=lines.map((line,i)=>line.includes(first)&&line.includes(second)?i:-1).filter(i=>i>=0);assert.equal(matches.length,1,'passive correlator label '+name);
