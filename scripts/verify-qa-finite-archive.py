@@ -184,6 +184,8 @@ def assemble_release_package(raw):
     offset = header_size + manifest_size
     manifest_text = raw[header_size:offset].decode("utf-8")
     manifest = canonical_record(manifest_text, "afw.finite-native-package.v2")
+    compatibility = manifest.get("compatibility")
+    require(isinstance(compatibility, dict) and compatibility.get("legacyContainmentQualified") is False)
     descriptors = manifest.get("modules")
     require(isinstance(descriptors, dict) and set(descriptors) == set(ROLES))
     members, expected = {}, {}

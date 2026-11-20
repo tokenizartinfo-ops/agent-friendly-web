@@ -10,7 +10,7 @@ import {readFile,mkdir,writeFile,realpath} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
-import {bootstrapCanonical} from '../lib/mcp-qa-finite-bootstrap-record.mjs';
+import {encodeFiniteStagingPackageLayout} from '../lib/mcp-qa-finite-seed.mjs';
 import {finiteWranglerProfileTemplate,finitePublicStaticExpectation,finitePublicProfileTemplate,qualifyHistoricalClosedVersionProfile} from '../lib/mcp-qa-finite-profile.mjs';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
@@ -137,9 +137,8 @@ function privateVerifier(cwd,mode,input,maxBuffer){
 /** Verify the v2 ZIP layout with real module bytes, returning only readback evidence.
  * A pending native guard is represented in the private manifest as false. */
 export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
- if(manifest?.purpose!=='afw.finite-native-package.v2'||manifest.compatibility?.legacyContainmentQualified!==false||
-    !modules||Object.keys(modules).length!==releaseRoles.length)fail();
- const manifestBytes=Buffer.from(bootstrapCanonical(manifest),'utf8');
+ if(!modules||Object.keys(modules).length!==releaseRoles.length)fail();
+ const manifestBytes=Buffer.from(encodeFiniteStagingPackageLayout(manifest),'utf8');
  if(!manifestBytes.length||manifestBytes.length>24576)fail();
  const inputs=[manifestBytes,...releaseRoles.map(role=>{
   const bytes=modules[role];
