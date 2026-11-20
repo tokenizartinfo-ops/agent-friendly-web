@@ -130,11 +130,11 @@ test('uninstrumented actual native source/SDK/Unit2a GET POST returns one origin
  assert.equal((await observe(f)).calls.length,0,'positive uses unwrapped native KV methods');
 },{observed:false}));
 test('held actual approve denies fabricated results and concurrent complete bearer replay; one original winner',()=>world(async f=>{
- const form=await consent(f);await f.stub.sdkConfigure('hold-get');const pending=f.post(form);
+ const form=await consent(f);await oldPaths(f,form);await f.stub.sdkConfigure('hold-get');const pending=f.post(form);
  let s=await held(f);assert(has(s,'sdk_approve:send'));assert(!has(s,'sdk_approve:observed'));assert(!has(s,'sdk_complete:send'));
  assert.equal(await plain(f.stub.sdkGrant(form.identity.grantId)),null);
- await oldPaths(f,form);assert.equal(await status(f.post(form)),503);
- assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ const [replay,current]=await Promise.all([status(f.post(form)),plain(f.stub.sdkReadCurrent())]);
+ assert.equal(replay,503);assert.equal(current.status,'unavailable');
  await f.stub.sdkReleaseHeld();await issued(f,form,await pending);
  s=await observe(f);assert(s.calls.some(c=>c.method==='get'&&c.prefix==='transaction'));assert(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').every(c=>c.actualGrantAck));assert.equal(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').length,1);assert.equal(s.calls.filter(c=>c.method==='list').length,0);assert(s.calls.every(c=>c.method==='get'&&['client','transaction'].includes(c.prefix)||c.method==='put'&&c.prefix==='grant'||c.method==='delete'&&c.prefix==='transaction'),'no other SDK grant/token mutation');
  for(const p of s.probes.filter(p=>p.strictUnavailable!==undefined))assert.equal(p.strictUnavailable,true,'strict public reader denied same ambient unresolved SEND');
@@ -256,9 +256,10 @@ async function fanoutMetrics(f,form,response,{peak}){
  console.info('fanout actual lifecycle',JSON.stringify({status:response.status,peak:state.peak,active:state.active,child,elapsed:child?child.endMono-child.startMono:null,tail:child&&ack?child.endedAt-ack.observedAt:null,full:full.length,narrow:narrow.length,counts,sql:state.sql,delayMinimum:f.ioWaits?.length?Math.min(...f.ioWaits):0,sendPresent:!!send,ackPresent:!!ack}));
  assert.equal(response.status,302,'genuine original POST must issue code before original child expiry');
  assert(child);assert(child.endMono-child.startMono<5000);assert(child.endedAt<child.deadline);
- assert.equal(full.length,112);assert.equal(narrow.length,84);
- assert.deepEqual(counts,Object.fromEntries(['verify-reader','verify-publisher','qa-deployment','qa-version','m-deployment','m-initial-version','m-current-version'].map(k=>[k,16])));
- assert.deepEqual(state.sql,{factual:128,preflight:16,writes:2});
+ // Seven double observations, with a shared consume-ACK/grant precheck.
+ assert.equal(full.length,98);assert.equal(narrow.length,70);
+ assert.deepEqual(counts,Object.fromEntries(['verify-reader','verify-publisher','qa-deployment','qa-version','m-deployment','m-initial-version','m-current-version'].map(k=>[k,14])));
+ assert.deepEqual(state.sql,{factual:112,preflight:16,writes:2});
  assert.equal(state.peak,peak);assert.equal(state.active,0);assert.deepEqual(state.same,{child:true,store:true});assertIoOrder(state.rows);
  assert(full.every(r=>r.outcome==='fulfilled'&&r.endMono>=r.cancelSettledAt&&r.cancelSettledAt>=r.cancelStartedAt&&r.bytes>0));
  if(f.ioDelay)assert(f.ioWaits.every(ms=>ms>=50));
