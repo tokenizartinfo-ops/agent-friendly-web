@@ -11,6 +11,7 @@ const workerRoles={'agent-friendly-web-delegated-canary':'canaryLive','agent-fri
  'agent-friendly-web-independent-closure-qa':'qaLive'};
 function fixture(t,mode){
  const f=finiteFixture(),p=f.plan,requests=[],primary=[];let canaryReads=0;
+ const predecessor={containerId:'4'.repeat(64),applicationId:p.resources.applicationId,programHash:'5'.repeat(64),sourceRevision:'6'.repeat(40)};
  f.env.AFW_MCP_CLOSURE_READ_TOKEN='synthetic-preflight-reader';
  f.env.RELEASE_DB={prepare(){throw Error('Native first-primary required');},withSession(pin){
   assert.equal(pin,'first-primary');
@@ -40,13 +41,16 @@ function fixture(t,mode){
    assert.ok(path.pathname.endsWith('/containers/applications/'+p.resources.applicationId+'/instances-v2'));
    assert.equal(path.searchParams.get('per_page'),'100');
    result=mode==='container'?[{id:p.resources.containerId,application_id:p.resources.applicationId,
-    image:'cloudflare/debian-trixie',status:{state:'running'}}]:[];
+    image:'cloudflare/debian-trixie',status:{state:'running'}}]:mode==='listed-predecessor'?[{
+    id:predecessor.containerId,application_id:p.resources.applicationId,image:'cloudflare/debian-trixie',
+    started_at:new Date(p.T0-2000).toISOString(),status:{state:'stopped',exit_code:0,updated_at:new Date(p.T0-1000).toISOString()},
+   }]:[];
    result_info={per_page:100};
   }
   return Response.json({success:true,errors:[],messages:[],result,...(result_info?{result_info}:{})},
    {headers:{date:new Date(f.now()).toUTCString()}});
  };
- const verify=()=>api.readPrivateQaFinitePrelaunch({ctx:f.ctx,env:f.env,control,parent});
+ const verify=()=>api.readPrivateQaFinitePrelaunch({ctx:f.ctx,env:f.env,control,parent,predecessor:mode==='missing-predecessor'?undefined:predecessor});
  return {f,p,verify,requests,primary};
 }
 test('native prelaunch sees the exact provider pointers twice and first-primary candidate absence',async t=>{
@@ -57,8 +61,13 @@ test('native prelaunch sees the exact provider pointers twice and first-primary 
  assert.equal(x.requests.filter(path=>path.endsWith('/deployments')).length,6);
  assert.equal(x.primary.length,8);assert.equal(x.f.puts,before);
 });
-for(const mode of ['drift','tails','container','D1-unavailable'])test('prelaunch denies '+mode,async t=>{
+for(const mode of ['drift','tails','container','listed-predecessor','D1-unavailable'])test('prelaunch denies '+mode,async t=>{
  assert.equal(typeof api.readPrivateQaFinitePrelaunch,'function');
  const x=fixture(t,mode),before=x.f.puts;
  await assert.rejects(x.verify());assert.equal(x.f.puts,before);
+});
+
+test('prelaunch requires the original context before reading provider or D1',async t=>{
+ const x=fixture(t,'missing-predecessor');await assert.rejects(x.verify());
+ assert.deepEqual(x.requests,[]);assert.deepEqual(x.primary,[]);assert.equal(x.f.puts,0);
 });
