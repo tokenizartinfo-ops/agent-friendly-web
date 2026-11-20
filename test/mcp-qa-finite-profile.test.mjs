@@ -1,0 +1,177 @@
+import {createHash} from 'node:crypto';
+import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
+import {validateReleaseOperatorBundle,validateFiniteReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {activationConfigurationHash,finiteActivationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
+import {restorationConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';
+let api;
+try{api=await import('../lib/mcp-qa-finite-profile.mjs');}catch{/* Missing implementation is an explicit RED assertion. */}
+function fixture(){
+ assert.equal(typeof api?.finitePublicProfileTemplate,'function','source-owned profile template required');
+ const v=structuredClone(api.finitePublicProfileTemplate('canaryLive'));
+ for(const b of v.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC-PRIVATE-'+b.name;}
+ return v;
+}
+test('candidate_private_projection_full_hash',()=>{
+ const script='export default {fetch(){return new Response(null,{status:404})}}';
+ const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};
+ const policy=inertNamedConfirmationPolicy(artifact),a=fixture();
+ for(const binding of a.bindings){const original=policy.observation.configuration.bindings.find(x=>x.name===binding.name);if(original&&binding.type==='plain_text'&&original.type==='plain_text')binding.text=original.text;}
+ const b=structuredClone(a),event=b.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY');
+ const changed=JSON.parse(event.text);changed.grantId='ci-only-second-inert';event.text=JSON.stringify(changed);
+ for(const configuration of [a,b]){const p=structuredClone(policy);p.observation.configuration=configuration;p.plan.configurationHash=finiteActivationConfigurationHash(configuration);assert.equal(validateFiniteReleaseOperatorBundle({artifact,policy:p}),true);}
+ const bad=structuredClone(b),raw=bad.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY'),invalid=JSON.parse(raw.text);invalid.clientId='wrong-private-client';raw.text=JSON.stringify(invalid);
+ const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=bad;invalidPolicy.plan.configurationHash=finiteActivationConfigurationHash(invalidPolicy.observation.configuration);
+ assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:bad}));
+ assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);
+ assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}));
+ assert.throws(()=>activationConfigurationHash(a),'old activation reader must reject new candidate flags');
+ assert.notEqual(finiteActivationConfigurationHash(a),finiteActivationConfigurationHash(b));
+ assert.notEqual(restorationConfigurationHash(a),restorationConfigurationHash(b));
+ assert.notEqual(finiteActivationConfigurationHash(a),restorationConfigurationHash(a));
+ const projected=JSON.stringify(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}));
+ assert(!projected.includes('SYNTHETIC-PRIVATE'));
+});
+test('unknown_private_slot_denied',()=>{
+ const a=fixture();a.bindings.push({name:'AFW_NEW_PRIVATE_POLICY',type:'plain_text',text:'private'});
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}));
+});
+test('actual_version_metadata_required',()=>{
+ const a={compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',usage_model:'standard',containers:[],exports:{default:{type:'worker'},AfwNodeControl:{type:'worker'},AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}},bindings:[{name:'AFW_FINITE_TRIAL_VERSION',type:'version_metadata'}]};
+ assert.match(activationConfigurationHash(a),/^[a-f0-9]{64}$/);
+ for(const change of [b=>b.name='AFW_FAKE_VERSION',b=>b.value='fake',b=>Object.defineProperty(b,'type',{get(){throw Error('getter executed');},enumerable:true})]){
+  const b=structuredClone(a);change(b.bindings[0]);assert.throws(()=>activationConfigurationHash(b));
+ }
+});
+test('exact public roles reject missing slots, accessors, flags, resource substitution and raw QA policies',()=>{
+ const a=fixture();
+ assert.equal(a.bindings.find(b=>b.name==='AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED').text,'true');
+ assert.equal(a.bindings.find(b=>b.name==='AFW_DOSSIER_RETIREMENT_READ_ENABLED').text,'false');
+ for(const mutate of [
+  v=>v.bindings.pop(),
+  v=>v.limits={cpu_ms:10},
+  v=>v.bindings.find(b=>b.name==='DB').id='00000000-0000-0000-0000-000000000000',
+  v=>v.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_ENABLED').text='false',
+  v=>v.bindings.find(b=>b.name==='AFW_FINITE_TRIAL_VERSION').type='plain_text',
+  v=>Object.defineProperty(v.bindings[0],'name',{get(){throw Error('getter');},enumerable:true}),
+  v=>v.bindings.push({name:'AFW_OAUTH_PILOT_EXPIRES_AT',type:'plain_text',text:'future'}),
+ ]){const b=structuredClone(a);mutate(b);assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}));}
+ const qa=structuredClone(api.finitePublicProfileTemplate('qaLive'));
+ assert.equal(qa.bindings.filter(b=>b.name.endsWith('_ENABLED')&&b.text==='false').length,14);
+ assert.equal(qa.bindings.filter(b=>b.name.startsWith('AFW_RELEASE_')&&b.text==='true').length,4);
+ qa.bindings.push({name:'AFW_DOSSIER_EVENTS_POLICY',type:'plain_text',text:'private'});
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:qa}));
+});
+
+test('projection rejects caller extras and accessor without invocation',()=>{
+ let invoked=false;const input={role:'qaLive'};
+ Object.defineProperty(input,'metadata',{enumerable:true,get(){invoked=true;throw Error('getter');}});
+ assert.throws(()=>api.projectFinitePublicConfiguration(input));assert.equal(invoked,false);
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:api.finitePublicProfileTemplate('qaLive'),allow:true}));
+});
+
+test('finite canary source preserves existing SQLite Container relationship and hashes that relationship',()=>{
+ const p=api.finitePublicProfileTemplate('canaryLive'),w=api.finiteWranglerProfileTemplate('canaryLive');
+ const node={type:'durable-object',storage:'sqlite',container:'agent-friendly-web-delegated-canary-afwowneventnode'};
+ assert.deepEqual(p.exports.AfwOwnEventNode,node);
+ assert.deepEqual(p.containers,[{class_name:'AfwOwnEventNode',name:node.container}]);
+ assert.deepEqual(w.exports.AfwOwnEventNode,node);
+ assert.equal(w.containers,undefined,'source does not create an app/image');
+ assert.equal(w.migrations,undefined,'source does not create a namespace');
+ assert.deepEqual(w.unsafe.metadata,{exports:p.exports,containers:[{class_name:'AfwOwnEventNode'}]});
+ const actual=fixture(),detached=structuredClone(actual);
+ delete detached.exports.AfwOwnEventNode.container;detached.containers=[];
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:detached}));
+ assert.throws(()=>activationConfigurationHash(actual),'old activation reader must not reinterpret new candidate');
+ assert.notEqual(finiteActivationConfigurationHash(actual),finiteActivationConfigurationHash(detached));
+ assert.notEqual(restorationConfigurationHash(actual),restorationConfigurationHash(detached));
+ assert.equal(p.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id,'d6fc71552de7494a863aca20365a572d');
+});
+
+test('new finite candidate flags are exact before every phase and reject old or expanded profiles',()=>{
+ const expected={qaLive:['nodejs_compat','enable_request_signal'],canaryLive:['nodejs_compat','global_fetch_strictly_public','enable_request_signal']};
+ for(const role of Object.keys(expected)){
+  const profile=role==='canaryLive'?fixture():structuredClone(api.finitePublicProfileTemplate(role));
+  const template=api.finitePublicProfileTemplate(role),config=api.finiteWranglerProfileTemplate(role);
+  assert.equal(template.compatibility_date,'2026-09-07');
+  assert.equal(config.compatibility_date,'2026-09-07');
+  assert.deepEqual(template.compatibility_flags,expected[role]);
+  assert.deepEqual(config.compatibility_flags,expected[role]);
+  assert.deepEqual(api.projectFinitePublicConfiguration({role,metadata:profile}).compatibility_flags,expected[role]);
+  for(const flags of [expected[role].slice(0,-1),[...expected[role].slice(0,-1),'request_signal_passthrough'],[...expected[role],'request_signal_passthrough'],[...expected[role]].reverse()]){
+   const changed=structuredClone(profile);changed.compatibility_flags=flags;
+   assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:changed}),role+' must reject nonexact candidate flags');
+  }
+ }
+});
+
+test('legacy bundle remains independently strict for the historical compatibility pair',()=>{
+ const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};
+ const policy=inertNamedConfirmationPolicy(artifact);
+ assert.deepEqual(policy.observation.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);
+ assert.equal(validateReleaseOperatorBundle({artifact,policy}),true);
+ const historical=policy.observation.configuration,changed=structuredClone(historical),binding=changed.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');
+ binding.text=JSON.stringify({...JSON.parse(binding.text),grantId:'ci-only-second-inert'});
+ assert.notEqual(activationConfigurationHash(historical),activationConfigurationHash(changed));
+ assert.notEqual(restorationConfigurationHash(historical),restorationConfigurationHash(changed));
+ assert.notEqual(activationConfigurationHash(historical),restorationConfigurationHash(historical));
+ assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy}));
+});
+
+test('candidate descriptor declares fixed finite activation while QA remains null',()=>{
+ const M='a'.repeat(40),tree='b'.repeat(40),roles=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
+ const versions={qaClosed:'c570b60b-95dc-48e1-89f3-9c4651691dbc',canaryClosed:'2607abae-cec3-4e35-89eb-8b8572262b54',operatorClosed:'855dc5c1-e757-49aa-a6f5-cb02f8d03ea4'},keys={qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'};
+ const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'c'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,{provenance:versions[role]?{kind:'historical-content-pin.v1',receiptPath:'lib/mcp-qa-cloud-closed-pins.mjs',receiptBlobSha:'26213123304eea25e652a52d808d25b7e0e3475e',receiptKey:keys[role],versionId:versions[role]}:{kind:'compiled-source.v1',sourceRevision:M,sourceTree:tree},module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',bytes:1,sha256:'d'.repeat(64),exports:[]},publicStatic:{purpose:'afw.finite-public-static-profile.v1',configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)}}])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
+
+ for(const role of ['qaLive','canaryLive']){
+  manifest.modules[role].publicStatic=api.finitePublicStaticExpectation(role);
+  const metadata=role==='canaryLive'?fixture():structuredClone(api.finitePublicProfileTemplate(role));
+  const descriptor=api.qualifyFiniteSourceRoleMetadata({manifest,role,metadata});
+  assert.equal(descriptor.privateFull.activationAlgorithm,role==='canaryLive'?'finiteActivationConfigurationHash':null);
+ }
+});
+
+test('D0.1 exact QA SDK alias changes only qaLive source contract',()=>{
+ const q=api.finitePublicProfileTemplate('qaLive');
+ const m=api.finitePublicProfileTemplate('canaryLive');
+ const alias={name:'AFW_FINITE_OWNER_OAUTH_KV',type:'kv_namespace',namespace_id:'6b94ff702e504e14a7730cee73a0f6ff'};
+ assert.deepEqual(q.bindings.filter(b=>b.name===alias.name),[alias]);
+ assert.deepEqual(m.bindings.filter(b=>b.type==='kv_namespace'),[{name:'OAUTH_KV',type:'kv_namespace',namespace_id:alias.namespace_id}]);
+ const config=api.finiteWranglerProfileTemplate('qaLive');
+ assert.deepEqual(config.kv_namespaces,[{binding:alias.name,id:alias.namespace_id}]);
+ assert.deepEqual(api.projectFinitePublicConfiguration({role:'qaLive',metadata:q}),q);
+ const changed=structuredClone(q);changed.bindings.find(b=>b.name===alias.name).namespace_id='0'.repeat(32);
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:changed}));
+});
+
+test('finite QA requires the named private Operations review receiver verified in Cloudflare',()=>{
+ const role='qaLive';
+ const expected={"type":"service","name":"AFW_FINITE_DOSSIER_REVIEW_RECEIVER","service":"agent-friendly-web-finite-review-qa","environment":"production","entrypoint":"FiniteDossierReviews"};
+ const nominal=structuredClone(api.finitePublicProfileTemplate(role));
+ assert.deepEqual(nominal.bindings.find(b=>b.name===expected.name),expected);
+ assert.deepEqual(api.finiteWranglerProfileTemplate(role).services,[{binding:expected.name,service:expected.service,environment:expected.environment,entrypoint:expected.entrypoint}]);
+ for(const b of nominal.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC-PRIVATE-'+b.name;}
+ assert.deepEqual(api.projectFinitePublicConfiguration({role,metadata:nominal}).bindings.find(b=>b.name===expected.name),expected);
+ for(const field of ['service','environment','entrypoint']){
+  const wrong=structuredClone(nominal);wrong.bindings.find(b=>b.name===expected.name)[field]='foreign';
+  assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:wrong}));
+ }
+ const missing=structuredClone(nominal);missing.bindings=missing.bindings.filter(b=>b.name!==expected.name);
+ assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:missing}));
+});
+
+test('finite canary prelaunch credential bindings are exact opaque descriptors',()=>{
+ const role='canaryLive';
+ for(const name of ['AFW_DOSSIER_FINITE_CALLBACK_SECRET','AFW_DOSSIER_PROVIDER_READ_TOKEN']){
+  const project=metadata=>api.projectFinitePublicConfiguration({role,metadata});
+  const actual=fixture(),descriptor={name,type:'secret_text'};
+  assert.deepEqual(project(actual).bindings.filter(binding=>binding.name===name),[descriptor]);
+  const missing=structuredClone(actual);
+  missing.bindings=missing.bindings.filter(binding=>binding.name!==name);
+  assert.throws(()=>project(missing),/Finite source authority unavailable/);
+  const unsafe=structuredClone(actual);
+  unsafe.bindings=unsafe.bindings.map(binding=>binding.name===name?{...binding,value:'discard-me'}:binding);
+  assert.throws(()=>project(unsafe),/Finite source authority unavailable/);
+ }
+});

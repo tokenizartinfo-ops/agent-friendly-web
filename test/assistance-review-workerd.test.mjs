@@ -21,8 +21,8 @@ test('native authenticated help review recovers a lost claim, finishes once and 
  if(new URL(request.url).pathname==='/qa-close'){closed=true;return Response.json({closed});}
  const env={AFW_ASSISTANCE_SUPERVISION_ENABLED:closed?'false':'true',AFW_OPERATIONS_SHARED_ASSISTANCE_BUDGET_ENABLED:'true',AFW_ASSISTANCE_PROJECT_REFS:JSON.stringify(['${signal.projectRef}']),AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(${time}+60000).toISOString()};
  return createOperationsServiceControls({db:b.DB,keySet:key,now:()=>${time},noticeEnv:env,limiter:{limit:async()=>({success:true})},config:{enabled:true,origin:'${origin}',teamDomain:'test.cloudflareaccess.com',audience:'synthetic-native',clientId:'synthetic-native.access'}})(request);
- }};`},bundle:true,write:false,format:'esm',platform:'browser'});
- const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,d1Databases:{DB:'native-help-review-ledger'}}));
+ }};`},bundle:true,write:false,format:'esm',platform:'browser',external:['node:*']});
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'native-help-review-ledger'}}));
  try{
   const db=await runtime.getD1Database('DB');
   for(const name of ['schema','consumer-state','notice-reservations','dossier-supervision','assistance-supervision','assistance-supervision-runs'])for(const sql of readFileSync('worker/operations/'+name+'.sql','utf8').replace(/--[^\n]*/g,'').split(';').map(x=>x.trim()).filter(Boolean))await db.prepare(sql).run();

@@ -1,0 +1,134 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+// Only the C2 external source is synthetic. The Known spy checks ONLY identity,
+// exact four keys and result preservation; its actual tests own business stages.
+const entry=`
+import {PrivateQaNamedConfirmation} from './worker/independent-closure/finite.mjs';
+import {finiteFixture,digest,hash} from './test/fixtures/qa-finite-trial.mjs';
+import {inertNamedConfirmationPolicy} from './test/fixtures/inert-named-confirmation-policy.mjs';
+import {finiteActivationConfigurationHash} from './lib/mcp-activation-observer.mjs';
+import {finiteCleanupPolicyHash} from './lib/mcp-finite-cleanup-policy.mjs';
+import {readFiniteReleaseGate} from './lib/mcp-own-finite-admission-gate.mjs';
+export const state={};
+export function material({env,event,step,parent}){
+ parent.check();state.reads++;
+ if(env!==state.env||event!==state.event||step!==state.step)throw Error('identity changed');
+ if(state.mode==='missing-source')throw Error('synthetic source missing');
+ if(state.mode==='hydration-expired')state.at+=5001;
+ if(state.mode==='mutated-event')event.timestamp.setTime(event.timestamp.getTime()+1);
+ const value=structuredClone(state.material);
+ if(state.mode==='wrong-source')value.execution.sourceRevision='a'.repeat(40);
+ if(state.mode==='wrong-plan')value.plan=value.plan.replace('"N1":','"extra":0,"N1":');
+ return value;
+}
+
+export async function known(input){
+ state.calls++;state.same=input.env===state.env&&input.event===state.event&&input.step===state.step;state.keys=Object.keys(input).sort();
+ if(state.mode==='known-throws')throw Error('synthetic Known throw');
+ const gate=readFiniteReleaseGate(input.env);state.hasGate=!!gate;
+ if(['reserved','foreign-reservation','lost-subscribe-ack'].includes(state.mode)){
+  await gate.beginReservation();
+  await gate.settleReservation();
+  state.result={status:'confirmed',mayRetry:false,operationalReadiness:false,
+   reservation:{purpose:'afw.successor-reservation.v1',trialId:state.mode==='foreign-reservation'?'0'.repeat(64):state.trialId,state:'prepared',mayBoot:false}};
+ }else state.result={status:'blocked',mayRetry:false,operationalReadiness:false};
+ return state.result;
+}
+export default {async fetch(request,env,ctx){
+ const {mode}=await request.json();state.mode=mode;state.calls=0;state.reads=0;state.effects=[];state.steps=[];state.trialId=null;
+ const real=Date.now(),f=finiteFixture({at:real+600000}),p=f.plan;state.at=p.T0+150000;Date.now=()=>state.at;
+ const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:hash(script),sourceCheck:'git-inputs-before-after-v1'},policy=inertNamedConfirmationPolicy(artifact);
+ policy.observation.configuration.compatibility_flags=['nodejs_compat','global_fetch_strictly_public','enable_request_signal'];
+ const window={startAt:p.T0,expiresAt:p.N1};Object.assign(policy,window);Object.assign(policy.plan,window);
+ const bindings=policy.observation.configuration.bindings,mb=bindings.find(b=>b.name==='AFW_DOSSIER_SUCCESSOR_POLICY'),manifest=JSON.parse(mb.text);Object.assign(manifest.candidate,window);mb.text=JSON.stringify(manifest);
+ const eb=bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');eb.text=JSON.stringify({...JSON.parse(eb.text),...window});policy.plan.configurationHash=finiteActivationConfigurationHash(policy.observation.configuration);
+ const bundle={artifact,policy},bundleHash=hash(JSON.stringify(bundle));p.bundleHash=bundleHash;p.workflows.confirmation='afw-release-'+bundleHash;p.closePolicyHash=finiteCleanupPolicyHash(p);
+ const execution={intentId:p.intentId,finitePlanHash:digest(p.purpose,p),controlHash:'1'.repeat(64),sourceRevision:p.source.revision,qaVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,launcherId:p.workflows.launcher,nominalId:p.workflows.confirmation,bundleHash,preparedHash:'2'.repeat(64),sendHash:'3'.repeat(64),bindingHash:'4'.repeat(64),createdAt:state.at};
+ const binding={accountId:'85d0d5dadac3341a564f22ce885e9eec',bindingName:'AFW_QA_NAMED_CONFIRMATION',className:'PrivateQaNamedConfirmation',definitionName:'afw-own-qa-private-confirmation',qaVersionId:p.deployments.qaLive.versionId,scriptName:'agent-friendly-web-independent-closure-qa',sourceModuleHash:p.source.moduleHash,sourceProfileHash:p.source.profileHash,sourceRevision:p.source.revision};execution.bindingHash=hash('afw.finite-native-child-binding.v1\\n'+JSON.stringify(Object.fromEntries(Object.keys(binding).sort().map(k=>[k,binding[k]]))));
+ state.material={bundle,plan:JSON.stringify(p),execution};
+ const event={timestamp:new Date(state.at),instanceId:p.workflows.confirmation,payload:{planHash:bundleHash}};
+ if(mode==='early')event.timestamp=new Date(p.T0+149999);
+ if(mode==='late')event.timestamp=new Date(p.T0+160001);
+ if(mode==='future')event.timestamp=new Date(state.at+1);
+ if(mode==='queued-expired')state.at+=70000;
+ if(mode==='wrong-payload')event.payload.extra=true;
+ if(mode==='wrong-id')event.instanceId='wrong';
+ if(mode==='schedule')event.schedule='x';
+ if(mode==='wrong-name')event.workflowName='foreign';
+ if(mode==='timestamp-not-date')event.timestamp=state.at;
+ if(mode==='at-last-create'){state.at=p.T0+160000;event.timestamp=new Date(state.at);execution.createdAt=state.at;}
+ state.trialId=p.trialId;
+ const actor={toString:()=>p.resources.containerId};
+ const refs={intentId:execution.intentId,controlHash:execution.controlHash};
+ const record=(kind,value)=>{
+  if(JSON.stringify(value)!==JSON.stringify(refs))throw Error('candidate selectors changed');
+  state.effects.push(kind);
+ };
+ const node={idFromName(name){if(name!=='afw-own-event-first-successor-v1')throw Error('wrong candidate slot');return actor;},
+  get(id){
+   if(id!==actor)throw Error('wrong candidate');
+   return {
+    beginFiniteTrialReservation(value){record('reserve',value);return {status:'issued'};},
+    settleFiniteTrialReservation(value){record('settle',value);return {status:'settled'};},
+    startFiniteTrialSubscription(value){
+     record('subscribe',value);
+     if(mode==='lost-subscribe-ack')throw Error('synthetic lost receipt');
+     return {saved:true,revision:p.selectors.expectedProjectRevision+1,
+      delivery:{eventId:'b'.repeat(64),status:202,httpReceivedAt:state.at,cloudReviewConfirmed:false}};
+    },
+   };
+  },
+ };
+ state.env={AFW_QA_VERSION:{id:p.deployments.qaLive.versionId},AFW_RELEASE_EVENTS_NODE:node,
+  AFW_INDEPENDENT_CLOSURE:{idFromName:()=>({toString:()=>p.resources.actorId})}};
+ state.event=event;
+ state.step={do(name,options,operation){
+  if(name!=='finite-subscribe-and-deliver'||options.retries.limit!==0)throw Error('unexpected step');
+  state.steps.push(name);return operation();
+ }};
+ const workflow=new PrivateQaNamedConfirmation(ctx,state.env),result=await workflow.run(event,state.step);
+ return Response.json({result,calls:state.calls,reads:state.reads,same:state.same,keys:state.keys,preserved:result?.result===state.result,gate:state.hasGate,effects:state.effects,steps:state.steps});
+}};
+`;
+const bundles={};
+async function run(mode,source=true){
+ if(!bundles[source])bundles[source]=(await build({stdin:{contents:"export {default} from 'synthetic-entry';",resolveDir:process.cwd(),sourcefile:'synthetic-confirmation-entry.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-source-and-identity-spy',setup(b){
+ if(source)b.onLoad({filter:/mcp-qa-finite-confirmation-source\.mjs$/},()=>({contents:"export {material as readPrivateQaFiniteConfirmationMaterial} from 'synthetic-entry';",loader:'js'}));
+ b.onResolve({filter:/^synthetic-entry$/},()=>({path:'entry',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:entry,resolveDir:process.cwd(),loader:'js'}));
+ b.onLoad({filter:/mcp-release-runtime\.mjs$/},()=>({contents:"export {known as runFiniteKnownCancellationReleaseWorkflow} from 'synthetic-entry'; export async function runKnownCancellationReleaseWorkflow(){throw Error('legacy Known entry forbidden for finite candidate');} export async function runReleaseWorkflow(){return {status:'blocked'}};export async function runReleaseOperator(){return {status:'blocked'}};",loader:'js'}));
+ }}]})).outputFiles[0].text;
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundles[source],compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
+ try{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(r.status,200,await r.clone().text());return r.json();}finally{await mf.dispose();}
+}
+for(const mode of ['success','at-last-create'])test('finite_confirmation_handoff_fixed_entry '+mode,async()=>{
+ const r=await run(mode);assert.equal(r.calls,1);assert.equal(r.same,true);assert.deepEqual(r.keys,['bundle','env','event','step']);assert.equal(r.result.purpose,'afw.finite-confirmation-result.v1');assert.equal(r.preserved,true);assert.equal(r.gate,true);assert.deepEqual(r.effects,[]);assert.deepEqual(r.steps,[]);
+});
+for(const mode of ['early','late','future','queued-expired','wrong-payload','wrong-id','schedule','wrong-name','timestamp-not-date','missing-source','hydration-expired','mutated-event','wrong-source','wrong-plan'])test('finite nominal rejects '+mode+' before Known',async()=>{const r=await run(mode);assert.equal(r.calls,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});
+test('Known throw cannot fabricate finite result envelope',async()=>{const r=await run('known-throws');assert.equal(r.calls,1);assert.equal(r.result.purpose,undefined);});
+
+test('finite technical result reader is strict, bounded and preserves actual Known result',async()=>{
+ const api=await import('../lib/mcp-qa-finite-confirmation.mjs');
+ assert.equal(typeof api.validatePrivateQaFiniteConfirmationResult,'function','finite output reader must exist');
+ const {finiteLauncherInstanceId}=await import('../lib/mcp-qa-finite-launch-records.mjs'),intentId='result-fixture',sourceRevision='b'.repeat(40),bundleHash='6'.repeat(64);
+ const e={intentId,finitePlanHash:'1'.repeat(64),controlHash:'2'.repeat(64),sourceRevision,qaVersionId:'11111111-1111-4111-8111-111111111111',actorId:'a'.repeat(64),launcherId:finiteLauncherInstanceId({intentId,sourceRevision}),nominalId:'afw-release-'+bundleHash,bundleHash,preparedHash:'3'.repeat(64),sendHash:'4'.repeat(64),bindingHash:'5'.repeat(64),createdAt:123000};
+ const provenance=Object.fromEntries(Object.entries(e).filter(([k])=>!['actorId','launcherId'].includes(k))),result={status:'blocked',mayRetry:false,operationalReadiness:false},value={purpose:'afw.finite-confirmation-result.v1',provenance,result};
+ assert.equal(api.validatePrivateQaFiniteConfirmationResult(value,e).result,result);
+ for(const alter of [v=>({...v,extra:true}),v=>({...v,provenance:{...v.provenance,sendHash:'f'.repeat(64)}}),v=>({...v,result:Object.create({hidden:true})}),v=>({...v,result:{padding:'x'.repeat(65536)}}),v=>{const c={};c.self=c;return {...v,result:c};},v=>({...v,result:{get status(){throw Error('must not invoke getter');}}})])assert.throws(()=>api.validatePrivateQaFiniteConfirmationResult(alter(value),e));
+});
+
+test('actual uninstalled confirmation source stays closed before Known',async()=>{const r=await run('success',false);assert.equal(r.calls,0);assert.equal(r.reads,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});
+
+test('the confirmed reservation invokes its own candidate once under a bounded zero-retry Workflow step',async()=>{
+ const r=await run('reserved');assert.equal(r.gate,true);
+ assert.deepEqual(r.effects,['reserve','settle','subscribe']);assert.deepEqual(r.steps,['finite-subscribe-and-deliver']);
+ assert.equal(r.result.result.noticeJourney.status,'transport_acknowledged');
+ assert.equal(r.result.result.noticeJourney.delivery.cloudReviewConfirmed,false);
+});
+test('foreign reservations and uncertain subscription acknowledgements cannot trigger another send',async()=>{
+ const foreign=await run('foreign-reservation');assert.deepEqual(foreign.effects,['reserve','settle']);assert.deepEqual(foreign.steps,[]);
+ const lost=await run('lost-subscribe-ack');
+ assert.deepEqual(lost.effects,['reserve','settle','subscribe']);assert.deepEqual(lost.steps,['finite-subscribe-and-deliver']);
+ assert.deepEqual(lost.result.result.noticeJourney,{status:'uncertain'});
+});

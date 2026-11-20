@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {build as compileFixture} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-import {activationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
+import {createHash} from 'node:crypto';
+import {activationConfigurationHash,finiteActivationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
 import {RELEASE_TARGET} from '../../lib/mcp-release-operator-policy.mjs';
 import {inertNamedConfirmationPolicy} from './inert-named-confirmation-policy.mjs';
 import {reservationFaultHarness} from './reservation-fault-harness.mjs';
@@ -11,13 +12,34 @@ import {namedHistoryFixture,seedNamedHistoryFixture} from './named-known-cancell
 
 // CI-only composition. Actual compiled operator, native Workflow/D1/namespace,
 // exact historical module bytes; ALL provider replies and identities synthetic.
-export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null,historyFixture=false,historyMode='known_cancellation',nativeFault=null,measure=false,replayExpected='uncertain'}){
+export function rehearseExactNamedConfirmation(options){return rehearseNamedConfirmation(false,options);}
+export function rehearseExactFiniteNamedConfirmation({artifact,mode='confirmed',payloadMode='object',retirement='stopped',replay=false,fault=null,nativeFault=null,measure=false,replayExpected='uncertain',witness=false}){
+ return rehearseNamedConfirmation(true,{artifact,mode,payloadMode,retirement,replay,fault,nativeFault,measure,replayExpected,build:bundle=>buildFiniteKnownFixture(bundle,witness),reserve:'true',historyMode:'known_cancellation',invocation:'workflow'});
+}
+// Unmounted test-only wrapper: the ACTUAL fixed finite Known core receives the
+// exact native event and step. No legacy validator or RPC operator is involved.
+async function buildFiniteKnownFixture(bundle,witness){
+ const source="import {WorkflowEntrypoint} from 'cloudflare:workers';import {runFiniteKnownCancellationReleaseWorkflow} from './lib/mcp-release-runtime.mjs';import {createFiniteReservationGateClient,withFiniteReleaseGate} from './lib/mcp-own-finite-admission-gate.mjs';const bundle="+JSON.stringify(bundle)+";export class AfwReleaseWorkflow extends WorkflowEntrypoint{run(event,step){const env=this.env;const gate=createFiniteReservationGateClient({namespace:env.AFW_RELEASE_EVENTS_NODE,identity:env.FINITE_RESERVATION_IDENTITY});return withFiniteReleaseGate(env,gate,()=>runFiniteKnownCancellationReleaseWorkflow({bundle,env,event,step}));}}export default{fetch(){return new Response(null,{status:404});}};";
+ const result=await compileFixture({stdin:{contents:source,resolveDir:process.cwd(),sourcefile:'finite-known-native-test.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
+ let script=result.outputFiles[0].text;
+ if(witness){
+  const anchor=/const authorize = async \(stage, signal\) => \{/g,settled=/active = false;\s*if \(onAbort\)/g;
+  assert.equal([...script.matchAll(anchor)].length,1);assert.equal([...script.matchAll(settled)].length,1);
+  script=script.replace(anchor,match=>match+' const __stageStart=performance.now(); globalThis.__knownStageWitness?.push(stage);').replace(settled,match=>'globalThis.__knownHookMs += performance.now()-__stageStart; '+match);
+ }
+ return {script,planHash:createHash('sha256').update(JSON.stringify(bundle)).digest('hex'),fixtureHistory:namedHistoryFixture(bundle)};
+}
+async function rehearseNamedConfirmation(finite,{artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null,historyFixture=false,historyMode='known_cancellation',nativeFault=null,measure=false,replayExpected='uncertain'}){
+
  assert.ok(['known_cancellation','original_only'].includes(historyMode),'Unknown native history fixture mode');
  const completeHistory=reserve==='true'||historyFixture;
  if(!['confirmed','tail-corrupt','regional-incident','metadata-reject','second-active'].includes(mode))throw Error('Unknown CI rehearsal');
  const compiledIdentity=await compileFixture({stdin:{resolveDir:process.cwd(),sourcefile:'named-custody-fixture.mjs',contents:`
 import {DurableObject} from 'cloudflare:workers';
 import {createRetiredRpcReceipt} from './lib/mcp-retired-rpc-receipt.mjs';
+import {createFiniteAdmissionGate} from './lib/mcp-own-finite-admission-gate.mjs';
+import {createHash} from 'node:crypto';
+const fixtureHash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 export class Own extends DurableObject{
  serverNow(){return Date.now()+(this.env.RETIREMENT==='server-ahead'?21:0);}
  observeRetired(){
@@ -25,11 +47,40 @@ export class Own extends DurableObject{
   return {...r,observedAt:this.env.RETIREMENT==='future-string'?String(this.serverNow()+1000):this.env.RETIREMENT==='future-unsafe'?8640000000000001:this.serverNow()+(this.env.RETIREMENT==='stale'?-31000:this.env.RETIREMENT==='future'?1000:0),...(this.env.RETIREMENT==='mismatch'?{programHash:'0'.repeat(64)}:{})};
  }
  observeRetiredReceipt(challenge){return createRetiredRpcReceipt({challenge,now:()=>this.serverNow(),observe:async()=>({value:this.observeRetired()})});}
+ #reservationGate(input){
+  const identity=this.env.FINITE_RESERVATION_IDENTITY,expiresAt=this.env.FINITE_RESERVATION_EXPIRES_AT;
+  if(!identity||this.ctx.id.toString()!==identity.containerId||input.intentId!==identity.intentId||input.controlHash!==identity.controlHash)throw Error('SYN reservation scope');
+  const storage=this.ctx.storage,monitorHash='9'.repeat(64);
+  const {intentId,controlHash,planHash,sourceRevision,runtimeVersionId,T0}=identity;
+  const claim={purpose:'afw.qa-finite-trial.v1:effect',intentId,controlHash,kind:'nominal',phase:'issued',issuedAt:T0,deadline:expiresAt,proofHash:null};
+  const claimHash=createHash('sha256').update(['afw.qa-finite-trial.v1:effect',JSON.stringify(claim)].join(String.fromCharCode(10))).digest('hex');
+  const gate=createFiniteAdmissionGate({storage,identity,timeoutMs:5000,now:Date.now,
+   nominalIdentity:{sourceRevision,runtimeVersionId,actorId:identity.containerId,monitorHash,consentExpiresAt:expiresAt},
+   readNominalControl:async()=>{
+    const reservation=(await gate.read()).writers.reservation;
+    const ownedWriters=reservation?[{intentId,controlHash,actorId:identity.containerId,kind:'reservation',
+     claimHash:fixtureHash(reservation.claim),phase:reservation.settlement?'settled':'issued'}]:[];
+    return {purpose:'afw.qa-finite-nominal-control.v1',intentId,controlHash,planHash,sourceRevision,runtimeVersionId,
+     actorId:identity.containerId,observedAt:Date.now(),phase:'armed',withdrawnAt:null,claim,claimHash,ownedWriters,
+     consent:{grantHash:identity.grantHash,monitorHash,expiresAt,valid:true}};
+   },
+   readPrimary:{reservation:async({identityHash,claimHash})=>{
+    const row=await this.env.FINITE_RESERVATION_DB.withSession('first-primary')
+     .prepare("SELECT * FROM dossier_successor_reservations WHERE slot=? AND trial_id=? AND container_id=? AND application_id=? AND state='prepared'")
+     .bind('afw.own-successor.v1',identity.trialId,identity.containerId,identity.applicationId).first();
+    if(!row)return null;
+    return {purpose:'afw.own-finite-admission.v1:settled',identityHash,kind:'reservation',claimHash,primaryRowHash:fixtureHash(row),settledAt:Date.now()};
+   },admission:async()=>null,launch:async()=>null}
+  });
+  return gate;
+ }
+ beginFiniteTrialReservation(input){return this.#reservationGate(input).beginReservation();}
+ settleFiniteTrialReservation(input){return this.#reservationGate(input).settleReservation();}
  fetch(){throw Error('No actor launch in package qualification');}
 }
-export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString()});}}
+export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:e.NODE.idFromName('afw-own-event-first-successor-v1').toString()});}}
 `},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',mainFields:['module','main'],external:['node:*','cloudflare:*'],legalComments:'none'});
- const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:compiledIdentity.outputFiles[0].text,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
+ const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:finite?['nodejs_compat','global_fetch_strictly_public','enable_request_signal']:['nodejs_compat'],script:compiledIdentity.outputFiles[0].text,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
  try{
   const ids=await (await (await mf.getWorker('identity')).fetch('https://synthetic.invalid/ids')).json();
@@ -41,7 +92,8 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
   // Mirror the real provider's Container-linked export and attachment shape.
   config.exports.AfwOwnEventNode.container='agent-friendly-web-delegated-canary-afwowneventnode';
   config.containers=[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}];
-  policy.plan.configurationHash=activationConfigurationHash(config);
+  if(finite)config.compatibility_flags=['nodejs_compat','global_fetch_strictly_public','enable_request_signal'];
+  policy.plan.configurationHash=(finite?finiteActivationConfigurationHash:activationConfigurationHash)(config);
   const compiled=await build({artifact,policy}),{versionId,deploymentId}=policy.observation,etag='f'.repeat(64);
   const counters={providerReads:0,apiReads:0,largestReplyBytes:0,...(reserve!==null?{retirementReads:0}:{})},root='https://api.cloudflare.com/client/v4/accounts/'+RELEASE_TARGET.accountId;
   const urls={module:root+'/workers/workers/'+RELEASE_TARGET.workerName+'/versions/'+versionId+'?include=modules',metadata:root+'/workers/workers/'+RELEASE_TARGET.workerName+'/versions/'+versionId,legacy:root+'/workers/scripts/'+RELEASE_TARGET.workerName+'/versions/'+versionId,deployments:root+'/workers/scripts/'+RELEASE_TARGET.workerName+'/deployments',application:root+'/containers/applications/'+RELEASE_TARGET.namespaceId,instance:root+'/containers/applications/'+RELEASE_TARGET.namespaceId+'/instances/'+ids.original};
@@ -71,15 +123,33 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
    const encoded=JSON.stringify({success:true,errors:[],result});counters.largestReplyBytes=Math.max(counters.largestReplyBytes,Buffer.byteLength(encoded));
    return new Response(encoded,{headers:{'Content-Type':'application/json'}});
   };
-  const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_WORKFLOW_ENABLED:'true',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'exact-named-rehearsal'},workflows:{FLOW:{name:'afw-exact-confirmation-qualification',className:'AfwReleaseWorkflow'}},outboundService};
+  const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:finite?['nodejs_compat','enable_request_signal']:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_WORKFLOW_ENABLED:'true',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'exact-named-rehearsal'},workflows:{FLOW:{name:'afw-exact-confirmation-qualification',className:'AfwReleaseWorkflow'}},outboundService};
   if(reserve!==null)operator.bindings.AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED=reserve;
   if(measure||nativeFault!==null)operator.script+='\n'+knownCancellationNativeHarness({fault:nativeFault,policyExpiresAt:window.expiresAt,grantId:JSON.parse(events.text).grantId});
+  // Test-only credential observation, outside the untouched Known core.
+  if(finite&&(measure||nativeFault!==null))operator.script+=`
+const __finiteMeasuredRun=AfwReleaseWorkflow.prototype.run;
+AfwReleaseWorkflow.prototype.run=async function(event,step){
+ let credentialReads=0;const env=new Proxy(this.env,{get(target,key){if(key==='AFW_RELEASE_READ_TOKEN')credentialReads++;return Reflect.get(target,key,target);}});
+ const result=await __finiteMeasuredRun.call({env},event,step);
+ return {...result,qualification:{...result.qualification,credentialReads}};
+};
+`;
   if(fault!==null)operator.script+='\n'+reservationFaultHarness(fault);
   const retired={purpose:'afw.node-retirement-observation.v1',containerId:ids.original,programHash:manifest.original.programHash,sourceRevision:manifest.original.sourceRevision,processGeneration:'8'.repeat(64),image:'cloudflare/debian-trixie',createdAt:window.startAt-10000,expiresAt:window.startAt-5000,closedAt:window.startAt-3000,observedAt:window.startAt-2000,physicalStopVerified:false,mayStartSuccessor:false};
   identity.bindings={RETIREMENT:retirement,...(retirement==='absent'?{}:{RETIRED:JSON.stringify(retired)})};
+  if(finite){
+   const T0=window.startAt,finiteIdentity={intentId:'SYN-known-reservation',controlHash:'d'.repeat(64),planHash:compiled.planHash,
+    containerId:ids.candidate,applicationId:manifest.scope.applicationId,
+    grantHash:createHash('sha256').update(JSON.parse(events.text).grantId).digest('hex'),
+    trialId:manifest.candidate.trialId,sourceRevision:artifact.sourceRevision,runtimeVersionId:versionId,T0,N1:T0+300000,C1:T0+420000};
+   operator.bindings.FINITE_RESERVATION_IDENTITY=finiteIdentity;
+   Object.assign(identity.bindings,{FINITE_RESERVATION_IDENTITY:finiteIdentity,FINITE_RESERVATION_EXPIRES_AT:window.expiresAt});
+   identity.d1Databases={FINITE_RESERVATION_DB:'exact-named-rehearsal'};
+  }
   if(['expired','rewind'].includes(retirement))operator.script="const originalFetch=globalThis.fetch;globalThis.fetch=async(...args)=>{const r=await originalFetch(...args);if(String(args[0]).includes('/instances/'))Date.now=()=>"+(retirement==='expired'?window.expiresAt+1:window.startAt)+";return r;};\\n".replace('\\n','\n')+operator.script;
   const caller={name:'rpc-caller',modules:true,compatibilityDate:'2026-09-07',bindings:{PLAN_HASH:compiled.planHash},serviceBindings:{OPERATOR:{name:'operator',entrypoint:'AfwReleaseOperator'}},script:'export default{async fetch(r,e){try{return Response.json(await e.OPERATOR.run(e.PLAN_HASH));}catch(error){return Response.json({error:error.message});}}}'};
-  await mf.setOptions(convertV4MiniflareOptions({workers:[identity,operator,caller]}));
+  await mf.setOptions(convertV4MiniflareOptions({workers:finite?[identity,operator]:[identity,operator,caller]}));
   const db=await mf.getD1Database('RELEASE_DB','operator');
   for(const name of ['publication','activation']){
    const sql=readFileSync('db/dossier-'+name+'-receipt.sql','utf8').replace(/^\s*--[^\r\n]*/gm,'');

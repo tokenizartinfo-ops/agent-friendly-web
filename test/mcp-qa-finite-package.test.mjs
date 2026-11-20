@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {encodeFinitePackageManifest,hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
-import {resolveFiniteNativePackage as syntheticResolver,finitePrivateLocatorZip,
+import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver,finitePrivateLocatorZip,
  finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator} from './fixtures/finite-package-resolver.mjs';
 
 let resolver;
@@ -24,7 +24,7 @@ const ROLES=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const blob=b=>createHash('sha1').update('blob '+Buffer.byteLength(b)+'\0').update(b).digest('hex');
 const clone=o=>structuredClone(o);
-const R2_KEY='finite-bundles-v1/'+M+'.zip';
+const R2_KEY='finite-packages-v2/'+M+'.zip';
 const R2=finiteR2TestUrl(M,AT);
 function fixture(){
  const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:sha(WORKFLOW_TEXT),modules:{},compatibility:{}};
@@ -127,14 +127,24 @@ test('private readback verifies every draft member without issuing a release loc
   {input:JSON.stringify({manifest:drafts}),timeout:5000,maxBuffer:65536});
  assert.equal(built.status,0,built.stderr?.toString());
  const bytes=built.stdout;
+ const draftUrl=finiteR2TestUrl(M,AT,true);
  const options={sourceRevision:M,sourceTree:TREE,archiveBytes:bytes.length,archiveSha256:sha(bytes),
-  credential:R2,now:()=>AT,fetchImpl:async(url,req)=>{
-   assert.equal(url,R2);assert.equal(req.method,'GET');
+  credential:draftUrl,now:()=>AT,fetchImpl:async(url,req)=>{
+   assert.equal(url,draftUrl);assert.equal(req.method,'GET');
    return new Response(bytes,{headers:{'content-type':'application/zip','content-length':String(bytes.length)}});
   }};
  const result=await verifyFinitePrivateR2Draft(options);
  assert.equal(result.moduleCount,5);assert.equal(result.authorizesDeployment,false);
- await assert.rejects(createFinitePrivateR2Locator({...options,workflowHash:sha(WORKFLOW_TEXT)}),{message:'Finite package unavailable'});
+ let releaseFetches=0;
+ await assert.rejects(createFinitePrivateR2Locator({...options,workflowHash:sha(WORKFLOW_TEXT),fetchImpl:async()=>{releaseFetches++;return options.fetchImpl(draftUrl,{method:'GET'});}}),{message:'Finite package unavailable'});
+ assert.equal(releaseFetches,0,'draft URL cannot reach release transport');
+});
+test('source constructor invokes concrete resolver only during seed-material',async()=>{
+ const f=fixture(),r=await resolvePrivateQaFiniteExternalSource({phase:'seed-material',...f.options});
+ assert.deepEqual(r.manifest,f.manifest);assert(f.calls.some(x=>x.url===SIGNED));
+ const missing=fixture();missing.hook=async url=>url.includes('/actions/workflows/')?new Response('{}',{status:404}):null;
+ await assert.rejects(()=>resolvePrivateQaFiniteExternalSource({phase:'seed-material',...missing.options}),{message:'Finite package unavailable'});
+ for(const phase of [undefined,'prepare','admit-and-ready','runtime'])await assert.rejects(()=>resolvePrivateQaFiniteExternalSource({phase,...f.options}));
 });
 for(const [field,value] of [['head_sha',OLD],['head_branch','feature'],['event','pull_request'],['path','.github/workflows/other.yml'],['run_attempt',2],['status','in_progress'],['conclusion','failure'],['workflow_id',12],['repository',{id:2,full_name:REPO}],['head_repository',{id:ID,full_name:'foreign/repo'}]]){
  test('reject run provenance '+field,async()=>{const f=fixture();f.run[field]=value;await denied(f);});

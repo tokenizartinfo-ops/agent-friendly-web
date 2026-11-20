@@ -2,6 +2,12 @@ name: AFW finite native package
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - ".github/workflows/afw-finite-native-package.yml"
+      - "scripts/build-finite-native-package.mjs"
+      - "lib/**"
+      - "worker/**"
   workflow_dispatch:
     inputs:
       source_revision:
@@ -13,13 +19,18 @@ permissions:
   actions: read
 jobs:
   verify:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.source_revision == github.sha) }}
+    if: >-
+      ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      ((github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
+      (github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.source_revision == github.sha))) }}
+    env:
+      AFW_PACKAGE_REVISION: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ env.AFW_PACKAGE_REVISION }}
           persist-credentials: false
           fetch-depth: 1
       - uses: actions/setup-node@v4
@@ -27,6 +38,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify exact compiled inputs
+        run: node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION"
       - name: Verify private R2 package transport and release provenance
         run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs
   package:

@@ -24,8 +24,8 @@ test('native signed host serializes overlapping confirmations and preserves perm
  // Operator endpoints are test-fixture only. No production host mounts them.
  const path=new URL(request.url).pathname;if(path==='/fixture/register')return Response.json(await preregistration.register());if(path==='/fixture/retire')return Response.json(await preregistration.withdraw());if(path==='/fixture/issue')return Response.json(await h.issue());if(path==='/fixture/status')return Response.json(await h.status());if(path==='/fixture/withdraw')return Response.json(await h.withdraw());return h.fetch(request);}}
  export default{fetch(request,env){return env.CHALLENGE.get(env.CHALLENGE.idFromName('own-synthetic')).fetch(request);}};
- `},bundle:true,write:false,format:'esm',platform:'browser'});
- const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,durableObjects:{CHALLENGE:{className:'Fixture',useSQLite:true}}}));
+ `},bundle:true,write:false,format:'esm',platform:'browser',external:['node:*']});
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,durableObjects:{CHALLENGE:{className:'Fixture',useSQLite:true}}}));
  try{const call=path=>runtime.dispatchFetch(c.origin+path);
  const requestChallenge=()=>runtime.dispatchFetch(c.origin+'/assistance/custody/confirm',{method:'POST',headers:{'content-type':'application/json','Cf-Access-Jwt-Assertion':jwt},body:JSON.stringify({challenge:'request'})});
  assert.equal((await requestChallenge()).status,409);assert.equal(await(await call('/fixture/register')).json(),true);

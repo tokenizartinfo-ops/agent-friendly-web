@@ -4,7 +4,7 @@ import { build } from 'esbuild';
 import { Miniflare, convertV4MiniflareOptions } from 'miniflare';
 import { readFileSync } from 'node:fs';
 import { generateKeyPair, SignJWT, exportJWK } from 'jose';
-import worker from '../worker/operations-manager/index.mjs';
+import worker from '../worker/operations-manager/fetch.mjs';
 import {createOperationsClient} from '../lib/operations-client.mjs';
 import {runNoticeCycle} from '../lib/operations-notice-cycle.mjs';
 
@@ -27,8 +27,8 @@ test('Workers runtime verifies signed identity and persists an atomic D1 diagnos
     export default {async fetch(request,env){
       if(new URL(request.url).pathname==='/synthetic-fixture')return Response.json(await recordSignal(env.DB,{eventId:'workerd-synthetic',resource:'afw_public_web',check:'public_home',version:'d09bcf52-6fae-4c34-bfec-40b715384205',observedAt:new Date(${current}).toISOString(),result:'failed'},${current}));
       return createOperationsServiceControls({db:env.DB,keySet:key,config:{enabled:true,origin:'https://operations-manager.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'runtime-operations-only',clientId:'runtime-service.access'},limiter:{limit:async()=>({success:true})}})(request);
-    }};`, resolveDir: process.cwd() }, bundle: true, write: false, format: 'esm', platform: 'browser' });
-  const runtime = new Miniflare(convertV4MiniflareOptions({ modules: true, compatibilityDate: '2026-09-07', script: bundle.outputFiles[0].text, d1Databases: { DB: 'operations-consumer-test' } }));
+    }};`, resolveDir: process.cwd() }, bundle: true, write: false, format: 'esm', platform: 'browser', external:['node:crypto'] });
+  const runtime = new Miniflare(convertV4MiniflareOptions({ modules: true, compatibilityDate: '2026-09-07', compatibilityFlags:['nodejs_compat'], script: bundle.outputFiles[0].text, d1Databases: { DB: 'operations-consumer-test' } }));
   try {
     const db = await runtime.getD1Database('DB');
     // Execute real schemas one statement at a time (D1 exec does not accept multiline SQL).
@@ -58,8 +58,8 @@ test('signed notice service in workerd reconciles a lost ACK response using its 
  const key=await importJWK(${JSON.stringify(jwk)},'RS256');
  export default {async fetch(request,binding){const now=${current};const noticeEnv={OPERATIONS_STATE_DB:binding.DB,AFW_OPERATIONS_NOTICES_ENABLED:'true',AFW_OPERATIONS_WATCHDOG_ENABLED:'true',AFW_OPERATIONS_PRODUCER_ENABLED:'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(now+300000).toISOString()};
  if(new URL(request.url).pathname==='/synthetic-fixture'){await recordWatchdogObservation(binding.DB,{paused:false,checkedAt:new Date(now).toISOString(),resources:[{resource:'afw_delegated_canary',issues:['delivery_pending']},{resource:'afw_delegated_real_pilot',issues:[]}]},{now});return Response.json(await admitWatchdogNotices(noticeEnv,{now}));}
- return createOperationsServiceControls({db:binding.DB,noticeEnv,keySet:key,now:()=>now,config:{enabled:true,origin:'https://operations-manager.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'notice-runtime-only',clientId:'notice-test.access'},limiter:{limit:async()=>({success:true})}})(request);}};`},bundle:true,write:false,format:'esm',platform:'browser'});
- const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,d1Databases:{DB:'authenticated-notice-test'}}));
+ return createOperationsServiceControls({db:binding.DB,noticeEnv,keySet:key,now:()=>now,config:{enabled:true,origin:'https://operations-manager.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'notice-runtime-only',clientId:'notice-test.access'},limiter:{limit:async()=>({success:true})}})(request);}};`},bundle:true,write:false,format:'esm',platform:'browser',external:['node:crypto']});
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'authenticated-notice-test'}}));
  try{const db=await runtime.getD1Database('DB');for(const name of ['schema','consumer-state','watchdog-state','watchdog-inbox','notice-reservations']){const sql=readFileSync(new URL('../worker/operations/'+name+'.sql',import.meta.url),'utf8').replace(/--[^\n]*/g,'');for(const statement of sql.split(';').map(x=>x.trim()).filter(Boolean))await db.prepare(statement).run();}
  const origin='https://operations-manager.agentfriendlyweb.dev';await runtime.dispatchFetch(origin+'/synthetic-fixture');assert.equal((await runtime.dispatchFetch(origin+'/notices')).status,401);
  const headers={'Cf-Access-Jwt-Assertion':jwt,'content-type':'application/json'};const listing=await runtime.dispatchFetch(origin+'/notices',{headers});assert.equal(listing.status,200);const {notices}=await listing.json();assert.equal(notices.length,1);

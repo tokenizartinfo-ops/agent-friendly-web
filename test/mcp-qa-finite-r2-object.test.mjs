@@ -91,3 +91,19 @@ test('occupied or uncertain object is read back once, and conflicting contents f
   assert.deepEqual(calls,fault==='foreign'?[]:['PUT','GET']);
  }
 });
+test('draft and deployable package credentials for the same revision cannot be interchanged',async()=>{
+ const draft=bundleUrl(),release=new URL(draft);
+ release.pathname='/finite-packages-v2/'+revision+'.zip';
+ assert.equal(api.finiteR2BundleKey(revision),object);
+ assert.equal(api.finiteR2PackageKey(revision),release.pathname.slice(1));
+ const calls=[],options={sourceRevision:revision,archiveBytes:1,now,signal,fetchImpl:async url=>{
+  calls.push(url);
+  return new Response('z',{headers:{'content-type':'application/zip','content-length':'1'}});
+ }};
+ await assert.rejects(api.readFiniteR2Bundle({...options,credential:release.href}),{message:'Finite R2 archive unavailable'});
+ await assert.rejects(api.readFiniteR2Package({...options,credential:draft}),{message:'Finite R2 archive unavailable'});
+ assert.deepEqual(calls,[]);
+ assert.equal(await (await api.readFiniteR2Bundle({...options,credential:draft})).text(),'z');
+ assert.equal(await (await api.readFiniteR2Package({...options,credential:release.href})).text(),'z');
+ assert.deepEqual(calls,[draft,release.href]);
+});

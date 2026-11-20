@@ -23,8 +23,8 @@ async function harness(){
    if(['/notices','/notices/claim','/notices/ack','/notices/receipts'].includes(new URL(request.url).pathname))return createOperationsServiceControls({db:binding.DB,noticeEnv:env,keySet:key,limiter,now,config:{enabled:true,origin:config.origin,teamDomain:config.teamDomain,audience:config.consumerAudience,clientId:'synthetic-reception.access'}})(request);
    return createNoticeReviewControls({env,config,keySet:key,limiter,now})(request);
   }};
- `},bundle:true,write:false,format:'esm',platform:'browser'});
- const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,d1Databases:{DB:'synthetic-notice-review-'+crypto.randomUUID()}}));
+ `},bundle:true,write:false,format:'esm',platform:'browser',external:['node:crypto']});
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'synthetic-notice-review-'+crypto.randomUUID()}}));
  try{
   const db=await runtime.getD1Database('DB');
   await install(db);

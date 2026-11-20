@@ -1,0 +1,208 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+// Actual workerd Workflow subclass. External native source qualification is
+// SYNTHETIC; it deliberately denies. This fixture never claims native authority.
+const entry=`
+import {createHash} from 'node:crypto';
+import {PrivateQaBootstrap} from './worker/independent-closure/finite.mjs';
+const state={reads:0};
+export function entrySource({env,event,step},lease){lease.assertCurrent();state.reads++;if(env!==state.env||event!==state.event||step!==state.step)throw Error('SYNTHETIC identity drift');throw Error('SYNTHETIC original source incomplete');}
+export default {async fetch(request,env,ctx){
+ const {mode}=await request.json();state.reads=0;
+ const refs={intentId:'a'.repeat(64),sourceRevision:'b'.repeat(40)};
+ const id='afw-finite-policy-'+createHash('sha256').update('afw.finite-private-policy-setup.v1\\n'+JSON.stringify(refs)).digest('hex');
+ const event={timestamp:new Date(),instanceId:id,workflowName:'afw-own-qa-private-bootstrap',payload:{operation:'finite_private_policy_setup',...refs}};
+ if(mode==='extra')event.payload.T0=Date.now();
+ if(mode==='future')event.timestamp=new Date(Date.now()+10000);
+ if(mode==='expired')event.timestamp=new Date(Date.now()-30000);
+ if(mode==='non_date')event.timestamp=Date.now();
+ if(mode==='wrong_id')event.instanceId='wrong';
+ if(mode==='wrong_name')event.workflowName='wrong';
+ state.env=env;state.event=event;state.step={async do(name,options,callback){return callback();}};
+ let outcome;try{outcome=await new PrivateQaBootstrap(ctx,env).run(event,state.step);}catch{outcome={status:'admin_pending'};}
+ return Response.json({reads:state.reads,outcome});
+}};
+`;
+const bundles=new Map();
+async function run(t,mode,synthetic=true){
+ if(!bundles.has(synthetic)){
+  const r=await build({stdin:{contents:"export {default} from 'synthetic-policy-entry';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'SYNTHETIC-native-entry',setup(b){
+   b.onResolve({filter:/^synthetic-policy-entry$/},()=>({path:'entry',namespace:'synthetic'}));
+   b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:entry,resolveDir:process.cwd(),loader:'js'}));
+   if(synthetic)b.onLoad({filter:/mcp-qa-finite-policy-setup-source\.mjs$/},()=>({contents:"export {entrySource as readPrivateQaFinitePolicyEntry} from 'synthetic-policy-entry'; export function readPrivateQaFinitePolicySource(){throw Error('SYNTHETIC unavailable');} export function readPrivateQaFinitePolicyOrigin(){throw Error('SYNTHETIC origin unavailable');}",loader:'js'}));
+  }}]});bundles.set(synthetic,r.outputFiles[0].text);
+ }
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundles.get(synthetic),compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}}}));
+ t.after(()=>mf.dispose());const response=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(response.status,200);return response.json();
+}
+test('Task4 native finite setup dispatch consults original source before any effect',async t=>{
+ const r=await run(t,'normal');assert.equal(r.reads,1);assert.equal(r.outcome.status,'admin_pending');assert.equal(r.outcome.receipt,undefined);
+});
+for(const mode of ['extra','future','expired','non_date','wrong_id','wrong_name'])test('Task4 native setup denies '+mode+' before source',async t=>{
+ const r=await run(t,mode);assert.equal(r.reads,0);assert.equal(r.outcome.status,'admin_pending');assert.equal(r.outcome.receipt,undefined);
+});
+test('Task4 actual unavailable source cannot mint setup authority',async t=>{
+ const r=await run(t,'normal',false);assert.equal(r.reads,0);assert.equal(r.outcome.status,'admin_pending');assert.equal(r.outcome.receipt,undefined);
+});
+
+import {policyFixture} from './fixtures/finite-policy-setup-native.mjs';
+import {hashFinitePreparationRecord as recordHash,decodeFinitePreparationRecord} from '../lib/mcp-qa-finite-preparation-records.mjs';
+test('Task4 actual native wrapper DO store and two-effect engine installs only actual ACK versions',async t=>{
+ const f=await policyFixture(t),outcome=await f.run();assert.equal(outcome.status,'installed',JSON.stringify({posts:f.posts(),reads:f.reads,keys:(await f.rows()).map(([k])=>k)}));assert.equal(f.posts(),2);
+ assert.equal(outcome.receipt.versionId,f.actual().versionId);assert.equal(outcome.receipt.deploymentId,f.actual().deploymentId);
+ assert.equal(outcome.receipt.receiptHash,recordHash('PolicyReceipt',outcome.receipt));
+ const rows=await f.rows(),context=decodeFinitePreparationRecord('SetupContext',rows.find(([k])=>k.endsWith(':context'))[1]);
+ assert.equal(context.ownerPreparation.programContext.sourceRevision,'c'.repeat(40));assert.equal(context.sourceRevision,'b'.repeat(40));
+ assert(context.T0<context.ownerPreparation.commandBy);assert(outcome.receipt.installedAt>context.ownerPreparation.commandBy);
+ assert.deepEqual(context.baseline.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public','enable_request_signal']);
+ assert.deepEqual(context.rollback.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);
+ assert(f.reads.some(url=>url.includes(context.baseline.versionId)));assert(f.reads.some(url=>url.includes(context.rollback.versionId)));
+ assert.equal(context.C0,context.T0+240000);assert.equal(context.C1,context.T0+420000);
+ const retained=JSON.parse(rows.find(([k])=>k.endsWith(':confirmation'))[1]);
+ assert.equal(retained.receiptHash,outcome.receipt.receiptHash);
+ assert.equal(retained.policy.observation.versionId,outcome.receipt.versionId);
+ assert.equal(retained.artifact.workerHash,outcome.receipt.moduleHash);
+ assert.equal(Object.hasOwn(retained.artifact,'script'),false);
+ const withdrawal=JSON.parse(context.policies.AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY);assert.equal(withdrawal.startAt,context.C0);assert.equal(withdrawal.expiresAt,context.C1);
+ const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:a>b?1:0)):x);
+ for(const request of f.requests){
+  const effect=request.url.includes('/versions?')?'upload':'activation',send=JSON.parse(rows.find(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect===effect)[1]);
+  const {createHash}=await import('node:crypto');
+  const expected=createHash('sha256').update('afw.finite-policy-request.v1\n'+canonical({method:request.method,path:request.url,baselineVersionId:context.baseline.versionId,baselineDeploymentId:context.baseline.deploymentId,body:request.body})).digest('hex');
+  assert.equal(send.requestHash,expected);assert(send.deadline-send.issuedAt<=5000);assert(send.deadline<=f.state.T0+200+30000);assert(send.deadline<=f.state.T0+50000);
+ }
+ assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,2);assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,2);
+ assert.equal(rows.some(([k])=>k==='afw.qa-finite-trial.v1:head'),false);
+ assert.equal(JSON.stringify(outcome).includes('SYNTHETIC_OWNER'),false);
+ assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),2);
+});
+for(const mode of ['actual_facts_unavailable','owner_incomplete','seed_incomplete','changed_grant','changed_revision','changed_selection','publisher_unavailable','queue_expired','setup_expired','original_queue_budget','command_at_boundary','head_touched','oversize','foreign_pointer']){
+ test('Task4 native setup denies '+mode+' before SEND',async t=>{
+  const f=await policyFixture(t,mode);assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),0);assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,0);
+ });
+}
+for(const mode of ['lost_ack','late_upload','provider404','wrong_bytes','wrong_full','foreign_after_upload']){
+ test('Task4 native upload '+mode+' preserves issued state without activation or resend',async t=>{
+  const f=await policyFixture(t,mode);assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),1);
+  assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),1);
+  assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,1);
+ });
+}
+test('Task4 lost activation ACK cannot produce installed receipt or repeat effects',async t=>{
+ const f=await policyFixture(t,'lost_activation');assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),2);
+ assert.equal((await f.rows()).filter(([k])=>k.endsWith(':receipt')||k.endsWith(':confirmation')).length,0);
+ assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),2);
+});
+
+test('Task4 held nested hydration retains original lineage after response until actual settlement',async t=>{
+ const f=await policyFixture(t,'held_hydration');
+ assert.equal((await f.run()).status,'admin_pending');
+ assert.equal((await f.run(true)).status,'admin_pending');
+ assert.deepEqual(await f.hydration(),{reads:1,lateDenied:0});
+ assert.equal(f.posts(),0);assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,0);
+ await new Promise(r=>setTimeout(r,6700));
+ assert.deepEqual(await f.hydration(),{reads:1,lateDenied:1});
+ assert.equal((await f.rows()).some(([k])=>k==='fixture:late-write'),false);
+});
+
+for(const mode of ['permission-grant-revoked','permission-consent-replaced','permission-notice-replaced','permission-notice-withdrawn','permission-project-revised'])test('real primary denies setup with changed original permission: '+mode,async t=>{
+ const f=await policyFixture(t,mode);
+ const r=await f.run();
+ assert.equal(r.status,'admin_pending');
+ assert.equal(f.posts(),0);
+ assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,0);
+});
+test('real primary blocks activation when the original notice permission is withdrawn after upload',async t=>{
+ const f=await policyFixture(t,'notice-withdrawn-after-upload');
+ const r=await f.run();
+ assert.equal(r.status,'admin_pending');
+ assert.equal(f.posts(),1);
+ const rows=await f.rows();
+ assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,1);
+ assert.equal(rows.some(([k])=>k.endsWith(':confirmation')),false);
+});
+
+test('original Cloudflare proof is completed before the setup callback',async t=>{
+ const f=await policyFixture(t),r=await f.run();
+ assert.equal(r.status,'installed');
+ assert.deepEqual(r.callbacks,['finite-private-policy-origin','finite-private-policy-setup']);
+});
+test('tampered original Cloudflare proof cannot reach the setup callback',async t=>{
+ const f=await policyFixture(t,'tampered-origin'),r=await f.run();
+ assert.equal(r.status,'admin_pending');
+ assert.deepEqual(r.callbacks,['finite-private-policy-origin']);
+ assert.equal(f.posts(),0);
+});
+
+test('the finite QA actor passes its fixed private expediente source',async t=>{
+ const f=await policyFixture(t,'qa-source-mounted');
+ assert.equal((await f.run()).status,'admin_pending');
+ assert.equal((await f.hydration()).qaSourceMounted,true);
+ assert.equal(f.posts(),0);
+});
+
+test('native confirmation reads only a fully retained installation of the same notice',async t=>{
+ const f=await policyFixture(t),result=await f.run();
+ assert.equal(result.status,'installed');
+ assert.deepEqual(await f.installedJournal('unchanged'),{status:'observed',receiptHash:result.receipt.receiptHash});
+ assert.deepEqual(await f.installedJournal('lost-upload-ack'),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});
+
+for(const change of ['wrong-context','lost-selection-witness'])test('native installed source rejects '+change+' for the originally selected expediente',async t=>{
+ const f=await policyFixture(t),result=await f.run();
+ assert.equal(result.status,'installed');
+ const rows=await f.rows();
+ const initial=await f.installedSource('unchanged');
+ assert.equal(initial.status,'observed');
+ assert.equal(initial.receiptHash,result.receipt.receiptHash);
+ assert.equal(initial.original.T0,f.state.T0);
+ assert.equal(initial.original.monitorHash,(await import('../lib/mcp-qa-finite-preparation-records.mjs')).hashFiniteOwnerEvidence('event',f.state.notice));
+ assert.deepEqual(await f.rows(),rows);
+ assert.deepEqual(await f.installedSource(change),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});
+
+test('launch rechecks the originally bound permission in first-primary D1 after the same notice is withdrawn',async t=>{
+ const f=await policyFixture(t);assert.equal((await f.run()).status,'installed');
+ const before=await f.launchPermission('enroll');
+ assert.equal(before.valid,true);
+ assert.equal(before.expiresAt,f.state.T0+300000);
+ await f.withdrawNotice();
+ assert.deepEqual(await f.launchPermission('read'),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});
+
+test('launch cannot proceed without the original approval to withdraw this subscription',async t=>{
+ const f=await policyFixture(t);assert.equal((await f.run()).status,'installed');
+ assert.equal((await f.launchPermission('enroll')).valid,true);
+ assert.deepEqual(await f.launchPermission('missing-scope'),{status:'unavailable'});
+ assert.equal(f.posts(),2);
+});
+
+for(const obstruction of ['stale-writer','extra-row','missing-confirmation','wrong-activation-request'])test('original cleanup requires complete policy lineage and rejects '+obstruction,async t=>{
+ const f=await policyFixture(t),run=await f.run();
+ assert.equal(run.status,'installed');
+ assert.deepEqual(await f.installedSource('lineage-unchanged'),{status:'observed',receiptHash:run.receipt.receiptHash,policyRows:6});
+ const count=f.posts();
+ assert.deepEqual(await f.installedSource('lineage-'+obstruction),{status:'unavailable'});
+ assert.equal(f.posts(),count);
+});
+
+test('coupled original cleanup cannot borrow a fabricated owner snapshot in the native actor',async t=>{
+ const f=await policyFixture(t),before=f.posts();
+ assert.deepEqual(await f.installedSource('lineage-fabricated-owner'),{denied:true,preserved:true});
+ assert.equal(f.posts(),before);
+});
+
+for(const mode of ['original-restore-acknowledged','original-restore-lost-ack'])test('compiled original restore owns one durable SEND: '+mode,async t=>{
+ const f=await policyFixture(t,mode);
+ assert.equal((await f.run()).status,'installed');
+ const before=f.posts(),acknowledged=mode==='original-restore-acknowledged';
+ assert.deepEqual(await f.installedSource('lineage-owned-restore'),{acknowledged,retainedSend:true,retainedAck:acknowledged});
+ assert.equal(f.posts(),before+1);
+ assert.deepEqual(await f.installedSource('lineage-owned-restore'),{acknowledged:false,retainedSend:true,retainedAck:acknowledged});
+ assert.equal(f.posts(),before+1);
+});
