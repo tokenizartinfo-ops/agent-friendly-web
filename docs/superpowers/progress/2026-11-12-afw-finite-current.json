@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-19 21:21:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-independent-observer-and-r2-validation.json",
-  "phase": "Exact five-module archive emitted to immutable private R2 and independently read back. Main-based finite integration branch qualified; release admission and real cloud occurrence pending.",
+  "previousCheckpoint": "docs/superpowers/progress/2026-11-20-afw-immutable-private-r2-bundle.json",
+  "phase": "private-R2-reader-verified-integration-CI-running",
   "activeNativeRuns": 0,
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Use a small source-bound manifest and locator receipt in GitHub. Resolve the exact ZIP directly in private R2 and verify archive hash, source tree, each role, and immutable rollback pins. The current resolver only accepts the complete public-repository Actions package shape and the source qualification gate still fails closed. Emit an admitted release for the promoted main revision; the staged integration commit contains the main-preserving overlay and is intentionally a different source revision from the present private bundle. After qualifying the main revision, recheck protected custody, stage exact runtime versions and rollback, then run one finite cloud occurrence. Accept only native unsubscription and assistant review of the identical notice with independent QA closure.",
+  "next": "Verify on GitHub and merge source only after whole-PR checks pass. Qualify and emit the exact main release, verify R2 and the closed restore pointers, then launch once and compare a same-notice cloud review receipt with the actual native withdrawal and independent QA closure.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": false,
   "ownerAvailability": {
@@ -1821,8 +1821,8 @@
       "recoveryIndex": "5e240ebaeb77df6dfebd048c2f7e3a1e37854869"
     }
   },
-  "schemaVersion": 189,
-  "updatedAtUTC": "2026-11-20T00:42:11Z",
+  "schemaVersion": 190,
+  "updatedAtUTC": "2026-11-20T01:23:01.901Z",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-18 02:03:56 UTC",
@@ -2736,6 +2736,14 @@
     "archiveSha256": "d4361a202c31be569f02af16ad8a5b8357a38d1196f70c180e4a6f34737fb241",
     "integrationHead": "c7e19976bb81851b71564e59e33d8f2eff7a5830",
     "validationRun": 44647279065,
+    "completePackage": false,
+    "actualCloudTrial": false
+  },
+  "privateR2VerifierIntegration": {
+    "path": "docs/superpowers/progress/2026-11-20-afw-private-r2-verifier-integration.json",
+    "pr": 720,
+    "head": "bacc5d60dcb8934423a47fa7b6a61294764259d2",
+    "mainAccepted": false,
     "completePackage": false,
     "actualCloudTrial": false
   }
