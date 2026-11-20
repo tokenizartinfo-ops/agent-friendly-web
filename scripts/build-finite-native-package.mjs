@@ -175,7 +175,17 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
    }
   }
  }
- const verified={...receipt,rollbackProfiles};
+ // Keep the pinned historical bytes inside the verifier and Workerd process.
+ const orderedClosedRoles=['qaClosed','canaryClosed','operatorClosed'];
+ const rollbackByteLength=orderedClosedRoles.reduce((length,role)=>length+allModules[role].bytes,0);
+ const historicalModules=await privateVerifier(cwd,'--emit-pinned-rollback-modules',archive,rollbackByteLength);
+ if(historicalModules.length!==rollbackByteLength)fail();
+ const [{verifyFiniteStagingMounts},{verifyFiniteRollbackMounts}]=await Promise.all([
+  import('./verify-finite-native-staging.mjs'),import('./verify-finite-native-rollback.mjs')
+ ]);
+ const currentMounts=await verifyFiniteStagingMounts(built);
+ const rollbackMounts=await verifyFiniteRollbackMounts(historicalModules,privateMetadata);
+ const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts}};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
@@ -197,20 +207,34 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const fromR2=mode==='--verify-r2-draft'||emit,privateDraft=mode==='--verify-private-draft'||fromR2;
  if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
+ // Keep the signed URLs in the CLI alone. Git, Python and Workerd may
+ // inherit the process environment, and none needs access to R2.
+ const backupReadUrl=process.env.AFW_R2_BACKUPS_READ_URL;
+ const bundleWriteUrl=process.env.AFW_R2_BUNDLE_WRITE_URL;
+ const bundleReadUrl=process.env.AFW_R2_BUNDLE_READ_URL;
+ delete process.env.AFW_R2_BACKUPS_READ_URL;
+ delete process.env.AFW_R2_BUNDLE_WRITE_URL;
+ delete process.env.AFW_R2_BUNDLE_READ_URL;
  if(privateDraft){
   const result=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
-   await readFiniteR2Archive({credential:process.env.AFW_R2_BACKUPS_READ_URL,signal:AbortSignal.timeout(15000)})
+   await readFiniteR2Archive({credential:backupReadUrl,signal:AbortSignal.timeout(15000)})
   ).body:()=>process.stdin,{emit});
   const receipt=emit?{...result.verified,privateR2Bundle:await storeFiniteR2Bundle({
-   sourceRevision,bytes:result.bundle,writeCredential:process.env.AFW_R2_BUNDLE_WRITE_URL,
-   readCredential:process.env.AFW_R2_BUNDLE_READ_URL,signal:AbortSignal.timeout(30000)
+   sourceRevision,bytes:result.bundle,writeCredential:bundleWriteUrl,
+   readCredential:bundleReadUrl,signal:AbortSignal.timeout(30000)
   }),authorizesDeployment:false}:result;
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
   const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});
+  let nativeMount;
+  if(staging){
+   const {verifyFiniteStagingMounts}=await import('./verify-finite-native-staging.mjs');
+   nativeMount=await verifyFiniteStagingMounts(built);
+   process.stdout.write(JSON.stringify({sourceRevision,nativeMount})+'\n');
+  }
   // Separate isolated staging namespace; never eligible artifact name/layout.
   const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
   for(const [path,bytes] of Object.entries(built.files)){const target=resolve(root,path);await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,bytes);}
-  if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
+  if(staging){const evidence={...built,nativeMount};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
  }
 }

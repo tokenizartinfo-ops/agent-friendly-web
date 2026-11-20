@@ -89,6 +89,16 @@ class ArchiveTests(unittest.TestCase):
     def invoke(self, data):
         return subprocess.run([sys.executable, str(SCRIPT)], input=data, capture_output=True, timeout=8)
 
+    def test_rollback_pipe_emits_nothing_for_an_unpinned_archive(self):
+        data = make_archive({"purpose": "afw.finite-native-package.v2"})
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--emit-pinned-rollback-modules"],
+            input=data, capture_output=True, timeout=8,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stdout, b"")
+        self.assertEqual(result.stderr, b"Finite archive unavailable\n")
+
     def test_valid_archive_is_inspected_not_executed(self):
         r = self.invoke(make_archive({"purpose": "afw.finite-native-package.v2"}))
         self.assertEqual(r.returncode, 0, r.stderr)

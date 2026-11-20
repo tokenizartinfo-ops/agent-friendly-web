@@ -340,6 +340,22 @@ def assemble_private_compiler_draft(raw, include_metadata=False, emit_bundle=Fal
     return result
 
 
+def emit_pinned_rollback_modules(raw):
+    """Return validated historical modules in fixed role order to private stdin."""
+    verified = inspect_pinned_r2_historical_inputs(raw)
+    parts = []
+    with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+        for role in CLOSED_ROLES:
+            member = role + "/" + module_name(role)
+            pin = verified["files"][member]
+            with archive.open(member) as source:
+                module = source.read(pin["bytes"] + 1)
+            require(len(module) == pin["bytes"] and
+                    hashlib.sha256(module).hexdigest() == pin["sha256"])
+            parts.append(module)
+    return b"".join(parts)
+
+
 def main():
     mode = tuple(sys.argv[1:])
     limit = 2 * ARCHIVE_LIMIT + MANIFEST_LIMIT + 12 if mode == ("--assemble-private-draft",) else ARCHIVE_LIMIT
@@ -353,6 +369,7 @@ def main():
         ("--private-draft-readback",): inspect_private_draft,
         ("--historical-inputs",): inspect_historical_inputs,
         ("--pinned-r2-historical-inputs",): inspect_pinned_r2_historical_inputs,
+        ("--emit-pinned-rollback-modules",): emit_pinned_rollback_modules,
         ("--assemble-private-draft",): assemble_private_draft,
         ("--assemble-compiler-draft",): assemble_private_compiler_draft,
         ("--inspect-rollback-compiler-draft",): lambda raw: assemble_private_compiler_draft(raw, True),
@@ -360,8 +377,8 @@ def main():
     }
     require(mode in inspectors)
     result = inspectors[mode](raw)
-    if mode == ("--emit-private-compiler-bundle",):
-        # Only the Node publisher consumes this bounded binary pipe.
+    if mode in {("--emit-private-compiler-bundle",), ("--emit-pinned-rollback-modules",)}:
+        # Only the Node compiler consumes these bounded binary pipes.
         require(isinstance(result, bytes) and 0 < len(result) <= ARCHIVE_LIMIT)
         sys.stdout.buffer.write(result)
         return
