@@ -231,24 +231,42 @@
     },
     "exactPackageWorkerdCandidate": {
       "pullRequest": 722,
-      "head": "ccd0719745714705a4f4aa223d2858d39cc389da",
-      "tree": "53bb103a40442a19db56d4eb6cccbf7585d71dec",
+      "head": "6def327c802622c3a9d5b1e5593f6e29fd24c24d",
+      "tree": "8d51269d235cb92719b498f8718ab83186a607bc",
       "cloudCheck": {
-        "runId": 44775158634,
-        "jobId": 136422885012,
+        "runId": 44777691141,
+        "jobId": 136431785245,
         "status": "success"
       },
-      "fullCiRun": 44775158337,
+      "fullCiRun": 44777691153,
       "exactStagedModules": 2,
       "rollbackRuntimeFromProtectedR2": "Pending protected dispatch on admitted exact main",
-      "operationalReadiness": false
+      "operationalReadiness": false,
+      "independentSourceReview": "No unresolved actionable findings after credential isolation, canonical rollback host and exact finite-only RPC denial",
+      "syntheticRollbackWorkerd": true
     },
     "finiteReceiverPrimary": {
       "atUTC": "2026-11-20T16:38:59.866Z",
       "deploymentId": "3a2dad24-2f32-488c-a480-52633118adac",
       "versionId": "c4d897ad-a804-48b5-90a5-8dc797bd5ec1",
       "exactContentInspectionNamedExport": true,
-      "flagsClosed": true
+      "flagsClosed": true,
+      "database": {
+        "name": "agent-friendly-web-finite-review-qa",
+        "metadataReadAtUTC": "2026-11-20T16:54:48.297Z",
+        "source": "sqlite_schema only",
+        "expectedTables": 3,
+        "immutableReviewTriggers": 2,
+        "missing": 0
+      }
+    },
+    "qaProviderMetadataCorrection": {
+      "pullRequest": 723,
+      "head": "af00c603719c7fabafbf9cccd26b6fc1a77eb016",
+      "tree": "96bc7ea356eb2076093ec6aeaa759d52e366cbec",
+      "targetedSourcePackageRun": 44776291266,
+      "fullCiRun": 44776291445,
+      "sourceReview": "No actionable findings"
     }
   },
   "findings": {
@@ -266,7 +284,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Await exact PR 722 CI, integrate, then request one read-only protected Actions private R2 verification on exact main. Continue with exact provider live metadata adoption, authorization semantics, private v2 assembly and custody, then one real finite signed notice delivery, review and native withdrawal. No PC-off readiness from source or staged/rollback mount checks.",
+    "next": "Wait on exact current PR CI and integrate with tree readback. Run the exact-main protected R2 GET and Workerd rollback checks. Full native package success still requires real source authority/custody, private v2 emission and exact readback. Then prove one real signed synthetic notice delivery, review and native withdrawal, before PC-off.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -355,7 +373,7 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T16:39:00Z",
+  "updatedUTC": "2026-11-20T16:55:00Z",
   "latestCandidate": {
     "pullRequest": 720,
     "head": "31ce377547d21de19e57eb82de5a6bdce063c177",
