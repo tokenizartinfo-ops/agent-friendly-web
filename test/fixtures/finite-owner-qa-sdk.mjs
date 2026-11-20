@@ -180,7 +180,7 @@ export async function readSyntheticIssuedGrantProps(code,grant){
 /** Test-only observation of the actual SDK Promise result, before the original
  * await/recheck rejects a terminally reduced operation. No result substitution. */
 export function instrumentFiniteOwnerQaSdkLate(source){
- const needle="actualPromise=retain(Promise.resolve().then(()=>{check();return call();}));position='sdk-pending';";
+ const needle="actualPromise=retain(Promise.resolve().then(()=>{check();return call(send);}));position='sdk-pending';";
  if(source.split(needle).length!==2)throw Error('SYN late observation point changed');
- return source.replace(needle,"actualPromise=retain(Promise.resolve().then(()=>{check();return call();}).then(value=>{if(op==='sdk_complete')globalThis.__d03LateCode=new URL(value.redirectTo).searchParams.get('code');return value;}));position='sdk-pending';");
+ return source.replace(needle,needle+"actualPromise.then(value=>{if(op==='sdk_complete')globalThis.__d03LateCode=new URL(value.redirectTo).searchParams.get('code');}).catch(()=>{});");
 }
