@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "bc335b1ddb2cbc77928e3373e2647a04081da6dc",
-    "latestVerifiedTree": "62e604b507ebf8b8839bb2263725c7c58fed6c11"
+    "latestVerifiedCommit": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
+    "latestVerifiedTree": "bd4ee2a8861edb9340ade05a8facec93dd36f259"
   },
   "candidate": {
     "pullRequest": 720,
@@ -465,7 +465,13 @@
         "create",
         "status"
       ],
-      "operationalReadiness": false
+      "operationalReadiness": false,
+      "sourceRevision": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
+      "sourceTree": "bd4ee2a8861edb9340ade05a8facec93dd36f259",
+      "mergedAtUTC": "2026-11-20T19:53:21Z",
+      "ci": 44799247555,
+      "ciConclusion": "success",
+      "exactCombinedTreeVerified": true
     }
   },
   "findings": {
@@ -483,7 +489,7 @@
       "Bundle original ticket consumption, approval and preconnection in a single guarded transaction and verify every record.",
       "Reuse the pair already qualified by the same original request for its first read only. Fresh ownership and source gates remain before writes, with original clocks unchanged."
     ],
-    "next": "Finish source CI for PR727 and read back the integrated tree. A single protected R2 read on the final source may verify that the three historical rollback modules and the configured native QA Workflow mounts work together, only if the existing lease is still valid. The deployable v2 artifact and independent cloud trial of the same signed notice and native withdrawal remain open.",
+    "next": "Qualify exact historical module export descriptors for deployable v2 assembly. The previous signed backup URL expired before the new main merge, so no replay was attempted. The public Workers/Queues incident remains identified. No real trial requested from the closed runtime.",
     "archivedVersionDigest": "The historical canary rollback expected the QA-closed hash domain, but the fixed engine supplied the ordinary restoration digest. Both producer and verifier now use the same rule.",
     "latencyWork": {
       "testedAgainstRuntimeSource": "6c12f6fa1a9785a9178fd4dba8ccdc1065bd145a",
@@ -572,20 +578,11 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T19:22:47Z",
+  "updatedUTC": "2026-11-20T19:55:19Z",
   "latestCandidate": {
-    "pullRequest": 727,
-    "head": "307815e2fde3dadcfc523de5a979a3bb46b3cee9",
-    "tree": "f3d00f2d8f7b62092fb9f3ae3f6f4aa857861599",
-    "base": "3d76f2e547c63e944d1e2b5a066c9c6a3f81b513",
-    "sourcePackageChecks": {
-      "runId": 44799247556,
-      "status": "success",
-      "completePackage": false
-    },
-    "ci": {
-      "runId": 44799247555,
-      "status": "in_progress"
-    }
+    "pullRequest": 728,
+    "head": "6687c3150482fc6a84c45d53ff41ea90355eccbe",
+    "base": "0fa577b1ad826dd96112acffaecbc01fbb8c30a6",
+    "status": "historical module export assertions awaiting GitHub check"
   }
 }
