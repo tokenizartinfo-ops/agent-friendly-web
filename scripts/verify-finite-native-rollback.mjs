@@ -101,7 +101,9 @@ export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRev
  const id='1'.repeat(64),context={purpose:'afw.qa-pre-entry-custody-context.v1',id,
   sourceRevision,baselineVersionId,baselineModuleHash:pin.sha256,startAt:0,expiresAt:1};
  let outboundAttempts=0;
- const mf=new Miniflare(convertV4MiniflareOptions({
+ let mf;
+ try{
+  mf=new Miniflare(convertV4MiniflareOptions({
   modules:[
    {type:'ESModule',path:'custody-staging/index.mjs',contents:code},
    {type:'ESModule',path:'custody-staging/closed-rollback.mjs',contents:baseline},
@@ -113,8 +115,7 @@ export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRev
   durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'IndependentClosure',useSQLite:true}},
   outboundService:async()=>{outboundAttempts++;return new Response(null,{status:503});},
   log:new NoOpLog(),handleStructuredLogs:()=>{},
- }));
- try{
+  }));
   const ns=await mf.getDurableObjectNamespace('AFW_INDEPENDENT_CLOSURE');
   const raw=await ns.get(ns.idFromName('afw-own-successor-closure-v1')).readPreEntryCustody(id,sourceRevision);
   const receipt=JSON.parse(raw);
@@ -125,5 +126,7 @@ export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRev
   const closed=response.status===404;await response.body?.cancel();
   if(!closed||outboundAttempts)fail();
   return Object.freeze({coldAssemblyBlocked:true,outboundAttempts});
- }catch{fail();}finally{await mf.dispose();}
+ }catch{fail();}finally{
+  if(mf)try{await mf.dispose();}catch{fail();}
+ }
 }
