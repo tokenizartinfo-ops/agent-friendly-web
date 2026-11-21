@@ -3,6 +3,7 @@ import {build} from 'esbuild';
 import ts from 'typescript';
 import {Miniflare,NoOpLog,convertV4MiniflareOptions} from 'miniflare';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
+import {createQaPreEntryCustodyContext,renderQaPreEntryCustodyModule} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 
 const roles=Object.freeze({qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'});
 const disabledRoutes=Object.freeze({
@@ -97,9 +98,8 @@ export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}
 }
 
 export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision}){
- const {id:baselineVersionId,module:pin}=QA_CLOUD_CLOSED_PINS.qaClosed;
- const id='1'.repeat(64),context={purpose:'afw.qa-pre-entry-custody-context.v1',id,
-  sourceRevision,baselineVersionId,baselineModuleHash:pin.sha256,startAt:0,expiresAt:1};
+ const context=createQaPreEntryCustodyContext({sourceRevision,startAt:0,expiresAt:1});
+ const {id,baselineVersionId}=context;
  let outboundAttempts=0;
  let mf;
  try{
@@ -107,7 +107,7 @@ export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRev
   modules:[
    {type:'ESModule',path:'custody-staging/index.mjs',contents:code},
    {type:'ESModule',path:'custody-staging/closed-rollback.mjs',contents:baseline},
-   {type:'ESModule',path:'custody-staging/pre-entry-custody-context.mjs',contents:'export const custodyContext=Object.freeze('+JSON.stringify(context)+');'}
+   {type:'ESModule',path:'custody-staging/pre-entry-custody-context.mjs',contents:renderQaPreEntryCustodyModule(context)}
   ],
   compatibilityDate:metadata.compatibility_date,compatibilityFlags:metadata.compatibility_flags,
   bindings:{...Object.fromEntries(metadata.bindings.filter(binding=>binding.type==='plain_text')
