@@ -6,7 +6,7 @@ import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 export {PrivateQaNamedConfirmation,PrivateQaPreregistration,default} from './closed-rollback.mjs';
 
 const slot='afw-own-successor-closure-v1';
-const purpose='afw.qa-pre-entry-custody.v1';
+const purpose='afw.qa-pre-entry-custody.v2';
 const policies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 const fail=()=>{throw Error('Closed pre-entry custody unavailable');};
 const blocked=()=>({purpose,status:'blocked',authorizesEffects:false,operationalReadiness:false,mayRetry:false});
@@ -27,22 +27,28 @@ function guard(env,id,source,minimum){
   wall=w;mono=m;
   for(const key of PRIVATE_QA_CLOSED_FLAGS)if(env[key]!=='false')fail();
   for(const key of policies)if(env[key]!=='')fail();
+  return w;
  };
- check();return{check,ns,versionId};
+ check();return{check,ns,versionId,context:c};
 }
-function receipt(r){
- fields(r,['purpose','status','reader','publisher','guardVerified','scopeVerified','authorizesEffects','operationalReadiness','mayRetry']);
+function receipt(r,g,earliest=g.context.startAt){
+ fields(r,['purpose','status','observationId','sourceRevision','qaVersionId','observedAt','reader','publisher','guardVerified','scopeVerified','authorizesEffects','operationalReadiness','mayRetry']);
  if(r.purpose!==purpose||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false||r.mayRetry!==false)fail();
+ const at=g.check();
+ if(r.observationId!==g.context.id||r.sourceRevision!==g.context.sourceRevision||r.qaVersionId!==g.versionId||
+    !Number.isSafeInteger(r.observedAt)||r.observedAt<g.context.startAt||r.observedAt<earliest||r.observedAt>at)fail();
  for(const v of [r.reader,r.publisher]){
   fields(v,['status','expiresAt','notBefore']);
   const expiry=typeof v.expiresAt==='string'?Date.parse(v.expiresAt):NaN,notBefore=v.notBefore===null?null:typeof v.notBefore==='string'?Date.parse(v.notBefore):NaN;
-  if(v.status!=='active'||!Number.isSafeInteger(expiry)||expiry<=Date.now()||new Date(expiry).toISOString()!==v.expiresAt||notBefore!==null&&(!Number.isSafeInteger(notBefore)||notBefore>Date.now()||new Date(notBefore).toISOString()!==v.notBefore))fail();
+  if(v.status!=='active'||!Number.isSafeInteger(expiry)||expiry<=at||new Date(expiry).toISOString()!==v.expiresAt||notBefore!==null&&(!Number.isSafeInteger(notBefore)||notBefore>at||new Date(notBefore).toISOString()!==v.notBefore))fail();
  }
  return r;
 }
-function observation(r){
+function observation(r,g){
  if(!r||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false)fail();
- return receipt({purpose,status:'observed',reader:r.reader,publisher:r.publisher,guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false});
+ return receipt({purpose,status:'observed',observationId:g.context.id,sourceRevision:g.context.sourceRevision,
+  qaVersionId:g.versionId,observedAt:g.check(),reader:r.reader,publisher:r.publisher,guardVerified:true,
+  scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false},g);
 }
 export class IndependentClosure extends BaselineClosure{
  async readPreEntryCustody(...args){
@@ -52,7 +58,7 @@ export class IndependentClosure extends BaselineClosure{
    if(actor.toString()!==g.ns.idFromName(slot).toString())fail();
    const value=await readFinitePreEntryCustody({ctx,env});
    g.check();if(this.ctx!==ctx||this.env!==env||ctx.storage!==storage||ctx.id!==actor||actor.toString()!==g.ns.idFromName(slot).toString())fail();
-   return JSON.stringify(observation(value));
+   return JSON.stringify(observation(value,g));
   }catch{return JSON.stringify(blocked());}
  }
 }
@@ -70,7 +76,7 @@ export class PrivateQaBootstrap extends BaselineBootstrap{
     const actor=g.ns.get(g.ns.idFromName(slot)),raw=await actor.readPreEntryCustody(custodyContext.id,custodyContext.sourceRevision);g.check();if(typeof raw!=='string'||new TextEncoder().encode(raw).length>2048)fail();return raw;
    });
    g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||typeof value!=='string'||new TextEncoder().encode(value).length>2048)fail();
-   return receipt(JSON.parse(value));
+   return receipt(JSON.parse(value),g,stamp);
   }catch{return blocked();}
  }
 }
