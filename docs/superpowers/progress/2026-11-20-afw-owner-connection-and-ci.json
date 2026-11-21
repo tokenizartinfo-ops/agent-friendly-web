@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "74f35606f94dcf5cccd7531b80140cdf8ba99162",
-    "latestVerifiedTree": "dfe952868c5e9b46f94bc79bf9192efc34e6e6fb"
+    "latestVerifiedCommit": "9034d98b0e2f7d398fbba433f5cfbd796dc188ac",
+    "latestVerifiedTree": "d9b527be9d2f60336dbec8645c0211e6431047b0"
   },
   "candidate": {
     "pullRequest": 720,
@@ -870,6 +870,37 @@
         "operationalReadiness": false,
         "blocker": "Actual QA source/profile and loaded read identity remain unqualified, the complete build still fails closed. The Cloudflare Workers/Queues incident is still open."
       }
+    },
+    "pr733ClosedReceiver": {
+      "pullRequest": 733,
+      "previousPullRequest": 732,
+      "state": "merged",
+      "sourceHead": "e80a9467f8cb2b6d443b41e49be1304b96f0979c",
+      "mergedRevision": "74f35606f94dcf5cccd7531b80140cdf8ba99162",
+      "tree": "dfe952868c5e9b46f94bc79bf9192efc34e6e6fb",
+      "fullCi": {
+        "run": 44836699417,
+        "status": "success",
+        "shardsPassed": 6,
+        "originalCheckpointCleanup": "success",
+        "verify": "success"
+      },
+      "focused": {
+        "redRun": 44836539778,
+        "greenRun": 44836699464,
+        "exactPackageModuleCount": 2,
+        "auxiliaryReceiver": true,
+        "nativeWorkflowDenials": 2,
+        "nativeReviewReceiverDenials": 3,
+        "outboundAttempts": 0
+      },
+      "scope": "Workerd mounts the real operations-manager auxiliary worker built from the same verified Git tree, with the service-binding mapping in the staged QA profile. The diagnostic Worker shares that binding and observes verifyChannel false and readReview null. Direct signed HTTP verification gets 404. No extra release ZIP role, live credentials, provider I/O or activation.",
+      "disposition": {
+        "deployableZip": false,
+        "realTrial": false,
+        "operationalReadiness": false,
+        "remaining": "Owner explicitly deferred real activation. Resume with native QA identity and loaded-token evidence and exact restoration; do not infer from the rehearsal. Last provider and R2 proof retained under earlier checkpoints."
+      }
     }
   },
   "findings": {
@@ -976,36 +1007,158 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-20T23:45:32.446Z",
+  "updatedUTC": "2026-11-21T00:17:32.311Z",
   "latestCandidate": {
-    "pullRequest": 733,
-    "previousPullRequest": 732,
+    "pullRequest": 734,
+    "previousPullRequest": 733,
     "state": "merged",
-    "sourceHead": "e80a9467f8cb2b6d443b41e49be1304b96f0979c",
-    "mergedRevision": "74f35606f94dcf5cccd7531b80140cdf8ba99162",
-    "tree": "dfe952868c5e9b46f94bc79bf9192efc34e6e6fb",
+    "sourceHead": "c9bf01be532c5ecb833569b7bcb5fb60215bd204",
+    "mergedRevision": "9034d98b0e2f7d398fbba433f5cfbd796dc188ac",
+    "tree": "d9b527be9d2f60336dbec8645c0211e6431047b0",
     "fullCi": {
-      "run": 44836699417,
+      "run": 44840191439,
       "status": "success",
       "shardsPassed": 6,
       "originalCheckpointCleanup": "success",
       "verify": "success"
     },
     "focused": {
-      "redRun": 44836539778,
-      "greenRun": 44836699464,
-      "exactPackageModuleCount": 2,
-      "auxiliaryReceiver": true,
-      "nativeWorkflowDenials": 2,
-      "nativeReviewReceiverDenials": 3,
-      "outboundAttempts": 0
+      "run": 44840191485,
+      "status": "success",
+      "predecessorCases": 21,
+      "sameNoticeCases": 1,
+      "packageCases": 184
     },
-    "scope": "Workerd mounts the real operations-manager auxiliary worker built from the same verified Git tree, with the service-binding mapping in the staged QA profile. The diagnostic Worker shares that binding and observes verifyChannel false and readReview null. Direct signed HTTP verification gets 404. No extra release ZIP role, live credentials, provider I/O or activation.",
+    "baselineProtectedRun": {
+      "run": 44839456508,
+      "sourceRevision": "74f35606f94dcf5cccd7531b80140cdf8ba99162",
+      "sourceTree": "dfe952868c5e9b46f94bc79bf9192efc34e6e6fb",
+      "job": 136643946708,
+      "sameJob": true,
+      "nativeMounts": {
+        "current": {
+          "exactModuleCount": 2,
+          "nativeWorkflowDenials": 2,
+          "nativeReviewReceiverDenials": 3,
+          "operationalReadiness": false
+        },
+        "rollback": {
+          "exactModuleCount": 3,
+          "deniedRouteCount": 10,
+          "operationalReadiness": false
+        }
+      },
+      "releaseLayout": {
+        "archiveSha256": "e7f24a044bf4de38441a40772a34588c95179a65ebc4bf65e92b8557b153a5cf",
+        "archiveBytes": 2026311,
+        "moduleCount": 5,
+        "completePackage": false,
+        "operationalReadiness": false
+      },
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28"
+    },
+    "exactProtectedRun": {
+      "run": 44842670658,
+      "sourceTree": "d9b527be9d2f60336dbec8645c0211e6431047b0",
+      "job": 136654684263,
+      "sourceRevision": "9034d98b0e2f7d398fbba433f5cfbd796dc188ac",
+      "releaseLayout": {
+        "archiveSha256": "49dda87c35612599ee7817f20b71c7ebc8d4bd8f03f067db4d61bcbe5626c717",
+        "archiveBytes": 2026300,
+        "moduleCount": 5,
+        "completePackage": false,
+        "operationalReadiness": false
+      },
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
+      "nativeMounts": {
+        "current": {
+          "exactModuleCount": 2,
+          "nativeWorkflowDenials": 2,
+          "nativeReviewReceiverDenials": 3,
+          "operationalReadiness": false
+        },
+        "rollback": {
+          "exactModuleCount": 3,
+          "deniedRouteCount": 10,
+          "operationalReadiness": false
+        }
+      },
+      "sameJob": true,
+      "custodyRehearsal": {
+        "baselineSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+        "testsPassed": 14,
+        "syntheticProvider": true,
+        "loadedCloudCredentialObserved": false,
+        "operationalReadiness": false
+      }
+    },
+    "provider": {
+      "components": [
+        "Workers",
+        "Queues"
+      ],
+      "status": "identified",
+      "observedAtUTC": "2026-11-21T00:10:37.8495198+00:00",
+      "id": "0ocqieaifg7h"
+    },
+    "live": {
+      "observedAtUTC": "2026-11-20T23:50:15.568Z",
+      "workers": {
+        "qa": {
+          "matchesClosedPointer": true,
+          "flags": 14,
+          "cron": 0,
+          "tails": 0,
+          "closed": true,
+          "readAndPublishSecretBindingsPresent": [
+            true,
+            true
+          ]
+        },
+        "canary": {
+          "matchesClosedPointer": true,
+          "flags": 8,
+          "cron": 0,
+          "tails": 0,
+          "closed": true
+        },
+        "operator": {
+          "matchesClosedPointer": true,
+          "flags": 3,
+          "cron": 0,
+          "tails": 0,
+          "closed": true
+        },
+        "receiver": {
+          "matchesClosedPointer": true,
+          "flags": 4,
+          "cron": 0,
+          "tails": 0,
+          "closed": true
+        }
+      },
+      "credentials": {
+        "reader": {
+          "expectedIdentityExists": true,
+          "active": true,
+          "expiryMatches": true,
+          "expiresAt": "2026-11-27T02:59:59Z"
+        },
+        "publisher": {
+          "expectedIdentityExists": true,
+          "active": true,
+          "expiryMatches": true,
+          "expiresAt": "2026-11-27T02:59:59Z"
+        }
+      },
+      "loadedCredentialObserved": false,
+      "operationalReadiness": false
+    },
     "disposition": {
       "deployableZip": false,
       "realTrial": false,
       "operationalReadiness": false,
-      "remaining": "Owner explicitly deferred real activation. Resume with native QA identity and loaded-token evidence and exact restoration; do not infer from the rehearsal. Last provider and R2 proof retained under earlier checkpoints."
+      "remaining": "Active QA closed pointer and configured secret names can be observed, but no safe mounted pre-entry probe provides the identity of the credential loaded by that Worker. The exact archive-backed synthetic probe is verified and blocked credentials are rejected. Complete package and native restoration remain unqualified. Active Workers/Queues incident keeps nominal admission blocked."
     }
   }
 }
