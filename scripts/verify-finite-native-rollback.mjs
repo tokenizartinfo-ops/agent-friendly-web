@@ -81,3 +81,43 @@ export async function verifyFiniteRollbackMounts(moduleFrame,metadata){
   }
  }catch{fail();}
 }
+
+/** Mount the real compiled wrapper against the exact QA backup without
+ * injecting synthetic custody profiles or an active observation window. */
+export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}){
+ const template=staging.custodyProbeTemplate,code=staging.files['qaCustodyProbe/index.mjs'];
+ const {id:baselineVersionId,module:pin}=QA_CLOUD_CLOSED_PINS.qaClosed;
+ const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+ if(template.sourceRevision!==staging.sourceRevision||template.sourceTree!==staging.sourceTree||
+    template.authorizesEffects!==false||template.operationalReadiness!==false||code.byteLength!==template.module.bytes||
+    sha(code)!==template.module.sha256||baseline.byteLength!==pin.bytes||sha(baseline)!==pin.sha256)fail();
+ const id='1'.repeat(64),context={purpose:'afw.qa-pre-entry-custody-context.v1',id,
+  sourceRevision:staging.sourceRevision,baselineVersionId,baselineModuleHash:pin.sha256,startAt:0,expiresAt:1};
+ let outboundAttempts=0;
+ const mf=new Miniflare(convertV4MiniflareOptions({
+  modules:[
+   {type:'ESModule',path:'custody-staging/index.mjs',contents:code},
+   {type:'ESModule',path:'custody-staging/closed-rollback.mjs',contents:baseline},
+   {type:'ESModule',path:'custody-staging/pre-entry-custody-context.mjs',contents:'export const custodyContext=Object.freeze('+JSON.stringify(context)+');'}
+  ],
+  compatibilityDate:metadata.compatibility_date,compatibilityFlags:metadata.compatibility_flags,
+  bindings:{...Object.fromEntries(metadata.bindings.filter(binding=>binding.type==='plain_text')
+   .map(binding=>[binding.name,binding.text])),AFW_QA_VERSION:{id:baselineVersionId}},
+  durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'IndependentClosure',useSQLite:true}},
+  outboundService:async()=>{outboundAttempts++;return new Response(null,{status:503});},
+  log:new NoOpLog(),handleStructuredLogs:()=>{},
+ }));
+ try{
+  const ns=await mf.getDurableObjectNamespace('AFW_INDEPENDENT_CLOSURE');
+  const raw=await ns.get(ns.idFromName('afw-own-successor-closure-v1')).readPreEntryCustody(id,staging.sourceRevision);
+  const receipt=JSON.parse(raw);
+  if(receipt?.purpose!=='afw.qa-pre-entry-custody.v1'||receipt.status!=='blocked'||
+     receipt.authorizesEffects!==false||receipt.operationalReadiness!==false||
+     receipt.mayRetry!==false||Object.keys(receipt).length!==5)fail();
+  const response=await mf.dispatchFetch('https://fixture.invalid/');
+  const closed=response.status===404;await response.body?.cancel();
+  if(!closed||outboundAttempts)fail();
+  return Object.freeze({templateSha256:template.module.sha256,baselineSha256:pin.sha256,
+   expiredWindowDenied:true,outboundAttempts,authorizesEffects:false,operationalReadiness:false});
+ }catch{fail();}finally{await mf.dispose();}
+}
