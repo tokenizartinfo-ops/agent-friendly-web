@@ -22,6 +22,8 @@ const bootstrapPaths={workflowHash:'.github/workflows/afw-finite-qa-bootstrap.ym
 const roles=['canaryLive','qaLive'];
 const paths={qaLive:'wrangler.independent-closure-qa.finite.jsonc',canaryLive:'wrangler.mcp-own.finite.jsonc'};
 const expectedExports={qaLive:['IndependentClosure','PrivateQaBootstrap','PrivateQaCatalog','PrivateQaNamedConfirmation','PrivateQaPreregistration','default','observePrivateQa'],canaryLive:['AfwNodeControl','AfwOwnEventNode','default']};
+const custodyProbePath='qaCustodyProbe/index.mjs';
+const custodyProbeEntry='scripts/qa-finite-pre-entry-custody-wrapper.mjs';
 const historicalInputPath='scripts/mcp-finite-r2-historical-inputs.json';
 const closedPinPath='lib/mcp-qa-cloud-closed-pins.mjs';
 const archiveVerifier='scripts/verify-qa-finite-archive.py';
@@ -72,6 +74,27 @@ async function inputs(cwd,revision){
   const role=roles.find(r=>paths[r]===path);if(role)assert.deepEqual(JSON.parse(bytes),finiteWranglerProfileTemplate(role));
  }return result;
 }
+async function compileQaCustodyProbeTemplate(cwd,sourceRevision,sourceTree){
+ const assemblyInputs=['./closed-rollback.mjs','./pre-entry-custody-context.mjs'];
+ const expectedExports=['IndependentClosure','PrivateQaBootstrap','PrivateQaNamedConfirmation','PrivateQaPreregistration','default'];
+ const compiled=await build({absWorkingDir:cwd,entryPoints:[custodyProbeEntry],bundle:true,write:false,
+  format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*',...assemblyInputs],
+  legalComments:'none',sourcemap:false,minifyWhitespace:true,metafile:true});
+ const outputs=Object.values(compiled.metafile.outputs);
+ if(outputs.length!==1||compiled.outputFiles.length!==1||!compiled.metafile.inputs[custodyProbeEntry]||
+    !compiled.metafile.inputs['lib/mcp-qa-finite-initial-custody-profile.mjs'])fail();
+ const output=outputs[0],imports=output.imports.map(item=>item.path);
+ assert.deepEqual(output.exports.slice().sort(),expectedExports);
+ if(!assemblyInputs.every(path=>imports.includes(path))||
+    output.imports.some(item=>!item.external||item.kind!=='import-statement'||
+     ![...assemblyInputs,'node:async_hooks','node:crypto'].includes(item.path)))fail();
+ const content=Buffer.from(compiled.outputFiles[0].contents);
+ if(!content.length||content.length>1048576)fail();
+ return {content,descriptor:Object.freeze({purpose:'afw.qa-custody-probe-template.v1',
+  sourceRevision,sourceTree,module:{name:'index.mjs',bytes:content.length,sha256:hash(content),exports:expectedExports},
+  assemblyInputs,authorizesEffects:false,operationalReadiness:false})};
+}
+
 /** Real compiler staging, deliberately NOT a package or deployment attestation.
  * No provider, private policy, callback, caller pins or readiness flag accepted. */
 export async function compileFiniteNativeStaging(input){
@@ -124,8 +147,10 @@ export async function compileFiniteNativeStaging(input){
    modules[role]={provenance:{kind:'compiled-source.v1',sourceRevision,sourceTree:before.tree},module:{name:'index.mjs',sha256:hash(bytes),bytes:bytes.length,exports:out[0].exports.slice().sort()},publicStatic:finitePublicStaticExpectation(role)};
    metafiles[role]=compiled.metafile;
   }
+  const probe=await compileQaCustodyProbeTemplate(cwd,sourceRevision,before.tree);
+  files[custodyProbePath]=probe.content;
   const after=await verifyMcpReleaseSource({cwd,sourceRevision});assert.deepEqual(after,before);assert.deepEqual(await inputs(cwd,sourceRevision),inputBefore);
-  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,historicalInput,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
+  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,historicalInput,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,custodyProbeTemplate:probe.descriptor,completePackage:false,operationalReadiness:false};
  }catch{fail();}
 }
 function privateVerifier(cwd,mode,input,maxBuffer){
@@ -256,7 +281,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  const rollbackByteLength=orderedClosedRoles.reduce((length,role)=>length+allModules[role].bytes,0);
  const historicalModules=await privateVerifier(cwd,'--emit-pinned-rollback-modules',archive,rollbackByteLength);
  if(historicalModules.length!==rollbackByteLength)fail();
- const [{verifyFiniteStagingMounts},{verifyFiniteRollbackMounts}]=await Promise.all([
+ const [{verifyFiniteStagingMounts},{verifyFiniteRollbackMounts,verifyExpiredQaCustodyTemplate}]=await Promise.all([
   import('./verify-finite-native-staging.mjs'),import('./verify-finite-native-rollback.mjs')
  ]);
  const currentMounts=await verifyFiniteStagingMounts(built);
@@ -287,8 +312,10 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  }});
  const custodyRehearsal=await verifyArchivedQaCustodyProbe({cwd,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree},
   layoutModules.qaClosed);
+ const expiredCustodyTemplate=await verifyExpiredQaCustodyTemplate({staging:built,
+  baseline:layoutModules.qaClosed,metadata:privateMetadata.qaClosed});
  const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts},
-  custodyRehearsal,releaseLayout};
+  custodyRehearsal,expiredCustodyTemplate,releaseLayout};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
@@ -333,7 +360,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   if(staging){
    const {verifyFiniteStagingMounts}=await import('./verify-finite-native-staging.mjs');
    nativeMount=await verifyFiniteStagingMounts(built);
-   process.stdout.write(JSON.stringify({sourceRevision,nativeMount})+'\n');
+   process.stdout.write(JSON.stringify({sourceRevision,nativeMount,custodyProbeTemplate:built.custodyProbeTemplate})+'\n');
   }
   // Separate isolated staging namespace; never eligible artifact name/layout.
   const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
