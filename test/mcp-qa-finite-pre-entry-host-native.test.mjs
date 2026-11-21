@@ -43,7 +43,7 @@ async function fixture(mode='normal'){
    if(mode==='receipt-window')value.observationId='f'.repeat(64);
    if(mode==='receipt-source')value.sourceRevision='f'.repeat(40);
    if(mode==='receipt-version')value.qaVersionId='22222222-2222-4222-8222-222222222222';
-   if(mode==='receipt-clock')value.observedAt=1;
+   if(mode==='receipt-clock')value.observedAt=${context.startAt};
    return JSON.stringify(value);
   }
   async snapshot(){return JSON.stringify([...await this.ctx.storage.list()]);}
