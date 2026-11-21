@@ -27,7 +27,16 @@ test('actual compiler staging hashes final bytes and retains source classes with
  const M=sourceRevision(),r=await api.compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:M});
  assert.equal(r.completePackage,false);assert.equal(r.operationalReadiness,false);
  assert.equal(r.manifest,undefined);assert.equal(r.sourceRevision,M);
- assert.deepEqual(Object.keys(r.files).sort(),['canaryLive/index.mjs','qaLive/index.mjs']);
+ assert.deepEqual(Object.keys(r.files).sort(),['canaryLive/index.mjs','qaCustodyProbe/index.mjs','qaLive/index.mjs']);
+ const probe=r.custodyProbeTemplate,bytes=r.files['qaCustodyProbe/index.mjs'];
+ assert.equal(probe.sourceRevision,M);
+ assert.equal(probe.sourceTree,r.sourceTree);
+ assert.equal(probe.authorizesEffects,false);
+ assert.equal(probe.operationalReadiness,false);
+ assert.equal(probe.module.bytes,bytes.byteLength);
+ assert.equal(probe.module.sha256,createHash('sha256').update(bytes).digest('hex'));
+ assert.deepEqual(probe.assemblyInputs,['./closed-rollback.mjs','./pre-entry-custody-context.mjs']);
+ assert.equal(Object.hasOwn(r.modules,'qaCustodyProbe'),false);
  for(const role of ['qaLive','canaryLive']){
   const bytes=r.files[role+'/index.mjs'],d=r.modules[role];
   assert.equal(createHash('sha256').update(bytes).digest('hex'),d.module.sha256);

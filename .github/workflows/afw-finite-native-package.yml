@@ -13,6 +13,8 @@ on:
       - "test/finite_historical_archive_test.py"
       - "test/verify-finite-native-rollback.test.mjs"
       - "test/verify-finite-native-staging.test.mjs"
+      - "test/build-finite-native-package.test.mjs"
+      - "test/mcp-qa-finite-pre-entry-host-native.test.mjs"
       - "test/mcp-qa-finite-closed-profile.test.mjs"
       - "test/mcp-qa-finite-publication-bridge.test.mjs"
       - "test/fixtures/finite-seed-world.mjs"
@@ -61,7 +63,9 @@ jobs:
         run: |
           staging=$(node scripts/build-finite-native-package.mjs --staging "$AFW_PACKAGE_REVISION")
           printf '%s\n' "$staging"
-          jq -e --arg revision "$AFW_PACKAGE_REVISION" '.sourceRevision == $revision and .nativeMount.nativeWorkflowDenials == 2 and .nativeMount.nativeReviewReceiverDenials == 3 and .nativeMount.operationalReadiness == false' <<< "$staging"
+          jq -e --arg revision "$AFW_PACKAGE_REVISION" '.sourceRevision == $revision and .nativeMount.nativeWorkflowDenials == 2 and .nativeMount.nativeReviewReceiverDenials == 3 and .nativeMount.operationalReadiness == false and .custodyProbeTemplate.authorizesEffects == false and (.custodyProbeTemplate.module.sha256 | test("^[a-f0-9]{64}$"))' <<< "$staging"
+      - name: Verify the staged QA custody template
+        run: node --test test/build-finite-native-package.test.mjs
       - name: Verify the bounded archive parser
         run: python3 -m unittest discover -s test -p 'finite_*archive_test.py'
       - name: Verify predecessor isolation
