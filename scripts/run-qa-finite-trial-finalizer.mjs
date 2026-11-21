@@ -100,7 +100,7 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
     archiveCredential,claimSend:github.claimSend,readSend:github.readSend,fetchImpl,now,signal});
    const closed=await restore.run();
    let result;
-   try{result={status:'restore_verified',...verifyFiniteCoupledQaTrialResult(closed,{controlHash,restoreFrom})};}
+   try{result={status:'restore_verified',...verifyFiniteCoupledQaTrialResult(closed,scope)};}
    catch{result={status:'independent_trial_unverified',restorationStatus:closed.status,operationalReadiness:false,mayRetry:false};}
    await write('afw-finite-result.json',JSON.stringify(result));return result;
   }

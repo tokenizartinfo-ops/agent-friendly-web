@@ -314,8 +314,21 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   layoutModules.qaClosed);
  const expiredCustodyTemplate=await verifyExpiredQaCustodyTemplate({staging:built,
   baseline:layoutModules.qaClosed,metadata:privateMetadata.qaClosed});
+ // Pin what the subsequent native qualification must prove against this
+ // exact draft. The archived mount and synthetic token cannot attest QA.
+ const preEntry={purpose:'afw.finite-package-pre-entry.v1',
+  sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
+  releaseZipSha256:releaseLayout.archiveSha256,
+  qaCandidateModuleSha256:built.modules.qaLive.module.sha256,
+  qaCustodyProbeTemplateSha256:built.custodyProbeTemplate.module.sha256,
+  rollbackArchiveSha256:built.historicalInput.archiveSha256,
+  rollbackReceiptSha256:built.historicalInput.receiptSha256,
+  qaRollbackVersionId:rollbackProfiles.qaClosed.versionId,
+  qaRollbackModuleSha256:layoutDescriptors.qaClosed.module.sha256};
  const verified={...receipt,rollbackProfiles,nativeMounts:{current:currentMounts,rollback:rollbackMounts},
-  custodyRehearsal,expiredCustodyTemplate,releaseLayout};
+  custodyRehearsal,expiredCustodyTemplate,releaseLayout,
+  preEntry:Object.freeze({...preEntry,qualificationHash:hash(JSON.stringify(preEntry)),
+   status:'pending_native_qualification',authorizesDeployment:false})};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();

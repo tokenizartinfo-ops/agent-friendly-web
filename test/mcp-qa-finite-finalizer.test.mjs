@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import * as controls from '../lib/mcp-qa-finite-trial-control.mjs';
 import {finiteFixture,digest} from './fixtures/qa-finite-trial.mjs';
 const api=await import('../lib/mcp-qa-finite-trial-finalizer.mjs').catch(()=>({}));
@@ -68,4 +69,15 @@ test('abort and after-await expiry block effects',async()=>{
 test('post-claim pointer conflict never overwrites and cannot refund send claim',async()=>{
  const f=await finiteFinalizerFixture(),original=f.deps.claim;f.deps.claim=async(...a)=>{const r=await original(...a);f.setPointer('88888888-8888-4888-8888-888888888888',f.plan.deployments.qaLive.deploymentId);return r;};
  assert.equal((await api.createPrivateQaFiniteTrialFinalizer(f.deps).run()).status,'uncertain');assert.equal(f.posts,0);assert.ok(f.send);
+});
+
+test('cloud finalizer checks provider status before issuing material without gating restoration',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/afw-finite-finalizer.yml',import.meta.url),'utf8');
+ const admit=workflow.slice(workflow.indexOf('\n  admit:\n'),workflow.indexOf('\n  restore:\n'));
+ const restore=workflow.slice(workflow.indexOf('\n  restore:\n'));
+ const provider='node scripts/check-own-cron-provider.mjs';
+ const check=admit.indexOf(provider),seed=admit.indexOf('id: finite_seed_once');
+ assert(check>0 && check<seed);
+ assert(!admit.slice(check,seed).includes('continue-on-error'));
+ assert(!restore.includes(provider));
 });
