@@ -35,7 +35,17 @@ async function fixture(mode='normal'){
  const entry=`import base,{IndependentClosure,PrivateQaBootstrap} from './scripts/qa-finite-pre-entry-custody-wrapper.mjs';
  import {observeFiniteOwnerStageWork} from './lib/mcp-qa-finite-stage-work.mjs';
  export class Actor extends IndependentClosure{
-  async readPreEntryCustody(...args){if(this.env.SYNTHETIC_MODE==='forged')return JSON.stringify({purpose:'afw.qa-pre-entry-custody.v1',status:'observed',guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false,reader:{status:'active'},publisher:{status:'active'},extra:'untrusted'});return super.readPreEntryCustody(...args);}
+  async readPreEntryCustody(...args){if(this.env.SYNTHETIC_MODE==='forged')return JSON.stringify({purpose:'afw.qa-pre-entry-custody.v2',status:'observed',guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false,reader:{status:'active'},publisher:{status:'active'},extra:'untrusted'});
+   const raw=await super.readPreEntryCustody(...args),mode=this.env.SYNTHETIC_MODE;
+   if(!mode.startsWith('receipt-'))return raw;
+   const value=JSON.parse(raw);
+   if(value.status!=='observed')throw Error('Expected a valid receipt for the test');
+   if(mode==='receipt-window')value.observationId='f'.repeat(64);
+   if(mode==='receipt-source')value.sourceRevision='f'.repeat(40);
+   if(mode==='receipt-version')value.qaVersionId='22222222-2222-4222-8222-222222222222';
+   if(mode==='receipt-clock')value.observedAt=${context.startAt};
+   return JSON.stringify(value);
+  }
   async snapshot(){return JSON.stringify([...await this.ctx.storage.list()]);}
   async inheritedInventory(){
    const base=Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(this)));
@@ -81,6 +91,11 @@ hostTest('fixed native Workflow reaches actual custody actor without consuming E
  const f=await fixture();try{
   const before=await f.stub.snapshot();assert.deepEqual(JSON.parse(await f.stub.inherited()),{alarm:{state:'unavailable'},arm:{state:'unavailable'},status:{state:'unavailable'}});
   const r=await f.run();assert.equal(r.status,'observed');assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);assert.equal(r.scopeVerified,false);
+  assert.equal(r.purpose,'afw.qa-pre-entry-custody.v2');
+  assert.equal(r.observationId,f.id);
+  assert.equal(r.sourceRevision,source);
+  assert.equal(r.qaVersionId,'11111111-1111-4111-8111-111111111111');
+  assert(Number.isSafeInteger(r.observedAt)&&r.observedAt<=Date.now());
   assert.equal(f.calls.length,3);assert.equal(await f.stub.snapshot(),before);assert.equal((await f.mf.dispatchFetch('https://synthetic.invalid/')).status,404);
  }finally{await f.mf.dispose();}
 });
@@ -120,3 +135,15 @@ hostTest('Workflow rejects wrong correlation and instance before actor access',a
   }finally{await f.mf.dispose();}
  }
 });
+
+for(const mode of ['receipt-window','receipt-source','receipt-version','receipt-clock']){
+ hostTest('Workflow denies custody evidence with a different '+mode.slice('receipt-'.length),async()=>{
+  const f=await fixture(mode);
+  try{
+   const before=await f.stub.snapshot();
+   assert.equal((await f.run()).status,'blocked');
+   assert.equal(f.calls.length,3);
+   assert.equal(await f.stub.snapshot(),before);
+  }finally{await f.mf.dispose();}
+ });
+}

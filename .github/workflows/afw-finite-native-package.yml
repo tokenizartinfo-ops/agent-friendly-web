@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/afw-finite-native-package.yml"
       - "scripts/build-finite-native-package.mjs"
+      - "scripts/qa-finite-pre-entry-custody-wrapper.mjs"
       - "scripts/verify-finite-native-staging.mjs"
       - "scripts/verify-finite-native-rollback.mjs"
       - "scripts/verify-qa-finite-archive.py"
@@ -66,7 +67,7 @@ jobs:
           printf '%s\n' "$staging"
           jq -e --arg revision "$AFW_PACKAGE_REVISION" '.sourceRevision == $revision and .nativeMount.nativeWorkflowDenials == 2 and .nativeMount.nativeReviewReceiverDenials == 3 and .nativeMount.operationalReadiness == false and .custodyProbeTemplate.authorizesEffects == false and (.custodyProbeTemplate.module.sha256 | test("^[a-f0-9]{64}$"))' <<< "$staging"
       - name: Verify the staged QA custody template
-        run: node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-pre-entry-context.test.mjs
+        run: node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-pre-entry-context.test.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs
       - name: Verify the bounded archive parser
         run: python3 -m unittest discover -s test -p 'finite_*archive_test.py'
       - name: Verify predecessor isolation
