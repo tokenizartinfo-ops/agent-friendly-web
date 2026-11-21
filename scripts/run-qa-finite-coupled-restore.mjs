@@ -54,15 +54,19 @@ export async function runFiniteCoupledRestoreJob({runtime=process.env,read=readF
 /** Trial acceptance runs after protective restoration, with no provider writes. */
 export function verifyFiniteCoupledQaTrialResult(result,scope){
  try{
-  const {controlHash,restoreFrom}=fields(scope,['controlHash','restoreFrom']);
-  const r=fields(result,['purpose','status','ownerReceiptHash','qaVersionId','qaDeploymentId',
+  const expected=fields(scope,['intentId','controlHash','sourceRevision','handoffHash','restoreFrom','restoreBefore']);
+  const {controlHash,restoreFrom,restoreBefore}=expected;
+  if([expected.intentId,controlHash,expected.handoffHash].some(id=>!hex(id))||
+     !hex(expected.sourceRevision,40)||!time(restoreFrom)||!time(restoreBefore)||restoreBefore-restoreFrom!==180000)fail();
+  const r=fields(result,['purpose','status','scopeHash','ownerReceiptHash','qaVersionId','qaDeploymentId',
    'noticeEvidence','authorizesEffects','operationalReadiness','mayRetry']);
   if(r.purpose!=='afw.finite-coupled-qa-restoration-result.v1'||r.status!=='restored_observed'||
-     !hex(r.ownerReceiptHash)||r.qaVersionId!==QA_CLOUD_CLOSED_PINS.qaClosed.id||!finiteUuid(r.qaDeploymentId)||
+     r.scopeHash!==hash(expected)||!hex(r.ownerReceiptHash)||r.qaVersionId!==QA_CLOUD_CLOSED_PINS.qaClosed.id||!finiteUuid(r.qaDeploymentId)||
      r.authorizesEffects!==false||r.operationalReadiness!==false||r.mayRetry!==false)fail();
   const evidence=validateFiniteCoupledNoticeEvidence(r.noticeEvidence,{controlHash,originalRestoreFrom:restoreFrom});
   return Object.freeze({purpose:'afw.finite-coupled-qa-trial-verification.v1',qaRestored:true,
-   sameNoticeReviewed:true,subscriptionWithdrawn:true,evidenceHash:hash(evidence),operationalReadiness:false});
+   sameNoticeReviewed:true,subscriptionWithdrawn:true,evidenceHash:hash({scopeHash:r.scopeHash,ownerReceiptHash:r.ownerReceiptHash,qaVersionId:r.qaVersionId,
+    qaDeploymentId:r.qaDeploymentId,noticeEvidence:evidence}),operationalReadiness:false});
  }catch{throw Error('Finite QA trial verification unavailable');}
 }
 
@@ -73,11 +77,12 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
    if(!resultPath||process.argv.length!==3)fail();
    const [raw,event]=await Promise.all([readFile(resultPath),readFile(process.env.GITHUB_EVENT_PATH)]);
    if(raw.length>65536||event.length>262144)fail();
-   const {control_hash,restore_before}=fields(JSON.parse(event.toString()).inputs,
+   const {intent_id,control_hash,handoff_hash,restore_before}=fields(JSON.parse(event.toString()).inputs,
     ['intent_id','control_hash','handoff_hash','restore_before']);
    if(typeof restore_before!=='string'||!/^\d{13}$/.test(restore_before))fail();
    const evidence=verifyFiniteCoupledQaTrialResult(JSON.parse(raw.toString()),
-    {controlHash:control_hash,restoreFrom:Number(restore_before)-180000});
+    {intentId:intent_id,controlHash:control_hash,sourceRevision:process.env.GITHUB_SHA,handoffHash:handoff_hash,
+     restoreFrom:Number(restore_before)-180000,restoreBefore:Number(restore_before)});
    process.stdout.write(JSON.stringify(evidence)+'\n');
   }catch{
    process.stderr.write('Finite QA trial verification unavailable\n');
