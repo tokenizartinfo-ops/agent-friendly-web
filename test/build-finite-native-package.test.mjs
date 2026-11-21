@@ -37,6 +37,19 @@ test('actual compiler staging hashes final bytes and retains source classes with
  assert.equal(probe.module.sha256,createHash('sha256').update(bytes).digest('hex'));
  assert.deepEqual(probe.assemblyInputs,['./closed-rollback.mjs','./pre-entry-custody-context.mjs']);
  assert.equal(Object.hasOwn(r.modules,'qaCustodyProbe'),false);
+ const {verifyColdQaCustodyMount}=await import('../scripts/verify-finite-native-rollback.mjs');
+ const baseline=`
+ import {DurableObject,WorkflowEntrypoint} from 'cloudflare:workers';
+ export class IndependentClosure extends DurableObject {}
+ export class PrivateQaBootstrap extends WorkflowEntrypoint {}
+ export class PrivateQaNamedConfirmation extends WorkflowEntrypoint {}
+ export class PrivateQaPreregistration extends DurableObject {}
+ export default {fetch(){return new Response(null,{status:404});}};
+ `;
+ const mount=await verifyColdQaCustodyMount({code:bytes,baseline,sourceRevision:M,metadata:{
+  compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],bindings:[],
+ }});
+ assert.deepEqual(mount,{coldAssemblyBlocked:true,outboundAttempts:0});
  for(const role of ['qaLive','canaryLive']){
   const bytes=r.files[role+'/index.mjs'],d=r.modules[role];
   assert.equal(createHash('sha256').update(bytes).digest('hex'),d.module.sha256);

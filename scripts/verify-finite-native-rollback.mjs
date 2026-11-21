@@ -91,8 +91,15 @@ export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}
  if(template.sourceRevision!==staging.sourceRevision||template.sourceTree!==staging.sourceTree||
     template.authorizesEffects!==false||template.operationalReadiness!==false||code.byteLength!==template.module.bytes||
     sha(code)!==template.module.sha256||baseline.byteLength!==pin.bytes||sha(baseline)!==pin.sha256)fail();
+ const mounted=await verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision:staging.sourceRevision});
+ return Object.freeze({templateSha256:template.module.sha256,baselineSha256:pin.sha256,
+  ...mounted,authorizesEffects:false,operationalReadiness:false});
+}
+
+export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision}){
+ const {id:baselineVersionId,module:pin}=QA_CLOUD_CLOSED_PINS.qaClosed;
  const id='1'.repeat(64),context={purpose:'afw.qa-pre-entry-custody-context.v1',id,
-  sourceRevision:staging.sourceRevision,baselineVersionId,baselineModuleHash:pin.sha256,startAt:0,expiresAt:1};
+  sourceRevision,baselineVersionId,baselineModuleHash:pin.sha256,startAt:0,expiresAt:1};
  let outboundAttempts=0;
  const mf=new Miniflare(convertV4MiniflareOptions({
   modules:[
@@ -109,7 +116,7 @@ export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}
  }));
  try{
   const ns=await mf.getDurableObjectNamespace('AFW_INDEPENDENT_CLOSURE');
-  const raw=await ns.get(ns.idFromName('afw-own-successor-closure-v1')).readPreEntryCustody(id,staging.sourceRevision);
+  const raw=await ns.get(ns.idFromName('afw-own-successor-closure-v1')).readPreEntryCustody(id,sourceRevision);
   const receipt=JSON.parse(raw);
   if(receipt?.purpose!=='afw.qa-pre-entry-custody.v1'||receipt.status!=='blocked'||
      receipt.authorizesEffects!==false||receipt.operationalReadiness!==false||
@@ -117,7 +124,6 @@ export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}
   const response=await mf.dispatchFetch('https://fixture.invalid/');
   const closed=response.status===404;await response.body?.cancel();
   if(!closed||outboundAttempts)fail();
-  return Object.freeze({templateSha256:template.module.sha256,baselineSha256:pin.sha256,
-   expiredWindowDenied:true,outboundAttempts,authorizesEffects:false,operationalReadiness:false});
+  return Object.freeze({coldAssemblyBlocked:true,outboundAttempts});
  }catch{fail();}finally{await mf.dispose();}
 }
