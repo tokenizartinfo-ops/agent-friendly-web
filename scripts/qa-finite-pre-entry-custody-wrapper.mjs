@@ -1,5 +1,6 @@
 import {IndependentClosure as BaselineClosure,PrivateQaBootstrap as BaselineBootstrap} from './closed-rollback.mjs';
 import {custodyContext} from './pre-entry-custody-context.mjs';
+import {readQaPreEntryCustodyContext} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 import {readFinitePreEntryCustody} from '../lib/mcp-qa-finite-initial-custody-probe.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 export {PrivateQaNamedConfirmation,PrivateQaPreregistration,default} from './closed-rollback.mjs';
@@ -9,15 +10,14 @@ const purpose='afw.qa-pre-entry-custody.v1';
 const policies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 const fail=()=>{throw Error('Closed pre-entry custody unavailable');};
 const blocked=()=>({purpose,status:'blocked',authorizesEffects:false,operationalReadiness:false,mayRetry:false});
-const hex=(v,n)=>typeof v==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(v);
 function fields(v,keys){
  if(!v||Object.getPrototypeOf(v)!==Object.prototype||Reflect.ownKeys(v).length!==keys.length)fail();
  for(const k of keys){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail();}
  return v;
 }
 function guard(env,id,source,minimum){
- const c=fields(custodyContext,['purpose','id','sourceRevision','baselineVersionId','baselineModuleHash','startAt','expiresAt']);
- if(c.purpose!=='afw.qa-pre-entry-custody-context.v1'||!hex(c.id,64)||id!==c.id||!hex(c.sourceRevision,40)||source!==c.sourceRevision||c.baselineVersionId!=='c570b60b-95dc-48e1-89f3-9c4651691dbc'||c.baselineModuleHash!=='4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f'||!Number.isSafeInteger(c.startAt)||!Number.isSafeInteger(c.expiresAt)||c.expiresAt<=c.startAt||c.expiresAt-c.startAt>600000)fail();
+ const c=readQaPreEntryCustodyContext(custodyContext);
+ if(id!==c.id||source!==c.sourceRevision)fail();
  const ns=env.AFW_INDEPENDENT_CLOSURE,version=env.AFW_QA_VERSION,versionId=version?.id;
  if(!ns||typeof ns.get!=='function'||typeof ns.idFromName!=='function'||typeof versionId!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(versionId))fail();
  let wall=Date.now(),mono=performance.now();

@@ -5,8 +5,9 @@ import {createHash} from 'node:crypto';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
+import {createQaPreEntryCustodyContext} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 
-const source='a'.repeat(40),id='e'.repeat(64),slot='afw-own-successor-closure-v1';
+const source='a'.repeat(40),slot='afw-own-successor-closure-v1';
 const baselineHash='4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f';
 const policies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 const exactPath=process.env.AFW_QA_INSPECTION_BASE_MODULE;
@@ -24,9 +25,11 @@ const hostTest=hasWrapper?test:test.skip;
 
 async function fixture(mode='normal'){
  const now=Date.now();
- const context={purpose:'afw.qa-pre-entry-custody-context.v1',id,sourceRevision:source,baselineVersionId:'c570b60b-95dc-48e1-89f3-9c4651691dbc',baselineModuleHash:baselineHash,startAt:now-1000,expiresAt:now+120000};
- if(mode==='expired')context.expiresAt=now-1;
- if(mode==='bad-source')context.sourceRevision='bad';
+ let context=createQaPreEntryCustodyContext({sourceRevision:source,startAt:now-1000,
+  expiresAt:mode==='expired'?now-1:now+120000});
+ const {id}=context;
+ if(mode==='bad-source')context={...context,sourceRevision:'bad'};
+ if(mode==='tampered-window')context={...context,expiresAt:context.expiresAt+1};
  const readerId='1'.repeat(32),publisherId='2'.repeat(32),expiresAt=now+3600000;
  const syntheticProfile={startAt:now-60000,endAt:expiresAt,reader:{id:readerId,expiresAt},publisher:{id:publisherId,expiresAt}};
  const entry=`import base,{IndependentClosure,PrivateQaBootstrap} from './scripts/qa-finite-pre-entry-custody-wrapper.mjs';
@@ -72,7 +75,7 @@ async function fixture(mode='normal'){
   do{state=await wf.status();if(['complete','errored','terminated'].includes(state.status))break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<end);
   assert.equal(state.status,'complete',JSON.stringify(state));return state.output;
  }
- return{mf,stub,ns:b.AFW_INDEPENDENT_CLOSURE,run,calls,get held(){return held;},release:()=>release?.()};
+ return{mf,stub,id,ns:b.AFW_INDEPENDENT_CLOSURE,run,calls,get held(){return held;},release:()=>release?.()};
 }
 hostTest('fixed native Workflow reaches actual custody actor without consuming Entry or changing history',async()=>{
  const f=await fixture();try{
@@ -81,18 +84,18 @@ hostTest('fixed native Workflow reaches actual custody actor without consuming E
   assert.equal(f.calls.length,3);assert.equal(await f.stub.snapshot(),before);assert.equal((await f.mf.dispatchFetch('https://synthetic.invalid/')).status,404);
  }finally{await f.mf.dispose();}
 });
-for(const mode of ['open','expired','bad-source','missing-holder'])hostTest('closed host rejects '+mode,async()=>{const f=await fixture(mode);try{assert.notEqual((await f.run()).status,'observed');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
+for(const mode of ['open','expired','bad-source','tampered-window','missing-holder'])hostTest('closed host rejects '+mode,async()=>{const f=await fixture(mode);try{assert.notEqual((await f.run()).status,'observed');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 hostTest('selector and wrong actor cannot start custody reads',async()=>{const f=await fixture();try{
- for(const args of [[],['f'.repeat(64)],[id,'b'.repeat(40)],[id,source,{}]])assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(...args)).status,'observed');
- const wrong=f.ns.get(f.ns.idFromName('foreign'));assert.notEqual(JSON.parse(await wrong.readPreEntryCustody(id,source)).status,'observed');
+ for(const args of [[],['f'.repeat(64)],[f.id,'b'.repeat(40)],[f.id,source,{}]])assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(...args)).status,'observed');
+ const wrong=f.ns.get(f.ns.idFromName('foreign'));assert.notEqual(JSON.parse(await wrong.readPreEntryCustody(f.id,source)).status,'observed');
  assert.equal(f.calls.length,0);
  }finally{await f.mf.dispose();}});
 hostTest('pending read remains exclusive after timeout until underlying operation settles',async()=>{
- const f=await fixture('hold');try{const r=await f.run();assert.notEqual(r.status,'observed');assert.equal(f.held,true);assert.equal(await f.stub.availability(),false);assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(id,source)).status,'observed');f.release();let ok=false;for(let n=0;n<200&&!ok;n++){ok=await f.stub.availability();if(!ok)await new Promise(r=>setTimeout(r,10));}assert.equal(ok,true);}finally{f.release();await f.mf.dispose();}
+ const f=await fixture('hold');try{const r=await f.run();assert.notEqual(r.status,'observed');assert.equal(f.held,true);assert.equal(await f.stub.availability(),false);assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(f.id,source)).status,'observed');f.release();let ok=false;for(let n=0;n<200&&!ok;n++){ok=await f.stub.availability();if(!ok)await new Promise(r=>setTimeout(r,10));}assert.equal(ok,true);}finally{f.release();await f.mf.dispose();}
 });
 
 hostTest('loaded wrong credential identity fails closed without mutations',async()=>{const f=await fixture('wrong-holder');try{const before=await f.stub.snapshot();assert.notEqual((await f.run()).status,'observed');assert.equal(await f.stub.snapshot(),before);assert.equal(f.calls.some(x=>x.url.endsWith('/tokens/verify')),true);assert.equal(f.calls.every(x=>x.method==='GET'),true);}finally{await f.mf.dispose();}});
-hostTest('Workflow rejects extra selectors before actor access',async()=>{const f=await fixture();try{const r=await f.run({operation:'inspect_pre_entry_custody',observationId:id,target:'foreign'});assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
+hostTest('Workflow rejects extra selectors before actor access',async()=>{const f=await fixture();try{const r=await f.run({operation:'inspect_pre_entry_custody',observationId:f.id,target:'foreign'});assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 
 hostTest('Workflow rejects a malformed actor receipt instead of forwarding it',async()=>{const f=await fixture('forged');try{const r=await f.run();assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 
@@ -111,8 +114,8 @@ hostTest('fixed wrapper bundles reproducibly with only fixed external boundaries
 hostTest('Workflow rejects wrong correlation and instance before actor access',async()=>{
  for(const variant of ['correlation','instance']){
   const f=await fixture();try{
-   const params={operation:'inspect_pre_entry_custody',observationId:variant==='correlation'?'f'.repeat(64):id};
-   const name=variant==='instance'?'afw-qa-custody-'+'f'.repeat(64):'afw-qa-custody-'+id;
+   const params={operation:'inspect_pre_entry_custody',observationId:variant==='correlation'?'f'.repeat(64):f.id};
+   const name=variant==='instance'?'afw-qa-custody-'+'f'.repeat(64):'afw-qa-custody-'+f.id;
    assert.equal((await f.run(params,name)).status,'blocked');assert.equal(f.calls.length,0);
   }finally{await f.mf.dispose();}
  }
