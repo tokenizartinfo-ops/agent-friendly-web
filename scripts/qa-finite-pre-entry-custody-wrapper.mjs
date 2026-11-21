@@ -1,12 +1,11 @@
 import {IndependentClosure as BaselineClosure,PrivateQaBootstrap as BaselineBootstrap} from './closed-rollback.mjs';
 import {custodyContext} from './pre-entry-custody-context.mjs';
-import {readQaPreEntryCustodyContext} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
+import {QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE as purpose,readQaPreEntryCustodyContext} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 import {readFinitePreEntryCustody} from '../lib/mcp-qa-finite-initial-custody-probe.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 export {PrivateQaNamedConfirmation,PrivateQaPreregistration,default} from './closed-rollback.mjs';
 
 const slot='afw-own-successor-closure-v1';
-const purpose='afw.qa-pre-entry-custody.v2';
 const policies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 const fail=()=>{throw Error('Closed pre-entry custody unavailable');};
 const blocked=()=>({purpose,status:'blocked',authorizesEffects:false,operationalReadiness:false,mayRetry:false});

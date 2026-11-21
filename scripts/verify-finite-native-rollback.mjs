@@ -3,7 +3,7 @@ import {build} from 'esbuild';
 import ts from 'typescript';
 import {Miniflare,NoOpLog,convertV4MiniflareOptions} from 'miniflare';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
-import {createQaPreEntryCustodyContext,renderQaPreEntryCustodyModule} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
+import {QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE,createQaPreEntryCustodyContext,renderQaPreEntryCustodyModule} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 
 const roles=Object.freeze({qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'});
 const disabledRoutes=Object.freeze({
@@ -119,7 +119,7 @@ export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRev
   const ns=await mf.getDurableObjectNamespace('AFW_INDEPENDENT_CLOSURE');
   const raw=await ns.get(ns.idFromName('afw-own-successor-closure-v1')).readPreEntryCustody(id,sourceRevision);
   const receipt=JSON.parse(raw);
-  if(receipt?.purpose!=='afw.qa-pre-entry-custody.v1'||receipt.status!=='blocked'||
+  if(receipt?.purpose!==QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE||receipt.status!=='blocked'||
      receipt.authorizesEffects!==false||receipt.operationalReadiness!==false||
      receipt.mayRetry!==false||Object.keys(receipt).length!==5)fail();
   const response=await mf.dispatchFetch('https://fixture.invalid/');
