@@ -17,8 +17,8 @@
       "runId": 44771886494,
       "status": "in_progress"
     },
-    "latestVerifiedCommit": "c5aa7aac55bcd53ef0e8235ec8c31d92927e7ce6",
-    "latestVerifiedTree": "5ae6bed10a701c0aa605c068d973cf757ba178c8"
+    "latestVerifiedCommit": "8ef441a66689b39a99196f03d6df91038c5fdf40",
+    "latestVerifiedTree": "65c5ef66d2769e8623f822d87b3fb14a0288c669"
   },
   "candidate": {
     "pullRequest": 720,
@@ -1054,6 +1054,85 @@
         "operationalReadiness": false,
         "remaining": "Active QA closed pointer and configured secret names can be observed, but no safe mounted pre-entry probe provides the identity of the credential loaded by that Worker. The exact archive-backed synthetic probe is verified and blocked credentials are rejected. Complete package and native restoration remain unqualified. Active Workers/Queues incident keeps nominal admission blocked."
       }
+    },
+    "pr735ColdTemplate": {
+      "pullRequest": 735,
+      "previousPullRequest": 734,
+      "state": "merged",
+      "sourceHead": "9d43b8e108676dba67fd3a14e63a39f4e5aa37f1",
+      "mergedRevision": "c5aa7aac55bcd53ef0e8235ec8c31d92927e7ce6",
+      "tree": "5ae6bed10a701c0aa605c068d973cf757ba178c8",
+      "fullCi": {
+        "run": 44844274753,
+        "status": "success",
+        "shardsPassed": 6,
+        "originalCheckpointCleanup": "success",
+        "verify": "success"
+      },
+      "focused": {
+        "redRun": 44843841635,
+        "greenRun": 44844274774,
+        "status": "success",
+        "standardTemplateMount": true
+      },
+      "exactProtectedRun": {
+        "run": 44846529467,
+        "sourceRevision": "c5aa7aac55bcd53ef0e8235ec8c31d92927e7ce6",
+        "expiredCustodyTemplate": {
+          "templateSha256": "a268551a34ca6619721685299899eb0d5da0190fcbf67cfc7b3d97d41c7f65c9",
+          "baselineSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+          "coldAssemblyBlocked": true,
+          "outboundAttempts": 0,
+          "authorizesEffects": false,
+          "operationalReadiness": false
+        },
+        "sourceTree": "5ae6bed10a701c0aa605c068d973cf757ba178c8",
+        "nativeMounts": {
+          "current": {
+            "exactModuleCount": 2,
+            "nativeWorkflowDenials": 2,
+            "nativeReviewReceiverDenials": 3,
+            "operationalReadiness": false
+          },
+          "rollback": {
+            "exactModuleCount": 3,
+            "deniedRouteCount": 10,
+            "operationalReadiness": false
+          }
+        },
+        "job": 136667499546,
+        "releaseLayout": {
+          "archiveSha256": "0af09218765897f0ce1826e4d4eda6f9b3f928ab6775a32ca78673668afa0710",
+          "archiveBytes": 2026284,
+          "moduleCount": 5,
+          "completePackage": false,
+          "operationalReadiness": false
+        },
+        "custodyRehearsal": {
+          "baselineSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+          "testsPassed": 14,
+          "syntheticProvider": true,
+          "loadedCloudCredentialObserved": false,
+          "operationalReadiness": false
+        },
+        "sameJob": true,
+        "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28"
+      },
+      "provider": {
+        "observedAtUTC": "2026-11-21T00:45:17.4801331+00:00",
+        "status": "identified",
+        "id": "0ocqieaifg7h",
+        "components": [
+          "Workers",
+          "Queues"
+        ]
+      },
+      "disposition": {
+        "deployableZip": false,
+        "realTrial": false,
+        "operationalReadiness": false,
+        "remaining": "Custody probe wrapper now reproducibly compiles with exact tracked source and fixed archived QA and observation context inputs. Mounted in Workerd with R2 bytes, expired context and no credentials, it rejected the inspection and stayed closed with zero network attempts. Live native loaded-token identity and complete package still require valid new scope and actual observation. Public provider incident still blocks nominal start."
+      }
     }
   },
   "findings": {
@@ -1160,39 +1239,55 @@
     "operationalReadiness": false,
     "ownerActionRequired": false
   },
-  "updatedUTC": "2026-11-21T00:52:34.733Z",
+  "updatedUTC": "2026-11-21T01:22:29.318Z",
   "latestCandidate": {
-    "pullRequest": 735,
-    "previousPullRequest": 734,
+    "pullRequest": 736,
+    "previousPullRequest": 735,
     "state": "merged",
-    "sourceHead": "9d43b8e108676dba67fd3a14e63a39f4e5aa37f1",
-    "mergedRevision": "c5aa7aac55bcd53ef0e8235ec8c31d92927e7ce6",
-    "tree": "5ae6bed10a701c0aa605c068d973cf757ba178c8",
+    "sourceHead": "04ad5d3852f701a6fa3fd3b65bcf6a1ff41ba837",
+    "mergedRevision": "8ef441a66689b39a99196f03d6df91038c5fdf40",
+    "tree": "65c5ef66d2769e8623f822d87b3fb14a0288c669",
     "fullCi": {
-      "run": 44844274753,
+      "run": 44847413345,
       "status": "success",
       "shardsPassed": 6,
       "originalCheckpointCleanup": "success",
       "verify": "success"
     },
     "focused": {
-      "redRun": 44843841635,
-      "greenRun": 44844274774,
-      "status": "success",
-      "standardTemplateMount": true
+      "redRun": 44847301425,
+      "greenRun": 44847413344,
+      "status": "success"
     },
     "exactProtectedRun": {
-      "run": 44846529467,
-      "sourceRevision": "c5aa7aac55bcd53ef0e8235ec8c31d92927e7ce6",
+      "run": 44849652554,
+      "job": 136677715386,
+      "sourceRevision": "8ef441a66689b39a99196f03d6df91038c5fdf40",
+      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28",
       "expiredCustodyTemplate": {
-        "templateSha256": "a268551a34ca6619721685299899eb0d5da0190fcbf67cfc7b3d97d41c7f65c9",
+        "templateSha256": "81fee89f3240e6ae36308789eb069722e3838e3c5f863804f58474e03a86145b",
         "baselineSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
         "coldAssemblyBlocked": true,
         "outboundAttempts": 0,
         "authorizesEffects": false,
         "operationalReadiness": false
       },
-      "sourceTree": "5ae6bed10a701c0aa605c068d973cf757ba178c8",
+      "custodyRehearsal": {
+        "baselineSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+        "testsPassed": 15,
+        "syntheticProvider": true,
+        "loadedCloudCredentialObserved": false,
+        "operationalReadiness": false
+      },
+      "sourceTree": "65c5ef66d2769e8623f822d87b3fb14a0288c669",
+      "releaseLayout": {
+        "archiveSha256": "f5ed3802e7c8fda5455d4c05f478ccf6e8bfa4f666932caa08568dcbf8520490",
+        "archiveBytes": 2026311,
+        "moduleCount": 5,
+        "completePackage": false,
+        "operationalReadiness": false
+      },
+      "sameJob": true,
       "nativeMounts": {
         "current": {
           "exactModuleCount": 2,
@@ -1205,39 +1300,56 @@
           "deniedRouteCount": 10,
           "operationalReadiness": false
         }
-      },
-      "job": 136667499546,
-      "releaseLayout": {
-        "archiveSha256": "0af09218765897f0ce1826e4d4eda6f9b3f928ab6775a32ca78673668afa0710",
-        "archiveBytes": 2026284,
-        "moduleCount": 5,
-        "completePackage": false,
-        "operationalReadiness": false
-      },
-      "custodyRehearsal": {
-        "baselineSha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
-        "testsPassed": 14,
-        "syntheticProvider": true,
-        "loadedCloudCredentialObserved": false,
-        "operationalReadiness": false
-      },
-      "sameJob": true,
-      "historicalArchiveSha256": "63421ec1c03998fae06bc09eaef687b9c13668d5c59797c4b772d5bd468b2d28"
+      }
     },
     "provider": {
-      "observedAtUTC": "2026-11-21T00:45:17.4801331+00:00",
       "status": "identified",
+      "observedAtUTC": "2026-11-21T01:16:41.5260048+00:00",
       "id": "0ocqieaifg7h",
       "components": [
         "Workers",
         "Queues"
       ]
     },
+    "live": {
+      "observedAtUTC": "2026-11-21T00:56:58.483Z",
+      "workers": {
+        "qa": {
+          "proved": true,
+          "stablePointer": true,
+          "exactBackupModule": true,
+          "bytes": 395915,
+          "sha256": "4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f",
+          "closedFlags": 14,
+          "hasPreEntryCustodyOperation": false,
+          "secretValuesReturned": false
+        },
+        "canary": {
+          "proved": true,
+          "stablePointer": true,
+          "exactBackupModule": true,
+          "bytes": 1830202,
+          "sha256": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+          "closedFlags": 8,
+          "secretValuesReturned": false
+        },
+        "operator": {
+          "proved": true,
+          "stablePointer": true,
+          "exactBackupModule": true,
+          "bytes": 1971922,
+          "sha256": "31f28ee68c870450c6b814fa3713f02ad7233500552157915a7bd2e928777b51",
+          "closedFlags": 3,
+          "secretValuesReturned": false
+        }
+      },
+      "operationalReadiness": false
+    },
     "disposition": {
       "deployableZip": false,
       "realTrial": false,
       "operationalReadiness": false,
-      "remaining": "Custody probe wrapper now reproducibly compiles with exact tracked source and fixed archived QA and observation context inputs. Mounted in Workerd with R2 bytes, expired context and no credentials, it rejected the inspection and stayed closed with zero network attempts. Live native loaded-token identity and complete package still require valid new scope and actual observation. Public provider incident still blocks nominal start."
+      "remaining": "Canonical context v2 now binds exact QA rollback, source and one interval to a digest-based Workflow ID and rejects tampered clocks. Current Cloudflare closed QA byte hash matches the archive and lacks the live custody operation. Need provider recovery and a valid, authorized native closed QA observation and rollback before package eligibility. No live credentials verified by the protected rehearsal."
     }
   }
 }
