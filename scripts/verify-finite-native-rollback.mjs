@@ -102,13 +102,16 @@ export function assembleQaPreEntryCustody({staging,baseline,context}){
  if(staging?.sourceRevision!==sourceRevision||typeof sourceTree!=='string'||!/^[a-f0-9]{40}$/.test(sourceTree)||
     template?.sourceRevision!==sourceRevision||template.sourceTree!==sourceTree||
     template.authorizesEffects!==false||template.operationalReadiness!==false||template.module?.name!=='index.mjs'||
-    !(code instanceof Uint8Array)||code.byteLength!==template.module.bytes||sha256(code)!==template.module.sha256||
-    !(baseline instanceof Uint8Array)||baseline.byteLength!==pin.bytes||sha256(baseline)!==pin.sha256)fail();
+    !(code instanceof Uint8Array)||code.byteLength<1||code.byteLength>1048576||code.byteLength!==template.module.bytes||
+    !(baseline instanceof Uint8Array)||baseline.byteLength!==pin.bytes)fail();
  const modules=custodyModules(code,baseline,scope);
+ const modulePins=Object.freeze(modules.map(({path,contents})=>Object.freeze({
+  path,bytes:contents.byteLength,sha256:sha256(contents)
+ })));
+ const [wrapper,backup]=modulePins;
+ if(wrapper.sha256!==template.module.sha256||backup.sha256!==pin.sha256)fail();
  const body={purpose:'afw.finite-qa-custody-assembly.v1',sourceRevision,sourceTree,observationId:scope.id,
-  baselineVersionId,startAt,expiresAt,modules:Object.freeze(modules.map(({path,contents})=>Object.freeze({
-   path,bytes:contents.byteLength,sha256:sha256(contents)
-  }))),authorizesDeployment:false,operationalReadiness:false};
+  baselineVersionId,startAt,expiresAt,modules:modulePins,authorizesDeployment:false,operationalReadiness:false};
  return {modules,receipt:Object.freeze({...body,assemblySha256:sha256(JSON.stringify(body))})};
 }
 
@@ -118,7 +121,7 @@ export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}
  const context=createQaPreEntryCustodyContext({sourceRevision:staging.sourceRevision,startAt:0,expiresAt:1});
  const {modules,receipt}=assembleQaPreEntryCustody({staging,baseline,context});
  const mounted=await mountColdQaCustody({modules,metadata,context});
- return Object.freeze({templateSha256:staging.custodyProbeTemplate.module.sha256,baselineSha256:context.baselineModuleHash,
+ return Object.freeze({templateSha256:receipt.modules[0].sha256,baselineSha256:receipt.modules[1].sha256,
   ...mounted,assembly:receipt,authorizesEffects:false,operationalReadiness:false});
 }
 
