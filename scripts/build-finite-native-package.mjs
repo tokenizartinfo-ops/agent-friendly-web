@@ -321,6 +321,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   releaseZipSha256:releaseLayout.archiveSha256,
   qaCandidateModuleSha256:built.modules.qaLive.module.sha256,
   qaCustodyProbeTemplateSha256:built.custodyProbeTemplate.module.sha256,
+  coldCustodyAssemblySha256:expiredCustodyTemplate.assembly.assemblySha256,
   rollbackArchiveSha256:built.historicalInput.archiveSha256,
   rollbackReceiptSha256:built.historicalInput.receiptSha256,
   qaRollbackVersionId:rollbackProfiles.qaClosed.versionId,
