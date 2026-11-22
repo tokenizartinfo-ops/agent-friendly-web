@@ -3,7 +3,7 @@ import {build} from 'esbuild';
 import ts from 'typescript';
 import {Miniflare,NoOpLog,convertV4MiniflareOptions} from 'miniflare';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
-import {QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE,createQaPreEntryCustodyContext,renderQaPreEntryCustodyModule} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
+import {QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE,createQaPreEntryCustodyContext,readQaPreEntryCustodyContext,renderQaPreEntryCustodyModule} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 
 const roles=Object.freeze({qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'});
 const disabledRoutes=Object.freeze({
@@ -83,32 +83,60 @@ export async function verifyFiniteRollbackMounts(moduleFrame,metadata){
  }catch{fail();}
 }
 
+const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+
+function custodyModules(code,baseline,context){
+ return [
+  {type:'ESModule',path:'custody-staging/index.mjs',contents:Buffer.from(code)},
+  {type:'ESModule',path:'custody-staging/closed-rollback.mjs',contents:Buffer.from(baseline)},
+  {type:'ESModule',path:'custody-staging/pre-entry-custody-context.mjs',contents:Buffer.from(renderQaPreEntryCustodyModule(context))}
+ ];
+}
+
+/** Prepare exactly the private pre-entry modules without using a provider
+ * credential or establishing publication authority. */
+export function assembleQaPreEntryCustody({staging,baseline,context}){
+ const scope=readQaPreEntryCustodyContext(context),template=staging?.custodyProbeTemplate;
+ const code=staging?.files?.['qaCustodyProbe/index.mjs'],pin=QA_CLOUD_CLOSED_PINS.qaClosed.module;
+ const {sourceRevision,baselineVersionId,startAt,expiresAt}=scope,sourceTree=staging?.sourceTree;
+ if(staging?.sourceRevision!==sourceRevision||typeof sourceTree!=='string'||!/^[a-f0-9]{40}$/.test(sourceTree)||
+    template?.sourceRevision!==sourceRevision||template.sourceTree!==sourceTree||
+    template.authorizesEffects!==false||template.operationalReadiness!==false||template.module?.name!=='index.mjs'||
+    !(code instanceof Uint8Array)||code.byteLength<1||code.byteLength>1048576||code.byteLength!==template.module.bytes||
+    !(baseline instanceof Uint8Array)||baseline.byteLength!==pin.bytes)fail();
+ const modules=custodyModules(code,baseline,scope);
+ const modulePins=Object.freeze(modules.map(({path,contents})=>Object.freeze({
+  path,bytes:contents.byteLength,sha256:sha256(contents)
+ })));
+ const [wrapper,backup]=modulePins;
+ if(wrapper.sha256!==template.module.sha256||backup.sha256!==pin.sha256)fail();
+ const body={purpose:'afw.finite-qa-custody-assembly.v1',sourceRevision,sourceTree,observationId:scope.id,
+  baselineVersionId,startAt,expiresAt,modules:modulePins,authorizesDeployment:false,operationalReadiness:false};
+ return {modules,receipt:Object.freeze({...body,assemblySha256:sha256(JSON.stringify(body))})};
+}
+
 /** Mount the real compiled wrapper against the exact QA backup without
  * injecting synthetic custody profiles or an active observation window. */
 export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}){
- const template=staging.custodyProbeTemplate,code=staging.files['qaCustodyProbe/index.mjs'];
- const {id:baselineVersionId,module:pin}=QA_CLOUD_CLOSED_PINS.qaClosed;
- const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
- if(template.sourceRevision!==staging.sourceRevision||template.sourceTree!==staging.sourceTree||
-    template.authorizesEffects!==false||template.operationalReadiness!==false||code.byteLength!==template.module.bytes||
-    sha(code)!==template.module.sha256||baseline.byteLength!==pin.bytes||sha(baseline)!==pin.sha256)fail();
- const mounted=await verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision:staging.sourceRevision});
- return Object.freeze({templateSha256:template.module.sha256,baselineSha256:pin.sha256,
-  ...mounted,authorizesEffects:false,operationalReadiness:false});
+ const context=createQaPreEntryCustodyContext({sourceRevision:staging.sourceRevision,startAt:0,expiresAt:1});
+ const {modules,receipt}=assembleQaPreEntryCustody({staging,baseline,context});
+ const mounted=await mountColdQaCustody({modules,metadata,context});
+ return Object.freeze({templateSha256:receipt.modules[0].sha256,baselineSha256:receipt.modules[1].sha256,
+  ...mounted,assembly:receipt,authorizesEffects:false,operationalReadiness:false});
 }
 
 export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision}){
  const context=createQaPreEntryCustodyContext({sourceRevision,startAt:0,expiresAt:1});
- const {id,baselineVersionId}=context;
+ return mountColdQaCustody({modules:custodyModules(code,baseline,context),metadata,context});
+}
+
+async function mountColdQaCustody({modules,metadata,context}){
+ const {id,sourceRevision,baselineVersionId}=context;
  let outboundAttempts=0;
  let mf;
  try{
   mf=new Miniflare(convertV4MiniflareOptions({
-  modules:[
-   {type:'ESModule',path:'custody-staging/index.mjs',contents:code},
-   {type:'ESModule',path:'custody-staging/closed-rollback.mjs',contents:baseline},
-   {type:'ESModule',path:'custody-staging/pre-entry-custody-context.mjs',contents:renderQaPreEntryCustodyModule(context)}
-  ],
+  modules,
   compatibilityDate:metadata.compatibility_date,compatibilityFlags:metadata.compatibility_flags,
   bindings:{...Object.fromEntries(metadata.bindings.filter(binding=>binding.type==='plain_text')
    .map(binding=>[binding.name,binding.text])),AFW_QA_VERSION:{id:baselineVersionId}},

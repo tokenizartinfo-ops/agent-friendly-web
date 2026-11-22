@@ -23,7 +23,8 @@ const source=Buffer.from(`
 `);
 const members={qaClosed:'closed-rollback.mjs',canary:'index.mjs',operator:'index.mjs'};
 const sources=Object.fromEntries(Object.keys(members).map(role=>[role,Buffer.concat([source,Buffer.from('\n// '+role)])]));
-const fixturePins=modules=>Object.fromEntries(Object.entries(members).map(([role,name])=>[role,{module:{
+const qaVersion='11111111-1111-4111-8111-111111111111';
+const fixturePins=modules=>Object.fromEntries(Object.entries(members).map(([role,name])=>[role,{id:role==='qaClosed'?qaVersion:undefined,module:{
  name,bytes:modules[role].length,sha256:createHash('sha256').update(modules[role]).digest('hex')
 }}]));
 const frame=Buffer.concat(Object.values(sources));
@@ -36,7 +37,8 @@ const metadata=(mode='closed')=>Object.fromEntries(['qaClosed','canaryClosed','o
 async function fixtureVerifier(modules){
  const pins=fixturePins(modules);
  const modulePath=fileURLToPath(new URL('../scripts/verify-finite-native-rollback.mjs',import.meta.url));
- const compiled=await build({entryPoints:[modulePath],bundle:true,write:false,format:'esm',platform:'node',
+ const compiled=await build({stdin:{contents:`export * from ${JSON.stringify(modulePath)};\nexport {createQaPreEntryCustodyContext} from './lib/mcp-qa-finite-pre-entry-context.mjs';`,
+  resolveDir:fileURLToPath(new URL('..',import.meta.url))},bundle:true,write:false,format:'esm',platform:'node',
   plugins:[{name:'synthetic-archive-pins',setup(builder){
    builder.onResolve({filter:/^(?:esbuild|miniflare|typescript)$/},args=>({path:pathToFileURL(require.resolve(args.path)).href,external:true}));
    builder.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({
@@ -44,12 +46,11 @@ async function fixtureVerifier(modules){
    }));
   }}]
  });
- const {verifyFiniteRollbackMounts}=await import('data:text/javascript;base64,'+Buffer.from(compiled.outputFiles[0].contents).toString('base64'));
- return verifyFiniteRollbackMounts;
+ return import('data:text/javascript;base64,'+Buffer.from(compiled.outputFiles[0].contents).toString('base64'));
 }
 
 test('rollback mount probe checks exact bytes, closed routes and denied egress in Workerd',async()=>{
- const verifyFiniteRollbackMounts=await fixtureVerifier(sources);
+ const {verifyFiniteRollbackMounts}=await fixtureVerifier(sources);
  assert.deepEqual(await verifyFiniteRollbackMounts(frame,metadata()),{
   exactModuleCount:3,deniedRouteCount:10,operationalReadiness:false,
   moduleExports:{qaClosed:['OwnRollbackFixture','default'],canaryClosed:['OwnRollbackFixture','default'],operatorClosed:['OwnRollbackFixture','default']}
@@ -71,4 +72,34 @@ test('an explicit namespace alias belongs to the exact export inventory',async()
  const {readArchivedExports}=await import('../scripts/verify-finite-native-rollback.mjs');
  const bytes=Buffer.from("export default {}; export * as BufferAlias from 'node:buffer';");
  assert.deepEqual(await readArchivedExports(bytes,'index.mjs'),['BufferAlias','default']);
+});
+
+test('QA custody assembly binds all three module bytes to the source, pinned rollback and exact clock',async()=>{
+ const {assembleQaPreEntryCustody,createQaPreEntryCustodyContext}=await fixtureVerifier(sources);
+ assert.equal(typeof assembleQaPreEntryCustody,'function');
+ const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+ const sourceRevision='a'.repeat(40),sourceTree='b'.repeat(40),code=Buffer.from('export default {};');
+ const baseline=Buffer.from(sources.qaClosed);
+ const staging={sourceRevision,sourceTree,files:{'qaCustodyProbe/index.mjs':code},custodyProbeTemplate:{
+  sourceRevision,sourceTree,authorizesEffects:false,operationalReadiness:false,
+  module:{name:'index.mjs',bytes:code.length,sha256:digest(code)}
+ }};
+ const context=createQaPreEntryCustodyContext({sourceRevision,startAt:100,expiresAt:200});
+ const {modules,receipt}=assembleQaPreEntryCustody({staging,baseline,context});
+ assert.equal(receipt.sourceRevision,sourceRevision);
+ assert.equal(receipt.sourceTree,sourceTree);
+ assert.equal(receipt.observationId,context.id);
+ assert.equal(receipt.baselineVersionId,qaVersion);
+ assert.equal(receipt.authorizesDeployment,false);
+ assert.deepEqual(receipt.modules,modules.map(({path,contents})=>({path,bytes:contents.length,sha256:digest(contents)})));
+ const {assemblySha256,...body}=receipt;
+ assert.equal(assemblySha256,digest(JSON.stringify(body)));
+ assert.equal(assembleQaPreEntryCustody({staging,baseline,context}).receipt.assemblySha256,assemblySha256);
+ const changed=createQaPreEntryCustodyContext({sourceRevision,startAt:100,expiresAt:201});
+ assert.notEqual(assembleQaPreEntryCustody({staging,baseline,context:changed}).receipt.assemblySha256,assemblySha256);
+ for(const input of [{baseline:Buffer.alloc(baseline.length)},{context:{...context,expiresAt:201}},
+  {staging:{...staging,sourceTree:'c'.repeat(40)}},
+  {staging:{...staging,files:{'qaCustodyProbe/index.mjs':Buffer.alloc(code.length)}}}]){
+  assert.throws(()=>assembleQaPreEntryCustody({staging,baseline,context,...input}),/unavailable/);
+ }
 });
