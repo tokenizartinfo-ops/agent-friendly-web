@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {listOwnerProjects} from '../lib/project-directory.mjs';
+import * as projectDraft from '../lib/project-draft.mjs';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 import ts from 'typescript';
@@ -36,6 +37,7 @@ test('private directory route authenticates before reading and keeps owner ident
   '../../../db':{getDb(){throw Error('unexpected_dossier_read');}},
   '../../../db/schema':{siteProjects:{}},
   '../../../lib/intake.mjs':{},'../../../lib/methodology.mjs':{},
+  '../../../lib/project-draft.mjs':projectDraft,
   '../../../lib/project-directory.mjs':{listOwnerProjects:async(...args)=>{calls.push(args);return {status:200,projects:[],nextOffset:null};}},
   '../../../lib/dossier-field-history.mjs':{changedDossierFields(){}},
   'cloudflare:workers':{env:{DB:'owner-scoped-db'}},
