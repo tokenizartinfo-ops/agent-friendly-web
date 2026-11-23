@@ -45,3 +45,11 @@ El diferencial buscado es ayudar a que personas y agentes puedan encontrar, inte
 - No sostener que todos los agentes visitan siempre la web original, que la web es su única fuente o que crear una página basta para ser recomendado. No prometer menor costo de construcción o consumo de tokens sin una comparación vigente y medible.
 
 AFW no vende clics ni una puntuación como sustitutos del valor. Su compromiso es acompañar una presencia propia fiel a la realidad, útil para el público adecuado y capaz de evolucionar con evidencia y permisos proporcionales.
+
+## Continuar con el responsable de AFW
+
+Directriz del titular, 23 de noviembre de 2026. El acompañamiento cubre los casos que necesitan una revisión más allá del paso guiado. En AF-3 a AF-5 y en sitios nuevos, ofrecer continuidad cuando falte una comprobación, una integración requiera criterio o el resultado se aleje de lo que el cliente esperaba. Si cambia la idea del sitio, acordar el cambio y conservar lo ya aprobado mientras se prepara la nueva versión.
+
+El chat responsable de AFW retoma el expediente en una sesión autorizada. Puede revisar lo preparado, comparar versiones, corregir, completar una propuesta o coordinar con quien mantiene el sitio. El cliente debe saber qué ya funciona, qué queda pendiente y quién puede avanzar. La publicación, los cambios de alcance y los permisos se acuerdan sobre el caso y la versión correspondientes.
+
+Empezamos registrando estas intervenciones en la [ficha de aprendizaje del piloto](AFW-PILOT-LEARNING-RECORD-2026-10-18.es.md#cuando-un-caso-necesita-acompañamiento). Los casos reales ayudan a distinguir pasos repetidos que se pueden automatizar, decisiones que conviene explicar mejor y excepciones que seguirán requiriendo revisión. Esta directriz describe el servicio y su evolución prevista. La atención depende del alcance acordado y de una sesión autorizada.

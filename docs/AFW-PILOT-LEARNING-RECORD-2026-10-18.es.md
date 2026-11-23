@@ -41,3 +41,18 @@ Clasificar una fricción como comprensión, datos/fuentes faltantes, acceso, gua
 Sin una referencia comparable no se declara ahorro. Sin una oferta concreta aceptada no se declara compra. No publicar el caso ni reutilizar citas identificables sin consentimiento separado. El journal técnico conserva referencias saneadas; los datos del expediente permanecen en su ámbito privado.
 
 Esta ficha es manual: no incorpora tracking, CRM, notificaciones, suscripciones ni operación con ordenador apagado. Los gates técnicos vigentes siguen en el [roadmap del piloto](AFW-FIRST-CLIENT-READINESS-2026-10-05.es.md).
+
+## Cuando un caso necesita acompañamiento
+
+Ampliación del 23 de noviembre de 2026. Usar la misma ficha cuando el recorrido termine con una entrega parcial, un bloqueo, una discrepancia con lo que esperaba el cliente o una solicitud de cambio. El chat responsable de AFW se hace cargo de la próxima acción dentro del alcance acordado al retomar una sesión autorizada.
+
+1. Guardá en el expediente el objetivo, la versión que el cliente vio, la última versión aprobada, lo comprobado y lo que falta. Anotá la diferencia concreta con el resultado esperado, la siguiente acción y si depende de AFW, del titular, del mantenedor o de un proveedor.
+2. Explicá qué queda disponible y qué se revisará. Pedí solo el dato o la decisión que falte. Si la sesión o el permiso vencieron, conservá el punto de seguimiento para retomarlo con acceso vigente. El chat consulta el expediente privado autorizado mediante su referencia y verifica que siga siendo el caso y la versión correctos.
+3. Trabajá sobre una propuesta identificable. Si el cliente pide cambiar el diseño, sumar páginas o modificar una capacidad, acordá el alcance y revisá el impacto sobre entrega y tiempos. Conservá la versión aprobada como punto de retorno. Pedí aprobación sobre la nueva versión antes de publicar y verificá el resultado en el destino acordado.
+4. Cerrá al confirmar con el cliente qué se resolvió y dejar comprobación para lo aplicado. Si queda trabajo, indicá el pendiente y su responsable. Agregá a esta ficha minutos de trabajo y espera por rol, causa, acción y resultado, con referencias opacas fuera del expediente privado.
+
+**Ejemplo de una integración AF-4.** «La guía quedó preparada. Falta comprobar que la herramienta funcione con el permiso de tu sitio. Podemos retomar desde acá con tu mantenedor». La capacidad sigue pendiente hasta verificarla con el alcance acordado.
+
+**Ejemplo de un sitio desde cero.** «Ya tenemos la portada y el contacto que aprobaste. Puedo preparar una versión con una sección de trabajos y mostrarte cómo queda». Revisar la nueva sección con el titular. Si agrega hechos relevantes para agentes, comprobar que la versión revisada y sus documentos coincidan.
+
+**Qué convertir en producto.** Revisar con casos reales qué correcciones se repiten, cuánto retrabajo causan y si la condición de éxito se puede comprobar. Empezar por mejorar la guía o automatizar un paso acotado cuando haya evidencia repetible, permiso claro, tratamiento de errores y una salida asistida. Probarlo con casos sin datos de clientes antes de incorporarlo al recorrido.
