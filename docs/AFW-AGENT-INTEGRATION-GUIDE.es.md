@@ -56,6 +56,8 @@ A las 14:04 de Argentina, un cliente sin credenciales leyó los documentos públ
 
 `tools/list` permite elegir una operación y `tools/call` entrega el resultado para ese uso. Para este primer recorrido externo, la respuesta puede responder una pregunta sobre la metodología sin pedir acceso a un expediente. La [tarjeta A2A](https://agentfriendlyweb.dev/.well-known/agent-card.json) anunció A2A 1.0 mediante JSON-RPC, con avisos push deshabilitados. El [OpenAPI](https://agentfriendlyweb.dev/openapi.json) declaró el diagnóstico público. En esta lectura no se invocaron A2A, OpenAPI ni las otras tres herramientas MCP. El valor comercial, el ahorro y el acceso delegado de un integrador necesitan pruebas propias.
 
+En una segunda comprobación a las 14:10 de Argentina, un cliente A2A ejecutó una sola llamada `SendMessage` sobre el sitio público de AFW. La respuesta HTTP 200 tenía un mensaje de agente en JSON-RPC 2.0 con 15 comprobaciones, 13 con HTTP 200. El resultado declaró `publicationAuthorized: false`. Se verificó el diagnóstico público de ese dominio y de esa fecha.
+
 ## Integración de lectura, un paso a la vez
 
 1. Configurar un cliente MCP compatible y una conexión autorizada para ese proyecto. No copiar cookies, bearer tokens o enlaces de autorización de otra sesión. El piloto actual no habilita registro dinámico de cualquier cliente.
