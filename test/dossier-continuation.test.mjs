@@ -114,3 +114,14 @@ test('normal private workspace mounts the continuation card and a domainless cre
   assert.match(workspace, /!workingPending && !continuationPending && !hasPendingDraft/);
   assert.match(workspace, /sessionRequired=\{sessionRequired\} onPendingChange=\{setContinuationPending\}/);
 });
+
+test('project panels have distinct keys so opening the workspace cannot remount a sibling draft', async () => {
+  const workspace = await readFile(new URL('../app/components/intake-workspace.tsx', import.meta.url), 'utf8');
+  const panels = ['DossierContinuation', 'DossierTrustSummary', 'DossierAiIndexPreparation'];
+  const keys = panels.map(panel => {
+    const key = workspace.match(new RegExp(`<${panel}\\s+key=\\{(.+?)\\}\\s`))?.[1];
+    assert.ok(key?.includes('projectId'), `${panel} must reset when the project changes`);
+    return key;
+  });
+  assert.equal(new Set(keys).size, panels.length);
+});
