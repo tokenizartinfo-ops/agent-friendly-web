@@ -1,0 +1,86 @@
+name: AFW PR 746 inactive release
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/public-pr746-inactive-upload.py'
+      - '.github/workflows/afw-pr746-inactive-upload.yml'
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        default: verify_only
+        options:
+          - verify_only
+          - upload_inactive
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: afw-public-inactive-upload
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+      WRANGLER_SEND_METRICS: 'false'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify the immutable main package and Wrangler upload shape
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/public-pr746-inactive-upload.py verify_only
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-pr746-package-${{ github.run_id }}
+          path: output/public-pr746-inactive-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+
+  upload:
+    needs: verify
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.operation == 'upload_inactive'
+    environment: afw-public-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.sha }}
+      WRANGLER_SEND_METRICS: 'false'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Upload the PR 746 version without assigning traffic
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_PUBLIC_UPLOAD_TOKEN }}
+        run: python3 scripts/public-pr746-inactive-upload.py upload_inactive
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-pr746-inactive-${{ github.run_id }}
+          path: output/public-pr746-inactive-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7
