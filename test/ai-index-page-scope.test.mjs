@@ -28,7 +28,7 @@ test('keeps an explicit exclusion and rejects an empty or contradictory decision
 
 test('rejects foreign, wrong-scheme, wildcard and ambiguous routes without returning their values', () => {
   for (const url of [
-    '//other.example/secret', 'https://other.example/secret',
+    '//other.example/secret', 'https://other.example/secret', 'https://taller.example//other.example/secret',
     'http://taller.example/secret', 'https://user:secret@taller.example/',
     '/secret?marker=1', '/secret#section', '/secret/*',
     '/secret\\alt', '/secret\u0000', '/secret/../public', '/%2e%2e/public', 'private',
@@ -43,3 +43,4 @@ test('preserves valid exact paths and enforces bounds on the proposed list', () 
   assert.equal(prepare(Array.from({length: 51}, (_, i) => '/' + i).join('\n')).code, 'length');
   assert.equal(prepareAiIndexPageScope({ website: '', include: '/', now }).code, 'origin');
 });
+
