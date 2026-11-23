@@ -233,7 +233,7 @@ test('paired consumer trial preserves the next step across revisions and rejects
       assert.equal(reference.context.missingInput.key, direct.field);
       assert.equal(JSON.stringify(reference).includes('PRIVATE_'), false);
       closed(reference);
-      observations.push({ revision, directPlannerInputBytes: bytes(directDraft), mcpStructuredContentBytes: bytes(response) });
+      observations.push({ revision, directPlannerOutputBytes: bytes(direct), mcpStructuredContentBytes: bytes(response) });
     }
 
     await compare(3, 'audience');
@@ -248,6 +248,9 @@ test('paired consumer trial preserves the next step across revisions and rejects
     assert.equal(Object.hasOwn(denied, 'context'), false);
     assert.equal(denied.automaticReconnect, false);
     assert.equal(calls, 4);
-    t.diagnostic(JSON.stringify({ observations, fixtureToolInvocations: calls, modelTokens: null, providerCost: null }));
+    t.diagnostic(JSON.stringify({
+      observations, directPlannerInvocations: observations.length, fixtureToolInvocations: calls,
+      serviceLatencyMs: null, modelTokens: null, providerCost: null,
+    }));
   });
 });
