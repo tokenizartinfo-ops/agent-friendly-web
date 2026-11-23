@@ -692,7 +692,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
 
-        {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation
+        {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation key={projectId}
           website={savedWebsite} contentSources={savedSnapshot.contentSources} observation={currentObservations.observation}
           readState={updatesReadState} locale={locale} /> : null}
 
