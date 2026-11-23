@@ -58,6 +58,22 @@ A las 14:04 de Argentina, un cliente sin credenciales leyó los documentos públ
 
 En una segunda comprobación a las 14:10 de Argentina, un cliente A2A ejecutó una sola llamada `SendMessage` sobre el sitio público de AFW. La respuesta HTTP 200 tenía un mensaje de agente en JSON-RPC 2.0 con 15 comprobaciones, 13 con HTTP 200. El resultado declaró `publicationAuthorized: false`. Se verificó el diagnóstico público de ese dominio y de esa fecha.
 
+### Segunda comprobación externa del 23 de noviembre
+
+A las 19:57 de Argentina, un cliente externo recibió HTTP 200 en manifiesto MCP, tarjeta A2A y OpenAPI. Propuso MCP `2026-07-28` y el servidor seleccionó `2025-11-25` en esta combinación cliente/servidor. Con la versión negociada pudo listar las cuatro herramientas. La tarjeta siguió anunciando A2A 1.0 mediante JSON-RPC, con push desactivado y el OpenAPI declaró `/api/scan`.
+
+`verify_public_okf_release` devolvió un error de integridad para `discovery/infrastructure-status.md`. Una lectura comparó los 17 archivos del inventario con el manifiesto y CHECKSUMS. Un único archivo tenía un hash antiguo en el manifiesto. Sus bytes y la entrada de CHECKSUMS sí coincidían. Este control permanece en el primer recorrido externo. Tras publicar la reparación, repetir la llamada y exigir un resultado válido. La fecha de caducidad de la evidencia debe revisarse por separado.
+
+### Primer ensayo de adopción por otro agente
+
+Fijar una versión pública, las fuentes y una rúbrica de corrección. Ejecutar tres tareas con dos clientes compatibles. Cada cliente usa las mismas tareas con acceso directo a las fuentes y mediante AFW, en sesiones separadas con el orden alternado. Tareas propuestas:
+
+1. Explicar qué diferencia a AF-2 de AF-3 y citar la metodología.
+2. Verificar una versión pública y señalar qué acredita el recibo. Si la verificación falla, recuperar la causa o dejar el resultado pendiente.
+3. Explicar qué necesita un titular para pasar de una propuesta aprobada a una instalación y cómo se comprueba el resultado. Pedir el siguiente dato cuando la fuente no alcanza.
+
+Contar todas las ejecuciones y los intentos fallidos en el [registro existente](../examples/agent-consumer/trial-ledger.mjs). Para aceptar, exigir hechos correctos, fuentes fechadas y una distinción clara entre lectura, preparación y autorización. Registrar latencia, llamadas, bytes, tokens informados, trabajo humano y costo cuando estén medidos. Antes de usar un supuesto ahorro para formular precio, revisar que no haya pérdida de calidad o atribuciones sin respaldo. Empezar con un cliente de diagnóstico público, seguir con preparación limitada para un integrador invitado y evaluar después instalación o delegación con sus permisos propios.
+
 ## Integración de lectura, un paso a la vez
 
 1. Configurar un cliente MCP compatible y una conexión autorizada para ese proyecto. No copiar cookies, bearer tokens o enlaces de autorización de otra sesión. El piloto actual no habilita registro dinámico de cualquier cliente.

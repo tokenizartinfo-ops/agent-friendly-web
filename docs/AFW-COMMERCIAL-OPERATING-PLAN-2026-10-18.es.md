@@ -31,7 +31,7 @@ Unidad propuesta: un sitio, una necesidad prioritaria y un conjunto acordado de 
 
 No incluye por defecto rediseño, migración, seguridad integral, acceso privado, ejecución autónoma, pagos, atención permanente ni garantías de citas, ranking o ventas. El copilot inteligente no está habilitado de forma general: producción conserva un piloto propio. La guía de producto no equivale a una persona o agente cloud vigilando continuamente.
 
-Si hay valor recurrente, ofrecer después un alcance separado: cambios de fuentes, revisión de información que caduca, nuevas preguntas y comprobaciones periódicas. No cobrar continuidad solo por permitir conservar entregables. Webs AI native desde cero y automatización interna permanecen como líneas posteriores con su propia validación y diseño.
+Si hay valor recurrente, ofrecer después un alcance separado: cambios de fuentes, revisión de información que caduca, nuevas preguntas y comprobaciones periódicas. No cobrar continuidad solo por permitir conservar entregables. La oferta de sitio propio desde cero se prueba en el recorrido asistido descrito más abajo. La automatización interna conserva su propia validación y diseño.
 
 ## Comprador y mantenedor: dos interlocutores
 
@@ -188,3 +188,37 @@ Si la persona todavía no tiene una referencia, mostrale dos o tres direcciones 
 El [nivel AF](https://agentfriendlyweb.dev/metodologia) se propone según el objetivo y la evidencia disponible. Un sitio que explica servicios y facilita el contacto puede cumplir su objetivo con una capa de descubrimiento sencilla. Las herramientas y permisos se incorporan cuando resuelven una necesidad verificable. Al variar el diseño, comprobá que páginas, contactos y documentos de descubrimiento comuniquen los mismos hechos que aprobó el titular. El [consumo por agentes](AFW-AGENT-INTEGRATION-GUIDE.es.md) y la [preparación para AI Index](AFW-CLOUDFLARE-AI-INDEX-2026-11-03.es.md) conservan sus propios controles.
 
 Para entregar el sitio, fijá la apariencia aprobada, prepará una copia portable y verificá las páginas y los documentos de descubrimiento en el dominio que el titular elija.
+
+## Piloto comercial y modelo de negocio — 23 de noviembre de 2026
+
+La primera hipótesis es vender una entrega verificable por sitio. Una persona puede ver una muestra antes de contratar. Una agencia puede revisar el paquete y conservar la relación de mantenimiento. La primera ronda usa un recorrido asistido y un presupuesto por alcance. Los avisos automáticos y la preparación delegada tienen aceptación propia.
+
+| Orden | A quién buscar y qué señal pedir | Quién compra y aplica | Cómo ofrecerlo |
+| --- | --- | --- | --- |
+| 1 | Agencias web, estudios WordPress y mantenedores hispanohablantes con un sitio de servicios activo y un cliente que ya pregunta cómo lo explican los asistentes. Buscar una contradicción concreta o una actualización pendiente. | Compra la agencia si revende la entrega, o su cliente cuando contrata a AFW. La agencia conserva la publicación. | Referidos y contactos profesionales existentes. Mostrar una pregunta que el sitio responde mal, la fuente que lo aclara y cómo recibiría el mantenedor el cambio. |
+| 2 | Profesionales y pymes de servicios en Argentina que reciben consultas repetidas sobre servicios, cobertura y contacto. Priorizar una oferta estable y un titular disponible. Un grupo tiene sitio y otro lo explica principalmente en redes. | Decide el titular. Publica su mantenedor o AFW cuando esa implementación se acuerde. | Referidos locales y conversaciones individuales. Ofrecer ordenar un sitio existente o mostrar una primera versión privada y portable si solo usa redes. |
+| 3 | Equipos que integran agentes y ya tienen un caso repetible en dos o más sitios. Deben poder medir tiempo y costo total y recuperar fuentes verificables. | Compra el integrador o el equipo de producto. Autoriza el titular del sitio. | Guía técnica y demostración con la superficie pública. La preparación, el acceso al expediente y la eventual contratación se evalúan por separado. |
+| Después | Cultura como caso de credibilidad. Hospitalidad mediante un mantenedor y cuando haya un titular que pueda actualizar información cambiante. | Dependiendo del caso, el responsable de contenidos y su mantenedor. | Mantener casos referidos y consentidos. Usar el plan de expansión para evaluar España u otros mercados después de los primeros resultados comparables. |
+
+Argentina es la hipótesis de acceso para entrevistar y prestar soporte en la primera ronda. CACE publicó un aumento del 21 % en órdenes de comercio electrónico para el primer semestre de 2026 frente al mismo período del año anterior. El dato describe comercio electrónico argentino. El estudio D4SME de la OCDE incluye diez países y permite pensar en diferencias de madurez, costos y tiempo de capacitación. La demanda, el costo de adquisición y la disposición a pagar por AFW se miden con el piloto. [CACE/Kantar](https://cace.org.ar/blogs/news/el-comercio-electronico-registro-un-incremento-del-28-en-su-facturacion-durante-el-primer-semestre-del-ano) · [OCDE D4SME](https://www.oecd.org/en/publications/sme-digitalisation-for-competitiveness_197e3077-en.html)
+
+### Oferta que se puede mostrar
+
+- **Mejorar un sitio existente.** Una oferta, tres preguntas reales y hasta tres rutas por acordar. Se entrega el diagnóstico, los cambios preparados, instrucciones para el mantenedor y la comprobación de lo aplicado. El presupuesto separa una instalación asistida, si corresponde.
+- **Crear un sitio propio desde las redes.** Una oferta, dos páginas y una dirección visual aprobada. La muestra privada deja revisar cómo se ve en móvil y cómo se entiende la oferta. La entrega puede ir al dominio elegido e incluye archivos portables, documentos para agentes y una guía de actualización. Dominio, alojamiento y cambios extra se presupuestan por separado.
+- **Consumir AFW desde un agente.** La entrada es un diagnóstico o una lectura pública estructurada. La hipótesis de cobro posterior es por trabajo aceptado con alcance y precio visibles de antemano. Si hace falta acompañamiento humano, se cotiza como parte explícita de una modalidad híbrida.
+
+**Borrador para una presentación individual.** «Si ya te preguntan qué hacés, qué zonas cubrís o cómo contactarte, podemos tomar tres preguntas reales y mostrarte cómo responderlas con información de tu propio sitio. Si hoy lo explicás por redes, te mostramos primero una versión privada que podés llevar a tu dominio». Identidad prevista para correo: `hello@agentfriendlyweb.dev`. Usar ese canal solo después de confirmar entrega y respuesta con el mismo remitente. El recorrido asistido puede empezar por una presentación referida.
+
+### Ronda inicial y decisión
+
+1. **Descubrimiento.** Proponer diez conversaciones, cinco con mantenedores y cinco con titulares directos. Buscar en referidos, carteras de agencias que ya conocen el problema y directorios profesionales sectoriales. Registrar por oportunidad el problema exacto, sus fuentes, quién decide, quién publica y la fecha del último cambio. Usar una referencia interna y consentimiento si se preservan detalles. La cifra es un objetivo de trabajo.
+2. **Calificación.** Pasan a propuesta los casos con una pregunta repetida, una oferta que puede verificarse, titular accesible y una vía de publicación o entrega. Dejar para más adelante trabajos con datos privados, permisos de pago, múltiples flujos o información que nadie pueda mantener. Usar la ficha de aprendizaje existente.
+3. **Piloto.** Tomar hasta tres entregas asistidas: una de agencia sobre un sitio existente, una directa y una desde redes si cumplen el alcance. Acordar tres respuestas esperadas, evidencia y criterio de aceptación antes de preparar la muestra. Comparar antes/después con las mismas preguntas. Registrar quién aprueba, minutos activos y de espera, correcciones, costo y resultado. Conservar aparte el piloto testigo del recorrido autónomo.
+4. **Venta y repetición.** Presentar una cotización acotada después de mostrar el trabajo. Medir cotizaciones emitidas, aceptadas y efectivamente cobradas por separado. Una señal inicial para ampliar sería completar dos entregas comparables y conseguir al menos una aceptación pagada con margen positivo. Esa señal sirve para decidir una ronda siguiente y ajustar el alcance.
+
+### Precios y costos por comprobar
+
+Calcular el costo directo de AFW con horas por rol, herramientas imputables, publicación y retrabajo observado. Para cotizar con un margen objetivo, dividir ese costo por uno menos el margen y la comisión variable de cobro, si ambas se expresan como fracción del ingreso y el denominador es positivo. Presupuestar por separado alojamiento, soporte y extras. Medir además el tiempo del titular y del mantenedor para estimar el costo total del comprador.
+
+El ingreso inicial propuesto es por entrega. Validar continuidad pagada con cambios reales de fuentes o verificaciones recurrentes. Para integradores, comparar el costo por trabajo aceptado con y sin AFW antes de fijar tarifas, cuotas o descuentos. Un incentivo defendible para el agente es poder usar menos llamadas, recuperar una respuesta sin rehacer el trabajo y conocer el alcance antes de actuar. Cada afirmación de ahorro requiere medición.
