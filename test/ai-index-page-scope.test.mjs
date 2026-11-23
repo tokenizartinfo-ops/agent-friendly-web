@@ -22,6 +22,8 @@ test('keeps an explicit exclusion and rejects an empty or contradictory decision
   assert.deepEqual(prepare('', '/archivo').draft.includeForReview, []);
   assert.equal(prepare().code, 'empty');
   assert.equal(prepare('/servicios', 'https://taller.example/servicios').code, 'conflict');
+  assert.equal(prepare('/servicios', '/%73ervicios').code, 'conflict');
+  assert.equal(prepare('/gu%C3%ADa', '/gu%c3%ada').code, 'conflict');
 });
 
 test('rejects foreign, wrong-scheme, wildcard and ambiguous routes without returning their values', () => {
@@ -29,7 +31,7 @@ test('rejects foreign, wrong-scheme, wildcard and ambiguous routes without retur
     '//other.example/secret', 'https://other.example/secret',
     'http://taller.example/secret', 'https://user:secret@taller.example/',
     '/secret?marker=1', '/secret#section', '/secret/*',
-    '/secret\\alt', '/secret/../public', '/%2e%2e/public', 'private',
+    '/secret\\alt', '/secret\u0000', '/secret/../public', '/%2e%2e/public', 'private',
   ]) {
     assert.deepEqual(prepare(url), {status: 'invalid', code: 'page'});
   }
