@@ -579,7 +579,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
         {!rehearsal && loaded && !projectId && !sessionRequired && (!data.website.trim() || initialCreationUnconfirmed) ? <ProjectCreate first locale={locale}
           ownerBinding={ownerBinding} disabled={manualBusy || status === 'saving'} onStartWithoutWebsite={openNamedDraft}
           onBeforeCreate={lockFirstProjectCreation} onAfterCreate={unlockFirstProjectCreation} /> : null}
-        {!rehearsal && loaded && projectId ? <DossierContinuation key={projectId}
+        {!rehearsal && loaded && projectId ? <DossierContinuation key={`continuation:${projectId}`}
           projectId={projectId} revision={scopeRevision} withoutWebsite={!savedWebsite} locale={locale} request={request}
           sessionRequired={sessionRequired} onPendingChange={setContinuationPending} saveRef={continuationSave}
           canSave={scopeRevision > 0 && !sessionRequired && !unconfirmedChanges && !conflictReview && status !== 'saving' && !workingPending && !manualBusy} /> : null}
@@ -596,7 +596,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           observationState={observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?'failed':observationReadReady?.projectId===projectId&&observationReadReady.website===savedWebsite?'ready':'loading'} observation={currentObservations.observation}
           onSave={()=>{void saveDossierFirstStep({workingPending,saveWorking:workingSave.current,saveDossier:saveReviewedDraft,dossierPending:!projectId||dossierDirtyFields(data,savedSnapshot).length>0}).then(saved=>{if(!saved&&workingPending){const panel=document.getElementById('dossier-copilot');if(panel instanceof HTMLDetailsElement){panel.open=true;panel.scrollIntoView({block:'start'});panel.querySelector<HTMLElement>('summary')?.focus();}}});}} onGuide={continueFirstGuide}
           onAudit={()=>{void saveObservation();}} onReview={reviewObservation} onRetryRead={retrySavedObservationRead}/>:null}
-        {loaded&&projectId?<DossierTrustSummary key={projectId} projectId={projectId} revision={scopeRevision} draft={data} saved={savedSnapshot} locale={locale} observation={currentObservations.observation} request={request}/>:null}
+        {loaded&&projectId?<DossierTrustSummary key={`trust-summary:${projectId}`} projectId={projectId} revision={scopeRevision} draft={data} saved={savedSnapshot} locale={locale} observation={currentObservations.observation} request={request}/>:null}
         <div hidden={guidedView}>
         <ScopeImport onReviewChange={setReviewedScope} onPrepareSeparate={setSeparateScope} onAvailableScopeChange={setAvailableScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
           if(manualLock.current || data.website.trim())return;
@@ -740,7 +740,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
 
-        {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation key={projectId}
+        {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation key={`ai-index-preparation:${projectId}`}
           website={savedWebsite} contentSources={savedSnapshot.contentSources} observation={currentObservations.observation}
           readState={updatesReadState} locale={locale} /> : null}
 
