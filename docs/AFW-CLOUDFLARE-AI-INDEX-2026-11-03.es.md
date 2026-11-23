@@ -42,7 +42,7 @@ La fuente de esta rama prepara la guía y la propuesta. Su publicación, aceptac
 
 La sección «Entrega y comprobación de mejoras» incorpora «Preparar el sitio para AI Index». Usa el dominio guardado, las categorías de fuentes declaradas y una lectura fechada del mismo origen. Si cambia el dominio, falla la lectura o la fecha resulta inválida, no traslada la evidencia anterior a la ficha.
 
-La ficha muestra respuestas directas, datos estructurados, fuentes citables e identidad del responsable como señales de la lectura. La revisión de hechos sigue a cargo de la persona y el mantenedor. Una observación técnica no acredita que el contenido sea vigente o coherente. La decisión explícita por páginas queda pendiente para una etapa posterior de registro. La ficha no realiza solicitudes, cambia permisos, modifica el puntaje ni comprueba la indexación.
+La ficha muestra respuestas directas, datos estructurados, fuentes citables e identidad del responsable como señales de la lectura. La revisión de hechos sigue a cargo de la persona y el mantenedor. Una observación técnica no acredita que el contenido sea vigente o coherente. La selección explícita por rutas puede prepararse y descargarse para revisión del titular. La ficha no realiza solicitudes, cambia permisos, modifica el puntaje ni comprueba la indexación.
 
 ## Borrador explícito por páginas
 
@@ -80,3 +80,13 @@ El caso público de Tokenizart queda fuera de esta primera propuesta. El alcance
   "status": "draft"
 }
 ```
+
+## Qué queda para una prueba de AI Index
+
+El 23 de noviembre a las 19:57 de Argentina, una lectura nueva confirmó HTTP 200, canonical propio, presencia en el sitemap y ausencia de `noindex` en las cuatro páginas candidatas. `robots.txt` devolvió HTTP 200 y publica reglas distintas según el rastreador. Una visita sin sesión a `/expediente` recibió una redirección. La prueba solo observa respuestas públicas y el alcance propuesto de cuatro rutas.
+
+1. Contrastar tres hechos por página con sus fuentes y fechas. Mantener fuera de la primera selección el caso de Tokenizart, los expedientes, las cápsulas privadas, las API privadas y cualquier contenido de infraestructura cuya evidencia ya haya caducado. Descargar el borrador y registrar la versión que el titular revise.
+2. Confirmar con Cloudflare si AFW tiene invitación, qué alcance admite y cómo se actualiza y retira una página. La página oficial todavía ofrece una [solicitud para beta privada](https://www.cloudflare.com/aiindex-signup/). Si no hay evidencia de acceso, la fase sigue en preparación.
+3. Si existe acceso autorizado, registrar propósito, páginas admitidas, titular y condiciones de distribución. Conservar una consulta conocida y la exclusión de una página antes de habilitar. Tras la confirmación del proveedor, probar recuperación desde un cliente autorizado y comparar fuente, fecha y texto con la versión canónica. Registrar por separado una retirada o actualización cuando el proveedor ofrezca el control.
+
+[AI Crawl Control](https://developers.cloudflare.com/ai-crawl-control/) permite observar y gestionar rastreadores. Su uso no acredita acceso a AI Index ni que una página se haya recuperado. [AI Search](https://developers.cloudflare.com/ai-search/configuration/data-source/website/) permite preparar una búsqueda sobre fuentes configuradas. AFW acompaña la calidad y el alcance de lo que el titular decide distribuir.
