@@ -98,6 +98,8 @@ test('the checkpoint accepts only bounded notes and eligible paths', async t => 
   assert.equal((await call(input({ progress: 'password: unsafe-synthetic-example' }))).status, 400);
   assert.equal((await call(input({ progress: 'Authorization: Bearer synthetic-opaque-example' }))).status, 400);
   assert.equal((await call(input({ approvedVersion: 'https://example.org/?token=example' }))).status, 400);
+  assert.equal((await call(input({ approvedVersion: 'https://example.org/?%74oken=example' }))).status, 400);
+  assert.equal((await call(input({ approvedVersion: 'https://example.org/#access%5Ftoken=example' }))).status, 400);
   assert.deepEqual(await (await call()).json(), { projectRevision: 3, checkpoint: null });
 });
 
@@ -108,6 +110,7 @@ test('normal private workspace mounts the continuation card and a domainless cre
   const route = await readFile(new URL('../app/api/projects/[projectId]/continuation/route.ts', import.meta.url), 'utf8');
   assert.match(route, /getIdentity: getCloudflareAccessUser/);
   assert.match(workspace, /onStartWithoutWebsite=\{openNamedDraft\}/);
+  assert.match(workspace, /initialCreationUnconfirmed \|\| !shouldAutosaveProject/);
   assert.match(workspace, /!workingPending && !continuationPending && !hasPendingDraft/);
   assert.match(workspace, /sessionRequired=\{sessionRequired\} onPendingChange=\{setContinuationPending\}/);
 });

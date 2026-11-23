@@ -21,7 +21,7 @@ const newSiteCopy = {
 type NewProject = { id: string; revision?: number; website?: string; organization?: string };
 
 export function ProjectCreate({ locale, disabled, suggestion, first = false, ownerBinding = '', onStartWithoutWebsite, onBeforeCreate, onAfterCreate }: { locale: 'es' | 'en' | 'pt'; disabled: boolean; first?: boolean; ownerBinding?: string;
-  onStartWithoutWebsite?: (project: NewProject) => boolean; onBeforeCreate?: () => boolean; onAfterCreate?: () => void; suggestion?: {website:string;scopeText:string}|null }) {
+  onStartWithoutWebsite?: (project: NewProject) => boolean; onBeforeCreate?: () => boolean; onAfterCreate?: (needsReconciliation: boolean) => void; suggestion?: {website:string;scopeText:string}|null }) {
   const copy = words[locale];
   const [website, setWebsite] = useState(suggestion?.website || '');
   const [organization, setOrganization] = useState('');
@@ -48,6 +48,7 @@ export function ProjectCreate({ locale, disabled, suggestion, first = false, own
     setState('busy');
     setValidationError(false);
     setAccountError(false);
+    let needsReconciliation = false;
     try {
       const project = await submit.current!();
       if (first && withoutWebsite && onStartWithoutWebsite?.(project)) return;
@@ -61,11 +62,12 @@ export function ProjectCreate({ locale, disabled, suggestion, first = false, own
         setValidationError(true);
         setState('idle');
       } else {
+        needsReconciliation = true;
         if (error && typeof error === 'object' && 'status' in error && [0, 401, 403].includes(Number(error.status))) setAccountError(true);
         setState('error');
       }
     } finally {
-      onAfterCreate?.();
+      onAfterCreate?.(needsReconciliation);
     }
   }
   function openCreated(event:React.MouseEvent<HTMLAnchorElement>){

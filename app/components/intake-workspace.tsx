@@ -160,6 +160,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
   const workingExit = useRef<(() => void) | null>(null);
   const continuationSave = useRef<((confirmedRevision?: number) => Promise<boolean>) | null>(null);
   const [continuationPending, setContinuationPending] = useState(false);
+  const [initialCreationUnconfirmed, setInitialCreationUnconfirmed] = useState(false);
   const savedBase = useRef<Intake>(emptyIntake);
   const [savedSnapshot, setSavedSnapshot] = useState<Intake>(emptyIntake);
   const savedRevision = useRef(0);
@@ -278,7 +279,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
   }, [locale, projectId, request, savedWebsite, observationLoadAttempt]);
 
   const saveReviewedDraft = useCallback(async () => {
-    if (!ready.current || manualLock.current || conflictReview || !canSaveProjectDraft(data, savedBase.current, projectId)) return false;
+    if (!ready.current || manualLock.current || initialCreationUnconfirmed || conflictReview || !canSaveProjectDraft(data, savedBase.current, projectId)) return false;
     manualLock.current = true;
     setManualBusy(true);
     setStatus('saving');
@@ -335,10 +336,10 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
       manualLock.current = false;
       setManualBusy(false);
     }
-  }, [conflictReview, data, locale, projectId, rehearsal, request, saveAttempt]);
+  }, [conflictReview, data, initialCreationUnconfirmed, locale, projectId, rehearsal, request, saveAttempt]);
 
   useEffect(() => {
-    if (!shouldAutosaveProject({ ready: ready.current, draft: data, base: savedBase.current, projectId,
+    if (initialCreationUnconfirmed || !shouldAutosaveProject({ ready: ready.current, draft: data, base: savedBase.current, projectId,
       manual: Boolean(rehearsal && !rehearsal.autoSave), busy: manualBusy, paused: autosavePaused,
       conflict: Boolean(conflictReview), sessionRequired })) return;
     if (exitTarget) return;
@@ -346,7 +347,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
       await saveReviewedDraft();
     }, 900);
     return () => window.clearTimeout(timer);
-  }, [data, projectId, rehearsal, manualBusy, autosavePaused, conflictReview, sessionRequired, saveReviewedDraft, status, exitTarget]);
+  }, [data, projectId, rehearsal, manualBusy, autosavePaused, conflictReview, sessionRequired, saveReviewedDraft, status, exitTarget, initialCreationUnconfirmed]);
 
   useEffect(() => {
     if (!workingPending && !continuationPending && !hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
@@ -508,13 +509,14 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
     window.requestAnimationFrame(()=>{const title=document.getElementById('project-directory-title');if(title){title.tabIndex=-1;title.focus();title.scrollIntoView({block:'start'});}});
   }
   function lockFirstProjectCreation() {
-    if (manualLock.current || projectId || data.website.trim()) return false;
+    if (manualLock.current || projectId || (data.website.trim() && !initialCreationUnconfirmed)) return false;
     manualLock.current = true;
     setManualBusy(true);
     return true;
   }
 
-  function unlockFirstProjectCreation() {
+  function unlockFirstProjectCreation(needsReconciliation: boolean) {
+    setInitialCreationUnconfirmed(needsReconciliation);
     manualLock.current = false;
     setManualBusy(false);
   }
@@ -574,7 +576,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           <p>{privateUiCopy(locale).dossier.intro}</p>
         </div>
 
-        {!rehearsal && loaded && !projectId && !sessionRequired && !data.website.trim() ? <ProjectCreate first locale={locale}
+        {!rehearsal && loaded && !projectId && !sessionRequired && (!data.website.trim() || initialCreationUnconfirmed) ? <ProjectCreate first locale={locale}
           ownerBinding={ownerBinding} disabled={manualBusy || status === 'saving'} onStartWithoutWebsite={openNamedDraft}
           onBeforeCreate={lockFirstProjectCreation} onAfterCreate={unlockFirstProjectCreation} /> : null}
         {!rehearsal && loaded && projectId ? <DossierContinuation key={projectId}
@@ -765,7 +767,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           {!rehearsal && projectId ? <ProjectCreate key={separateScope?.scopeText || 'manual'} locale={locale} ownerBinding={ownerBinding} suggestion={separateScope} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot, projectId }) || (status !== 'idle' && status !== 'saved')} /> : null}
         </div>
         {conflictReview ? <div id="dossier-conflict"><IntakeConflictReview key={conflictReview.plan.revision} locale={locale} plan={conflictReview.plan} onConfirm={confirmConflictReview} onCancel={() => setConflictReview(null)} /></div> : null}
-        {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || Boolean(conflictReview) || !loaded || !canSaveProjectDraft(data, savedSnapshot, projectId)} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}
+        {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || initialCreationUnconfirmed || Boolean(conflictReview) || !loaded || !canSaveProjectDraft(data, savedSnapshot, projectId)} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}
         {sessionRequired ? <p id="dossier-session" tabIndex={-1} role="alert">{!rehearsal ? localizedMessage(locale, 'La sesión venció. Conserva esta pestaña abierta e inicia sesión en otra pestaña; después vuelve a guardar aquí.', 'Your session expired. Keep this tab open and sign in in another tab; then return here and save again.', 'Sua sessão expirou. Mantenha esta aba aberta e entre em outra aba; depois volte e salve novamente.') : localizedMessage(locale,
           'La sesión de prueba venció. Tus cambios siguen en este formulario, sin guardar. No cierres ni recargues esta pestaña. Restablece la sesión simulada arriba y vuelve a confirmar el guardado; no necesitas completar todo otra vez.',
           'The test session expired. Your unsaved changes remain in this form. Do not close or reload this tab. Restore the simulated session above, then confirm saving again; you do not need to fill everything out again.',
