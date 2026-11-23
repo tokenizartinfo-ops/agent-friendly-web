@@ -29,8 +29,13 @@ async function fixture({closed=false,expired=false}={}){
  const built=await build({stdin:{contents:entry,resolveDir:fileURLToPath(new URL('..',import.meta.url)),sourcefile:'shared-runtime-native.mjs',loader:'js'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  let posts=0,providerReads=0;
  const outboundService=async request=>{
-  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json'){
-   providerReads++;return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:'resolved',updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]}]});
+  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json'){
+   providerReads++;assert.equal(request.headers.get('Authorization'),null);
+   return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[]});
+  }
+  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents/cbvocc87nsne.json'){
+   providerReads++;assert.equal(request.headers.get('Authorization'),null);
+   return Response.json({page:{url:'https://www.cloudflarestatus.com'},incident:{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:'resolved',updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]}});
   }
   assert.ok(request.url.startsWith('https://api.cloudflare.com/client/v4/accounts/'+accountId+'/'));
   assert.equal(request.headers.get('Authorization'),'Bearer synthetic_shared_runtime_credential');
@@ -59,6 +64,7 @@ test('explicit bundle executes from another native Workflow class despite a fore
  try{
   const instance=await f.flow.create({id:f.id,params:JSON.stringify({planHash:f.planHash})}),first=await terminal(instance);
   assert.equal(first.output.status,'confirmed');assert.equal(first.output.receipt.versionId,versionId);
+  assert.equal(f.providerReads(),2);
   assert.equal(f.posts(),1);assert.equal(await rows(f,'dossier_publication_attempts'),1);assert.equal(await rows(f,'dossier_publication_receipts'),1);
   await instance.restart();const second=await terminal(instance);
   assert.equal(second.output.status,'uncertain');assert.equal(second.output.mayRetry,false);assert.equal(f.posts(),1);assert.equal(await rows(f,'dossier_publication_attempts'),1);

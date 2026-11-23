@@ -34,6 +34,6 @@ test('invalid timestamps, duplicate IDs and malformed component metadata still f
  const s=feed(ai());s.incidents.push(ai());const r=assessCronProviderSnapshot(s,{now,dependencyProfile:profile});assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);assert.deepEqual(r.nonBlockingIncidents,[]);
 });
 test('public observer retains one bounded official read and sanitizes the nonblocking report',async()=>{
- let requests=0;const r=await checkOwnCronProvider({now:()=>now,dependencyProfile:profile,fetchImpl:async(url,options)=>{requests++;assert.equal(url,'https://www.cloudflarestatus.com/api/v2/incidents.json');assert.equal(options.redirect,'error');assert.deepEqual(Object.keys(options.headers),['User-Agent']);return new Response(JSON.stringify(feed(ai())),{headers:{'Content-Type':'application/json'}});}});
+ let requests=0;const r=await checkOwnCronProvider({now:()=>now,dependencyProfile:profile,fetchImpl:async(url,options)=>{requests++;assert.equal(url,'https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json');assert.equal(options.redirect,'error');assert.deepEqual(Object.keys(options.headers),['User-Agent']);return new Response(JSON.stringify(feed(ai())),{headers:{'Content-Type':'application/json'}});}});
  assert.equal(requests,1);assert.equal(r.requestCount,1);assert.equal(r.providerGate,'resolved');assert.equal(r.operationalReadiness,false);assert.equal(JSON.stringify(r).includes('unsafe topic'),false);assert.equal(JSON.stringify(r).includes('AI Security'),false);
 });
