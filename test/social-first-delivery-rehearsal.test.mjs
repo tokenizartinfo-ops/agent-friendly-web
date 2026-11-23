@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { once } from 'node:events';
 import { createServer } from 'node:http';
 import { performance } from 'node:perf_hooks';
@@ -50,15 +51,21 @@ test('social-first business rehearses a website it can own and verify', async (t
   assert.equal(planCopilotNextTurn(saved).actionId, 'review_scope');
   finish('guideSaveReloadMs');
 
-  // Owner-reviewed fictitious content. The discovery capsule does not create this page.
-  const facts = ['Reparamos bicicletas urbanas', 'Atendemos en Villa Ejemplo', 'Pedí turno en /contacto'];
+  // A fictitious social bio is out of date. The simulated owner confirms the correction.
+  const socialLocation = 'Barrio Ejemplo';
+  const confirmedLocation = 'Villa Ejemplo';
+  assert.notEqual(socialLocation, confirmedLocation);
+  const facts = ['Reparamos bicicletas urbanas', 'Atendemos en ' + confirmedLocation];
   const previous = Buffer.from('<h1>Taller Ejemplo</h1>');
-  const homepage = Buffer.from('<h1>Taller Ejemplo</h1>' + facts.map(fact => '<p>' + fact + '</p>').join(''));
+  const homepage = Buffer.from('<h1>Taller Ejemplo</h1>' + facts.map(fact => '<p>' + fact + '</p>').join('')
+    + '<a href="/contacto">Pedir turno</a>');
+  const contact = Buffer.from('<h1>Contacto</h1><p>Solicitá un turno por mensaje privado en nuestro perfil ficticio.</p>');
+  const pages = new Map([['/', homepage], ['/contacto', contact]]);
   const files = new Map([['/', previous]]);
   const server = createServer((request, response) => {
     const bytes = files.get(request.url);
     if (!bytes) return response.writeHead(404).end();
-    response.writeHead(200, { 'content-type': request.url === '/' ? 'text/html; charset=utf-8' : 'text/plain; charset=utf-8' }).end(bytes);
+    response.writeHead(200, { 'content-type': request.url.endsWith('.txt') ? 'text/plain; charset=utf-8' : 'text/html; charset=utf-8' }).end(bytes);
   });
   server.listen(0, '127.0.0.1');
   t.after(() => new Promise(resolve => {
@@ -73,7 +80,9 @@ test('social-first business rehearses a website it can own and verify', async (t
     return { status: response.status, body: bodyBytes.toString('utf8'), bodyBytes,
       contentType: response.headers.get('content-type'), truncated: false };
   };
-  for (const fact of facts) assert.equal((await read('/')).body.includes(fact), false);
+  const baseline = await read('/');
+  for (const fact of facts) assert.equal(baseline.body.includes(fact), false);
+  assert.equal((await read('/contacto')).status, 404);
   finish('baselineMs');
 
   const capsule = buildPublicationCapsule({
@@ -99,7 +108,19 @@ test('social-first business rehearses a website it can own and verify', async (t
     },
   });
   assert.ok((await compare()).resources.every(resource => resource.status === 'missing'));
+  const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+  const packageBytes = new Map(pages);
+  for (const file of capsule.files) packageBytes.set(file.destinationPath, Buffer.from(file.content, 'utf8'));
+
+  // The test-only handoff identifies the reviewed website pages and the same AFW manifest.
+  const handoffId = contents => hash(JSON.stringify({
+    project: saved.id, revision: saved.revision, origin: capsule.manifest.target.origin,
+    capsule: capsule.integrity.manifestSha256,
+    destinations: Array.from(contents, ([path, bytes]) => [path, hash(bytes)]),
+  }));
+  const reviewedHandoff = handoffId(packageBytes);
   const approvals = [];
+  const handoffApprovals = new Map();
   const state = () => capsuleState({
     requiredRoles: capsule.manifest.approvals.requiredRoles, approvals,
     expiresAt: capsule.expiresAt, now: '2026-11-23T15:05:00Z',
@@ -112,13 +133,21 @@ test('social-first business rehearses a website it can own and verify', async (t
     });
     assert.equal(decision.manifestSha256, capsule.integrity.manifestSha256);
     approvals.push({ ...decision, role });
+    handoffApprovals.set(role, reviewedHandoff);
     if (role === 'owner') assert.equal(state(), 'maintainer_approval_pending');
   }
   assert.equal(state(), 'approved_for_manual_handoff');
   finish('prepareAndApproveMs');
 
-  files.set('/', homepage);
-  for (const file of capsule.files) files.set(file.destinationPath, Buffer.from(file.content, 'utf8'));
+  const install = contents => {
+    for (const role of capsule.manifest.approvals.requiredRoles) {
+      assert.equal(handoffApprovals.get(role), handoffId(contents), 'Handoff changed after review');
+    }
+    for (const [path, bytes] of contents) files.set(path, bytes);
+  };
+  assert.throws(() => install(new Map(packageBytes).set('/', Buffer.from('unreviewed'))), /Handoff changed/);
+  assert.deepEqual((await read('/')).bodyBytes, previous);
+  install(packageBytes);
   const after = await compare();
   assert.equal(after.manifestSha256, capsule.integrity.manifestSha256);
   assert.equal(after.limits.remoteMutation, false);
@@ -127,6 +156,12 @@ test('social-first business rehearses a website it can own and verify', async (t
     assert.equal(result.currentSha256, capsule.files.find(file => file.destinationPath === result.destinationPath).sha256);
   }
   const installed = await read('/');
+  assert.deepEqual(installed.bodyBytes, homepage);
+  assert.ok(installed.body.includes('href="/contacto"'));
+  const contactReadback = await read('/contacto');
+  assert.equal(contactReadback.status, 200);
+  assert.deepEqual(contactReadback.bodyBytes, contact);
+  assert.equal(installed.body.includes(socialLocation), false);
   for (const fact of facts) assert.ok(installed.body.includes(fact));
   for (const file of capsule.files) {
     // Today the capsule carries declared metadata. The pages need their own semantic review.
@@ -135,12 +170,15 @@ test('social-first business rehearses a website it can own and verify', async (t
   finish('installAndVerifyMs');
 
   files.set('/', previous);
+  files.delete('/contacto');
   for (const file of capsule.files) files.delete(file.destinationPath);
   assert.deepEqual((await read('/')).bodyBytes, previous);
+  assert.equal((await read('/contacto')).status, 404);
   assert.ok((await compare()).resources.every(resource => resource.status === 'missing'));
   finish('rollbackAndVerifyMs');
   t.diagnostic(JSON.stringify({
     sourceRevision: saved.revision, capsuleVersion: capsule.version, checkedFacts: facts.length,
+    verifiedPages: pages.size, reviewedHandoff,
     verifiedFiles: after.resources.length, localRunnerTimings: timings, humanTime: null,
     semanticFactsInCapsule: false, customerPublication: false,
   }));
