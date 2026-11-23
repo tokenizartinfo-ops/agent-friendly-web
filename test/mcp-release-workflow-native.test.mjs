@@ -25,7 +25,7 @@ async function fixture({operator='true',workflow='true',provider='resolved',lost
  if(confirm)policy={operation:'confirm',startAt,expiresAt,plan:{activationKey:'d'.repeat(64),artifactKey:hash(JSON.stringify([accountId,workerName,artifact.workerHash])),trialId:'e'.repeat(64),scopeHash:'f'.repeat(64),configurationHash:activationConfigurationHash(configuration),startAt,expiresAt},observation:{versionId,deploymentId:'33333333-3333-4333-8333-333333333333',namespaceId,applicationId:namespaceId,configuration}};
  const built=await buildMcpReleaseOperator({artifact,policy});let posts=0,providerReads=0;
  const outboundService=async request=>{
-  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json'){
+  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json'){
    providerReads++;
    if(provider==='redirect')return new Response(null,{status:302,headers:{Location:'https://outside.invalid/'}});
    return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:provider.startsWith('builds-')?'resolved':provider,updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]},...(provider.startsWith('builds-')?[{id:'buildsonly',name:'Cloudflare Workers build delays',status:'monitoring',updated_at:'2026-10-14T00:00:00Z',components:[{id:'vcpsk0w6g86k',name:'Workers Builds'}],incident_updates:[{affected_components:[{code:provider==='builds-mixed'?'runtime':'vcpsk0w6g86k',name:provider==='builds-mixed'?'Cloudflare Sites and Services - Workers':'Cloudflare Sites and Services - Workers Builds'}]}]}]:[])]});
@@ -45,7 +45,7 @@ async function fixture({operator='true',workflow='true',provider='resolved',lost
  };
  const bindings={AFW_RELEASE_OPERATOR_ENABLED:operator,AFW_RELEASE_PUBLISH_TOKEN:'synthetic_publish_credential'};if(workflow!==null)bindings.AFW_RELEASE_WORKFLOW_ENABLED=workflow;
  if(reservation!==null)bindings.AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED=reservation;
- const clock=slow||rewind||rewindBase?"const originalFetch=globalThis.fetch;globalThis.fetch=async(...args)=>{const response=await originalFetch(...args);if("+(rewindBase?"String(args[0]).endsWith('/versions/"+baseVersionId+"')":"String(args[0])==='https://www.cloudflarestatus.com/api/v2/incidents.json'")+")Date.now=()=>"+(rewind||rewindBase?startAt+1:expiresAt+1)+";return response;};\n":'';
+ const clock=slow||rewind||rewindBase?"const originalFetch=globalThis.fetch;globalThis.fetch=async(...args)=>{const response=await originalFetch(...args);if("+(rewindBase?"String(args[0]).endsWith('/versions/"+baseVersionId+"')":"String(args[0])==='https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json'")+")Date.now=()=>"+(rewind||rewindBase?startAt+1:expiresAt+1)+";return response;};\n":'';
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[{name:'operator',modules:true,script:clock+built.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings,d1Databases:{RELEASE_DB:'release-workflow-native'},workflows:{FLOW:{name:'afw-release-test',className:'AfwReleaseWorkflow'}},outboundService}]}));
  try{
   const db=await mf.getD1Database('RELEASE_DB','operator');

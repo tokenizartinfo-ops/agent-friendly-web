@@ -29,7 +29,7 @@ async function fixture({closed=false,expired=false}={}){
  const built=await build({stdin:{contents:entry,resolveDir:fileURLToPath(new URL('..',import.meta.url)),sourcefile:'shared-runtime-native.mjs',loader:'js'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  let posts=0,providerReads=0;
  const outboundService=async request=>{
-  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json'){
+  if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json'){
    providerReads++;return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:'resolved',updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]}]});
   }
   assert.ok(request.url.startsWith('https://api.cloudflare.com/client/v4/accounts/'+accountId+'/'));

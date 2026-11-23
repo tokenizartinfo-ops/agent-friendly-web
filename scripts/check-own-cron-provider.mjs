@@ -1,5 +1,6 @@
 import {pathToFileURL} from 'node:url';
-const SOURCE='https://www.cloudflarestatus.com/api/v2/incidents.json';
+// The rolling incident history can omit incidents that remain open.
+const SOURCE='https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json';
 const INCIDENT='cbvocc87nsne',MAX_BYTES=262144;
 const TRACKED_SOURCE='https://www.cloudflarestatus.com/api/v2/incidents/cbvocc87nsne.json';
 const ACTIVE=new Set(['investigating','identified','monitoring']);

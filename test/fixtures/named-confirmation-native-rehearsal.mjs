@@ -99,7 +99,7 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
   const urls={module:root+'/workers/workers/'+RELEASE_TARGET.workerName+'/versions/'+versionId+'?include=modules',metadata:root+'/workers/workers/'+RELEASE_TARGET.workerName+'/versions/'+versionId,legacy:root+'/workers/scripts/'+RELEASE_TARGET.workerName+'/versions/'+versionId,deployments:root+'/workers/scripts/'+RELEASE_TARGET.workerName+'/deployments',application:root+'/containers/applications/'+RELEASE_TARGET.namespaceId,instance:root+'/containers/applications/'+RELEASE_TARGET.namespaceId+'/instances/'+ids.original};
   const outboundService=async request=>{
    assert.equal(request.method,'GET','qualification must never publish');
-   if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json'){
+   if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents/unresolved.json'){
     counters.providerReads++;
     const incidents=[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:'resolved',updated_at:'2026-10-14T00:00:00.000Z',components:[],incident_updates:[]}];
     if(mode==='regional-incident')incidents.push({id:'ciworkersregion',name:'Regional elevated errors',status:'investigating',updated_at:'2026-10-14T00:00:00.000Z',components:[{name:'Workers'}],incident_updates:[]});
