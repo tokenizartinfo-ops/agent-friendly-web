@@ -37,3 +37,9 @@ AFW puede mostrar una guía y preparar un handoff. Una solicitud o configuració
 - Evaluar un recorrido para clientes con vista previa y decisiones por el responsable; comparar resultados por fuentes y fechas.
 
 La fuente de esta rama prepara la guía y la propuesta. Su publicación, aceptación en la beta, creación de índice y disponibilidad para terceros necesitan verificaciones independientes.
+
+## Ficha de preparación en el expediente — 23 de noviembre
+
+La sección «Entrega y comprobación de mejoras» incorpora «Preparar el sitio para AI Index». Usa el dominio guardado, las categorías de fuentes declaradas y una lectura fechada del mismo origen. Si cambia el dominio, falla la lectura o la fecha resulta inválida, no traslada la evidencia anterior a la ficha.
+
+La ficha muestra respuestas directas, datos estructurados, fuentes citables e identidad del responsable como señales de la lectura. La revisión de hechos sigue a cargo de la persona y el mantenedor. Una observación técnica no acredita que el contenido sea vigente o coherente. La decisión explícita por páginas queda pendiente para una etapa posterior de registro. La ficha no realiza solicitudes, cambia permisos, modifica el puntaje ni comprueba la indexación.

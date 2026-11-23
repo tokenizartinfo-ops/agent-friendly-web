@@ -130,3 +130,30 @@ La [filosofía integral](AFW-INTEGRAL-PHILOSOPHY-2026-10-07.es.md#fuente-propia-
 Presentar AFW como acompañamiento para expresar qué aporta ese responsable, a quién, con qué alcance y qué evidencia. La información clara y coherente facilita su evaluación; no garantiza selección por modelos ni sustituye una necesidad del comprador. «AI first» y la cantidad de archivos no acreditan utilidad, disponibilidad de herramientas o veracidad.
 
 Aplicar esta dirección a futuras presentaciones y versiones de correo, sin cambiar paquetes históricos, aprobar envíos, añadir tracking o publicar precios por esta ampliación. Las comparaciones de costos, ahorro, demanda y alternativas siguen pendientes de medición. Se preserva la investigación comercial como hipótesis revisable.
+
+## Un sitio propio desde el inicio — propuesta del 23 de noviembre
+
+**Tu negocio puede tener una fuente propia desde el primer día.** Si hoy tus servicios, productos u obras están en redes, AFW te ayuda a elegir qué información querés llevar a un sitio que controlás. Las redes pueden seguir acercando público. Tu dominio, las páginas y los documentos descargables quedan como referencia que vos podés actualizar y llevar a otro proveedor.
+
+**Para quién.** Profesionales, pequeños comercios, artistas y proyectos con una oferta reconocible, un responsable y fuentes que pueden revisar. Una agencia puede incorporar esta entrega a su trabajo. Si todavía falta definir qué se ofrece, empezar por ordenar esa información con el titular.
+
+| Entrega | Qué incluye | Cómo se comprueba |
+| --- | --- | --- |
+| Sitio inicial | Selección y revisión de contenido aportado voluntariamente, páginas para explicar una oferta y su alcance, un contacto público elegido por el titular | El titular valida texto, edición, enlaces y acceso a una copia exportable |
+| Documentación para agentes | Páginas canónicas, datos estructurados coherentes con lo visible, mapa del sitio y documentos de descubrimiento cuando aporten valor | Las señales públicas apuntan a la versión revisada. Una pregunta de prueba compara el resultado con la fuente original |
+| Publicación y transferencia | Ruta acordada, publicación por el titular o su mantenedor, comprobación de destinos y copia recuperable | El titular conserva el dominio, acceso a contenidos y una guía de actualización. La reversión se prueba en el entorno acordado |
+
+**Modalidades propuestas.** Preparación para quien ya tiene un mantenedor, entrega acompañada con publicación acordada y revisión posterior opcional. El dominio y el hosting, las páginas y fuentes a revisar, las rondas de corrección y el tiempo de mantenimiento se presentan por separado antes de aceptar. Registrar si quienes participan pueden actualizar la oferta después de la entrega. Seguimiento, APIs, pagos e indexación de terceros requieren un alcance propio.
+
+**Validación.** Empezar por una oferta, un conjunto pequeño de páginas y preguntas verificables sobre servicio, zona y contacto. Medir minutos de revisión y retrabajo por rol, complejidad de publicación y costos del dominio, hosting, soporte y herramientas por separado. Dejar precios y demanda como hipótesis hasta observar una oferta concreta y su aceptación. El ensayo reproducible usa un sitio ficticio y sirve para detectar fricción técnica antes de un piloto consentido.
+
+**Alcance actual.** El ensayo modela el sitio y su entrega en CI. La cápsula actual aporta identidad, objetivos y metadatos de descubrimiento. Los hechos de negocio viven en páginas revisadas por el titular. La propuesta comercial incluye preparar esas páginas con acompañamiento y entregar su fuente. Los cambios de producción y cualquier compromiso comercial conservan su aprobación propia.
+
+### Sites como taller y muestra para clientes
+
+1. **Prototipo privado en Sites.** Empezar con una web estática cuando alcance. Guardar el contenido como archivos portables, junto con los documentos para agentes. Revisar la oferta, quién la declara, las fuentes y el canal de contacto. Para una demostración usar hechos claramente ficticios o contenido de muestra autorizado.
+2. **Vista pública cuando esté revisada.** Publicar la versión elegida con la audiencia pública y comprobarla sin sesión antes de compartir el enlace. Cualquiera con el enlace puede visitarla. Una demostración pública puede conservar indicaciones de exclusión de buscadores, que por sí solas no restringen acceso. Si la muestra contiene información privada, se mantiene con acceso restringido.
+3. **Sitio definitivo donde el titular elija.** El cliente puede alojar la fuente estática en su propio proveedor y dominio. También puede acordar un subdominio gestionado por AFW, con salida y copia exportable. Conservar como opción un dominio propio del cliente conectado al hosting elegido o, si el plan y sus permisos lo permiten, a Sites. La titularidad del contenido y el control del DNS se explican por separado. Un subdominio de AFW sigue bajo su zona DNS.
+4. **Verificación tras el traslado.** En el dominio final, comprobar rutas sin sesión, contenido, enlaces y canónicas, reglas de rastreo, estados HTTP y recuperación. Si la web usa autenticación, base de datos o conexiones propias de Sites, confirmar primero cómo se reemplazan y migran. Una versión estática se entrega con sus archivos y fuente.
+
+La oferta usa Sites en la fase de diseño y demostración. Cada publicación, configuración de dominio y entrega se decide sobre una versión y un destino concretos. Ver disponibilidad y límites de la cuenta antes de cotizar hosting. [Crear un Site](https://learn.chatgpt.com/docs/sites/creating-a-site) · [Publicación y acceso](https://learn.chatgpt.com/docs/sites/publishing-and-sharing) · [Dominios y versiones](https://learn.chatgpt.com/docs/sites/managing-a-site).
