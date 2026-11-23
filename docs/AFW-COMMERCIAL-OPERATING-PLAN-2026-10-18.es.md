@@ -191,6 +191,8 @@ Para entregar el sitio, fijá la apariencia aprobada, prepará una copia portabl
 
 ## Piloto comercial y modelo de negocio — 23 de noviembre de 2026
 
+El [recorrido comercial operativo](AFW-COMMERCIAL-PLAYBOOK.es.md) reúne la selección de casos, el abordaje, el seguimiento, la comparación con alternativas y las pruebas de monetización para personas, agencias e integradores.
+
 La primera hipótesis es vender una entrega verificable por sitio. Una persona puede ver una muestra antes de contratar. Una agencia puede revisar el paquete y conservar la relación de mantenimiento. La primera ronda usa un recorrido asistido y un presupuesto por alcance. Los avisos automáticos y la preparación delegada tienen aceptación propia.
 
 | Orden | A quién buscar y qué señal pedir | Quién compra y aplica | Cómo ofrecerlo |
