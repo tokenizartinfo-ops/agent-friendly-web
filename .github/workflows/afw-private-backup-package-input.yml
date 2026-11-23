@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify startup, same-notice review and withdrawal in isolation
+      - name: Verify isolated startup, review, withdrawal and simulated restoration
         run: node --test test/mcp-qa-finite-receiver-workerd.test.mjs
       - name: Verify pinned private backup and current compiler output
         env:

@@ -25,6 +25,7 @@ on:
       - "test/mcp-qa-finite-prelaunch-check.test.mjs"
       - "test/mcp-own-finite-entrypoints-native.test.mjs"
       - "test/mcp-qa-finite-receiver-workerd.test.mjs"
+      - "test/fixtures/mcp-qa-finite-coupled-restorer.mjs"
       - "test/fixtures/mcp-own-durable-host.mjs"
       - "test/fixtures/mcp-own-synthetic-save.mjs"
       - "lib/**"
@@ -72,7 +73,7 @@ jobs:
         run: python3 -m unittest discover -s test -p 'finite_*archive_test.py'
       - name: Verify predecessor isolation
         run: node --test test/mcp-qa-finite-admission-primary.test.mjs test/mcp-qa-finite-launch-admission.test.mjs test/mcp-qa-finite-prelaunch-check.test.mjs test/mcp-own-finite-entrypoints-native.test.mjs
-      - name: Verify one same-notice occurrence through withdrawal
+      - name: Verify one isolated notice through review, withdrawal and simulated restoration
         run: node --test test/mcp-qa-finite-receiver-workerd.test.mjs
       - name: Verify private R2 package transport and release provenance
         run: node --test test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-r2-object.test.mjs test/verify-finite-native-rollback.test.mjs test/verify-finite-native-staging.test.mjs test/mcp-qa-finite-closed-profile.test.mjs test/mcp-qa-finite-seed-issuer.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs

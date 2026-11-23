@@ -4,65 +4,13 @@ import locator from '../scripts/mcp-finite-r2-historical-inputs.json' with {type
 import {QA_CLOUD_CLOSED_PINS as pins} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 import {finiteHash as hash} from '../lib/mcp-finite-evidence.mjs';
 
-import {observePrivateQaCoupledRestorePreparation,finiteCoupledQaPreparationInstanceId,FINITE_COUPLED_QA_OPERATION} from '../lib/mcp-qa-finite-coupled-restore-observer.mjs';
+import {FINITE_COUPLED_QA_OPERATION} from '../lib/mcp-qa-finite-coupled-restore-observer.mjs';
+import {finiteCoupledRestoreFixture,live,active,restored} from './fixtures/mcp-qa-finite-coupled-restorer.mjs';
 
 const api=await import('../lib/mcp-qa-finite-coupled-restorer.mjs').catch(()=>({}));
-const purpose='afw.finite-coupled-qa-finalization.v1';
-const live='11111111-1111-4111-8111-111111111111',active='22222222-2222-4222-8222-222222222222';
-const restored='33333333-3333-4333-8333-333333333333';
-function fixture(){
- let at=Date.parse('2026-11-19T12:01:00Z'),pointer={versionId:live,deploymentId:active,annotation:null},record,phase=0;
- const intent={intentId:'1'.repeat(64),controlHash:'2'.repeat(64),sourceRevision:'3'.repeat(40),handoffHash:'4'.repeat(64),restoreFrom:at-30000,restoreBefore:at+150000};
- const {id,configurationHash,module}=pins.qaClosed;
- const basis={purpose,status:'prepared',intentId:intent.intentId,controlHash:intent.controlHash,sourceRevision:intent.sourceRevision,handoffHash:intent.handoffHash,
-  ownerReceiptHash:'5'.repeat(64),ownerClosedAt:at-1000,restoreBefore:intent.restoreBefore,liveQa:{versionId:live,deploymentId:active},closedQa:{versionId:id,configurationHash,module},
-  restoredCanary:{versionId:pins.canary.id,deploymentId:pins.canary.deploymentId},
-  backup:{archiveSha256:locator.archiveSha256,archiveBytes:locator.archiveBytes,receiptSha256:locator.receiptSha256,qaClosed:locator.inputs.qaClosed},authorizesEffects:false,operationalReadiness:false};
- const preparation={...basis,preparationHash:hash(basis)};
- const refs={intentId:intent.intentId,controlHash:intent.controlHash,sourceRevision:intent.sourceRevision};
- const event={instanceId:finiteCoupledQaPreparationInstanceId(refs),workflowName:'afw-own-qa-private-bootstrap',
-   payload:{operation:FINITE_COUPLED_QA_OPERATION,...refs}};
- let observed;
- const observe=()=>observePrivateQaCoupledRestorePreparation({event,sourceRevision:refs.sourceRevision,
-  step:{do:async(name,options,task)=>{assert.equal(name,'observe-original-qa-restore-preparation');return task();}},
-  env:{AFW_QA_VERSION:{id:live},AFW_INDEPENDENT_CLOSURE:{
-   idFromName(name){assert.equal(name,'afw-own-successor-closure-v1');return 'exact-original-slot';},
-   get(slot){assert.equal(slot,'exact-original-slot');return {async readFiniteCoupledQaFinalization(x){
-    assert.deepEqual(x,{intentId:intent.intentId,controlHash:intent.controlHash});return f.preparation;
-   }};}
-  }}
- });
- const f={intent,preparation,reads:0,claims:0,writes:0,readback:0,loseAck:false,scopeDrift:false,missingArchive:false,claimMode:'issued',tamperSend:false,driftAfterClaim:false};
- const marker='afw-coupled-qa-restore-'+hash({purpose:'afw.finite-coupled-qa-restore-key.v1',intentId:intent.intentId,controlHash:intent.controlHash,handoffHash:intent.handoffHash});
- f.deps={intent,signal:new AbortController().signal,now:()=>at,
-  readObservation:async()=>{
-   observed??=await observe();
-   return f.foreignObservation?{...observed,instanceId:'foreign-workflow'}:observed;
-  },
-  readProvider:async()=>{
-   f.reads++;if(phase===1)f.readback++;
-   return {purpose:'afw.finite-coupled-qa-provider.v1',observedAt:at,archiveSha256:f.missingArchive?'a'.repeat(64):locator.archiveSha256,
-    custodyUntil:f.scopeDrift?at:intent.restoreBefore,providerEvidenceHash:'6'.repeat(64),namespacePreserved:true,privateExposure:true,
-    peerVersionsClosed:true,ownWorkflowsTerminal:true,ownContainerEmpty:true,targetQualified:true,...pointer};
-  },
-  claimSend:async r=>{f.claims++;if(record)return 'existing';if(f.claimMode!=='issued')return f.claimMode;record=r;if(f.driftAfterClaim)pointer={...pointer,deploymentId:restored};return 'issued';},
-  readSend:async()=>f.tamperSend?{...record,ownerReceiptHash:'a'.repeat(64)}:record,
-  deployClosed:async request=>{
-   f.writes++;assert.equal(request.recordHash,hash(record));assert.equal(request.record.annotation,marker);
-   assert.deepEqual(request.body,{strategy:'percentage',versions:[{version_id:id,percentage:100}],annotations:{'workers/message':marker}});
-   assert.equal(request.record.requestHash,hash(request.body));
-   pointer={versionId:id,deploymentId:restored,annotation:marker};phase=1;
-   if(f.loseAck)throw Error('synthetic lost Cloudflare acknowledgment');
-   return {deploymentId:restored};
-  }
- };
- f.expire=()=>{at=intent.restoreBefore;};
- f.advance=ms=>{at+=ms;};
- return f;
-}
 const requireController=()=>{assert.equal(typeof api.createPrivateQaFiniteCoupledRestorer,'function');return api.createPrivateQaFiniteCoupledRestorer;};
 test('the independent writer restores the exact private R2 target once and reports matching provider readback',async()=>{
- const create=requireController(),f=fixture(),controller=create(f.deps);
+ const create=requireController(),f=finiteCoupledRestoreFixture(),controller=create(f.deps);
  const result=await controller.run();
  assert.equal(result.status,'restored_observed');
  assert.equal(result.ownerReceiptHash,f.preparation.ownerReceiptHash);
@@ -86,7 +34,7 @@ function addNoticeEvidence(f,{foreign=false}={}){
  return noticeEvidence;
 }
 test('independent restoration reports the exact retained delivery, review and withdrawal together',async()=>{
- const f=fixture(),evidence=addNoticeEvidence(f);
+ const f=finiteCoupledRestoreFixture(),evidence=addNoticeEvidence(f);
  const result=await requireController()(f.deps).run();
  assert.equal(result.status,'restored_observed');
  assert.deepEqual(result.noticeEvidence,evidence);
@@ -95,14 +43,14 @@ test('independent restoration reports the exact retained delivery, review and wi
  assert.equal(f.writes,1);
 });
 test('a foreign review proof cannot credit the notice or obstruct independent restoration',async()=>{
- const f=fixture();addNoticeEvidence(f,{foreign:true});
+ const f=finiteCoupledRestoreFixture();addNoticeEvidence(f,{foreign:true});
  const result=await requireController()(f.deps).run();
  assert.equal(result.status,'restored_observed');
  assert.equal(Object.hasOwn(result,'noticeEvidence'),false);
  assert.equal(f.writes,1);
 });
 test('a lost provider acknowledgment is observed independently without replay or successful attribution',async()=>{
- const create=requireController(),f=fixture();f.loseAck=true;
+ const create=requireController(),f=finiteCoupledRestoreFixture();f.loseAck=true;
  const first=await create(f.deps).run();
  assert.equal(first.status,'closed_observed_uncertain');assert.equal(f.readback,1);
  assert.equal((await create(f.deps).run()).status,'closed_observed_uncertain');assert.equal(f.writes,1);
@@ -118,7 +66,7 @@ for(const [name,change] of Object.entries({
  'provider drift after durable send':f=>{f.driftAfterClaim=true;}
 })){
  test(name+' prevents the only QA write',async()=>{
-  const create=requireController(),f=fixture();change(f);
+  const create=requireController(),f=finiteCoupledRestoreFixture();change(f);
   assert.ok(['admin_pending','uncertain'].includes((await create(f.deps).run()).status));
   assert.equal(f.writes,0);
  });
@@ -133,7 +81,7 @@ const cfAccountPath='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec';
 const observedStep='observe-original-qa-restore-preparation';
 
 async function httpFixture({foreignInstance=false,wrongStep=false,unstableResult=false}={}){
- const f=fixture(),{intent}=f;
+ const f=finiteCoupledRestoreFixture(),{intent}=f;
  const observed=await f.deps.readObservation(),instanceId=observed.instanceId;
  const base='/workflows/'+bootstrapName;
  const at=f.deps.now(),stamp=new Date(at).toISOString();
@@ -195,7 +143,7 @@ test('Cloudflare credential failure blocks R2 access, the external claim and any
 });
 
 test('original recovery waits read-only through a missing receipt, then restores once with the same notice',async()=>{
- const f=fixture(),evidence=addNoticeEvidence(f),original=f.deps.readObservation;
+ const f=finiteCoupledRestoreFixture(),evidence=addNoticeEvidence(f),original=f.deps.readObservation;
  let attempts=0;
  f.deps.readObservation=async(...args)=>{
   if(++attempts<=2){assert.equal(f.claims,0);assert.equal(f.reads,0);return {status:'not_yet_observed'};}
@@ -207,7 +155,7 @@ test('original recovery waits read-only through a missing receipt, then restores
  assert.deepEqual(result.noticeEvidence,evidence);
 });
 test('a receipt that never arrives leaves time for recovery and never claims a write',async()=>{
- const f=fixture();
+ const f=finiteCoupledRestoreFixture();
  let observations=0;
  f.deps.readObservation=async()=>{observations++;return {status:'not_yet_observed'};};
  f.deps.sleep=async ms=>f.advance(ms);
@@ -216,7 +164,7 @@ test('a receipt that never arrives leaves time for recovery and never claims a w
  assert(observations>1&&observations<=29);assert(f.deps.now()<=f.intent.restoreBefore-35000);
 });
 test('a late wakeup cannot read or start the restore at the expired polling cutoff',async()=>{
- const f=fixture();let observations=0;
+ const f=finiteCoupledRestoreFixture();let observations=0;
  f.deps.readObservation=async()=>{observations++;return {status:'not_yet_observed'};};
  f.deps.sleep=async()=>f.advance(150000);
  assert.equal((await requireController()(f.deps).run()).status,'admin_pending');
@@ -240,7 +188,7 @@ test('authenticated exact 404 is pending, other 404s and foreign pending inputs 
 test('final QA acceptance requires a verified review and withdrawal of the restored run notice',async()=>{
  const {verifyFiniteCoupledQaTrialResult:verify}=await import('../scripts/run-qa-finite-coupled-restore.mjs');
  assert.equal(typeof verify,'function');
- const f=fixture();addNoticeEvidence(f);
+ const f=finiteCoupledRestoreFixture();addNoticeEvidence(f);
  const result=await requireController()(f.deps).run(),scope=f.intent;
  const record=verify(result,scope);
  assert.equal(record.qaRestored,true);
@@ -266,7 +214,7 @@ test('final QA acceptance requires a verified review and withdrawal of the resto
   /Finite QA trial verification unavailable/);
  const reordered=Object.fromEntries(Object.entries(scope).reverse());
  assert.equal(verify(result,reordered).evidenceHash,record.evidenceHash);
- const empty=fixture(),protectedResult=await requireController()(empty.deps).run();
+ const empty=finiteCoupledRestoreFixture(),protectedResult=await requireController()(empty.deps).run();
  assert.equal(protectedResult.status,'restored_observed');
  assert.equal(empty.writes,1);
  assert.throws(()=>verify(protectedResult,empty.intent));

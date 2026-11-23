@@ -11,10 +11,13 @@ import {syntheticSaveFixture} from './fixtures/mcp-own-synthetic-save.mjs';
 import {saveOwnSyntheticGoal} from '../lib/mcp-own-synthetic-save.mjs';
 import {projectDossierEvent} from '../lib/dossier-supervision.mjs';
 import {ownSubscriptionReceiptFields} from '../lib/mcp-own-subscription-receipt.mjs';
+import {createPrivateQaFiniteCoupledRestorer} from '../lib/mcp-qa-finite-coupled-restorer.mjs';
+import {verifyFiniteCoupledQaTrialResult} from '../scripts/run-qa-finite-coupled-restore.mjs';
+import {finiteCoupledRestoreFixture} from './fixtures/mcp-qa-finite-coupled-restorer.mjs';
 
 const digest=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
-test('one isolated occurrence boots, sends, reviews and withdraws the same notice',async()=>{
+test('one isolated occurrence boots, reviews and withdraws one notice before verifying simulated restoration',async()=>{
  const {privateKey,publicKey}=await generateKeyPair('RS256'),kid='finite-review-workerd-test';
  const jwk={...await exportJWK(publicKey),kid,alg:'RS256'};
  const access={team:'afw-review-fixture.cloudflareaccess.com',audience:'synthetic-finite-review',client:'synthetic-review.access'};
@@ -161,7 +164,8 @@ test('one isolated occurrence boots, sends, reviews and withdraws the same notic
   assert.deepEqual(withdrawn.httpReceipt,{status:202,httpReceivedAt:sent.httpReceivedAt});
   assert.equal(await read({...withdrawn,eventId:'e'.repeat(64)}),null);
   assert.equal(await read({...withdrawn,withdrawn:false}),null);
-  assert.deepEqual(await read(withdrawn),{purpose:'afw.finite-dossier-review.v1',eventId:policy.eventId,controlHash:policy.controlHash,
+  const review=await read(withdrawn);
+  assert.deepEqual(review,{purpose:'afw.finite-dossier-review.v1',eventId:policy.eventId,controlHash:policy.controlHash,
    actorHash:policy.actorHash,executionHash:policy.executionHash,resultHash,runId,revision:policy.revision,receivedAt,reviewedAt});
   await source.host.close();
   assert.equal(source.config.ctx.container.running,false);
@@ -169,6 +173,20 @@ test('one isolated occurrence boots, sends, reviews and withdraws the same notic
   await assert.rejects(source.host.deliverFiniteOwnSaved(input));
   assert.equal(source.boots(),1);
   assert.deepEqual(callbacks,[200,202]);
+
+  const noticeEvidence={purpose:'afw.finite-coupled-notice-evidence.v1',completionHash:digest({withdrawn,review}),
+   startAt,closeAt:startAt+240000,notice:withdrawn,review};
+  // Advance only the simulated provider clock. Workerd supplied the actual
+  // review and withdrawal from this occurrence. No provider call is made.
+  const restore=finiteCoupledRestoreFixture({at:startAt+600000,controlHash:policy.controlHash,noticeEvidence});
+  const result=await createPrivateQaFiniteCoupledRestorer(restore.deps).run();
+  const accepted=verifyFiniteCoupledQaTrialResult(result,restore.intent);
+  assert.equal(accepted.sameNoticeReviewed,true);
+  assert.equal(accepted.subscriptionWithdrawn,true);
+  assert.equal(accepted.qaRestored,true);
+  assert.equal(accepted.operationalReadiness,false);
+  assert.deepEqual(result.noticeEvidence,noticeEvidence);
+  assert.equal(restore.claims,1);assert.equal(restore.writes,1);assert.equal(restore.readback,1);
  }finally{
   try{if(source?.config.ctx.container.running)await source.host.close();}
   finally{source?.close();await runtime.dispose();}
