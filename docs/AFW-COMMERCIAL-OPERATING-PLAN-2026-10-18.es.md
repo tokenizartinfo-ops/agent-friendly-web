@@ -172,3 +172,19 @@ La oferta usa Sites en la fase de diseño y demostración. Cada publicación, co
 Medir tiempo activo y espera por rol, correcciones de contenido, costo directo de servicios y si el titular puede actualizar la oferta sin ayuda. Validar aparte el interés en comprar el alcance propuesto. Todavía no se fija tarifa, plazo garantizado ni promesa de visibilidad.
 
 **Evidencia de la muestra.** El día 23 de noviembre Sites desplegó en privado la versión 1 de Taller Ejemplo. La visita sin sesión mostró el acceso de ChatGPT. El ZIP original también se trasladó en memoria a un dominio de cliente ficticio y a un subdominio de demostración ficticio. Se verificaron seis rutas en cada destino, incluidas ambas páginas y los documentos agénticos. Se comprobaron las URLs canónicas, el tipo de contenido y los hashes. Un HTML de fallback con HTTP 200 se detectó como error al evaluar `llms.txt`, y la lectura volvió a pasar al restaurar el archivo correcto. Fueron pruebas en un servidor aislado. El piloto con una persona real y su decisión de publicación siguen pendientes.
+
+## Diseño de un sitio propio
+
+Empezá con el objetivo y los materiales que ya existen. Según lo que sepa el titular, elegí las preguntas que ayuden a avanzar:
+
+- «¿Quién va a entrar y qué querés que pueda hacer?»
+- «¿Cómo te gustaría que se vea tu sitio?»
+- «¿Viste algún sitio que te guste? ¿Qué te gustó, la navegación, el estilo de las fotos, los colores o cómo explica su oferta?»
+- «¿Ya tenés un manual de marca o un logo? Si tu identidad está en redes, ¿querés que trabajemos con esos materiales? También podemos empezar de cero».
+- «¿Qué querés conservar de tu sitio, marca o redes?»
+
+Si la persona todavía no tiene una referencia, mostrale dos o tres direcciones visuales con la misma oferta y explicá qué gana con cada una. Usá las referencias para identificar atributos y tratar los materiales del titular según el permiso que haya elegido. La primera vista es privada. Permite decidir tipografía, paleta, imágenes y orden de bloques, y deja constancia de la versión aprobada. Probá la acción principal, la lectura en móvil, contraste y navegación por teclado. Identificá las imágenes ilustrativas como tales hasta disponer de materiales aprobados.
+
+El [nivel AF](https://agentfriendlyweb.dev/metodologia) se propone según el objetivo y la evidencia disponible. Un sitio que explica servicios y facilita el contacto puede cumplir su objetivo con una capa de descubrimiento sencilla. Las herramientas y permisos se incorporan cuando resuelven una necesidad verificable. Al variar el diseño, comprobá que páginas, contactos y documentos de descubrimiento comuniquen los mismos hechos que aprobó el titular. El [consumo por agentes](AFW-AGENT-INTEGRATION-GUIDE.es.md) y la [preparación para AI Index](AFW-CLOUDFLARE-AI-INDEX-2026-11-03.es.md) conservan sus propios controles.
+
+Para entregar el sitio, fijá la apariencia aprobada, prepará una copia portable y verificá las páginas y los documentos de descubrimiento en el dominio que el titular elija.
