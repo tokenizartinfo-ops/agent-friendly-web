@@ -157,3 +157,18 @@ Aplicar esta dirección a futuras presentaciones y versiones de correo, sin camb
 4. **Verificación tras el traslado.** En el dominio final, comprobar rutas sin sesión, contenido, enlaces y canónicas, reglas de rastreo, estados HTTP y recuperación. Si la web usa autenticación, base de datos o conexiones propias de Sites, confirmar primero cómo se reemplazan y migran. Una versión estática se entrega con sus archivos y fuente.
 
 La oferta usa Sites en la fase de diseño y demostración. Cada publicación, configuración de dominio y entrega se decide sobre una versión y un destino concretos. Ver disponibilidad y límites de la cuenta antes de cotizar hosting. [Crear un Site](https://learn.chatgpt.com/docs/sites/creating-a-site) · [Publicación y acceso](https://learn.chatgpt.com/docs/sites/publishing-and-sharing) · [Dominios y versiones](https://learn.chatgpt.com/docs/sites/managing-a-site).
+
+### Ficha del primer piloto de «sitio propio»
+
+**Para un profesional, comercio o proyecto con actividad en redes y una oferta que ya puede explicar.** En la primera charla vamos a elegir un servicio o producto que valga la pena presentar y ordenar tres datos que la gente necesita para entenderlo. Por ejemplo, qué ofrecés, a quién atendés y cómo contactarte. El titular trae las fuentes que quiere revisar y define quién valida el contenido y quién puede publicar.
+
+| Momento | Entrega y decisión |
+| --- | --- |
+| Primera charla | Acordamos una oferta, tres preguntas y sus fuentes públicas o autorizadas. Dejamos en blanco las afirmaciones que aún requieren evidencia. |
+| Muestra | Armamos dos páginas con información revisable y los primeros documentos para agentes. Revisamos en privado texto, contacto y capacidad de actualización. |
+| Entrega | Presentamos la versión exacta y un presupuesto con preparación, revisión y publicación desglosadas. El titular elige el dominio y el hosting. También recibe los archivos y una guía de mantenimiento. |
+| Cierre | Con la publicación acordada, probamos que las tres preguntas se puedan responder con las fuentes visibles, verificamos sin sesión las rutas acordadas y entregamos la versión comprobada y su plan de recuperación. |
+
+Medir tiempo activo y espera por rol, correcciones de contenido, costo directo de servicios y si el titular puede actualizar la oferta sin ayuda. Validar aparte el interés en comprar el alcance propuesto. Todavía no se fija tarifa, plazo garantizado ni promesa de visibilidad.
+
+**Evidencia de la muestra.** El día 23 de noviembre Sites desplegó en privado la versión 1 de Taller Ejemplo. La visita sin sesión mostró el acceso de ChatGPT. El ZIP original también se trasladó en memoria a un dominio de cliente ficticio y a un subdominio de demostración ficticio. Se verificaron seis rutas en cada destino, incluidas ambas páginas y los documentos agénticos. Se comprobaron las URLs canónicas, el tipo de contenido y los hashes. Un HTML de fallback con HTTP 200 se detectó como error al evaluar `llms.txt`, y la lectura volvió a pasar al restaurar el archivo correcto. Fueron pruebas en un servidor aislado. El piloto con una persona real y su decisión de publicación siguen pendientes.
