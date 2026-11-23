@@ -11,6 +11,9 @@ async function routeHarness() {
   const projects = [{ id: 'owned', userId: 'owner-a' }];
   const events = [{ projectId: 'owned', userId: 'owner-a', type: 'project_updated',
     createdAt: '2026-09-30T12:00:00Z', payloadJson: JSON.stringify({ revision: 2, changedFields: ['cms'], secret: 'private' }) }];
+  const continuationEvents = Array.from({ length: 501 }, () => ({ projectId: 'owned', userId: 'owner-a',
+    type: 'dossier_continuation_saved', createdAt: '2026-11-23T12:00:00Z', payloadJson: '{}' }));
+  events.unshift(...continuationEvents);
   const siteProjects = new Proxy({}, { get: (_, key) => key });
   const projectEvents = new Proxy({}, { get: (_, key) => key });
   const db = { select(selection) {
@@ -21,7 +24,7 @@ async function routeHarness() {
     return query;
   } };
   const modules = {
-    'drizzle-orm': { eq: (field, value) => row => row[field] === value, and: (...rules) => row => rules.every(rule => rule(row)), desc: value => value },
+    'drizzle-orm': { eq: (field, value) => row => row[field] === value, and: (...rules) => row => rules.every(rule => rule(row)), desc: value => value, inArray: (field, values) => row => values.includes(row[field]) },
     '../../../../cloudflare-access-auth': { getCloudflareAccessUser: async () => user },
     '../../../../../db': { getDb: () => db },
     '../../../../../db/schema': { siteProjects, projectEvents },

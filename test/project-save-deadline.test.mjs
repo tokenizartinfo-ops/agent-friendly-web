@@ -8,11 +8,12 @@ import * as responses from '../lib/project-save-response.mjs';
 import { createProjectSaveAttempt } from '../lib/project-save-attempt.mjs';
 import { createIntakeRehearsal } from '../lib/intake-workspace-rehearsal.mjs';
 import { normalizeIntake } from '../lib/intake.mjs';
+import { canSaveProjectDraft } from '../lib/project-draft.mjs';
 import { reconcileSavedDraft } from '../lib/project-save-reconciliation.mjs';
 
 // Exercise the actual component callback; only React state and the network boundary
 // are supplied by the harness. No copied implementation of save/error handling.
-function componentSave(request, project) {
+function componentSave(request, project, { initialCreationUnconfirmed = false } = {}) {
   const source = ts.createSourceFile('intake-workspace.tsx', readFileSync('app/components/intake-workspace.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   let callback;
   function find(node) {
@@ -26,6 +27,7 @@ function componentSave(request, project) {
   const lock = { current: false };
   const bindings = {
     Error, ready: { current: true }, manualLock: lock, conflictReview: null, data: draft,
+    initialCreationUnconfirmed, canSaveProjectDraft,
     sourceHints: { current: {} }, projectId: project.id, savedRevision: { current: project.revision },
     savedBase: { current: draft }, saveAttempt: createProjectSaveAttempt(), request, locale: 'es', rehearsal: null,
     readProjectSaveResponse: responses.readProjectSaveResponse,
@@ -137,4 +139,12 @@ test('a completed save clears its timer and invalid budgets never send a write',
     await assert.rejects(responses.saveProjectDraft(request, attempt, { timeoutMs }), /invalid_save_timeout/);
   }
   assert.equal(writes, 1);
+});
+
+test('unconfirmed initial creation keeps a separate project write closed', async () => {
+  const h = componentSave(() => assert.fail('An unresolved creation must not start another write'),
+    { website: 'https://example.invalid/', organization: 'Example' }, { initialCreationUnconfirmed: true });
+  assert.equal(await h.save(), false);
+  assert.equal(h.lock.current, false);
+  assert.equal(h.state.draft.organization, 'Example');
 });

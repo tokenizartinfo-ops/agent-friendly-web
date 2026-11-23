@@ -15,3 +15,13 @@ test('normalized saved data does not loop on trailing slashes, whitespace or mis
   assert.equal(shouldAutosaveProject({ ready: true, draft: { website: 'restaurant.example', organization: ' Demo ' }, base: { website: 'https://restaurant.example/', organization: 'Demo' } }), false);
   assert.equal(shouldAutosaveProject({ ready: true, draft: { organization: 'Demo' }, base: {} }), false);
 });
+
+test('an existing named project without a URL can autosave while deletion and implicit creation stay blocked', () => {
+  const draft = { website: '', organization: 'Taller', audience: 'Vecinos' };
+  const base = { website: '', organization: 'Taller' };
+  assert.equal(shouldAutosaveProject({ ready: true, draft, base, projectId: 'draft' }), true);
+  assert.equal(shouldAutosaveProject({ ready: true, draft, base }), false);
+  assert.equal(shouldAutosaveProject({ ready: true, draft: { ...draft, organization: {} }, base, projectId: 'draft' }), false);
+  assert.equal(shouldAutosaveProject({ ready: true, draft, base: { ...base, website: 'https://example.org/' }, projectId: 'live' }), false);
+  assert.equal(shouldAutosaveProject({ ready: true, draft: { ...draft, website: 'http://[' }, base, projectId: 'draft' }), false);
+});

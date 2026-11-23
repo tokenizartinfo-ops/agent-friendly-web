@@ -38,7 +38,11 @@ test('reviewed copilot changes resume project autosave and navigation waits for 
   const dialog = await readFile('app/components/draft-exit-dialog.tsx', 'utf8');
   assert.match(workspace, /<IntakeIntelligentCopilot[\s\S]*?setAutosavePaused\(false\); setData\(intakeFromProject\(next\)\)/);
   assert.match(workspace, /if \(workingPending && !\(await workingSave\.current\?\.\(\)\)\) return false/);
-  assert.match(workspace, /const saved = hasPendingDraft[\s\S]*?await saveReviewedDraft\(\) : true/);
+  const navigation = workspace.slice(workspace.indexOf('onSaveLeave={async'), workspace.indexOf('onLeave={()', workspace.indexOf('onSaveLeave={async')));
+  assert.match(navigation, /const dossierPending = hasPendingDraft[\s\S]*?const saved = dossierPending \? await saveReviewedDraft\(\) : true/);
+  assert.match(navigation, /if \(saved && continuationPending && !\(await continuationSave\.current\?\.\(dossierPending \? savedRevision\.current : undefined\)\)\) return false/);
+  assert.ok(navigation.indexOf('await saveReviewedDraft()') < navigation.indexOf('await continuationSave.current?.('));
+  assert.ok(navigation.indexOf('await continuationSave.current?.(') < navigation.indexOf('window.location.assign(exitTarget)'));
   assert.match(workspace, /if \(saved\) \{ exitCleanup\.current\?\.\(\); workingExit\.current\?\.\(\); window\.location\.assign\(exitTarget\); \}/);
   assert.match(dialog, /if \(!await onSaveLeave\(\)\) setFailed\(true\)/);
   assert.match(dialog, /Salir sin guardar/);

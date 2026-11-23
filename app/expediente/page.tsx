@@ -6,6 +6,7 @@ import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 import { notFound } from 'next/navigation';
 import { env } from 'cloudflare:workers';
+import { projectCreateOwnerBinding } from '../../lib/project-draft.mjs';
 import {isAssistanceGoalWindowOpen} from '../../lib/assistance-goal-window.mjs';
 
 export const metadata: Metadata = localizedRouteMetadata('dossier', 'es') as Metadata;
@@ -23,12 +24,13 @@ export async function DossierExperience({ locale = 'es', searchParams }: Dossier
   if (!returnPath) notFound();
   const projectId = typeof project === 'string' ? project : undefined;
   const user = await requireCloudflareAccessUser(returnPath);
+  const ownerBinding = await projectCreateOwnerBinding(user.userId);
   const assistanceSettings=env as unknown as Record<string,unknown>;
   return (
     <main lang={locale}>
       <SiteHeader routeKey="dossier" locale={locale} projectId={projectId} />
       <div className="account-bar">{copy.privateSession}: <strong>{user.email}</strong><a href={cloudflareAccessSignOutPath()}>{copy.signOut}</a></div>
-      <IntakeWorkspace userName={user.displayName} userEmail={user.email} locale={locale} copilotEnabled={String(env.AFW_COPILOT_ENABLED) === 'true'} copilotProjectId={env.AFW_COPILOT_PROJECT_ID} assistanceGoalProposalEnabled={isAssistanceGoalWindowOpen({AFW_ASSISTANCE_GOAL_CONTEXT_ENABLED:assistanceSettings.AFW_ASSISTANCE_GOAL_PROPOSAL_ENABLED,AFW_ASSISTANCE_GOAL_CONTEXT_EXPIRES_AT:assistanceSettings.AFW_ASSISTANCE_GOAL_PROPOSAL_EXPIRES_AT})} assistanceGoalConsentEnabled={isAssistanceGoalWindowOpen(assistanceSettings)} assistanceEnabled={assistanceSettings.AFW_ASSISTANCE_ENABLED==='true'} assistanceProjectId={typeof assistanceSettings.AFW_ASSISTANCE_PROJECT_ID==='string'?assistanceSettings.AFW_ASSISTANCE_PROJECT_ID:''} />
+      <IntakeWorkspace ownerBinding={ownerBinding} userName={user.displayName} userEmail={user.email} locale={locale} copilotEnabled={String(env.AFW_COPILOT_ENABLED) === 'true'} copilotProjectId={env.AFW_COPILOT_PROJECT_ID} assistanceGoalProposalEnabled={isAssistanceGoalWindowOpen({AFW_ASSISTANCE_GOAL_CONTEXT_ENABLED:assistanceSettings.AFW_ASSISTANCE_GOAL_PROPOSAL_ENABLED,AFW_ASSISTANCE_GOAL_CONTEXT_EXPIRES_AT:assistanceSettings.AFW_ASSISTANCE_GOAL_PROPOSAL_EXPIRES_AT})} assistanceGoalConsentEnabled={isAssistanceGoalWindowOpen(assistanceSettings)} assistanceEnabled={assistanceSettings.AFW_ASSISTANCE_ENABLED==='true'} assistanceProjectId={typeof assistanceSettings.AFW_ASSISTANCE_PROJECT_ID==='string'?assistanceSettings.AFW_ASSISTANCE_PROJECT_ID:''} />
     </main>
   );
 }
