@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { DatabaseSync } from 'node:sqlite';
 import { Client, InMemoryTransport } from '@modelcontextprotocol/client';
+import { planCopilotNextTurn } from '../lib/copilot-next-turn.mjs';
+import { consumeAgentNextStep } from '../examples/agent-consumer/reference-client.mjs';
 import { createDelegatedOAuthStore } from '../lib/delegated-oauth-store.mjs';
 import { createDelegatedProjectRepository } from '../lib/delegated-project-repository.mjs';
 import { readDelegatedProject } from '../lib/delegated-project-read.mjs';
@@ -200,4 +202,52 @@ test('delegated admission refuses missing or failed primary custody instead of f
     createPrimarySession() { throw Error('PRIVATE_PRIMARY_FAILURE'); } });
   const result = await f.read({ repository: failed });
   assert.equal(result.code, 'delegated_read_unavailable'); assert.equal(JSON.stringify(result).includes('PRIVATE_'), false);
+});
+
+test('paired consumer trial preserves the next step across revisions and rejects a withdrawn grant', async t => {
+  const f = fixture(t);
+  const directDraft = {
+    organization: 'Taller Ejemplo', website: 'https://fixture.example.invalid/',
+    audience: '', languages: [], goals: ['content'], contentSources: [],
+  };
+  const bytes = value => Buffer.byteLength(JSON.stringify(value), 'utf8');
+  const observations = [];
+  await withClient(f, { continuityEnabled: true }, async client => {
+    let calls = 0;
+    const tool = async revision => {
+      calls += 1;
+      return (await client.callTool({
+        name: 'read_project_next_step', arguments: { expectedRevision: revision },
+      })).structuredContent;
+    };
+    const consume = (raw, expectedRevision) => consumeAgentNextStep(raw, {
+      projectRef: 'p-synthetic', expectedRevision, now: START,
+    });
+    async function compare(revision, want) {
+      const direct = planCopilotNextTurn(directDraft, null, [], { revision });
+      const response = await tool(revision);
+      const reference = consume(response, revision);
+      assert.equal(direct.field, want);
+      assert.equal(reference.status, 'ready');
+      assert.equal(reference.context.revision, direct.basedOnRevision);
+      assert.equal(reference.context.missingInput.key, direct.field);
+      assert.equal(JSON.stringify(reference).includes('PRIVATE_'), false);
+      closed(reference);
+      observations.push({ revision, directPlannerInputBytes: bytes(directDraft), mcpStructuredContentBytes: bytes(response) });
+    }
+
+    await compare(3, 'audience');
+    directDraft.audience = 'Quienes necesitan un servicio';
+    f.sqlite.prepare('UPDATE site_projects SET audience=?, revision=4').run(directDraft.audience);
+    assert.equal(consume(await tool(3), 3).code, 'revision_conflict');
+    await compare(4, 'languages');
+
+    f.sqlite.prepare('UPDATE delegated_access_grants SET revoked_at=?').run(iso(0));
+    const denied = consume(await tool(4), 4);
+    assert.equal(denied.code, 'access_denied');
+    assert.equal(Object.hasOwn(denied, 'context'), false);
+    assert.equal(denied.automaticReconnect, false);
+    assert.equal(calls, 4);
+    t.diagnostic(JSON.stringify({ observations, fixtureToolInvocations: calls, modelTokens: null, providerCost: null }));
+  });
 });
