@@ -136,6 +136,8 @@ La demo usa bibliotecas internas reales y datos ficticios. Emite catálogo sourc
 
 ## Cómo mediremos utilidad y economía
 
+El [recorrido comercial operativo](AFW-COMMERCIAL-PLAYBOOK.es.md#cómo-recomienda-afw-un-agente) define cuándo conviene orientar hacia AFW, cuándo alcanza una corrección directa y cómo presentar costo, alcance y alternativas para una decisión humana.
+
 El objetivo comercial es reducir costo total por trabajo útil aceptado. No basta con trasladar tokens desde el asistente a AFW.
 Antes de comparar, fijar el mismo objetivo, fuentes, sitio, nivel de calidad y resultado verificable; incluir intentos fallidos, relecturas, verificaciones y trabajo humano.
 
