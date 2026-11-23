@@ -81,3 +81,14 @@ test('cloud finalizer checks provider status before issuing material without gat
  assert(!admit.slice(check,seed).includes('continue-on-error'));
  assert(!restore.includes(provider));
 });
+
+test('QA bootstrap checks the provider before credentialed reads and issuance',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/afw-finite-qa-bootstrap.yml',import.meta.url),'utf8');
+ const start=workflow.indexOf('      - name: Check Cloudflare before recording QA bootstrap provenance\n');
+ const dependencies=workflow.indexOf('      - run: npm ci');
+ const custody=workflow.indexOf('      - name: Verify the exact private QA bootstrap credentials');
+ const issuance=workflow.indexOf('        id: finite_bootstrap_once');
+ assert(start>0 && start<dependencies && dependencies<custody && custody<issuance);
+ assert.equal(workflow.slice(start,dependencies),
+  '      - name: Check Cloudflare before recording QA bootstrap provenance\n        run: node scripts/check-own-cron-provider.mjs\n');
+});
