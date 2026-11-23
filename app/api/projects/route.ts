@@ -3,6 +3,7 @@ import { getCloudflareAccessUser } from '../../cloudflare-access-auth';
 import { getDb } from '../../../db';
 import { projectEvents, siteProjects } from '../../../db/schema';
 import { completionForIntake, nextQuestion, normalizeIntake } from '../../../lib/intake.mjs';
+import { canSaveProjectDraft, namedDraftWithoutWebsite, projectCreateOwnerBinding } from '../../../lib/project-draft.mjs';
 import { buildRoadmap } from '../../../lib/methodology.mjs';
 import { listOwnerProjects } from '../../../lib/project-directory.mjs';
 import { changedDossierFields, reviewedDossierSources } from '../../../lib/dossier-field-history.mjs';
@@ -98,15 +99,27 @@ export async function POST(request: Request) {
   }
   if (!input || Array.isArray(input) || typeof input !== 'object') return Response.json({ code: 'invalid_json' }, { status: 400, headers });
   const raw = input as Record<string, unknown>;
-  const allowed = ['contract', 'confirmCreate', 'idempotencyKey', 'website', 'organization'];
+  const allowed = ['contract', 'confirmCreate', 'idempotencyKey', 'website', 'organization', 'withoutWebsite', 'ownerBinding'];
   if (Object.keys(raw).some(key => !allowed.includes(key))
     || raw.contract !== 'agentfriendly.project-create.v1' || raw.confirmCreate !== true
     || typeof raw.idempotencyKey !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9._:-]{7,119}$/.test(raw.idempotencyKey)
+    || (raw.withoutWebsite !== undefined && raw.withoutWebsite !== true)
+    || (raw.withoutWebsite !== true && raw.ownerBinding !== undefined)
     || typeof raw.website !== 'string' || (raw.organization !== undefined && typeof raw.organization !== 'string')) {
     return Response.json({ error: 'Confirma la creacion con una clave de reintento valida, sitio y nombre.' }, { status: 400, headers });
   }
   const intake = normalizeIntake({ website: raw.website, organization: raw.organization || '' });
-  if (!intake.website) return Response.json({ error: 'Indica el sitio web del nuevo expediente.' }, { status: 400, headers });
+  if (raw.withoutWebsite === true) {
+    if (request.headers.get('origin') !== new URL(request.url).origin) return Response.json({ code: 'invalid_origin' }, { status: 403, headers });
+    if (raw.ownerBinding !== await projectCreateOwnerBinding(user.userId)) {
+      return Response.json({ code: 'owner_session_changed' }, { status: 403, headers });
+    }
+    if (!namedDraftWithoutWebsite(raw)) {
+      return Response.json({ code: 'named_draft_required' }, { status: 400, headers });
+    }
+  } else if (!intake.website) {
+    return Response.json({ error: 'Indica el sitio web del nuevo expediente.' }, { status: 400, headers });
+  }
   const id = `project-${await digest(JSON.stringify(['project-create-v1', user.userId, raw.idempotencyKey]))}`;
   const eventId = `creation-${await digest(JSON.stringify(['project-create-receipt-v1', user.userId, raw.idempotencyKey]))}`;
   const requestHash = await digest(JSON.stringify([intake.website, intake.organization]));
@@ -153,7 +166,12 @@ export async function PUT(request: Request) {
   }
   const expectedRevision = typeof raw.revision === 'number' ? raw.revision : 0;
   const intake = normalizeIntake(raw);
-  if (!intake.website) return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
+  if (!intake.website && (!raw.id || !namedDraftWithoutWebsite(raw))) {
+    return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
+  }
+  if (!intake.website && request.headers.get('origin') !== new URL(request.url).origin) {
+    return Response.json({ code: 'invalid_origin' }, { status: 403, headers: { 'cache-control': 'no-store' } });
+  }
 
   const now = new Date().toISOString();
   const completion = completionForIntake(intake);
@@ -207,6 +225,9 @@ export async function PUT(request: Request) {
     const concurrentReceipt = await recoverReceipt();
     if (concurrentReceipt) return concurrentReceipt;
     return Response.json({ code: 'project_selection_required', error: 'Abre el expediente guardado antes de continuar. No se modificaron sus datos.' }, { status: 409, headers: { 'cache-control': 'no-store' } });
+  }
+  if (!canSaveProjectDraft(raw, existing, requestedId)) {
+    return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
   }
   const id = existing?.id || crypto.randomUUID();
   // Old clients do not know this private preference and must not erase it.

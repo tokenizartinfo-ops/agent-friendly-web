@@ -56,3 +56,9 @@ Ampliación del 23 de noviembre de 2026. Usar la misma ficha cuando el recorrido
 **Ejemplo de un sitio desde cero.** «Ya tenemos la portada y el contacto que aprobaste. Puedo preparar una versión con una sección de trabajos y mostrarte cómo queda». Revisar la nueva sección con el titular. Si agrega hechos relevantes para agentes, comprobar que la versión revisada y sus documentos coincidan.
 
 **Qué convertir en producto.** Revisar con casos reales qué correcciones se repiten, cuánto retrabajo causan y si la condición de éxito se puede comprobar. Empezar por mejorar la guía o automatizar un paso acotado cuando haya evidencia repetible, permiso claro, tratamiento de errores y una salida asistida. Probarlo con casos sin datos de clientes antes de incorporarlo al recorrido.
+
+### Retomar desde la interfaz
+
+En el expediente privado, abrí **Retomar este expediente**. Elegí una mejora AF-3 a AF-5 o el diseño de un sitio nuevo. Guardá el pendiente, el próximo paso y quién puede avanzar. Podés añadir lo que ya avanzó y la referencia de la versión aprobada. Si el sitio todavía no tiene dominio, creá primero un borrador privado con nombre.
+
+El punto queda asociado a la revisión guardada. Si el expediente cambió, revisá el contexto antes de continuar. Podés copiar su enlace privado, que abre el mismo expediente con una sesión autorizada. Las notas y decisiones permanecen en el expediente hasta que alguien las revise allí.
