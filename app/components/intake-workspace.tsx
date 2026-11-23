@@ -29,6 +29,7 @@ import { createObservationSaveAttempt } from '../../lib/observation-save-attempt
 import { currentOriginObservations, observationOrigin } from '../../lib/observation-current-origin.mjs';
 import { observationScoreLabel } from '../../lib/observation-score-copy.mjs';
 import { SavedObservationEvidence } from './saved-observation-evidence';
+import { DossierAiIndexPreparation } from './dossier-ai-index-preparation';
 import { readObservationSnapshot } from '../../lib/observation-read-client.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 import { missingIntakeQuestions } from '../../lib/intake-question-coach.mjs';
@@ -690,6 +691,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           {observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?<button type="button" className="secondary-action" onClick={retrySavedObservationRead}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
+
+        {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation
+          website={savedWebsite} contentSources={savedSnapshot.contentSources} observation={currentObservations.observation}
+          readState={updatesReadState} locale={locale} /> : null}
 
         {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} deliveryContext={{cms:savedSnapshot.cms,hosting:savedSnapshot.hosting}} observationHistory={currentObservations.history} /></div> : null}
         </details>
