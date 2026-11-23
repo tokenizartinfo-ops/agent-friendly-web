@@ -43,3 +43,9 @@ La fuente de esta rama prepara la guía y la propuesta. Su publicación, aceptac
 La sección «Entrega y comprobación de mejoras» incorpora «Preparar el sitio para AI Index». Usa el dominio guardado, las categorías de fuentes declaradas y una lectura fechada del mismo origen. Si cambia el dominio, falla la lectura o la fecha resulta inválida, no traslada la evidencia anterior a la ficha.
 
 La ficha muestra respuestas directas, datos estructurados, fuentes citables e identidad del responsable como señales de la lectura. La revisión de hechos sigue a cargo de la persona y el mantenedor. Una observación técnica no acredita que el contenido sea vigente o coherente. La decisión explícita por páginas queda pendiente para una etapa posterior de registro. La ficha no realiza solicitudes, cambia permisos, modifica el puntaje ni comprueba la indexación.
+
+## Borrador explícito por páginas
+
+La ficha admite una lista de páginas por considerar y otra de exclusión. Cada línea corresponde a una ruta exacta del origen guardado. El archivo local `afw-ai-index-borrador.json` reúne esa selección para revisión con el responsable. Se conservan la fecha, el origen y las rutas. Las notas y la evidencia del expediente quedan fuera del archivo.
+
+La lista preparada en la vista se descarta al cambiar de expediente o de origen. El archivo descargado es la copia que queda en manos del titular. La preparación no verifica que las páginas sean públicas o vigentes, ni guarda una autorización oficial ni envía solicitudes.
