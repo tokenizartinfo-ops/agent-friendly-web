@@ -31,7 +31,7 @@ Una constancia histórica no garantiza disponibilidad ahora. Este documento no c
 
 ## Primer recorrido público y compatibilidad de transporte
 
-Para explorar las capacidades públicas, el destino es https://agentfriendlyweb.dev/mcp. Esa superficie no entrega el expediente privado ni requiere el permiso delegado del piloto de lectura. El paso privado descrito más abajo necesita su propia conexión autorizada.
+Para explorar las capacidades públicas, usar el endpoint anunciado por el manifiesto, `https://mcp.agentfriendlyweb.dev/mcp`. Esa superficie no entrega el expediente privado ni requiere el permiso delegado del piloto de lectura. El paso privado descrito más abajo necesita su propia conexión autorizada.
 
 Usar un cliente MCP compatible: completar su inicialización y consultar `tools/list` antes de elegir una herramienta. La [aceptación pública del25oct](AFW-PUBLIC-JSON-CLOUD-ACCEPTANCE-2026-10-25.es.md) comprobó inicialización y catálogo, junto con los límites de complejidad; no acredita cada `tools/call`, una auditoría de cualquier sitio ni una conexión privada vigente. El catálogo observado sirve para decidir qué invocar; no concede autorización para escribir, instalar o publicar.
 
@@ -49,6 +49,14 @@ Los límites de entrada de AFW se aplican al **sobre JSON completo**, incluidos 
 Fuente de esos límites: [adaptador HTTP de la aplicación cualificada](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/d3b638a46d1f9ab559142222e181e9aae2e0a83e/lib/public-mcp-http.mjs). La aceptación remota del25oct comprobó los bordes de profundidad/valores y JSON inválido; esta actualización documental no ejecuta una nueva prueba remota de tamaño o media type.
 
 El cliente debe acotar su tiempo total y bytes de respuesta y tratar un timeout como resultado no confirmado. Los 10s,512KiB y50peticiones por fase del observador de aceptación son límites de ese observador, no un SLA o una cuota comercial prometidos a otros integradores. Una respuesta SSE pública, un catálogo visible o una recuperación del cliente no habilitan eventos privados, supervisión continua ni pagos.
+
+### Comprobación externa del 23 de noviembre
+
+A las 14:04 de Argentina, un cliente sin credenciales leyó los documentos públicos y siguió el endpoint anunciado en el [manifiesto MCP](https://agentfriendlyweb.dev/.well-known/mcp.json) y en [llms.txt](https://agentfriendlyweb.dev/llms.txt). Negoció MCP `2026-07-28`, recibió las mismas cuatro herramientas que declara el manifiesto y ejecutó `get_afw_methodology` con `section: levels`. El resultado estructurado incluyó los seis niveles AF-0 a AF-5.
+
+`tools/list` permite elegir una operación y `tools/call` entrega el resultado para ese uso. Para este primer recorrido externo, la respuesta puede responder una pregunta sobre la metodología sin pedir acceso a un expediente. La [tarjeta A2A](https://agentfriendlyweb.dev/.well-known/agent-card.json) anunció A2A 1.0 mediante JSON-RPC, con avisos push deshabilitados. El [OpenAPI](https://agentfriendlyweb.dev/openapi.json) declaró el diagnóstico público. En esta lectura no se invocaron A2A, OpenAPI ni las otras tres herramientas MCP. El valor comercial, el ahorro y el acceso delegado de un integrador necesitan pruebas propias.
+
+En una segunda comprobación a las 14:10 de Argentina, un cliente A2A ejecutó una sola llamada `SendMessage` sobre el sitio público de AFW. La respuesta HTTP 200 tenía un mensaje de agente en JSON-RPC 2.0 con 15 comprobaciones, 13 con HTTP 200. El resultado declaró `publicationAuthorized: false`. Se verificó el diagnóstico público de ese dominio y de esa fecha.
 
 ## Integración de lectura, un paso a la vez
 

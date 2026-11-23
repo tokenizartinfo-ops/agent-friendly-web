@@ -49,3 +49,34 @@ La ficha muestra respuestas directas, datos estructurados, fuentes citables e id
 La ficha admite una lista de páginas por considerar y otra de exclusión. Cada línea corresponde a una ruta exacta del origen guardado. El archivo local `afw-ai-index-borrador.json` reúne esa selección para revisión con el responsable. Se conservan la fecha, el origen y las rutas. Las notas y la evidencia del expediente quedan fuera del archivo.
 
 La lista preparada en la vista se descarta al cambiar de expediente o de origen. El archivo descargado es la copia que queda en manos del titular. La preparación no verifica que las páginas sean públicas o vigentes, ni guarda una autorización oficial ni envía solicitudes.
+
+## Primera selección para el dominio de AFW
+
+La lectura pública del 23 de noviembre a las 14:04 de Argentina encontró cuatro páginas propias candidatas. Las cuatro devolvieron HTTP 200, declararon su propia URL canónica, aparecieron en el sitemap y no mostraron una indicación `noindex` en el HTML ni en el encabezado observado.
+
+| Página | Función |
+| --- | --- |
+| `/guia` | Explica por dónde empezar con AFW. |
+| `/metodologia` | Describe qué comprueba la escala AF y cómo interpretar la evidencia. |
+| `/sectores` | Organiza ejemplos según distintos objetivos. |
+| `/aeo-y-crawlers` | Explica las decisiones de descubrimiento y rastreo. |
+
+El caso público de Tokenizart queda fuera de esta primera propuesta. El alcance se concentra en documentación propia de AFW. El siguiente control es revisar que el contenido esté al día y contrastar la selección con las posibilidades de la beta y la decisión del titular. La lectura técnica no comprueba recuperación por el índice.
+
+```json
+{
+  "contract": "afw.ai-index-page-scope.v1",
+  "origin": "https://agentfriendlyweb.dev",
+  "preparedAt": "2026-11-23T17:05:42.307Z",
+  "includeForReview": [
+    "/guia",
+    "/metodologia",
+    "/sectores",
+    "/aeo-y-crawlers"
+  ],
+  "excludeFromProposal": [
+    "/casos/tokenizart"
+  ],
+  "status": "draft"
+}
+```
