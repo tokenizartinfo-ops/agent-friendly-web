@@ -53,13 +53,34 @@ Sites esta retirado y no es un destino de recuperacion. Se conserva la version a
 `;
 const output = `---\n${stringify(metadata)}---\n${body}`;
 const concept = 'discovery/infrastructure-status.md';
-writeFileSync(`public/okf/v0.2/${concept}`, output);
+const manifestPath = 'public/okf/v0.2/manifest.json';
+const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+const entries = manifest.files.filter(entry => entry.path === concept);
+if (entries.length !== 1) throw new Error('Expected one infrastructure manifest entry');
+const sha = createHash('sha256').update(output).digest('hex');
+entries[0].sha256 = sha;
+const manifestOutput = `${JSON.stringify(manifest, null, 2)}\n`;
+
 const modulePath = 'app/okf/v0.2/CHECKSUMS.sha256/checksums.generated.ts';
 const current = readFileSync(modulePath, 'utf8').match(/export const OKF_V02_CHECKSUMS = ("[\s\S]*");\s*$/);
 if (!current) throw new Error('Invalid checksum module');
+const checksums = new Map([
+  [concept, sha],
+  ['manifest.json', createHash('sha256').update(manifestOutput).digest('hex')],
+]);
 const lines = JSON.parse(current[1]).trimEnd().split('\n');
-if (lines.filter(line => line.endsWith(`  ${concept}`)).length !== 1) throw new Error('Expected one infrastructure checksum');
-const sha = createHash('sha256').update(output).digest('hex');
-const updated = lines.map(line => line.endsWith(`  ${concept}`) ? `${sha}  ${concept}` : line).join('\n') + '\n';
+for (const filePath of checksums.keys()) {
+  if (lines.filter(line => line.endsWith(`  ${filePath}`)).length !== 1) {
+    throw new Error(`Expected one checksum for ${filePath}`);
+  }
+}
+const updated = lines.map(line => {
+  const filePath = line.slice(66);
+  const checksum = checksums.get(filePath);
+  return checksum ? `${checksum}  ${filePath}` : line;
+}).join('\n') + '\n';
+
+writeFileSync(`public/okf/v0.2/${concept}`, output);
+writeFileSync(manifestPath, manifestOutput);
 writeFileSync(modulePath, `export const OKF_V02_CHECKSUMS = ${JSON.stringify(updated)};\n`);
 console.log(JSON.stringify({ concept, observedAt: ledger.observed_at, sha256: sha, remoteWrites: 0 }));
