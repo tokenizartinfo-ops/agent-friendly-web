@@ -32,6 +32,8 @@ test('unknown, failed, mismatched and future evidence never appears as a current
     [{ ...current, target: 'http://taller.example' }, 'ready'],
     [{ ...current, checkedAt: '2026-11-23T16:00:00Z' }, 'ready'],
     [{ ...current, checkedAt: 'unreadable' }, 'ready'],
+    [{ ...current, checkedAt: '2026-02-30T00:00:00Z' }, 'ready'],
+    [{ ...current, checkedAt: '2026-11-22' }, 'ready'],
   ]) {
     const sheet = buildAiIndexPreparation({ website, observation, readState, now });
     assert.equal(sheet.observedAt, null);
