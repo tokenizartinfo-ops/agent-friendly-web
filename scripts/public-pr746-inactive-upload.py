@@ -1,4 +1,4 @@
-"""Qualify and optionally upload exactly the AFW PR 746 main artifact."""
+"""Qualify and optionally upload the AFW continuation build with the PR 748 panel fix."""
 import importlib.util
 import io
 import json
@@ -12,15 +12,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = "fab1f2601e4e7053e34bae47317013943fbebc55"
-BUILD_RUN = 45244039007
+SOURCE = "bda722d9238b25c35afd76ce62227226c6c77d2a"
+BUILD_RUN = 45254020994
 WORKFLOW = ".github/workflows/afw-pr746-inactive-upload.yml"
 SCRIPT = "scripts/public-pr746-inactive-upload.py"
 PROFILE = "pr746"
 CONTRACT = "output/public-pr746-release.json"
 RECEIPT = "output/public-pr746-inactive-receipt.json"
 BASELINE = {
-    "deploymentId": "fb1fe1fb-dd74-490d-a244-03c7c139b1b1",
+    "deploymentId": "bd5df29c-a06a-4e6b-b8df-cca6c6974d5b",
     "versionId": "29ff6775-2f8f-4318-81c8-c8931c6a4973",
     "bindingsSha256": "7347149d5e22db8d04ef7fcdefa82da44eb9e877b0efde2faa1f1c22d099cf74",
     "settingsSha256": "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166",
@@ -49,7 +49,7 @@ def check_contract(contract, name):
 def inspect_archive(data, digest):
     require(0 < len(data) <= qual.MAX_ZIP and qual.sha256(data) == digest and data.startswith(b"PK\x03\x04"), "pr746_zip")
     files, names, folded, total = [], set(), set(), 0
-    markers = {b"dossier_continuation_saved", b"Retomar este expediente"}
+    markers = {b"dossier_continuation_saved", b"Retomar este expediente", b"trust-summary:", b"ai-index-preparation:"}
     found = set()
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         require(0 < len(archive.infolist()) <= qual.MAX_FILES * 2, "pr746_count")
