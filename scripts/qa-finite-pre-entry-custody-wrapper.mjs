@@ -1,6 +1,6 @@
 import {IndependentClosure as BaselineClosure,PrivateQaBootstrap as BaselineBootstrap} from './closed-rollback.mjs';
 import {custodyContext} from './pre-entry-custody-context.mjs';
-import {QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE as purpose,readQaPreEntryCustodyContext} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
+import {QA_PRE_ENTRY_CUSTODY_RECEIPT_PURPOSE as purpose,readQaPreEntryCustodyContext,validateQaPreEntryCustodyReceipt} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 import {readFinitePreEntryCustody} from '../lib/mcp-qa-finite-initial-custody-probe.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 export {PrivateQaNamedConfirmation,PrivateQaPreregistration,default} from './closed-rollback.mjs';
@@ -30,19 +30,9 @@ function guard(env,id,source,minimum){
  };
  check();return{check,ns,versionId,context:c};
 }
-function receipt(r,g,earliest=g.context.startAt){
- fields(r,['purpose','status','observationId','sourceRevision','releaseZipSha256','qaVersionId','observedAt','reader','publisher','guardVerified','scopeVerified','authorizesEffects','operationalReadiness','mayRetry']);
- if(r.purpose!==purpose||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false||r.mayRetry!==false)fail();
- const at=g.check();
- if(r.observationId!==g.context.id||r.sourceRevision!==g.context.sourceRevision||
-    r.releaseZipSha256!==g.context.releaseZipSha256||r.qaVersionId!==g.versionId||
-    !Number.isSafeInteger(r.observedAt)||r.observedAt<g.context.startAt||r.observedAt<earliest||r.observedAt>at)fail();
- for(const v of [r.reader,r.publisher]){
-  fields(v,['status','expiresAt','notBefore']);
-  const expiry=typeof v.expiresAt==='string'?Date.parse(v.expiresAt):NaN,notBefore=v.notBefore===null?null:typeof v.notBefore==='string'?Date.parse(v.notBefore):NaN;
-  if(v.status!=='active'||!Number.isSafeInteger(expiry)||expiry<=at||new Date(expiry).toISOString()!==v.expiresAt||notBefore!==null&&(!Number.isSafeInteger(notBefore)||notBefore>at||new Date(notBefore).toISOString()!==v.notBefore))fail();
- }
- return r;
+function receipt(output,g,observedFrom=g.context.startAt){
+ return validateQaPreEntryCustodyReceipt({output,context:g.context,qaVersionId:g.versionId,
+  observedFrom,readAt:g.check()});
 }
 function observation(r,g){
  if(!r||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false)fail();
@@ -75,8 +65,8 @@ export class PrivateQaBootstrap extends BaselineBootstrap{
     if(executed)fail();executed=true;g.check();
     const actor=g.ns.get(g.ns.idFromName(slot)),raw=await actor.readPreEntryCustody(custodyContext.id,custodyContext.sourceRevision);g.check();if(typeof raw!=='string'||new TextEncoder().encode(raw).length>2048)fail();return raw;
    });
-   g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||typeof value!=='string'||new TextEncoder().encode(value).length>2048)fail();
-   return receipt(JSON.parse(value),g,stamp);
+   g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||typeof value!=='string')fail();
+   return receipt(value,g,stamp);
   }catch{return blocked();}
  }
 }
