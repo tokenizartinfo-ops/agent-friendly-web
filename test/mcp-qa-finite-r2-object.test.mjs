@@ -15,6 +15,28 @@ function signed(){
  return url;
 }
 const signal=new AbortController().signal;
+test('final ZIP configuration selects the dedicated exact package link ahead of a draft link',()=>{
+ const sourceRevision='a'.repeat(40),draft=signed(),pkg=signed();
+ draft.pathname='/finite-bundles-v1/'+sourceRevision+'.zip';
+ pkg.pathname='/finite-packages-v2/'+sourceRevision+'.zip';
+ assert.equal(api.finiteR2PackageReadCredential({AFW_R2_PACKAGE_READ_URL:pkg.href,AFW_R2_BUNDLE_READ_URL:draft.href},{sourceRevision,now}),pkg.href);
+ assert.equal(api.finiteR2PackageReadCredential({AFW_R2_BUNDLE_READ_URL:pkg.href},{sourceRevision,now}),pkg.href);
+ assert.equal(api.finiteR2PackageReadCredential({AFW_R2_PACKAGE_READ_URL:'',AFW_R2_BUNDLE_READ_URL:pkg.href},{sourceRevision,now}),pkg.href);
+});
+test('final ZIP configuration rejects draft, historical, mismatched and expired links locally',()=>{
+ const sourceRevision='a'.repeat(40),draft=signed(),pkg=signed(),wrong=signed(),expired=signed();
+ draft.pathname='/finite-bundles-v1/'+sourceRevision+'.zip';
+ pkg.pathname='/finite-packages-v2/'+sourceRevision+'.zip';
+ wrong.pathname='/finite-packages-v2/'+'b'.repeat(40)+'.zip';
+ expired.pathname=pkg.pathname;expired.searchParams.set('X-Amz-Expires','45');
+ for(const env of [
+  {},{AFW_R2_BUNDLE_READ_URL:draft.href},{AFW_R2_PACKAGE_READ_URL:signed().href},
+  {AFW_R2_PACKAGE_READ_URL:wrong.href},{AFW_R2_PACKAGE_READ_URL:expired.href},
+  {AFW_R2_PACKAGE_READ_URL:draft.href,AFW_R2_BUNDLE_READ_URL:pkg.href},
+ ]){
+  assert.throws(()=>api.finiteR2PackageReadCredential(env,{sourceRevision,now}),{message:'Finite R2 package credential unavailable'});
+ }
+});
 test('the executor reads only the pinned backup object with a signed GET and no account bearer token',async()=>{
  assert.equal(typeof api.readFiniteR2Archive,'function','exact R2 reader required');
  const url=signed(),calls=[];
