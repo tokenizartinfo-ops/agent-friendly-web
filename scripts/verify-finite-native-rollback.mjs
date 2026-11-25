@@ -98,7 +98,7 @@ function custodyModules(code,baseline,context){
 export function assembleQaPreEntryCustody({staging,baseline,context}){
  const scope=readQaPreEntryCustodyContext(context),template=staging?.custodyProbeTemplate;
  const code=staging?.files?.['qaCustodyProbe/index.mjs'],pin=QA_CLOUD_CLOSED_PINS.qaClosed.module;
- const {sourceRevision,baselineVersionId,startAt,expiresAt}=scope,sourceTree=staging?.sourceTree;
+ const {sourceRevision,releaseZipSha256,baselineVersionId,startAt,expiresAt}=scope,sourceTree=staging?.sourceTree;
  if(staging?.sourceRevision!==sourceRevision||typeof sourceTree!=='string'||!/^[a-f0-9]{40}$/.test(sourceTree)||
     template?.sourceRevision!==sourceRevision||template.sourceTree!==sourceTree||
     template.authorizesEffects!==false||template.operationalReadiness!==false||template.module?.name!=='index.mjs'||
@@ -110,23 +110,23 @@ export function assembleQaPreEntryCustody({staging,baseline,context}){
  })));
  const [wrapper,backup]=modulePins;
  if(wrapper.sha256!==template.module.sha256||backup.sha256!==pin.sha256)fail();
- const body={purpose:'afw.finite-qa-custody-assembly.v1',sourceRevision,sourceTree,observationId:scope.id,
+ const body={purpose:'afw.finite-qa-custody-assembly.v2',sourceRevision,sourceTree,releaseZipSha256,observationId:scope.id,
   baselineVersionId,startAt,expiresAt,modules:modulePins,authorizesDeployment:false,operationalReadiness:false};
  return {modules,receipt:Object.freeze({...body,assemblySha256:sha256(JSON.stringify(body))})};
 }
 
 /** Mount the real compiled wrapper against the exact QA backup without
  * injecting synthetic custody profiles or an active observation window. */
-export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata}){
- const context=createQaPreEntryCustodyContext({sourceRevision:staging.sourceRevision,startAt:0,expiresAt:1});
+export async function verifyExpiredQaCustodyTemplate({staging,baseline,metadata,releaseZipSha256}){
+ const context=createQaPreEntryCustodyContext({sourceRevision:staging.sourceRevision,releaseZipSha256,startAt:0,expiresAt:1});
  const {modules,receipt}=assembleQaPreEntryCustody({staging,baseline,context});
  const mounted=await mountColdQaCustody({modules,metadata,context});
  return Object.freeze({templateSha256:receipt.modules[0].sha256,baselineSha256:receipt.modules[1].sha256,
   ...mounted,assembly:receipt,authorizesEffects:false,operationalReadiness:false});
 }
 
-export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision}){
- const context=createQaPreEntryCustodyContext({sourceRevision,startAt:0,expiresAt:1});
+export async function verifyColdQaCustodyMount({code,baseline,metadata,sourceRevision,releaseZipSha256}){
+ const context=createQaPreEntryCustodyContext({sourceRevision,releaseZipSha256,startAt:0,expiresAt:1});
  return mountColdQaCustody({modules:custodyModules(code,baseline,context),metadata,context});
 }
 

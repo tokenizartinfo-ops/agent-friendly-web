@@ -46,7 +46,7 @@ test('actual compiler staging hashes final bytes and retains source classes with
  export class PrivateQaPreregistration extends DurableObject {}
  export default {fetch(){return new Response(null,{status:404});}};
  `;
- const mount=await verifyColdQaCustodyMount({code:bytes,baseline,sourceRevision:M,metadata:{
+ const mount=await verifyColdQaCustodyMount({code:bytes,baseline,sourceRevision:M,releaseZipSha256:'f'.repeat(64),metadata:{
   compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],bindings:[],
  }});
  assert.deepEqual(mount,{coldAssemblyBlocked:true,outboundAttempts:0});

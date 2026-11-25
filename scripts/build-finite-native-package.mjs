@@ -313,7 +313,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
  const custodyRehearsal=await verifyArchivedQaCustodyProbe({cwd,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree},
   layoutModules.qaClosed);
  const expiredCustodyTemplate=await verifyExpiredQaCustodyTemplate({staging:built,
-  baseline:layoutModules.qaClosed,metadata:privateMetadata.qaClosed});
+  baseline:layoutModules.qaClosed,metadata:privateMetadata.qaClosed,releaseZipSha256:releaseLayout.archiveSha256});
  // Pin what the subsequent native qualification must prove against this
  // exact draft. The archived mount and synthetic token cannot attest QA.
  const preEntry={purpose:'afw.finite-package-pre-entry.v1',
