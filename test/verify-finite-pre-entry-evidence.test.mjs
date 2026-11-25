@@ -23,6 +23,7 @@ function fixture(){
   qaRollbackVersionId:pins.qaClosed.id,qaRollbackModuleSha256:pins.qaClosed.module.sha256};
  const comment={id:303,author_association:'OWNER',user:owner,issue_url:'https://api.github.com/repos/'+repo.full_name+'/issues/497',
   created_at:stamp(0),updated_at:stamp(0),body:'/afw-qa-pre-entry-custody v1 '+sourceRevision+' '+zip+' '+wrapper};
+ const intentId=digest(['afw.qa-pre-entry-custody-command.v1',repo.id,comment.id,sourceRevision,start,zip,wrapper].join('\n'));
  const run=(id,event,path,created,updated)=>({id,event,path:'.github/workflows/'+path,created_at:stamp(created),updated_at:stamp(updated),
   repository:repo,head_repository:repo,head_branch:'main',head_sha:sourceRevision,run_attempt:1,status:'completed',conclusion:'success',actor:owner,triggering_actor:owner});
  const receipt={purpose:'afw.qa-pre-entry-custody.v3',status:'observed',observationId:context.id,sourceRevision,
@@ -41,7 +42,7 @@ function fixture(){
    historicalArchiveSha256:historical.archiveSha256,releaseLayout:{archiveSha256:zip,moduleCount:5,completePackage:false,operationalReadiness:false},
    rollbackProfiles:{qaClosed:profiles.qa},preEntry:{...pre,qualificationHash:digest(JSON.stringify(pre)),status:'pending_native_qualification',authorizesDeployment:false}},
   custody:{purpose:'afw.qa-cloud-closed-custody-observation.v1',status:'verified',stage:'complete',cleanupFailureStage:null,
-   observedAt:stamp(117000),intentId:digest(['afw.qa-pre-entry-custody-command.v1',repo.id,comment.id,sourceRevision,start,zip,wrapper].join('\n')),
+   observedAt:stamp(117000),intentId,
    sourceRevision,releaseZipSha256:zip,artifactBaseVersionId:pins.qaClosed.id,artifactModuleHash:pins.qaClosed.module.sha256,
    commentId:'303',runId:'302',candidateVersionId:candidate,activationDeploymentId:staged,restorationDeploymentId:restored,
    candidateObserved:true,restorationAcknowledged:true,finalClosedVerified:true,nativeCustodyObservationVerified:true,
@@ -57,6 +58,8 @@ function fixture(){
   primary:{instanceId:'afw-qa-custody-'+context.id,params:JSON.stringify({operation:'inspect_pre_entry_custody',observationId:context.id}),
    queued:stamp(98000),start:stamp(100000),end:stamp(102000),success:true,status:'complete',step_count:1,
    steps:[{name:'inspect-pre-entry-custody-1',success:true}],output:receipt},
+  restoration:{id:restored,created_on:stamp(110000).replace('.000Z','.000123Z'),strategy:'percentage',
+   annotations:{'workers/message':'AFW closed QA restoration '+intentId},versions:[{version_id:pins.qaClosed.id,percentage:100}]},
  };
 }
 
@@ -82,6 +85,8 @@ for(const [label,change] of [
  ['an older Workflow response',x=>{x.primary.step_count=0;}],
  ['a mismatched candidate',x=>{x.custody.candidateVersionId=pins.qaClosed.id;}],
  ['a rollback to an alternate deployment',x=>{x.custody.finalReadback.deployments.qa.deploymentId=staged;}],
+ ['a primary rollback that contains the candidate',x=>{x.restoration.versions[0].version_id=candidate;}],
+ ['a primary rollback that postdates closed verification',x=>{x.restoration.created_on=stamp(116001);}],
  ['an inaccurate rollback module hash',x=>{x.custody.finalReadback.profiles.qa.moduleHash='a'.repeat(64);}],
  ['an unfinished Workflow',x=>{x.custody.finalReadback.allOwnWorkflowsTerminal=false;}],
  ['a rollback beyond the original deadline',x=>{x.custody.finalReadback.observedAt=stamp(480000);}],

@@ -16,9 +16,11 @@ const requireState=(actual,expected)=>{
 };
 const uuid=value=>typeof value==='string'&&/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(value);
 function timestamp(value){
- if(typeof value!=='string'||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(value))fail();
+ if(typeof value!=='string')fail();
+ const utc=/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d{1,6}))?Z$/.exec(value);
+ if(!utc)fail();
  const at=Date.parse(value);
- const canonical=value.length===20?value.slice(0,-1)+'.000Z':value;
+ const canonical=utc[1]+'.'+(utc[2]??'').padEnd(3,'0').slice(0,3)+'Z';
  if(!time(at)||new Date(at).toISOString()!==canonical)fail();
  return at;
 }
@@ -69,8 +71,8 @@ function verifyRestoration(readback,deploymentId){
  * for retrieving the records from their primary APIs. No authorization. */
 export function verifyFinitePreEntryEvidence(input){
  try{
-  const {source,draftRun,custodyRun,comment,draft,custody,primary}=fields(input,
-   ['source','draftRun','custodyRun','comment','draft','custody','primary']);
+  const {source,draftRun,custodyRun,comment,draft,custody,primary,restoration}=fields(input,
+   ['source','draftRun','custodyRun','comment','draft','custody','primary','restoration']);
   const pre=verifyDraft(draft,source),{sourceRevision,sourceTree,releaseZipSha256}=pre;
   const draftTiming=verifyRun(draftRun,'workflow_dispatch','afw-private-backup-package-input.yml',sourceRevision);
   const runTiming=verifyRun(custodyRun,'issue_comment','afw-qa-closed-custody-observation.yml',sourceRevision);
@@ -104,9 +106,14 @@ export function verifyFinitePreEntryEvidence(input){
   const validate=output=>validateQaPreEntryCustodyReceipt({output,context,qaVersionId:candidateVersionId,observedFrom:started,readAt:ended});
   const receipt=validate(primary.output);
   if(hash(receipt)!==hash(validate(custody.nativeResult)))fail();
+  requireState(restoration,{id:restorationDeploymentId,strategy:'percentage'});
+  requireState(restoration.annotations,{'workers/message':'AFW closed QA restoration '+command.intentId});
+  if(!Array.isArray(restoration.versions)||restoration.versions.length!==1)fail();
+  requireState(restoration.versions[0],{version_id:pre.qaRollbackVersionId,percentage:100});
+  const appliedAt=timestamp(restoration.created_on);
   const restoredAt=verifyRestoration(custody.finalReadback,restorationDeploymentId),observedAt=timestamp(custody.observedAt);
   // GitHub run timestamps have second resolution. The original recovery clock does not.
-  if(restoredAt<ended||observedAt<restoredAt||observedAt>=command.cleanupExpiresAt||observedAt>=runTiming.end+1000)fail();
+  if(appliedAt<ended||restoredAt<appliedAt||observedAt<restoredAt||observedAt>=command.cleanupExpiresAt||observedAt>=runTiming.end+1000)fail();
   return Object.freeze({purpose:'afw.finite-pre-entry-evidence.v1',status:'matched',sourceRevision,sourceTree,releaseZipSha256,
    rollbackArchiveSha256:pre.rollbackArchiveSha256,rollbackReceiptSha256:pre.rollbackReceiptSha256,
    draftRunId:draftRun.id,custodyRunId:custodyRun.id,commandId:comment.id,observationId:context.id,candidateVersionId,
