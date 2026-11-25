@@ -1,3 +1,15 @@
+## 25 de noviembre de 2026 · QA cerrado comprobado
+
+El [borrador compilado con los respaldos privados de R2](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/45645755388) corresponde a la revisión `85a458a816329ed43d2f89110657d106ad440fb5` y al ZIP `e18f264a7ed099505679404b91a8cff288663e28ac3bc8cc834281a4399035cf`.
+
+La [observación de QA](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/45645978119) comprobó las dos credenciales desde el Worker, verificó la información del guard histórico y restauró QA a su versión cerrada. Una lectura primaria independiente confirmó el despliegue de restauración `9e8fa64a-5eb5-4f53-ae72-b4344dd04522` al 100 %. La ventana quedó consumida.
+
+Para reproducir la comparación de esa evidencia, pasar por stdin a `node scripts/verify-finite-pre-entry-evidence.mjs` un JSON con el commit de GitHub (`source`), los metadatos de ambas ejecuciones (`draftRun` y `custodyRun`), el comentario original (`comment`), los dos recibos de Actions (`draft` y `custody`) y la instancia consultada en Cloudflare (`primary`, con `instanceId`). Usar las respuestas de las APIs oficiales y conservar sus fechas como cadenas. El resultado registra la coincidencia histórica y deja `completePackage`, `authorizesDeployment` y `operationalReadiness` en `false`.
+
+La calificación de publicación del ZIP sigue pendiente. Al reanudar, verificar el estado actual del proveedor y de las credenciales, completar el paquete y comprobar en una sola ventana la recepción y revisión del mismo aviso, la retirada efectiva de la suscripción y el cierre. La prueba con la PC apagada requiere ese recorrido completo. El [incidente de Event Subscriptions](https://www.cloudflarestatus.com/incidents/0ocqieaifg7h) seguía abierto en este corte.
+
+Los registros siguientes corresponden a cortes anteriores.
+
 26 de octubre de 2026, corte23:57 UTC — **Preparación privada: lectura aceptada, proveedor bloqueado y runtime nuevo pendiente.** Este es un corte fechado; la [continuidad497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6391041814) conserva cambios y lecturas posteriores. No deducir vigencia de un recurso desde este documento.
 
 - **Lectura real aceptada:** C01 realizó una consulta de siguiente paso desde Work cloud y quedó cerrado. El [recibo](AFW-CONTINUITY-CLOUD-ACCEPTANCE-2026-10-26.es.md) conserva su alcance summary-only y su fuente congelada444d. No repetir esa lectura como un hito pendiente.
