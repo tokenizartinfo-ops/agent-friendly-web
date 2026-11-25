@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {QA_CLOUD_CLOSED_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
-import {createQaPreEntryCustodyContext,readQaPreEntryCustodyContext,renderQaPreEntryCustodyModule} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
+import {createQaPreEntryCustodyContext,readQaPreEntryCustodyContext,renderQaPreEntryCustodyModule,validateQaPreEntryCustodyReceipt} from '../lib/mcp-qa-finite-pre-entry-context.mjs';
 
 const window={sourceRevision:'b'.repeat(40),releaseZipSha256:'a'.repeat(64),startAt:1000,expiresAt:61000};
 
@@ -38,3 +38,47 @@ test('custody preparation and reading reject tampered windows, fallback pins and
  assert.throws(()=>readQaPreEntryCustodyContext({...context,get id(){touched=true;return context.id;}}));
  assert.equal(touched,false);
 });
+
+const candidateVersionId='12345678-1234-4123-8123-123456789012';
+
+function custodyReceipt(){
+ const context=createQaPreEntryCustodyContext(window);
+ const binding={context,qaVersionId:candidateVersionId,observedFrom:2000,readAt:4000};
+ const active={status:'active',expiresAt:new Date(60000).toISOString(),notBefore:null};
+ const output={purpose:'afw.qa-pre-entry-custody.v3',status:'observed',observationId:context.id,
+  sourceRevision:context.sourceRevision,releaseZipSha256:context.releaseZipSha256,qaVersionId:candidateVersionId,
+  observedAt:3000,reader:{...active},publisher:{...active},guardVerified:true,scopeVerified:false,
+  authorizesEffects:false,operationalReadiness:false,mayRetry:false};
+ return{binding,output};
+}
+
+test('accepts a bounded runtime receipt only for the exact QA candidate and archive',()=>{
+ const {binding,output}=custodyReceipt();
+ const actual=validateQaPreEntryCustodyReceipt({...binding,output:JSON.stringify(output)});
+ assert.deepEqual(actual,output);
+ assert.equal(Object.isFrozen(actual),true);
+ assert.equal(Object.isFrozen(actual.reader),true);
+ assert.equal(Object.isFrozen(actual.publisher),true);
+});
+
+test('rejects a foreign archive, older run, different deployment and promoted evidence',()=>{
+ const {binding,output}=custodyReceipt();
+ const foreign=createQaPreEntryCustodyContext({...window,releaseZipSha256:'c'.repeat(64)});
+ const stale=[{...binding,context:foreign,output},{...binding,observedFrom:3001,output},
+  {...binding,readAt:2999,output},{...binding,readAt:window.expiresAt,output},
+  {...binding,qaVersionId:'99999999-9999-4999-8999-999999999999',output}];
+ for(const candidate of stale)assert.throws(()=>validateQaPreEntryCustodyReceipt(candidate));
+ for(const patch of [{releaseZipSha256:foreign.releaseZipSha256},{sourceRevision:'9'.repeat(40)},
+  {authorizesEffects:true},{scopeVerified:true},{operationalReadiness:true},{mayRetry:true},{status:'blocked'},
+  {publisher:{...output.publisher,notBefore:new Date(3001).toISOString()}},
+  {reader:{...output.reader,expiresAt:new Date(binding.readAt).toISOString()}},
+  {publisher:{...output.publisher,expiresAt:'1970-01-01T00:01:00Z'}},{token:'invalid'}]){
+  assert.throws(()=>validateQaPreEntryCustodyReceipt({...binding,output:{...output,...patch}}));
+ }
+ assert.throws(()=>validateQaPreEntryCustodyReceipt({...binding,output:JSON.stringify(output)+' '.repeat(2048)}));
+ let getterCalled=false;
+ const poisoned={...output,get reader(){getterCalled=true;return output.reader;}};
+ assert.throws(()=>validateQaPreEntryCustodyReceipt({...binding,output:poisoned}));
+ assert.equal(getterCalled,false);
+});
+
