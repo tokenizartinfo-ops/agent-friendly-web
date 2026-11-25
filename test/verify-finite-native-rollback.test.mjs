@@ -84,10 +84,12 @@ test('QA custody assembly binds all three module bytes to the source, pinned rol
   sourceRevision,sourceTree,authorizesEffects:false,operationalReadiness:false,
   module:{name:'index.mjs',bytes:code.length,sha256:digest(code)}
  }};
- const context=createQaPreEntryCustodyContext({sourceRevision,startAt:100,expiresAt:200});
+ const inputs={sourceRevision,releaseZipSha256:'d'.repeat(64),startAt:100,expiresAt:200};
+ const context=createQaPreEntryCustodyContext(inputs);
  const {modules,receipt}=assembleQaPreEntryCustody({staging,baseline,context});
  assert.equal(receipt.sourceRevision,sourceRevision);
  assert.equal(receipt.sourceTree,sourceTree);
+ assert.equal(receipt.releaseZipSha256,inputs.releaseZipSha256);
  assert.equal(receipt.observationId,context.id);
  assert.equal(receipt.baselineVersionId,qaVersion);
  assert.equal(receipt.authorizesDeployment,false);
@@ -95,8 +97,10 @@ test('QA custody assembly binds all three module bytes to the source, pinned rol
  const {assemblySha256,...body}=receipt;
  assert.equal(assemblySha256,digest(JSON.stringify(body)));
  assert.equal(assembleQaPreEntryCustody({staging,baseline,context}).receipt.assemblySha256,assemblySha256);
- const changed=createQaPreEntryCustodyContext({sourceRevision,startAt:100,expiresAt:201});
- assert.notEqual(assembleQaPreEntryCustody({staging,baseline,context:changed}).receipt.assemblySha256,assemblySha256);
+ for(const input of [{...inputs,expiresAt:201},{...inputs,releaseZipSha256:'e'.repeat(64)}]){
+  const changed=createQaPreEntryCustodyContext(input);
+  assert.notEqual(assembleQaPreEntryCustody({staging,baseline,context:changed}).receipt.assemblySha256,assemblySha256);
+ }
  for(const input of [{baseline:Buffer.alloc(baseline.length)},{context:{...context,expiresAt:201}},
   {staging:{...staging,sourceTree:'c'.repeat(40)}},
   {staging:{...staging,files:{'qaCustodyProbe/index.mjs':Buffer.alloc(code.length)}}}]){

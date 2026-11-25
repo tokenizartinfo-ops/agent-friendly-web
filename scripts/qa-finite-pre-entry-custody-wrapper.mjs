@@ -31,10 +31,11 @@ function guard(env,id,source,minimum){
  check();return{check,ns,versionId,context:c};
 }
 function receipt(r,g,earliest=g.context.startAt){
- fields(r,['purpose','status','observationId','sourceRevision','qaVersionId','observedAt','reader','publisher','guardVerified','scopeVerified','authorizesEffects','operationalReadiness','mayRetry']);
+ fields(r,['purpose','status','observationId','sourceRevision','releaseZipSha256','qaVersionId','observedAt','reader','publisher','guardVerified','scopeVerified','authorizesEffects','operationalReadiness','mayRetry']);
  if(r.purpose!==purpose||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false||r.mayRetry!==false)fail();
  const at=g.check();
- if(r.observationId!==g.context.id||r.sourceRevision!==g.context.sourceRevision||r.qaVersionId!==g.versionId||
+ if(r.observationId!==g.context.id||r.sourceRevision!==g.context.sourceRevision||
+    r.releaseZipSha256!==g.context.releaseZipSha256||r.qaVersionId!==g.versionId||
     !Number.isSafeInteger(r.observedAt)||r.observedAt<g.context.startAt||r.observedAt<earliest||r.observedAt>at)fail();
  for(const v of [r.reader,r.publisher]){
   fields(v,['status','expiresAt','notBefore']);
@@ -46,7 +47,7 @@ function receipt(r,g,earliest=g.context.startAt){
 function observation(r,g){
  if(!r||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false)fail();
  return receipt({purpose,status:'observed',observationId:g.context.id,sourceRevision:g.context.sourceRevision,
-  qaVersionId:g.versionId,observedAt:g.check(),reader:r.reader,publisher:r.publisher,guardVerified:true,
+  releaseZipSha256:g.context.releaseZipSha256,qaVersionId:g.versionId,observedAt:g.check(),reader:r.reader,publisher:r.publisher,guardVerified:true,
   scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false},g);
 }
 export class IndependentClosure extends BaselineClosure{
