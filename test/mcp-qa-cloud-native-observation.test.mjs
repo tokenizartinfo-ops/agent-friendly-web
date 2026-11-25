@@ -50,8 +50,10 @@ async function fixture({effect,transport,custody=false,changedArtifact=false}={}
    const supplied=init.headers.Authorization;
    assert.ok([readerCredential,publisherCredential].some(value=>supplied==='Bearer '+value));
    const reader=supplied==='Bearer '+readerCredential;
+   if(mode==='readerDenied')return response(null,401);
    const id=reader&&mode!=='crossedCredentials'?'cc9aeb666b3616232df10a17598ced52':'0821b27a745d1ef581b445c75311711b';
-   return response({id,status:'active',expires_on:'2026-11-27T02:59:59Z'});
+   return Response.json({success:true,errors:[],messages:[{code:10000,message:'This API Token is valid and active',type:null}],
+    result:{id,status:'active',expires_on:'2026-11-27T02:59:59Z'}},{headers:{date:new Date(f.wall).toUTCString()}});
   }
   if(url.origin==='https://api.cloudflare.com'&&p.includes('/workflows/afw-own-qa-private-bootstrap/instances/')){
    f.requests.push({url,init});const own='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-bootstrap/instances/'+instanceId;
@@ -381,6 +383,7 @@ test('closed custody observes the exact ZIP and restores QA with the Queue incid
  assert.equal(r.externalInstanceObserved,true);
  assert.equal(r.posts.createWorkflow,0);
  assert.equal(r.posts.terminateWorkflow,0);
+ assert.deepEqual(r.credentialPreflight,{reader:{httpStatus:200,verified:true},publisher:{httpStatus:200,verified:true}});
  assert.equal(r.nativeResult.qaVersionId,CANDIDATE);
  assert.equal(r.finalClosedVerified,true);
  assert.equal(r.operationalReadiness,false);
@@ -429,6 +432,18 @@ test('closed custody rejects crossed credentials before any upload or claim',asy
  assert.equal(r.claimAcknowledged,false);
  assert.deepEqual(x.posts,{upload:0,activate:0,restore:0});
  assert.equal(x.f.requests.filter(q=>q.url.pathname.endsWith('/tokens/verify')).length,1);
+ assert.deepEqual(r.credentialPreflight,{reader:{httpStatus:200,verified:false},publisher:{httpStatus:null,verified:false}});
+ assert.equal(JSON.stringify(r).includes('PRIVATE'),false);
+});
+
+test('closed custody keeps a reader HTTP denial separate from an identity mismatch',async()=>{
+ const x=await fixture({custody:true});x.setMode('readerDenied');
+ const r=await x.run();
+ assert.equal(r.status,'blocked');
+ assert.equal(r.stage,'credential_preflight');
+ assert.deepEqual(r.credentialPreflight,{reader:{httpStatus:401,verified:false},publisher:{httpStatus:null,verified:false}});
+ assert.equal(r.claimAcknowledged,false);
+ assert.deepEqual(x.posts,{upload:0,activate:0,restore:0});
  assert.equal(JSON.stringify(r).includes('PRIVATE'),false);
 });
 
