@@ -34,6 +34,8 @@ jobs:
       - name: Wait for the authorized Workflow, validate its receipt, and restore closed QA
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          AFW_MCP_CLOSURE_READ_TOKEN: ${{ secrets.AFW_MCP_CLOSURE_READ_TOKEN }}
+          AFW_MCP_CLOSURE_PUBLISH_TOKEN: ${{ secrets.AFW_MCP_CLOSURE_PUBLISH_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/qa-closed-custody-observation.mjs observe
       - uses: actions/upload-artifact@v4
