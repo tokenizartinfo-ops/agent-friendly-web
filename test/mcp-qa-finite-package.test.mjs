@@ -7,7 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {encodeFinitePackageManifest,hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
 import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver,finitePrivateLocatorZip,
- finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator} from './fixtures/finite-package-resolver.mjs';
+ finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator,verifyFiniteReleaseArchive,finitePublicStaticExpectation} from './fixtures/finite-package-resolver.mjs';
 
 let resolver;
 resolver=syntheticResolver;
@@ -26,6 +26,12 @@ const blob=b=>createHash('sha1').update('blob '+Buffer.byteLength(b)+'\0').updat
 const clone=o=>structuredClone(o);
 const R2_KEY='finite-packages-v2/'+M+'.zip';
 const R2=finiteR2TestUrl(M,AT);
+function fixtureZip(manifest,mutation){
+ const built=spawnSync('python3',[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],
+  {input:JSON.stringify({manifest,mutation}),maxBuffer:64*1024*1024,timeout:5000});
+ assert.equal(built.status,0,built.stderr?.toString());
+ return built.stdout;
+}
 function fixture(){
  const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:sha(WORKFLOW_TEXT),modules:{},compatibility:{}};
  for(const role of ROLES)manifest.modules[role]={sourceRevision:role==='operatorClosed'?OLD:M,sourceTree:role==='operatorClosed'?OLDTREE:TREE,module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:sha(MODULE),bytes:MODULE.length,exports:[]},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)};
@@ -50,9 +56,7 @@ function fixture(){
    return r;
   }
   if(url===API+'/actions/runs/101/artifacts?per_page=100&page=1'){
-   const built=spawnSync('python3',[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],{input:JSON.stringify({manifest:f.manifest,mutation:f.mutation}),maxBuffer:64*1024*1024,timeout:5000});
-   assert.equal(built.status,0,built.stderr?.toString());
-   f.zip=built.stdout;
+   f.zip=fixtureZip(f.manifest,f.mutation);
    if(f.privateR2){
     f.r2Zip=f.zip;
     const locator={purpose:'afw.finite-private-package-locator.v1',sourceRevision:M,sourceTree:TREE,
@@ -75,6 +79,38 @@ function fixture(){
 async function resolve(f){assert.equal(typeof resolver,'function','concrete package resolver must be installed');return resolver(f.options);}
 async function denied(f){await assert.rejects(()=>resolve(f),{message:'Finite package unavailable'});}
 function runURL(page){return API+'/actions/workflows/afw-finite-native-package.yml/runs?head_sha='+M+'&branch=main&event=push&status=success&per_page=100&page='+page;}
+
+test('verifies the final ZIP bytes with independently pinned provenance and no provider transport',async()=>{
+ const f=fixture();
+ for(const role of ROLES)f.manifest.modules[role].publicStatic=finitePublicStaticExpectation(role);
+ const archive=fixtureZip(f.manifest),options={archive,sourceRevision:M,sourceTree:TREE,
+  workflowHash:sha(f.workflowText),expectedArchiveSha256:sha(archive)};
+ const result=await verifyFiniteReleaseArchive(options);
+ assert.deepEqual(result,{purpose:'afw.finite-release-archive-review.v1',status:'verified_archive',sourceRevision:M,
+  sourceTree:TREE,buildWorkflowHash:sha(f.workflowText),archiveBytes:archive.length,archiveSha256:sha(archive),
+  manifestHash:hashFinitePackageManifest(f.manifest),nativeQualificationRequired:true,authorizesDeployment:false,operationalReadiness:false});
+ assert(Object.isFrozen(result));assert.deepEqual(f.calls,[]);
+ assert.doesNotMatch(JSON.stringify(result),/ARCHIVE_MUST_NEVER_EXECUTE/);
+ await assert.rejects(createFinitePrivateR2Locator({sourceRevision:M,sourceTree:TREE,workflowHash:sha(f.workflowText),
+  credential:R2,now:()=>AT,fetchImpl:async url=>{
+   assert.equal(url,R2);
+   return new Response(archive,{headers:{'content-type':'application/zip','content-length':String(archive.length)}});
+  }}),{message:'Finite package unavailable'});
+});
+
+test('offline final ZIP verification rejects a different digest, source, unqualified layout or cancellation',async()=>{
+ const f=fixture(),wrongProfile=fixtureZip(f.manifest);
+ for(const role of ROLES)f.manifest.modules[role].publicStatic=finitePublicStaticExpectation(role);
+ const archive=fixtureZip(f.manifest),valid={archive,sourceRevision:M,sourceTree:TREE,
+  workflowHash:sha(f.workflowText),expectedArchiveSha256:sha(archive)};
+ f.manifest.compatibility.legacyContainmentQualified=false;
+ const draft=fixtureZip(f.manifest);
+ for(const change of [
+  {expectedArchiveSha256:'0'.repeat(64)},{sourceTree:'0'.repeat(40)},{workflowHash:'0'.repeat(64)},
+  {archive:draft,expectedArchiveSha256:sha(draft)},{archive:wrongProfile,expectedArchiveSha256:sha(wrongProfile)},
+  {signal:AbortSignal.abort()},
+ ])await assert.rejects(()=>verifyFiniteReleaseArchive({...valid,...change}),{message:'Finite package unavailable'});
+});
 
 test('real ZIP through actual Python subprocess yields immutable technical material only',async()=>{
  const f=fixture(),result=await resolve(f);
