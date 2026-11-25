@@ -3,11 +3,12 @@ import {v2Manifest} from './fixtures/finite-v2.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {spawnSync} from 'node:child_process';
+import {spawn,spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {encodeFinitePackageManifest,hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
 import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver,finitePrivateLocatorZip,
- finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator,verifyFiniteReleaseArchive,finitePublicStaticExpectation} from './fixtures/finite-package-resolver.mjs';
+ finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator,verifyFiniteReleaseArchive,finitePublicStaticExpectation,
+ finitePublicProfileTemplate} from './fixtures/finite-package-resolver.mjs';
 
 let resolver;
 resolver=syntheticResolver;
@@ -21,13 +22,14 @@ const TOKEN='opaque+/=~.future-'+'z'.repeat(30);
 const AT=Date.parse('2026-11-01T18:00:00.000Z');
 const MODULE=Buffer.from("throw new Error('ARCHIVE_MUST_NEVER_EXECUTE');\n");
 const ROLES=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
+const interpreter=process.platform==='win32'?'python':'python3';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const blob=b=>createHash('sha1').update('blob '+Buffer.byteLength(b)+'\0').update(b).digest('hex');
 const clone=o=>structuredClone(o);
 const R2_KEY='finite-packages-v2/'+M+'.zip';
 const R2=finiteR2TestUrl(M,AT);
 function fixtureZip(manifest,mutation){
- const built=spawnSync('python3',[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],
+ const built=spawnSync(interpreter,[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],
   {input:JSON.stringify({manifest,mutation}),maxBuffer:64*1024*1024,timeout:5000});
  assert.equal(built.status,0,built.stderr?.toString());
  return built.stdout;
@@ -80,9 +82,17 @@ async function resolve(f){assert.equal(typeof resolver,'function','concrete pack
 async function denied(f){await assert.rejects(()=>resolve(f),{message:'Finite package unavailable'});}
 function runURL(page){return API+'/actions/workflows/afw-finite-native-package.yml/runs?head_sha='+M+'&branch=main&event=push&status=success&per_page=100&page='+page;}
 
+function setReviewedArchiveProfiles(manifest){
+ for(const role of ROLES)manifest.modules[role].publicStatic=finitePublicStaticExpectation(role);
+ for(const role of ['qaLive','canaryLive']){
+  const {exports}=finitePublicProfileTemplate(role);
+  manifest.modules[role].module.exports=(Array.isArray(exports)?[...exports]:Object.keys(exports)).sort();
+ }
+}
+
 test('verifies the final ZIP bytes with independently pinned provenance and no provider transport',async()=>{
  const f=fixture();
- for(const role of ROLES)f.manifest.modules[role].publicStatic=finitePublicStaticExpectation(role);
+ setReviewedArchiveProfiles(f.manifest);
  const archive=fixtureZip(f.manifest),options={archive,sourceRevision:M,sourceTree:TREE,
   workflowHash:sha(f.workflowText),expectedArchiveSha256:sha(archive)};
  const result=await verifyFiniteReleaseArchive(options);
@@ -98,18 +108,41 @@ test('verifies the final ZIP bytes with independently pinned provenance and no p
   }}),{message:'Finite package unavailable'});
 });
 
-test('offline final ZIP verification rejects a different digest, source, unqualified layout or cancellation',async()=>{
+test('offline final ZIP verification rejects a different digest, source, unqualified layout, exports or cancellation',async()=>{
  const f=fixture(),wrongProfile=fixtureZip(f.manifest);
- for(const role of ROLES)f.manifest.modules[role].publicStatic=finitePublicStaticExpectation(role);
+ setReviewedArchiveProfiles(f.manifest);
  const archive=fixtureZip(f.manifest),valid={archive,sourceRevision:M,sourceTree:TREE,
   workflowHash:sha(f.workflowText),expectedArchiveSha256:sha(archive)};
  f.manifest.compatibility.legacyContainmentQualified=false;
  const draft=fixtureZip(f.manifest);
+ f.manifest.compatibility.legacyContainmentQualified=true;
+ f.manifest.modules.canaryLive.module.exports=[];
+ const wrongExports=fixtureZip(f.manifest);
  for(const change of [
   {expectedArchiveSha256:'0'.repeat(64)},{sourceTree:'0'.repeat(40)},{workflowHash:'0'.repeat(64)},
   {archive:draft,expectedArchiveSha256:sha(draft)},{archive:wrongProfile,expectedArchiveSha256:sha(wrongProfile)},
+  {archive:wrongExports,expectedArchiveSha256:sha(wrongExports)},
   {signal:AbortSignal.abort()},
  ])await assert.rejects(()=>verifyFiniteReleaseArchive({...valid,...change}),{message:'Finite package unavailable'});
+});
+
+test('offline ZIP CLI times out even when its input pipe stays open',async()=>{
+ const script=fileURLToPath(new URL('../scripts/verify-finite-release-archive.mjs',import.meta.url));
+ const clock='data:text/javascript,'+encodeURIComponent(
+  'const t=AbortSignal.timeout; AbortSignal.timeout=ms=>t(Math.min(ms,200));');
+ const child=spawn(process.execPath,['--import',clock,script,M,TREE,sha(WORKFLOW_TEXT),'0'.repeat(64)],{stdio:['pipe','pipe','pipe']});
+ let out='',err='';
+ child.stdout.setEncoding('utf8').on('data',chunk=>{out+=chunk;});
+ child.stderr.setEncoding('utf8').on('data',chunk=>{err+=chunk;});
+ child.stdin.on('error',()=>{});
+ const watchdog=setTimeout(()=>child.kill(),8000);
+ try{
+  const finished=new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',resolve);});
+  child.stdin.write('PK');
+  assert.equal(await finished,1);
+  assert.equal(out,'');
+  assert.equal(err,'Finite package unavailable\n');
+ }finally{clearTimeout(watchdog);child.stdin.destroy();}
 });
 
 test('real ZIP through actual Python subprocess yields immutable technical material only',async()=>{
@@ -159,7 +192,7 @@ test('private readback verifies every draft member without issuing a release loc
   completePackage:false,operationalReadiness:false,files:{}};
  for(const role of ROLES)drafts.files[role+'/'+(role==='qaClosed'?'closed-rollback.mjs':'index.mjs')]=
   {bytes:MODULE.length,sha256:sha(MODULE)};
- const built=spawnSync('python3',[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],
+ const built=spawnSync(interpreter,[fileURLToPath(new URL('./finite_archive_test.py',import.meta.url)),'--fixture'],
   {input:JSON.stringify({manifest:drafts}),timeout:5000,maxBuffer:65536});
  assert.equal(built.status,0,built.stderr?.toString());
  const bytes=built.stdout;
