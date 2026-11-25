@@ -8,13 +8,14 @@ export {PrivateQaNamedConfirmation,PrivateQaPreregistration,default} from './clo
 const slot='afw-own-successor-closure-v1';
 const policies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 const fail=()=>{throw Error('Closed pre-entry custody unavailable');};
-const stages=new Set(['workflow_guard','actor_guard','read_scope','actor_context',
+const stages=new Set(['read_scope','actor_context',
  'reader_http','reader_headers','reader_identity','publisher_http','publisher_headers','publisher_identity','historical_guard']);
 function blocked(diagnostic){
- const stage=stages.has(diagnostic?.stage)?diagnostic.stage:'workflow_guard';
+ const stage=diagnostic?.stage;
  const status=diagnostic?.httpStatus;
  const httpStatus=Number.isSafeInteger(status)&&status>=100&&status<=599?status:null;
- return {purpose,status:'blocked',diagnostic:{stage,httpStatus},authorizesEffects:false,operationalReadiness:false,mayRetry:false};
+ return {purpose,status:'blocked',...stages.has(stage)?{diagnostic:{stage,httpStatus}}:{},
+  authorizesEffects:false,operationalReadiness:false,mayRetry:false};
 }
 function fields(v,keys){
  if(!v||Object.getPrototypeOf(v)!==Object.prototype||Reflect.ownKeys(v).length!==keys.length)fail();
@@ -57,7 +58,7 @@ export class IndependentClosure extends BaselineClosure{
    g.check();if(this.ctx!==ctx||this.env!==env||ctx.storage!==storage||ctx.id!==actor||actor.toString()!==g.ns.idFromName(slot).toString())fail();
    if(value?.status==='unavailable')return JSON.stringify(blocked(value.diagnostic));
    return JSON.stringify(observation(value,g));
-  }catch{return JSON.stringify(blocked({stage:'actor_guard'}));}
+  }catch{return JSON.stringify(blocked());}
  }
 }
 export class PrivateQaBootstrap extends BaselineBootstrap{
@@ -77,6 +78,7 @@ export class PrivateQaBootstrap extends BaselineBootstrap{
      typeof value!=='string'||new TextEncoder().encode(value).length>2048)fail();
    const observed=JSON.parse(value);
    if(observed?.status==='blocked'){
+    if(!Object.hasOwn(observed,'diagnostic'))return blocked();
     fields(observed,['purpose','status','diagnostic','authorizesEffects','operationalReadiness','mayRetry']);
     const d=fields(observed.diagnostic,['stage','httpStatus']);
     if(observed.purpose!==purpose||observed.authorizesEffects!==false||observed.operationalReadiness!==false||
