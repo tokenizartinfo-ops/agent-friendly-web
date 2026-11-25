@@ -96,6 +96,7 @@ jobs:
       - name: Verify private R2 bundle and write its public locator
         env:
           AFW_R2_PACKAGE_SOURCE_REVISION: ${{ inputs.source_revision }}
+          AFW_R2_PACKAGE_READ_URL: ${{ secrets.AFW_R2_PACKAGE_READ_URL }}
           AFW_R2_BUNDLE_READ_URL: ${{ secrets.AFW_R2_BUNDLE_READ_URL }}
         run: node scripts/write-finite-r2-locator.mjs
       - uses: actions/upload-artifact@v4

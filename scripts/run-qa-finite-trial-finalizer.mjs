@@ -8,7 +8,7 @@ import {validateFiniteExternalPlan,validateFiniteObserverOutput} from '../lib/mc
 import {createPrivateQaFiniteTrialFinalizer} from '../lib/mcp-qa-finite-trial-finalizer.mjs';
 import {resolvePrivateQaFiniteExternalSource} from '../lib/mcp-qa-finite-source.mjs';
 import {validateFiniteNativeObserverHandoff} from '../lib/mcp-qa-finite-observer.mjs';
-import {assertFiniteR2ArchiveCredential} from '../lib/mcp-qa-finite-r2-object.mjs';
+import {assertFiniteR2ArchiveCredential,finiteR2PackageReadCredential} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {verifyFiniteCoupledQaTrialResult} from './run-qa-finite-coupled-restore.mjs';
 const fail=()=>{throw Error('Finite finalizer unavailable');};
 /** Fixed phase CLI. Source implementation may be installed only in reviewed code.
@@ -29,8 +29,9 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   }
   if(phase==='admission'){await append(env.GITHUB_OUTPUT,'intent_id='+admission.intentId+'\n');return {status:'admitted',operationalReadiness:false};}
   if(phase==='seed-material'){
+   const r2Credential=finiteR2PackageReadCredential(env,{sourceRevision:admission.sourceRevision,now});
    return await issueFiniteMaterialSeed({admission,githubToken:env.GITHUB_TOKEN,credential:env.AFW_QA_CLOSED_TOKEN,
-    r2Credential:env.AFW_R2_BUNDLE_READ_URL,fetchImpl,now,signal});
+    r2Credential,fetchImpl,now,signal});
   }
   // Bootstrap facts identify only the original QA publication and custody.
   if(phase==='launch'){
