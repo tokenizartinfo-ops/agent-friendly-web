@@ -55,7 +55,27 @@ async function fixture({effect,transport,custody=false,changedArtifact=false}={}
    if(mode==='wrongParams')workflow.params=JSON.stringify({operation:'inspect_closed_quiescence',observationId:'0'.repeat(64)});
    return response(workflow);
   }
+  if(custody&&url.origin==='https://api.github.com'&&init.method==='POST'){
+   const b=JSON.parse(init.body),ref='refs/tags/afw-qa-closed-custody-ready/'+admission.intentId;
+   if(b.ref===ref){
+    assert.equal(f.version,CANDIDATE);
+    assert.equal(b.sha,source);
+    f.requests.push({url,init});
+    workflowPosts++;
+    const role={status:'active',expiresAt:new Date(admission.expiresAt+60000).toISOString(),notBefore:null};
+    const output={purpose:'afw.qa-pre-entry-custody.v3',status:'observed',observationId:custodyContext.id,
+     sourceRevision:source,releaseZipSha256:mode==='wrongArchive'?'f'.repeat(64):releaseZipSha256,
+     qaVersionId:mode==='wrongRuntime'?RESTORE:CANDIDATE,observedAt:f.wall,reader:role,publisher:{...role},
+     guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false};
+    if(mode!=='externalStartTimeout')workflow={params:parameters,status:'complete',success:mode!=='unsuccessfulWorkflow',
+     output,versionId:'opaque-native-version'};
+    const date=new Date(f.wall).toUTCString();
+    if(mode==='externalStartTimeout')f.wall=admission.expiresAt;
+    return new Response(JSON.stringify({ref,object:{sha:source,type:'commit'}}),{status:201,headers:{'content-type':'application/json',date}});
+   }
+  }
   if(url.origin==='https://api.cloudflare.com'&&init.method==='POST'&&p.endsWith('/workflows/afw-own-qa-private-bootstrap/instances')){
+   assert.equal(custody,false,'the limited credential is never used to start a Workflow');
    workflowPosts++;f.requests.push({url,init});const b=JSON.parse(init.body);
    assert.deepEqual(b,{instance_id:instanceId,params:parameters});
    if(mode==='workflow403')return response(null,403);
@@ -68,14 +88,7 @@ async function fixture({effect,transport,custody=false,changedArtifact=false}={}
    if(mode==='nativeBlocked'||mode==='lateWorkflowCleanup')output.status='blocked';
    if(mode==='nativeTooSlow')output.elapsedMs=5000;
    if(mode==='nativeCompletesAfter7800'){output.enqueueAgeMs=3845;output.elapsedMs=4022;output.capturedTotalAgeMs=7867;}
-   if(custody){
-    const role={status:'active',expiresAt:new Date(admission.expiresAt+60000).toISOString(),notBefore:null};
-    const custodyOutput={purpose:'afw.qa-pre-entry-custody.v3',status:'observed',observationId:custodyContext.id,
-     sourceRevision:source,releaseZipSha256:mode==='wrongArchive'?'f'.repeat(64):releaseZipSha256,
-     qaVersionId:mode==='wrongRuntime'?RESTORE:CANDIDATE,observedAt:f.wall,reader:role,publisher:{...role},
-     guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false};
-    workflow={params:b.params,status:'complete',success:mode!=='unsuccessfulWorkflow',output:custodyOutput,versionId:'opaque-native-version'};
-   }else workflow={params:b.params,status:'complete',output,versionId:'opaque-native-version'};
+   workflow={params:b.params,status:'complete',output,versionId:'opaque-native-version'};
    workflowAckAt=performance.now();
    if(mode==='createDeniedRace403'||mode==='createDeniedRace409'){workflow.status='running';return response(null,mode==='createDeniedRace403'?403:409);}
    if(mode==='createUnknown')throw Error('PRIVATE_CREATE_ACK');
@@ -345,6 +358,10 @@ test('closed custody observes the exact ZIP and restores QA with the Queue incid
  assert.equal(r.nativeCustodyObservationVerified,true);
  assert.equal(r.nativeResult.releaseZipSha256,'e'.repeat(64));
  assert.equal(r.eventSubscriptionIncidentExcluded,true);
+ assert.equal(r.externalStartReady,true);
+ assert.equal(r.externalInstanceObserved,true);
+ assert.equal(r.posts.createWorkflow,0);
+ assert.equal(r.posts.terminateWorkflow,0);
  assert.equal(r.nativeResult.qaVersionId,CANDIDATE);
  assert.equal(r.finalClosedVerified,true);
  assert.equal(r.operationalReadiness,false);
@@ -354,7 +371,7 @@ test('closed custody observes the exact ZIP and restores QA with the Queue incid
  assert.equal(JSON.stringify(r).includes('content_base64'),false);
 });
 
-for(const mode of ['wrongArchive','wrongRuntime','unsuccessfulWorkflow','finalReadbackFailure']){
+for(const mode of ['wrongArchive','wrongRuntime','unsuccessfulWorkflow','finalReadbackFailure','externalStartTimeout']){
  test('closed custody rejects '+mode+' and restores the pinned version',async()=>{
   const x=await fixture({custody:true});x.setMode(mode);const r=await x.run();
   assert.notEqual(r.status,'verified');

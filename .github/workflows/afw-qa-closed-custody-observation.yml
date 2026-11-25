@@ -31,7 +31,7 @@ jobs:
         env:
           AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
         run: node scripts/qa-closed-custody-observation.mjs prepare
-      - name: Observe credentials and restore closed QA
+      - name: Wait for the authorized Workflow, validate its receipt, and restore closed QA
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
