@@ -76,6 +76,14 @@ async function fixture(mode='normal'){
   calls.push({url:req.url,method:req.method});assert.equal(req.method,'GET');
   if(mode==='hold'&&req.url.endsWith('/tokens/verify')&&!held){held=true;await new Promise(r=>{release=r;});}
   let result;
+  if(mode==='reader-unauthorized'&&req.url.endsWith('/tokens/verify')){
+   return Response.json({success:false,errors:[{code:10000,message:'synthetic private provider error'}],messages:[]},
+    {status:401,headers:{date:new Date().toUTCString()}});
+  }
+  if(mode==='historical-missing'&&!req.url.endsWith('/tokens/verify')){
+   return Response.json({success:false,errors:[{code:10000,message:'synthetic private provider error'}],messages:[]},
+    {status:404,headers:{date:new Date().toUTCString()}});
+  }
   if(req.url.endsWith('/tokens/verify'))result={id:mode==='wrong-holder'?'0'.repeat(32):req.headers.get('authorization')==='Bearer synthetic-native-reader'?readerId:publisherId,status:'active',expires_on:new Date(expiresAt).toISOString(),not_before:null};
   else {assert.match(req.url,/\/workflows\/afw-own-qa-private-bootstrap\/instances\/afw-mcp-closure-/);result={status:'complete',step_count:6,output:{status:'blocked',dispatchStatus:'uncertain',nativeWithdrawalVerified:false,operationalReadiness:false,mayRetry:false},steps:[{name:'one'},{name:'restore-own-closed-canary-1',start:'2026-10-30T16:41:01.564Z',end:'2026-10-30T16:41:01.675Z',success:true},{name:'two'},{name:'three'},{name:'four'},{name:'five'}]};}
   return Response.json({success:true,errors:[],messages:[],result},{headers:{date:new Date().toUTCString()}});
@@ -111,7 +119,21 @@ hostTest('pending read remains exclusive after timeout until underlying operatio
  const f=await fixture('hold');try{const r=await f.run();assert.notEqual(r.status,'observed');assert.equal(f.held,true);assert.equal(await f.stub.availability(),false);assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(f.id,source)).status,'observed');f.release();let ok=false;for(let n=0;n<200&&!ok;n++){ok=await f.stub.availability();if(!ok)await new Promise(r=>setTimeout(r,10));}assert.equal(ok,true);}finally{f.release();await f.mf.dispose();}
 });
 
-hostTest('loaded wrong credential identity fails closed without mutations',async()=>{const f=await fixture('wrong-holder');try{const before=await f.stub.snapshot();assert.notEqual((await f.run()).status,'observed');assert.equal(await f.stub.snapshot(),before);assert.equal(f.calls.some(x=>x.url.endsWith('/tokens/verify')),true);assert.equal(f.calls.every(x=>x.method==='GET'),true);}finally{await f.mf.dispose();}});
+hostTest('loaded wrong credential identity fails closed without mutations',async()=>{const f=await fixture('wrong-holder');try{const before=await f.stub.snapshot(),r=await f.run();assert.equal(r.status,'blocked');assert.deepEqual(r.diagnostic,{stage:'reader_identity',httpStatus:200});assert.equal(await f.stub.snapshot(),before);assert.equal(f.calls.some(x=>x.url.endsWith('/tokens/verify')),true);assert.equal(f.calls.every(x=>x.method==='GET'),true);}finally{await f.mf.dispose();}});
+for(const [mode,stage,httpStatus] of [['reader-unauthorized','reader_http',401],['historical-missing','historical_guard',null]]){
+ hostTest('bounded diagnostic distinguishes '+mode+' without provider body or effects',async()=>{
+  const f=await fixture(mode);
+  try{
+   const before=await f.stub.snapshot(),r=await f.run();
+   assert.equal(r.status,'blocked');
+   assert.deepEqual(r.diagnostic,{stage,httpStatus});
+   assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);
+   assert.equal(JSON.stringify(r).includes('private provider'),false);
+   assert.equal(await f.stub.snapshot(),before);
+   assert.equal(f.calls.every(x=>x.method==='GET'),true);
+  }finally{await f.mf.dispose();}
+ });
+}
 hostTest('Workflow rejects extra selectors before actor access',async()=>{const f=await fixture();try{const r=await f.run({operation:'inspect_pre_entry_custody',observationId:f.id,target:'foreign'});assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 
 hostTest('Workflow rejects a malformed actor receipt instead of forwarding it',async()=>{const f=await fixture('forged');try{const r=await f.run();assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});

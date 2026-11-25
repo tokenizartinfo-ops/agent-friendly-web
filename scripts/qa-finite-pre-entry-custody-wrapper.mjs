@@ -8,7 +8,14 @@ export {PrivateQaNamedConfirmation,PrivateQaPreregistration,default} from './clo
 const slot='afw-own-successor-closure-v1';
 const policies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 const fail=()=>{throw Error('Closed pre-entry custody unavailable');};
-const blocked=()=>({purpose,status:'blocked',authorizesEffects:false,operationalReadiness:false,mayRetry:false});
+const stages=new Set(['workflow_guard','actor_guard','read_scope','actor_context',
+ 'reader_http','reader_headers','reader_identity','publisher_http','publisher_headers','publisher_identity','historical_guard']);
+function blocked(diagnostic){
+ const stage=stages.has(diagnostic?.stage)?diagnostic.stage:'workflow_guard';
+ const status=diagnostic?.httpStatus;
+ const httpStatus=Number.isSafeInteger(status)&&status>=100&&status<=599?status:null;
+ return {purpose,status:'blocked',diagnostic:{stage,httpStatus},authorizesEffects:false,operationalReadiness:false,mayRetry:false};
+}
 function fields(v,keys){
  if(!v||Object.getPrototypeOf(v)!==Object.prototype||Reflect.ownKeys(v).length!==keys.length)fail();
  for(const k of keys){const d=Object.getOwnPropertyDescriptor(v,k);if(!d?.enumerable||!Object.hasOwn(d,'value'))fail();}
@@ -48,8 +55,9 @@ export class IndependentClosure extends BaselineClosure{
    if(actor.toString()!==g.ns.idFromName(slot).toString())fail();
    const value=await readFinitePreEntryCustody({ctx,env});
    g.check();if(this.ctx!==ctx||this.env!==env||ctx.storage!==storage||ctx.id!==actor||actor.toString()!==g.ns.idFromName(slot).toString())fail();
+   if(value?.status==='unavailable')return JSON.stringify(blocked(value.diagnostic));
    return JSON.stringify(observation(value,g));
-  }catch{return JSON.stringify(blocked());}
+  }catch{return JSON.stringify(blocked({stage:'actor_guard'}));}
  }
 }
 export class PrivateQaBootstrap extends BaselineBootstrap{
@@ -65,8 +73,17 @@ export class PrivateQaBootstrap extends BaselineBootstrap{
     if(executed)fail();executed=true;g.check();
     const actor=g.ns.get(g.ns.idFromName(slot)),raw=await actor.readPreEntryCustody(custodyContext.id,custodyContext.sourceRevision);g.check();if(typeof raw!=='string'||new TextEncoder().encode(raw).length>2048)fail();return raw;
    });
-   g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||typeof value!=='string')fail();
-   return receipt(value,g,stamp);
+   g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||
+     typeof value!=='string'||new TextEncoder().encode(value).length>2048)fail();
+   const observed=JSON.parse(value);
+   if(observed?.status==='blocked'){
+    fields(observed,['purpose','status','diagnostic','authorizesEffects','operationalReadiness','mayRetry']);
+    const d=fields(observed.diagnostic,['stage','httpStatus']);
+    if(observed.purpose!==purpose||observed.authorizesEffects!==false||observed.operationalReadiness!==false||
+       observed.mayRetry!==false||!stages.has(d.stage))fail();
+    return blocked(d);
+   }
+   return receipt(observed,g,stamp);
   }catch{return blocked();}
  }
 }
