@@ -1,0 +1,46 @@
+name: AFW closed QA credential observation
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  observe:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && startsWith(github.event.comment.body, '/afw-qa-pre-entry-custody v1 ') }}
+    concurrency:
+      group: afw-qa-cloud-closed-rollback
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.4'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Prepare exact custody wrapper from the verified R2 package inputs
+        env:
+          AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
+        run: node scripts/qa-closed-custody-observation.mjs prepare
+      - name: Wait for the authorized Workflow, validate its receipt, and restore closed QA
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/qa-closed-custody-observation.mjs observe
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-closed-custody-${{ github.run_id }}-${{ github.run_attempt }}
+          path: afw-qa-closed-custody-result.json
+          if-no-files-found: error
+          retention-days: 7
+

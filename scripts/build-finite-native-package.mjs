@@ -235,7 +235,7 @@ export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
 
 /** The digest and rollback configuration are verified before the binary
  * publisher can use the same immutable frame. */
-async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false}={}){
+async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false,custody=false}={}){
  const built=await compileFiniteNativeStaging({cwd,sourceRevision}),expected=built.historicalInput.archiveBytes;
  let length=0;const chunks=[];
  for await(const part of await readArchive()){
@@ -330,11 +330,23 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   custodyRehearsal,expiredCustodyTemplate,releaseLayout,
   preEntry:Object.freeze({...preEntry,qualificationHash:hash(JSON.stringify(preEntry)),
    status:'pending_native_qualification',authorizesDeployment:false})};
+ if(custody){
+  const wrapper=built.files[custodyProbePath],descriptor=built.custodyProbeTemplate.module;
+  if(!Buffer.isBuffer(wrapper)||wrapper.length!==descriptor.bytes||hash(wrapper)!==descriptor.sha256)fail();
+  return Object.freeze({releaseZipSha256:releaseLayout.archiveSha256,
+   artifact:Object.freeze({sourceRevision,bytes:wrapper.length,sha256:descriptor.sha256,base64:wrapper.toString('base64')})});
+ }
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
  return {verified,bundle};
 }
+export async function prepareQaClosedCustodyArtifact(input,readCredential){
+ options(input);
+ return verifyPrivateFiniteCompilerDraft(input,async()=>
+  (await readFiniteR2Archive({credential:readCredential,signal:AbortSignal.timeout(15000)})).body,{custody:true});
+}
+
 /** Complete-package boundary. Deliberately no positive path until separately
  * reviewed historical input custody/privacy and actual native mounts qualify.
  * Class exports and successful compilation are insufficient evidence. */

@@ -42,3 +42,29 @@ test('native hook preserves metadata-only bounded seven-day artifacts and indepe
  const p=await readFile('scripts/qa-native-baseline-prepare.mjs','utf8');assert.match(p,/validateQaClosedBaseVersion\(e\.result\)/);assert.match(p,/method:'GET'/);assert.match(p,/afw-qa-legacy-exact-base\.mjs/);assert.equal((p.match(/inspectQaNativeCommand\(options\)/g)??[]).length,2);assert.doesNotMatch(p,/method:'(?:POST|PUT|PATCH|DELETE)'/);
  const entry=await readFile('scripts/qa-cloud-native-observation.mjs','utf8');assert.match(entry,/validateQaNativeArtifact/);assert.match(entry,/assertQaLifecycleWindow\(admission,'cleanup'\)/);
 });
+
+
+test('closed custody workflow isolates compilation and runtime credentials and only preserves a receipt',async()=>{
+ const text=await readFile('.github/workflows/afw-qa-closed-custody-observation.yml','utf8');
+ const w=parse(text),job=w.jobs.observe,steps=job.steps;
+ assert.deepEqual(w.on,{issue_comment:{types:['created']}});
+ assert.deepEqual(w.permissions,{contents:'read'});
+ assert.deepEqual(job.concurrency,{group:'afw-qa-cloud-closed-rollback',queue:'max','cancel-in-progress':false});
+ assert.equal(job.environment,'afw-qa-cloud-closed-rollback');
+ assert.deepEqual(job.permissions,{contents:'write'});
+ for(const gate of ["github.ref == 'refs/heads/main'","github.run_attempt == '1'",'github.event.repository.id == 1347578006',
+  'github.event.issue.number == 497','!github.event.issue.pull_request','github.event.comment.user.id == 290715446',
+  'github.event.sender.id == 290715446',"github.event.comment.author_association == 'OWNER'",
+  "startsWith(github.event.comment.body, '/afw-qa-pre-entry-custody v1 ')"])assert.ok(job.if.includes(gate),gate);
+ assert.doesNotMatch(job.if,/\|\|/);
+ assert.deepEqual(steps[0].with,{ref:expression('github.sha'),'persist-credentials':false,'fetch-depth':1});
+ const runs=steps.filter(s=>s.run);
+ assert.deepEqual(runs.map(s=>s.run),['npm ci --ignore-scripts --no-audit --no-fund',
+  'node scripts/qa-closed-custody-observation.mjs prepare','node scripts/qa-closed-custody-observation.mjs observe']);
+ assert.equal(runs[0].env,undefined);
+ assert.deepEqual(runs[1].env,{AFW_R2_BACKUPS_READ_URL:expression('secrets.AFW_R2_BACKUPS_READ_URL')});
+ assert.deepEqual(runs[2].env,{AFW_QA_CLOSED_TOKEN:expression('secrets.AFW_QA_CLOSED_TOKEN'),GITHUB_TOKEN:expression('github.token')});
+ assert.equal(steps.at(-1).with.path,'afw-qa-closed-custody-result.json');
+ assert.doesNotMatch(text,/workflow_dispatch:|schedule:|pull_request_target:|secrets: inherit|environment: production/);
+});
+
