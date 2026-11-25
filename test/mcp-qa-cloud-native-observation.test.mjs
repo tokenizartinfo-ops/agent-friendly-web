@@ -447,3 +447,31 @@ test('closed custody keeps a reader HTTP denial separate from an identity mismat
  assert.equal(JSON.stringify(r).includes('PRIVATE'),false);
 });
 
+test('closed custody restores the exact historical version when QA secrets differ',async()=>{
+ const attempts=[];
+ const x=await fixture({custody:true,effect:({kind,url,init,f})=>{
+  if(kind!=='restore')return;
+  attempts.push({force:url.searchParams.get('force'),versions:JSON.parse(init.body).versions});
+  if(url.searchParams.get('force')!=='true')return deniedResponse(f,400,[{code:10220,message:'PRIVATE_PROVIDER'}]);
+ }});
+ x.setMode('wrongArchive');
+ const r=await x.run();
+ assert.equal(r.status,'blocked');
+ assert.equal(r.stage,'workflow_observation');
+ assert.equal(r.finalClosedVerified,true);
+ assert.equal(r.restorationAcknowledged,true);
+ assert.deepEqual(attempts,[{force:'true',versions:[{version_id:x.f.pins.qaClosed.id,percentage:100}]}]);
+ assert.equal(r.forcedCredentialRestoration,true);
+});
+
+test('ordinary native observation restores without the credential change flag',async()=>{
+ const attempts=[];
+ const x=await fixture({effect:({kind,url})=>{
+  if(kind==='restore')attempts.push(url.searchParams.get('force'));
+ }});
+ const r=await x.run();
+ assert.equal(r.restorationAcknowledged,true);
+ assert.deepEqual(attempts,[null]);
+ assert.equal(Object.hasOwn(r,'forcedCredentialRestoration'),false);
+});
+
