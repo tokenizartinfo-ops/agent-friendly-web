@@ -63,7 +63,9 @@ test('closed custody workflow isolates compilation and runtime credentials and o
   'node scripts/qa-closed-custody-observation.mjs prepare','node scripts/qa-closed-custody-observation.mjs observe']);
  assert.equal(runs[0].env,undefined);
  assert.deepEqual(runs[1].env,{AFW_R2_BACKUPS_READ_URL:expression('secrets.AFW_R2_BACKUPS_READ_URL')});
- assert.deepEqual(runs[2].env,{AFW_QA_CLOSED_TOKEN:expression('secrets.AFW_QA_CLOSED_TOKEN'),GITHUB_TOKEN:expression('github.token')});
+ assert.deepEqual(runs[2].env,{AFW_QA_CLOSED_TOKEN:expression('secrets.AFW_QA_CLOSED_TOKEN'),
+  AFW_MCP_CLOSURE_READ_TOKEN:expression('secrets.AFW_MCP_CLOSURE_READ_TOKEN'),
+  AFW_MCP_CLOSURE_PUBLISH_TOKEN:expression('secrets.AFW_MCP_CLOSURE_PUBLISH_TOKEN'),GITHUB_TOKEN:expression('github.token')});
  assert.equal(steps.at(-1).with.path,'afw-qa-closed-custody-result.json');
  assert.doesNotMatch(text,/workflow_dispatch:|schedule:|pull_request_target:|secrets: inherit|environment: production/);
 });

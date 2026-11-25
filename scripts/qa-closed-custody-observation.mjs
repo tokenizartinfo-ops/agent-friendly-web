@@ -50,7 +50,8 @@ try{
   stage='r2_and_compiler';
   const readCredential=env.AFW_R2_BACKUPS_READ_URL;
   delete env.AFW_R2_BACKUPS_READ_URL;
-  if(env.AFW_QA_CLOSED_TOKEN!==undefined||env.GITHUB_TOKEN!==undefined)fail();
+  if([env.AFW_QA_CLOSED_TOKEN,env.GITHUB_TOKEN,env.AFW_MCP_CLOSURE_READ_TOKEN,env.AFW_MCP_CLOSURE_PUBLISH_TOKEN]
+   .some(value=>value!==undefined))fail();
   const {prepareQaClosedCustodyArtifact}=await import('./build-finite-native-package.mjs');
   const {releaseZipSha256,artifact}=await prepareQaClosedCustodyArtifact({cwd,sourceRevision:admission.sourceRevision},readCredential);
   assertQaLifecycleWindow(admission,'nominal',180000);
@@ -67,7 +68,8 @@ try{
   if(prepared?.intentId!==admission.intentId||prepared.releaseZipSha256!==admission.releaseZipSha256)fail();
   stage='controller';
   const result=await runQaClosedCustodyObservation({admission,credential:env.AFW_QA_CLOSED_TOKEN,
-   githubCredential:env.GITHUB_TOKEN,fetchImpl:fetch,now,artifact:prepared.artifact});
+   githubCredential:env.GITHUB_TOKEN,fetchImpl:fetch,now,artifact:prepared.artifact,
+   readerCredential:env.AFW_MCP_CLOSURE_READ_TOKEN,publisherCredential:env.AFW_MCP_CLOSURE_PUBLISH_TOKEN});
   stage='settlement';
   let valid=true;
   try{assertQaLifecycleWindow(admission,'cleanup');}catch{valid=false;}

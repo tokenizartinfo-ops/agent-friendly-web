@@ -7,7 +7,14 @@ import {qaClosedHttpFixture} from './fixtures/qa-closed-http.mjs';
 const CANDIDATE='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',ACTIVATE='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',RESTORE='cccccccc-cccc-4ccc-8ccc-cccccccccccc';
 async function fixture({effect,transport,custody=false,changedArtifact=false}={}){
  const f=qaClosedHttpFixture();f.version=f.pins.qaClosed.id;
- const base=f.versions[f.pins.qaClosed.id];base.main_module='closed-rollback.mjs';base.modules[0].name='closed-rollback.mjs';f.pins.qaClosed.module.name='closed-rollback.mjs';f.pins.qaClosed.configurationHash=qaClosedConfigurationHash(base);const at=f.wall,source='a'.repeat(40),now=()=>f.wall;
+ const readerCredential='PRIVATE-synthetic-reader-token',publisherCredential='PRIVATE-synthetic-publisher-token';
+ const base=f.versions[f.pins.qaClosed.id];
+ if(custody){
+  f.wall=Date.parse('2026-11-25T13:00:00Z');
+  base.bindings.push({name:'AFW_MCP_CLOSURE_READ_TOKEN',type:'secret_text'},{name:'AFW_MCP_CLOSURE_PUBLISH_TOKEN',type:'secret_text'});
+  f.pins.qaClosed.bindingCount=base.bindings.length;
+ }
+ base.main_module='closed-rollback.mjs';base.modules[0].name='closed-rollback.mjs';f.pins.qaClosed.module.name='closed-rollback.mjs';f.pins.qaClosed.configurationHash=qaClosedConfigurationHash(base);const at=f.wall,source='a'.repeat(40),now=()=>f.wall;
  const built=await build({stdin:{contents:"export {validateQaLifecycleCommand,validateQaNativeObservationCommand,validateQaPreEntryCustodyCommand,assertQaLifecycleWindow} from './lib/mcp-qa-cloud-lifecycle-admission.mjs';export {runQaClosedCloudClone,runQaNativeMetadataObservation,runQaClosedCustodyObservation} from './lib/mcp-qa-cloud-clone.mjs';export {createQaPreEntryCustodyContext} from './lib/mcp-qa-finite-pre-entry-context.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'test-compiled-pins',setup(b){b.onResolve({filter:/mcp-qa-native-artifact\.mjs$/},()=>({path:'artifact',namespace:'test-artifact'}));b.onLoad({filter:/.*/,namespace:'test-artifact'},()=>({contents:"export function validateQaNativeArtifact({artifact}){if(artifact?.purpose!=='test-fixed-native-wrapper')throw Error('bad test artifact');return artifact;}",loader:'js'}));b.onResolve({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({path:'pins',namespace:'test-pins'}));b.onLoad({filter:/.*/,namespace:'test-pins'},()=>({contents:'export const QA_CLOUD_CLOSED_PINS=Object.freeze('+JSON.stringify(f.pins)+');',loader:'js'}));}}]});
  const api=await import('data:text/javascript;base64,'+Buffer.from(built.outputFiles[0].text).toString('base64'));
  const wrapper=Buffer.from('export default {}; // test wrapper');
@@ -37,6 +44,14 @@ async function fixture({effect,transport,custody=false,changedArtifact=false}={}
   if(url.origin==='https://www.cloudflarestatus.com'){
    f.requests.push({url,init});assert.equal(p,'/api/v2/incidents/unresolved.json');assert.equal(init.method,'GET');assert.equal(Object.keys(init.headers).some(k=>k.toLowerCase()==='authorization'),false);
    return new Response(JSON.stringify({incidents:mode==='providerIncident'?[{id:'synthetic',name:'Workers errors',status:'investigating'}]:mode==='unrelatedIncident'?[{id:'other',name:'Email routing statistics',status:'investigating',components:[{name:'Email Routing'}]}]:mode==='broaderEventIncident'?[{...queueIncident,components:[...queueIncident.components,{id:'new',name:'Workflows'}]}]:mode==='exactQueueIncident'||custody?[queueIncident]:[]}),{status:200,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
+  }
+  if(custody&&url.origin==='https://api.cloudflare.com'&&p.endsWith('/tokens/verify')){
+   f.requests.push({url,init});assert.equal(init.method,'GET');
+   const supplied=init.headers.Authorization;
+   assert.ok([readerCredential,publisherCredential].some(value=>supplied==='Bearer '+value));
+   const reader=supplied==='Bearer '+readerCredential;
+   const id=reader&&mode!=='crossedCredentials'?'cc9aeb666b3616232df10a17598ced52':'0821b27a745d1ef581b445c75311711b';
+   return response({id,status:'active',expires_on:'2026-11-27T02:59:59Z'});
   }
   if(url.origin==='https://api.cloudflare.com'&&p.includes('/workflows/afw-own-qa-private-bootstrap/instances/')){
    f.requests.push({url,init});const own='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-bootstrap/instances/'+instanceId;
@@ -104,7 +119,11 @@ async function fixture({effect,transport,custody=false,changedArtifact=false}={}
    if(p.endsWith('/versions')){
     posts.upload++;assert.equal(p,'/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/'+f.pins.qaClosed.name+'/versions');assert.equal(url.searchParams.get('deploy'),'false');assert.equal(body.modules.length,3);assert.equal(body.main_module,'index.mjs');assert.deepEqual(body.modules.find(m=>m.name==='closed-rollback.mjs'),f.versions[f.pins.qaClosed.id].modules[0]);
  const compiled=JSON.parse(Buffer.from(body.modules.find(m=>m.name===(custody?'pre-entry-custody-context.mjs':'closed-observation-context-v2.mjs')).content_base64,'base64').toString().match(/Object.freeze\((.*)\);/s)[1]);assert.equal(compiled.id,custody?custodyContext.id:admission.intentId);assert.equal(compiled.startAt,admission.createdAt);assert.equal(compiled.expiresAt,admission.expiresAt);if(custody)assert.equal(compiled.releaseZipSha256,releaseZipSha256);else assert.equal(Object.keys(compiled).length,7);
-    assert.deepEqual(body.bindings,f.versions[f.pins.qaClosed.id].bindings.map(b=>({name:b.name,type:'inherit',version_id:f.pins.qaClosed.id})));assert.equal(body.annotations['workers/tag'],admission.intentId);
+    assert.deepEqual(body.bindings,f.versions[f.pins.qaClosed.id].bindings.map(b=>{
+     if(custody&&b.name==='AFW_MCP_CLOSURE_READ_TOKEN')return {name:b.name,type:'secret_text',text:readerCredential};
+     if(custody&&b.name==='AFW_MCP_CLOSURE_PUBLISH_TOKEN')return {name:b.name,type:'secret_text',text:publisherCredential};
+     return {name:b.name,type:'inherit',version_id:f.pins.qaClosed.id};
+    }));assert.equal(body.annotations['workers/tag'],admission.intentId);
     assert.equal(Object.hasOwn(body,'migrations'),false);assert.equal(Object.hasOwn(body,'migration_tag'),false);
     const v=structuredClone(f.versions[f.pins.qaClosed.id]);v.id=CANDIDATE;v.annotations=body.annotations;v.modules=body.modules;v.main_module=body.main_module;f.versions[CANDIDATE]=v;
     if(mode==='tagMismatch')v.annotations['workers/tag']='x'.repeat(64);
@@ -141,7 +160,7 @@ async function fixture({effect,transport,custody=false,changedArtifact=false}={}
   if(mode==='finalReadbackFailure'&&posts.restore&&p.endsWith('/tails'))return response([{id:'PRIVATE_ACTIVE_TAIL'}]);
   return normal(input,init);
  };
- return{f,api,admission,admissionMono,posts,get workflowPosts(){return workflowPosts;},get terminatePosts(){return terminatePosts;},get polls(){return polls;},get workflowStatus(){return workflow?.status;},fetchImpl,setMode(v){mode=v;},run:()=>(custody?api.runQaClosedCustodyObservation:api.runQaNativeMetadataObservation)({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now,artifact}),event,context,now};
+ return{f,api,admission,admissionMono,posts,get workflowPosts(){return workflowPosts;},get terminatePosts(){return terminatePosts;},get polls(){return polls;},get workflowStatus(){return workflow?.status;},fetchImpl,setMode(v){mode=v;},run:()=>(custody?api.runQaClosedCustodyObservation:api.runQaNativeMetadataObservation)({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now,artifact,...custody?{readerCredential,publisherCredential}:{}}),event,context,now};
 }
 
 test('native closed lifecycle creates one correlated metadata Workflow, restores once and proves all terminal',async()=>{
@@ -400,5 +419,16 @@ test('closed custody rejects a changed wrapper and old command before any provid
  assert.equal(x.f.requests.length,0);
  const old=await fixture();
  assert.throws(()=>x.api.validateQaPreEntryCustodyCommand({event:old.event,context:old.context,now:old.now}));
+});
+
+test('closed custody rejects crossed credentials before any upload or claim',async()=>{
+ const x=await fixture({custody:true});x.setMode('crossedCredentials');
+ const r=await x.run();
+ assert.equal(r.status,'blocked');
+ assert.equal(r.stage,'credential_preflight');
+ assert.equal(r.claimAcknowledged,false);
+ assert.deepEqual(x.posts,{upload:0,activate:0,restore:0});
+ assert.equal(x.f.requests.filter(q=>q.url.pathname.endsWith('/tokens/verify')).length,1);
+ assert.equal(JSON.stringify(r).includes('PRIVATE'),false);
 });
 
