@@ -19,6 +19,7 @@ export const resolvePrivateQaFiniteExternalSource=api.resolvePrivateQaFiniteExte
 export const verifyFinitePrivateR2Draft=api.verifyFinitePrivateR2Draft;
 export const createFinitePrivateR2Locator=api.createFinitePrivateR2Locator;
 export const verifyFiniteReleaseArchive=api.verifyFiniteReleaseArchive;
+export const verifyFiniteCandidateArchive=api.verifyFiniteCandidateArchive;
 export const finitePublicStaticExpectation=api.finitePublicStaticExpectation;
 export const finitePublicProfileTemplate=api.finitePublicProfileTemplate;
 

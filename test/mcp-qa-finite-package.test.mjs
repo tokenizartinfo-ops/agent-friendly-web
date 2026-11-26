@@ -7,7 +7,7 @@ import {spawn,spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {encodeFinitePackageManifest,hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
 import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver,finitePrivateLocatorZip,
- finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator,verifyFiniteReleaseArchive,finitePublicStaticExpectation,
+ finiteR2TestUrl,verifyFinitePrivateR2Draft,createFinitePrivateR2Locator,verifyFiniteReleaseArchive,verifyFiniteCandidateArchive,finitePublicStaticExpectation,
  finitePublicProfileTemplate} from './fixtures/finite-package-resolver.mjs';
 
 let resolver;
@@ -106,6 +106,35 @@ test('verifies the final ZIP bytes with independently pinned provenance and no p
    assert.equal(url,R2);
    return new Response(archive,{headers:{'content-type':'application/zip','content-length':String(archive.length)}});
   }}),{message:'Finite package unavailable'});
+});
+
+test('offline candidate ZIP review verifies private staging bytes while the release gate stays closed',async()=>{
+ const f=fixture();
+ setReviewedArchiveProfiles(f.manifest);
+ const qualifiedArchive=fixtureZip(f.manifest);
+ f.manifest.compatibility.legacyContainmentQualified=false;
+ const archive=fixtureZip(f.manifest);
+ const options={archive,sourceRevision:M,sourceTree:TREE,workflowHash:sha(f.workflowText),expectedArchiveSha256:sha(archive)};
+ const receipt=await verifyFiniteCandidateArchive(options);
+ assert.deepEqual(receipt,{
+  purpose:'afw.finite-candidate-archive-review.v1',status:'verified_candidate_archive',
+  sourceRevision:M,sourceTree:TREE,buildWorkflowHash:options.workflowHash,
+  archiveBytes:archive.length,archiveSha256:options.expectedArchiveSha256,
+  nativeQualificationRequired:true,authorizesDeployment:false,operationalReadiness:false,
+ });
+ assert(Object.isFrozen(receipt));assert.deepEqual(f.calls,[]);
+ await assert.rejects(()=>verifyFiniteReleaseArchive(options),{message:'Finite package unavailable'});
+ f.manifest.modules.qaLive.module.exports=[];
+ const wrongExports=fixtureZip(f.manifest);
+ f.manifest.modules.qaLive.publicStatic=finitePublicStaticExpectation('canaryLive');
+ const wrongProfile=fixtureZip(f.manifest);
+ for(const change of [
+  {archive:qualifiedArchive,expectedArchiveSha256:sha(qualifiedArchive)},
+  {archive:wrongExports,expectedArchiveSha256:sha(wrongExports)},
+  {archive:wrongProfile,expectedArchiveSha256:sha(wrongProfile)},
+  {expectedArchiveSha256:'0'.repeat(64)},{workflowHash:'0'.repeat(64)},{sourceTree:'0'.repeat(40)},
+  {signal:AbortSignal.abort()},
+ ])await assert.rejects(()=>verifyFiniteCandidateArchive({...options,...change}),{message:'Finite package unavailable'});
 });
 
 test('offline final ZIP verification rejects a different digest, source, unqualified layout, exports or cancellation',async()=>{
