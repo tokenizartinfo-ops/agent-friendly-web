@@ -61,7 +61,7 @@ export async function HomeExperience({ searchParams, locale = 'es' }: HomeProps 
     ],
   };
   return (
-    <main lang={locale}>
+    <main lang={locale} className="home-page">
       <PublicWebMcpRegistration />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <SiteHeader locale={locale} routeKey="home" />
