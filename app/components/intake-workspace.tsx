@@ -41,6 +41,7 @@ import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
 import { canSaveProjectDraft } from '../../lib/project-draft.mjs';
 import { DossierContinuation } from './dossier-continuation';
+import { DossierConditionsReview } from './dossier-conditions-review';
 import { DossierAssistance } from './dossier-assistance';
 import {DossierFirstStep} from './dossier-first-step';
 import {saveDossierFirstStep} from '../../lib/dossier-first-step.mjs';
@@ -551,6 +552,11 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
     if(panel instanceof HTMLDetailsElement){panel.open=true;panel.querySelector<HTMLElement>('.coach-question h3,summary')?.focus();panel.scrollIntoView({block:'start'});}
   }
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
+  const conditionsReview = loaded && projectId && !sessionRequired
+    ? <DossierConditionsReview key={`conditions:${projectId}`} projectId={projectId} revision={scopeRevision}
+      newSite={!savedWebsite} locale={locale} request={request}
+      canSave={scopeRevision > 0 && !unconfirmedChanges && !conflictReview && status !== 'saving' && !workingPending && !manualBusy} />
+    : null;
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
       <a className="dossier-help-dock" href={`#${helpTargetId}`} onClick={()=>{const panel=document.getElementById(helpTargetId);if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
@@ -583,6 +589,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           projectId={projectId} revision={scopeRevision} withoutWebsite={!savedWebsite} locale={locale} request={request}
           sessionRequired={sessionRequired} onPendingChange={setContinuationPending} saveRef={continuationSave}
           canSave={scopeRevision > 0 && !sessionRequired && !unconfirmedChanges && !conflictReview && status !== 'saving' && !workingPending && !manualBusy} /> : null}
+        {!savedWebsite ? conditionsReview : null}
 
         {loaded && !conflictReview && !sessionRequired ? <div className="guided-view-switch"><p>{guidedView
           ? pilotCopilot ? localizedMessage(locale, 'Vamos de a poco. Contame tu sitio con tus palabras o por audio; revisamos juntos cada propuesta antes de guardarla.', 'Let us take this one step at a time. Describe your site in text or audio; we will review each suggestion before saving.', 'Vamos por partes. Conte sobre seu site por texto ou áudio; revisaremos cada sugestão antes de salvar.') : localizedMessage(locale,'Vamos de a poco. Respondé una pregunta por vez; revisá la propuesta y comprobá el guardado antes de salir.','Take one step at a time. Answer one question, review the suggestion and check saving before leaving.','Vamos por partes. Responda uma pergunta, revise a proposta e confira o salvamento antes de sair.')
@@ -743,6 +750,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
         {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation key={`ai-index-preparation:${projectId}`}
           website={savedWebsite} contentSources={savedSnapshot.contentSources} observation={currentObservations.observation}
           readState={updatesReadState} locale={locale} /> : null}
+        {savedWebsite ? conditionsReview : null}
 
         {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} deliveryContext={{cms:savedSnapshot.cms,hosting:savedSnapshot.hosting}} observationHistory={currentObservations.history} /></div> : null}
         </details>
