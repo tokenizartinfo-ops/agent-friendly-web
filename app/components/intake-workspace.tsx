@@ -161,6 +161,8 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
   const workingExit = useRef<(() => void) | null>(null);
   const continuationSave = useRef<((confirmedRevision?: number) => Promise<boolean>) | null>(null);
   const [continuationPending, setContinuationPending] = useState(false);
+  const conditionsSave = useRef<((confirmedRevision?: number) => Promise<boolean>) | null>(null);
+  const [conditionsPending, setConditionsPending] = useState(false);
   const [initialCreationUnconfirmed, setInitialCreationUnconfirmed] = useState(false);
   const savedBase = useRef<Intake>(emptyIntake);
   const [savedSnapshot, setSavedSnapshot] = useState<Intake>(emptyIntake);
@@ -351,12 +353,12 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
   }, [data, projectId, rehearsal, manualBusy, autosavePaused, conflictReview, sessionRequired, saveReviewedDraft, status, exitTarget, initialCreationUnconfirmed]);
 
   useEffect(() => {
-    if (!workingPending && !continuationPending && !hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
+    if (!workingPending && !continuationPending && !conditionsPending && !hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
       busy: manualBusy, conflict: Boolean(conflictReview) })) return;
     const cleanup = attachDraftExitGuard(window, document, (href: string) => { setExitTarget(href); return false; });
     exitCleanup.current = cleanup;
     return () => { cleanup(); exitCleanup.current = null; };
-  }, [data, manualBusy, conflictReview, status, locale, workingPending, continuationPending]);
+  }, [data, manualBusy, conflictReview, status, locale, workingPending, continuationPending, conditionsPending]);
 
   function confirmConflictReview(choices: Record<string, string>) {
     if (!conflictReview) return;
@@ -551,12 +553,36 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
     const panel=document.getElementById('dossier-assistant');
     if(panel instanceof HTMLDetailsElement){panel.open=true;panel.querySelector<HTMLElement>('.coach-question h3,summary')?.focus();panel.scrollIntoView({block:'start'});}
   }
+  async function refreshConditionsDossier(minimumRevision: number, signal: AbortSignal) {
+    if (savedRevision.current >= minimumRevision) return true;
+    if (!projectId || manualLock.current || unconfirmedChanges || conflictReview) return false;
+    manualLock.current = true;
+    setManualBusy(true);
+    try {
+      const response = await request(`/api/projects?project=${encodeURIComponent(projectId)}`, {
+        cache: 'no-store', redirect: 'manual', signal,
+      });
+      if (!response.ok) return false;
+      const { project } = await response.json() as ProjectPayload;
+      if (signal.aborted || project?.id !== projectId || !Number.isSafeInteger(project.revision)
+        || project.revision < minimumRevision) return false;
+      const acknowledged = intakeFromProject(project);
+      savedBase.current = acknowledged;
+      savedRevision.current = project.revision;
+      setScopeRevision(project.revision);
+      setSavedSnapshot(acknowledged);
+      setData(current => reconcileSavedDraft(data, acknowledged, current));
+      setSavedWebsite(project.website || '');
+      setRoadmap(project.roadmap || []);
+      setSessionRequired(false);
+      return true;
+    } finally {
+      manualLock.current = false;
+      setManualBusy(false);
+    }
+  }
+
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
-  const conditionsReview = loaded && projectId && !sessionRequired
-    ? <DossierConditionsReview key={`conditions:${projectId}`} projectId={projectId} revision={scopeRevision}
-      newSite={!savedWebsite} locale={locale} request={request}
-      canSave={scopeRevision > 0 && !unconfirmedChanges && !conflictReview && status !== 'saving' && !workingPending && !manualBusy} />
-    : null;
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
       <a className="dossier-help-dock" href={`#${helpTargetId}`} onClick={()=>{const panel=document.getElementById(helpTargetId);if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
@@ -566,6 +592,7 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           busy: manualBusy, conflict: Boolean(conflictReview) });
         const saved = dossierPending ? await saveReviewedDraft() : true;
         if (saved && continuationPending && !(await continuationSave.current?.(dossierPending ? savedRevision.current : undefined))) return false;
+        if (saved && conditionsPending && !(await conditionsSave.current?.(dossierPending ? savedRevision.current : undefined))) return false;
         if (saved) { exitCleanup.current?.(); workingExit.current?.(); window.location.assign(exitTarget); }
         return saved;
       }} onLeave={() => {
@@ -589,7 +616,11 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
           projectId={projectId} revision={scopeRevision} withoutWebsite={!savedWebsite} locale={locale} request={request}
           sessionRequired={sessionRequired} onPendingChange={setContinuationPending} saveRef={continuationSave}
           canSave={scopeRevision > 0 && !sessionRequired && !unconfirmedChanges && !conflictReview && status !== 'saving' && !workingPending && !manualBusy} /> : null}
-        {!savedWebsite ? conditionsReview : null}
+        {!rehearsal && loaded && projectId ? <DossierConditionsReview key={`conditions:${projectId}`}
+          projectId={projectId} revision={scopeRevision} newSite={!savedWebsite} locale={locale} request={request}
+          sessionRequired={sessionRequired} onPendingChange={setConditionsPending} saveRef={conditionsSave}
+          refreshDossier={refreshConditionsDossier}
+          canSave={scopeRevision > 0 && !unconfirmedChanges && !conflictReview && status !== 'saving' && !workingPending && !manualBusy} /> : null}
 
         {loaded && !conflictReview && !sessionRequired ? <div className="guided-view-switch"><p>{guidedView
           ? pilotCopilot ? localizedMessage(locale, 'Vamos de a poco. Contame tu sitio con tus palabras o por audio; revisamos juntos cada propuesta antes de guardarla.', 'Let us take this one step at a time. Describe your site in text or audio; we will review each suggestion before saving.', 'Vamos por partes. Conte sobre seu site por texto ou áudio; revisaremos cada sugestão antes de salvar.') : localizedMessage(locale,'Vamos de a poco. Respondé una pregunta por vez; revisá la propuesta y comprobá el guardado antes de salir.','Take one step at a time. Answer one question, review the suggestion and check saving before leaving.','Vamos por partes. Responda uma pergunta, revise a proposta e confira o salvamento antes de sair.')
@@ -750,7 +781,10 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
         {loaded && projectId && !sessionRequired ? <DossierAiIndexPreparation key={`ai-index-preparation:${projectId}`}
           website={savedWebsite} contentSources={savedSnapshot.contentSources} observation={currentObservations.observation}
           readState={updatesReadState} locale={locale} /> : null}
-        {savedWebsite ? conditionsReview : null}
+        {!rehearsal && loaded && projectId && savedWebsite ? <p><a href="#dossier-conditions-title" onClick={() => {
+          const panel = document.getElementById('dossier-conditions');
+          if (panel instanceof HTMLDetailsElement) panel.open = true;
+        }}>{localizedMessage(locale, 'Revisar accesibilidad y condiciones · AF-2', 'Review accessibility and conditions · AF-2', 'Revisar acessibilidade e condições · AF-2')}</a></p> : null}
 
         {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} deliveryContext={{cms:savedSnapshot.cms,hosting:savedSnapshot.hosting}} observationHistory={currentObservations.history} /></div> : null}
         </details>
