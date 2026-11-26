@@ -223,13 +223,10 @@ export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
  const header=Buffer.alloc(inputs.length*4);
  inputs.forEach((bytes,index)=>header.writeUInt32LE(bytes.byteLength,index*4));
  const zip=await privateVerifier(cwd,'--assemble-release-package',Buffer.concat([header,...inputs]),64*1024*1024);
- const readback=JSON.parse(await privateVerifier(cwd,null,zip,65536));
- if(readback.manifestText!==manifestBytes.toString('utf8')||Object.keys(readback.files).length!==releaseRoles.length)fail();
- for(const role of releaseRoles){
-  const {name,sha256,bytes}=manifest.modules[role].module;
-  assert.deepEqual(readback.files[role+'/'+name],{sha256,bytes});
- }
- return Object.freeze({archiveSha256:hash(zip),archiveBytes:zip.length,moduleCount:releaseRoles.length,
+ const {verifyFiniteCandidateArchive}=await import('../lib/mcp-qa-finite-package.mjs');
+ const receipt=await verifyFiniteCandidateArchive({archive:zip,sourceRevision:manifest.sourceRevision,
+  sourceTree:manifest.sourceTree,workflowHash:manifest.buildWorkflowHash,expectedArchiveSha256:hash(zip)});
+ return Object.freeze({archiveSha256:receipt.archiveSha256,archiveBytes:receipt.archiveBytes,moduleCount:releaseRoles.length,
   completePackage:false,operationalReadiness:false});
 }
 

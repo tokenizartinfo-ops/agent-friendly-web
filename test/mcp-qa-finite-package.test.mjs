@@ -124,8 +124,10 @@ test('offline candidate ZIP review verifies private staging bytes while the rele
  });
  assert(Object.isFrozen(receipt));assert.deepEqual(f.calls,[]);
  await assert.rejects(()=>verifyFiniteReleaseArchive(options),{message:'Finite package unavailable'});
+ const reviewedExports=f.manifest.modules.qaLive.module.exports;
  f.manifest.modules.qaLive.module.exports=[];
  const wrongExports=fixtureZip(f.manifest);
+ f.manifest.modules.qaLive.module.exports=reviewedExports;
  f.manifest.modules.qaLive.publicStatic=finitePublicStaticExpectation('canaryLive');
  const wrongProfile=fixtureZip(f.manifest);
  for(const change of [
