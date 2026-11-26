@@ -211,7 +211,7 @@ async function verifyArchivedQaCustodyProbe({cwd,sourceRevision,sourceTree},modu
 
 /** Verify the v2 ZIP layout with real module bytes, returning only readback evidence.
  * A pending native guard is represented in the private manifest as false. */
-export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
+async function assembleFiniteReleaseLayout({cwd,manifest,modules}){
  if(!modules||Object.keys(modules).length!==releaseRoles.length)fail();
  const manifestBytes=Buffer.from(encodeFiniteStagingPackageLayout(manifest),'utf8');
  if(!manifestBytes.length||manifestBytes.length>24576)fail();
@@ -222,12 +222,21 @@ export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
  })];
  const header=Buffer.alloc(inputs.length*4);
  inputs.forEach((bytes,index)=>header.writeUInt32LE(bytes.byteLength,index*4));
- const zip=await privateVerifier(cwd,'--assemble-release-package',Buffer.concat([header,...inputs]),64*1024*1024);
- const {verifyFiniteCandidateArchive}=await import('../lib/mcp-qa-finite-package.mjs');
- const receipt=await verifyFiniteCandidateArchive({archive:zip,sourceRevision:manifest.sourceRevision,
-  sourceTree:manifest.sourceTree,workflowHash:manifest.buildWorkflowHash,expectedArchiveSha256:hash(zip)});
- return Object.freeze({archiveSha256:receipt.archiveSha256,archiveBytes:receipt.archiveBytes,moduleCount:releaseRoles.length,
+ return privateVerifier(cwd,'--assemble-release-package',Buffer.concat([header,...inputs]),64*1024*1024);
+}
+function releaseLayoutEvidence(zip){
+ return Object.freeze({archiveSha256:hash(zip),archiveBytes:zip.length,moduleCount:releaseRoles.length,
   completePackage:false,operationalReadiness:false});
+}
+export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
+ const zip=await assembleFiniteReleaseLayout({cwd,manifest,modules});
+ const readback=JSON.parse(await privateVerifier(cwd,null,zip,65536));
+ if(readback.manifestText!==encodeFiniteStagingPackageLayout(manifest)||Object.keys(readback.files).length!==releaseRoles.length)fail();
+ for(const role of releaseRoles){
+  const {name,sha256,bytes}=manifest.modules[role].module;
+  assert.deepEqual(readback.files[role+'/'+name],{sha256,bytes});
+ }
+ return releaseLayoutEvidence(zip);
 }
 
 /** The digest and rollback configuration are verified before the binary
@@ -301,12 +310,16 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
    module:{...modulePin,exports:moduleExports[role]},publicStatic:profile.publicStatic
   };
  }
- const releaseLayout=await verifyFiniteReleaseLayout({cwd,modules:layoutModules,manifest:{
+ const releaseZip=await assembleFiniteReleaseLayout({cwd,modules:layoutModules,manifest:{
   purpose:'afw.finite-native-package.v2',sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
   sourceCheck:built.sourceCheck,buildWorkflowHash:built.buildWorkflowHash,modules:layoutDescriptors,
   compatibility:{qaClassesPreserved:true,qaNamespacesPreserved:true,canaryClassesPreserved:true,canaryNamespacesPreserved:true,
    closedEntrypointsDenied:true,legacyContainmentQualified:false}
  }});
+ const releaseLayout=releaseLayoutEvidence(releaseZip);
+ const {verifyFiniteCandidateArchive}=await import('../lib/mcp-qa-finite-package.mjs');
+ await verifyFiniteCandidateArchive({archive:releaseZip,sourceRevision:built.sourceRevision,
+  sourceTree:built.sourceTree,workflowHash:built.buildWorkflowHash,expectedArchiveSha256:releaseLayout.archiveSha256});
  const custodyRehearsal=await verifyArchivedQaCustodyProbe({cwd,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree},
   layoutModules.qaClosed);
  const expiredCustodyTemplate=await verifyExpiredQaCustodyTemplate({staging:built,
