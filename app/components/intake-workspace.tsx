@@ -353,8 +353,8 @@ export function IntakeWorkspace({ userName, userEmail, ownerBinding = '', locale
   }, [data, projectId, rehearsal, manualBusy, autosavePaused, conflictReview, sessionRequired, saveReviewedDraft, status, exitTarget, initialCreationUnconfirmed]);
 
   useEffect(() => {
-    if (!workingPending && !continuationPending && !conditionsPending && !hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
-      busy: manualBusy, conflict: Boolean(conflictReview) })) return;
+    if (!workingPending && !continuationPending && !hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
+      busy: manualBusy, conflict: Boolean(conflictReview) }) && !conditionsPending) return;
     const cleanup = attachDraftExitGuard(window, document, (href: string) => { setExitTarget(href); return false; });
     exitCleanup.current = cleanup;
     return () => { cleanup(); exitCleanup.current = null; };
