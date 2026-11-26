@@ -2313,3 +2313,131 @@ footer p { margin: 0; }
   .site-header nav.is-open { max-height: calc(100dvh - 74px); overflow-y: auto; }
   .site-resources-links { position: static; min-width: 0; padding: 0 14px; border: 0; border-left: 2px solid var(--line); box-shadow: none; }
 }
+
+/* Readable labels and supporting copy on the public home in every locale. */
+.home-page {
+  --home-label-size: 0.875rem;
+  --home-copy-size: 1rem;
+}
+
+.home-page :is(
+  .brand small,
+  .language-switcher a,
+  .site-header nav a,
+  .site-resources > summary,
+  .comic-call-heading > span,
+  .home-value-intro > span,
+  .maturity-map-intro > span,
+  .maturity-node span,
+  .home-service-journey > header > span,
+  .audit-copy .eyebrow,
+  .scan-form label,
+  .trust-row,
+  .score-heading span,
+  .score-reference,
+  .score-boundary,
+  .score-note,
+  .section-heading :is(span, time),
+  .category-copy span,
+  .category-score,
+  .journey-panel > span,
+  .journey-panel li span,
+  .home-comparison-band > header > span,
+  .control-label,
+  .segment-control button,
+  .stage-control button :is(strong, span),
+  .scenario-title span,
+  .weak-answer strong,
+  .answer-heading :is(span, strong),
+  .evidence-line,
+  .agent-answer li,
+  .empty-evidence,
+  .public-faq > header > span,
+  .public-faq-list nav a,
+  .public-faq-all,
+  .future-archive > header > span,
+  .archive-tab,
+  .archive-status,
+  .archive-drawers small,
+  .archive-more > summary,
+  .home-next-paths > header > span,
+  .home-next-paths > div > a > span,
+  .footer-intro p,
+  .footer-column :is(strong, a),
+  .footer-legal
+) {
+  font-size: var(--home-label-size);
+  line-height: 1.45;
+}
+
+.home-page :is(
+  .comic-call-actions a,
+  .maturity-map-intro p,
+  .maturity-map-intro a,
+  .maturity-track strong,
+  .journey-panel li,
+  .journey-panel > a,
+  .home-comparison-band > header :is(p, a),
+  .weak-answer p,
+  .public-faq-list p,
+  .future-archive > header p,
+  .archive-drawers strong,
+  .archive-drawers p,
+  .home-next-paths > header p,
+  .home-next-paths > div > a > p
+) {
+  font-size: var(--home-copy-size);
+  line-height: 1.55;
+}
+
+.home-page .maturity-track p {
+  font-size: var(--home-label-size);
+  line-height: 1.55;
+}
+
+.home-page .future-archive > header p {
+  color: #463d34;
+}
+
+.home-page :is(.maturity-node span, .stage-control button strong) {
+  color: #8e432f;
+}
+
+.home-page .language-switcher a {
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.home-page .segment-control button {
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+
+.home-page .archive-tab {
+  top: -18px;
+}
+
+.home-page .archive-drawers > a {
+  overflow-wrap: anywhere;
+}
+
+.home-page .answer-heading {
+  flex-wrap: wrap;
+  gap: 8px 15px;
+}
+
+.home-page .comic-call-actions a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-page .comic-call-actions a {
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+  }
+
+  .home-page .comic-call-actions a:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 #8c7458;
+  }
+}
