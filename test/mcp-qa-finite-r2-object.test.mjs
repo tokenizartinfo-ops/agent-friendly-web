@@ -113,6 +113,40 @@ test('occupied or uncertain object is read back once, and conflicting contents f
   assert.deepEqual(calls,fault==='foreign'?[]:['PUT','GET']);
  }
 });
+test('the reviewed candidate uses its own R2 key and cannot overwrite an existing object',async()=>{
+ const key='finite-candidates-v1/'+revision+'.zip',bytes=Buffer.from('candidate archive');
+ function candidateUrl(write=false,prefix='finite-candidates-v1'){
+  const u=new URL(bundleUrl(write));
+  u.pathname='/'+prefix+'/'+revision+'.zip';
+  return u.href;
+ }
+ assert.equal(api.finiteR2CandidateKey(revision),key);
+ for(const variant of ['fresh','existing','conflicting','final-key','draft-key','misdirected-read']){
+  const calls=[];
+  const update=variant==='final-key'?candidateUrl(true,'finite-packages-v2'):variant==='draft-key'?bundleUrl(true):candidateUrl(true);
+  const read=variant==='misdirected-read'?candidateUrl(false,'finite-packages-v2'):candidateUrl();
+  const result=api.storeFiniteR2Candidate({sourceRevision:revision,bytes,writeCredential:update,readCredential:read,now,signal,
+   fetchImpl:async(url,init)=>{
+    assert.equal(new URL(url).pathname,'/'+key);
+    calls.push(init.method);
+    if(init.method==='PUT'){
+     assert.equal(init.headers['If-None-Match'],'*');
+     return new Response(null,{status:variant==='fresh'?200:412});
+    }
+    const returned=variant==='conflicting'?Buffer.alloc(bytes.length,9):bytes;
+    return new Response(returned,{headers:{'content-type':'application/zip','content-length':String(bytes.length)}});
+   }});
+  if(variant==='fresh'||variant==='existing'){
+   const receipt=await result;
+   assert.equal(receipt.objectKey,key);
+   assert.equal(receipt.archiveBytes,bytes.length);
+   assert.equal(receipt.status,variant==='fresh'?'created_verified':'readback_verified');
+   assert.match(receipt.archiveSha256,/^[a-f0-9]{64}$/);
+  }else await assert.rejects(result,{message:'Finite R2 archive unavailable'});
+  assert.deepEqual(calls,['final-key','draft-key','misdirected-read'].includes(variant)?[]:['PUT','GET']);
+ }
+});
+
 test('draft and deployable package credentials for the same revision cannot be interchanged',async()=>{
  const draft=bundleUrl(),release=new URL(draft);
  release.pathname='/finite-packages-v2/'+revision+'.zip';

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFiniteR2Archive,storeFiniteR2Bundle} from '../lib/mcp-qa-finite-r2-object.mjs';
+import {readFiniteR2Archive,storeFiniteR2Bundle,storeFiniteR2Candidate} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFile} from 'node:child_process';
@@ -241,7 +241,7 @@ export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
 
 /** The digest and rollback configuration are verified before the binary
  * publisher can use the same immutable frame. */
-async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false,custody=false}={}){
+async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false,custody=false,preserveCandidate=false}={}){
  const built=await compileFiniteNativeStaging({cwd,sourceRevision}),expected=built.historicalInput.archiveBytes;
  let length=0;const chunks=[];
  for await(const part of await readArchive()){
@@ -346,6 +346,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   return Object.freeze({releaseZipSha256:releaseLayout.archiveSha256,
    artifact:Object.freeze({sourceRevision,bytes:wrapper.length,sha256:descriptor.sha256,base64:wrapper.toString('base64')})});
  }
+ if(preserveCandidate)return {verified,candidateArchive:releaseZip};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
@@ -370,7 +371,8 @@ export async function buildFiniteNativePackage(input){
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const mode=process.argv[2],staging=mode==='--staging',emit=mode==='--emit-private-r2';
- const fromR2=mode==='--verify-r2-draft'||emit,privateDraft=mode==='--verify-private-draft'||fromR2;
+ const preserveCandidate=mode==='--emit-r2-candidate';
+ const fromR2=mode==='--verify-r2-draft'||emit||preserveCandidate,privateDraft=mode==='--verify-private-draft'||fromR2;
  if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
  // Keep the signed URLs in the CLI alone. Git, Python and Workerd may
@@ -378,17 +380,28 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const backupReadUrl=process.env.AFW_R2_BACKUPS_READ_URL;
  const bundleWriteUrl=process.env.AFW_R2_BUNDLE_WRITE_URL;
  const bundleReadUrl=process.env.AFW_R2_BUNDLE_READ_URL;
+ const candidateWriteUrl=process.env.AFW_R2_CANDIDATE_WRITE_URL;
+ const candidateReadUrl=process.env.AFW_R2_CANDIDATE_READ_URL;
  delete process.env.AFW_R2_BACKUPS_READ_URL;
  delete process.env.AFW_R2_BUNDLE_WRITE_URL;
  delete process.env.AFW_R2_BUNDLE_READ_URL;
+ delete process.env.AFW_R2_CANDIDATE_WRITE_URL;
+ delete process.env.AFW_R2_CANDIDATE_READ_URL;
  if(privateDraft){
   const result=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
    await readFiniteR2Archive({credential:backupReadUrl,signal:AbortSignal.timeout(15000)})
-  ).body:()=>process.stdin,{emit});
-  const receipt=emit?{...result.verified,privateR2Bundle:await storeFiniteR2Bundle({
-   sourceRevision,bytes:result.bundle,writeCredential:bundleWriteUrl,
-   readCredential:bundleReadUrl,signal:AbortSignal.timeout(30000)
-  }),authorizesDeployment:false}:result;
+  ).body:()=>process.stdin,{emit,preserveCandidate});
+  let receipt=result;
+  if(preserveCandidate){
+   const saved=await storeFiniteR2Candidate({sourceRevision,bytes:result.candidateArchive,
+    writeCredential:candidateWriteUrl,readCredential:candidateReadUrl,signal:AbortSignal.timeout(30000)});
+   if(saved.archiveSha256!==result.verified.releaseLayout.archiveSha256)fail();
+   receipt={...result.verified,privateR2Candidate:saved,authorizesDeployment:false};
+  }else if(emit){
+   const saved=await storeFiniteR2Bundle({sourceRevision,bytes:result.bundle,writeCredential:bundleWriteUrl,
+    readCredential:bundleReadUrl,signal:AbortSignal.timeout(30000)});
+   receipt={...result.verified,privateR2Bundle:saved,authorizesDeployment:false};
+  }
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
   const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});
