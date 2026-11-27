@@ -11,6 +11,10 @@ on:
         type: choice
         default: verify_only
         options: [verify_only, preserve_candidate]
+      candidate_sha256:
+        description: SHA-256 from an independent verified-only receipt for this exact revision
+        type: string
+        required: false
 permissions:
   contents: read
 jobs:
@@ -48,4 +52,5 @@ jobs:
           AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
           AFW_R2_CANDIDATE_WRITE_URL: ${{ secrets.AFW_R2_CANDIDATE_WRITE_URL }}
           AFW_R2_CANDIDATE_READ_URL: ${{ secrets.AFW_R2_CANDIDATE_READ_URL }}
-        run: node scripts/build-finite-native-package.mjs --emit-r2-candidate "$GITHUB_SHA"
+          AFW_EXPECTED_CANDIDATE_SHA256: ${{ inputs.candidate_sha256 }}
+        run: node scripts/build-finite-native-package.mjs --emit-r2-candidate "$GITHUB_SHA" "$AFW_EXPECTED_CANDIDATE_SHA256"

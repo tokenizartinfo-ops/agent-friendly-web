@@ -373,7 +373,9 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const mode=process.argv[2],staging=mode==='--staging',emit=mode==='--emit-private-r2';
  const preserveCandidate=mode==='--emit-r2-candidate';
  const fromR2=mode==='--verify-r2-draft'||emit||preserveCandidate,privateDraft=mode==='--verify-private-draft'||fromR2;
- if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
+ const expectedCandidateSha256=preserveCandidate?process.argv[4]:null;
+ const expectedArgs=preserveCandidate?5:staging||privateDraft?4:3;
+ if(process.argv.length!==expectedArgs||preserveCandidate&&!sha256Hex(expectedCandidateSha256))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
  // Keep the signed URLs in the CLI alone. Git, Python and Workerd may
  // inherit the process environment, and none needs access to R2.
@@ -393,7 +395,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   ).body:()=>process.stdin,{emit,preserveCandidate});
   let receipt=result;
   if(preserveCandidate){
-   const saved=await storeFiniteR2Candidate({sourceRevision,bytes:result.candidateArchive,
+   const saved=await storeFiniteR2Candidate({sourceRevision,bytes:result.candidateArchive,expectedArchiveSha256:expectedCandidateSha256,
     writeCredential:candidateWriteUrl,readCredential:candidateReadUrl,signal:AbortSignal.timeout(30000)});
    if(saved.archiveSha256!==result.verified.releaseLayout.archiveSha256)fail();
    receipt={...result.verified,privateR2Candidate:saved,authorizesDeployment:false};

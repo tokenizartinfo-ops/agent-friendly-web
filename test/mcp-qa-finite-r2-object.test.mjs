@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import pin from '../scripts/mcp-finite-r2-historical-inputs.json' with {type:'json'};
 
 const api=await import('../lib/mcp-qa-finite-r2-object.mjs').catch(error=>{
@@ -115,17 +116,20 @@ test('occupied or uncertain object is read back once, and conflicting contents f
 });
 test('the reviewed candidate uses its own R2 key and cannot overwrite an existing object',async()=>{
  const key='finite-candidates-v1/'+revision+'.zip',bytes=Buffer.from('candidate archive');
+ const digest=createHash('sha256').update(bytes).digest('hex');
  function candidateUrl(write=false,prefix='finite-candidates-v1'){
   const u=new URL(bundleUrl(write));
   u.pathname='/'+prefix+'/'+revision+'.zip';
   return u.href;
  }
  assert.equal(api.finiteR2CandidateKey(revision),key);
- for(const variant of ['fresh','existing','conflicting','final-key','draft-key','misdirected-read']){
+ for(const variant of ['fresh','existing','conflicting','final-key','draft-key','misdirected-read','wrong-digest','no-digest','short-read']){
   const calls=[];
   const update=variant==='final-key'?candidateUrl(true,'finite-packages-v2'):variant==='draft-key'?bundleUrl(true):candidateUrl(true);
-  const read=variant==='misdirected-read'?candidateUrl(false,'finite-packages-v2'):candidateUrl();
-  const result=api.storeFiniteR2Candidate({sourceRevision:revision,bytes,writeCredential:update,readCredential:read,now,signal,
+  const read=new URL(variant==='misdirected-read'?candidateUrl(false,'finite-packages-v2'):candidateUrl());
+  if(variant==='short-read')read.searchParams.set('X-Amz-Expires','80');
+  const expectedArchiveSha256=variant==='wrong-digest'?'0'.repeat(64):variant==='no-digest'?undefined:digest;
+  const result=api.storeFiniteR2Candidate({sourceRevision:revision,bytes,expectedArchiveSha256,writeCredential:update,readCredential:read.href,now,signal,
    fetchImpl:async(url,init)=>{
     assert.equal(new URL(url).pathname,'/'+key);
     calls.push(init.method);
@@ -141,9 +145,9 @@ test('the reviewed candidate uses its own R2 key and cannot overwrite an existin
    assert.equal(receipt.objectKey,key);
    assert.equal(receipt.archiveBytes,bytes.length);
    assert.equal(receipt.status,variant==='fresh'?'created_verified':'readback_verified');
-   assert.match(receipt.archiveSha256,/^[a-f0-9]{64}$/);
+   assert.equal(receipt.archiveSha256,digest);
   }else await assert.rejects(result,{message:'Finite R2 archive unavailable'});
-  assert.deepEqual(calls,['final-key','draft-key','misdirected-read'].includes(variant)?[]:['PUT','GET']);
+  assert.deepEqual(calls,['final-key','draft-key','misdirected-read','wrong-digest','no-digest','short-read'].includes(variant)?[]:['PUT','GET']);
  }
 });
 
