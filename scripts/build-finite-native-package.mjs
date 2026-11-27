@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFiniteR2Archive,storeFiniteR2Bundle} from '../lib/mcp-qa-finite-r2-object.mjs';
+import {readFiniteR2Archive,storeFiniteR2Bundle,storeFiniteR2Candidate} from '../lib/mcp-qa-finite-r2-object.mjs';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFile} from 'node:child_process';
@@ -211,7 +211,7 @@ async function verifyArchivedQaCustodyProbe({cwd,sourceRevision,sourceTree},modu
 
 /** Verify the v2 ZIP layout with real module bytes, returning only readback evidence.
  * A pending native guard is represented in the private manifest as false. */
-export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
+async function assembleFiniteReleaseLayout({cwd,manifest,modules}){
  if(!modules||Object.keys(modules).length!==releaseRoles.length)fail();
  const manifestBytes=Buffer.from(encodeFiniteStagingPackageLayout(manifest),'utf8');
  if(!manifestBytes.length||manifestBytes.length>24576)fail();
@@ -222,20 +222,26 @@ export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
  })];
  const header=Buffer.alloc(inputs.length*4);
  inputs.forEach((bytes,index)=>header.writeUInt32LE(bytes.byteLength,index*4));
- const zip=await privateVerifier(cwd,'--assemble-release-package',Buffer.concat([header,...inputs]),64*1024*1024);
+ return privateVerifier(cwd,'--assemble-release-package',Buffer.concat([header,...inputs]),64*1024*1024);
+}
+function releaseLayoutEvidence(zip){
+ return Object.freeze({archiveSha256:hash(zip),archiveBytes:zip.length,moduleCount:releaseRoles.length,
+  completePackage:false,operationalReadiness:false});
+}
+export async function verifyFiniteReleaseLayout({cwd,manifest,modules}){
+ const zip=await assembleFiniteReleaseLayout({cwd,manifest,modules});
  const readback=JSON.parse(await privateVerifier(cwd,null,zip,65536));
- if(readback.manifestText!==manifestBytes.toString('utf8')||Object.keys(readback.files).length!==releaseRoles.length)fail();
+ if(readback.manifestText!==encodeFiniteStagingPackageLayout(manifest)||Object.keys(readback.files).length!==releaseRoles.length)fail();
  for(const role of releaseRoles){
   const {name,sha256,bytes}=manifest.modules[role].module;
   assert.deepEqual(readback.files[role+'/'+name],{sha256,bytes});
  }
- return Object.freeze({archiveSha256:hash(zip),archiveBytes:zip.length,moduleCount:releaseRoles.length,
-  completePackage:false,operationalReadiness:false});
+ return releaseLayoutEvidence(zip);
 }
 
 /** The digest and rollback configuration are verified before the binary
  * publisher can use the same immutable frame. */
-async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false,custody=false}={}){
+async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive,{emit=false,custody=false,preserveCandidate=false}={}){
  const built=await compileFiniteNativeStaging({cwd,sourceRevision}),expected=built.historicalInput.archiveBytes;
  let length=0;const chunks=[];
  for await(const part of await readArchive()){
@@ -304,12 +310,16 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
    module:{...modulePin,exports:moduleExports[role]},publicStatic:profile.publicStatic
   };
  }
- const releaseLayout=await verifyFiniteReleaseLayout({cwd,modules:layoutModules,manifest:{
+ const releaseZip=await assembleFiniteReleaseLayout({cwd,modules:layoutModules,manifest:{
   purpose:'afw.finite-native-package.v2',sourceRevision:built.sourceRevision,sourceTree:built.sourceTree,
   sourceCheck:built.sourceCheck,buildWorkflowHash:built.buildWorkflowHash,modules:layoutDescriptors,
   compatibility:{qaClassesPreserved:true,qaNamespacesPreserved:true,canaryClassesPreserved:true,canaryNamespacesPreserved:true,
    closedEntrypointsDenied:true,legacyContainmentQualified:false}
  }});
+ const releaseLayout=releaseLayoutEvidence(releaseZip);
+ const {verifyFiniteCandidateArchive}=await import('../lib/mcp-qa-finite-package.mjs');
+ await verifyFiniteCandidateArchive({archive:releaseZip,sourceRevision:built.sourceRevision,
+  sourceTree:built.sourceTree,workflowHash:built.buildWorkflowHash,expectedArchiveSha256:releaseLayout.archiveSha256});
  const custodyRehearsal=await verifyArchivedQaCustodyProbe({cwd,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree},
   layoutModules.qaClosed);
  const expiredCustodyTemplate=await verifyExpiredQaCustodyTemplate({staging:built,
@@ -336,6 +346,7 @@ async function verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},readArchive
   return Object.freeze({releaseZipSha256:releaseLayout.archiveSha256,
    artifact:Object.freeze({sourceRevision,bytes:wrapper.length,sha256:descriptor.sha256,base64:wrapper.toString('base64')})});
  }
+ if(preserveCandidate)return {verified,candidateArchive:releaseZip};
  if(!emit)return verified;
  const bundle=await privateVerifier(cwd,'--emit-private-compiler-bundle',frame,64*1024*1024);
  if(bundle.length!==receipt.draftBytes||hash(bundle)!==receipt.draftSha256)fail();
@@ -360,25 +371,39 @@ export async function buildFiniteNativePackage(input){
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const mode=process.argv[2],staging=mode==='--staging',emit=mode==='--emit-private-r2';
- const fromR2=mode==='--verify-r2-draft'||emit,privateDraft=mode==='--verify-private-draft'||fromR2;
- if(!((staging||privateDraft)&&process.argv.length===4||!staging&&!privateDraft&&process.argv.length===3))fail();
+ const preserveCandidate=mode==='--emit-r2-candidate';
+ const fromR2=mode==='--verify-r2-draft'||emit||preserveCandidate,privateDraft=mode==='--verify-private-draft'||fromR2;
+ const expectedCandidateSha256=preserveCandidate?process.argv[4]:null;
+ const expectedArgs=preserveCandidate?5:staging||privateDraft?4:3;
+ if(process.argv.length!==expectedArgs||preserveCandidate&&!sha256Hex(expectedCandidateSha256))fail();
  const sourceRevision=process.argv[staging||privateDraft?3:2],cwd=fileURLToPath(new URL('..',import.meta.url));
  // Keep the signed URLs in the CLI alone. Git, Python and Workerd may
  // inherit the process environment, and none needs access to R2.
  const backupReadUrl=process.env.AFW_R2_BACKUPS_READ_URL;
  const bundleWriteUrl=process.env.AFW_R2_BUNDLE_WRITE_URL;
  const bundleReadUrl=process.env.AFW_R2_BUNDLE_READ_URL;
+ const candidateWriteUrl=process.env.AFW_R2_CANDIDATE_WRITE_URL;
+ const candidateReadUrl=process.env.AFW_R2_CANDIDATE_READ_URL;
  delete process.env.AFW_R2_BACKUPS_READ_URL;
  delete process.env.AFW_R2_BUNDLE_WRITE_URL;
  delete process.env.AFW_R2_BUNDLE_READ_URL;
+ delete process.env.AFW_R2_CANDIDATE_WRITE_URL;
+ delete process.env.AFW_R2_CANDIDATE_READ_URL;
  if(privateDraft){
   const result=await verifyPrivateFiniteCompilerDraft({cwd,sourceRevision},fromR2?async()=>(
    await readFiniteR2Archive({credential:backupReadUrl,signal:AbortSignal.timeout(15000)})
-  ).body:()=>process.stdin,{emit});
-  const receipt=emit?{...result.verified,privateR2Bundle:await storeFiniteR2Bundle({
-   sourceRevision,bytes:result.bundle,writeCredential:bundleWriteUrl,
-   readCredential:bundleReadUrl,signal:AbortSignal.timeout(30000)
-  }),authorizesDeployment:false}:result;
+  ).body:()=>process.stdin,{emit,preserveCandidate});
+  let receipt=result;
+  if(preserveCandidate){
+   const saved=await storeFiniteR2Candidate({sourceRevision,bytes:result.candidateArchive,expectedArchiveSha256:expectedCandidateSha256,
+    writeCredential:candidateWriteUrl,readCredential:candidateReadUrl,signal:AbortSignal.timeout(30000)});
+   if(saved.archiveSha256!==result.verified.releaseLayout.archiveSha256)fail();
+   receipt={...result.verified,privateR2Candidate:saved,authorizesDeployment:false};
+  }else if(emit){
+   const saved=await storeFiniteR2Bundle({sourceRevision,bytes:result.bundle,writeCredential:bundleWriteUrl,
+    readCredential:bundleReadUrl,signal:AbortSignal.timeout(30000)});
+   receipt={...result.verified,privateR2Bundle:saved,authorizesDeployment:false};
+  }
   process.stdout.write(JSON.stringify(receipt)+'\n');
  }else{
   const built=staging?await compileFiniteNativeStaging({cwd,sourceRevision}):await buildFiniteNativePackage({cwd,sourceRevision});

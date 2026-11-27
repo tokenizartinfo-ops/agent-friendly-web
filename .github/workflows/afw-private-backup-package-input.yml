@@ -6,6 +6,15 @@ on:
         description: Exact current main revision
         required: true
         type: string
+      operation:
+        description: Verify only, or preserve the exact reviewed candidate in its private R2 key
+        type: choice
+        default: verify_only
+        options: [verify_only, preserve_candidate]
+      candidate_sha256:
+        description: SHA-256 from an independent verified-only receipt for this exact revision
+        type: string
+        required: false
 permissions:
   contents: read
 jobs:
@@ -33,6 +42,15 @@ jobs:
       - name: Verify isolated startup, review, withdrawal and simulated restoration
         run: node --test test/mcp-qa-finite-receiver-workerd.test.mjs
       - name: Verify pinned private backup and current compiler output
+        if: inputs.operation == 'verify_only'
         env:
           AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
         run: node scripts/build-finite-native-package.mjs --verify-r2-draft "$GITHUB_SHA"
+      - name: Preserve only the independently reviewed candidate ZIP
+        if: inputs.operation == 'preserve_candidate'
+        env:
+          AFW_R2_BACKUPS_READ_URL: ${{ secrets.AFW_R2_BACKUPS_READ_URL }}
+          AFW_R2_CANDIDATE_WRITE_URL: ${{ secrets.AFW_R2_CANDIDATE_WRITE_URL }}
+          AFW_R2_CANDIDATE_READ_URL: ${{ secrets.AFW_R2_CANDIDATE_READ_URL }}
+          AFW_EXPECTED_CANDIDATE_SHA256: ${{ inputs.candidate_sha256 }}
+        run: node scripts/build-finite-native-package.mjs --emit-r2-candidate "$GITHUB_SHA" "$AFW_EXPECTED_CANDIDATE_SHA256"

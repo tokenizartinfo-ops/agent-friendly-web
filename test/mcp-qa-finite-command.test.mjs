@@ -4,7 +4,8 @@ import {readFile} from 'node:fs/promises';
 import {validateQaFiniteConfirmationCommand,assertQaFiniteConfirmationAdmission} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 import {runFiniteFinalizerCli} from '../scripts/run-qa-finite-trial-finalizer.mjs';
 function fixture(){
- const at=Date.now(),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'};
+ // Keep the synthetic command inside the fixture's pinned custody window.
+ const at=Date.parse('2026-11-26T17:30:00Z'),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'};
  const event={action:'created',repository:{id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'},issue:{number:497},sender:{...actor},comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+sha,created_at:new Date(at).toISOString(),author_association:'OWNER',user:{...actor}}};
  const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:sha};
  return {at,event,context,now:()=>at};
